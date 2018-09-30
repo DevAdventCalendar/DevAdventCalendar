@@ -16,6 +16,7 @@ namespace DevAdventCalendarCompetition
         
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            // TODO refactor
             //var context = new ApplicationDbContext();
 
             //var test = context.Set<Test>().First(el => el.Number == TestNumber);
