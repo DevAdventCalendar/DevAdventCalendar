@@ -1,0 +1,16 @@
+﻿
+
+@model DevAdventCalendarCompetition.Models.Test
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Test @Model.Number</h3>
+        <p>
+            <b>Status: </b>Test ended<b>
+            </b>
+        </p>
+        <p>
+            <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: @Model.EndDate.Value.ToLongTimeString()</b>
+        </p>
+    </div>
+</div>

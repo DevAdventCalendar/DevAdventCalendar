@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Results";
+}
+@model WrocSharpCompetition.Vms.TestResultsVm
+
+<div class="jumbotron">
+    <h1><img src="/images/wroc-color.svg" class="logo" /> Competition Results</h1>
+</div>
+<div class="row">
+
+    <ul class="nav nav-tabs" role="tablist">
+        @for (var j = 0; j < Model.SingleTestResults.Count; j++)
+        {
+            var result = Model.SingleTestResults[j];
+            var active = "";
+            if (j == 0)
+            {
+                active = "active";
+            }
+            else
+            {
+                active = "";
+            }
+
+            <li role="presentation" class="@active"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
+        }
+
+        <li role="presentation"><a href="#totalresults" role="tab" data-toggle="tab">Total results</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        @for (var j = 0; j < Model.SingleTestResults.Count; j++)
+        {
+            var result = Model.SingleTestResults[j];
+            var active = "";
+            if (j == 0)
+            {
+                active = "active";
+            }
+
+            if (result.TestEnded)
+            {
+                <div role="tabpanel" class="tab-pane @active" id="test@(result.TestNumber)">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Full name</th>
+                                <th>Time</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < result.Entries.Count; i++)
+                            {
+                                var testResult = result.Entries[i];
+                                <tr>
+                                    <th scope="row">@(i + 1)</th>
+                                    <td>@testResult.FullName</td>
+                                    <td>@testResult.Offset.Minutes m. @testResult.Offset.Seconds s. @testResult.Offset.Milliseconds ms</td>
+                                    <td>@testResult.Points</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div role="tabpanel" class="tab-pane @active" id="test@(result.TestNumber)">Test has not ended yet.</div>
+            }
+        }
+
+        @if (Model.TotalTestResults != null)
+        {
+         <div role="tabpanel" class="tab-pane" id="totalresults">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full name</th>
+                        <th>Total points</th>
+                        <th>Total time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.TotalTestResults.Count; i++)
+                    {
+                        var testResult = Model.TotalTestResults[i];
+                        <tr>
+                            <th scope="row">@(i + 1)</th>
+                            <td>@testResult.FullName</td>
+                            <td>@testResult.TotalPoints</td>
+                            <td>@testResult.TotalOffset.Minutes m. @testResult.TotalOffset.Seconds s. @testResult.TotalOffset.Milliseconds ms</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+        else
+        {
+            <div role="tabpanel" class="tab-pane" id="totalresults">All tests has not ended yet.</div>
+        }
+    </div>
+</div>
