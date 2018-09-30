@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "TEST" + Model.TestNumber + " answered";
+}
+@model WrocSharpCompetition.Vms.AnswerVm
+
+<div class="jumbotron">
+    <h1>You have answered TEST @Model.TestNumber</h1>
+</div>
+<div class="row">
+    Your response came at @Model.TestAnswer.AnsweringTime.ToLongTimeString() - it took you @Model.TestAnswer.AnsweringTimeOffset.Minutes m. @Model.TestAnswer.AnsweringTimeOffset.Seconds s. @Model.TestAnswer.AnsweringTimeOffset.Milliseconds ms to do it.
+</div>

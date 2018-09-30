@@ -1,0 +1,45 @@
+﻿
+
+@model DevAdventCalendarCompetition.Models.Test
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Test @Model.Number</h3>
+        <p>
+            <b>Status: </b>Test started<b>
+            </b>
+        </p>
+        <p>
+            <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Time to end: </b> <span id="countdown"></span>
+        </p>
+    </div>
+    <div class="col-md-12">
+        <form class="form-inline" method="POST" action="/Admin/EndTest">
+            @Html.Hidden("testId", Model.Id)
+            <button type="submit" class="btn btn-default">End test earlier</button>
+        </form>
+    </div>
+</div>
+<script>
+        var endDateString = '@Model.EndDate.Value.ToString("o")';
+        var endDate = new Date(endDateString);
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            timeSync.url = "/Home/GetServerTime";
+            timeSync
+                .getTimeDifference()
+                .then(function() {
+                    var clientEndDateTicks = endDate - timeSync.timeDifference;
+
+                    var clientEndDate = new Date(clientEndDateTicks);
+
+                    $('#countdown').countdown(clientEndDate, function(event) {
+                        $(this).html(event.strftime('%M m. %S s.'));
+                    }).on('finish.countdown', function(event) {
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 1000);
+                    });
+                });
+        });
+</script>
