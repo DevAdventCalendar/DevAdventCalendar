@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model DevAdventCalendarCompetition.Models.Test
+
+<div class="jumbotron">
+    <h1><img class="logo" src="/images/wroc-color.svg" /> Competition</h1>
+</div>
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Start TEST @Model.Number</h2>
+            <p>
+                <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Time to end: </b> <span id="countdown"></span>
+            </p>
+
+            @if (ViewBag.TestNotAnswered == true)
+            {
+                var url = "/test" + Model.Number;
+                <p>
+                    <a class="btn btn-default btn-lg" href="@url">TEST @Model.Number</a>
+                </p>
+            }
+        </div>
+    </div>
+    <script>
+        var endDateString = '@Model.EndDate.Value.ToString("o")';
+        var endDate = new Date(endDateString);
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            timeSync.url = "/Home/GetServerTime";
+            timeSync
+                .getTimeDifference()
+                .then(function() {
+                    var clientEndDateTicks = endDate - timeSync.timeDifference;
+
+                    var clientEndDate = new Date(clientEndDateTicks);
+
+                    $('#countdown').countdown(clientEndDate, function(event) {
+                        $(this).html(event.strftime('%M m. %S s.'));
+                    }).on('finish.countdown', function(event) {
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 1000);
+                    });
+                });
+        });
+    </script>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <p>There is no open test right now - please wait for opening.</p>
+        </div>
+    </div>
+}

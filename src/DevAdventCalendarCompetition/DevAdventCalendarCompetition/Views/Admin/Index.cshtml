@@ -1,0 +1,31 @@
+﻿@using DevAdventCalendarCompetition.Models
+@model List<DevAdventCalendarCompetition.Models.Test>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Admin page</h1>
+</div>
+@for (int i = 0; i < Model.Count; i++)
+{
+    var currentTest = Model[i];
+    var previousTest = i == 0 ? null : Model[i - 1];
+
+    if (previousTest != null && previousTest.Status != TestStatus.Ended)
+    {
+        @Html.Partial("_TestPreviousNotEnded",currentTest)
+    }
+    else if (currentTest.Status == TestStatus.NotStarted)
+    {
+        @Html.Partial("_TestNotStarted", currentTest)
+    }
+    else if (currentTest.Status == TestStatus.Started)
+    {
+        @Html.Partial("_TestStarted", currentTest)
+    }
+    else
+    {
+        @Html.Partial("_TestEnded", currentTest)
+    }
+}

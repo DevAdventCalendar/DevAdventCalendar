@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Test has ended";
+}
+@model int
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <p>
+        Test @Model has ended. Check the <a href="@Url.Action("Results")">results</a> of the test.
+    </p>
+</div>
