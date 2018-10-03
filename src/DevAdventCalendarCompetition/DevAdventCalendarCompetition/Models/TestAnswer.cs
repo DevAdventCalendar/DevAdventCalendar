@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DevAdventCalendarCompetition.Models
 {
-    public class TestAnswer:ModelBase
+    public class TestAnswer : ModelBase
     {
         public int TestId { get; set; }
 

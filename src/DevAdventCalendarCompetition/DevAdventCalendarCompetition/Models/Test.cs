@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DevAdventCalendarCompetition.Models
 {
-    public class Test:ModelBase
+    public class Test : ModelBase
     {
-
         public int Number { get; set; }
 
         public DateTime? StartDate { get; set; }
 
         private DateTime? _endDate;
+
         public DateTime? EndDate
         {
             get
@@ -48,7 +46,7 @@ namespace DevAdventCalendarCompetition.Models
             {
                 if (!HasStarted)
                     return TestStatus.NotStarted;
-                if(!HasEnded)
+                if (!HasEnded)
                     return TestStatus.Started;
                 return TestStatus.Ended;
             }
@@ -57,7 +55,6 @@ namespace DevAdventCalendarCompetition.Models
 
     public class TestMapping : MappingBase<Test>
     {
-        
     }
 
     public enum TestStatus

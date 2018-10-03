@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DevAdventCalendarCompetition.Data;
+using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Vms;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Data;
-using DevAdventCalendarCompetition.Vms;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -149,6 +149,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             return View(number);
         }
+
         public ActionResult GetServerTime()
         {
             return Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Models.AccountViewModels;
+using DevAdventCalendarCompetition.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Models.AccountViewModels;
-using DevAdventCalendarCompetition.Services;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -430,7 +426,6 @@ namespace DevAdventCalendarCompetition.Controllers
             return View();
         }
 
-
         [HttpGet]
         public IActionResult AccessDenied()
         {
@@ -459,6 +454,6 @@ namespace DevAdventCalendarCompetition.Controllers
             }
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

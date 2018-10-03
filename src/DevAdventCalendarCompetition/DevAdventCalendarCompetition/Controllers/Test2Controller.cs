@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
+﻿using DevAdventCalendarCompetition.Data;
 using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Data;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -32,7 +28,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 ModelState.AddModelError("", "Answer is not correct. Try again.");
                 var test = _context.Set<Test>().First(el => el.Number == 2);
-                return View("Index",test);
+                return View("Index", test);
             }
 
             return SaveAnswerAndRedirect(2);
