@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
+﻿using DevAdventCalendarCompetition.Data;
 using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Data;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
-    public class Test1Controller: BaseTestController
+    public class Test1Controller : BaseTestController
     {
         public Test1Controller(ApplicationDbContext context) : base(context)
         {

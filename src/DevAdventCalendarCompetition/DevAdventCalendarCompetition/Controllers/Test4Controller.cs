@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
+﻿using DevAdventCalendarCompetition.Data;
 using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Data;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -26,7 +23,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [CanStartTest(TestNumber = 4)]
         public ActionResult Index(string answer = "")
         {
-            var answers = new []{ "TALOFA", "FALOPA", "TALOFALAVA", "MALOLESOIFUA", "MALO"};
+            var answers = new[] { "TALOFA", "FALOPA", "TALOFALAVA", "MALOLESOIFUA", "MALO" };
             var fixedAnswer = answer.ToUpper().Replace(" ", "");
 
             if (!answers.Contains(fixedAnswer))

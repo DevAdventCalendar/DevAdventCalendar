@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Models.ManageViewModels;
+using DevAdventCalendarCompetition.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Models.ManageViewModels;
-using DevAdventCalendarCompetition.Services;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -540,6 +538,6 @@ namespace DevAdventCalendarCompetition.Controllers
             model.AuthenticatorUri = GenerateQrCodeUri(user.Email, unformattedKey);
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

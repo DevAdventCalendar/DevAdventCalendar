@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DevAdventCalendarCompetition.Vms
 {
@@ -17,7 +15,8 @@ namespace DevAdventCalendarCompetition.Vms
 
         public TimeSpan TestOffset
         {
-            get {
+            get
+            {
                 if (EndDate.HasValue && StartDate.HasValue)
                 {
                     return EndDate.Value.Subtract(StartDate.Value);

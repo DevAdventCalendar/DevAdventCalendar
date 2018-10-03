@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http.Authentication;
+﻿using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevAdventCalendarCompetition.Vms
 {

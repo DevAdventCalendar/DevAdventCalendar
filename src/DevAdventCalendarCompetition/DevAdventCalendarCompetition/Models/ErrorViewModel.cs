@@ -1,5 +1,3 @@
-using System;
-
 namespace DevAdventCalendarCompetition.Models
 {
     public class ErrorViewModel

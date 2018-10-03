@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DevAdventCalendarCompetition.Data;
+using DevAdventCalendarCompetition.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Threading;
-using System.Web;
-using DevAdventCalendarCompetition.Models;
-using DevAdventCalendarCompetition.Data;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -15,6 +11,7 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private ApplicationDbContext _context;
+
         public AdminController(ApplicationDbContext context)
         {
             _context = context;
@@ -68,7 +65,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
             return RedirectToAction("Index");
         }
-        
 
         public string Reset()
         {
@@ -77,7 +73,6 @@ namespace DevAdventCalendarCompetition.Controllers
             bool.TryParse(resetEnabledString, out resetEnabled);
             if (!resetEnabled)
                 return "Reset is not enabled.";
-
 
             var tests = _context.Set<Test>().ToList();
             foreach (var test in tests)

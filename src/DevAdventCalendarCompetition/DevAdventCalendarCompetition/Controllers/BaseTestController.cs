@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DevAdventCalendarCompetition.Data;
 using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Vms;
-using DevAdventCalendarCompetition.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -28,16 +26,15 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 TestId = test.Id,
                 UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-            AnsweringTime = DateTime.Now,
+                AnsweringTime = DateTime.Now,
                 AnsweringTimeOffset = DateTime.Now.Subtract(test.StartDate.Value)
             };
 
             _context.Set<TestAnswer>().Add(testAnswer);
             _context.SaveChanges();
 
-            var vm = new AnswerVm() {TestAnswer = testAnswer, TestNumber = testNumber };
+            var vm = new AnswerVm() { TestAnswer = testAnswer, TestNumber = testNumber };
             return View("Answered", vm);
         }
-
     }
 }

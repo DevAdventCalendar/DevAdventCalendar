@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using DevAdventCalendarCompetition.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace DevAdventCalendarCompetition
 {
-    public class CanStartTestAttribute: ActionFilterAttribute
+    public class CanStartTestAttribute : ActionFilterAttribute
     {
-        public int TestNumber { get; set;}
-        
+        public int TestNumber { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             // TODO refactor
@@ -41,6 +33,5 @@ namespace DevAdventCalendarCompetition
             //    filterContext.Result = new RedirectResult(url);
             //}
         }
-
     }
 }
