@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DevAdventCalendarCompetition
+namespace DevAdventCalendarCompetition.Repository.Models
 {
     public abstract class MappingBase<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : ModelBase

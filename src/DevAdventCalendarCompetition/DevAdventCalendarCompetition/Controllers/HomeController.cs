@@ -1,8 +1,6 @@
-﻿using DevAdventCalendarCompetition.Data;
-using DevAdventCalendarCompetition.Models;
+﻿using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +10,16 @@ namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
-        protected ApplicationDbContext _context;
+        protected IHomeService _homeService;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(IHomeService homeService)
         {
-            _context = context;
+            _homeService = homeService;
         }
 
         public ActionResult Index()
         {
-            var tests = _context.Set<Test>().ToList();
-            var currentTest = tests.FirstOrDefault(el => el.Status == TestStatus.Started);
+            var currentTest = _homeService.GetCurrentTest();
             if (currentTest == null)
                 return View();
 
@@ -30,8 +27,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (userId == null)
                 return View(currentTest);
 
-            var currentTestAnswer =
-                _context.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == currentTest.Id);
+            var currentTestAnswer = _homeService.GetTestAnswerByUserId(userId, currentTest.Id);
             if (currentTestAnswer == null)
                 ViewBag.TestNotAnswered = true;
 
@@ -40,10 +36,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult Results()
         {
-            var tests = _context.Set<Test>()
-                .Include(t => t.Answers)
-                .ThenInclude(ta => ta.User)
-                .OrderBy(el => el.Number).ToList();
+            var tests = _homeService.GetTestsWithUserAnswers();
 
             var singleTestResults = tests.Select(test => new SingleTestResultsVm()
             {

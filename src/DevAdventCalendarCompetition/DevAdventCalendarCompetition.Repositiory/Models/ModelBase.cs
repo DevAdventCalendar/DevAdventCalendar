@@ -1,4 +1,4 @@
-﻿namespace DevAdventCalendarCompetition
+﻿namespace DevAdventCalendarCompetition.Repository.Models
 {
     public class ModelBase
     {
