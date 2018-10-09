@@ -31,7 +31,10 @@ namespace DevAdventCalendarCompetition
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });            
+            }); 
             services.AddMvc();
         }
 
@@ -52,7 +55,11 @@ namespace DevAdventCalendarCompetition
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickApp API V1");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
