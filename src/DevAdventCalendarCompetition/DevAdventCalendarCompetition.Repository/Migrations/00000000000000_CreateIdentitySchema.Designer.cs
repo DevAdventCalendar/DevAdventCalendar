@@ -86,7 +86,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Test");
+                    b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("DevAdventCalendarCompetition.Models.TestAnswer", b =>
