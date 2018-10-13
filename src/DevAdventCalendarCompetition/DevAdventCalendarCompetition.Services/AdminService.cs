@@ -1,6 +1,8 @@
-﻿using DevAdventCalendarCompetition.Repository.Interfaces;
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Models;
 using System;
 using System.Collections.Generic;
 
@@ -17,31 +19,39 @@ namespace DevAdventCalendarCompetition.Services
             _baseTestRepository = baseTestRepository;
         }
 
-        public List<Test> GetAllTests()
+        public List<TestDto> GetAllTests()
         {
-            return _adminRepository.GetAll();
+            var testList = _adminRepository.GetAll();
+            var testDtoList = Mapper.Map<List<TestDto>>(testList);
+            return testDtoList;
         }
 
-        public Test GetTestById(int testId)
+        public TestDto GetTestById(int testId)
         {
-            return _adminRepository.GetById(testId);
+            var test = _adminRepository.GetById(testId);
+            var testDto = Mapper.Map<TestDto>(test);
+            return testDto;
         }
 
-        public Test GetPreviousTest(int testNumber)
+        public TestDto GetPreviousTest(int testNumber)
         {
-            return _baseTestRepository.GetByNumber(testNumber);
+            var test = _baseTestRepository.GetByNumber(testNumber);
+            var testDto = Mapper.Map<TestDto>(test);
+            return testDto;
         }
 
-        public void UpdateTestDates(Test test, DateTime startTime, DateTime endTime)
+        public void UpdateTestDates(TestDto testDto, DateTime startTime, DateTime endTime)
         {
-            test.StartDate = startTime;
-            test.EndDate = endTime;
+            testDto.StartDate = startTime;
+            testDto.EndDate = endTime;
+            var test = Mapper.Map<Test>(testDto);
             _adminRepository.UpdateDates(test);
         }
 
-        public void UpdateTestEndDate(Test test, DateTime endTime)
+        public void UpdateTestEndDate(TestDto testDto, DateTime endTime)
         {
-            test.EndDate = endTime;
+            testDto.EndDate = endTime;
+            var test = Mapper.Map<Test>(testDto);
             _adminRepository.UpdateEndDate(test);
         }
 

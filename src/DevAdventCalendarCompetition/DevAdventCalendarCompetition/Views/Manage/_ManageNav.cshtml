@@ -1,7 +1,8 @@
 ﻿@using DevAdventCalendarCompetition.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+@using DevAdventCalendarCompetition.Services
+@inject IdentityService IdentityService
 @{
-    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var hasExternalLogins = (await IdentityService.GetExternalAuthenticationSchemes()).Any();
 }
 
 <ul class="nav nav-pills nav-stacked">

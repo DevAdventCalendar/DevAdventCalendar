@@ -1,5 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Interfaces;
-using DevAdventCalendarCompetition.Repository.Models;
+﻿using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -11,17 +10,14 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class ManageService : IManageService
     {
-        private readonly IManageRepository _manageRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public ManageService(IManageRepository manageRepository,
-            UserManager<ApplicationUser> userManager,
+        public ManageService(UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender)
         {
-            _manageRepository = manageRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;

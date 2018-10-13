@@ -19,38 +19,38 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult Index()
         {
-            var currentTest = _homeService.GetCurrentTest();
-            if (currentTest == null)
+            var currentTestDto = _homeService.GetCurrentTest();
+            if (currentTestDto == null)
                 return View();
 
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return View(currentTest);
+                return View(currentTestDto);
 
-            var currentTestAnswer = _homeService.GetTestAnswerByUserId(userId, currentTest.Id);
+            var currentTestAnswer = _homeService.GetTestAnswerByUserId(userId, currentTestDto.Id);
             if (currentTestAnswer == null)
                 ViewBag.TestNotAnswered = true;
 
-            return View(currentTest);
+            return View(currentTestDto);
         }
 
         public ActionResult Results()
         {
-            var tests = _homeService.GetTestsWithUserAnswers();
+            var testDtoList = _homeService.GetTestsWithUserAnswers();
 
-            var singleTestResults = tests.Select(test => new SingleTestResultsVm()
+            var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
             {
-                TestNumber = test.Number,
-                TestEnded = test.HasEnded,
-                EndDate = test.EndDate,
-                StartDate = test.StartDate,
-                Entries = test.Answers.OrderBy(ta => ta.AnsweringTimeOffset)
+                TestNumber = testDto.Number,
+                TestEnded = testDto.HasEnded,
+                EndDate = testDto.EndDate,
+                StartDate = testDto.StartDate,
+                Entries = testDto.Answers.OrderBy(ta => ta.AnsweringTimeOffset)
                     .Select(
                         ta =>
                             new SingleTestResultEntry()
                             {
                                 UserId = ta.UserId,
-                                FullName = ta.User.FirstName + " " + ta.User.SecondName,
+                                FullName = ta.UserFullName,
                                 Offset = ta.AnsweringTimeOffset
                             })
                             .ToList()
@@ -69,7 +69,7 @@ namespace DevAdventCalendarCompetition.Controllers
             });
             List<TotalTestResultEntryVm> totalTestResults = null;
 
-            if (tests.All(t => t.HasEnded))
+            if (testDtoList.All(t => t.HasEnded))
             {
                 var totalResultsDict = singleTestResults
                     .SelectMany(r => r.Entries)

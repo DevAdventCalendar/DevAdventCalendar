@@ -1,5 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Interfaces;
-using DevAdventCalendarCompetition.Repository.Models;
+﻿using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -11,17 +10,14 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IAccountRepository _accountRepository;
         private readonly IEmailSender _emailSender;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountService(IAccountRepository accountRepository,
-            IEmailSender emailSender,
+        public AccountService(IEmailSender emailSender,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
-            _accountRepository = accountRepository;
             _emailSender = emailSender;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -52,10 +48,14 @@ namespace DevAdventCalendarCompetition.Services
             return await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
         }
 
-        public async Task<IdentityResult> CreateAsync(string email, string password)
+        public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
         {
-            var user = new ApplicationUser { UserName = email, Email = email };
             return await _userManager.CreateAsync(user, password);
+        }
+
+        public async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
         public async Task<string> GenerateEmailConfirmationTokenAsync(ClaimsPrincipal pricipal)
@@ -72,6 +72,16 @@ namespace DevAdventCalendarCompetition.Services
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             await _emailSender.SendEmailAsync(email, subject, message);
+        }
+
+        public ApplicationUser CreateApplicationUserByEmail(string email)
+        {
+            return new ApplicationUser { UserName = email, Email = email };
+        }
+
+        public async Task SignInWithApplicationUserAsync(ApplicationUser user)
+        {
+            await _signInManager.SignInAsync(user, isPersistent: false);
         }
 
         public async Task SignInAsync(ClaimsPrincipal principal)

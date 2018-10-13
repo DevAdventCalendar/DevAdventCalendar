@@ -1,4 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
+﻿using DevAdventCalendarCompetition.Services.Models;
 using System;
 using System.Collections.Generic;
 
@@ -6,15 +6,15 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IAdminService
     {
-        List<Test> GetAllTests();
+        List<TestDto> GetAllTests();
 
-        Test GetTestById(int id);
+        TestDto GetTestById(int id);
 
-        Test GetPreviousTest(int testNumber);
+        TestDto GetPreviousTest(int testNumber);
 
-        void UpdateTestDates(Test test, DateTime startTime, DateTime endTime);
+        void UpdateTestDates(TestDto test, DateTime startTime, DateTime endTime);
 
-        void UpdateTestEndDate(Test test, DateTime endTime);
+        void UpdateTestEndDate(TestDto test, DateTime endTime);
 
         void ResetTestDates();
 

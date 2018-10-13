@@ -18,20 +18,20 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult SaveAnswerAndRedirect(int testNumber)
         {
-            var test = _baseTestService.GetTestByNumber(testNumber);
+            var testDto = _baseTestService.GetTestByNumber(testNumber);
             //TODO: check for null, error handling
 
-            _baseTestService.AddTestAnswer(test.Id, User.FindFirstValue(ClaimTypes.NameIdentifier), test.StartDate.Value);
+            _baseTestService.AddTestAnswer(testDto.Id, User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.StartDate.Value);
 
             //TODO: use Automapper?
-            var testAnswer = _baseTestService.GetAnswerByTestId(test.Id);
+            var testAnswerDto = _baseTestService.GetAnswerByTestId(testDto.Id);
 
             var testAnswerVm = new TestAnswerVm()
             {
-                TestId = testAnswer.TestId,
-                UserId = testAnswer.UserId,
-                AnsweringTime = testAnswer.AnsweringTime,
-                AnsweringTimeOffset = testAnswer.AnsweringTimeOffset
+                TestId = testAnswerDto.TestId,
+                UserId = testAnswerDto.UserId,
+                AnsweringTime = testAnswerDto.AnsweringTime,
+                AnsweringTimeOffset = testAnswerDto.AnsweringTimeOffset
             };
 
             var answerVm = new AnswerVm() { TestAnswerVm = testAnswerVm, TestNumber = testNumber };

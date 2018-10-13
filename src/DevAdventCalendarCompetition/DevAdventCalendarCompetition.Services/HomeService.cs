@@ -1,6 +1,7 @@
-﻿using DevAdventCalendarCompetition.Repository.Interfaces;
-using DevAdventCalendarCompetition.Repository.Models;
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Models;
 using System.Collections.Generic;
 
 namespace DevAdventCalendarCompetition.Services
@@ -14,19 +15,25 @@ namespace DevAdventCalendarCompetition.Services
             _homeRepository = homeRepository;
         }
 
-        public Test GetCurrentTest()
+        public TestDto GetCurrentTest()
         {
-            return _homeRepository.GetCurrentTest();
+            var test = _homeRepository.GetCurrentTest();
+            var testDto = Mapper.Map<TestDto>(test);
+            return testDto;
         }
 
-        public TestAnswer GetTestAnswerByUserId(string userId, int testId)
+        public TestAnswerDto GetTestAnswerByUserId(string userId, int testId)
         {
-            return _homeRepository.GetTestAnswerByUserId(userId, testId);
+            var testAnswer = _homeRepository.GetTestAnswerByUserId(userId, testId);
+            var testAnswerDto = Mapper.Map<TestAnswerDto>(testAnswer);
+            return testAnswerDto;
         }
 
-        public List<Test> GetTestsWithUserAnswers()
+        public List<TestWithAnswerListDto> GetTestsWithUserAnswers()
         {
-            return _homeRepository.GetTestsWithUserAnswers();
+            var testList = _homeRepository.GetTestsWithUserAnswers();
+            var testWithAnswersDtoList = Mapper.Map<List<TestWithAnswerListDto>>(testList);
+            return testWithAnswersDtoList;
         }
     }
 }

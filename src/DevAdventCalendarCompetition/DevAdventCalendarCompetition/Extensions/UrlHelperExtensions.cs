@@ -1,6 +1,7 @@
 using DevAdventCalendarCompetition.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.Mvc
+namespace DevAdventCalendarCompetition.Extensions
 {
     public static class UrlHelperExtensions
     {

@@ -1,5 +1,5 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,13 +26,13 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult StartTest(int testId, string minutesString)
         {
-            var test = _adminService.GetTestById(testId);
-            if (test.Status != TestStatus.NotStarted)
+            var testDto = _adminService.GetTestById(testId);
+            if (testDto.Status != TestStatus.NotStarted)
                 throw new ArgumentException("Test was started");
 
-            var previousTest = _adminService.GetPreviousTest(test.Number);
+            var previousTestDto = _adminService.GetPreviousTest(testDto.Number);
 
-            if (previousTest != null && previousTest.Status != TestStatus.Ended)
+            if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
                 throw new ArgumentException("Previous test has not ended");
 
             //TODO: move to service
@@ -44,7 +44,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var startTime = DateTime.Now;
             var endTime = startTime.AddMinutes(minutes);
 
-            _adminService.UpdateTestDates(test, startTime, endTime);
+            _adminService.UpdateTestDates(testDto, startTime, endTime);
 
             return RedirectToAction("Index");
         }
@@ -52,11 +52,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult EndTest(int testId)
         {
-            var test = _adminService.GetTestById(testId);
-            if (test.Status != TestStatus.Started)
+            var testDto = _adminService.GetTestById(testId);
+            if (testDto.Status != TestStatus.Started)
                 throw new ArgumentException("Test was started");
 
-            _adminService.UpdateTestEndDate(test, DateTime.Now);
+            _adminService.UpdateTestEndDate(testDto, DateTime.Now);
 
             return RedirectToAction("Index");
         }

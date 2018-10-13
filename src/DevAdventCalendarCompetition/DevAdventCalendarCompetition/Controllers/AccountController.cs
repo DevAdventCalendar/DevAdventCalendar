@@ -1,4 +1,5 @@
-﻿using DevAdventCalendarCompetition.Models.AccountViewModels;
+﻿using DevAdventCalendarCompetition.Extensions;
+using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -35,8 +36,10 @@ namespace DevAdventCalendarCompetition.Controllers
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
+            var model = new LoginViewModel();
+
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -208,17 +211,17 @@ namespace DevAdventCalendarCompetition.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _accountService.CreateAsync(model.Email, model.Password);
+                var user = _accountService.CreateApplicationUserByEmail(model.Email);
+                var result = await _accountService.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _accountService.GenerateEmailConfirmationTokenAsync(User);
-                    var userId = _accountService.GetUserId(User);
-                    var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
+                    var code = await _accountService.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _accountService.SignInAsync(User);
+                    await _accountService.SignInWithApplicationUserAsync(user);
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
@@ -299,7 +302,8 @@ namespace DevAdventCalendarCompetition.Controllers
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
 
-                var result = await _accountService.CreateAsync(model.Email, null);
+                var user = _accountService.CreateApplicationUserByEmail(model.Email);
+                var result = await _accountService.CreateAsync(user, null);
                 if (result.Succeeded)
                 {
                     result = await _accountService.AddLoginAsync(User, info);

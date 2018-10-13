@@ -1,14 +1,14 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
+﻿using DevAdventCalendarCompetition.Services.Models;
 using System.Collections.Generic;
 
 namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IHomeService
     {
-        Test GetCurrentTest();
+        TestDto GetCurrentTest();
 
-        TestAnswer GetTestAnswerByUserId(string userId, int testId);
+        TestAnswerDto GetTestAnswerByUserId(string userId, int testId);
 
-        List<Test> GetTestsWithUserAnswers();
+        List<TestWithAnswerListDto> GetTestsWithUserAnswers();
     }
 }

@@ -1,4 +1,5 @@
-﻿using DevAdventCalendarCompetition.Models.ManageViewModels;
+﻿using DevAdventCalendarCompetition.Extensions;
+using DevAdventCalendarCompetition.Models.ManageViewModels;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;

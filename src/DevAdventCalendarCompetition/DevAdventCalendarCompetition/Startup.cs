@@ -1,4 +1,5 @@
 ﻿using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,16 +20,16 @@ namespace DevAdventCalendarCompetition
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var serviceStartup = new Services.Startup(Configuration);
+            serviceStartup.Configure(services);
 
-            //TODO: solution https://www.codeproject.com/Articles/1156558/ASP-NET-Core-Moving-IdentityDbContext-and-EF-model
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
-
-            // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAdminService, AdminService>();
+            services.AddTransient<IBaseTestService, BaseTestService>();
+            services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<IManageService, ManageService>();
+            services.AddTransient<IdentityService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });

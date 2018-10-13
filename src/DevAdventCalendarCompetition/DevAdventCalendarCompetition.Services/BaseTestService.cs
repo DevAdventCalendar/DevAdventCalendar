@@ -1,6 +1,8 @@
-﻿using DevAdventCalendarCompetition.Repository.Interfaces;
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Models;
 using System;
 
 namespace DevAdventCalendarCompetition.Services
@@ -14,9 +16,11 @@ namespace DevAdventCalendarCompetition.Services
             _baseTestRepository = baseTestRepository;
         }
 
-        public Test GetTestByNumber(int testNumber)
+        public TestDto GetTestByNumber(int testNumber)
         {
-            return _baseTestRepository.GetByNumber(testNumber);
+            var test = _baseTestRepository.GetByNumber(testNumber);
+            var testDto = Mapper.Map<TestDto>(test);
+            return testDto;
         }
 
         public void AddTestAnswer(int testId, string userId, DateTime testStartDate)
@@ -32,9 +36,11 @@ namespace DevAdventCalendarCompetition.Services
             _baseTestRepository.AddAnswer(testAnswer);
         }
 
-        public TestAnswer GetAnswerByTestId(int testId)
+        public TestAnswerDto GetAnswerByTestId(int testId)
         {
-            return _baseTestRepository.GetAnswerByTestId(testId);
+            var testAnswer = _baseTestRepository.GetAnswerByTestId(testId);
+            var testAnswerDto = Mapper.Map<TestAnswerDto>(testAnswer);
+            return testAnswerDto;
         }
     }
 }
