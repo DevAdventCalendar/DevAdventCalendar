@@ -9,7 +9,10 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+<<<<<<< HEAD
 using System.IO;
+=======
+>>>>>>> Added an Answer field to TestAnswers.
 
 namespace DevAdventCalendarCompetition
 {
