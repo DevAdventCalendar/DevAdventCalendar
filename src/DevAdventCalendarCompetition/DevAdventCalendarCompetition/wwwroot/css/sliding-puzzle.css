@@ -1,0 +1,44 @@
+
+#puzzle { 
+    display: flex;
+    flex-direction: row;
+    margin:auto; 
+    border-radius:5px; 
+    max-width: 890px;
+    max-height: 750px;
+}
+
+#puzzle figure { 
+    width:800px; 
+    height:600px;    
+    position:relative; 
+    float:left; 
+    background-color:#fff; 
+}
+
+#puzzle .puzzle-container {
+    border:5px solid rgb(197, 197, 197); 
+    box-shadow:15px 15px 10px rgb(197, 197, 197); 
+    position: relative;
+}
+
+#ui { 
+    display: block;
+    margin-top: 50px;
+    width:200px; 
+    padding:10px 0 0 10px; 
+}
+
+#ui button { 
+    margin-bottom:2em; 
+}
+
+#ui p { 
+    font-size:1.7em; 
+}
+
+#start { 
+    width:204px; 
+    height:50px; 
+    font-size:1.75em; 
+}

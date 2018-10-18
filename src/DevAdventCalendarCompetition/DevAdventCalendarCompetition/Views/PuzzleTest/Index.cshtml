@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Puzzle";
+}
+@model DevAdventCalendarCompetition.Models.Test
+<div class="jumbotron">
+    <h1>Puzzle </h1>
+</div>
+<div class="row">
+    <div class="col-md-12" style="margin-bottom: 20px">
+        <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Time to end: </b> <span id="countdown"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <p>
+            Ułóż przesuwane puzzle ze znaną osobistością świata IT ;)
+        </p>
+    </div>
+</div>
+<div class="row game-container">
+    <div class="col-md-12 col-lg-12">
+        <div id="puzzle">
+            <div class="puzzle-container">
+                <figure><img src="images/bill-gates-800-1.jpg" alt="Bill Gates"></figure>
+            </div>
+        </div>       
+    </div>
+</div>
+<div class="row">
+     <div class="col col-md-2 col-lg-2" id="ui">
+        <button type="button" class="btn btn-primary" id="start">Start!</button>
+    </div>
+    <h2 id="moveCounter"></h2>
+    <div>
+        <button type="button" class="btn btn-secondaty" id="reset" disabled>Reset!</button>
+    </div>
+</div>
+<script>
+        var endDateString = '@Model.EndDate.Value.ToString("o")';
+        var endDate = new Date(endDateString);
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            timeSync.url = "/Home/GetServerTime";
+            timeSync
+                .getTimeDifference()
+                .then(function() {
+                    var clientEndDateTicks = endDate - timeSync.timeDifference;
+
+                    var clientEndDate = new Date(clientEndDateTicks);
+
+                    $('#countdown').countdown(clientEndDate, function(event) {
+                        $(this).html(event.strftime('%M m. %S s.'));
+                    }).on('finish.countdown', function(event) {
+                        setTimeout(function() {
+                            location.reload(true);
+                        }, 1000);
+                    });
+                });
+        });
+</script>
