@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Data;
@@ -35,7 +36,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (user != null)
             {
-                var test = await _context.TestAnswers.FirstOrDefaultAsync(a => a.AnsweringTime == null && a.Answer == null && a.UserId == user.Id);
+                var test = await _context.TestAnswers.FirstOrDefaultAsync(a => a.AnsweringTime == DateTime.MinValue && a.Answer == null && a.UserId == user.Id);
 
                 if (test != null)
                 {
@@ -70,7 +71,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     _context.TestAnswers.Add(answer);
                     await _context.SaveChangesAsync();
 
-                    return Ok();
+                    return Ok("Test started!");
                 }              
             }
 
@@ -80,21 +81,18 @@ namespace DevAdventCalendarCompetition.Controllers
         // TODO: Secure the game from changing values in view and possible winning the game without any effort.
 
         [HttpPost]
-        public async Task<IActionResult> UpdateGameResult([FromBody] int moves, int gameDuration, DateTime testEnd)
+        public async Task<IActionResult> UpdateGameResult(int moves, int gameDuration, string testEnd)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(); // TODO: Handle error condition: what to do with test and result if an error occurs?
-
             var user = _userManager.Users.FirstOrDefault(u => u.Email == HttpContext.User.Identity.Name);
-          
+           
             if (user != null)
             {
-                var testAnswer = await _context.TestAnswers.FirstOrDefaultAsync(a => a.AnsweringTime == null && a.Answer == null && a.UserId == user.Id);
+                var testAnswer = await _context.TestAnswers.FirstOrDefaultAsync(a => a.AnsweringTime == DateTime.MinValue && a.Answer == null && a.UserId == user.Id);
 
                 if (testAnswer != null)
                 {
                     testAnswer.Answer = moves.ToString();
-                    testAnswer.AnsweringTime = testEnd;
+                    testAnswer.AnsweringTime = DateTime.ParseExact(testEnd, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
                     testAnswer.AnsweringTimeOffset = TimeSpan.FromSeconds(gameDuration);
 
                     _context.TestAnswers.Update(testAnswer);
@@ -108,18 +106,18 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ResetGame()
+        public async Task<IActionResult> ResetGame(int moveCount)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Email == HttpContext.User.Identity.Name);
 
             if (user != null)
             {
                 var testAnswer = await _context.TestAnswers.FirstOrDefaultAsync(a =>
-                    a.AnsweringTime == null && a.Answer == null && a.UserId == user.Id);
+                    a.AnsweringTime == DateTime.MinValue && a.Answer == null && a.UserId == user.Id);
 
                 if (testAnswer != null)
                 {
-                    testAnswer.Answer = "0";
+                    testAnswer.Answer = moveCount.ToString();
                     testAnswer.AnsweringTime = DateTime.Now;
                     testAnswer.AnsweringTimeOffset = TimeSpan.Zero;
 

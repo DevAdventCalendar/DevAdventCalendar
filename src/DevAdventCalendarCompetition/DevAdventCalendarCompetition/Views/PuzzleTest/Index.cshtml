@@ -26,14 +26,14 @@
         </div>       
     </div>
 </div>
-<div class="row">
-     <div class="col col-md-2 col-lg-2" id="ui">
+<div class="row ui">
+     <div class="col col-md-2 col-lg-2">
         <button type="button" class="btn btn-primary" id="start">Start!</button>
+    </div>   
+    <div class="col col-md-2 col-lg-2">
+        <button type="button" class="btn btn-secondary" id="reset" disabled>Reset!</button>
     </div>
-    <h2 id="moveCounter"></h2>
-    <div>
-        <button type="button" class="btn btn-secondaty" id="reset" disabled>Reset!</button>
-    </div>
+    <div class="col col-md-8 col-lg-8"><h2 id="moveCounter"></h2></div>
 </div>
 <script>
         var endDateString = '@Model.EndDate.Value.ToString("o")';

@@ -65,10 +65,10 @@ $(function () {
             type: "post",
             url: puzzleUrl + "/StartGame",
             success: function(data) {
-                if(data !== '') {
+                if(data == 'Test started!') {
                     startTime = new Date();
                     moveCounter = 0;
-                    $("#moveCounter").text(moveCounter);
+                    $("#moveCounter").text("Liczba kroków: " + moveCounter);
                     var pieces = imgContainer.children();
                     
                     function shuffle(array) {
@@ -98,6 +98,23 @@ $(function () {
             }
         });        
     });
+
+    $("#reset").on("click", function (e) {    
+        window.location.reload();
+    });
+
+    $(window).on("beforeunload", function() {
+        if(started) {
+            $.ajax({
+                type: "post",
+                data: { moveCount: moveCounter },
+                url: puzzleUrl + "/ResetGame",
+                success: function(data) {
+                    location.reload();
+                }
+            });
+        }
+    });
 });
 
 function tileClickEvent(event) {
@@ -111,7 +128,7 @@ function tileClickEvent(event) {
     });
 
     if(!started) {
-        alert("The game has not started yet! Press START button to start.");
+        alert("Hej, hej...co tak szybko? By zacząć układać puzzle, musisz najpierw wcisnąć przycisk Start!");
         return;
     }
     else
@@ -157,12 +174,12 @@ function moveTile(event) {
 
     if(checkGameEndCondition()) {
         var endTime = new Date();
-        var gameDuration = (endTime - startTime) / 1000;
+        var gameDuration = Math.ceil((endTime - startTime) / 1000);
 
         $.ajax({
             type: "post",
-            url: puzzleUrl + "UpdateGameResult",
-            data: { result: moveCounter, gameDuration: gameDuration, testEnd: endTime },
+            url: puzzleUrl + "/UpdateGameResult",
+            data: { moves: moveCounter, gameDuration: gameDuration, testEnd: endTime.toISOString().replace("T", " ").replace("Z", "") },
             success: function() {
                 alert("Gratulacje! Puzzle ułożyłeś w " + moveCounter + " próbach, a zajęło Ci to " + gameDuration + " sekund.");
             },
@@ -195,7 +212,7 @@ function checkGameEndCondition() {
     };
     
     moveCounter++;
-    $("#moveCounter").text("Krok nr: " + moveCounter);
+    $("#moveCounter").text("Liczba kroków: " + moveCounter);
 
     return result;
 }

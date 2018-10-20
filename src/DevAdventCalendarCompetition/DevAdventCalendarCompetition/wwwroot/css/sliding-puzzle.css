@@ -22,23 +22,25 @@
     position: relative;
 }
 
-#ui { 
+.ui { 
     display: block;
     margin-top: 50px;
-    width:200px; 
     padding:10px 0 0 10px; 
 }
 
-#ui button { 
+.ui button { 
     margin-bottom:2em; 
+    width:100px; 
+    height:50px; 
+    font-size:1.75em;
 }
 
-#ui p { 
+.ui p { 
     font-size:1.7em; 
 }
 
-#start { 
-    width:204px; 
-    height:50px; 
-    font-size:1.75em; 
+.ui h2 {
+    margin-bottom: 2em;
+    vertical-align: top;
+    text-align: right;
 }
