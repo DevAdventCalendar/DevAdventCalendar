@@ -53,10 +53,6 @@ namespace DevAdventCalendarCompetition.Repository.Models
         }
     }
 
-    public class TestMapping : MappingBase<Test>
-    {
-    }
-
     public enum TestStatus
     {
         NotStarted, Started, Ended
