@@ -1,8 +1,6 @@
-﻿using DevAdventCalendarCompetition.Data;
-using DevAdventCalendarCompetition.Models;
+﻿using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,52 +10,47 @@ namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
-        protected ApplicationDbContext _context;
+        protected IHomeService _homeService;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(IHomeService homeService)
         {
-            _context = context;
+            _homeService = homeService;
         }
 
         public ActionResult Index()
         {
-            var tests = _context.Set<Test>().ToList();
-            var currentTest = tests.FirstOrDefault(el => el.Status == TestStatus.Started);
-            if (currentTest == null)
+            var currentTestDto = _homeService.GetCurrentTest();
+            if (currentTestDto == null)
                 return View();
 
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return View(currentTest);
+                return View(currentTestDto);
 
-            var currentTestAnswer =
-                _context.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == currentTest.Id);
+            var currentTestAnswer = _homeService.GetTestAnswerByUserId(userId, currentTestDto.Id);
             if (currentTestAnswer == null)
                 ViewBag.TestNotAnswered = true;
 
-            return View(currentTest);
+            return View(currentTestDto);
         }
 
         public ActionResult Results()
         {
-            var tests = _context.Set<Test>()
-                .Include(t => t.Answers)
-                .ThenInclude(ta => ta.User)
-                .OrderBy(el => el.Number).ToList();
+            var testDtoList = _homeService.GetTestsWithUserAnswers();
 
-            var singleTestResults = tests.Select(test => new SingleTestResultsVm()
+            var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
             {
-                TestNumber = test.Number,
-                TestEnded = test.HasEnded,
-                EndDate = test.EndDate,
-                StartDate = test.StartDate,
-                Entries = test.Answers.OrderBy(ta => ta.AnsweringTimeOffset)
+                TestNumber = testDto.Number,
+                TestEnded = testDto.HasEnded,
+                EndDate = testDto.EndDate,
+                StartDate = testDto.StartDate,
+                Entries = testDto.Answers.OrderBy(ta => ta.AnsweringTimeOffset)
                     .Select(
                         ta =>
                             new SingleTestResultEntry()
                             {
                                 UserId = ta.UserId,
-                                FullName = ta.User.FirstName + " " + ta.User.SecondName,
+                                FullName = ta.UserFullName,
                                 Offset = ta.AnsweringTimeOffset
                             })
                             .ToList()
@@ -76,7 +69,7 @@ namespace DevAdventCalendarCompetition.Controllers
             });
             List<TotalTestResultEntryVm> totalTestResults = null;
 
-            if (tests.All(t => t.HasEnded))
+            if (testDtoList.All(t => t.HasEnded))
             {
                 var totalResultsDict = singleTestResults
                     .SelectMany(r => r.Entries)

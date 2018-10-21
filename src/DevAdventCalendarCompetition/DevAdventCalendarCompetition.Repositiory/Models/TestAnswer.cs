@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DevAdventCalendarCompetition.Models
+namespace DevAdventCalendarCompetition.Repository.Models
 {
     public class TestAnswer : ModelBase
     {

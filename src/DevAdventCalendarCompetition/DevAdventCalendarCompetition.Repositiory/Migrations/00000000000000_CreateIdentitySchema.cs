@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace DevAdventCalendarCompetition.Data.Migrations
+namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

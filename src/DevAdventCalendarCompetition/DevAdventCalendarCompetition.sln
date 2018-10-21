@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition", "DevAdventCalendarCompetition\DevAdventCalendarCompetition.csproj", "{ABEBFE43-9603-4F88-8551-42D05BF4365F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition", "DevAdventCalendarCompetition\DevAdventCalendarCompetition.csproj", "{ABEBFE43-9603-4F88-8551-42D05BF4365F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.Services", "DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj", "{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.Repository", "DevAdventCalendarCompetition.Repositiory\DevAdventCalendarCompetition.Repository.csproj", "{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{ABEBFE43-9603-4F88-8551-42D05BF4365F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABEBFE43-9603-4F88-8551-42D05BF4365F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABEBFE43-9603-4F88-8551-42D05BF4365F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

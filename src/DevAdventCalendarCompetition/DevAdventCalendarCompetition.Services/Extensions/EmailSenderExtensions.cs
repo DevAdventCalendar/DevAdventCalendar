@@ -1,7 +1,8 @@
+using DevAdventCalendarCompetition.Services.Interfaces;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace DevAdventCalendarCompetition.Services
+namespace DevAdventCalendarCompetition.Services.Extensions
 {
     public static class EmailSenderExtensions
     {

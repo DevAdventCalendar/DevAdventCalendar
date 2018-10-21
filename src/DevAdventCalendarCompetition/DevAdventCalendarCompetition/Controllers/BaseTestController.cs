@@ -1,10 +1,7 @@
-﻿using DevAdventCalendarCompetition.Data;
-using DevAdventCalendarCompetition.Models;
+﻿using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -12,29 +9,34 @@ namespace DevAdventCalendarCompetition.Controllers
     [Authorize]
     public class BaseTestController : Controller
     {
-        protected ApplicationDbContext _context;
+        protected readonly IBaseTestService _baseTestService;
 
-        public BaseTestController(ApplicationDbContext context)
+        public BaseTestController(IBaseTestService baseTestService)
         {
-            _context = context;
+            _baseTestService = baseTestService;
         }
 
         public ActionResult SaveAnswerAndRedirect(int testNumber)
         {
-            var test = _context.Set<Test>().First(el => el.Number == testNumber);
-            var testAnswer = new TestAnswer()
+            var testDto = _baseTestService.GetTestByNumber(testNumber);
+            //TODO: check for null, error handling
+
+            _baseTestService.AddTestAnswer(testDto.Id, User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.StartDate.Value);
+
+            //TODO: use Automapper?
+            var testAnswerDto = _baseTestService.GetAnswerByTestId(testDto.Id);
+
+            var testAnswerVm = new TestAnswerVm()
             {
-                TestId = test.Id,
-                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                AnsweringTime = DateTime.Now,
-                AnsweringTimeOffset = DateTime.Now.Subtract(test.StartDate.Value)
+                TestId = testAnswerDto.TestId,
+                UserId = testAnswerDto.UserId,
+                AnsweringTime = testAnswerDto.AnsweringTime,
+                AnsweringTimeOffset = testAnswerDto.AnsweringTimeOffset
             };
 
-            _context.Set<TestAnswer>().Add(testAnswer);
-            _context.SaveChanges();
+            var answerVm = new AnswerVm() { TestAnswerVm = testAnswerVm, TestNumber = testNumber };
 
-            var vm = new AnswerVm() { TestAnswer = testAnswer, TestNumber = testNumber };
-            return View("Answered", vm);
+            return View("Answered", answerVm);
         }
     }
 }

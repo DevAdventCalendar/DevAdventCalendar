@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DevAdventCalendarCompetition.Services
+namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IEmailSender
     {

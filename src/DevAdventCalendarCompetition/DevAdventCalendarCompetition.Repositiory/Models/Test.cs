@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DevAdventCalendarCompetition.Models
+namespace DevAdventCalendarCompetition.Repository.Models
 {
     public class Test : ModelBase
     {

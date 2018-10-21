@@ -1,8 +1,8 @@
-﻿using DevAdventCalendarCompetition.Models;
+﻿using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevAdventCalendarCompetition.Data
+namespace DevAdventCalendarCompetition.Repository.Context
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
