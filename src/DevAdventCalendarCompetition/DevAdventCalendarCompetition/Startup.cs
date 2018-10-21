@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace DevAdventCalendarCompetition
 {
@@ -33,8 +34,8 @@ namespace DevAdventCalendarCompetition
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });            
-            }); 
+                c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
+            });
             services.AddMvc();
         }
 
