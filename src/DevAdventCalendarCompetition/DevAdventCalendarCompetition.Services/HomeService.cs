@@ -9,30 +9,34 @@ namespace DevAdventCalendarCompetition.Services
     public class HomeService : IHomeService
     {
         private readonly IHomeRepository _homeRepository;
+		private readonly IMapper _mapper;
 
-        public HomeService(IHomeRepository homeRepository)
+		public HomeService(
+			IHomeRepository homeRepository,
+			IMapper mapper)
         {
             _homeRepository = homeRepository;
-        }
+			_mapper = mapper;
+		}
 
         public TestDto GetCurrentTest()
         {
             var test = _homeRepository.GetCurrentTest();
-            var testDto = Mapper.Map<TestDto>(test);
+            var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
 
         public TestAnswerDto GetTestAnswerByUserId(string userId, int testId)
         {
             var testAnswer = _homeRepository.GetTestAnswerByUserId(userId, testId);
-            var testAnswerDto = Mapper.Map<TestAnswerDto>(testAnswer);
+            var testAnswerDto = _mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
         }
 
         public List<TestWithAnswerListDto> GetTestsWithUserAnswers()
         {
             var testList = _homeRepository.GetTestsWithUserAnswers();
-            var testWithAnswersDtoList = Mapper.Map<List<TestWithAnswerListDto>>(testList);
+            var testWithAnswersDtoList = _mapper.Map<List<TestWithAnswerListDto>>(testList);
             return testWithAnswersDtoList;
         }
     }
