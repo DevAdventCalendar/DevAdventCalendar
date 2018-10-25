@@ -4,12 +4,13 @@ using DevAdventCalendarCompetition.Services.Models;
 
 namespace DevAdventCalendarCompetition.Services.Profiles
 {
-	internal class TestProfile : Profile
-	{
-		public TestProfile()
-		{
-			CreateMap<Test, TestDto>();
-			CreateMap<TestDto, Test>();
-		}
-	}
+    public class TestProfile : Profile
+    {
+        public TestProfile()
+        {
+            CreateMap<Test, TestDto>();
+            CreateMap<TestDto, Test>()
+                .ForMember(dest => dest.Answers, opt => opt.Ignore());
+        }
+    }
 }
