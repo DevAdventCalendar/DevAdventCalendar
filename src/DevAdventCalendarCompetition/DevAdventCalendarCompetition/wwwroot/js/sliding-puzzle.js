@@ -179,7 +179,7 @@ function moveTile(event) {
         $.ajax({
             type: "post",
             url: puzzleUrl + "/UpdateGameResult",
-            data: { moves: moveCounter, gameDuration: gameDuration, testEnd: endTime.toISOString().replace("T", " ").replace("Z", "") },
+            data: { moveCount: moveCounter, gameDuration: gameDuration, testEnd: endTime.toISOString().replace("T", " ").replace("Z", "") },
             success: function() {
                 alert("Gratulacje! Puzzle ułożyłeś w " + moveCounter + " próbach, a zajęło Ci to " + gameDuration + " sekund.");
             },

@@ -5,6 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Data;
 using DevAdventCalendarCompetition.Models;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Context;
+using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,65 +19,40 @@ namespace DevAdventCalendarCompetition.Controllers
 {
     public class PuzzleTestController : BaseTestController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public PuzzleTestController(ApplicationDbContext context, UserManager<ApplicationUser> userManager) : base(context)
+        public PuzzleTestController(IBaseTestService baseTestService, IPuzzleTestService puzzleTestService) : base(baseTestService)
         {
-            _userManager = userManager;
+            _puzzleTestService = puzzleTestService;
         }
 
         [HttpGet]
         [CanStartTest(TestNumber = 7)]
         public IActionResult Index()
         {
-            var test = _context.Tests.FirstOrDefault(el => el.Number == 7);
+            var test = _baseTestService.GetTestByNumber(7);
             return View(test);
         }
 
         [HttpGet]
-        public async Task<IActionResult> CheckGameStarted()
+        public IActionResult CheckGameStarted()
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == HttpContext.User.Identity.Name);
+            var testAnswer =_puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            if (user != null)
-            {
-                var test = await _context.TestAnswers.FirstOrDefaultAsync(a => a.AnsweringTime == DateTime.MinValue && a.Answer == null && a.UserId == user.Id);
-
-                if (test != null)
-                {
-                    return Ok(true);
-                }
-            }
-
-            return Ok(false);
+            if (testAnswer != null)
+                return Ok(true);
+            else
+                return BadRequest(false);
         }
 
         [HttpPost]
         [CanStartTest(TestNumber = 7)]
-        public async Task<IActionResult> StartGame()
+        public IActionResult StartGame()
         {
-            var test = await _context.Tests.FirstOrDefaultAsync(t => t.Number == 7);
+            var test = _baseTestService.GetTestByNumber(7);
 
             if (test != null)
             {
-                var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == HttpContext.User.Identity.Name);
-
-                if (user != null)
-                {
-                    var answer = new TestAnswer
-                    {
-                        Answer = null,
-                        Test = test,
-                        TestId = test.Id,
-                        User = user,
-                        UserId = user.Id
-                    };
-
-                    _context.TestAnswers.Add(answer);
-                    await _context.SaveChangesAsync();
-
-                    return Ok("Test started!");
-                }              
+                _puzzleTestService.SaveEmptyTestAnswer(test.Id, User.FindFirstValue(ClaimTypes.NameIdentifier));
+                return Ok("Test started!");            
             }
 
             return BadRequest();
@@ -81,51 +61,30 @@ namespace DevAdventCalendarCompetition.Controllers
         // TODO: Secure the game from changing values in view and possible winning the game without any effort.
 
         [HttpPost]
-        public async Task<IActionResult> UpdateGameResult(int moves, int gameDuration, string testEnd)
+        public IActionResult UpdateGameResult(int moveCount, int gameDuration, string testEnd)
         {
-            var user = _userManager.Users.FirstOrDefault(u => u.Email == HttpContext.User.Identity.Name);
-           
-            if (user != null)
+            var testAnswer = _puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (testAnswer != null)
             {
-                var testAnswer = await _context.TestAnswers.FirstOrDefaultAsync(a => a.AnsweringTime == DateTime.MinValue && a.Answer == null && a.UserId == user.Id);
+                _puzzleTestService.UpdatePuzzleTestAnswer(testAnswer, moveCount, gameDuration, testEnd);
 
-                if (testAnswer != null)
-                {
-                    testAnswer.Answer = moves.ToString();
-                    testAnswer.AnsweringTime = DateTime.ParseExact(testEnd, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
-                    testAnswer.AnsweringTimeOffset = TimeSpan.FromSeconds(gameDuration);
-
-                    _context.TestAnswers.Update(testAnswer);
-                    await _context.SaveChangesAsync();
-
-                    return Ok();
-                }
+                return Ok();
             }
 
             return BadRequest();
         }
 
         [HttpPost]
-        public async Task<IActionResult> ResetGame(int moveCount)
+        public IActionResult ResetGame(int moveCount)
         {
-            var user = _userManager.Users.FirstOrDefault(u => u.Email == HttpContext.User.Identity.Name);
+            var testAnswer = _puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            if (user != null)
+            if (testAnswer != null)
             {
-                var testAnswer = await _context.TestAnswers.FirstOrDefaultAsync(a =>
-                    a.AnsweringTime == DateTime.MinValue && a.Answer == null && a.UserId == user.Id);
+                _puzzleTestService.ResetGame(testAnswer, moveCount);
 
-                if (testAnswer != null)
-                {
-                    testAnswer.Answer = moveCount.ToString();
-                    testAnswer.AnsweringTime = DateTime.Now;
-                    testAnswer.AnsweringTimeOffset = TimeSpan.Zero;
-
-                    _context.TestAnswers.Update(testAnswer);
-                    await _context.SaveChangesAsync();
-
-                    return Ok();
-                }
+                return Ok();
             }
 
             return BadRequest();
