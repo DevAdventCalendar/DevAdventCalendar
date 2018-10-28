@@ -19,6 +19,7 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult SaveAnswerAndRedirect(int testNumber)
         {
             var testDto = _baseTestService.GetTestByNumber(testNumber);
+
             //TODO: check for null, error handling
 
             _baseTestService.AddTestAnswer(testDto.Id, User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.StartDate.Value);

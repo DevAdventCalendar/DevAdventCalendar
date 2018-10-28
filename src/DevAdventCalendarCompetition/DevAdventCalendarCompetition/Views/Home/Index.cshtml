@@ -15,10 +15,8 @@
             <p>
                 <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Time to end: </b> <span id="countdown"></span>
             </p>
-
-            @if (ViewBag.TestNotAnswered == true)
-            {
-                var url = "/test" + Model.Number;
+            @{
+                var url = (Model.Number == 7 ? "/PuzzleTest" : "/test" + Model.Number);
                 <p>
                     <a class="btn btn-default btn-lg" href="@url">TEST @Model.Number</a>
                 </p>

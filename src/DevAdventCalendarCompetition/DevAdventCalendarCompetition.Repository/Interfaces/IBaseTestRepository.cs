@@ -5,9 +5,8 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
     public interface IBaseTestRepository
     {
         Test GetByNumber(int testNumber);
-
-        void AddAnswer(TestAnswer testAnswer);
-
         TestAnswer GetAnswerByTestId(int testId);
+        void AddAnswer(TestAnswer testAnswer);
+        void UpdateAnswer(TestAnswer testAnswer);     
     }
 }
