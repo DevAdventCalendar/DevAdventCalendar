@@ -1,5 +1,4 @@
 using System;
-using DevAdventCalendarCompetition.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +12,7 @@ namespace DevAdventCalendarCompetition
         {
             var host = BuildWebHost(args);
 
-            using(var scope = host.Services.CreateScope())
+            /*using(var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 try
@@ -26,7 +25,7 @@ namespace DevAdventCalendarCompetition
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
-            }
+            }*/
 
             host.Run();
         }
