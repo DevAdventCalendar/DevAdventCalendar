@@ -15,6 +15,7 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index()
         {
             var test = _baseTestService.GetTestByNumber(4);
+
             return View(test);
         }
 
@@ -28,7 +29,9 @@ namespace DevAdventCalendarCompetition.Controllers
             if (!answers.Contains(fixedAnswer))
             {
                 ModelState.AddModelError("", "Answer is not correct. Try again.");
+
                 var test = _baseTestService.GetTestByNumber(4);
+
                 return View("Index", test);
             }
 

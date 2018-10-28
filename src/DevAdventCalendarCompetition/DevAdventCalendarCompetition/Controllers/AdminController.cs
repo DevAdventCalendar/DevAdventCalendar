@@ -31,7 +31,6 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException("Test was started");
 
             var previousTestDto = _adminService.GetPreviousTest(testDto.Number);
-
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
                 throw new ArgumentException("Previous test has not ended");
 
@@ -70,8 +69,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (!resetEnabled)
                 return "Reset is not enabled.";
 
-            _adminService.ResetTestDates();
-
+            _adminService.ResetTestDates();     
             _adminService.ResetTestAnswers();
 
             return "Data was reseted.";
