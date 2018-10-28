@@ -18,6 +18,6 @@ namespace DevAdventCalendarCompetition
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .Build();
+                .Build();      
     }
 }
