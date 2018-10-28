@@ -16,10 +16,12 @@ git clone https://github.com/WTobor/DevAdventCalendar.git
 ```
 git checkout develop
 ```
-3. Create your feature branch (from branch `develop`)
+3. Create your branch (from branch `develop`)
 ```
 git checkout -b my-new-feature
 ```
+we are using git-flow, so create branch `feature/new-feature` (for new features) or `hotfix/new-hotfix` (for fixing bugs)
+
 4. Commit your changes (remember to check if code compiles without errors and tests pass)
 ```
 git commit -m 'Add some feature'
@@ -29,3 +31,15 @@ git commit -m 'Add some feature'
 git push origin my-new-feature
 ```
 6. Create a pull request (the template has already been created, simply complete it)
+ 
+# Swagger
+
+Useful tool to check api endpoints. Can be access by   url/swagger/v1  (or whatever we call)
+
+# Docker
+
+Application is using Docker to work  on VPS. Additional Docker-compose helping with configure for all of this
+
+# Nginx 
+
+Reverse proxy for fowarding ports, pages and  certyficate
