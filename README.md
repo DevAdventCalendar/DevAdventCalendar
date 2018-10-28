@@ -31,3 +31,15 @@ git commit -m 'Add some feature'
 git push origin my-new-feature
 ```
 6. Create a pull request (the template has already been created, simply complete it)
+ 
+# Swagger
+
+Useful tool to check api endpoints. Can be access by   url/swagger/v1  (or whatever we call)
+
+# Docker
+
+Application is using Docker to work  on VPS. Additional Docker-compose helping with configure for all of this
+
+# Nginx 
+
+Reverse proxy for fowarding ports, pages and  certyficate
