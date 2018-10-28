@@ -1,5 +1,4 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -8,6 +7,73 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.navbar-header, .navbar-header .navbar-brand {
+    height: 90px;
+}
+
+/* Adjusting navbar and brand-images */
+.navbar-header .navbar-brand img {
+    display: inline-block;
+    max-height: 100px;
+}
+
+.navbar-collapse.collapse, .navbar-collapse.collapsing {
+    font-size: 2em;
+    padding-top: 25px;
+    color: black;
+}
+
+.nav.navbar-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav.navbar-nav li a {
+    color: black;
+    border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: none;
+    }
+}
+
+button.navbar-toggle {
+    padding-top: 25px;
+}
+
+button.navbar-toggle .icon-bar {
+    background-color: gray;
+}
+
+#calendar-logo {
+    height: 80px;
+}
+
+#calendar-text {
+    height: 60px;
+}
+
+#santa {
+    height: 150px;
+    margin-right: 20px;
+}
+
+.content-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+.container.body-content .row {
+    min-height: 500px;
 }
 
 /* Carousel */
@@ -26,10 +92,43 @@
     margin: 15px;
 }
 
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
+   
+
+
+    .navbar-header .navbar-brand {
+        text-align: center;
+    }
+
+    .navbar-nav {
+        margin-top: 40px;
+        padding: 15px 0 15px 0;
+        background-color: rgb(153, 1, 0);
+    }
+
+    .nav.navbar-nav li a {
+        color: white;
+    }
+
+    .nav.navbar-nav li a:hover {
+        color: darkred;
+    }
+    
     /* Hide captions */
     .carousel-caption {
         display: none;
+    }
+
+    .content-centered {
+        flex-direction: column;
+        margin-top: 50px;
     }
 }
