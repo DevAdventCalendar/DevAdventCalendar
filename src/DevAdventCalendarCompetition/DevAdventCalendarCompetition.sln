@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetitio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.Services", "DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj", "{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.Repository", "DevAdventCalendarCompetition.Repositiory\DevAdventCalendarCompetition.Repository.csproj", "{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.Repository", "DevAdventCalendarCompetition.Repository\DevAdventCalendarCompetition.Repository.csproj", "{E1B14B60-0B8D-4F19-BFF1-B049CF780A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
