@@ -72,7 +72,7 @@ button.navbar-toggle .icon-bar {
     margin-top: 100px;
 }
 
-.container.body-content .row {
+.container.body-content #home-santa.row {
     min-height: 500px;
 }
 
@@ -99,11 +99,13 @@ button.navbar-toggle .icon-bar {
     vertical-align: middle;
 }
 
+#about-social-section {
+    margin-top: 20px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 768px) {
-   
-
-
+  
     .navbar-header .navbar-brand {
         text-align: center;
     }
