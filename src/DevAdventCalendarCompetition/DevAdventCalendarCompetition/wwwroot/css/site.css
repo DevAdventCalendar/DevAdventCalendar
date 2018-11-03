@@ -99,7 +99,17 @@ button.navbar-toggle .icon-bar {
     vertical-align: middle;
 }
 
-#about-social-section {
+.about-person {
+    padding-bottom: 50px;
+}
+
+    .about-person h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+.about-social-section {
     margin-top: 20px;
 }
 
@@ -132,5 +142,15 @@ button.navbar-toggle .icon-bar {
     .content-centered {
         flex-direction: column;
         margin-top: 50px;
+    }
+
+    .about-person {
+        text-align: center;
+    }
+
+    .about-person h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        margin-top: 10px;
     }
 }
