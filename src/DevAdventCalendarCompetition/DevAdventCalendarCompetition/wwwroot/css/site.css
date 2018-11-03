@@ -27,7 +27,7 @@
 
 .nav.navbar-nav {
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     flex-wrap: wrap;
 }
 
