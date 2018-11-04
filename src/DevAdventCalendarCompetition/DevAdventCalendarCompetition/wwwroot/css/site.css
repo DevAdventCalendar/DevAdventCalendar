@@ -1,5 +1,6 @@
 ﻿body {
     padding-bottom: 20px;
+    min-width: 400px;
 }
 
 /* Wrapping element */
@@ -135,7 +136,7 @@ address .col .row {
 }
 
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   
     .navbar-header .navbar-brand {
         text-align: center;
@@ -180,4 +181,12 @@ address .col .row {
         margin-bottom: 10px;
         margin-top: 10px;
     }
+}
+
+@media screen and (max-width: 400px) {
+
+    address {
+        text-align: center;
+    }
+
 }
