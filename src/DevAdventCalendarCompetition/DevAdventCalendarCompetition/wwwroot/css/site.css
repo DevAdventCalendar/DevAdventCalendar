@@ -3,6 +3,12 @@
     min-width: 400px;
 }
 
+hr {
+    border: none;
+    height: 30px;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 5px, rgb(220, 1, 0) 5px, rgb(220, 1, 0) 20px);
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -10,11 +16,16 @@
     padding-right: 15px;
 }
 
+/* Adjusting navbar and brand-images */
+
+.navbar {
+    margin-bottom: 0;
+}
+
 .navbar-header, .navbar-header .navbar-brand {
     height: 90px;
 }
 
-/* Adjusting navbar and brand-images */
 .navbar-header .navbar-brand img {
     display: inline-block;
     max-height: 100px;
@@ -159,8 +170,8 @@ address .col .row {
 }
 
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-  
+@media screen and (max-width: 767px) {   
+
     .navbar-header .navbar-brand {
         text-align: center;
     }
