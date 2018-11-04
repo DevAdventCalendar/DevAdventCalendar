@@ -19,6 +19,4 @@ FROM microsoft/dotnet:2.1-aspnetcore-runtime AS runtime
 WORKDIR /out
 COPY --from=build /out .
 
-ENV ASPNETCORE_ENVIRONMENT=Docker
-
 ENTRYPOINT ["dotnet", "DevAdventCalendarCompetition.dll"]
