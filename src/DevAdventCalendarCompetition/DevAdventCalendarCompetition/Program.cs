@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore;
+using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DevAdventCalendarCompetition
 {
@@ -7,7 +10,9 @@ namespace DevAdventCalendarCompetition
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

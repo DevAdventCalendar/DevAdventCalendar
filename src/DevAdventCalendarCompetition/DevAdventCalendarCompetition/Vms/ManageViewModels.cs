@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
         public IList<AuthenticationDescription> OtherLogins { get; set; }
+        public IList<AuthenticationScheme> ExternalProviders { get; set; }
     }
 
     public class FactorViewModel

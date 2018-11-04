@@ -1,5 +1,5 @@
-﻿@using DevAdventCalendarCompetition.Models
-@model List<DevAdventCalendarCompetition.Models.Test>
+﻿@using DevAdventCalendarCompetition.Services.Models
+@model List<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -14,7 +14,7 @@
 
     if (previousTest != null && previousTest.Status != TestStatus.Ended)
     {
-        @Html.Partial("_TestPreviousNotEnded",currentTest)
+        @Html.Partial("_TestPreviousNotEnded", currentTest.Number)
     }
     else if (currentTest.Status == TestStatus.NotStarted)
     {

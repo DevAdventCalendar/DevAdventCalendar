@@ -1,20 +1,19 @@
-﻿using DevAdventCalendarCompetition.Data;
-using DevAdventCalendarCompetition.Models;
+﻿using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     public class Test6Controller : BaseTestController
     {
-        public Test6Controller(ApplicationDbContext context) : base(context)
+        public Test6Controller(IBaseTestService baseTestService) : base(baseTestService)
         {
         }
 
         [CanStartTest(TestNumber = 6)]
         public ActionResult Index()
         {
-            var test = _context.Set<Test>().First(el => el.Number == 6);
+            var test = _baseTestService.GetTestByNumber(6);
+
             return View(test);
         }
 
@@ -27,7 +26,9 @@ namespace DevAdventCalendarCompetition.Controllers
             if (fixedAnswer != "PEOPLE")
             {
                 ModelState.AddModelError("", "Answer is not correct. Try again.");
-                var test = _context.Set<Test>().First(el => el.Number == 6);
+
+                var test = _baseTestService.GetTestByNumber(6);
+
                 return View("Index", test);
             }
 

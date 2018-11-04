@@ -1,11 +1,12 @@
-﻿@model WrocSharpCompetition.Vms.VerifyCodeViewModel
+﻿@model DevAdventCalendarCompetition.Vms.VerifyCodeViewModel
 @{
     ViewBag.Title = "Verify";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, null, new { @class = "form-horizontal", role = "form" }))
+{
     @Html.AntiForgeryToken()
     @Html.Hidden("provider", @Model.Provider)
     @Html.Hidden("rememberMe", @Model.RememberMe)
@@ -34,5 +35,5 @@
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    Scripts.Render("~/bundles/jqueryval")
 }
