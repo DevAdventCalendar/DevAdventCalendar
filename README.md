@@ -32,14 +32,24 @@ git push origin my-new-feature
 ```
 6. Create a pull request (the template has already been created, simply complete it)
  
-# Swagger
 
-Useful tool to check api endpoints. Can be access by   url/swagger/v1  (or whatever we call)
+# Used Tools
 
-# Docker
+## Swagger
+
+Useful tool to check api endpoints. It is  generated based on Controllers and attributes and can test any rest calls from this page. It is very helpful if you are using not razer page  (Angular etc) or for mobile apps.
+
+Can be access by: pagedomain (or localhost)/swagger/ 
+
+![Swagger](docs/Pictures/swagger.PNG/?raw=true "Swagger")
+
+
+Full documentation:  https://docs.microsoft.com/pl-pl/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-2.1 
+
+## Docker
+
+Docker is an open platform that enables developers and administrators to build images, ship, and run distributed applications in a loosely isolated environment called a container. This approach enables efficient application lifecycle management between development, QA, and production environments.
 
 Application is using Docker to work  on VPS. Additional Docker-compose helping with configure for all of this
 
-# Nginx 
-
-Reverse proxy for fowarding ports, pages and  certyficate
+Full documentation: https://docs.microsoft.com/pl-pl/dotnet/core/docker/intro-net-docker
