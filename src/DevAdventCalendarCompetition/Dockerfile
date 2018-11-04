@@ -12,9 +12,13 @@ RUN dotnet restore
 COPY . .
 WORKDIR /app/DevAdventCalendarCompetition
 RUN dotnet publish -c Release -o /out
+WORKDIR /out
 
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime AS runtime
 WORKDIR /out
 COPY --from=build /out .
+
+ENV ASPNETCORE_ENVIRONMENT=Docker
+
 ENTRYPOINT ["dotnet", "DevAdventCalendarCompetition.dll"]

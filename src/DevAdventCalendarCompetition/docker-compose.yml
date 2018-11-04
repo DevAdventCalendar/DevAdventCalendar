@@ -1,11 +1,22 @@
 version: '3.7'
 services:
+  db:
+    image: microsoft/mssql-server-linux
+    ports:
+      - '1433:1433'
+    environment:
+      SA_PASSWORD: "DevCal123!."
+      ACCEPT_EULA: "Y"
+
   web:
     build:
       context: .
     ports:
       - 5000:80
       - 44394:443 
+    links:
+      - db
+
   proxy:
     image: nginx:latest
     ports:
