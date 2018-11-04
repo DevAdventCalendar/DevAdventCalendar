@@ -10,16 +10,20 @@ namespace DevAdventCalendarCompetition.Services
     public class BaseTestService : IBaseTestService
     {
         private readonly IBaseTestRepository _baseTestRepository;
+		private readonly IMapper _mapper;
 
-        public BaseTestService(IBaseTestRepository baseTestRepository)
+        public BaseTestService(
+			IBaseTestRepository baseTestRepository,
+			IMapper mapper)
         {
             _baseTestRepository = baseTestRepository;
+			_mapper = mapper;
         }
 
         public TestDto GetTestByNumber(int testNumber)
         {
             var test = _baseTestRepository.GetByNumber(testNumber);
-            var testDto = Mapper.Map<TestDto>(test);
+            var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
 
@@ -43,7 +47,7 @@ namespace DevAdventCalendarCompetition.Services
         public TestAnswerDto GetAnswerByTestId(int testId)
         {
             var testAnswer = _baseTestRepository.GetAnswerByTestId(testId);
-            var testAnswerDto = Mapper.Map<TestAnswerDto>(testAnswer);
+            var testAnswerDto = _mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
         }
     }

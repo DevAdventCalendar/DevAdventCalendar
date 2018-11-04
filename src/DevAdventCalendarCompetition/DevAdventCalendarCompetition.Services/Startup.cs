@@ -35,14 +35,7 @@ namespace DevAdventCalendarCompetition.Services
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Test, TestDto>();
-                cfg.CreateMap<TestDto, Test>();
-
-                cfg.CreateMap<TestAnswer, TestAnswerDto>();
-                cfg.CreateMap<TestAnswer, TestWithAnswerListDto>();
-            });
+			services.AddAutoMapper();
         }
     }
 }
