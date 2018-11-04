@@ -17,6 +17,8 @@
 .navbar-header .navbar-brand img {
     display: inline-block;
     max-height: 100px;
+    max-width: 100%;
+    height: auto;
 }
 
 .navbar-collapse.collapse, .navbar-collapse.collapsing {
