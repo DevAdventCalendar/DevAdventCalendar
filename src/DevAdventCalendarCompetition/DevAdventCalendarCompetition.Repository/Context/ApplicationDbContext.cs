@@ -10,8 +10,6 @@ namespace DevAdventCalendarCompetition.Repository.Context
 
         public DbSet<TestAnswer> TestAnswer { get; set; }
 
-
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
