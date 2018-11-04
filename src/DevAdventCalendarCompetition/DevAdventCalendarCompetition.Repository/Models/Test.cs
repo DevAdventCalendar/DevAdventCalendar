@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
+    [Table("Test")]
     public class Test : ModelBase
     {
         public int Number { get; set; }

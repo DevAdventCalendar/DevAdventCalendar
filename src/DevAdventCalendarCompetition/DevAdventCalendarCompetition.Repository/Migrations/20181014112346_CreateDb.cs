@@ -52,7 +52,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TestId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(maxLength: 450, nullable: false),
                     AnsweringTime = table.Column<DateTime>(nullable: false),
                     AnsweringTimeOffset = table.Column<TimeSpan>(nullable: false)
                 },
