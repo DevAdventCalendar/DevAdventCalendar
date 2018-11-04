@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
+    [Table("TestAnswer")]
     public class TestAnswer : ModelBase
     {
         [Required]
@@ -13,6 +14,7 @@ namespace DevAdventCalendarCompetition.Repository.Models
         public Test Test { get; set; }
 
         [Required]
+        [MaxLength(450)]
         [ForeignKey("User")]
         public string UserId { get; set; }
 

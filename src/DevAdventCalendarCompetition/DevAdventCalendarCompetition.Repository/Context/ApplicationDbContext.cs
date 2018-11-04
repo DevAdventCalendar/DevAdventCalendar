@@ -6,9 +6,9 @@ namespace DevAdventCalendarCompetition.Repository.Context
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Test> Tests { get; set; }
+        public DbSet<Test> Test { get; set; }
 
-        public DbSet<TestAnswer> TestAnswers { get; set; }
+        public DbSet<TestAnswer> TestAnswer { get; set; }
 
 
 
