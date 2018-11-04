@@ -39,7 +39,7 @@ git push origin my-new-feature
 
 Useful tool to check api endpoints. It is  generated based on Controllers and attributes and can test any rest calls from this page. It is very helpful if you are using not razer page  (Angular etc) or for mobile apps.
 
-Can be access by; pagedomain (or localhost)/swagger/ 
+Can be access by: pagedomain (or localhost)/swagger/ 
 
 ![Swagger](docs/Pictures/swagger.PNG/?raw=true "Swagger")
 
