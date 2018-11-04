@@ -25,13 +25,17 @@ namespace DevAdventCalendarCompetition.Services
 
         public void AddTestAnswer(int testId, string userId, DateTime testStartDate)
         {
+            var currentTime = DateTime.Now;
+            var answerTimeOffset = currentTime.Subtract(testStartDate);
+            var maxAnswerTime = new TimeSpan(0, 23, 59, 59, 999);
+
             var testAnswer = new TestAnswer()
             {
                 TestId = testId,
                 UserId = userId,
-                AnsweringTime = DateTime.Now,
-                AnsweringTimeOffset = DateTime.Now.Subtract(testStartDate)
-            };
+                AnsweringTime = currentTime,
+                AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
+        };
 
             _baseTestRepository.AddAnswer(testAnswer);
         }
