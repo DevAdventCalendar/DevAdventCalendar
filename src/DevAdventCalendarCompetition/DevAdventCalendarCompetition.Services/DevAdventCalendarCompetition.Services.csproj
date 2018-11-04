@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DevAdventCalendarCompetition.Repositiory\DevAdventCalendarCompetition.Repository.csproj" />
+    <ProjectReference Include="..\DevAdventCalendarCompetition.Repository\DevAdventCalendarCompetition.Repository.csproj" />
   </ItemGroup>
 
 </Project>
