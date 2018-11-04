@@ -50,6 +50,12 @@ hr {
     border-radius: 10px;
 }
 
+    .nav.navbar-nav li.active a {
+        color: white;
+        background-color: darkred;
+        border-radius: 10px;
+    }
+
 @media (min-width: 768px) {
     .navbar-nav {
         float: none;
@@ -191,6 +197,12 @@ address .col .row {
     .nav.navbar-nav li a {
         color: white;
     }
+
+        .nav.navbar-nav li.active a {
+            color: darkred;
+            background-color: white;
+            border-radius: 10px;
+        }
 
     .nav.navbar-nav li a:hover {
         color: darkred;
