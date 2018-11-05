@@ -1,4 +1,5 @@
-﻿using DevAdventCalendarCompetition.Extensions;
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -30,6 +31,7 @@ namespace DevAdventCalendarCompetition
             services
                 .RegisterDatabase(Configuration)
                 .RegisterServices()
+                .AddAutoMapper()
                 .RegisterMapping()
                 .AddSwaggerGen(c =>
                 {
