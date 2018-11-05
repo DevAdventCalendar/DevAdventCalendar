@@ -1,5 +1,6 @@
-﻿using DevAdventCalendarCompetition.Services;
-using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Extensions;
+using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,9 +11,14 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private const string DockerEnvName = "Docker";
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var configurationBuilder = new ConfigurationBuilder()
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
+                .AddEnvironmentVariables();
+
+            Configuration = configurationBuilder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -20,26 +26,25 @@ namespace DevAdventCalendarCompetition
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var serviceStartup = new Services.Startup(Configuration);
-            serviceStartup.Configure(services);
-
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IAdminService, AdminService>();
-            services.AddTransient<IBaseTestService, BaseTestService>();
-            services.AddTransient<IHomeService, HomeService>();
-            services.AddTransient<IManageService, ManageService>();
-            services.AddTransient<IdentityService>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
-            });
-            services.AddMvc();
+            services
+                .RegisterDatabase(Configuration)
+                .RegisterServices()
+                .AddAutoMapper()
+                .RegisterMapping()
+                .AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
+                })
+                .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if(env.EnvironmentName.Equals(DockerEnvName))
+            {
+                app.ApplicationServices.GetService<ApplicationDbContext>().Database.EnsureCreated();
+            }
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();

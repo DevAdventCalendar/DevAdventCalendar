@@ -8,8 +8,7 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-
+        <link rel="stylesheet" href="~/css/Site.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -29,8 +28,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img id="calendar-logo" src="~/images/logo.jpg" alt="Logo - prezent"/>
-                    <img id="calendar-text" src="~/images/devadventcalendar.JPG" alt="DevAdventCalendar"/>
+                    <img id="calendar-logo" src="~/images/logo.jpg" alt="Logo - prezent" />
+                    <img id="calendar-text" src="~/images/devadventcalendar.JPG" alt="DevAdventCalendar" />
                 </a>
             </div>
             <div class="navbar-collapse collapse">
@@ -42,7 +41,7 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">    
+    <div class="container body-content">
         <hr />
         @RenderBody()
         <hr />
