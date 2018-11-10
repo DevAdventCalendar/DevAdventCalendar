@@ -1,7 +1,25 @@
 ﻿<div class="row">
-    <div class="col center-block text-center">
-        <img id="santa" src="images/santa.JPG" alt="Święty Mikołaj" />
-        <h2>W trakcie prac...</h2>
+    <div class="col content-centered">
+        <table class="calendar-content">
+            <tbody>
+                @for (var i = 0; i < 4; i++)
+                {
+                <tr>
+                    @for (int j = 0; j < 6; j++)
+                    {
+                    <td class="calendar-day">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                DZIEŃ @(i * 6 + j + 1)
+                                <img src="images/santa-nobackground.png" width="60" />
+                            </div>
+                        </div>
+                    </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
     <div class="col content-centered">
         <!-- Begin Mailchimp Signup Form -->
