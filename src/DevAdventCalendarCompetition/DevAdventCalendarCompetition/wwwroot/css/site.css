@@ -45,17 +45,6 @@ hr {
     flex-wrap: wrap;
 }
 
-.nav.navbar-nav li a {
-    color: black;
-    border-radius: 10px;
-}
-
-    .nav.navbar-nav li.active a {
-        color: white;
-        background-color: darkred;
-        border-radius: 10px;
-    }
-
 @media (min-width: 768px) {
     .navbar-nav {
         float: none;
@@ -91,7 +80,7 @@ button.navbar-toggle .icon-bar {
     -webkit-animation-direction: alternate;
 }
 
-@keyframes tilt {   
+@keyframes tilt {
     10% {
         transform: rotate(-20deg);
         -webkit-transform: rotate(-20deg);
@@ -141,18 +130,18 @@ button.navbar-toggle .icon-bar {
     padding-bottom: 50px;
 }
 
-    .about-person h2 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-        margin-top: 0;
-    }
+.about-person h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
 
 .about-social-section {
     margin-top: 20px;
 }
 
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {   
+@media screen and (max-width: 767px) {
 
     .navbar-header .navbar-brand {
         text-align: center;
@@ -174,11 +163,10 @@ button.navbar-toggle .icon-bar {
         color: white;
     }
 
-        .nav.navbar-nav li.active a {
-            color: darkred;
-            background-color: white;
-            border-radius: 10px;
-        }
+    .nav.navbar-nav li.active a {
+        color: darkred;
+        background-color: white;
+    }
 
     .nav.navbar-nav li a:hover {
         color: darkred;
@@ -211,4 +199,51 @@ button.navbar-toggle .icon-bar {
         text-align: center;
     }
 
+}
+
+.mc-field-group {
+    padding: 2px 0;
+}
+
+.mc-field-group label,
+.mc-field-group input {
+    width: 49%;
+    padding: 3px 0;
+}
+
+#mc-embedded-subscribe {
+    background: #dc0100;
+    border: 1px solid #dc0100;
+    color: white;
+    padding: 6px 12px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#mc-embedded-subscribe:hover {
+    background: #990100;
+    border-color: #990100;
+}
+
+.nav.navbar-nav li a {
+    background: #dc0100;
+    margin: 0 0 0 7px;
+    color: white
+}
+
+.nav.navbar-nav li a:hover {
+    background: #990100;
+}
+
+.navbar-collapse {
+    padding-right: 0 !important;
+}
+
+.about-social-section {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 5px;
+}
+
+.about-social-section a {
+    margin-left: 7px
 }
