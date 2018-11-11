@@ -57,6 +57,10 @@ namespace DevAdventCalendarCompetition.Repository.Models
         public string SponsorName { get; set; }
 
         public string SponsorLogoUrl { get; set; }
+
+        public string Description { get; set; }
+
+        public string HashedAnswer { get; set; }
     }
 
     public enum TestStatus

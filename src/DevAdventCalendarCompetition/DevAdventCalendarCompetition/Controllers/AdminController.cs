@@ -23,6 +23,18 @@ namespace DevAdventCalendarCompetition.Controllers
             return View(tests);
         }
 
+        public ActionResult AddTest()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddTest(int number, string description, string answer)
+        {
+            _adminService.AddTest(number, description, answer);
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult StartTest(int testId, string minutesString)
         {
@@ -69,7 +81,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (!resetEnabled)
                 return "Reset is not enabled.";
 
-            _adminService.ResetTestDates();     
+            _adminService.ResetTestDates();
             _adminService.ResetTestAnswers();
 
             return "Data was reseted.";
