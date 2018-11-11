@@ -12,6 +12,10 @@ namespace DevAdventCalendarCompetition.Services.Models
         public DateTime? EndDate { get; set; }
 
         public TestStatus Status { get; set; }
+
+        public string SponsorName { get; set; }
+
+        public string SponsorLogoUrl { get; set; }
     }
 
     public enum TestStatus
