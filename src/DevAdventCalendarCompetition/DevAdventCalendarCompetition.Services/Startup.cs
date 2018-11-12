@@ -3,11 +3,11 @@ using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -35,7 +35,10 @@ namespace DevAdventCalendarCompetition.Services
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
 
-			services.AddAutoMapper();
+            var config = Configuration.GetSection("StringHasher");
+            services.AddTransient<StringHasher>(new HashParameters(int.Parse(config.Key), Encoding.ASCII.GetBytes(config.Value));
+
+            services.AddAutoMapper();
         }
     }
 }
