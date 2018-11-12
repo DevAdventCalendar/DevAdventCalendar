@@ -38,7 +38,7 @@ namespace DevAdventCalendarCompetition.Repository.Models
                 if (!EndDate.HasValue)
                     return false;
 
-                return DateTime.Now.AddMonths(1) > EndDate.Value;
+                return DateTime.Now > EndDate.Value;
             }
         }
 
