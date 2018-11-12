@@ -1,22 +1,37 @@
-﻿<div class="row">
+﻿@using DevAdventCalendarCompetition.Services.Models
+@model DevAdventCalendarCompetition.Services.Models.TestDto
+
+<div class="row">
     <div class="col content-centered">
         <table class="calendar-content">
             <tbody>
                 @for (var i = 0; i < 4; i++)
                 {
-                <tr>
-                    @for (int j = 0; j < 6; j++)
-                    {
-                    <td class="calendar-day">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                DZIEŃ @(i * 6 + j + 1)
-                                <img src="images/santa-nobackground.png" width="60" />
-                            </div>
-                        </div>
-                    </td>
-                    }
-                </tr>
+                    <tr>
+                        @for (int j = 0; j < 6; j++)
+                        {
+                            <td class="calendar-day">
+                                @{
+                                    var dayNumber = i * 6 + j + 1;
+                                }
+                                <div class="panel panel-default task-@(Model.Status == TestStatus.Started && Model.StartDate.Value.Day == dayNumber? "active" : "inactive")">
+                                    <div class="panel-body">
+
+                                        DZIEŃ @dayNumber
+
+                                        @if (Model.Status == TestStatus.Started && Model.StartDate.Value.Day == dayNumber)
+                                        {
+                                            <img src="images/@Model.SponsorLogoUrl" width="60" />
+                                        }
+                                        else
+                                        {
+                                            <img src="images/santa-nobackground.png" width="60" />
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        }
+                    </tr>
                 }
             </tbody>
         </table>

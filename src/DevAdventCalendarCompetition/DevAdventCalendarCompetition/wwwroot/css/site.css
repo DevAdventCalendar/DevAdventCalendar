@@ -103,7 +103,14 @@ button.navbar-toggle .icon-bar {
         border: none;
         border-radius: 50% 50% 50% 50%;
         background: rgba(76, 76, 76, 0.1);
+    }
+
+    .calendar-content .calendar-day .panel.panel-default.task-inactive {
         opacity: 0.5;
+    }
+
+    .calendar-content .calendar-day .panel.panel-default.task-active {
+        opacity: 1;
     }
 
 .content-centered {
