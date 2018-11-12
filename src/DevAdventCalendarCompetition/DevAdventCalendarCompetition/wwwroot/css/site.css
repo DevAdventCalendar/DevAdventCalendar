@@ -100,14 +100,25 @@ button.navbar-toggle {
     padding-top: 10px;
 }
 
-#main-sponsor-title {
-    font-size: 14pt;
-}
+    #main-sponsor-title {
+        font-size: 14pt;
+    }
 
-#main-sponsor-name {
-    font-size: 18pt;
+    #main-sponsor-name {
+        font-size: 18pt;
+        font-weight: bold;
+    }
+
+.week-sponsor-section {
+    padding: 0 0 20px 20px;
+    font-size: 12pt;
     font-weight: bold;
 }
+
+    .week-sponsor-section img {
+        max-width: 60px;
+        padding-top: 5px;
+    }
 
 .calendar-content {
     margin-top: 40px;
