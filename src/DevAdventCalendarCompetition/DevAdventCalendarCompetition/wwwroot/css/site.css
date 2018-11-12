@@ -109,30 +109,10 @@ button.navbar-toggle .icon-bar {
 .content-centered {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     align-content: center;
     flex-direction: row;
 }
-
-.container.body-content #home-santa.row {
-    min-height: 500px;
-}
-
-.container.body-content #contact.row {
-    min-height: 500px;
-}
-
-address .col .row {
-    margin-top: 30px;
-}
-
-    address .col .row img {
-        margin-right: 30px;
-    }
-
-    address .col .row a {
-        font-size: 1.5em;
-    }
 
 /* Carousel */
 .carousel-caption p {
