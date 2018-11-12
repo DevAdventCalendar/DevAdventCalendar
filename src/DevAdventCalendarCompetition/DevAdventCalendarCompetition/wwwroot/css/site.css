@@ -4,13 +4,19 @@ body {
     font-family: 'Mali', cursive;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, footer, .alert
-{
+h1, h2, h3, h4, h5, h6, p, a, footer, .alert {
     font-family: 'Mali', cursive;
 }
 
-a { color:#c12c2c; text-decoration: none;}
-a:hover { color:#831e1e; text-decoration: underline;}
+a {
+    color: #c12c2c;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #831e1e;
+        text-decoration: underline;
+    }
 
 hr {
     border: none;
@@ -36,12 +42,12 @@ hr {
     height: 90px;
 }
 
-.navbar-header .navbar-brand img {
-    display: inline-block;
-    max-height: 100px;
-    max-width: 100%;
-    height: auto;
-}
+    .navbar-header .navbar-brand img {
+        display: inline-block;
+        max-height: 100px;
+        max-width: 100%;
+        height: auto;
+    }
 
 .navbar-collapse.collapse, .navbar-collapse.collapsing {
     font-size: 2em;
@@ -55,10 +61,10 @@ hr {
     flex-wrap: wrap;
 }
 
-.nav.navbar-nav li a {
-    color: black;
-    border-radius: 10px;
-}
+    .nav.navbar-nav li a {
+        color: black;
+        border-radius: 10px;
+    }
 
     .nav.navbar-nav li.active a {
         color: white;
@@ -76,9 +82,9 @@ button.navbar-toggle {
     padding-top: 25px;
 }
 
-button.navbar-toggle .icon-bar {
-    background-color: gray;
-}
+    button.navbar-toggle .icon-bar {
+        background-color: gray;
+    }
 
 #calendar-logo {
     height: 80px;
@@ -96,26 +102,26 @@ button.navbar-toggle .icon-bar {
         padding-right: 20px;
     }
 
-    .calendar-content .calendar-day .panel.panel-default {
-        text-align: center;
-        font-weight: bold;
-        width: 120px;
-        border: none;
-        border-radius: 50% 50% 50% 50%;
-        background: rgba(76, 76, 76, 0.1);
-    }
+        .calendar-content .calendar-day .panel.panel-default {
+            text-align: center;
+            font-weight: bold;
+            width: 120px;
+            border: none;
+            border-radius: 50% 50% 50% 50%;
+            background: rgba(76, 76, 76, 0.1);
+        }
 
-    .calendar-content .calendar-day .panel.panel-default.task-inactive {
-        opacity: 0.5;
-    }
+            .calendar-content .calendar-day .panel.panel-default.task-inactive {
+                opacity: 0.5;
+            }
 
-    .calendar-content .calendar-day .panel.panel-default.task-active {
-        opacity: 1;
-    }
+            .calendar-content .calendar-day .panel.panel-default.task-active {
+                opacity: 1;
+            }
 
-    .panel-body img {
-        max-width: 60px;
-    }
+.panel-body img {
+    max-width: 60px;
+}
 
 .content-centered {
     display: flex;
@@ -142,8 +148,7 @@ button.navbar-toggle .icon-bar {
 }
 
 .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-
+    min-height: 100%; /* Fallback for browsers do NOT support vh unit */
     display: inline-block;
     vertical-align: middle;
 }
@@ -180,9 +185,9 @@ button.navbar-toggle .icon-bar {
         flex-wrap: wrap;
     }
 
-    .nav.navbar-nav li a {
-        color: white;
-    }
+        .nav.navbar-nav li a {
+            color: white;
+        }
 
         .nav.navbar-nav li.active a {
             color: darkred;
@@ -190,9 +195,9 @@ button.navbar-toggle .icon-bar {
             border-radius: 10px;
         }
 
-    .nav.navbar-nav li a:hover {
-        color: darkred;
-    }
+        .nav.navbar-nav li a:hover {
+            color: darkred;
+        }
 
     /* Hide captions */
     .carousel-caption {
@@ -208,10 +213,62 @@ button.navbar-toggle .icon-bar {
         text-align: center;
     }
 
-    .about-person h2 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-        margin-top: 10px;
+        .about-person h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+}
+
+@media screen and (max-width: 991px) {
+    .calendar-content .calendar-day {
+        padding-right: 5px;
+    }
+
+    .content-centered {
+        flex-direction: column;
+        margin-top: 5px;
+    }
+
+    .calendar-content .calendar-day .panel.panel-default {
+        text-align: center;
+        font-weight: bold;
+        font-size: 10pt;
+        width: 100px;
+        border: none;
+        border-radius: 50% 50% 50% 50%;
+        background: rgba(76, 76, 76, 0.1);
+    }
+
+    .calendar-content .calendar-day .panel-body img {
+        margin-top: 5px;
+        max-width: 50px;
+    }
+}
+
+@media screen and (max-width: 648px) {
+    .calendar-content .calendar-day {
+        padding-right: 5px;
+    }
+
+    .content-centered {
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .calendar-content .calendar-day .panel.panel-default {
+        text-align: center;
+        font-weight: bold;
+        font-size: 8pt;
+        width: 80px;
+        border: none;
+        border-radius: 50% 50% 50% 50%;
+        background: rgba(76, 76, 76, 0.1);
+    }
+
+    .calendar-content .calendar-day .panel-body img {
+        margin-top: 5px;
+        max-width: 40px;
     }
 }
 
@@ -244,8 +301,8 @@ button.navbar-toggle .icon-bar {
             padding: 5px;
         }
 
-        .calendar-content .calendar-day .panel-body img {
-            margin-top: 5px;
-            max-width: 40px;
-        }
+            .calendar-content .calendar-day .panel-body img {
+                margin-top: 5px;
+                max-width: 40px;
+            }
 }
