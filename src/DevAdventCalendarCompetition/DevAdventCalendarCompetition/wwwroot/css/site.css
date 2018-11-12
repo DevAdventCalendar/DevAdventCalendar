@@ -390,7 +390,7 @@ address .col .row {
 
     .content-centered {
         flex-direction: column;
-        margin-top: 0;
+        margin-top: 10px;
     }
 
     address {
