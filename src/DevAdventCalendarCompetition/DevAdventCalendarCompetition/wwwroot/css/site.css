@@ -94,8 +94,23 @@ button.navbar-toggle {
     height: 60px;
 }
 
+.main-sponsor-section {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+#main-sponsor-title {
+    font-size: 14pt;
+}
+
+#main-sponsor-name {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
 .calendar-content {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
     .calendar-content .calendar-day {
@@ -227,7 +242,7 @@ button.navbar-toggle {
 
     .content-centered {
         flex-direction: column;
-        margin-top: 5px;
+        margin-top: 15px;
     }
 
     .calendar-content .calendar-day .panel.panel-default {
@@ -253,7 +268,7 @@ button.navbar-toggle {
 
     .content-centered {
         flex-direction: column;
-        margin-top: 0;
+        margin-top: 10px;
     }
 
     .calendar-content .calendar-day .panel.panel-default {
@@ -275,7 +290,7 @@ button.navbar-toggle {
 @media screen and (max-width: 400px) {
     .content-centered {
         flex-direction: column;
-        margin-top: 0;
+        margin-top: 10px;
     }
 
     address {
