@@ -1,5 +1,5 @@
 ﻿@using DevAdventCalendarCompetition.Services.Models
-@model DevAdventCalendarCompetition.Services.Models.TestDto
+@model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 
 <div class="row">
     <div class="col content-centered">
@@ -13,15 +13,16 @@
                             <td class="calendar-day">
                                 @{
                                     var dayNumber = i * 6 + j + 1;
+                                    var taskForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
                                 }
-                                <div class="panel panel-default task-@(Model.Status == TestStatus.Started && Model.StartDate.Value.Day == dayNumber? "active" : "inactive")">
+                                <div class="panel panel-default task-@(taskForDay != null && taskForDay.Status != TestStatus.Ended ? "active" : "inactive")">
                                     <div class="panel-body">
 
                                         DZIEŃ @dayNumber
 
-                                        @if (Model.Status == TestStatus.Started && Model.StartDate.Value.Day == dayNumber)
+                                        @if (taskForDay != null)
                                         {
-                                            <img src="images/@Model.SponsorLogoUrl" width="60" />
+                                            <img src="images/@taskForDay.SponsorLogoUrl" width="60" />
                                         }
                                         else
                                         {

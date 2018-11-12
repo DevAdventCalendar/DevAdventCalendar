@@ -33,6 +33,13 @@ namespace DevAdventCalendarCompetition.Services
             return testAnswerDto;
         }
 
+        public List<TestDto> GetCurrentTests()
+        {
+            var testList = _homeRepository.GetAllTests();
+            var allTestsDtoList = _mapper.Map<List<TestDto>>(testList);
+            return allTestsDtoList;
+        }
+
         public List<TestWithAnswerListDto> GetTestsWithUserAnswers()
         {
             var testList = _homeRepository.GetTestsWithUserAnswers();
