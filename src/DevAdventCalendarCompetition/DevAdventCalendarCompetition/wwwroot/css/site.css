@@ -388,6 +388,11 @@ address .col .row {
         margin-left: 0;
     }
 
+    .content-centered {
+        flex-direction: column;
+        margin-top: 0;
+    }
+
     address {
         text-align: center;
     }
