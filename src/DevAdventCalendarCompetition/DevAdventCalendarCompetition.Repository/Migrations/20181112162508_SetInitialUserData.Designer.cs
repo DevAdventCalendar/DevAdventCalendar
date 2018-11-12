@@ -4,14 +4,16 @@ using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181112162508_SetInitialUserData")]
+    partial class SetInitialUserData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,10 +93,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<string>("HashedAnswer");
 
                     b.Property<int>("Number");
-
-                    b.Property<string>("SponsorLogoUrl");
-
-                    b.Property<string>("SponsorName");
 
                     b.Property<DateTime?>("StartDate");
 
