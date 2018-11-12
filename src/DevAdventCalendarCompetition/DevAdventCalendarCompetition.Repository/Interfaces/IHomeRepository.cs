@@ -7,6 +7,8 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
     {
         Test GetCurrentTest();
 
+        Test GetTestByNumber(int testNumber);
+
         TestAnswer GetTestAnswerByUserId(string userId, int testId);
 
         List<Test> GetAllTests();

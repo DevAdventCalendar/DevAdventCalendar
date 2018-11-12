@@ -46,5 +46,12 @@ namespace DevAdventCalendarCompetition.Services
             var testWithAnswersDtoList = _mapper.Map<List<TestWithAnswerListDto>>(testList);
             return testWithAnswersDtoList;
         }
+
+        public string CheckTestStatus(int testNumber)
+        {
+            var test = _homeRepository.GetTestByNumber(testNumber);
+
+            return test.Status.ToString();
+        }
     }
 }

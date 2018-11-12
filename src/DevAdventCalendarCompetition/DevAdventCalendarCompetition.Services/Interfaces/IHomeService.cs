@@ -12,5 +12,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         List<TestDto> GetCurrentTests();
 
         List<TestWithAnswerListDto> GetTestsWithUserAnswers();
+
+        string CheckTestStatus(int testNumber);
     }
 }

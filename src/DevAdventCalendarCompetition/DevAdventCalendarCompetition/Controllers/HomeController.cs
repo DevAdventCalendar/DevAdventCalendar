@@ -108,6 +108,12 @@ namespace DevAdventCalendarCompetition.Controllers
             return View("Results", vm);
         }
 
+        [HttpPost]
+        public ActionResult CheckTestStatus(int testNumber)
+        {
+            return Content(_homeService.CheckTestStatus(testNumber));  
+        }
+
         public ActionResult Error()
         {
             ViewBag.errorMessage = TempData["errorMessage"];

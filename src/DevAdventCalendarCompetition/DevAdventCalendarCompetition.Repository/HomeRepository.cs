@@ -21,6 +21,11 @@ namespace DevAdventCalendarCompetition.Repository
             return _dbContext.Set<Test>().FirstOrDefault(el => el.Status == TestStatus.Started);
         }
 
+        public Test GetTestByNumber(int testNumber)
+        {
+            return _dbContext.Set<Test>().FirstOrDefault(t => t.Number == testNumber);
+        }
+
         public TestAnswer GetTestAnswerByUserId(string userId, int testId)
         {
             return _dbContext.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == testId);
