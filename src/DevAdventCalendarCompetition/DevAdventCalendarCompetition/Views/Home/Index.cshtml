@@ -1,6 +1,10 @@
 @using DevAdventCalendarCompetition.Services.Models
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
-
+<div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
+    <button type="button" class="close" data-hide="alert" aria-label="Zamknij"><span aria-hidden="true">&times;</span>
+    </button>
+    <span id="alert-text"></span>
+</div>
 <div class="row">
     <div class="col content-centered">
         <table class="calendar-content">
