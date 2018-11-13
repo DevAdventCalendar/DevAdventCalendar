@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TestViewModel
 @{
+    ViewData["Title"] = "Dodaj nowy test";
 }
+
+<div class="row content-centered">
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Number"></label>
+            <input asp-for="Number" class="form-control" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Answer"></label>
+            <input asp-for="Answer" class="form-control" />
+            <span asp-validation-for="Answer" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartDate"></label>
+            <input asp-for="StartDate" class="form-control" type="date" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EndDate"></label>
+            <input asp-for="EndDate" class="form-control" type="date" disabled />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SponsorName"></label>
+            <input asp-for="SponsorName" class="form-control" />
+            <span asp-validation-for="SponsorName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SponsorLogoUrl"></label>
+            <input asp-for="SponsorLogoUrl" class="form-control" />
+            <span asp-validation-for="SponsorLogoUrl" class="text-danger"></span>
+        </div>
+        <div class="content-centered">
+            <button type="submit" class="btn btn-default">Dodaj</button>
+        </div>
+    }
+    <form class="form" method="POST" action=""></form>
+</div>

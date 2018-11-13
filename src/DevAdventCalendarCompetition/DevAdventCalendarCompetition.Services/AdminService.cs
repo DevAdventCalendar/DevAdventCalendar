@@ -47,15 +47,11 @@ namespace DevAdventCalendarCompetition.Services
             return testDto;
         }
 
-        public void AddTest(int number, string description, string answer)
+        public void AddTest(TestDto testDto)
         {
-            string hashedAnswer = _stringHasher.ComputeHash(answer);
-            var test = new Test()
-            {
-                Number = number,
-                Description = description,
-                HashedAnswer = hashedAnswer
-            };
+            string hashedAnswer = _stringHasher.ComputeHash(testDto.Answer);
+            var test = _mapper.Map<Test>(testDto);
+            test.HashedAnswer = hashedAnswer;
             _baseTestRepository.AddTest(test);
         }
 

@@ -1,4 +1,5 @@
-﻿using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,10 +30,24 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTest(int number, string description, string answer)
+        public ActionResult AddTest(TestViewModel model)
         {
-            _adminService.AddTest(number, description, answer);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var testDto = new TestDto
+                {
+                    Number = model.Number,
+                    Description = model.Description,
+                    Answer = model.Answer,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    SponsorLogoUrl = model.SponsorLogoUrl,
+                    SponsorName = model.SponsorName
+                };
+                _adminService.AddTest(testDto);
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpPost]
