@@ -51,7 +51,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             var test = _homeRepository.GetTestByNumber(testNumber);
 
-            return test.Status.ToString();
+            return test == null ? TestStatus.NotStarted.ToString() : test.Status.ToString();
         }
     }
 }
