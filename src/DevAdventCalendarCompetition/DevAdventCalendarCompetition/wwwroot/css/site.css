@@ -171,7 +171,7 @@ button.navbar-toggle .icon-bar {
     .nav.navbar-nav li a:hover {
         color: darkred;
     }
-    
+
     /* Hide captions */
     .carousel-caption {
         display: none;
@@ -246,4 +246,10 @@ button.navbar-toggle .icon-bar {
 
 .about-social-section a {
     margin-left: 7px
+}
+
+.about-social-section .fab,
+.about-social-section .fas {
+    margin-right: 5px;
+    font-size: 1.2em;
 }
