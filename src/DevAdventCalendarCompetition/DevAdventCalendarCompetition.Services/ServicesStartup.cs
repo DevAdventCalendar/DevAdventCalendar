@@ -5,6 +5,7 @@ using DevAdventCalendarCompetition.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -22,7 +23,8 @@ namespace DevAdventCalendarCompetition.Services
             services.AddTransient<IHomeRepository, HomeRepository>();
 
             var config = configuration.GetSection("StringHasher");
-            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), config.GetValue<byte[]>("Salt"));
+            var stringSalt = config.GetValue<string>("Salt");
+            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
             services.AddScoped<StringHasher>(sh => new StringHasher(hashParameters));
 
             services.AddAutoMapper();

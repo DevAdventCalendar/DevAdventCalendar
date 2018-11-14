@@ -30,7 +30,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTest(TestViewModel model)
+        public ActionResult AddTest(TestVm model)
         {
             if (ModelState.IsValid)
             {
