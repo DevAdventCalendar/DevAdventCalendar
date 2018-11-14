@@ -21,10 +21,11 @@ namespace DevAdventCalendarCompetition.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
+					.AddErrorDescriber<CustomIdentityErrorDescriber>()
+					.AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
-            services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
+			services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
