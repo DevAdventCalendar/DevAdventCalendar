@@ -39,7 +39,7 @@ namespace DevAdventCalendarCompetition.Services
                 UserId = userId,
                 AnsweringTime = currentTime,
                 AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
-        };
+            };
 
             _baseTestRepository.AddAnswer(testAnswer);
         }
