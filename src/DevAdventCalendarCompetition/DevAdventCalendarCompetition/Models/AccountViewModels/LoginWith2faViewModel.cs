@@ -4,15 +4,16 @@ namespace DevAdventCalendarCompetition.Models.AccountViewModels
 {
     public class LoginWith2faViewModel
     {
-        [Required]
-        [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Pole Kod uwierzytelniający jest obowiązkowe")]
+        [StringLength(7, ErrorMessage = "Długość {0} powinna być większa niż {2} i mniejsza niż {1}.", MinimumLength = 6)]
         [DataType(DataType.Text)]
-        [Display(Name = "Authenticator code")]
+        [Display(Name = "Kod uwierzytelniający")]
         public string TwoFactorCode { get; set; }
 
-        [Display(Name = "Remember this machine")]
+        [Display(Name = "Zapamiętaj urządzenie")]
         public bool RememberMachine { get; set; }
 
+        [Display(Name = "Zapamiętaj mnie")]
         public bool RememberMe { get; set; }
     }
 }
