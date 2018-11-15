@@ -391,6 +391,7 @@ address .col .row {
     .content-centered {
         flex-direction: column;
         margin-top: 10px;
+        margin-left: 0;
     }
 
     address {
