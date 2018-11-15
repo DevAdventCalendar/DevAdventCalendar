@@ -9,8 +9,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-<div class="row content-centered">
-    <div class="col-md-4">
+<div class="content-centered">
         <section>
             <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -46,7 +45,7 @@
                         <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Zarejestrować nowego użytkownika?</a>
                     </p>
                 </div>
-</form>
+            </form>
         </section>
     </div>
 
@@ -77,12 +76,10 @@
             </div>
         }
     }
-</div>
+    <div class="row content-centered">
+        <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
+    </div>
 
-<div class="row content-centered">
-    <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
-</div>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
