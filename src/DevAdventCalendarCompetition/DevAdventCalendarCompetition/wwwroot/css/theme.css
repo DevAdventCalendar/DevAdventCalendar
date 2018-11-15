@@ -2531,7 +2531,7 @@ output {
   padding-top: 7px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #ecacac;
+  color: rgb(2,0,15);
 }
 .form-control {
   display: block;
@@ -2540,7 +2540,7 @@ output {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #ecacac;
+  color: rgb(2,0,15);
   background-color: #ffffff;
   background-image: none;
   border: 1px solid #cccccc;
