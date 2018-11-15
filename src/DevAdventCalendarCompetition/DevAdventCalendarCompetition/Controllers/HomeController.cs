@@ -128,6 +128,11 @@ namespace DevAdventCalendarCompetition.Controllers
             return View();
         }
 
+        public ActionResult Sponsors()
+        {
+            return View();
+        }
+
         public ActionResult Rules()
         {
             return View();
