@@ -30,54 +30,54 @@ namespace DevAdventCalendarCompetition.Vms
 
     public class SetPasswordViewModel
     {
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Pole Nowe hasło jest obowiązkowe")]
+        [StringLength(100, ErrorMessage = "Długość {0} powinna być większa niż {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź nowe hasło")]
+        [Compare("NewPassword", ErrorMessage = "Nowe hasło i hasło potwierdzające nie pasują do siebie.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Pole Bieżące hasło jest obowiązkowe")]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Bieżące hasło")]
         public string OldPassword { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Pole Nowe hasło jest obowiązkowe")]
+        [StringLength(100, ErrorMessage = "Długość {0} powinna być większa niż {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź nowe hasło")]
+        [Compare("NewPassword", ErrorMessage = "Nowe hasło i hasło potwierdzające nie pasują do siebie.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class AddPhoneNumberViewModel
     {
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Pole Numer telefonu jest obowiązkowe")]
+        [Phone(ErrorMessage = "Podaj prawidłowy format numeru telefonu")]
+        [Display(Name = "Numer telefonu")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
-        [Required]
-        [Display(Name = "Code")]
+        [Required(ErrorMessage = "Pole Kod jest obowiązkowe")]
+        [Display(Name = "Kod")]
         public string Code { get; set; }
 
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Pole Numer telefonu jest obowiązkowe")]
+        [Phone(ErrorMessage = "Podaj prawidłowy format numeru telefonu")]
+        [Display(Name = "Number telefonu")]
         public string PhoneNumber { get; set; }
     }
 

@@ -4,9 +4,9 @@ namespace DevAdventCalendarCompetition.Models.AccountViewModels
 {
     public class LoginWithRecoveryCodeViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Pole Kod odzyskiwania jest obowiązkowe")]
         [DataType(DataType.Text)]
-        [Display(Name = "Recovery Code")]
+        [Display(Name = "Kod odzyskiwania")]
         public string RecoveryCode { get; set; }
     }
 }
