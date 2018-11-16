@@ -10,7 +10,7 @@
 
 <h2>@ViewData["Title"]</h2>
 <div class="content-centered">
-        <section>
+        <section class="center-block">
             <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -31,11 +31,8 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row content-centered">
-                        <button type="submit" class="btn btn-default">Zaloguj</button>
-                    </div>
-
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-default">Zaloguj</button>
                 </div>
                 <div class="form-group">
                     <p>
@@ -76,7 +73,7 @@
             </div>
         }
     }
-    <div class="row content-centered">
+    <div class="row text-center">
         <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
     </div>
 
