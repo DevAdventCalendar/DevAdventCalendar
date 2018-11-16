@@ -101,27 +101,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-<script>
-    $mcj.extend($mcj.validator.messages, {
-        required: "To pole jest wymagane.",
-        remote: "Proszę o wypełnienie tego pola.",
-        email: "Proszę o podanie prawidłowego adresu email.",
-        url: "Proszę o podanie prawidłowego URL.",
-        date: "Proszę o podanie prawidłowej daty.",
-        dateISO: "Proszę o podanie prawidłowej daty (ISO).",
-        number: "Proszę o podanie prawidłowej liczby.",
-        digits: "Proszę o podanie samych cyfr.",
-        creditcard: "Proszę o podanie prawidłowej karty kredytowej.",
-        equalTo: "Proszę o podanie tej samej wartości ponownie.",
-        accept: "Wpisz wartość z poprawnym rozszerzeniem.",
-        maxlength: $mcj.validator.format("Proszę o podanie nie więcej niż {0} znaków."),
-        minlength: $mcj.validator.format("Proszę o podanie przynajmniej {0} znaków."),
-        rangelength: $mcj.validator.format("Proszę o podanie wartości o długości od {0} do {1} znaków."),
-        range: $mcj.validator.format("Proszę o podanie wartości z przedziału od {0} do {1}."),
-        max: $mcj.validator.format("Proszę o podanie wartości mniejszej bądź równej {0}."),
-        min: $mcj.validator.format("Proszę o podanie wartości większej bądź równej {0}."),
-        mc_birthday: "Proszę o wpisanie prawidłowego miesiąca i dnia.",
-        mc_date: "Proszę o wpisanie prawidłowej daty.",
-        mc_phone: "Proszę o wpisanie prawidłowego numeru telefonu.",
-    });
-</script>

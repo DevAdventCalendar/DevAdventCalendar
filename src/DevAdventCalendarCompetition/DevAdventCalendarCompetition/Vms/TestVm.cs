@@ -16,11 +16,13 @@ namespace DevAdventCalendarCompetition.Models
         [Required(ErrorMessage = "Pole Dzień rozpoczęcia jest obowiązkowe")]
         [Display(Name = "Dzień rozpoczęcia")]
         [DataType(DataType.Date, ErrorMessage = "Podaj poprawny format daty")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "Pole Dzień zakończenia jest obowiązkowe")]
         [Display(Name = "Dzień zakończenia")]
         [DataType(DataType.Date, ErrorMessage = "Podaj poprawny format daty")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(1);
 
         [Required(ErrorMessage = "Pole Odpowiedź jest obowiązkowe")]
