@@ -28,24 +28,9 @@ namespace DevAdventCalendarCompetition.Services
             return await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockoutOnFailure: false);
         }
 
-        public async Task<ApplicationUser> GetTwoFactorAuthenticationUserAsync()
-        {
-            return await _signInManager.GetTwoFactorAuthenticationUserAsync();
-        }
-
         public string GetUserId(ClaimsPrincipal principal)
         {
             return _userManager.GetUserId(principal);
-        }
-
-        public async Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string authenticatorCode, bool rememberMe, bool rememberMachine)
-        {
-            return await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, rememberMachine);
-        }
-
-        public async Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(string recoveryCode)
-        {
-            return await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
         }
 
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
