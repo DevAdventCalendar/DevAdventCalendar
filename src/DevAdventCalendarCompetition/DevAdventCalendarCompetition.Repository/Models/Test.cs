@@ -29,7 +29,16 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public ICollection<TestAnswer> Answers { get; set; }
 
-        public bool HasStarted => StartDate.HasValue;
+        public bool HasStarted
+        {
+            get
+            {
+                if (!StartDate.HasValue)
+                    return false;
+
+                return DateTime.Now > StartDate.Value;
+            }
+        }
 
         public bool HasEnded
         {

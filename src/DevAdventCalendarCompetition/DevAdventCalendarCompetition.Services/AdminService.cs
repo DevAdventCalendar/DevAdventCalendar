@@ -42,7 +42,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public TestDto GetPreviousTest(int testNumber)
         {
-            var test = _baseTestRepository.GetByNumber(testNumber);
+            var test = _baseTestRepository.GetByNumber(testNumber - 1);
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
@@ -55,10 +55,15 @@ namespace DevAdventCalendarCompetition.Services
             _baseTestRepository.AddTest(test);
         }
 
-        public void UpdateTestDates(TestDto testDto, DateTime startTime, DateTime endTime)
+        public void UpdateTestDates(TestDto testDto, string minutesString)
         {
-            testDto.StartDate = startTime;
-            testDto.EndDate = endTime;
+            uint minutes = 0;
+            var parsed = uint.TryParse(minutesString, out minutes);
+            if (!parsed)
+                minutes = 20;
+
+            testDto.StartDate = DateTime.Now;
+            testDto.EndDate = DateTime.Now.AddMinutes(minutes);
             var test = _mapper.Map<Test>(testDto);
             _adminRepository.UpdateDates(test);
         }

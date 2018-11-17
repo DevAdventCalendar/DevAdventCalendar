@@ -11,10 +11,12 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly IBaseTestService _baseTestService;
 
-        public AdminController(IAdminService adminService)
+        public AdminController(IAdminService adminService, IBaseTestService baseTestService)
         {
             _adminService = adminService;
+            _baseTestService = baseTestService;
         }
 
         public ActionResult Index()
@@ -34,6 +36,21 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (ModelState.IsValid)
             {
+                if ((model.EndDate - model.StartDate).TotalDays != 1)
+                {
+                    ModelState.AddModelError(nameof(model.StartDate), "Test może trwać tylko 1 dzień!");
+                    return View(model);
+                }
+                var dbTest = _baseTestService.GetTestByNumber(model.Number);
+                if (dbTest != null)
+                {
+                    ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
+                    return View(model);
+                }
+
+                //automatically set time to noon
+                model.StartDate.Add(new TimeSpan(12, 0, 0));
+
                 var testDto = new TestDto
                 {
                     Number = model.Number,
@@ -61,16 +78,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
                 throw new ArgumentException("Previous test has not ended");
 
-            //TODO: move to service
-            uint minutes = 0;
-            var parsed = uint.TryParse(minutesString, out minutes);
-            if (!parsed)
-                minutes = 20;
-
-            var startTime = DateTime.Now;
-            var endTime = startTime.AddMinutes(minutes);
-
-            _adminService.UpdateTestDates(testDto, startTime, endTime);
+            _adminService.UpdateTestDates(testDto, minutesString);
 
             return RedirectToAction("Index");
         }

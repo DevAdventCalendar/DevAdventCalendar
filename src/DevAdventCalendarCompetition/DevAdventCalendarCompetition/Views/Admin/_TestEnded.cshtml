@@ -4,11 +4,11 @@
     <div class="col-md-12">
         <h3>Test @Model.Number</h3>
         <p>
-            <b>Status: </b>Test ended<b>
+            <b>Status: </b>Test zakończony<b>
             </b>
         </p>
         <p>
-            <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: @Model.EndDate.Value.ToLongTimeString()</b>
+            <b>Czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongDateString() @Model.StartDate.Value.ToShortTimeString() - <b>Czas zakończenia: @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()</b>
         </p>
     </div>
 </div>
