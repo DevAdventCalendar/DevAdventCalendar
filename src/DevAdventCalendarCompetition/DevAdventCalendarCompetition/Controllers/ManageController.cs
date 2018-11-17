@@ -94,7 +94,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Profil został zaktualizowany";
             return RedirectToAction(nameof(Index));
         }
 
@@ -118,7 +118,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var email = user.Email;
             await _accountService.SendEmailConfirmationAsync(email, callbackUrl);
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "E-mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę odbiorczą";
             return RedirectToAction(nameof(Index));
         }
 
@@ -165,7 +165,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             await _accountService.SignInAsync(User);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = "Twoje hasło zostało zmienione";
 
             return RedirectToAction(nameof(ChangePassword));
         }
