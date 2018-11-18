@@ -71,7 +71,7 @@ namespace DevAdventCalendarCompetition.Vms
 
         [Required(ErrorMessage = "Pole Numer telefonu jest obowiązkowe")]
         [Phone(ErrorMessage = "Podaj prawidłowy format numeru telefonu")]
-        [Display(Name = "Number telefonu")]
+        [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
     }
 }

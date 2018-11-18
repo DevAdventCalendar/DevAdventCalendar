@@ -18,10 +18,7 @@
                 <label asp-for="Email"></label>
                 @if (Model.IsEmailConfirmed)
                 {
-                    <div class="input-group">
-                        <input asp-for="Email" class="form-control" />
-                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
-                    </div>
+                    <input asp-for="Email" class="form-control" />
                 }
                 else
                 {
