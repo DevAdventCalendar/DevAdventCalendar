@@ -65,7 +65,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Błąd logowania");
                     return View(model);
                 }
             }
