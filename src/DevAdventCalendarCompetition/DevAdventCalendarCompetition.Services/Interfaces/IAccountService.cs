@@ -10,13 +10,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
     {
         Task<SignInResult> PasswordSignInAsync(string email, string password, bool rememberMe);
 
-        Task<ApplicationUser> GetTwoFactorAuthenticationUserAsync();
-
         string GetUserId(ClaimsPrincipal pricipal);
-
-        Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string authenticatorCode, bool rememberMe, bool rememberMachine);
-
-        Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(string recoveryCode);
 
         ApplicationUser CreateApplicationUserByEmail(string email);
 

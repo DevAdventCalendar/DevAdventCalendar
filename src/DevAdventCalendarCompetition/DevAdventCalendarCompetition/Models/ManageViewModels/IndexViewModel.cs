@@ -4,6 +4,7 @@ namespace DevAdventCalendarCompetition.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        [Display(Name = "Nazwa użytkownika")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

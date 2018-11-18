@@ -72,35 +72,5 @@ namespace DevAdventCalendarCompetition.Services
         {
             return await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
         }
-
-        public async Task<string> GetAuthenticatorKeyAsync(ApplicationUser user)
-        {
-            return await _userManager.GetAuthenticatorKeyAsync(user);
-        }
-
-        public async Task<int> CountRecoveryCodesAsync(ApplicationUser user)
-        {
-            return await _userManager.CountRecoveryCodesAsync(user);
-        }
-
-        public async Task<IdentityResult> SetTwoFactorEnabledAsync(ApplicationUser user, bool enabled = false)
-        {
-            return await _userManager.SetTwoFactorEnabledAsync(user, enabled);
-        }
-
-        public async Task<bool> VerifyTwoFactorTokenAsync(ApplicationUser user, string code)
-        {
-            return await _userManager.VerifyTwoFactorTokenAsync(user, _userManager.Options.Tokens.AuthenticatorTokenProvider, code);
-        }
-
-        public async Task<IEnumerable<string>> GenerateNewTwoFactorRecoveryCodesAsync(ApplicationUser user)
-        {
-            return await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
-        }
-
-        public async Task<IdentityResult> ResetAuthenticatorKeyAsync(ApplicationUser user)
-        {
-            return await _userManager.ResetAuthenticatorKeyAsync(user);
-        }
     }
 }

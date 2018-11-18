@@ -28,17 +28,5 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string password);
 
         Task<IdentityResult> RemoveLoginAsync(ApplicationUser user, string loginProvider, string providerKey);
-
-        Task<string> GetAuthenticatorKeyAsync(ApplicationUser user);
-
-        Task<int> CountRecoveryCodesAsync(ApplicationUser user);
-
-        Task<IdentityResult> SetTwoFactorEnabledAsync(ApplicationUser user, bool enabled = false);
-
-        Task<bool> VerifyTwoFactorTokenAsync(ApplicationUser user, string code);
-
-        Task<IEnumerable<string>> GenerateNewTwoFactorRecoveryCodesAsync(ApplicationUser user);
-
-        Task<IdentityResult> ResetAuthenticatorKeyAsync(ApplicationUser user);
     }
 }
