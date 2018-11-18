@@ -4,15 +4,15 @@ namespace DevAdventCalendarCompetition.Models.ManageViewModels
 {
     public class SetPasswordViewModel
     {
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Pole Nowe hasło jest obowiązkowe")]
+        [StringLength(100, ErrorMessage = "Długość {0} powinna być większa niż {2} i mniejsza niż {1}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź nowe hasło")]
+        [Compare("NewPassword", ErrorMessage = "Hasło i hasło potwierdzające nie pasują do siebie.")]
         public string ConfirmPassword { get; set; }
 
         public string StatusMessage { get; set; }

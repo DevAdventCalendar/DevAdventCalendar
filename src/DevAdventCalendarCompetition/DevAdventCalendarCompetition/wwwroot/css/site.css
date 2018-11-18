@@ -1,7 +1,16 @@
-﻿body {
+body {
     padding-bottom: 20px;
     min-width: 400px;
+    font-family: 'Mali', cursive;
 }
+
+h1, h2, h3, h4, h5, h6, p, a, footer, .alert
+{
+    font-family: 'Mali', cursive;
+}
+
+a { color:#c12c2c; text-decoration: none;}
+a:hover { color:#831e1e; text-decoration: underline;}
 
 hr {
     border: none;
@@ -20,6 +29,7 @@ hr {
 
 .navbar {
     margin-bottom: 0;
+    font-family: 'Mali', cursive;
 }
 
 .navbar-header, .navbar-header .navbar-brand {

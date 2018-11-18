@@ -5,10 +5,10 @@ namespace DevAdventCalendarCompetition.Models.ManageViewModels
 {
     public class EnableAuthenticatorViewModel
     {
-        [Required]
-        [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Pole Kod weryfikacyjny jest obowiązkowe")]
+        [StringLength(7, ErrorMessage = "Długość {0} powinna być większa niż {2} i mniejsza niż {1}", MinimumLength = 6)]
         [DataType(DataType.Text)]
-        [Display(Name = "Verification Code")]
+        [Display(Name = "Kod weryfikacyjny")]
         public string Code { get; set; }
 
         [BindNever]

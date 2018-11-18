@@ -4,15 +4,17 @@ namespace DevAdventCalendarCompetition.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Pole Email jest obowiązkowe")]
+        [EmailAddress(ErrorMessage = "Podaj prawidłowy format adresu email")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Hasło jest obowiązkowe")]
         [DataType(DataType.Password)]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamiętać mnie?")]
         public bool RememberMe { get; set; }
     }
 }
