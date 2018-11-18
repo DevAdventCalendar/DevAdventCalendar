@@ -11,6 +11,8 @@ namespace DevAdventCalendarCompetition.Services.Profiles
             CreateMap<Test, TestDto>();
             CreateMap<TestDto, Test>()
                 .ForMember(dest => dest.Answers, opt => opt.Ignore());
+            CreateMap<Test, TestWithAnswerListDto>()
+                .ForMember(dest => dest.TestId, opt => opt.Ignore());
         }
     }
 }
