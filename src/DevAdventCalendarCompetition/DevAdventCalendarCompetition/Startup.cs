@@ -35,6 +35,7 @@ namespace DevAdventCalendarCompetition
 				.RegisterServices()
 				.AddAutoMapper()
 				.RegisterMapping()
+                .AddExternalLoginProviders(Configuration)
 				.AddSwaggerGen(c =>
 				{
 					c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });

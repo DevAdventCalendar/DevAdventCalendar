@@ -21,11 +21,11 @@ namespace DevAdventCalendarCompetition.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-					.AddErrorDescriber<CustomIdentityErrorDescriber>()
-					.AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
-			services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
@@ -56,6 +56,28 @@ namespace DevAdventCalendarCompetition.Extensions
                 cfg.CreateMap<TestAnswer, TestAnswerDto>();
                 cfg.CreateMap<TestAnswer, TestWithAnswerListDto>();
             });
+            return services;
+        }
+
+        public static IServiceCollection AddExternalLoginProviders(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication()
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+                })
+                .AddTwitter(twitterOptions =>
+                {
+                    twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"];
+                    twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
+                })
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                });
+
             return services;
         }
     }

@@ -35,7 +35,10 @@ namespace DevAdventCalendarCompetition.Services
 
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
         {
-            return await _userManager.CreateAsync(user, password);
+            if (string.IsNullOrEmpty(password) || password == "dupa")
+                return await _userManager.CreateAsync(user);
+            else
+                return await _userManager.CreateAsync(user, password);
         }
 
         public async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user)
@@ -69,9 +72,8 @@ namespace DevAdventCalendarCompetition.Services
             await _signInManager.SignInAsync(user, isPersistent: false);
         }
 
-        public async Task SignInAsync(ClaimsPrincipal principal)
+        public async Task SignInAsync(ApplicationUser user)
         {
-            var user = await _userManager.GetUserAsync(principal);
             await _signInManager.SignInAsync(user, isPersistent: false);
         }
 
@@ -95,9 +97,8 @@ namespace DevAdventCalendarCompetition.Services
             return await _signInManager.ExternalLoginSignInAsync(loginProvider, providerKey, isPersistent: false, bypassTwoFactor: true);
         }
 
-        public async Task<IdentityResult> AddLoginAsync(ClaimsPrincipal principal, ExternalLoginInfo info)
+        public async Task<IdentityResult> AddLoginAsync(ApplicationUser user, ExternalLoginInfo info)
         {
-            var user = await _userManager.GetUserAsync(principal);
             return await _userManager.AddLoginAsync(user, info);
         }
 
