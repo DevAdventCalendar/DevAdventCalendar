@@ -82,6 +82,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = homeService.GetCurrentTest();
             //Assert
             Assert.IsType<TestDto>(result);
+            Assert.Equal(result.Id, _currentTest.Id);
             _homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
         }
 
@@ -138,6 +139,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = homeService.GetTestsWithUserAnswers();
             //Assert
             Assert.IsType<List<TestWithAnswerListDto>>(result);
+            Assert.True(1 == result.Count);
             _homeRepositoryMock.Verify(mock => mock.GetTestsWithUserAnswers(), Times.Once());
         }
     }

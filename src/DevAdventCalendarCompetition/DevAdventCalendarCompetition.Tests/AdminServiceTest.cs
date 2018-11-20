@@ -74,6 +74,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = adminService.GetAllTests();
             //Assert
             Assert.IsType<List<TestDto>>(result);
+            Assert.True(1 ==result.Count);
             _adminRepositoryMock.Verify(mock => mock.GetAll(), Times.Once())
 ;        }
 
@@ -88,7 +89,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = adminService.GetTestById(_currentTest.Id);
             //Assert
             Assert.IsType<TestDto>(result);
-            _adminRepositoryMock.Verify(mock => mock.GetById(It.Is<int>(x => x.Equals(_currentTest.Id))));
+            _adminRepositoryMock.Verify(mock => mock.GetById(It.Is<int>(x => x.Equals(_currentTest.Id))), Times.Once());
         }
 
         [Fact]
@@ -102,7 +103,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = adminService.GetPreviousTest(_previousTest.Number);
             //Assert
             Assert.IsType<TestDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_previousTest.Number))));
+            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_previousTest.Number))), Times.Once());
         }
 
         [Fact]
@@ -116,7 +117,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = adminService.GetPreviousTest(_currentTest.Number);
             //Assert
             Assert.Null(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_currentTest.Number))));
+            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_currentTest.Number))), Times.Once());
         }
 
         [Fact]
