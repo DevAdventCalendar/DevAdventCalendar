@@ -1,5 +1,4 @@
-﻿@using System.Linq
-@using DevAdventCalendarCompetition.Services
+﻿@using DevAdventCalendarCompetition.Services
 @model LoginViewModel
 
 @inject IdentityService IdentityService
@@ -10,53 +9,53 @@
 
 <h2>@ViewData["Title"]</h2>
 <div class="content-centered">
-        <section class="center-block">
-            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email">Email</label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+    <section class="center-block">
+        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Hasło</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Password">Hasło</label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="RememberMe">
-                            <input asp-for="RememberMe" />
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-default">Zaloguj</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a asp-action="ForgotPassword">Zapomniałeś/aś hasła?</a>
-                    </p>
-                    <p>
-                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Zarejestrować nowego użytkownika?</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-default">Zaloguj</button>
+            </div>
+            <div class="form-group">
+                <p>
+                    <a asp-action="ForgotPassword">Zapomniałeś/aś hasła?</a>
+                </p>
+                <p>
+                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Zarejestrować nowego użytkownika?</a>
+                </p>
+            </div>
+        </form>
+    </section>
+</div>
 
-    @{
+@{
+    var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
 
-        var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
+    if (externalProviders != null && externalProviders.Count == 0)
+    {
 
-        if (externalProviders != null && externalProviders.Count == 0)
-        {
-
-        }
-        else
-        {
-            <div class="col-md-6 col-md-offset-2">
+    }
+    else
+    {
+        <div class="row text-center">
+            <div class="col-md-12">
                 <section>
                     <h4>Użyj innego sposobu logowania.</h4>
                     <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
@@ -73,12 +72,16 @@
                     </form>
                 </section>
             </div>
-        }
+        </div>
     }
-    <div class="row text-center">
-        <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
-    </div>
+}
 
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-    }
+<br/>
+
+<div class="row text-center">
+    <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

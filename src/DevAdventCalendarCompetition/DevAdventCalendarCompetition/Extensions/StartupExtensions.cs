@@ -76,6 +76,12 @@ namespace DevAdventCalendarCompetition.Extensions
                 {
                     googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
                     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                })
+                .AddGitHub(githubOptions =>
+                {
+                    githubOptions.ClientId = configuration["Authentication:GitHub:ClientId"];
+                    githubOptions.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
+                    githubOptions.Scope.Add("user:email");
                 });
 
             return services;

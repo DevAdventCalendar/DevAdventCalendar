@@ -1,4 +1,8 @@
-﻿@model RegisterViewModel
+﻿@using DevAdventCalendarCompetition.Services
+@model RegisterViewModel
+
+@inject IdentityService IdentityService
+
 @{
     ViewData["Title"] = "Rejestracja";
 }
@@ -30,6 +34,39 @@
     </div>
 </div>
 
+<br/>
+
+@{
+    var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
+
+    if (externalProviders != null && externalProviders.Count == 0)
+    {
+
+    }
+    else
+    {
+        <div class="row text-center">
+            <div class="col-md-12" style="padding-bottom: 20px">
+                <section>
+                    <h4>Lub użyj jednego z serwisów:</h4>
+                    <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in externalProviders)
+                                {
+                                    <button type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
+                                        <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
+                                    </button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    }
+}
+
 <br />
 
 <div class="text-center">
@@ -38,6 +75,6 @@
     </div>
 </div>
 
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-    }
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
