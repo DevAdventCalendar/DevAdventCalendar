@@ -74,7 +74,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = adminService.GetAllTests();
             //Assert
             Assert.IsType<List<TestDto>>(result);
-            Assert.True(1 ==result.Count);
+            Assert.True(_testList.Count ==result.Count);
             _adminRepositoryMock.Verify(mock => mock.GetAll(), Times.Once())
 ;        }
 

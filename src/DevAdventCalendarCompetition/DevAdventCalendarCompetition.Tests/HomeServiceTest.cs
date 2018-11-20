@@ -139,7 +139,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = homeService.GetTestsWithUserAnswers();
             //Assert
             Assert.IsType<List<TestWithAnswerListDto>>(result);
-            Assert.True(1 == result.Count);
+            Assert.True(_testList.Count == result.Count);
             _homeRepositoryMock.Verify(mock => mock.GetTestsWithUserAnswers(), Times.Once());
         }
     }
