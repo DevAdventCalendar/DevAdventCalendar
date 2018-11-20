@@ -88,6 +88,37 @@ button.navbar-toggle {
     height: 60px;
 }
 
+#santa {
+    height: 200px;
+    animation-name: tilt;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-name: tilt;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-direction: alternate;
+}
+
+@keyframes tilt {   
+    10% {
+        transform: rotate(-20deg);
+        -webkit-transform: rotate(-20deg);
+    }
+    50% {
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+    }
+    100% {
+        transform: rotate(20deg);
+        -webkit-transform: rotate(20deg);
+    }
+}
+
+#home-santa .content-centered {
+    margin: 20px 0 20px 0;
+}
+
 .main-sponsor-section {
     display: flex;
     align-items: center;
