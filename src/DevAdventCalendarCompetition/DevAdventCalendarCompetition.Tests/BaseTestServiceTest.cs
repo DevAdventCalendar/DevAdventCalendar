@@ -121,9 +121,9 @@ namespace DevAdventCalendarCompetition.Tests
             _baseTestRepositoryMock.Setup(mock => mock.AddAnswer(It.IsAny<TestAnswer>()));
             var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
             //Act
-            baseTestService.AddTestAnswer(_testAnswer.Id, _testAnswer.UserId, DateTime.Now);
+            baseTestService.AddTestAnswer(_testAnswer.TestId, _testAnswer.UserId, DateTime.Now);
             //Assert
-            _baseTestRepositoryMock.Verify(mock => mock.AddAnswer(It.Is<TestAnswer>(x=>x.Id == _testAnswer.Id)), Times.Once());
+            _baseTestRepositoryMock.Verify(mock => mock.AddAnswer(It.Is<TestAnswer>(x=>x.UserId == _testAnswer.UserId && x.TestId == _testAnswer.TestId)), Times.Once());
         }
     }
 }

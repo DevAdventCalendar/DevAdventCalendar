@@ -130,7 +130,20 @@ namespace DevAdventCalendarCompetition.Tests
             //Act
             adminService.UpdateTestDates(_testDto, (DateTime)_testDto.StartDate, (DateTime)_testDto.EndDate);
             //Assert
-            _adminRepositoryMock.Verify(mock => mock.UpdateDates(It.Is<Test>(x => x.Equals(_testDto))), Times.Once());
+            _adminRepositoryMock.Verify(mock => mock.UpdateDates(It.Is<Test>(x => x.Number == _testDto.Number && x.Id == _testDto.Id && x.StartDate == _testDto.StartDate && x.EndDate == _testDto.EndDate)), Times.Once());
+        }
+
+        [Fact]
+        public void UpdateTestEndDate()
+        {
+            //Arrange
+            _adminRepositoryMock.Setup(mock => mock.UpdateEndDate(It.IsAny<Test>()));
+            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var adminService = new AdminService(_adminRepositoryMock.Object, _baseTestRepositoryMock.Object, _mapper);
+            //Act
+            adminService.UpdateTestEndDate(_testDto, (DateTime)_testDto.EndDate);
+            //Assert
+            _adminRepositoryMock.Verify(mock => mock.UpdateEndDate(It.Is<Test>(x => x.Number == _testDto.Number && x.Id == _testDto.Id && x.StartDate == _testDto.StartDate && x.EndDate == _testDto.EndDate)), Times.Once());
         }
     }
 }
