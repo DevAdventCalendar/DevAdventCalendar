@@ -32,7 +32,7 @@ namespace DevAdventCalendarCompetition
 		{
 			services
 				.RegisterDatabase(Configuration)
-				.RegisterServices()
+				.RegisterServices(Configuration)
 				.AddAutoMapper()
 				.RegisterMapping()
                 .AddExternalLoginProviders(Configuration)
