@@ -50,5 +50,17 @@ namespace DevAdventCalendarCompetition.Services
             var testAnswerDto = _mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
         }
-    }
+
+		public void AddTestWrongAnswer(string userId, string wrongAnswer, DateTime wrongAnswerDate)
+		{
+			var testWrongAnswer = new TestWrongAnswer()
+			{
+				UserId = userId,
+				Time = wrongAnswerDate,
+				Answer = wrongAnswer
+			};
+
+			_baseTestRepository.AddWrongAnswer(testWrongAnswer);
+		}
+	}
 }

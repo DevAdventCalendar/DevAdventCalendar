@@ -28,7 +28,9 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (!answers.Contains(fixedAnswer))
             {
-                ModelState.AddModelError("", "Answer is not correct. Try again.");
+				SaveWrongAnswer(fixedAnswer);
+
+				ModelState.AddModelError("", "Answer is not correct. Try again.");
 
                 var test = _baseTestService.GetTestByNumber(4);
 

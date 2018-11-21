@@ -7,6 +7,8 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
         Test GetByNumber(int testNumber);
         TestAnswer GetAnswerByTestId(int testId);
         void AddAnswer(TestAnswer testAnswer);
-        void UpdateAnswer(TestAnswer testAnswer);     
-    }
+        void UpdateAnswer(TestAnswer testAnswer);
+		void AddWrongAnswer(TestWrongAnswer wrongAnswer);
+
+	}
 }

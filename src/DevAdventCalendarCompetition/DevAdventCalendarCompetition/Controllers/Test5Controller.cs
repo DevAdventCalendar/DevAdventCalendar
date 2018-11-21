@@ -29,7 +29,9 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (integralSolution != 44.0)
             {
-                ModelState.AddModelError("", "Answer is not correct. Try again.");
+				SaveWrongAnswer(fixedAnswer);
+
+				ModelState.AddModelError("", "Answer is not correct. Try again.");
 
                 var test = _baseTestService.GetTestByNumber(5);
 

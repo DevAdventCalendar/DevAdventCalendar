@@ -15,12 +15,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DevAdventCalendarCompetition.Extensions
 {
-    public static class StartupExtensions
-    {
-        public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+	public static class StartupExtensions
+	{
+		public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
+		{
+			services.AddDbContext<ApplicationDbContext>(options =>
+				options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
                     {
@@ -32,9 +32,9 @@ namespace DevAdventCalendarCompetition.Extensions
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            services.AddTransient<IAdminRepository, AdminRepository>();
-            services.AddTransient<IBaseTestRepository, BaseTestRepository>();
-            services.AddTransient<IHomeRepository, HomeRepository>();
+			services.AddTransient<IAdminRepository, AdminRepository>();
+			services.AddTransient<IBaseTestRepository, BaseTestRepository>();
+			services.AddTransient<IHomeRepository, HomeRepository>();
 
             services.AddScoped<DbInitializer>();
 
@@ -66,12 +66,12 @@ namespace DevAdventCalendarCompetition.Extensions
             return services;
         }
 
-        public static IServiceCollection RegisterMapping(this IServiceCollection services)
-        {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Test, TestDto>();
-                cfg.CreateMap<TestDto, Test>();
+		public static IServiceCollection RegisterMapping(this IServiceCollection services)
+		{
+			Mapper.Initialize(cfg =>
+			{
+				cfg.CreateMap<Test, TestDto>();
+				cfg.CreateMap<TestDto, Test>();
 
                 cfg.CreateMap<TestAnswer, TestAnswerDto>();
                 cfg.CreateMap<TestAnswer, TestWithAnswerListDto>();
