@@ -19,19 +19,15 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult Index()
         {
-            var currentTestDto = _homeService.GetCurrentTest();
-            if (currentTestDto == null)
+            var currentTestsDto = _homeService.GetCurrentTests();
+            if (currentTestsDto == null)
                 return View();
 
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return View(currentTestDto);
+                return View(currentTestsDto);
 
-            var currentTestAnswer = _homeService.GetTestAnswerByUserId(userId, currentTestDto.Id);
-            if (currentTestAnswer == null)
-                ViewBag.TestNotAnswered = true;
-
-            return View(currentTestDto);
+            return View(currentTestsDto);
         }
 
         public ActionResult Results()
@@ -110,6 +106,12 @@ namespace DevAdventCalendarCompetition.Controllers
             };
 
             return View("Results", vm);
+        }
+
+        [HttpPost]
+        public ActionResult CheckTestStatus(int testNumber)
+        {
+            return Content(_homeService.CheckTestStatus(testNumber));  
         }
 
         public ActionResult Error()

@@ -33,11 +33,25 @@ namespace DevAdventCalendarCompetition.Services
             return testAnswerDto;
         }
 
+        public List<TestDto> GetCurrentTests()
+        {
+            var testList = _homeRepository.GetAllTests();
+            var allTestsDtoList = _mapper.Map<List<TestDto>>(testList);
+            return allTestsDtoList;
+        }
+
         public List<TestWithAnswerListDto> GetTestsWithUserAnswers()
         {
             var testList = _homeRepository.GetTestsWithUserAnswers();
             var testWithAnswersDtoList = _mapper.Map<List<TestWithAnswerListDto>>(testList);
             return testWithAnswersDtoList;
+        }
+
+        public string CheckTestStatus(int testNumber)
+        {
+            var test = _homeRepository.GetTestByNumber(testNumber);
+
+            return test == null ? TestStatus.NotStarted.ToString() : test.Status.ToString();
         }
     }
 }
