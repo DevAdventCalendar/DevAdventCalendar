@@ -42,44 +42,31 @@
                 </p>
             </div>
         </form>
+
+        <br/>
+
+        @{
+            var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
+
+            if (externalProviders != null && externalProviders.Count > 0)
+            {
+                <h4>Lub użyj innego sposobu logowania</h4>
+                <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    <div class="col text-center">
+                        @foreach (var provider in externalProviders)
+                        {
+                            <div class="row btn-block">
+                                <button type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
+                                    <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </form>
+            }
+        }
+
     </section>
-</div>
-
-@{
-    var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
-
-    if (externalProviders != null && externalProviders.Count == 0)
-    {
-
-    }
-    else
-    {
-        <div class="row text-center">
-            <div class="col-md-12">
-                <section>
-                    <h4>Użyj innego sposobu logowania.</h4>
-                    <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in externalProviders)
-                                {
-                                    <button type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
-                                        <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
-                                    </button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                </section>
-            </div>
-        </div>
-    }
-}
-
-<br/>
-
-<div class="row text-center">
-    <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
 </div>
 
 @section Scripts {
