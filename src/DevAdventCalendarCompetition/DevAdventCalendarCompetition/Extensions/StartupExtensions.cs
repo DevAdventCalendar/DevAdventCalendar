@@ -20,9 +20,12 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddErrorDescriber<CustomIdentityErrorDescriber>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+                    {
+                        config.SignIn.RequireConfirmedEmail = true;
+                    })
+					.AddErrorDescriber<CustomIdentityErrorDescriber>()
+					.AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");

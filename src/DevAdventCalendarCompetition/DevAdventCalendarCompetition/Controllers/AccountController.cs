@@ -50,9 +50,19 @@ namespace DevAdventCalendarCompetition.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                var user = await _accountService.FindByEmailAsync(model.Email);
+
+                if (!user.EmailConfirmed)
+                {
+                    _logger.LogInformation("User not confirmed.");
+                    ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
+                    return View(model);
+                }
+                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
