@@ -35,7 +35,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
         {
-            if (string.IsNullOrEmpty(password) || password == "dupa")
+            if (string.IsNullOrEmpty(password))
                 return await _userManager.CreateAsync(user);
             else
                 return await _userManager.CreateAsync(user, password);
