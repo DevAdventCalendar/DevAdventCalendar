@@ -1,0 +1,36 @@
+﻿@*based on https://github.com/ProfessionalCSharp/MoreSamples/tree/master/ASPNETCore/GDPRSample/GDPRSample*@
+@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <nav id="cookieConsent" class="navbar navbar-default navbar-static-top " role="alert">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <p class="navbar-text">
+                    Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.
+                </p>
+                <div class="navbar-right">
+                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-info navbar-btn">Dowiedz się więcej</a>
+                    <button type="button" class="btn btn-default navbar-btn" data-cookie-string="@cookieString">Akceptuj</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        (function () {
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.querySelector("#cookieConsent").classList.add("hidden");
+            }, false);
+        })();
+            //$("#cookieConsent").click(function () {
+            //    $("#cookieConsent").addClass("hidden");
+            //});
+    </script>
+}
