@@ -8,6 +8,12 @@ namespace DevAdventCalendarCompetition.Repository.Models
     public class TestWrongAnswer : ModelBase
     {
         [Required]
+        [ForeignKey("Test")]
+        public int TestId { get; set; }
+
+        public Test Test { get; set; }
+
+        [Required]
         [MaxLength(450)]
         [ForeignKey("User")]
         public string UserId { get; set; }

@@ -11,6 +11,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         TestAnswerDto GetAnswerByTestId(int testId);
 
-		void AddTestWrongAnswer(string userId, string wrongAnswer, DateTime wrongAnswerDate);
-	}
+        void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate);
+    }
 }

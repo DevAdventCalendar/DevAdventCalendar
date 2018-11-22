@@ -17,10 +17,12 @@ namespace DevAdventCalendarCompetition.Controllers
             _baseTestService = baseTestService;
         }
 
-		public void SaveWrongAnswer(string wrongAnswer)
-		{
-			_baseTestService.AddTestWrongAnswer(User.FindFirstValue(ClaimTypes.NameIdentifier), wrongAnswer, DateTime.Now);
-		}
+        public void SaveWrongAnswer(string wrongAnswer, int testNumber)
+        {
+            var testDto = _baseTestService.GetTestByNumber(testNumber);
+
+            _baseTestService.AddTestWrongAnswer(User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.Id, wrongAnswer, DateTime.Now);
+        }
 
         public ActionResult SaveAnswerAndRedirect(int testNumber)
         {

@@ -12,16 +12,16 @@ namespace DevAdventCalendarCompetition.Services
     {
         private readonly IAdminRepository _adminRepository;
         private readonly IBaseTestRepository _baseTestRepository;
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public AdminService(
-			IAdminRepository adminRepository, 
-			IBaseTestRepository baseTestRepository,
-			IMapper mapper)
+            IAdminRepository adminRepository,
+            IBaseTestRepository baseTestRepository,
+            IMapper mapper)
         {
             _adminRepository = adminRepository;
             _baseTestRepository = baseTestRepository;
-			_mapper = mapper;
+            _mapper = mapper;
         }
 
         public List<TestDto> GetAllTests()
