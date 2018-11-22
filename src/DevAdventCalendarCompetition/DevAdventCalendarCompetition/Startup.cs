@@ -1,4 +1,14 @@
-﻿namespace DevAdventCalendarCompetition
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Extensions;
+using DevAdventCalendarCompetition.Repository.Context;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
+
+namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
@@ -30,7 +40,6 @@
                 .RegisterServices(Configuration)
                 .AddAutoMapper()
                 .RegisterMapping()
-                .AddExternalLoginProviders(Configuration)
                 .AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });

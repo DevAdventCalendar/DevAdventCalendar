@@ -9,10 +9,19 @@
 
 @if (showBanner)
 {
-    <nav id="cookieConsent" class="navbar navbar-default navbar-static-top " role="alert">
+    <nav id="cookieConsent" class="navbar navbar-default navbar-fixed-top" role="alert">
         <div class="container">
+            <div class="navbar-header cookies">
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#cookieConsent .navbar-collapse">
+                    <span class="sr-only">Toggle cookie consent banner</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">Wszyscy lubimy ciasteczka...</span>
+            </div>
             <div class="collapse navbar-collapse">
-                <p class="navbar-text">
+                <p class="navbar-text cookies-text">
                     Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.
                 </p>
                 <div class="navbar-right">
@@ -29,8 +38,5 @@
                 document.querySelector("#cookieConsent").classList.add("hidden");
             }, false);
         })();
-            //$("#cookieConsent").click(function () {
-            //    $("#cookieConsent").addClass("hidden");
-            //});
     </script>
 }
