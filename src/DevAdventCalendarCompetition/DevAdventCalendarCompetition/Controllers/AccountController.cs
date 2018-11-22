@@ -108,9 +108,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _accountService.SignInWithApplicationUserAsync(user);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return View("RegisterConfirmation");
                 }
                 AddErrors(result);
             }
