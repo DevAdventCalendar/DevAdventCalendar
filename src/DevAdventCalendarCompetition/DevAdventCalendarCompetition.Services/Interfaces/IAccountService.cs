@@ -26,7 +26,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task SendEmailAsync(string email, string subject, string message);
 
-        Task SignInAsync(ClaimsPrincipal principal);
+        Task SignInAsync(ApplicationUser user);
 
         Task SignOutAsync();
 
@@ -36,7 +36,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey);
 
-        Task<IdentityResult> AddLoginAsync(ClaimsPrincipal principal, ExternalLoginInfo info);
+        Task<IdentityResult> AddLoginAsync(ApplicationUser user, ExternalLoginInfo info);
 
         Task<ApplicationUser> FindByIdAsync(string userId);
 

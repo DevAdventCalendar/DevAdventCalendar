@@ -1,11 +1,15 @@
-﻿@model RegisterViewModel
+﻿@using DevAdventCalendarCompetition.Services
+@model RegisterViewModel
+
+@inject IdentityService IdentityService
+
 @{
     ViewData["Title"] = "Rejestracja";
 }
 
 <h2>@ViewData["Title"]</h2>
-<div class="row content-centered">
-    <div class="col-md-4">
+<div class="content-centered">
+    <section class="center-block">
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -23,21 +27,37 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <div class="row content-centered">
+            <div class="row text-center">
                 <button type="submit" class="btn btn-default">Zarejestruj</button>
             </div>
         </form>
-    </div>
+
+        <br/>
+
+        @{
+            var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
+
+            if (externalProviders != null && externalProviders.Count > 0)
+            {
+                <h4>Lub użyj innego sposobu rejestracji</h4>
+                <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    <div class="col text-center">
+                        @foreach (var provider in externalProviders)
+                        {
+                            <div class="row btn-block">
+                                <button type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
+                                    <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </form>
+            }
+        }
+
+    </section>
 </div>
 
-<br />
-
-<div class="text-center">
-    <div class="row center-block">
-        <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
-    </div>
-</div>
-
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-    }
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

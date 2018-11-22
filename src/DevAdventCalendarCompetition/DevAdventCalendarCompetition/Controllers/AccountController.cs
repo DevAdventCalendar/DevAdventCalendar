@@ -193,10 +193,10 @@ namespace DevAdventCalendarCompetition.Controllers
                 var result = await _accountService.CreateAsync(user, null);
                 if (result.Succeeded)
                 {
-                    result = await _accountService.AddLoginAsync(User, info);
+                    result = await _accountService.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        await _accountService.SignInAsync(User);
+                        await _accountService.SignInAsync(user);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
                         return RedirectToLocal(returnUrl);
                     }

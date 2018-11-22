@@ -471,4 +471,4 @@ ASALocalRun/
 # End of https://www.gitignore.io/api/aspnetcore,visualstudio,visualstudiocode
 \.vscode/
 
-*.env
+**/*.env

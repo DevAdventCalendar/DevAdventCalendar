@@ -163,7 +163,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return View(model);
             }
 
-            await _accountService.SignInAsync(User);
+            await _accountService.SignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
             StatusMessage = "Twoje hasło zostało zmienione";
 
@@ -212,7 +212,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return View(model);
             }
 
-            await _accountService.SignInAsync(User);
+            await _accountService.SignInAsync(user);
             StatusMessage = "Your password has been set.";
 
             return RedirectToAction(nameof(SetPassword));
@@ -265,7 +265,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ApplicationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
             }
 
-            var result = await _accountService.AddLoginAsync(User, info);
+            var result = await _accountService.AddLoginAsync(user, info);
             if (!result.Succeeded)
             {
                 throw new ApplicationException($"Unexpected error occurred adding external login for user with ID '{user.Id}'.");
@@ -294,7 +294,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ApplicationException($"Unexpected error occurred removing external login for user with ID '{user.Id}'.");
             }
 
-            await _accountService.SignInAsync(User);
+            await _accountService.SignInAsync(user);
             StatusMessage = "The external login was removed.";
             return RedirectToAction(nameof(ExternalLogins));
         }
