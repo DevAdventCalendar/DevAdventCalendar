@@ -22,13 +22,13 @@ namespace DevAdventCalendarCompetition.Services
                 Host = Host,
                 Port = Port,
                 EnableSsl = true,
-                //Credentials = new NetworkCredential("account_email_to_change", "password_to_change")
                 Credentials = new NetworkCredential(UserName, Password)
             };
 
             var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
             {
                 Subject = subject,
+                IsBodyHtml = true,
                 Body = message
             };
             
