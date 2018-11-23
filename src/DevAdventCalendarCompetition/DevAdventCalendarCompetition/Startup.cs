@@ -4,6 +4,7 @@ using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -55,6 +56,9 @@ namespace DevAdventCalendarCompetition
             {
                 app.ApplicationServices.GetService<ApplicationDbContext>().Database.EnsureCreated();
             }
+
+            app.UpdateDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
