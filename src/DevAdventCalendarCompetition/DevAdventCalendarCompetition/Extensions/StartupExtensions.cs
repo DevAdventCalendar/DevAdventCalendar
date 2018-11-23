@@ -20,9 +20,12 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddErrorDescriber<CustomIdentityErrorDescriber>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+                    {
+                        config.SignIn.RequireConfirmedEmail = true;
+                    })
+					.AddErrorDescriber<CustomIdentityErrorDescriber>()
+					.AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
@@ -34,9 +37,22 @@ namespace DevAdventCalendarCompetition.Extensions
             return services;
         }
 
-        public static IServiceCollection RegisterServices(this IServiceCollection services)
+        public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>(
+                sender =>
+                {
+                    var emailSender = new EmailSender
+                    {
+                        Host = configuration.GetValue<string>("Email:Smtp:Host"),
+                        Port = configuration.GetValue<int>("Email:Smtp:Port"),
+                        UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
+                        Password = configuration.GetValue<string>("Email:Smtp:Password")
+                    };
+
+                    return emailSender;
+                });
+
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAdminService, AdminService>();
             services.AddTransient<IBaseTestService, BaseTestService>();

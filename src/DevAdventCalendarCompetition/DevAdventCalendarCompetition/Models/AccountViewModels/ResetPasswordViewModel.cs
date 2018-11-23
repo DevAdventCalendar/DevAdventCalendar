@@ -11,6 +11,7 @@ namespace DevAdventCalendarCompetition.Models.AccountViewModels
         [Required(ErrorMessage = "Pole Hasło jest obowiązkowe")]
         [StringLength(100, ErrorMessage = "Długość {0} powinna być większa niż {2} i mniejsza niż {1}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]

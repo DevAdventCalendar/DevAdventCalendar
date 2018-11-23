@@ -14,11 +14,10 @@ $(function() {
         if (url == (this.href)) {
             $(this).closest("li").addClass("active");
         }
-    });  
-});   
+    });
+});
 
 function CheckTestStatus(testNumber) {
-
     if (testNumber != null) {
         $.post("/Home/CheckTestStatus",
             {
@@ -38,5 +37,5 @@ function CheckTestStatus(testNumber) {
     } else {
         $("#alert-text").text("Poczekaj na otwarcie okienka!");
         $("#tile-open-alert").show();
-    }  
+    }
 }

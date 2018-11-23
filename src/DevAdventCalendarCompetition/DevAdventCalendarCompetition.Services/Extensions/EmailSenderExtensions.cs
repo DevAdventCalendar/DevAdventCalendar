@@ -8,8 +8,11 @@ namespace DevAdventCalendarCompetition.Services.Extensions
     {
         public static Task SendEmailConfirmationAsync(this IEmailSender emailSender, string email, string link)
         {
-            return emailSender.SendEmailAsync(email, "Confirm your email",
-                $"Please confirm your account by clicking this link: <a href='{HtmlEncoder.Default.Encode(link)}'>link</a>");
+            return emailSender.SendEmailAsync(email, "Potwierdzenie za³o¿enia konta", 
+                $"Prosimy o potwierdzenie za³o¿enia konta poprzez klikniêcie na link" +
+                $"<p><a href='{ link }'>LINK</a></p><p>Pozdrawiamy,<br />Elfy DevAdventCalendar</p>" +
+                $"<p>PS. Dodatkowo bêdzie nam bardzo mi³o, jeœli dasz ³apkê w górê na <a href='https://www.facebook.com/devadventcalendar/'>Facebooku</a> " +
+                $"i <a href='https://twitter.com/dev_advent_cal'>Twitterze</a>!</p>");
         }
     }
 }

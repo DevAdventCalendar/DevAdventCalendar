@@ -50,9 +50,19 @@ namespace DevAdventCalendarCompetition.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                var user = await _accountService.FindByEmailAsync(model.Email);
+
+                if (!user.EmailConfirmed)
+                {
+                    _logger.LogInformation("User not confirmed.");
+                    ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
+                    return View(model);
+                }
+                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -108,9 +118,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _accountService.SignInWithApplicationUserAsync(user);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return View("RegisterConfirmation");
                 }
                 AddErrors(result);
             }
@@ -249,9 +257,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _accountService.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
-                await _accountService.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, user.Email, Request.Scheme);
+                await _accountService.SendEmailAsync(model.Email, "Reset hasła",
+                   $"Swoje hasło zresetujesz klikając na link: <a href='{callbackUrl}'>LINK</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 
@@ -268,13 +276,13 @@ namespace DevAdventCalendarCompetition.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult ResetPassword(string code = null)
+        public IActionResult ResetPassword(string email, string code = null)
         {
             if (code == null)
             {
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
-            var model = new ResetPasswordViewModel { Code = code };
+            var model = new ResetPasswordViewModel { Code = code, Email = email};
             return View(model);
         }
 

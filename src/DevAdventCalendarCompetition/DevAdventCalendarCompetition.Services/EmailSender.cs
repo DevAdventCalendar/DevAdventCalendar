@@ -1,4 +1,7 @@
-﻿using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using System;
+using System.Net;
+using System.Net.Mail;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace DevAdventCalendarCompetition.Services
@@ -7,9 +10,29 @@ namespace DevAdventCalendarCompetition.Services
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Task.CompletedTask;
+            var smtpClient = new SmtpClient
+            {
+                Host = Host,
+                Port = Port,
+                EnableSsl = true,
+                Credentials = new NetworkCredential(UserName, Password)
+            };
+
+            var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
+            {
+                Subject = subject,
+                IsBodyHtml = true,
+                Body = message
+            };
+            
+            return smtpClient.SendMailAsync(mailMessage); 
         }
     }
 }
