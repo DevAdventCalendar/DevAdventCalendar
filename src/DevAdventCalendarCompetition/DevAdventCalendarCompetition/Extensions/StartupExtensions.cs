@@ -6,6 +6,8 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +35,8 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
+
+            services.AddScoped<DbInitializer>();
 
             return services;
         }
@@ -102,6 +106,15 @@ namespace DevAdventCalendarCompetition.Extensions
                 ;
 
             return services;
+        }
+
+        public static void UpdateDatabase(this IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var init = scope.ServiceProvider.GetService<DbInitializer>();
+                init.Seed();
+            }
         }
     }
 }

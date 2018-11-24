@@ -2,11 +2,15 @@
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
 namespace DevAdventCalendarCompetition
 {
@@ -35,6 +39,10 @@ namespace DevAdventCalendarCompetition
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(Configuration.GetValue<string>("DataProtection:Keys")))
+                .SetApplicationName("DevAdventCalendar");
+
             services
                 .RegisterDatabase(Configuration)
                 .RegisterServices(Configuration)
@@ -51,10 +59,8 @@ namespace DevAdventCalendarCompetition
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.EnvironmentName.Equals(DockerEnvName))
-            {
-                app.ApplicationServices.GetService<ApplicationDbContext>().Database.EnsureCreated();
-            }
+            app.UpdateDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -69,6 +75,13 @@ namespace DevAdventCalendarCompetition
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseHttpMethodOverride();
 
             app.UseAuthentication();
             app.UseSwagger();
