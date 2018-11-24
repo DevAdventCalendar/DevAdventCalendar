@@ -7,6 +7,7 @@ using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -81,11 +82,11 @@ namespace DevAdventCalendarCompetition.Extensions
         public static IServiceCollection AddExternalLoginProviders(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication()
-                .AddFacebook(facebookOptions =>
-                {
-                    facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
-                    facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
-                })
+                //.AddFacebook(facebookOptions =>
+                //{
+                //    facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
+                //    facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+                //})
                 .AddTwitter(twitterOptions =>
                 {
                     twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"];
