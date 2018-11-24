@@ -24,8 +24,8 @@ namespace DevAdventCalendarCompetition.Extensions
                     {
                         config.SignIn.RequireConfirmedEmail = true;
                     })
-					.AddErrorDescriber<CustomIdentityErrorDescriber>()
-					.AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
@@ -78,27 +78,28 @@ namespace DevAdventCalendarCompetition.Extensions
         public static IServiceCollection AddExternalLoginProviders(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication()
-                .AddFacebook(facebookOptions =>
-                {
-                    facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
-                    facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
-                })
-                .AddTwitter(twitterOptions =>
-                {
-                    twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"];
-                    twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
-                })
-                .AddGoogle(googleOptions =>
-                {
-                    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-                    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                })
-                .AddGitHub(githubOptions =>
-                {
-                    githubOptions.ClientId = configuration["Authentication:GitHub:ClientId"];
-                    githubOptions.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
-                    githubOptions.Scope.Add("user:email");
-                });
+                //.AddFacebook(facebookOptions =>
+                //{
+                //    facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
+                //    facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+                //})
+                //.AddTwitter(twitterOptions =>
+                //{
+                //    twitterOptions.ConsumerKey = configuration["Authentication:Twitter:ConsumerKey"];
+                //    twitterOptions.ConsumerSecret = configuration["Authentication:Twitter:ConsumerSecret"];
+                //})
+                //.AddGoogle(googleOptions =>
+                //{
+                //    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                //    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                //})
+                //.AddGitHub(githubOptions =>
+                //{
+                //    githubOptions.ClientId = configuration["Authentication:GitHub:ClientId"];
+                //    githubOptions.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
+                //    githubOptions.Scope.Add("user:email");
+                //})
+                ;
 
             return services;
         }
