@@ -1,4 +1,4 @@
-﻿@model DevAdventCalendarCompetition.Models.Test
+﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
 
 <div class="row">
     <div class="col-md-12">
@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-12">
         <form class="form-inline" method="POST" action="/Admin/StartTest">
-            @Html.Hidden("testId",Model.Id)
+            @Html.Hidden("testId", Model.Id)
             <div class="form-group">
                 <label for='timeString'>Time to end in minutes</label>
                 <input id='timeString' type="text" name="minutesString" class="form-control" placeholder="default 20 minutes">

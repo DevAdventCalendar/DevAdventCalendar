@@ -1,10 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Confirm email";
-}
-
-<h2>@ViewData["Title"]</h2>
-<div>
-    <p>
-        Thank you for confirming your email.
-    </p>
+﻿<div class="content-centered">
+    <div class="row text-center">
+        <h3>
+            Email potwierdzony.
+        </h3>
+        <h3>
+            <b>@Html.ActionLink("Zaloguj się!", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</b>
+        </h3>
+    </div>
 </div>

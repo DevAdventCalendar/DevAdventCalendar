@@ -1,10 +1,8 @@
-﻿using DevAdventCalendarCompetition.Models;
-
-namespace DevAdventCalendarCompetition.Vms
+﻿namespace DevAdventCalendarCompetition.Vms
 {
     public class AnswerVm
     {
-        public TestAnswer TestAnswer { get; set; }
+        public TestAnswerVm TestAnswerVm { get; set; }
 
         public int TestNumber { get; set; }
     }

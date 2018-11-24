@@ -1,6 +1,7 @@
 using DevAdventCalendarCompetition.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.Mvc
+namespace DevAdventCalendarCompetition.Extensions
 {
     public static class UrlHelperExtensions
     {
@@ -13,12 +14,12 @@ namespace Microsoft.AspNetCore.Mvc
                 protocol: scheme);
         }
 
-        public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+        public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code, string email, string scheme)
         {
             return urlHelper.Action(
                 action: nameof(AccountController.ResetPassword),
                 controller: "Account",
-                values: new { userId, code },
+                values: new { userId, code, email },
                 protocol: scheme);
         }
     }

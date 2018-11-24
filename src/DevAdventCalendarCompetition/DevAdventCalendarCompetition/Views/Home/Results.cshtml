@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "Results";
 }
-@model WrocSharpCompetition.Vms.TestResultsVm
+@model DevAdventCalendarCompetition.Vms.TestResultsVm
 
 <div class="jumbotron">
-    <h1><img src="/images/wroc-color.svg" class="logo" /> Competition Results</h1>
+    <h1><img src="~/images/icon.svg" class="logo" /> Dev Advent Calendar Results</h1>
 </div>
 <div class="row">
 
@@ -75,30 +75,30 @@
 
         @if (Model.TotalTestResults != null)
         {
-         <div role="tabpanel" class="tab-pane" id="totalresults">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Full name</th>
-                        <th>Total points</th>
-                        <th>Total time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.TotalTestResults.Count; i++)
-                    {
-                        var testResult = Model.TotalTestResults[i];
+            <div role="tabpanel" class="tab-pane" id="totalresults">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <th scope="row">@(i + 1)</th>
-                            <td>@testResult.FullName</td>
-                            <td>@testResult.TotalPoints</td>
-                            <td>@testResult.TotalOffset.Minutes m. @testResult.TotalOffset.Seconds s. @testResult.TotalOffset.Milliseconds ms</td>
+                            <th>#</th>
+                            <th>Full name</th>
+                            <th>Total points</th>
+                            <th>Total time</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.TotalTestResults.Count; i++)
+                        {
+                            var testResult = Model.TotalTestResults[i];
+                            <tr>
+                                <th scope="row">@(i + 1)</th>
+                                <td>@testResult.FullName</td>
+                                <td>@testResult.TotalPoints</td>
+                                <td>@testResult.TotalOffset.Minutes m. @testResult.TotalOffset.Seconds s. @testResult.TotalOffset.Milliseconds ms</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         }
         else
         {

@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  db:
+    image: microsoft/mssql-server-linux
+    container_name: devcal-db
+    ports:
+      - '1433:1433'
+    env_file: db.env
+    volumes:
+      - /data/devcal-mssql:/var/opt/mssql
+    restart: unless-stopped
+
+
+  web:
+    image: devadventcalendar/devadventcalendar
+    container_name: devcal-app
+    ports:
+      - 5005:80
+      - 44394:443
+    env_file: app.env
+    links:
+      - db
+    restart: unless-stopped
+
+  watchtower:
+    image: v2tec/watchtower
+    container_name: devcal-watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 60 devcal-app
+    restart: unless-stopped
+    
