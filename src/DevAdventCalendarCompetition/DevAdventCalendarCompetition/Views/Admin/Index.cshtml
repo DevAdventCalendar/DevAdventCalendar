@@ -4,8 +4,9 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Admin page</h1>
+<h3>Strona Administratora</h3>
+<div>
+    <a href="/Admin/AddTest" class="btn btn-default">Dodaj test</a>
 </div>
 @for (int i = 0; i < Model.Count; i++)
 {
@@ -14,10 +15,11 @@
 
     if (previousTest != null && previousTest.Status != TestStatus.Ended)
     {
-        @Html.Partial("_TestPreviousNotEnded", currentTest.Number)
+        @Html.Partial("_TestPreviousNotEnded", currentTest)
     }
     else if (currentTest.Status == TestStatus.NotStarted)
     {
+        ViewData["Status"] = "Test nie rozpoczął się";
         @Html.Partial("_TestNotStarted", currentTest)
     }
     else if (currentTest.Status == TestStatus.Started)

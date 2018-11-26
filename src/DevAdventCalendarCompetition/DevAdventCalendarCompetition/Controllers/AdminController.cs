@@ -1,4 +1,5 @@
-﻿using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly IBaseTestService _baseTestService;
 
-        public AdminController(IAdminService adminService)
+        public AdminController(IAdminService adminService, IBaseTestService baseTestService)
         {
             _adminService = adminService;
+            _baseTestService = baseTestService;
         }
 
         public ActionResult Index()
@@ -21,6 +24,47 @@ namespace DevAdventCalendarCompetition.Controllers
             var tests = _adminService.GetAllTests();
 
             return View(tests);
+        }
+
+        public ActionResult AddTest()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddTest(TestVm model)
+        {
+            if (ModelState.IsValid)
+            {
+                if ((model.EndDate - model.StartDate).TotalDays != 1)
+                {
+                    ModelState.AddModelError(nameof(model.StartDate), "Test może trwać tylko 1 dzień!");
+                    return View(model);
+                }
+                var dbTest = _baseTestService.GetTestByNumber(model.Number);
+                if (dbTest != null)
+                {
+                    ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
+                    return View(model);
+                }
+
+                //automatically set time to noon
+                model.StartDate.Add(new TimeSpan(12, 0, 0));
+
+                var testDto = new TestDto
+                {
+                    Number = model.Number,
+                    Description = model.Description,
+                    Answer = model.Answer,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    SponsorLogoUrl = model.SponsorLogoUrl,
+                    SponsorName = model.SponsorName
+                };
+                _adminService.AddTest(testDto);
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpPost]
@@ -34,16 +78,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
                 throw new ArgumentException("Previous test has not ended");
 
-            //TODO: move to service
-            uint minutes = 0;
-            var parsed = uint.TryParse(minutesString, out minutes);
-            if (!parsed)
-                minutes = 20;
-
-            var startTime = DateTime.Now;
-            var endTime = startTime.AddMinutes(minutes);
-
-            _adminService.UpdateTestDates(testDto, startTime, endTime);
+            _adminService.UpdateTestDates(testDto, minutesString);
 
             return RedirectToAction("Index");
         }
@@ -69,7 +104,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (!resetEnabled)
                 return "Reset is not enabled.";
 
-            _adminService.ResetTestDates();     
+            _adminService.ResetTestDates();
             _adminService.ResetTestAnswers();
 
             return "Data was reseted.";

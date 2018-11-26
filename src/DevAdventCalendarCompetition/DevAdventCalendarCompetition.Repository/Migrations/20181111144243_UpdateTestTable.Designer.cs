@@ -4,14 +4,16 @@ using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181111144243_UpdateTestTable")]
+    partial class UpdateTestTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,10 +74,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new { Id = "1", AccessFailedCount = 0, ConcurrencyStamp = "7f38fd91-271a-40e5-8182-89e6c778bf94", Email = "devadventcalendar@gmail.com", EmailConfirmed = true, LockoutEnabled = false, NormalizedUserName = "devadventcalendar@gmail.com", PasswordHash = "AQAAAAEAACcQAAAAEFkQXt1OKqtskYErBhopRhGBvLkB+eNCGS1ana7FXWzKzUlCIhQxGCzZfXQuDNMk1A==", PhoneNumberConfirmed = false, SecurityStamp = "a05896b3-1408-4b47-abed-ece15177428e", TwoFactorEnabled = false, UserName = "devadventcalendar@gmail.com" }
-                    );
                 });
 
             modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.Test", b =>
@@ -91,10 +89,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<string>("HashedAnswer");
 
                     b.Property<int>("Number");
-
-                    b.Property<string>("SponsorLogoUrl");
-
-                    b.Property<string>("SponsorName");
 
                     b.Property<DateTime?>("StartDate");
 
@@ -150,10 +144,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = "1", ConcurrencyStamp = "57c244a4-9d0a-4b58-9997-d1c920ca6a21", Name = "Admin" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -225,10 +215,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new { UserId = "1", RoleId = "1" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

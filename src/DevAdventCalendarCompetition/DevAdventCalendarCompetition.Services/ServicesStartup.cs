@@ -2,32 +2,19 @@
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
-using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    public class Startup
+    public static class ServicesStartup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        public void Configure(IServiceCollection services)
+        public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
@@ -35,7 +22,12 @@ namespace DevAdventCalendarCompetition.Services
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
 
-			services.AddAutoMapper();
+            var config = configuration.GetSection("StringHasher");
+            var stringSalt = config.GetValue<string>("Salt");
+            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
+            services.AddScoped<StringHasher>(sh => new StringHasher(hashParameters));
+
+            services.AddAutoMapper();
         }
     }
 }

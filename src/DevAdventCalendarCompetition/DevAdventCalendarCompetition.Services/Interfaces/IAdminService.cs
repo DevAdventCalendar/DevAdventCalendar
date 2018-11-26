@@ -12,7 +12,9 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         TestDto GetPreviousTest(int testNumber);
 
-        void UpdateTestDates(TestDto test, DateTime startTime, DateTime endTime);
+        void AddTest(TestDto testDto);
+
+        void UpdateTestDates(TestDto test, string minutesString);
 
         void UpdateTestEndDate(TestDto test, DateTime endTime);
 

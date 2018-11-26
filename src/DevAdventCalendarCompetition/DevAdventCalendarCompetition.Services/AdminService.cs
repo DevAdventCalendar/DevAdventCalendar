@@ -13,15 +13,17 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IAdminRepository _adminRepository;
         private readonly IBaseTestRepository _baseTestRepository;
         private readonly IMapper _mapper;
+        private readonly StringHasher _stringHasher;
 
         public AdminService(
             IAdminRepository adminRepository,
             IBaseTestRepository baseTestRepository,
-            IMapper mapper)
+            IMapper mapper, StringHasher stringHasher)
         {
             _adminRepository = adminRepository;
             _baseTestRepository = baseTestRepository;
             _mapper = mapper;
+            _stringHasher = stringHasher;
         }
 
         public List<TestDto> GetAllTests()
@@ -40,15 +42,28 @@ namespace DevAdventCalendarCompetition.Services
 
         public TestDto GetPreviousTest(int testNumber)
         {
-            var test = _baseTestRepository.GetByNumber(testNumber);
+            var test = _baseTestRepository.GetByNumber(testNumber - 1);
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
 
-        public void UpdateTestDates(TestDto testDto, DateTime startTime, DateTime endTime)
+        public void AddTest(TestDto testDto)
         {
-            testDto.StartDate = startTime;
-            testDto.EndDate = endTime;
+            string hashedAnswer = _stringHasher.ComputeHash(testDto.Answer);
+            var test = _mapper.Map<Test>(testDto);
+            test.HashedAnswer = hashedAnswer;
+            _baseTestRepository.AddTest(test);
+        }
+
+        public void UpdateTestDates(TestDto testDto, string minutesString)
+        {
+            uint minutes = 0;
+            var parsed = uint.TryParse(minutesString, out minutes);
+            if (!parsed)
+                minutes = 20;
+
+            testDto.StartDate = DateTime.Now;
+            testDto.EndDate = DateTime.Now.AddMinutes(minutes);
             var test = _mapper.Map<Test>(testDto);
             _adminRepository.UpdateDates(test);
         }

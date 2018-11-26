@@ -17,7 +17,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public List<Test> GetAll()
         {
-            return _dbContext.Set<Test>().OrderBy(t => t.Number).ToList();
+            return _dbContext.Set<Test>().OrderBy(t => t.StartDate).ToList();
         }
 
         public Test GetById(int testId)
