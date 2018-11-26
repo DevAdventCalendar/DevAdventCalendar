@@ -18,10 +18,10 @@ namespace DevAdventCalendarCompetition.Tests
 
         private Test _currentTest = new Test()
         {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today,
-            EndDate = DateTime.Today.AddDays(1),
+            Id = 2,
+            Number = 2,
+            StartDate = DateTime.Today.AddHours(12),
+            EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
             Answers = null
         };
 
@@ -33,7 +33,7 @@ namespace DevAdventCalendarCompetition.Tests
             User = new ApplicationUser(),
             UserId = "1",
             AnsweringTimeOffset = new TimeSpan(),
-            AnsweringTime = DateTime.Today
+            AnsweringTime = DateTime.Now
         };
 
         private List<Test> _testList = new List<Test>()
@@ -42,8 +42,8 @@ namespace DevAdventCalendarCompetition.Tests
             {
                 Id = 1,
                 Number = 1,
-                StartDate = DateTime.Today,
-                EndDate = DateTime.Today.AddDays(1),
+                StartDate = DateTime.Today.AddHours(12),
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
                 Answers = null
             }
         };
@@ -52,17 +52,17 @@ namespace DevAdventCalendarCompetition.Tests
         {
             Id = 1,
             Number = 1,
-            StartDate = DateTime.Today.AddDays(-2),
-            EndDate = DateTime.Today.AddDays(-1),
+            StartDate = DateTime.Today.AddDays(-2).AddHours(12),
+            EndDate = DateTime.Today.AddDays(-2).AddHours(23).AddMinutes(59),
             Answers = null
         };
 
         private Test _futureTest = new Test()
         {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today.AddDays(1),
-            EndDate = DateTime.Today.AddDays(2),
+            Id = 3,
+            Number = 3,
+            StartDate = DateTime.Today.AddDays(1).AddHours(12),
+            EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
             Answers = null
         };
 
@@ -125,7 +125,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = homeService.GetTestAnswerByUserId(_testAnswer.UserId, _testAnswer.Id);
             //Assert
             Assert.IsType<TestAnswerDto>(result);
-            _homeRepositoryMock.Verify(mock => mock.GetTestAnswerByUserId(It.Is<string>(x=>x.Equals(_testAnswer.UserId)),It.Is<int>(x=>x.Equals(_testAnswer.Id))), Times.Once());
+            _homeRepositoryMock.Verify(mock => mock.GetTestAnswerByUserId(It.Is<string>(x => x.Equals(_testAnswer.UserId)), It.Is<int>(x => x.Equals(_testAnswer.Id))), Times.Once());
         }
 
         [Fact]

@@ -41,8 +41,6 @@ namespace DevAdventCalendarCompetition.Services
         public TestDto GetPreviousTest(int testNumber)
         {
             var test = _baseTestRepository.GetByNumber(testNumber);
-            if (test.StartDate >= DateTime.Today)
-                return null;
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }

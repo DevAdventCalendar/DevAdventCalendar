@@ -23,7 +23,7 @@ namespace DevAdventCalendarCompetition.Services
         public TestDto GetCurrentTest()
         {
             var test = _homeRepository.GetCurrentTest();
-            if (test.StartDate > DateTime.Today || test.StartDate < DateTime.Today)
+            if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
                 return null;
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
