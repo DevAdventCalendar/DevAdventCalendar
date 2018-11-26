@@ -10,5 +10,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         void AddTestAnswer(int testId, string userId, DateTime testStartDate);
 
         TestAnswerDto GetAnswerByTestId(int testId);
+
+        void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate);
     }
 }

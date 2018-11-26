@@ -2,6 +2,7 @@
 using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -14,6 +15,13 @@ namespace DevAdventCalendarCompetition.Controllers
         public BaseTestController(IBaseTestService baseTestService)
         {
             _baseTestService = baseTestService;
+        }
+
+        public void SaveWrongAnswer(string wrongAnswer, int testNumber)
+        {
+            var testDto = _baseTestService.GetTestByNumber(testNumber);
+
+            _baseTestService.AddTestWrongAnswer(User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.Id, wrongAnswer, DateTime.Now);
         }
 
         public ActionResult SaveAnswerAndRedirect(int testNumber)

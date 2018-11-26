@@ -21,18 +21,21 @@ namespace DevAdventCalendarCompetition.Controllers
         [CanStartTest(TestNumber = 6)]
         public ActionResult Index(string answer = "")
         {
+            var testNumber = 6;
             var fixedAnswer = answer.ToUpper().Replace(" ", "");
 
             if (fixedAnswer != "PEOPLE")
             {
+                SaveWrongAnswer(fixedAnswer, testNumber);
+
                 ModelState.AddModelError("", "Answer is not correct. Try again.");
 
-                var test = _baseTestService.GetTestByNumber(6);
+                var test = _baseTestService.GetTestByNumber(testNumber);
 
                 return View("Index", test);
             }
 
-            return SaveAnswerAndRedirect(6);
+            return SaveAnswerAndRedirect(testNumber);
         }
     }
 }

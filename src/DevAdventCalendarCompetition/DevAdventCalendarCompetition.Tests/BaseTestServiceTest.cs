@@ -53,6 +53,17 @@ namespace DevAdventCalendarCompetition.Tests
             AnsweringTime = DateTime.Today
         };
 
+        private TestWrongAnswer _testWrongAnswer = new TestWrongAnswer()
+        {
+            Id = 1,
+            Test = new Test(),
+            TestId = 1,
+            User = new ApplicationUser(),
+            UserId = "1",
+            Time = DateTime.Today,
+            Answer = "abcd"
+        };
+
         public BaseTestServiceTest()
         {
             _baseTestRepositoryMock = new Mock<IBaseTestRepository>();
@@ -69,7 +80,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = baseTestService.GetTestByNumber(_oldTest.Number);
             //Assert
             Assert.Null(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x=>x.Equals(_oldTest.Number))), Times.Once);
+            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_oldTest.Number))), Times.Once);
         }
 
         [Fact]
@@ -83,7 +94,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = baseTestService.GetTestByNumber(_futureTest.Number);
             //Assert
             Assert.Null(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x=>x.Equals(_futureTest.Number))), Times.Once());
+            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_futureTest.Number))), Times.Once());
         }
 
         [Fact]
@@ -97,7 +108,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = baseTestService.GetTestByNumber(_currentTest.Number);
             //Assert
             Assert.IsType<TestDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x=>x.Equals(_currentTest.Number))), Times.Once());
+            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_currentTest.Number))), Times.Once());
         }
 
         [Fact]
@@ -111,7 +122,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = baseTestService.GetAnswerByTestId(_testAnswer.Id);
             //Assert
             Assert.IsType<TestAnswerDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetAnswerByTestId(It.Is<int>(x=>x.Equals(_testAnswer.Id))), Times.Once());
+            _baseTestRepositoryMock.Verify(mock => mock.GetAnswerByTestId(It.Is<int>(x => x.Equals(_testAnswer.Id))), Times.Once());
         }
 
         [Fact]
@@ -123,7 +134,29 @@ namespace DevAdventCalendarCompetition.Tests
             //Act
             baseTestService.AddTestAnswer(_testAnswer.TestId, _testAnswer.UserId, DateTime.Now);
             //Assert
-            _baseTestRepositoryMock.Verify(mock => mock.AddAnswer(It.Is<TestAnswer>(x=>x.UserId == _testAnswer.UserId && x.TestId == _testAnswer.TestId)), Times.Once());
+            _baseTestRepositoryMock.Verify(mock => mock.AddAnswer(It.Is<TestAnswer>(x => x.UserId == _testAnswer.UserId && x.TestId == _testAnswer.TestId)), Times.Once());
+        }
+
+        [Fact]
+        public void AddTestWrongAnswer()
+        {
+            //Arrange
+            _baseTestRepositoryMock.Setup(mock => mock.AddWrongAnswer(It.IsAny<TestWrongAnswer>()));
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+
+            //Act
+            baseTestService.AddTestWrongAnswer(_testWrongAnswer.UserId, _testWrongAnswer.TestId, _testWrongAnswer.Answer, _testWrongAnswer.Time);
+
+            //Assert
+            _baseTestRepositoryMock.Verify(
+                mock => mock.AddWrongAnswer(
+                    It.Is<TestWrongAnswer>(
+                        x => x.UserId == _testWrongAnswer.UserId
+                        && x.Time == _testWrongAnswer.Time
+                        && x.Answer == _testWrongAnswer.Answer
+                        && x.TestId == _testWrongAnswer.TestId
+                    )
+                ), Times.Once());
         }
     }
 }

@@ -9,15 +9,15 @@ namespace DevAdventCalendarCompetition.Services
     public class HomeService : IHomeService
     {
         private readonly IHomeRepository _homeRepository;
-		private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-		public HomeService(
-			IHomeRepository homeRepository,
-			IMapper mapper)
+        public HomeService(
+            IHomeRepository homeRepository,
+            IMapper mapper)
         {
             _homeRepository = homeRepository;
-			_mapper = mapper;
-		}
+            _mapper = mapper;
+        }
 
         public TestDto GetCurrentTest()
         {

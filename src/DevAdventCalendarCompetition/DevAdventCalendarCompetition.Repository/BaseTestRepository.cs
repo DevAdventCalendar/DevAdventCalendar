@@ -25,6 +25,12 @@ namespace DevAdventCalendarCompetition.Repository
             _dbContext.SaveChanges();
         }
 
+        public void AddWrongAnswer(TestWrongAnswer wrongAnswer)
+        {
+            _dbContext.Set<TestWrongAnswer>().Add(wrongAnswer);
+            _dbContext.SaveChanges();
+        }
+
         public void UpdateAnswer(TestAnswer testAnswer)
         {
             _dbContext.Set<TestAnswer>().Update(testAnswer);

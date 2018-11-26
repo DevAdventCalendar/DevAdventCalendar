@@ -22,6 +22,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [CanStartTest(TestNumber = 5)]
         public ActionResult Index(string answer = "")
         {
+            var testNumber = 5;
             var fixedAnswer = answer.ToUpper().Replace(" ", "").Replace(".", ",");
             double integralSolution = 0;
             double.TryParse(fixedAnswer, out integralSolution);
@@ -29,14 +30,16 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (integralSolution != 44.0)
             {
+                SaveWrongAnswer(fixedAnswer, testNumber);
+
                 ModelState.AddModelError("", "Answer is not correct. Try again.");
 
-                var test = _baseTestService.GetTestByNumber(5);
+                var test = _baseTestService.GetTestByNumber(testNumber);
 
                 return View("Index", test);
             }
 
-            return SaveAnswerAndRedirect(5);
+            return SaveAnswerAndRedirect(testNumber);
         }
     }
 }
