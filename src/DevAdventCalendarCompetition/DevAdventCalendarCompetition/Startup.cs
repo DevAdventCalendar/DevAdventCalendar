@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
-using DevAdventCalendarCompetition.Repository.Context;
-using DevAdventCalendarCompetition.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -83,6 +80,7 @@ namespace DevAdventCalendarCompetition
             });
 
             app.UseHttpMethodOverride();
+            app.UseHttpsRequestScheme();
 
             app.UseAuthentication();
             app.UseSwagger();
