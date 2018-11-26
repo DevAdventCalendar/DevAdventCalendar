@@ -1,4 +1,4 @@
-using DevAdventCalendarCompetition.Services.Interfaces;
+ï»¿using DevAdventCalendarCompetition.Services.Interfaces;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
@@ -8,10 +8,10 @@ namespace DevAdventCalendarCompetition.Services.Extensions
     {
         public static Task SendEmailConfirmationAsync(this IEmailSender emailSender, string email, string link)
         {
-            return emailSender.SendEmailAsync(email, "Potwierdzenie za³o¿enia konta", 
-                $"Prosimy o potwierdzenie za³o¿enia konta poprzez klikniêcie na link" +
+            return emailSender.SendEmailAsync(email, "Potwierdzenie zaÅ‚oÅ¼enia konta", 
+                $"Prosimy o potwierdzenie zaÅ‚oÅ¼enia konta poprzez klikniÄ™cie na link" +
                 $"<p><a href='{ link }'>LINK</a></p><p>Pozdrawiamy,<br />Elfy DevAdventCalendar</p>" +
-                $"<p>PS. Dodatkowo bêdzie nam bardzo mi³o, jeœli dasz ³apkê w górê na <a href='https://www.facebook.com/devadventcalendar/'>Facebooku</a> " +
+                $"<p>PS. Dodatkowo bÄ™dzie nam bardzo miÅ‚o, jeÅ›li dasz Å‚apkÄ™ w gÃ³rÄ™ na <a href='https://www.facebook.com/devadventcalendar/'>Facebooku</a> " +
                 $"i <a href='https://twitter.com/dev_advent_cal'>Twitterze</a>!</p>");
         }
     }
