@@ -2,6 +2,7 @@
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using System;
 using System.Collections.Generic;
 
 namespace DevAdventCalendarCompetition.Services
@@ -22,6 +23,8 @@ namespace DevAdventCalendarCompetition.Services
         public TestDto GetCurrentTest()
         {
             var test = _homeRepository.GetCurrentTest();
+            if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
+                return null;
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }

@@ -19,26 +19,26 @@ namespace DevAdventCalendarCompetition.Tests
         {
             Id = 1,
             Number = 1,
-            StartDate = DateTime.Today.AddDays(-2),
-            EndDate = DateTime.Today.AddDays(-1),
+            StartDate = DateTime.Today.AddDays(-2).AddHours(12),
+            EndDate = DateTime.Today.AddDays(-2).AddHours(23).AddMinutes(59),
             Answers = null
         };
 
         private Test _futureTest = new Test()
         {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today.AddDays(1),
-            EndDate = DateTime.Today.AddDays(2),
+            Id = 3,
+            Number = 3,
+            StartDate = DateTime.Today.AddDays(1).AddHours(12),
+            EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
             Answers = null
         };
 
         private Test _currentTest = new Test()
         {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today,
-            EndDate = DateTime.Today.AddDays(1),
+            Id = 2,
+            Number = 2,
+            StartDate = DateTime.Today.AddHours(12),
+            EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
             Answers = null
         };
 
