@@ -200,6 +200,10 @@ button.navbar-toggle {
         padding-top: 5px;
     }
 
+#prizes h2, #prizes h3 {
+    line-height: 3.5rem;
+}
+
 .calendar-content {
     margin-top: 40px;
 }
