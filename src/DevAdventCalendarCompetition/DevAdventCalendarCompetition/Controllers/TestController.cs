@@ -1,30 +1,31 @@
 ﻿using DevAdventCalendarCompetition.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
-    public class Test3Controller : BaseTestController
+    public class TestController : BaseTestController
     {
-        public Test3Controller(IBaseTestService baseTestService) : base(baseTestService)
+        public TestController(IBaseTestService baseTestService) : base(baseTestService)
         {
         }
 
-        [CanStartTest(TestNumber = 3)]
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(int testNumber)
         {
-            var test = _baseTestService.GetTestByNumber(3);
+            var test = _baseTestService.GetTestByNumber(testNumber);
 
             return View(test);
         }
 
         [HttpPost]
-        [CanStartTest(TestNumber = 3)]
         public ActionResult Index(string answer = "")
         {
-            var testNumber = 3;
+            var testNumber = 1;
+
             var fixedAnswer = answer.ToUpper().Replace(" ", "");
 
-            if (fixedAnswer != "READYMIX")
+            if (fixedAnswer != "0100111101000010010010100100010101000011010101000100100101010110010010010101010001011001")
             {
                 SaveWrongAnswer(fixedAnswer, testNumber);
 
