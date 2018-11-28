@@ -58,11 +58,11 @@ namespace DevAdventCalendarCompetition.Controllers
                     ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
                     return View(model);
                 }
-                
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
-                
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -169,6 +169,12 @@ namespace DevAdventCalendarCompetition.Controllers
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
                 return RedirectToLocal(returnUrl);
             }
+
+            if (result.IsNotAllowed)
+            {
+                return View("RegisterConfirmation");
+            }
+
             if (result.IsLockedOut)
             {
                 return RedirectToAction(nameof(Lockout));
@@ -204,9 +210,13 @@ namespace DevAdventCalendarCompetition.Controllers
                     result = await _accountService.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        await _accountService.SignInAsync(user);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+
+                        var code = await _accountService.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                        await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                        return View("RegisterConfirmation");
                     }
                 }
                 AddErrors(result);
@@ -282,7 +292,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
-            var model = new ResetPasswordViewModel { Code = code, Email = email};
+            var model = new ResetPasswordViewModel { Code = code, Email = email };
             return View(model);
         }
 

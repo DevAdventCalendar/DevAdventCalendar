@@ -10,62 +10,64 @@
 <h2>@ViewData["Title"]</h2>
 <div class="content-centered">
     <section class="center-block">
-        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email">Email</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password">Hasło</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label asp-for="RememberMe">
-                        <input asp-for="RememberMe" />
-                        @Html.DisplayNameFor(m => m.RememberMe)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-default">Zaloguj</button>
-            </div>
-            <div class="form-group">
-                <p>
-                    <a asp-action="ForgotPassword">Zapomniałeś/aś hasła?</a>
-                </p>
-                <p>
-                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Zarejestrować nowego użytkownika?</a>
-                </p>
-            </div>
-        </form>
-
-        <br/>
-
-        @{
-            var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
-
-            if (externalProviders != null && externalProviders.Count > 0)
-            {
-                <h4>Lub użyj innego sposobu logowania</h4>
-                <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                    <div class="col text-center">
-                        @foreach (var provider in externalProviders)
-                        {
-                            <div class="row btn-block">
-                                <button type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
-                                    <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
-                                </button>
-                            </div>
-                        }
+        <div class="row">
+            <div class="col col-md-8">
+                <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Hasło</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="RememberMe">
+                                <input asp-for="RememberMe" />
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-default">Zaloguj</button>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <a asp-action="ForgotPassword">Zapomniałeś/aś hasła?</a>
+                        </p>
+                        <p>
+                            <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Zarejestrować nowego użytkownika?</a>
+                        </p>
                     </div>
                 </form>
-            }
-        }
+            </div>
+            <div class="col col-md-4">
+                @{
+                    var externalProviders = await IdentityService.GetExternalAuthenticationSchemes();
 
+                    if (externalProviders != null && externalProviders.Count > 0)
+                    {
+                        <h4>Lub użyj innego sposobu logowania</h4>
+                        <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                            <div class="col text-center">
+                                @foreach (var provider in externalProviders)
+                                {
+                                    <div class="row btn-block">
+                                        <button style="width:150px" type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
+                                            <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
+                                        </button>
+                                    </div>
+                                }
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+        </div>
     </section>
 </div>
 
