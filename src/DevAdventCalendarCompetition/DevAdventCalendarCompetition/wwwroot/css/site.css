@@ -136,17 +136,9 @@ button.navbar-toggle {
     font-weight: bold;
 }
 
-.week-sponsor-section {
-    max-width: 150px;
-    padding: 0 25px 20px 25px;
-    font-size: 10pt;
-    font-weight: bold;
+.week-sponsor {
+    max-width: 200px;
 }
-
-    .week-sponsor-section img {
-        max-width: 70px;
-        padding-top: 5px;
-    }
 
 .calendar-content {
     margin-top: 40px;

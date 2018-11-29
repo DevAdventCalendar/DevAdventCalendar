@@ -48,10 +48,22 @@
                                 </div>
                             </td>
                         }
-                        <td class="week-sponsor-section text-center">
-                            TYDZIEŃ @(i + 1)
-                            <img src="images/sponsor-logo-example.jpg" alt="Logo sponsora tygodnia" />
-                        </td>
+                            <td class="week-sponsor text-center">
+                                TYDZIEŃ @(i + 1)
+                                @if (i == 1)
+                                {
+                                    <a href="https://www.objectivity.co.uk/" target="_blank">
+                                        <img src="~/images/marketing/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
+                                    </a>
+                                }
+                                else if (i == 2)
+                                {
+                                    <a href="https://instapage.com" target="_blank">
+                                        <img src="~/images/marketing/instapage.jpg" alt="instapage" title="Instapage" class="img-responsive center-block" />
+                                    </a>
+                                }
+
+                            </td>
                     </tr>
                 }
                 </tbody>
