@@ -6,15 +6,15 @@
 
 <div class="jumbotron">
     <h1>TEST 2 </h1>
-    <p class="lead">We will remove spaces from answer to simplify responding.</p>
+    <p class="lead">Usuniemy spacje z odpowiedzi, aby ułatwić ci odpowiedź.</p>
 </div>
 <div class="row">
     <div class="col-md-12" style="margin-bottom: 20px">
-        <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Time to end: </b> <span id="countdown"></span>
+        <b>Czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongTimeString() - <b>Data zakończenia: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Czas do końca: </b> <span id="countdown"></span>
     </div>
     <div class="col-md-12">
         <p>
-            Encode <b>OBJECTIVITYISGREAT</b> with Caesar cipher with shift 12.
+            Zakoduj <b>OBJECTIVITYISGREAT</b> szyfrem Cezara z przesunięciem 12.
         </p>
     </div>
     <div class="col-md-12">
@@ -22,10 +22,10 @@
         {
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                <label for='answer'>Answer</label>
+                <label for='answer'>Odpowiedź</label>
                 <input id='answer' name="answer" type="text" class="form-control" style="text-transform: uppercase">
             </div>
-            <button type="submit" class="btn btn-default">Send</button>
+            <button type="submit" class="btn btn-default">Wyślij</button>
         }
         <form class="form" method="POST" action=""></form>
     </div>

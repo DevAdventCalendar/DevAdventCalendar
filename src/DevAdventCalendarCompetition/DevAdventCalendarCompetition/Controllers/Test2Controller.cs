@@ -1,4 +1,4 @@
-using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -28,7 +28,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 SaveWrongAnswer(fixedAnswer, testNumber);
 
-                ModelState.AddModelError("", "Answer is not correct. Try again.");
+                ModelState.AddModelError("", "Odpowiedź jest nieprawidłowa. Spróbuj ponownie.");
 
                 var test = _baseTestService.GetTestByNumber(testNumber);
                 return View("Index", test);
