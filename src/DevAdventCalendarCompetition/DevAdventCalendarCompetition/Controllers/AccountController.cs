@@ -153,7 +153,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
                 return RedirectToAction(nameof(Login));
             }
             var info = await _accountService.GetExternalLoginInfoAsync();
@@ -194,7 +194,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var info = await _accountService.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
-                    throw new ApplicationException("Error loading external login information during confirmation.");
+                    throw new ApplicationException("Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.");
                 }
 
                 var user = _accountService.CreateApplicationUserByEmail(model.Email);
@@ -227,7 +227,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _accountService.FindByIdAsync(userId);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
             var result = await _accountService.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
@@ -280,7 +280,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (code == null)
             {
-                throw new ApplicationException("A code must be supplied for password reset.");
+                throw new ApplicationException("Kod musi być dostarczony do resetowania hasła.");
             }
             var model = new ResetPasswordViewModel { Code = code, Email = email};
             return View(model);

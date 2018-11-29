@@ -28,7 +28,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 SaveWrongAnswer(fixedAnswer, testNumber);
 
-                ModelState.AddModelError("", "Answer is not correct. Try again.");
+                ModelState.AddModelError("", "OdpowiedŸ jest nieprawid³owa. Spróbuj ponownie.");
 
                 var test = _baseTestService.GetTestByNumber(testNumber);
                 return View("Index", test);
