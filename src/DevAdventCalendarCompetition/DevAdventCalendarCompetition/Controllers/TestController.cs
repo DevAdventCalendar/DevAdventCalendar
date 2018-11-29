@@ -19,22 +19,19 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string answer = "")
+        public ActionResult Index(int testNumber, string answer = "")
         {
-            var testNumber = 1;
+            var test = _baseTestService.GetTestByNumber(testNumber);
+            var finalAnswer = answer.ToUpper().Replace(" ", "");
 
-            var fixedAnswer = answer.ToUpper().Replace(" ", "");
-
-            if (fixedAnswer != "0100111101000010010010100100010101000011010101000100100101010110010010010101010001011001")
+            if (test != null && finalAnswer != test.Answer)
             {
-                SaveWrongAnswer(fixedAnswer, testNumber);
+                SaveWrongAnswer(finalAnswer, testNumber);
 
-                ModelState.AddModelError("", "Answer is not correct. Try again.");
+                ModelState.AddModelError("", "Źle! Spróbuj ponownie :)");
 
-                var test = _baseTestService.GetTestByNumber(testNumber);
-
-                return View("Index", test);
-            }
+                return View("Index", test);               
+            }           
 
             return SaveAnswerAndRedirect(testNumber);
         }
