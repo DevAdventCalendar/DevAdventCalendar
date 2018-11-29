@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
+using DevAdventCalendarCompetition.Services;
 
 namespace DevAdventCalendarCompetition
 {
@@ -40,6 +41,8 @@ namespace DevAdventCalendarCompetition
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(Configuration.GetValue<string>("DataProtection:Keys")))
                 .SetApplicationName("DevAdventCalendar");
+
+            ServicesStartup.Configure(services, Configuration);
 
             services
                 .RegisterDatabase(Configuration)
