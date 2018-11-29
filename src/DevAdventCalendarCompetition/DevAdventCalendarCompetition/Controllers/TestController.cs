@@ -22,11 +22,11 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index(int testNumber, string answer = "")
         {
             var test = _baseTestService.GetTestByNumber(testNumber);
-            var finalAnswer = answer.ToUpper().Replace(" ", "");
+            //var finalAnswer = answer.ToUpper().Replace(" ", "");
 
-            if (test != null && finalAnswer != test.Answer)
+            if (test != null && !_baseTestService.VerifyTestAnswer(answer, test.Answer))
             {
-                SaveWrongAnswer(finalAnswer, testNumber);
+                SaveWrongAnswer(answer, testNumber);
 
                 ModelState.AddModelError("", "Źle! Spróbuj ponownie :)");
 
