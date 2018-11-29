@@ -1,5 +1,6 @@
 @using DevAdventCalendarCompetition.Services.Models
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
+
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
     <button type="button" class="close" data-hide="alert" aria-label="Zamknij"><span aria-hidden="true">&times;</span>
     </button>
@@ -28,7 +29,7 @@
                         @for (int j = 0; j < 6; j++)
                         {
                             var dayNumber = i * 6 + j + 1;
-                            var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
+                            var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber+10);
 
                             <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
                                 <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
@@ -38,7 +39,7 @@
 
                                         @if (testForDay != null)
                                         {
-                                            <img src="images/@testForDay.SponsorLogoUrl" alt="Logo sponsora dnia" />
+                                            <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number><img src="images/@testForDay.SponsorLogoUrl" alt="Logo sponsora dnia" /></a>
                                         }
                                         else
                                         {
