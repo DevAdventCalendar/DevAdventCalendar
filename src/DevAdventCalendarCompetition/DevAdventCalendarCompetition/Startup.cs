@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
+using DevAdventCalendarCompetition.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +41,8 @@ namespace DevAdventCalendarCompetition
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(Configuration.GetValue<string>("DataProtection:Keys")))
                 .SetApplicationName("DevAdventCalendar");
+
+            ServicesStartup.Configure(services, Configuration);
 
             services
                 .RegisterDatabase(Configuration)
