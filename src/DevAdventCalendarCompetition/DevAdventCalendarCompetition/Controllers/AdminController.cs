@@ -36,11 +36,6 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (ModelState.IsValid)
             {
-                if ((model.EndDate - model.StartDate).TotalDays != 1)
-                {
-                    ModelState.AddModelError(nameof(model.StartDate), "Test może trwać tylko 1 dzień!");
-                    return View(model);
-                }
                 var dbTest = _baseTestService.GetTestByNumber(model.Number);
                 if (dbTest != null)
                 {
@@ -48,8 +43,10 @@ namespace DevAdventCalendarCompetition.Controllers
                     return View(model);
                 }
 
-                //automatically set time to noon
-                model.StartDate.Add(new TimeSpan(12, 0, 0));
+                //automatically set start and end time
+                var testDay = model.StartDate;
+                model.StartDate = testDay.AddHours(12).AddMinutes(00);
+                model.EndDate = testDay.AddHours(23).AddMinutes(59);
 
                 var testDto = new TestDto
                 {
