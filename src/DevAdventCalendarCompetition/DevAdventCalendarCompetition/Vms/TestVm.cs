@@ -30,5 +30,8 @@ namespace DevAdventCalendarCompetition.Models
 
         [Display(Name = "Logo sponsora (ścieżka)")]
         public string SponsorLogoUrl { get; set; }
+
+        [Display(Name = "Zniżka")]
+        public string Discount { get; set; }
     }
 }

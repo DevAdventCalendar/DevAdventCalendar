@@ -70,6 +70,8 @@ namespace DevAdventCalendarCompetition.Repository.Models
         public string Description { get; set; }
 
         public string HashedAnswer { get; set; }
+
+        public string Discount { get; set; }
     }
 
     public enum TestStatus

@@ -196,6 +196,10 @@ button.navbar-toggle {
     color: black;
 }
 
+.discount h4 {
+    font-weight: bold;
+}
+
 #prizes h2, #prizes h3 {
     line-height: 3.5rem;
 }
