@@ -23,6 +23,16 @@
                 <div class="discount text-center">
                     <h3>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</h3>
                     <h4>@Model.Discount</h4>
+                    
+                    @if (Model.DiscountLogoUrl != null && Model.DiscountUrl != null)
+                    {
+                        <div class="discount-links">
+                            <a href="@Model.DiscountUrl" target="_blank">LINK</a>
+                            <a href="@Model.DiscountLogoUrl" target="_blank">
+                                <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath"/>
+                            </a>        
+                        </div>                                                                        
+                    }
                 </div>
                 <br />
             }
