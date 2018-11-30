@@ -39,7 +39,9 @@
 
                                         @if (testForDay != null)
                                         {
-                                            <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number><img src="images/@testForDay.SponsorLogoUrl" alt="Logo sponsora dnia" /></a>
+                                            <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
+                                                <img src="images/@(string.IsNullOrEmpty(testForDay.SponsorLogoUrl) ? "sponsor-logo-example.jpg" : testForDay.SponsorLogoUrl)" alt="Logo sponsora dnia"/>
+                                            </a>
                                         }
                                         else
                                         {
