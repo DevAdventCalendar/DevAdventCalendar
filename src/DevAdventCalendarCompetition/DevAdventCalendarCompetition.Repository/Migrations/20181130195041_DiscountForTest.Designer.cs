@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181130182153_DiscountForTest")]
+    [Migration("20181130195041_DiscountForTest")]
     partial class DiscountForTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
