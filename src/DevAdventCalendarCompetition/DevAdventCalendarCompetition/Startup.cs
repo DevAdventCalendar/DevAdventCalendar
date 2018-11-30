@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
+using DevAdventCalendarCompetition.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;

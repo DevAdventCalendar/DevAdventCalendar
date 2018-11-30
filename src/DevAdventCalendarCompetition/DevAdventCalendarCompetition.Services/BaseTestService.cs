@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using DevAdventCalendarCompetition.Repository.Interfaces;
-using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Services.Models;
-using System;
+﻿using System;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -26,8 +21,6 @@ namespace DevAdventCalendarCompetition.Services
         public TestDto GetTestByNumber(int testNumber)
         {
             var test = _baseTestRepository.GetByNumber(testNumber);
-
-            //TODO remove(for tests only)
 
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
