@@ -1,27 +1,29 @@
 ﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
 
-@{
-    if (Model != null)
-    {
-        ViewBag.Title = "ZAGADKA " + Model.Number;
-    }
-    else
-    {
-        ViewBag.Title = "Brak zagadek na dziś";
-    }
-}
-
 <div class="row">
     @*<div class="col-md-12 text-center">
         <b>Start time: </b> @Model.StartDate.Value.ToLongTimeString() - <b>End date: </b> @Model.EndDate.Value.ToLongTimeString() - <b>Time to end: </b> <span id="countdown"></span>
     </div>*@
     <div class="col-md-12">
-        <h2>@ViewBag.Title</h2>
-        @if (Model != null)
+        @if (Model == null)
         {
+            <h2>Brak zagadek na dziś</h2>
+        }
+        else
+        {
+            if (Model.SponsorLogoUrl != null)
+            {
+                <div id="day-sponsor" class="text-center">
+                    <h2>Sponsorem dnia jest</h2>
+                    <h3>@Model.SponsorName</h3>
+                    <img src="images/@Model.SponsorLogoUrl" alt="@Model.SponsorName" width=165 />
+                </div>
+            }
+
+            <h2>ZAGADKA @Model.Number</h2>
             <h3>@Model.Description</h3>
             <br />
-            
+
             using (Html.BeginForm(FormMethod.Post))
             {
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -31,9 +33,10 @@
                 </div>
                 <button type="submit" class="btn btn-default">Wyślij</button>
             }
-        }   
+        }        
     </div>
 </div>
+
 @*<script>
         var endDateString = '@Model.EndDate.Value.ToString("o")';
         var endDate = new Date(endDateString);
