@@ -57,7 +57,9 @@ namespace DevAdventCalendarCompetition.Controllers
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
                     SponsorName = model.SponsorName,
-                    Discount = model.Discount
+                    Discount = model.Discount,
+                    DiscountUrl = model.DiscountUrl,
+                    DiscountLogoUrl = model.DiscountLogoUrl
                 };
                 _adminService.AddTest(testDto);
                 return RedirectToAction("Index");

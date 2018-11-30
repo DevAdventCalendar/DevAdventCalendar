@@ -199,6 +199,15 @@ button.navbar-toggle {
 .discount h4 {
     font-weight: bold;
 }
+ 
+    .discount .discount-links img {
+        max-width: 150px;
+        padding-left: 30px;
+    }
+
+    .discount .discount-links {
+        padding-top: 30px;
+    }
 
 #prizes h2, #prizes h3 {
     line-height: 3.5rem;

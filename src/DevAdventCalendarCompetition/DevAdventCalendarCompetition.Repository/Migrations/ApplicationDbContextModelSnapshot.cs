@@ -84,6 +84,10 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<string>("Discount");
 
+                    b.Property<string>("DiscountLogoUrl");
+
+                    b.Property<string>("DiscountUrl");
+
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<string>("HashedAnswer");
