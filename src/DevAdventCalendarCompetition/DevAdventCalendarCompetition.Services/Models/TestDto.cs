@@ -28,6 +28,8 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string DiscountLogoUrl { get; set; }
 
+        public string DiscountLogoPath { get; set; }
+
         public bool HasUserAnswered { get; set; }
     }
 
