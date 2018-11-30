@@ -1,4 +1,9 @@
-﻿using System;
+﻿using AutoMapper;
+using DevAdventCalendarCompetition.Repository.Interfaces;
+using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Models;
+using System;
 
 namespace DevAdventCalendarCompetition.Services
 {
