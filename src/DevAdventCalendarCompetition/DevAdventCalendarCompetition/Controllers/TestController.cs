@@ -15,15 +15,21 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index(int testNumber)
         {
             var test = _baseTestService.GetTestByNumber(testNumber);
-
-            if (test != null && test.EndDate >= DateTime.Now && test.StartDate <= DateTime.Now)
+            if (test != null)
             {
                 var userHasAnswered = _baseTestService.HasUserAnsweredTest(User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
                 if (userHasAnswered)
                 {
                     test.HasUserAnswered = true;
+                    return View(test);
                 }
-                return View(test);
+                else
+                {
+                    if (test.EndDate >= DateTime.Now && test.StartDate <= DateTime.Now)
+                    {
+                        return View(test);
+                    }
+                }
             }
 
             return View();
