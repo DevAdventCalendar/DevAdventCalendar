@@ -28,10 +28,7 @@ namespace DevAdventCalendarCompetition.Services
             var test = _baseTestRepository.GetByNumber(testNumber);
 
             //TODO remove(for tests only)
-#if !DEBUG
-            if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
-                return null;
-#endif
+
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
@@ -49,13 +46,8 @@ namespace DevAdventCalendarCompetition.Services
                 AnsweringTime = currentTime,
                 AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
             };
+
             //TODO remove (for tests only)
-#if DEBUG
-            if (testAnswer.AnsweringTimeOffset < new TimeSpan(0, 0, 0, 0, 0))
-            {
-                testAnswer.AnsweringTimeOffset = maxAnswerTime;
-            }
-#endif
 
             _baseTestRepository.AddAnswer(testAnswer);
         }
