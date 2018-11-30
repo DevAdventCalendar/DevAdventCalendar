@@ -1,40 +1,30 @@
 @using DevAdventCalendarCompetition.Services.Models
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
-    <button type="button" class="close" data-hide="alert" aria-label="Zamknij"><span aria-hidden="true">&times;</span>
+    <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
+        <span aria-hidden="true">&times;</span>
     </button>
     <span id="alert-text"></span>
 </div>
-@*<div class="row main-sponsor-section">
-    <div class="col-xs-3 col-md-3 col-xs-offset-1 col-md-offset-2">
-        <span id="main-sponsor-title">Główny sponsor kalendarza</span>
-    </div>
-    <div class="col-xs-4 col-md-3">
-        <span id="main-sponsor-name">Nazwa sponsora</span>
-    </div>
-    <div class="col-xs-2 col-md-2">
-        <img src="images/sponsor-logo-example.jpg" alt="Logo głównego sponsora kalendarza" width="100" />
-    </div>
-</div>*@
 <div class="row">
     @if (User.Identity.IsAuthenticated)
     {
         <div class="col content-centered">
             <table class="calendar-content">
                 <tbody>
-                @for (var i = 0; i < 4; i++)
-                {
-                    <tr>
-                        @for (int j = 0; j < 6; j++)
-                        {
-                            var dayNumber = i * 6 + j + 1;
-                            var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
+                    @for (var i = 0; i < 4; i++)
+                    {
+                        <tr>
+                            @for (int j = 0; j < 6; j++)
+                            {
+                                var dayNumber = i * 6 + j + 1;
+                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
 
-                            <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
-                                <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
-                                    <div class="panel-body">
+                                <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
+                                    <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
+                                        <div class="panel-body">
 
-                                        DZIEŃ @dayNumber
+                                            DZIEŃ @dayNumber
 
                                         @if (testForDay != null)
                                         {
@@ -62,7 +52,6 @@
                                         <img src="~/images/marketing/instapage.jpg" alt="instapage" title="Instapage" class="img-responsive center-block" />
                                     </a>
                                 }
-
                             </td>
                     </tr>
                 }
@@ -82,13 +71,13 @@
             <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
             <style type="text/css">
 
-#mc_embed_signup {
+                #mc_embed_signup {
                     background: #fff;
                     clear: left;
                     font: 14px Helvetica, Arial, sans-serif;
                     font-family: 'Mali', cursive;
                 }
-            /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
             </style>
             <div id="mc_embed_signup">
@@ -121,10 +110,10 @@
             </div>
             <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
             <script type='text/javascript'>
-                (function($) {
+                (function ($) {
                     window.fnames = new Array();
-        window.ftypes = new Array();
-        fnames[0] = 'EMAIL';
+                    window.ftypes = new Array();
+                    fnames[0] = 'EMAIL';
                     ftypes[0] = 'email';
                     fnames[1] = 'FNAME';
                     ftypes[1] = 'text';
