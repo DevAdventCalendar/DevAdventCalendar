@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     Number = model.Number,
                     Description = model.Description,
-                    Answer = model.Answer,
+                    Answer = model.Answer.ToUpper().Replace(" ", ""),
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
