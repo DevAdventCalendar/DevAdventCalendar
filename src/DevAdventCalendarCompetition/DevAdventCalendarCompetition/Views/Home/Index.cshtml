@@ -19,7 +19,7 @@
                             @for (int j = 0; j < 6; j++)
                             {
                                 var dayNumber = i * 6 + j + 1;
-                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
+                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day - 29 == dayNumber);
 
                                 <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
                                     <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
@@ -27,19 +27,19 @@
 
                                             DZIEŃ @dayNumber
 
-                                        @if (testForDay != null)
-                                        {
-                                            <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
-                                                <img src="images/@(string.IsNullOrEmpty(testForDay.SponsorLogoUrl) ? "sponsor-logo-example.jpg" : testForDay.SponsorLogoUrl)" alt="Logo sponsora dnia" />
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
-                                        }
+                                            @if (testForDay != null)
+                                            {
+                                                <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
+                                                    <img src="images/@(string.IsNullOrEmpty(testForDay.SponsorLogoUrl) ? "sponsor-logo-example.jpg" : testForDay.SponsorLogoUrl)" alt="Logo sponsora dnia" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
                             }
                             <td class="week-sponsor text-center">
                                 TYDZIEŃ @(i + 1)
@@ -56,8 +56,8 @@
                                     </a>
                                 }
                             </td>
-                    </tr>
-                }
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
