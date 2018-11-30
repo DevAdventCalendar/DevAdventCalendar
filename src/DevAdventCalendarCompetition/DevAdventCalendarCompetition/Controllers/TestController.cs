@@ -1,6 +1,6 @@
 ﻿using DevAdventCalendarCompetition.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -14,8 +14,17 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index(int testNumber)
         {
             var test = _baseTestService.GetTestByNumber(testNumber);
+            if (test != null)
+            {
+                var userHasAnswered = _baseTestService.HasUserAnsweredTest(User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
+                if (userHasAnswered)
+                {
+                    test.HasUserAnswered = true;
+                }
+                return View(test);
+            }
 
-            return View(test);
+            return View();
         }
 
         [HttpPost]
@@ -24,16 +33,15 @@ namespace DevAdventCalendarCompetition.Controllers
             var test = _baseTestService.GetTestByNumber(testNumber);
             var finalAnswer = answer.ToUpper().Replace(" ", "");
 
-            if (test != null && !_baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
+            if (test != null && _baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
             {
-                SaveWrongAnswer(finalAnswer, testNumber);
-
-                ModelState.AddModelError("", "Źle! Spróbuj ponownie :)");
-
-                return View("Index", test);
+                return SaveAnswerAndRedirect(testNumber);
             }
 
-            return SaveAnswerAndRedirect(testNumber);
+            SaveWrongAnswer(finalAnswer, testNumber);
+
+            ModelState.AddModelError("", "Źle! Spróbuj ponownie :)");
+            return View("Index", test);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public BaseTestService(
             IBaseTestRepository baseTestRepository,
-            IMapper mapper, 
+            IMapper mapper,
             StringHasher stringHasher)
         {
             _baseTestRepository = baseTestRepository;
@@ -26,11 +26,11 @@ namespace DevAdventCalendarCompetition.Services
         public TestDto GetTestByNumber(int testNumber)
         {
             var test = _baseTestRepository.GetByNumber(testNumber);
-
-            if (test == null)
+            //TODO remove(for tests only)
+#if !DEBUG
+            if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
                 return null;
-            /*if (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today)
-                return null;*/
+#endif
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
@@ -48,6 +48,13 @@ namespace DevAdventCalendarCompetition.Services
                 AnsweringTime = currentTime,
                 AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
             };
+            //TODO remove (for tests only)
+#if DEBUG
+            if (testAnswer.AnsweringTimeOffset < new TimeSpan(0, 0, 0, 0, 0))
+            {
+                testAnswer.AnsweringTimeOffset = maxAnswerTime;
+            }
+#endif
 
             _baseTestRepository.AddAnswer(testAnswer);
         }
@@ -57,6 +64,11 @@ namespace DevAdventCalendarCompetition.Services
             var testAnswer = _baseTestRepository.GetAnswerByTestId(testId);
             var testAnswerDto = _mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
+        }
+
+        public bool HasUserAnsweredTest(string userId, int testId)
+        {
+            return _baseTestRepository.HasUserAnsweredTest(userId, testId);
         }
 
         public void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate)
