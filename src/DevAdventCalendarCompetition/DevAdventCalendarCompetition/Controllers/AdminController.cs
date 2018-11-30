@@ -36,11 +36,6 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (ModelState.IsValid)
             {
-                if ((model.EndDate - model.StartDate).TotalDays != 1)
-                {
-                    ModelState.AddModelError(nameof(model.StartDate), "Test może trwać tylko 1 dzień!");
-                    return View(model);
-                }
                 var dbTest = _baseTestService.GetTestByNumber(model.Number);
                 if (dbTest != null)
                 {
@@ -48,8 +43,10 @@ namespace DevAdventCalendarCompetition.Controllers
                     return View(model);
                 }
 
-                //automatically set time to noon
-                model.StartDate.Add(new TimeSpan(12, 0, 0));
+                //automatically set start and end time
+                var testDay = model.StartDate;
+                model.StartDate = testDay.AddHours(12).AddMinutes(00);
+                model.EndDate = testDay.AddHours(23).AddMinutes(59);
 
                 var testDto = new TestDto
                 {
@@ -72,11 +69,11 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             var testDto = _adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.NotStarted)
-                throw new ArgumentException("Test was started");
+                throw new ArgumentException("Test został uruchomiony");
 
             var previousTestDto = _adminService.GetPreviousTest(testDto.Number);
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
-                throw new ArgumentException("Previous test has not ended");
+                throw new ArgumentException("Poprzedni test nie został zakończony");
 
             _adminService.UpdateTestDates(testDto, minutesString);
 
@@ -88,7 +85,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             var testDto = _adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.Started)
-                throw new ArgumentException("Test was started");
+                throw new ArgumentException("Test został uruchomiony");
 
             _adminService.UpdateTestEndDate(testDto, DateTime.Now);
 
@@ -102,12 +99,12 @@ namespace DevAdventCalendarCompetition.Controllers
             var resetEnabledString = "true"; // TODO get from AppSettings // ConfigurationManager.AppSettings["ResetEnabled"];
             bool.TryParse(resetEnabledString, out resetEnabled);
             if (!resetEnabled)
-                return "Reset is not enabled.";
+                return "Reset nie jest włączony.";
 
             _adminService.ResetTestDates();
             _adminService.ResetTestAnswers();
 
-            return "Data was reseted.";
+            return "Dane zostały zresetowane.";
         }
     }
 }

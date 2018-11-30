@@ -41,7 +41,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var model = new IndexViewModel
@@ -68,7 +68,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var email = user.Email;
@@ -77,7 +77,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setEmailResult = await _manageService.SetEmailAsync(user, model.Email);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                    throw new ApplicationException($"Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem '{user.Id}'.");
                 }
             }
 
@@ -87,7 +87,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setPhoneResult = await _manageService.SetPhoneNumberAsync(user, model.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                    throw new ApplicationException($"Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem '{user.Id}'.");
                 }
             }
 
@@ -107,7 +107,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var code = await _accountService.GenerateEmailConfirmationTokenAsync(User);
@@ -125,7 +125,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var hasPassword = await _manageService.HasPasswordAsync(user);
@@ -150,7 +150,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var changePasswordResult = await _manageService.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
@@ -173,7 +173,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var hasPassword = await _manageService.HasPasswordAsync(user);
@@ -199,7 +199,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await _manageService.GetUserAsync(User);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_accountService.GetUserId(User)}'.");
+                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
             }
 
             var addPasswordResult = await _manageService.AddPasswordAsync(user, model.NewPassword);

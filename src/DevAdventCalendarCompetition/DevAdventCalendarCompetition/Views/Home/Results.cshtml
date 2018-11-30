@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Results";
+    ViewBag.Title = "Wyniki";
 }
 @model DevAdventCalendarCompetition.Vms.TestResultsVm
 
 <div class="jumbotron">
-    <h1><img src="~/images/icon.svg" class="logo" /> Dev Advent Calendar Results</h1>
+    <h1><img src="~/images/icon.svg" class="logo" /> Wyniki Dev Advent Calendar</h1>
 </div>
 <div class="row">
 
@@ -25,7 +25,7 @@
             <li role="presentation" class="@active"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
         }
 
-        <li role="presentation"><a href="#totalresults" role="tab" data-toggle="tab">Total results</a></li>
+        <li role="presentation"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -47,9 +47,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Full name</th>
-                                <th>Time</th>
-                                <th>Points</th>
+                                <th>Imię i nazwisko</th>
+                                <th>Czas</th>
+                                <th>Punkty</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,7 +69,7 @@
             }
             else
             {
-                <div role="tabpanel" class="tab-pane @active" id="test@(result.TestNumber)">Test has not ended yet.</div>
+                <div role="tabpanel" class="tab-pane @active" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
             }
         }
 
@@ -80,9 +80,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Full name</th>
-                            <th>Total points</th>
-                            <th>Total time</th>
+                            <th>Imię i nazwisko</th>
+                            <th>Suma punktów</th>
+                            <th>Całkowity czas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,7 +102,7 @@
         }
         else
         {
-            <div role="tabpanel" class="tab-pane" id="totalresults">All tests has not ended yet.</div>
+            <div role="tabpanel" class="tab-pane" id="totalresults">Testy jeszcze się nie zakończyły</div>
         }
     </div>
 </div>

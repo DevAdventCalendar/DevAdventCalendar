@@ -47,5 +47,10 @@ namespace DevAdventCalendarCompetition.Repository
         {
             return _dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId);
         }
+
+        public bool HasUserAnsweredTest(string userId, int testId)
+        {
+            return _dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId && el.UserId == userId) != null;
+        }
     }
 }

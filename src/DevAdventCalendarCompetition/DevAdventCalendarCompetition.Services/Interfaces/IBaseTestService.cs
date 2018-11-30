@@ -7,6 +7,8 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
     {
         TestDto GetTestByNumber(int testNumber);
 
+        bool HasUserAnsweredTest(string userId, int testNumber);
+
         void AddTestAnswer(int testId, string userId, DateTime testStartDate);
 
         TestAnswerDto GetAnswerByTestId(int testId);
