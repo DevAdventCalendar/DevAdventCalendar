@@ -4,7 +4,15 @@
     <div class="col-md-12">
         @if (Model == null)
         {
-            <h2>Brak zagadek na dziś</h2>
+            <div class="row content-centered">
+                <div class="col text-center">
+                    <h2>Hm... Chyba znalazłeś się w złym miejscu i w złym czasie.</h2>
+                    <br />
+                    <img id="santa" src="~/images/sad_santa.JPG" alt="Święty Mikołaj" />
+                    <br />
+                    <h2>Spróbuj innym razem, albo w innym miejscu</h2>
+                </div>
+            </div>
         }
         else
         {
@@ -23,15 +31,15 @@
                 <div class="discount text-center">
                     <h3>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</h3>
                     <h4>@Model.Discount</h4>
-                    
+
                     @if (Model.DiscountLogoUrl != null && Model.DiscountUrl != null)
                     {
                         <div class="discount-links">
                             <a href="@Model.DiscountUrl" target="_blank">LINK</a>
                             <a href="@Model.DiscountLogoUrl" target="_blank">
-                                <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath"/>
-                            </a>        
-                        </div>                                                                        
+                                <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath" />
+                            </a>
+                        </div>
                     }
                 </div>
                 <br />

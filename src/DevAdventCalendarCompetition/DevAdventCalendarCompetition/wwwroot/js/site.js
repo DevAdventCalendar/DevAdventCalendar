@@ -1,6 +1,6 @@
 ﻿// Write your JavaScript code.
 
-$(function() {
+$(function () {
     var url = window.location.href;
 
     $("[data-hide]").on("click", function () {
@@ -10,7 +10,7 @@ $(function() {
         */
     });
 
-    $(".navbar-collapse.collapse a").each(function() {
+    $(".navbar-collapse.collapse a").each(function () {
         if (url == (this.href)) {
             $(this).closest("li").addClass("active");
         }
@@ -23,19 +23,14 @@ function CheckTestStatus(testNumber) {
             {
                 testNumber: testNumber
             },
-            function(result) {
+            function (result) {
                 if (result === "Ended") {
                     $("#alert-text").text("Niestety, spóźniłeś się...");
                     $("#tile-open-alert").show();
                 }
-            }).fail(
-            function(xhr) {
-                $("#alert-text").text("Ups! Coś poszło nie tak...");
-                $("#tile-open-alert").show();
-            }
-        );
+            });
     } else {
-        $("#alert-text").text("Poczekaj na otwarcie okienka!");
+        $("#alert-text").text("Nie możesz wejść!");
         $("#tile-open-alert").show();
     }
 }

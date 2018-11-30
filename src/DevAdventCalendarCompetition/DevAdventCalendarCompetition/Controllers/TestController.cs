@@ -1,5 +1,6 @@
 ﻿using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -15,7 +16,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             var test = _baseTestService.GetTestByNumber(testNumber);
 
-            if (test != null)
+            if (test != null && test.EndDate >= DateTime.Now && test.StartDate <= DateTime.Now)
             {
                 var userHasAnswered = _baseTestService.HasUserAnsweredTest(User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
                 if (userHasAnswered)
