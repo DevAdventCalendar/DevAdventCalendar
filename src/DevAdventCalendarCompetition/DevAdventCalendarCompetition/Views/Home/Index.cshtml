@@ -22,12 +22,12 @@
                                 var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
 
                                 <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
-                                    <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
+                                    <div class="panel panel-default task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
                                         <div class="panel-body">
 
                                             DZIEŃ @dayNumber
 
-                                            @if (testForDay != null)
+                                            @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
                                             {
                                                 <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
                                                     <img src="images/@(string.IsNullOrEmpty(testForDay.SponsorLogoUrl) ? "sponsor-logo-example.jpg" : testForDay.SponsorLogoUrl)" alt="Logo sponsora dnia" />
