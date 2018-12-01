@@ -1,11 +1,9 @@
 ﻿@{
-    ViewBag.Title = "TEST" + Model.TestNumber + " odpowiedziany";
+    ViewBag.Title = "Odpowiedź poprawna!";
 }
-@model DevAdventCalendarCompetition.Vms.AnswerVm
 
-<div class="jumbotron">
-    <h1>Odpowiedziałeś na Test @Model.TestNumber</h1>
-</div>
 <div class="row">
-    Twoją odpowiedź otrzymaliśmy @Model.TestAnswerVm.AnsweringTime.ToLongTimeString() - zajęło ci to @Model.TestAnswerVm.AnsweringTimeOffset.Minutes m. @Model.TestAnswerVm.AnsweringTimeOffset.Seconds s. @Model.TestAnswerVm.AnsweringTimeOffset.Milliseconds ms aby to zrobić.
+    <div class="col-xs-12 content-centered">
+        <h2>@ViewBag.Title</h2>
+    </div>
 </div>

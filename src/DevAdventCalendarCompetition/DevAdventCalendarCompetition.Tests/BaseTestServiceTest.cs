@@ -13,6 +13,7 @@ namespace DevAdventCalendarCompetition.Tests
     public class BaseTestServiceTest
     {
         private readonly Mock<IBaseTestRepository> _baseTestRepositoryMock;
+        private readonly StringHasher _stringHasher;
         private IMapper _mapper;
 
         private Test _oldTest = new Test()
@@ -74,8 +75,9 @@ namespace DevAdventCalendarCompetition.Tests
         {
             //Arrange
             _baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(_oldTest);
+
             _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
             //Act
             var result = baseTestService.GetTestByNumber(_oldTest.Number);
             //Assert
@@ -89,7 +91,7 @@ namespace DevAdventCalendarCompetition.Tests
             //Arange
             _baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(_futureTest);
             _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
             //Act
             var result = baseTestService.GetTestByNumber(_futureTest.Number);
             //Assert
@@ -103,7 +105,7 @@ namespace DevAdventCalendarCompetition.Tests
             //Arrange
             _baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(_currentTest);
             _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
             //Act
             var result = baseTestService.GetTestByNumber(_currentTest.Number);
             //Assert
@@ -117,7 +119,7 @@ namespace DevAdventCalendarCompetition.Tests
             //Arrange
             _baseTestRepositoryMock.Setup(mock => mock.GetAnswerByTestId(It.IsAny<int>())).Returns(_testAnswer);
             _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
             //Act
             var result = baseTestService.GetAnswerByTestId(_testAnswer.Id);
             //Assert
@@ -130,7 +132,7 @@ namespace DevAdventCalendarCompetition.Tests
         {
             //Arrange
             _baseTestRepositoryMock.Setup(mock => mock.AddAnswer(It.IsAny<TestAnswer>()));
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
             //Act
             baseTestService.AddTestAnswer(_testAnswer.TestId, _testAnswer.UserId, DateTime.Now);
             //Assert
@@ -142,7 +144,7 @@ namespace DevAdventCalendarCompetition.Tests
         {
             //Arrange
             _baseTestRepositoryMock.Setup(mock => mock.AddWrongAnswer(It.IsAny<TestWrongAnswer>()));
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper);
+            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
 
             //Act
             baseTestService.AddTestWrongAnswer(_testWrongAnswer.UserId, _testWrongAnswer.TestId, _testWrongAnswer.Answer, _testWrongAnswer.Time);

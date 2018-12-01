@@ -21,6 +21,16 @@ namespace DevAdventCalendarCompetition.Services.Models
         public DateTime? EndDate { get; set; }
 
         public TestStatus Status { get; set; }
+
+        public string Discount { get; set; }
+
+        public string DiscountUrl { get; set; }
+
+        public string DiscountLogoUrl { get; set; }
+
+        public string DiscountLogoPath { get; set; }
+
+        public bool HasUserAnswered { get; set; }
     }
 
     public enum TestStatus

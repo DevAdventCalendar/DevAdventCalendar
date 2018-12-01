@@ -1,5 +1,6 @@
 @using DevAdventCalendarCompetition.Services.Models
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
+
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
     <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
         <span aria-hidden="true">&times;</span>
@@ -26,18 +27,20 @@
 
                                             DZIEŃ @dayNumber
 
-                                        @if (testForDay != null)
-                                        {
-                                            <img src="images/@testForDay.SponsorLogoUrl" alt="Logo sponsora dnia" />
-                                        }
-                                        else
-                                        {
-                                            <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
-                                        }
+                                            @if (testForDay != null)
+                                            {
+                                                <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
+                                                    <img src="images/@(string.IsNullOrEmpty(testForDay.SponsorLogoUrl) ? "sponsor-logo-example.jpg" : testForDay.SponsorLogoUrl)" alt="Logo sponsora dnia" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        }
+                                </td>
+                            }
                             <td class="week-sponsor text-center">
                                 TYDZIEŃ @(i + 1)
                                 @if (i == 1)
@@ -53,8 +56,8 @@
                                     </a>
                                 }
                             </td>
-                    </tr>
-                }
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

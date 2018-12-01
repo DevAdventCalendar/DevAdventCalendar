@@ -52,11 +52,15 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     Number = model.Number,
                     Description = model.Description,
-                    Answer = model.Answer,
+                    Answer = model.Answer.ToUpper().Replace(" ", ""),
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
-                    SponsorName = model.SponsorName
+                    SponsorName = model.SponsorName,
+                    Discount = model.Discount,
+                    DiscountUrl = model.DiscountUrl,
+                    DiscountLogoUrl = model.DiscountLogoUrl,
+                    DiscountLogoPath = model.DiscountLogoPath
                 };
                 _adminService.AddTest(testDto);
                 return RedirectToAction("Index");

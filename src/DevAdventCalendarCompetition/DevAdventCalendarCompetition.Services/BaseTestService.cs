@@ -11,20 +11,22 @@ namespace DevAdventCalendarCompetition.Services
     {
         private readonly IBaseTestRepository _baseTestRepository;
         private readonly IMapper _mapper;
+        private readonly StringHasher _stringHasher;
 
         public BaseTestService(
             IBaseTestRepository baseTestRepository,
-            IMapper mapper)
+            IMapper mapper,
+            StringHasher stringHasher)
         {
             _baseTestRepository = baseTestRepository;
             _mapper = mapper;
+            _stringHasher = stringHasher;
         }
 
         public TestDto GetTestByNumber(int testNumber)
         {
             var test = _baseTestRepository.GetByNumber(testNumber);
-            if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
-                return null;
+
             var testDto = _mapper.Map<TestDto>(test);
             return testDto;
         }
@@ -43,6 +45,8 @@ namespace DevAdventCalendarCompetition.Services
                 AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
             };
 
+            //TODO remove (for tests only)
+
             _baseTestRepository.AddAnswer(testAnswer);
         }
 
@@ -51,6 +55,11 @@ namespace DevAdventCalendarCompetition.Services
             var testAnswer = _baseTestRepository.GetAnswerByTestId(testId);
             var testAnswerDto = _mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
+        }
+
+        public bool HasUserAnsweredTest(string userId, int testId)
+        {
+            return _baseTestRepository.HasUserAnsweredTest(userId, testId);
         }
 
         public void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate)
@@ -64,6 +73,11 @@ namespace DevAdventCalendarCompetition.Services
             };
 
             _baseTestRepository.AddWrongAnswer(testWrongAnswer);
+        }
+
+        public bool VerifyTestAnswer(string userAnswer, string correntAnswer)
+        {
+            return _stringHasher.VerifyHash(userAnswer, correntAnswer);
         }
     }
 }
