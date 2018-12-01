@@ -61,6 +61,11 @@ hr {
     flex-wrap: wrap;
 }
 
+    .nav.navbar-nav .btn-link {
+        font-size: 0.7em;
+        color: #e46969;
+    }	
+
     .nav.navbar-nav li a {
         color: black;
         border-radius: 10px;
