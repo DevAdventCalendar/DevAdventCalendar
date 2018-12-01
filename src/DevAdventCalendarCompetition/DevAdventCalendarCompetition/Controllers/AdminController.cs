@@ -22,6 +22,8 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index()
         {
             var tests = _adminService.GetAllTests();
+            ViewBag.DateTime = DateTime.Now;
+            ViewBag.DateTimeUtc = DateTime.UtcNow;
 
             return View(tests);
         }
