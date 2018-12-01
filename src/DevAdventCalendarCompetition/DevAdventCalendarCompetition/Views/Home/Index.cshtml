@@ -22,7 +22,7 @@
                                 var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
 
                                 <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
-                                    <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
+                                    <div class="panel panel-default task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
                                         <div class="panel-body">
 
                                             DZIEŃ @dayNumber
