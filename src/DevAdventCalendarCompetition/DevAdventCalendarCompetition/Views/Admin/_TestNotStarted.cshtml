@@ -7,6 +7,9 @@
         <p>
             <b>Status: </b>@ViewData["Status"]
         </p>
+        <p>
+            <b>Czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <b>Czas zakończenia: </b> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
+        </p>
     </div>
     <div class="col-md-12">
         <form class="form-inline" method="POST" action="/Admin/StartTest">

@@ -25,7 +25,10 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
                 else
                 {
-                    if (test.EndDate >= DateTime.Now && test.StartDate <= DateTime.Now)
+                    //TODO: remove
+                    ViewBag.TestStarted = test.StartDate <= DateTime.Now;
+                    ViewBag.TestEnded = DateTime.Now > test.EndDate;
+                    if (test.StartDate <= DateTime.Now && !(DateTime.Now > test.EndDate))
                     {
                         return View(test);
                     }
