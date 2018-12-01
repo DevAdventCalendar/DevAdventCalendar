@@ -19,7 +19,7 @@
                             @for (int j = 0; j < 6; j++)
                             {
                                 var dayNumber = i * 6 + j + 1;
-                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day - 29 == dayNumber);
+                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
 
                                 <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
                                     <div class="panel panel-default task-@(testForDay != null && testForDay.Status != TestStatus.Ended ? "active" : "inactive")">
