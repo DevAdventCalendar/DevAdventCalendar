@@ -1,6 +1,6 @@
 body {
     padding-bottom: 20px;
-    min-width: 400px;
+    min-width: 320px;
     font-family: 'Mali', cursive;
 }
 
@@ -141,30 +141,53 @@ button.navbar-toggle {
     font-weight: bold;
 }
 
-.week-sponsor {
-    max-width: 200px;
-}
-
 .calendar-content {
     margin-top: 40px;
 }
 
     .calendar-content .calendar-day {
         padding-right: 20px;
+    }      
+
+    .calendar-content .calendar-day .panel.panel-default {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        font-size: 12pt;
+        width: 130px;
+        height: 130px;
+        border: none;
+        border-radius: 50% 50% 50% 50%;
+        background: rgba(76, 76, 76, 0.1);
     }
 
-        .calendar-content .calendar-day .panel.panel-default {
-            text-align: center;
-            font-weight: bold;
-            width: 120px;
-            border: none;
-            border-radius: 50% 50% 50% 50%;
-            background: rgba(76, 76, 76, 0.1);
+    .calendar-content .calendar-day .panel.panel-default.task-active {
+        opacity: 1;
+    }
+
+        .calendar-content .calendar-day .panel.panel-default.task-inactive {
+            opacity: 0.5;
         }
 
-            .calendar-content .calendar-day .panel.panel-default.task-inactive {
-                opacity: 0.5;
-            }
+        .calendar-content .calendar-day .panel-body {
+            padding: 15px;
+        }
+
+        .calendar-content .calendar-day .panel-body img {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            max-width: 64px;
+        }
+
+        .calendar-day .calendar-sponsor-img {
+            display: flex;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            margin-top: 5px;
+        }
 
 #home-santa .content-centered {
     margin: 20px 0 20px 0;
@@ -185,15 +208,15 @@ button.navbar-toggle {
     font-weight: bold;
 }
 
-.week-sponsor-section {
-    max-width: 150px;
+.week-sponsor {
+    max-width: 200px;
     padding: 0 25px 20px 25px;
-    font-size: 10pt;
+    font-size: 14pt;
     font-weight: bold;
 }
 
-    .week-sponsor-section img {
-        max-width: 70px;
+    .week-sponsor img {
+        max-width: 150px;
         padding-top: 5px;
     }
 
@@ -216,32 +239,7 @@ button.navbar-toggle {
 
 #prizes h2, #prizes h3 {
     line-height: 3.5rem;
-}
-
-.calendar-content {
-    margin-top: 40px;
-}
-
-    .calendar-content .calendar-day {
-        padding-right: 20px;
-    }
-
-        .calendar-content .calendar-day .panel.panel-default {
-            text-align: center;
-            font-weight: bold;
-            width: 120px;
-            border: none;
-            border-radius: 50% 50% 50% 50%;
-            background: rgba(76, 76, 76, 0.1);
-        }
-
-            .calendar-content .calendar-day .panel.panel-default.task-inactive {
-                opacity: 0.5;
-            }
-
-            .calendar-content .calendar-day .panel.panel-default.task-active {
-                opacity: 1;
-            }
+}        
 
 .panel-body img {
     max-width: 60px;
@@ -307,10 +305,102 @@ address .col .row {
     margin-top: 20px;
 }
 
+@media screen and (max-width: 1280px) { 
+
+    .calendar-content .calendar-day .panel.panel-default {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        font-size: 10pt;
+        width: 120px;
+        height: 120px;
+        border: none;
+        border-radius: 50% 50% 50% 50%;
+        background: rgba(76, 76, 76, 0.1);
+    }
+
+    .calendar-content .calendar-day .panel-body {
+        padding-top: 15px;
+    }
+
+    .calendar-content .calendar-day .panel-body img {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        max-width: 60px;
+    }
+
+    .calendar-day .calendar-sponsor-img {
+        display: flex;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        margin-top: 5px;
+    }
+
+    .week-sponsor {
+        max-width: 160px;
+        padding: 0 25px 20px 15px;
+        font-size: 14pt;
+        font-weight: bold;
+    }
+
+        .week-sponsor img {
+            max-width: 120px;
+            padding-top: 5px;
+        }
+}
+
 @media (min-width: 768px) {
     .navbar-nav {
         float: none;
     }
+}
+
+@media screen and (max-width: 990px) {
+    .calendar-content .calendar-day {
+        padding-right: 10px;
+    }      
+
+    .calendar-content .calendar-day .panel.panel-default {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        font-size: 9pt;
+        width: 95px;
+        height: 95px;
+        border: none;
+        border-radius: 50% 50% 50% 50%;
+        background: rgba(76, 76, 76, 0.1);
+    }
+
+    .calendar-content .calendar-day .panel-body img {
+        margin-top: 15px;
+        max-width: 45px;
+    }
+
+    .calendar-day .calendar-sponsor-img {
+        display: flex;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        margin-top: 5px;
+    }
+
+    .week-sponsor {
+        max-width: 130px;
+        padding: 0 25px 20px 15px;
+        font-size: 11pt;
+        font-weight: bold;
+    }
+
+        .week-sponsor img {
+            max-width: 90px;
+            padding-top: 5px;
+        }
 }
 
 /* Hide/rearrange for smaller screens */
@@ -351,8 +441,7 @@ address .col .row {
     }
 
     .content-centered {
-        flex-direction: column;
-        margin-top: 50px;
+        margin-top: 10px;
     }
 
     .about-person {
@@ -375,6 +464,7 @@ address .col .row {
             font-weight: bold;
             font-size: 9pt;
             width: 80px;
+            height: 90px;
             border: none;
             border-radius: 50% 50% 50% 50%;
             background: rgba(76, 76, 76, 0.1);
@@ -387,37 +477,52 @@ address .col .row {
             .calendar-content .calendar-day .panel-body img {
                 margin-top: 5px;
                 margin-bottom: 10px;
-                max-width: 40px;
+                max-width: 45px;
             }
 
-    .week-sponsor-section {
+            .calendar-day .calendar-sponsor-img {
+                display: flex;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                margin-top: 5px;
+            }
+
+    .week-sponsor {
         max-width: 100px;
         padding: 0 10px 20px 15px;
         font-size: 10pt;
         font-weight: bold;
     }
 
-        .week-sponsor-section img {
-            max-width: 50px;
+        .week-sponsor img {
+            max-width: 80px;
             padding-top: 5px;
         }
 }
 
 @media screen and (max-width: 648px) {
     .content-centered {
-        flex-direction: column;
-        margin-top: 10px;
+        margin-top: 0;
+    }
+
+    .container.body-content hr {
+        margin-top: 100px;
+    }
+
+    #calendar-text {
+        height: auto;
     }
 
     .calendar-content .calendar-day {
-        padding-right: 5px;
+        padding-right: 0px;
     }
 
         .calendar-content .calendar-day .panel.panel-default {
             text-align: center;
             font-weight: bold;
             font-size: 9pt;
-            width: 70px;
+            width: 65px;
             border: none;
             background: none;
             box-shadow: none;
@@ -430,79 +535,125 @@ address .col .row {
 
             .calendar-content .calendar-day .panel-body img {
                 margin-top: 5px;
-                max-width: 50px;
+                max-width: 45px;
             }
 
-    .week-sponsor-section {
-        max-width: 75px;
-        padding: 0 0 20px 10px;
+    .week-sponsor {
+        max-width: 65px;
+        padding: 0 0 20px 0px;
         font-size: 9pt;
         font-weight: bold;
     }
 
-        .week-sponsor-section img {
-            max-width: 50px;
-            padding-top: 5px;
-        }
-}
-
-@media screen and (max-width: 400px) {
-    .calendar-content .calendar-day .panel.panel-default {
-        text-align: center;
-        font-weight: bold;
-        font-size: 6pt;
-        width: 60px;
-        border: none;
-        background: none;
-        box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-
-    .calendar-content .calendar-day .panel-body {
-        padding: 0;
-    }
-
-        .calendar-content .calendar-day .panel-body img {
-            margin-top: 5px;
-            max-width: 40px;
-        }
-
-    .week-sponsor-section {
-        max-width: 90px;
-        padding: 0 20px 20px 20px;
-        font-size: 6pt;
-        font-weight: bold;
-    }
-
-        .week-sponsor-section img {
+        .week-sponsor img {
             max-width: 45px;
             padding-top: 5px;
         }
 }
 
 @media screen and (max-width: 440px) {
+    
+    .content-centered {
+        flex-direction: row;
+        margin-top: 0;
+    }
+
+    .calendar-content {
+        margin-top: 20px;
+    }
+
+    .container.body-content hr {
+        margin-top: 70px;
+    }
+    
+    .nav.navbar-nav {
+        font-size: 14pt;
+    }
+
     .calendar-content .calendar-day .panel.panel-default {
         text-align: center;
         font-weight: bold;
-        font-size: 6pt;
-        width: 55px;
+        font-size: 8pt;
+        width: 50px;
+        max-height: 80px;
         border: none;
         background: none;
         box-shadow: none;
         -webkit-box-shadow: none;
     }
 
-    .week-sponsor-section {
+    .week-sponsor {
         max-width: 55px;
         padding: 0 0 20px 10px;
+        font-size: 8pt;
+        font-weight: bold;
+    }
+
+        .week-sponsor img {
+            max-width: 35px;
+            padding-top: 5px;
+        }
+}
+
+@media screen and (max-width: 400px) {
+
+    .content-centered {
+        flex-direction: row;
+        margin-top: 0;
+    }
+
+    .calendar-content {
+        margin-top: 20px;
+    }
+
+    .calendar-content .calendar-day {
+        padding: 0;
+    }
+
+    .calendar-content .calendar-day .panel.panel-default {
+        text-align: center;
+        font-weight: bold;
+        font-size: 6pt;
+        max-width: 45px;
+        max-height: 60px;
+        border: none;
+        background: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+        .calendar-content .calendar-day {
+            padding-right: 0;
+        }
+
+        .calendar-content .calendar-day .panel-body {
+            padding: 0;
+        }
+
+        .calendar-content .calendar-day .panel-body img {
+            margin-top: 5px;
+            max-width: 30px;
+        }
+
+        .calendar-day .calendar-sponsor-img {
+            display: flex;
+            align-items: center;
+            max-width: 30px;
+            max-height: 30px;
+            margin-top: 10px;
+        }
+
+    .week-sponsor {
+        max-width: 40px;
+        padding: 0 0 20px 0;
         font-size: 6pt;
         font-weight: bold;
     }
 
-        .week-sponsor-section img {
-            max-width: 40px;
-            padding-top: 5px;
-        }
+    .week-sponsor img {
+        max-width: 30px;
+        padding-top: 5px;
+    }
 }
 
 .cookies {
