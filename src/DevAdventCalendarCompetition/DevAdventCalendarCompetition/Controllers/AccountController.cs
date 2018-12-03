@@ -317,7 +317,13 @@ namespace DevAdventCalendarCompetition.Controllers
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
             AddErrors(result);
-            return View();
+            
+            model = new ResetPasswordViewModel
+            {
+                Email = model.Email
+            };
+
+            return View(model);
         }
 
         [HttpGet]
