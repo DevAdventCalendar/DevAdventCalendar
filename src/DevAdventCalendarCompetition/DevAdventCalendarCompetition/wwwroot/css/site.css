@@ -305,8 +305,11 @@ address .col .row {
     margin-top: 20px;
 }
 
-@media screen and (max-width: 1280px) { 
+    .about-social-image {
+        display: block;
+    }
 
+@media screen and (max-width: 1280px) {
     .calendar-content .calendar-day .panel.panel-default {
         display: flex;
         flex-direction: column;
@@ -401,6 +404,10 @@ address .col .row {
             max-width: 90px;
             padding-top: 5px;
         }
+
+    .about-social-image {
+        display: inline-block;
+    }
 }
 
 /* Hide/rearrange for smaller screens */
