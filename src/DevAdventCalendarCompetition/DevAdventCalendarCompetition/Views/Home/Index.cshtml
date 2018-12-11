@@ -14,18 +14,19 @@
     {
         if (correctAnswersForUser != null)
         {
-            <div class="col text-center ">
+            <div class="col text-center">
                 @if (correctAnswersForUser == 0)
                 {
-                    <h3>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie. Ale nie poddawaj się! Do boju!</h3>
+                    <h3>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie.<br/>Ale nie poddawaj się! Do boju!</h3>
                 }
                 else if (correctAnswersForUser == DateTime.Now.Day)
                 {
-                    <h3>Twoje statystyki wyglądają następująco:<br /><b>@correctAnswersForUser/@DateTime.Now.Day</b><br />otwartych okienek</h3>
+                    <h2><b>Gratulacje!</b></h2>
+                    <h3>Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h3>
                 }
                 else
                 {
-                    <h3>Gratulacje! Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h3>
+                    <h3>Twoje statystyki wyglądają następująco:<br /><b>@correctAnswersForUser/@DateTime.Now.Day</b><br />otwartych okienek</h3>                   
                 }                
             </div>
         }
