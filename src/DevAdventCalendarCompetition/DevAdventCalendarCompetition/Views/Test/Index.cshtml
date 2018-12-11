@@ -62,10 +62,11 @@
                 using (Html.BeginForm(FormMethod.Post))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        <label for='answer'>Twoja odpowiedź</label>
-                        <input id='answer' name="answer" type="text" class="form-control" style="text-transform: uppercase">
-                    </div>
+                <div class="form-group">
+                    <label for='answer'>Twoja odpowiedź</label>
+                    <input id='answer' name="answer" type="text" class="form-control" style="text-transform: uppercase">
+                    <p class="small">Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</p>
+                </div>
                     <button type="submit" class="btn btn-default">Wyślij</button>
                 }
             }
