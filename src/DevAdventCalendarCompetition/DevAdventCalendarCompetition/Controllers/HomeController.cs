@@ -27,6 +27,8 @@ namespace DevAdventCalendarCompetition.Controllers
             if (userId == null)
                 return View(currentTestsDto);
 
+            ViewBag.CorrectAnswers = _homeService.GetCorrectAnswersCountForUser(userId);
+
             return View(currentTestsDto);
         }
 
