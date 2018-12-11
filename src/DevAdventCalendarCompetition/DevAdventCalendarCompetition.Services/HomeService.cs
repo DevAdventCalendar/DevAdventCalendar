@@ -57,7 +57,7 @@ namespace DevAdventCalendarCompetition.Services
             return test == null ? TestStatus.NotStarted.ToString() : test.Status.ToString();
         }
 
-        public int GetCorrectAnswersForUser(string userId)
+        public int GetCorrectAnswersCountForUser(string userId)
         {
             return _homeRepository.GetCorrectAnswersCountForUser(userId);
         }
