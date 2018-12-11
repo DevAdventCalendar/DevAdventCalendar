@@ -1,6 +1,8 @@
 @using DevAdventCalendarCompetition.Services.Models
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
-
+@{
+    var correctAnswersForUser = ViewBag.CorrectAnswers;
+}
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
     <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
         <span aria-hidden="true">&times;</span>
@@ -10,6 +12,23 @@
 <div class="row">
     @if (User.Identity.IsAuthenticated)
     {
+        if (correctAnswersForUser != null)
+        {
+            <div class="col text-center ">
+                @if (correctAnswersForUser == 0)
+                {
+                    <h3>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie. Ale nie poddawaj się! Do boju!</h3>
+                }
+                else if (correctAnswersForUser == DateTime.Now.Day)
+                {
+                    <h3>Twoje statystyki wyglądają następująco:<br /><b>@correctAnswersForUser/@DateTime.Now.Day</b><br />otwartych okienek</h3>
+                }
+                else
+                {
+                    <h3>Gratulacje! Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h3>
+                }                
+            </div>
+        }
         <div class="col content-centered">
             <table class="calendar-content">
                 <tbody>
@@ -24,9 +43,7 @@
                                 <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
                                     <div class="panel panel-default task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
                                         <div class="panel-body">
-
                                             DZIEŃ @dayNumber
-                                            
                                             <div class="calendar-sponsor-img">
                                                 @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
                                                 {
@@ -38,7 +55,7 @@
                                                 {
                                                     <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
                                                 }
-                                            </div>                                           
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
