@@ -14,5 +14,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         List<TestWithAnswerListDto> GetTestsWithUserAnswers();
 
         string CheckTestStatus(int testNumber);
+
+        int GetCorrectAnswersForUser(string userId);
     }
 }
