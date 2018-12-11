@@ -59,7 +59,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public int GetCorrectAnswersForUser(string userId)
         {
-            throw new NotImplementedException();
+            return _homeRepository.GetCorrectAnswersCountForUser(userId);
         }
     }
 }
