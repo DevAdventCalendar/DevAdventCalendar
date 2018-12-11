@@ -48,7 +48,9 @@ namespace DevAdventCalendarCompetition.Repository
         public int GetCorrectAnswersCountForUser(string userId)
         {
             return _dbContext.Set<TestAnswer>()
-                .Count(a => a.UserId == userId);
+                .Where(a => a.UserId == userId)
+                .GroupBy(t => t.TestId)
+                .Count();
         }
     }
 }
