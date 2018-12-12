@@ -85,6 +85,10 @@ button.navbar-toggle {
         background-color: gray;
     }
 
+.correct-answers-info h3 {
+    line-height: 1.5em;
+}
+
 #calendar-logo {
     height: 80px;
 }

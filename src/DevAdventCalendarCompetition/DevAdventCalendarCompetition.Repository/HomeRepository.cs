@@ -44,5 +44,13 @@ namespace DevAdventCalendarCompetition.Repository
                 .ThenInclude(ta => ta.User)
                 .OrderBy(el => el.Number).ToList();
         }
+
+        public int GetCorrectAnswersCountForUser(string userId)
+        {
+            return _dbContext.Set<TestAnswer>()
+                .Where(a => a.UserId == userId)
+                .GroupBy(t => t.TestId)
+                .Count();
+        }
     }
 }
