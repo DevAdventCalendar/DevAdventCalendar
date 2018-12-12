@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Services.Models;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -41,14 +42,27 @@ namespace DevAdventCalendarCompetition.Controllers
             var test = _baseTestService.GetTestByNumber(testNumber);
             var finalAnswer = answer.ToUpper().Replace(" ", "");
 
-            if (test != null && _baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
+            if (test != null)
             {
-                return SaveAnswerAndRedirect(testNumber);
+                if (_baseTestService.HasUserAnsweredTest(User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
+                {
+                    test.HasUserAnswered = true;
+                    return View("Index", test);
+                }   
+                
+                if(test.Status == TestStatus.Ended || test.Status == TestStatus.NotStarted)
+                {
+                    ModelState.AddModelError("", "Wystąpił błąd!");
+                    return View("Index", test);
+                }
+
+                if(_baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))        
+                    return SaveAnswerAndRedirect(testNumber);
+
+                SaveWrongAnswer(finalAnswer, testNumber);
+                ModelState.AddModelError("", "Źle! Spróbuj ponownie :)");
             }
-
-            SaveWrongAnswer(finalAnswer, testNumber);
-
-            ModelState.AddModelError("", "Źle! Spróbuj ponownie :)");
+  
             return View("Index", test);
         }
     }
