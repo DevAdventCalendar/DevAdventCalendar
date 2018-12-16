@@ -2,6 +2,7 @@
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
+    var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
 }
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
     <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
@@ -19,14 +20,14 @@
                 {
                     <h3>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie.<br/>Ale nie poddawaj się! Do boju!</h3>
                 }
-                else if (correctAnswersForUser == DateTime.Now.Day)
+                else if (correctAnswersForUser == overallPossibleTestsCount)
                 {
                     <h2><b>Gratulacje!</b></h2>
                     <h3>Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h3>
                 }
                 else
                 {
-                    <h3>Twoje statystyki wyglądają następująco:<br /><b>@correctAnswersForUser/@DateTime.Now.Day</b><br />otwartych okienek</h3>                   
+                    <h3>Twoje statystyki wyglądają następująco:<br /><b>@correctAnswersForUser/@overallPossibleTestsCount</b><br />otwartych okienek</h3>                   
                 }                
             </div>
         }
