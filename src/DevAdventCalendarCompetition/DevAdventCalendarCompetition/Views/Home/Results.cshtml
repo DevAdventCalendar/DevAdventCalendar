@@ -3,29 +3,24 @@
 }
 @model DevAdventCalendarCompetition.Vms.TestResultsVm
 
-<div class="jumbotron">
-    <h1><img src="~/images/icon.svg" class="logo" /> Wyniki Dev Advent Calendar</h1>
+<div class="text-center">
+    <img src="~/images/icon.svg" width="200" />
+    <h1>Wyniki Dev Advent Calendar</h1>
 </div>
-<div class="row">
+
+<div class="row results">
 
     <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
+
         @for (var j = 0; j < Model.SingleTestResults.Count; j++)
         {
             var result = Model.SingleTestResults[j];
             var active = "";
-            if (j == 0)
-            {
-                active = "active";
-            }
-            else
-            {
-                active = "";
-            }
 
-            <li role="presentation" class="@active"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
+
+            <li role="presentation"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
         }
-
-        <li role="presentation"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -34,21 +29,17 @@
         @for (var j = 0; j < Model.SingleTestResults.Count; j++)
         {
             var result = Model.SingleTestResults[j];
-            var active = "";
-            if (j == 0)
-            {
-                active = "active";
-            }
 
             if (result.TestEnded)
             {
-                <div role="tabpanel" class="tab-pane @active" id="test@(result.TestNumber)">
+                <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Imię i nazwisko</th>
-                                <th>Czas</th>
+                                <th class="col-xs-1">#</th>
+                                <th>Użytkownik</th>
+                                <th>Poprawne odpowiedzi</th>
+                                <th>Błędne odpowiedzi</th>
                                 <th>Punkty</th>
                             </tr>
                         </thead>
@@ -57,9 +48,8 @@
                             {
                                 var testResult = result.Entries[i];
                                 <tr>
-                                    <th scope="row">@(i + 1)</th>
+                                    <th scope="row" class="col-xs-1">@(i + 1)</th>
                                     <td>@testResult.FullName</td>
-                                    <td>@testResult.Offset.Minutes m. @testResult.Offset.Seconds s. @testResult.Offset.Milliseconds ms</td>
                                     <td>@testResult.Points</td>
                                 </tr>
                             }
@@ -69,20 +59,19 @@
             }
             else
             {
-                <div role="tabpanel" class="tab-pane @active" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
+                <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
             }
         }
 
         @if (Model.TotalTestResults != null)
         {
-            <div role="tabpanel" class="tab-pane" id="totalresults">
+            <div role="tabpanel" class="tab-pane active" id="totalresults">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Imię i nazwisko</th>
+                            <th class="col-xs-1">#</th>
+                            <th>Użytkownik</th>
                             <th>Suma punktów</th>
-                            <th>Całkowity czas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,10 +79,9 @@
                         {
                             var testResult = Model.TotalTestResults[i];
                             <tr>
-                                <th scope="row">@(i + 1)</th>
+                                <th scope="row" class="col-xs-1">@(i + 1)</th>
                                 <td>@testResult.FullName</td>
                                 <td>@testResult.TotalPoints</td>
-                                <td>@testResult.TotalOffset.Minutes m. @testResult.TotalOffset.Seconds s. @testResult.TotalOffset.Milliseconds ms</td>
                             </tr>
                         }
                     </tbody>
