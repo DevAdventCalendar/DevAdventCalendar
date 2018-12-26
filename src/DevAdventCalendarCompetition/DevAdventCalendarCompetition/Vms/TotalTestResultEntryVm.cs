@@ -7,11 +7,9 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public string FullName { get; set; }
 
-        public TimeSpan TotalOffset { get; set; }
-
         public int TotalPoints { get; set; }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 
     public class TotalTestResultEntryVmComparer : IEqualityComparer<TotalTestResultEntryVm>

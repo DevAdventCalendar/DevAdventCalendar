@@ -33,7 +33,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         public ActionResult Results()
-        {
+        {           
             var testDtoList = _homeService.GetTestsWithUserAnswers();
 
             var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
@@ -66,41 +66,16 @@ namespace DevAdventCalendarCompetition.Controllers
                     entry.Points = PointsPerPlace[i];
                 }
             });
-            List<TotalTestResultEntryVm> totalTestResults = null;
 
-            if (testDtoList.All(t => t.HasEnded))
+            List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
+
+            totalTestResults.Add(new TotalTestResultEntryVm
             {
-                var totalResultsDict = singleTestResults
-                    .SelectMany(r => r.Entries)
-                    .Select(r => new TotalTestResultEntryVm { FullName = r.FullName, UserId = r.UserId })
-                    .Distinct(new TotalTestResultEntryVmComparer())
-                    .ToDictionary(el => el.UserId);
+                UserId = 1,
+                FullName = "devadventcalendar@gmail.com",
+                TotalPoints = 500
+            });
 
-                foreach (var singleTestResult in singleTestResults)
-                {
-                    var userCountedDict = new Dictionary<string, bool>();
-                    singleTestResult.Entries.ForEach(e =>
-                    {
-                        var totalResult = totalResultsDict[e.UserId];
-                        totalResult.TotalPoints += e.Points;
-                        userCountedDict[e.UserId] = true;
-                    });
-
-                    foreach (var entry in totalResultsDict)
-                    {
-                        if (userCountedDict.ContainsKey(entry.Key) == false)
-                        {
-                            entry.Value.TotalOffset += singleTestResult.TestOffset;
-                        }
-                    }
-                }
-
-                totalTestResults = totalResultsDict
-                    .Values.ToList()
-                    .OrderByDescending(t => t.TotalPoints)
-                    .ThenBy(t => t.TotalOffset)
-                    .ToList();
-            }
             var vm = new TestResultsVm()
             {
                 SingleTestResults = singleTestResults,
