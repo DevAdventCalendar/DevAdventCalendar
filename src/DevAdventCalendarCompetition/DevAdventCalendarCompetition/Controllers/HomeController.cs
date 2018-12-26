@@ -49,7 +49,8 @@ namespace DevAdventCalendarCompetition.Controllers
                             {
                                 UserId = ta.UserId,
                                 FullName = ta.UserFullName,
-                                Offset = ta.AnsweringTimeOffset
+                                CorrectAnswersCount = 0,
+                                WrongAnswersCount = 0
                             })
                             .ToList()
             }).ToList();
@@ -82,7 +83,6 @@ namespace DevAdventCalendarCompetition.Controllers
                     {
                         var totalResult = totalResultsDict[e.UserId];
                         totalResult.TotalPoints += e.Points;
-                        totalResult.TotalOffset += e.Offset;
                         userCountedDict[e.UserId] = true;
                     });
 
