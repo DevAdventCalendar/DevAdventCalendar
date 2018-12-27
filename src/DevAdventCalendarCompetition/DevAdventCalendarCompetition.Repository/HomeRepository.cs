@@ -52,5 +52,10 @@ namespace DevAdventCalendarCompetition.Repository
                 .GroupBy(t => t.TestId)
                 .Count();
         }
+
+        public List<Result> GetAllTestResults()
+        {
+            return _dbContext.Set<Result>().ToList();
+        }
     }
 }
