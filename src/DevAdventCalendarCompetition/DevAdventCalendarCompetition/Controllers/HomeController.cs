@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -67,14 +68,20 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
             });
 
+            var testResultListDto = _homeService.GetAllTestResults();
+
             List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
 
-            totalTestResults.Add(new TotalTestResultEntryVm
+
+            foreach (var result in testResultListDto)
             {
-                UserId = 1,
-                FullName = "devadventcalendar@gmail.com",
-                TotalPoints = 500
-            });
+                totalTestResults.Add(new TotalTestResultEntryVm
+                {
+                    UserId = result.UserId,
+                    FullName = PrepareUserEmailForRODO(result.Email),
+                    TotalPoints = result.Points
+                });
+            }          
 
             var vm = new TestResultsVm()
             {
@@ -152,5 +159,13 @@ namespace DevAdventCalendarCompetition.Controllers
             100, 80, 60, 50, 45, 40, 36, 32, 29, 26, 24, 22, 20, 18, 16, 15, 14, 13, 12, 11,
             10, 9, 8, 7, 6, 5, 4, 3, 2, 1
         };
+
+        private string PrepareUserEmailForRODO(string email)
+        {
+            string emailMaskRegex = "(^\\w{3}).*(@\\w).*(.)$";
+
+            return Regex.Replace(email, emailMaskRegex,
+                m => m.Groups[1].Value + "..." + m.Groups[2].Value + "..." + m.Groups[3].Value);
+        }
     }
 }
