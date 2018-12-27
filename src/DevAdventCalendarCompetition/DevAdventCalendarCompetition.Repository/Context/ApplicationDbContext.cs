@@ -14,6 +14,8 @@ namespace DevAdventCalendarCompetition.Repository.Context
 
 		public DbSet<TestWrongAnswer> TestWrongAnswer { get; set; }
 
+	    public DbSet<Result> Results { get; set; }
+
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{
