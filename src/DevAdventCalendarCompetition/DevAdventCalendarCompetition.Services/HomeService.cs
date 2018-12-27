@@ -50,6 +50,14 @@ namespace DevAdventCalendarCompetition.Services
             return testWithAnswersDtoList;
         }
 
+        public List<TestResultDto> GetAllTestResults()
+        {
+            var testResultList = _homeRepository.GetAllTestResults();
+            var testResultsDtoList = _mapper.Map<List<TestResultDto>>(testResultList);
+
+            return testResultsDtoList;
+        }
+
         public string CheckTestStatus(int testNumber)
         {
             var test = _homeRepository.GetTestByNumber(testNumber);

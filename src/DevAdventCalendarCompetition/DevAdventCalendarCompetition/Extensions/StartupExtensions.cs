@@ -74,6 +74,8 @@ namespace DevAdventCalendarCompetition.Extensions
 
                 cfg.CreateMap<TestAnswer, TestAnswerDto>();
                 cfg.CreateMap<TestAnswer, TestWithAnswerListDto>();
+
+                cfg.CreateMap<Result, TestResultDto>();
             });
             return services;
         }
