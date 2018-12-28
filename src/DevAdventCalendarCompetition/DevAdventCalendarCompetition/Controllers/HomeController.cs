@@ -43,7 +43,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 TestEnded = testDto.HasEnded,
                 EndDate = testDto.EndDate,
                 StartDate = testDto.StartDate,
-                Entries = testDto.Answers.OrderBy(ta => ta.AnsweringTimeOffset)
+                Entries = testDto.Answers
                     .Select(
                         ta =>
                             new SingleTestResultEntry()
@@ -53,7 +53,7 @@ namespace DevAdventCalendarCompetition.Controllers
                                 CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
                                 WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
                             })
-                    .Concat(testDto.WrongAnswers
+                    .Union(testDto.WrongAnswers
                     .Select(
                         wa =>
                             new SingleTestResultEntry()
@@ -63,20 +63,16 @@ namespace DevAdventCalendarCompetition.Controllers
                                 CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
                                 WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
                             }))
-                            .ToList()
+                    .GroupBy(e => new { e.FullName, e.CorrectAnswersCount, e.WrongAnswersCount })
+                    .Select(e => new SingleTestResultEntry
+                    {
+                        FullName = e.Key.FullName,
+                        CorrectAnswersCount = e.Key.CorrectAnswersCount,
+                        WrongAnswersCount = e.Key.WrongAnswersCount
+                    })
+                    .OrderByDescending(e => e.CorrectAnswersCount)
+                    .ToList()
             }).ToList();
-
-            singleTestResults.ForEach(r =>
-            {
-                for (int i = 0; i < r.Entries.Count; i++)
-                {
-                    if (i >= 30)
-                        continue;
-
-                    var entry = r.Entries[i];
-                    entry.Points = PointsPerPlace[i];
-                }
-            });
 
             var testResultListDto = _homeService.GetAllTestResults();
 
