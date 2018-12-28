@@ -49,10 +49,20 @@ namespace DevAdventCalendarCompetition.Controllers
                             new SingleTestResultEntry()
                             {
                                 UserId = ta.UserId,
-                                FullName = ta.UserFullName,
-                                CorrectAnswersCount = 0,
-                                WrongAnswersCount = 0
+                                FullName = PrepareUserEmailForRODO(ta.UserFullName),
+                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
+                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
                             })
+                    .Concat(testDto.WrongAnswers
+                    .Select(
+                        wa =>
+                            new SingleTestResultEntry()
+                            {
+                                UserId = wa.UserId,
+                                FullName = PrepareUserEmailForRODO(wa.UserFullName),
+                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
+                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
+                            }))
                             .ToList()
             }).ToList();
 

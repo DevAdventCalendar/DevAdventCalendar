@@ -9,7 +9,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
         public TestAnswerProfile()
         {
             CreateMap<TestAnswer, TestAnswerDto>()
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.SecondName}"));
+                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email));
 
             CreateMap<TestAnswerDto, TestAnswer>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
