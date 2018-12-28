@@ -15,5 +15,7 @@ namespace DevAdventCalendarCompetition.Services.Models
         public int WrongAnswersCount { get; set; }
        
         public int Points { get; set; }
+
+        public int Position { get; set; }
     }
 }

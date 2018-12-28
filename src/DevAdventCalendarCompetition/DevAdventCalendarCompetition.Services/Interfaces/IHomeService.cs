@@ -18,5 +18,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         int GetCorrectAnswersCountForUser(string userId);
 
         List<TestResultDto> GetAllTestResults();
+
+        int GetUserPosition(string userId);
     }
 }

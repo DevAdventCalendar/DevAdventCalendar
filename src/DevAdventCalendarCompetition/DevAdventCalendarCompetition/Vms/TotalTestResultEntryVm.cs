@@ -7,6 +7,8 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public string FullName { get; set; }
 
+        public int Position { get; set; }
+
         public int TotalPoints { get; set; }
 
         public string UserId { get; set; }

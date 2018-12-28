@@ -69,5 +69,10 @@ namespace DevAdventCalendarCompetition.Services
         {
             return _homeRepository.GetCorrectAnswersCountForUser(userId);
         }
+
+        public int GetUserPosition(string userId)
+        {
+            return _homeRepository.GetUserPosition(userId);
+        }
     }
 }

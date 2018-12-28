@@ -34,7 +34,11 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         public ActionResult Results()
-        {           
+        {
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return View();
+
             var testDtoList = _homeService.GetTestsWithUserAnswers();
 
             var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
@@ -82,6 +86,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 totalTestResults.Add(new TotalTestResultEntryVm
                 {
+                    Position = result.Position,
                     UserId = result.UserId,
                     FullName = PrepareUserEmailForRODO(result.Email),
                     TotalPoints = result.Points
@@ -90,6 +95,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var vm = new TestResultsVm()
             {
+                CurrentUserPosition = _homeService.GetUserPosition(userId),
                 SingleTestResults = singleTestResults,
                 TotalTestResults = totalTestResults
             };

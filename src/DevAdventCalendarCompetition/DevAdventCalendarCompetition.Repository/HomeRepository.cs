@@ -56,7 +56,15 @@ namespace DevAdventCalendarCompetition.Repository
 
         public List<Result> GetAllTestResults()
         {
-            return _dbContext.Set<Result>().ToList();
+            return _dbContext.Set<Result>()
+                .OrderByDescending(r => r.Points)
+                .ToList();
+        }
+
+        public int GetUserPosition(string userId)
+        {
+            return _dbContext.Set<Result>()
+                .FirstOrDefault(r => r.UserId == userId)?.Id ?? 0;
         }
     }
 }
