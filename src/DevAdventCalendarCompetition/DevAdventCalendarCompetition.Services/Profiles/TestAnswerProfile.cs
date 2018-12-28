@@ -30,7 +30,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
                 .ForMember(dest => dest.User, opt => opt.Ignore())
                 .ForMember(dest => dest.UserId, opt => opt.Ignore())
                 .ForMember(dest => dest.AnsweringTime, opt => opt.Ignore())
-                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());
+                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());        
         }
     }
 }

@@ -72,7 +72,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
             List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
 
-
             foreach (var result in testResultListDto)
             {
                 totalTestResults.Add(new TotalTestResultEntryVm

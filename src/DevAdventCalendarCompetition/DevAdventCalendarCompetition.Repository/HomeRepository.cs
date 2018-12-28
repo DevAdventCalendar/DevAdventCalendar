@@ -40,6 +40,7 @@ namespace DevAdventCalendarCompetition.Repository
         public List<Test> GetTestsWithUserAnswers()
         {
             return _dbContext.Set<Test>()
+                .Include(t => t.WrongAnswers)
                 .Include(t => t.Answers)
                 .ThenInclude(ta => ta.User)
                 .OrderBy(el => el.Number).ToList();

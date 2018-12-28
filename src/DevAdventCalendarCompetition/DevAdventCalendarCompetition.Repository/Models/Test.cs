@@ -29,6 +29,8 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public ICollection<TestAnswer> Answers { get; set; }
 
+        public ICollection<TestWrongAnswer> WrongAnswers { get; set; }
+
         public bool HasStarted
         {
             get
