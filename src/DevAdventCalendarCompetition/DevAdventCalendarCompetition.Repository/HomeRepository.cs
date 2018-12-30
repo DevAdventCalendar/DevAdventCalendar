@@ -4,6 +4,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -63,8 +64,10 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetUserPosition(string userId)
         {
-            return _dbContext.Set<Result>()
-                .FirstOrDefault(r => r.UserId == userId)?.Id ?? 0;
+            var result = _dbContext.Set<Result>()
+                .FirstOrDefault(r => r.UserId == userId);
+
+            return result != null ? _dbContext.Results.IndexOf(result) : 0;
         }
     }
 }
