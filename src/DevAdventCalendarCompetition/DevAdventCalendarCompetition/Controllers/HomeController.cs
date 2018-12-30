@@ -165,12 +165,6 @@ namespace DevAdventCalendarCompetition.Controllers
             return Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));
         }
 
-        private int[] PointsPerPlace =
-        {
-            100, 80, 60, 50, 45, 40, 36, 32, 29, 26, 24, 22, 20, 18, 16, 15, 14, 13, 12, 11,
-            10, 9, 8, 7, 6, 5, 4, 3, 2, 1
-        };
-
         private string PrepareUserEmailForRODO(string email)
         {
             string emailMaskRegex = "(^\\w{3}).*(@\\w).*(.)$";
