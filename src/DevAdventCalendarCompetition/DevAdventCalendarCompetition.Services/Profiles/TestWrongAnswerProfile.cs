@@ -21,7 +21,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
 
             CreateMap<TestWrongAnswer, TestWrongAnswerDto>()
                 .ForMember(dest => dest.AnsweringTime, opt => opt.MapFrom(src => src.Time))
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email)); ;
+                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User == null ? "UżytkownikAnonimowy" : src.User.Email)); ;
         }
     }
 }
