@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
-using DevAdventCalendarCompetition.Services;
 
 namespace DevAdventCalendarCompetition
 {
@@ -49,7 +48,6 @@ namespace DevAdventCalendarCompetition
                 .RegisterDatabase(Configuration)
                 .RegisterServices(Configuration)
                 .AddAutoMapper()
-                .RegisterMapping()
                 .AddExternalLoginProviders(Configuration)
                 .AddSwaggerGen(c =>
                 {

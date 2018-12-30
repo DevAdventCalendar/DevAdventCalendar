@@ -1,11 +1,9 @@
-using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -62,19 +60,6 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IdentityService>();
-            return services;
-        }
-
-        public static IServiceCollection RegisterMapping(this IServiceCollection services)
-        {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Test, TestDto>();
-                cfg.CreateMap<TestDto, Test>();
-
-                cfg.CreateMap<TestAnswer, TestAnswerDto>();
-                cfg.CreateMap<TestAnswer, TestWithAnswerListDto>();
-            });
             return services;
         }
 
