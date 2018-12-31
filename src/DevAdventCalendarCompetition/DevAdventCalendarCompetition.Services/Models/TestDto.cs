@@ -12,6 +12,8 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string Answer { get; set; }
 
+        public string PlainAnswer { get; set; }
+
         public string SponsorLogoUrl { get; set; }
 
         public string SponsorName { get; set; }
@@ -31,6 +33,8 @@ namespace DevAdventCalendarCompetition.Services.Models
         public string DiscountLogoPath { get; set; }
 
         public bool HasUserAnswered { get; set; }
+
+        public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
     }
 
     public enum TestStatus

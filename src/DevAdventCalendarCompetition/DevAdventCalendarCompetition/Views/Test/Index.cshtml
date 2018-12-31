@@ -20,7 +20,7 @@
         }
         else
         {
-            if (Model.SponsorLogoUrl != null)
+            if (Model.SponsorLogoUrl != null && Model.IsAdvent)
             {
                 <div id="day-sponsor" class="text-center">
                     <h2>Sponsorem dnia jest</h2>
@@ -29,7 +29,7 @@
                 </div>
             }
 
-            if (Model.Discount != null)
+            if (Model.Discount != null && Model.IsAdvent)
             {
                 <br />
                 <div class="discount text-center">
@@ -57,18 +57,27 @@
             {
                 <h3>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</h3>
             }
-            else
+            else if (Model.IsAdvent)
             {
                 using (Html.BeginForm(FormMethod.Post))
                 {
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    <label for='answer'>Twoja odpowiedź</label>
-                    <input id='answer' name="answer" type="text" class="form-control" style="text-transform: uppercase">
-                    <p class="small">Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</p>
-                </div>
+                    <div class="form-group">
+                        <label for='answer'>Twoja odpowiedź</label>
+                        <input id='answer' name="answer" type="text" class="form-control" style="text-transform: uppercase">
+                        <p class="small">Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</p>
+                    </div>
                     <button type="submit" class="btn btn-default">Wyślij</button>
                 }
+            }
+            else
+            {
+                <h3>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</h3>
+            }
+
+            if (!Model.IsAdvent && !string.IsNullOrEmpty(Model.PlainAnswer))
+            {
+                <h4>Poprawna odpowiedź: @Model.PlainAnswer</h4>
             }
         }
     </div>
