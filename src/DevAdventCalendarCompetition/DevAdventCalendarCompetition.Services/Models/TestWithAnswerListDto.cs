@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DevAdventCalendarCompetition.Repository.Migrations;
 
 namespace DevAdventCalendarCompetition.Services.Models
 {
@@ -14,6 +15,8 @@ namespace DevAdventCalendarCompetition.Services.Models
         public DateTime? EndDate { get; set; }
 
         public ICollection<TestAnswerDto> Answers { get; set; }
+
+        public ICollection<TestWrongAnswerDto> WrongAnswers { get; set; }
 
         public bool HasEnded { get; set; }
     }

@@ -313,6 +313,11 @@ address .col .row {
         display: block;
     }
 
+.results {
+    margin: 0;
+    padding-top: 50px;
+}
+
 @media screen and (max-width: 1280px) {
     .calendar-content .calendar-day .panel.panel-default {
         display: flex;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -34,6 +35,10 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult Results()
         {
+            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return View();
+
             var testDtoList = _homeService.GetTestsWithUserAnswers();
 
             var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
@@ -42,67 +47,55 @@ namespace DevAdventCalendarCompetition.Controllers
                 TestEnded = testDto.HasEnded,
                 EndDate = testDto.EndDate,
                 StartDate = testDto.StartDate,
-                Entries = testDto.Answers.OrderBy(ta => ta.AnsweringTimeOffset)
+                Entries = testDto.Answers
                     .Select(
                         ta =>
                             new SingleTestResultEntry()
                             {
                                 UserId = ta.UserId,
-                                FullName = ta.UserFullName,
-                                Offset = ta.AnsweringTimeOffset
+                                FullName = PrepareUserEmailForRODO(ta.UserFullName),
+                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
+                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
                             })
-                            .ToList()
+                    .Union(testDto.WrongAnswers
+                    .Select(
+                        wa =>
+                            new SingleTestResultEntry()
+                            {
+                                UserId = wa.UserId,
+                                FullName = PrepareUserEmailForRODO(wa.UserFullName),
+                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
+                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
+                            }))
+                    .GroupBy(e => new { e.FullName, e.CorrectAnswersCount, e.WrongAnswersCount })
+                    .Select(e => new SingleTestResultEntry
+                    {
+                        FullName = e.Key.FullName,
+                        CorrectAnswersCount = e.Key.CorrectAnswersCount,
+                        WrongAnswersCount = e.Key.WrongAnswersCount
+                    })
+                    .OrderByDescending(e => e.CorrectAnswersCount)
+                    .ToList()
             }).ToList();
 
-            singleTestResults.ForEach(r =>
+            var testResultListDto = _homeService.GetAllTestResults();
+
+            List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
+
+            foreach (var result in testResultListDto)
             {
-                for (int i = 0; i < r.Entries.Count; i++)
+                totalTestResults.Add(new TotalTestResultEntryVm
                 {
-                    if (i >= 30)
-                        continue;
+                    Position = result.Position,
+                    UserId = result.UserId,
+                    FullName = PrepareUserEmailForRODO(result.Email),
+                    TotalPoints = result.Points
+                });
+            }          
 
-                    var entry = r.Entries[i];
-                    entry.Points = PointsPerPlace[i];
-                }
-            });
-            List<TotalTestResultEntryVm> totalTestResults = null;
-
-            if (testDtoList.All(t => t.HasEnded))
-            {
-                var totalResultsDict = singleTestResults
-                    .SelectMany(r => r.Entries)
-                    .Select(r => new TotalTestResultEntryVm { FullName = r.FullName, UserId = r.UserId })
-                    .Distinct(new TotalTestResultEntryVmComparer())
-                    .ToDictionary(el => el.UserId);
-
-                foreach (var singleTestResult in singleTestResults)
-                {
-                    var userCountedDict = new Dictionary<string, bool>();
-                    singleTestResult.Entries.ForEach(e =>
-                    {
-                        var totalResult = totalResultsDict[e.UserId];
-                        totalResult.TotalPoints += e.Points;
-                        totalResult.TotalOffset += e.Offset;
-                        userCountedDict[e.UserId] = true;
-                    });
-
-                    foreach (var entry in totalResultsDict)
-                    {
-                        if (userCountedDict.ContainsKey(entry.Key) == false)
-                        {
-                            entry.Value.TotalOffset += singleTestResult.TestOffset;
-                        }
-                    }
-                }
-
-                totalTestResults = totalResultsDict
-                    .Values.ToList()
-                    .OrderByDescending(t => t.TotalPoints)
-                    .ThenBy(t => t.TotalOffset)
-                    .ToList();
-            }
             var vm = new TestResultsVm()
             {
+                CurrentUserPosition = _homeService.GetUserPosition(userId),
                 SingleTestResults = singleTestResults,
                 TotalTestResults = totalTestResults
             };
@@ -172,10 +165,12 @@ namespace DevAdventCalendarCompetition.Controllers
             return Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));
         }
 
-        private int[] PointsPerPlace =
+        private string PrepareUserEmailForRODO(string email)
         {
-            100, 80, 60, 50, 45, 40, 36, 32, 29, 26, 24, 22, 20, 18, 16, 15, 14, 13, 12, 11,
-            10, 9, 8, 7, 6, 5, 4, 3, 2, 1
-        };
+            string emailMaskRegex = "(^\\w{3}).*(@\\w).*(.)$";
+
+            return Regex.Replace(email, emailMaskRegex,
+                m => m.Groups[1].Value + "..." + m.Groups[2].Value + "..." + m.Groups[3].Value);
+        }
     }
 }

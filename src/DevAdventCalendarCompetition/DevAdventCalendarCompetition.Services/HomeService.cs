@@ -50,6 +50,14 @@ namespace DevAdventCalendarCompetition.Services
             return testWithAnswersDtoList;
         }
 
+        public List<TestResultDto> GetAllTestResults()
+        {
+            var testResultList = _homeRepository.GetAllTestResults();
+            var testResultsDtoList = _mapper.Map<List<TestResultDto>>(testResultList);
+
+            return testResultsDtoList;
+        }
+
         public string CheckTestStatus(int testNumber)
         {
             var test = _homeRepository.GetTestByNumber(testNumber);
@@ -60,6 +68,11 @@ namespace DevAdventCalendarCompetition.Services
         public int GetCorrectAnswersCountForUser(string userId)
         {
             return _homeRepository.GetCorrectAnswersCountForUser(userId);
+        }
+
+        public int GetUserPosition(string userId)
+        {
+            return _homeRepository.GetUserPosition(userId);
         }
     }
 }

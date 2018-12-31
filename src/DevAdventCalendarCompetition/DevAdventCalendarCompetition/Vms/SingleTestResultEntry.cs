@@ -6,7 +6,9 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public string FullName { get; set; }
 
-        public TimeSpan Offset { get; set; }
+        public int CorrectAnswersCount { get; set; }
+
+        public int WrongAnswersCount { get; set; }
 
         public int Points { get; set; }
 

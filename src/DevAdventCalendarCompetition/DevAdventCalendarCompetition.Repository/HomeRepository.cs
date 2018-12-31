@@ -4,6 +4,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -40,6 +41,7 @@ namespace DevAdventCalendarCompetition.Repository
         public List<Test> GetTestsWithUserAnswers()
         {
             return _dbContext.Set<Test>()
+                .Include(t => t.WrongAnswers)
                 .Include(t => t.Answers)
                 .ThenInclude(ta => ta.User)
                 .OrderBy(el => el.Number).ToList();
@@ -51,6 +53,21 @@ namespace DevAdventCalendarCompetition.Repository
                 .Where(a => a.UserId == userId)
                 .GroupBy(t => t.TestId)
                 .Count();
+        }
+
+        public List<Result> GetAllTestResults()
+        {
+            return _dbContext.Set<Result>()
+                .OrderByDescending(r => r.Points)
+                .ToList();
+        }
+
+        public int GetUserPosition(string userId)
+        {
+            var result = _dbContext.Set<Result>()
+                .FirstOrDefault(r => r.UserId == userId);
+
+            return result != null ? _dbContext.Results.IndexOf(result) : 0;
         }
     }
 }

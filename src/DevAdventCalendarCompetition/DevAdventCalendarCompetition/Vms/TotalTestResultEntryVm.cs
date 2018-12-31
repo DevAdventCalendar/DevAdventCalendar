@@ -7,7 +7,7 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public string FullName { get; set; }
 
-        public TimeSpan TotalOffset { get; set; }
+        public int Position { get; set; }
 
         public int TotalPoints { get; set; }
 
