@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Models;
 
@@ -21,7 +18,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
 
             CreateMap<TestWrongAnswer, TestWrongAnswerDto>()
                 .ForMember(dest => dest.AnsweringTime, opt => opt.MapFrom(src => src.Time))
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User == null ? "UżytkownikAnonimowy" : src.User.Email)); ;
+                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.Email)); ;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DevAdventCalendarCompetition.Vms
 {
@@ -8,6 +7,10 @@ namespace DevAdventCalendarCompetition.Vms
         public string FullName { get; set; }
 
         public int Position { get; set; }
+
+        public int CorrectAnswers { get; set; }
+
+        public int WrongAnswers { get; set; }
 
         public int TotalPoints { get; set; }
 

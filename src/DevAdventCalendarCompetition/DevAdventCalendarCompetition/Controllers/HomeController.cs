@@ -89,9 +89,11 @@ namespace DevAdventCalendarCompetition.Controllers
                     Position = result.Position,
                     UserId = result.UserId,
                     FullName = PrepareUserEmailForRODO(result.Email),
+                    CorrectAnswers = result.CorrectAnswersCount,
+                    WrongAnswers = result.WrongAnswersCount,
                     TotalPoints = result.Points
                 });
-            }          
+            }
 
             var vm = new TestResultsVm()
             {
@@ -106,7 +108,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult CheckTestStatus(int testNumber)
         {
-            return Content(_homeService.CheckTestStatus(testNumber));  
+            return Content(_homeService.CheckTestStatus(testNumber));
         }
 
         public ActionResult Error()
