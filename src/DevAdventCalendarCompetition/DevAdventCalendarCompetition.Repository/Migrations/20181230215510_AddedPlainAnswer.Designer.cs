@@ -4,14 +4,16 @@ using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181230215510_AddedPlainAnswer")]
+    partial class AddedPlainAnswer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,29 +74,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.Result", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CorrectAnswersCount");
-
-                    b.Property<int>("Points");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(450);
-
-                    b.Property<int>("WrongAnswersCount");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Results");
                 });
 
             modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.Test", b =>
@@ -290,14 +269,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.Result", b =>
-                {
-                    b.HasOne("DevAdventCalendarCompetition.Repository.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.TestAnswer", b =>

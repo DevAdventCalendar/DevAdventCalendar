@@ -26,7 +26,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
                 else
                 {
-                    if (test.StartDate <= DateTime.Now && !(DateTime.Now > test.EndDate))
+                    if (test.StartDate <= DateTime.Now && !(DateTime.Now > test.EndDate) || !test.IsAdvent)
                     {
                         return View(test);
                     }
