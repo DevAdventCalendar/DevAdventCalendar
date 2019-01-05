@@ -169,7 +169,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         private string PrepareUserEmailForRODO(string email)
         {
-            string emailMaskRegex = "(^\\w{3}).*(@\\w).*(.)$";
+            string emailMaskRegex = "(^[\\w\\.\\-]{3}).*(@[\\w\\.\\-]).*(.)$";
 
             return Regex.Replace(email, emailMaskRegex,
                 m => m.Groups[1].Value + "..." + m.Groups[2].Value + "..." + m.Groups[3].Value);
