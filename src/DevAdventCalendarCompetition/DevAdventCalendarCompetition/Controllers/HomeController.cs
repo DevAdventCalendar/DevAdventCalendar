@@ -39,44 +39,45 @@ namespace DevAdventCalendarCompetition.Controllers
             if (userId == null)
                 return View();
 
-            var testDtoList = _homeService.GetTestsWithUserAnswers();
+            // var testDtoList = _homeService.GetTestsWithUserAnswers();
 
-            var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
-            {
-                TestNumber = testDto.Number,
-                TestEnded = testDto.HasEnded,
-                EndDate = testDto.EndDate,
-                StartDate = testDto.StartDate,
-                Entries = testDto.Answers
-                    .Select(
-                        ta =>
-                            new SingleTestResultEntry()
-                            {
-                                UserId = ta.UserId,
-                                FullName = PrepareUserEmailForRODO(ta.UserFullName),
-                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
-                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
-                            })
-                    .Union(testDto.WrongAnswers
-                    .Select(
-                        wa =>
-                            new SingleTestResultEntry()
-                            {
-                                UserId = wa.UserId,
-                                FullName = PrepareUserEmailForRODO(wa.UserFullName),
-                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
-                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
-                            }))
-                    .GroupBy(e => new { e.FullName, e.CorrectAnswersCount, e.WrongAnswersCount })
-                    .Select(e => new SingleTestResultEntry
-                    {
-                        FullName = e.Key.FullName,
-                        CorrectAnswersCount = e.Key.CorrectAnswersCount,
-                        WrongAnswersCount = e.Key.WrongAnswersCount
-                    })
-                    .OrderByDescending(e => e.CorrectAnswersCount)
-                    .ToList()
-            }).ToList();
+            /*  var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
+              {
+                  TestNumber = testDto.Number,
+                  TestEnded = testDto.HasEnded,
+                  EndDate = testDto.EndDate,
+                  StartDate = testDto.StartDate,
+                  Entries = testDto.Answers
+                      .Select(
+                          ta =>
+                              new SingleTestResultEntry()
+                              {
+                                  UserId = ta.UserId,
+                                  FullName = PrepareUserEmailForRODO(ta.UserFullName),
+                                  CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
+                                  WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
+                              })
+                      .Union(testDto.WrongAnswers
+                      .Select(
+                          wa =>
+                              new SingleTestResultEntry()
+                              {
+                                  UserId = wa.UserId,
+                                  FullName = PrepareUserEmailForRODO(wa.UserFullName),
+                                  CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
+                                  WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
+                              }))
+                      .GroupBy(e => new { e.FullName, e.CorrectAnswersCount, e.WrongAnswersCount })
+                      .Select(e => new SingleTestResultEntry
+                      {
+                          FullName = e.Key.FullName,
+                          CorrectAnswersCount = e.Key.CorrectAnswersCount,
+                          WrongAnswersCount = e.Key.WrongAnswersCount
+                      })
+                      .OrderByDescending(e => e.CorrectAnswersCount)
+                      .ToList()
+              }).ToList();
+              */
 
             var testResultListDto = _homeService.GetAllTestResults();
 
@@ -98,7 +99,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var vm = new TestResultsVm()
             {
                 CurrentUserPosition = _homeService.GetUserPosition(userId),
-                SingleTestResults = singleTestResults,
+                // SingleTestResults = singleTestResults,
                 TotalTestResults = totalTestResults
             };
 
