@@ -89,9 +89,11 @@ namespace DevAdventCalendarCompetition.Controllers
                     Position = result.Position,
                     UserId = result.UserId,
                     FullName = PrepareUserEmailForRODO(result.Email),
+                    CorrectAnswers = result.CorrectAnswersCount,
+                    WrongAnswers = result.WrongAnswersCount,
                     TotalPoints = result.Points
                 });
-            }          
+            }
 
             var vm = new TestResultsVm()
             {
@@ -106,7 +108,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult CheckTestStatus(int testNumber)
         {
-            return Content(_homeService.CheckTestStatus(testNumber));  
+            return Content(_homeService.CheckTestStatus(testNumber));
         }
 
         public ActionResult Error()
@@ -167,7 +169,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         private string PrepareUserEmailForRODO(string email)
         {
-            string emailMaskRegex = "(^\\w{3}).*(@\\w).*(.)$";
+            string emailMaskRegex = "(^[\\w\\.\\-]{3}).*(@[\\w\\.\\-]).*(.)$";
 
             return Regex.Replace(email, emailMaskRegex,
                 m => m.Groups[1].Value + "..." + m.Groups[2].Value + "..." + m.Groups[3].Value);

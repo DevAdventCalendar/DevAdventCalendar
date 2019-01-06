@@ -64,10 +64,19 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetUserPosition(string userId)
         {
-            var result = _dbContext.Set<Result>()
-                .FirstOrDefault(r => r.UserId == userId);
+            var result = _dbContext.Results
+                .FirstOrDefault(x => x.UserId == userId);
 
-            return result != null ? _dbContext.Results.IndexOf(result) : 0;
+            if (result == null)
+            {
+                return 0;
+            }
+
+            var indexOfResult = _dbContext.Results
+                .OrderByDescending(r => r.Points)
+                .IndexOf(result);
+
+            return ++indexOfResult;
         }
     }
 }
