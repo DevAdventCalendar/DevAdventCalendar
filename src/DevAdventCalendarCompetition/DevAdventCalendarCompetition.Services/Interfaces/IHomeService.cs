@@ -20,5 +20,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         List<TestResultDto> GetAllTestResults();
 
         int GetUserPosition(string userId);
+
+        string PrepareUserEmailForRODO(string email);
     }
 }

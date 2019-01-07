@@ -2,9 +2,9 @@
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -58,6 +58,7 @@ namespace DevAdventCalendarCompetition.Repository
         public List<Result> GetAllTestResults()
         {
             return _dbContext.Set<Result>()
+                .Include(u => u.User)
                 .OrderByDescending(r => r.Points)
                 .ToList();
         }
