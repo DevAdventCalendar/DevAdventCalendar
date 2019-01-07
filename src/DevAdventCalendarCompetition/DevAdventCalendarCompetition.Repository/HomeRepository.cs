@@ -59,7 +59,7 @@ namespace DevAdventCalendarCompetition.Repository
         {
             return _dbContext.Set<Result>()
                 .Include(u => u.User)
-                .OrderByDescending(r => r.Points)
+                .OrderBy(r => r.Id)
                 .ToList();
         }
 
