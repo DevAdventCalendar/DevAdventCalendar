@@ -31,55 +31,60 @@ else
     </div>
 
     <div class="row results">
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
+        @*
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
 
-            @for (var j = 0; j < Model.SingleTestResults.Count; j++)
-            {
-                var result = Model.SingleTestResults[j];
-                var active = "";
+                @for (var j = 0; j < Model.SingleTestResults.Count; j++)
+                {
+                    var result = Model.SingleTestResults[j];
+                    var active = "";
 
-                <li role="presentation"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
-            }
-        </ul>
+                    <li role="presentation"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
+                }
+            </ul>
+        *@
         <!-- Tab panes -->
         <div class="tab-content">
-            @for (var j = 0; j < Model.SingleTestResults.Count; j++)
-            {
-                var result = Model.SingleTestResults[j];
+            @*
+                @for (var j = 0; j < Model.SingleTestResults.Count; j++)
+                {
+                    var result = Model.SingleTestResults[j];
 
-                if (result.TestEnded)
-                {
-                    <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="col-xs-1">#</th>
-                                    <th>Użytkownik</th>
-                                    <th>Poprawne odpowiedzi</th>
-                                    <th>Błędne odpowiedzi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (var i = 0; i < result.Entries.Count; i++)
-                                {
-                                    var testResult = result.Entries[i];
+                    if (result.TestEnded)
+                    {
+                        <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <th scope="row" class="col-xs-1">@(i + 1)</th>
-                                        <td>@testResult.FullName</td>
-                                        <td>@testResult.CorrectAnswersCount</td>
-                                        <td>@testResult.WrongAnswersCount</td>
+                                        <th class="col-xs-1">#</th>
+                                        <th>Użytkownik</th>
+                                        <th>Poprawne odpowiedzi</th>
+                                        <th>Błędne odpowiedzi</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    @for (var i = 0; i < result.Entries.Count; i++)
+                                    {
+                                        var testResult = result.Entries[i];
+                                        <tr>
+                                            <th scope="row" class="col-xs-1">@(i + 1)</th>
+                                            <td>@testResult.FullName</td>
+                                            <td>@testResult.CorrectAnswersCount</td>
+                                            <td>@testResult.WrongAnswersCount</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
+                    }
                 }
-                else
-                {
-                    <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
-                }
-            }
+            *@
+
             @if (Model.TotalTestResults != null)
             {
                 <div role="tabpanel" class="tab-pane active" id="totalresults">
@@ -97,13 +102,13 @@ else
                             @for (var i = 0; i < Model.TotalTestResults.Count; i++)
                             {
                                 var testResult = Model.TotalTestResults[i];
-                            <tr>
-                                <th scope="row" class="col-xs-1">@(i + 1)</th>
-                                <td>@testResult.FullName</td>
-                                <td>@testResult.CorrectAnswers</td>
-                                <td>@testResult.WrongAnswers</td>
-                                <td>@testResult.TotalPoints</td>
-                            </tr>
+                                <tr>
+                                    <th scope="row" class="col-xs-1">@(i + 1)</th>
+                                    <td>@testResult.FullName</td>
+                                    <td>@testResult.CorrectAnswers</td>
+                                    <td>@testResult.WrongAnswers</td>
+                                    <td>@testResult.TotalPoints</td>
+                                </tr>
                             }
                         </tbody>
                     </table>

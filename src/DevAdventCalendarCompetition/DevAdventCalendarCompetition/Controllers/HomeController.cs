@@ -3,9 +3,7 @@ using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text.RegularExpressions;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -39,7 +37,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (userId == null)
                 return View();
 
-            var testDtoList = _homeService.GetTestsWithUserAnswers();
+            /* var testDtoList = _homeService.GetTestsWithUserAnswers();
 
             var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
             {
@@ -53,7 +51,7 @@ namespace DevAdventCalendarCompetition.Controllers
                             new SingleTestResultEntry()
                             {
                                 UserId = ta.UserId,
-                                FullName = PrepareUserEmailForRODO(ta.UserFullName),
+                                FullName = _homeService.PrepareUserEmailForRODO(ta.UserFullName),
                                 CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
                                 WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
                             })
@@ -63,7 +61,7 @@ namespace DevAdventCalendarCompetition.Controllers
                             new SingleTestResultEntry()
                             {
                                 UserId = wa.UserId,
-                                FullName = PrepareUserEmailForRODO(wa.UserFullName),
+                                FullName = _homeService.PrepareUserEmailForRODO(wa.UserFullName),
                                 CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
                                 WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
                             }))
@@ -77,6 +75,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     .OrderByDescending(e => e.CorrectAnswersCount)
                     .ToList()
             }).ToList();
+            */
 
             var testResultListDto = _homeService.GetAllTestResults();
 
@@ -88,7 +87,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     Position = result.Position,
                     UserId = result.UserId,
-                    FullName = PrepareUserEmailForRODO(result.Email),
+                    FullName = _homeService.PrepareUserEmailForRODO(result.Email),
                     CorrectAnswers = result.CorrectAnswersCount,
                     WrongAnswers = result.WrongAnswersCount,
                     TotalPoints = result.Points
@@ -98,11 +97,11 @@ namespace DevAdventCalendarCompetition.Controllers
             var vm = new TestResultsVm()
             {
                 CurrentUserPosition = _homeService.GetUserPosition(userId),
-                SingleTestResults = singleTestResults,
+                //SingleTestResults = singleTestResults,
                 TotalTestResults = totalTestResults
             };
 
-            return View("Results", vm);
+            return View(vm);
         }
 
         [HttpPost]
@@ -165,14 +164,6 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult GetServerTime()
         {
             return Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));
-        }
-
-        private string PrepareUserEmailForRODO(string email)
-        {
-            string emailMaskRegex = "(^[\\w\\.\\-]{3}).*(@[\\w\\.\\-]).*(.)$";
-
-            return Regex.Replace(email, emailMaskRegex,
-                m => m.Groups[1].Value + "..." + m.Groups[2].Value + "..." + m.Groups[3].Value);
         }
     }
 }

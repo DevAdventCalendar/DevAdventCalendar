@@ -4,6 +4,7 @@ using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -73,6 +74,15 @@ namespace DevAdventCalendarCompetition.Services
         public int GetUserPosition(string userId)
         {
             return _homeRepository.GetUserPosition(userId);
+        }
+
+        public string PrepareUserEmailForRODO(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return string.Empty;
+            var emailMaskRegex = "(^[\\w\\.\\-]{3}).*(@[\\w\\.\\-]).*(.)$";
+
+            return Regex.Replace(email, emailMaskRegex,
+                m => m.Groups[1].Value + "..." + m.Groups[2].Value + "..." + m.Groups[3].Value);
         }
     }
 }
