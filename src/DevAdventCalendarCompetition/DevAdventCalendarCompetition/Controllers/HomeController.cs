@@ -77,7 +77,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }).ToList();
             */
 
-            const int pageSize = 50;
+            int pageSize = 50;
 
             var testResultListDto = _homeService.GetAllTestResults();
 
@@ -100,7 +100,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 CurrentUserPosition = _homeService.GetUserPosition(userId),
                 //SingleTestResults = singleTestResults,
-                TotalTestResults = totalTestResults
+                TotalTestResults = PaginatedList<TotalTestResultEntryVm>.Create(totalTestResults, pageIndex ?? 1, pageSize)
             };
 
             return View(vm);
