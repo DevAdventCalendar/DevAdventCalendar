@@ -59,6 +59,11 @@ namespace DevAdventCalendarCompetition.Services
             return testResultsDtoList;
         }
 
+        public PaginatedList<TestResultDto> GetPaginatedResults(int? pageIndex, int pageSize)
+        {
+            return PaginatedList<TestResultDto>.Create(GetAllTestResults(), pageIndex ?? 1, pageSize);
+        }
+
         public string CheckTestStatus(int testNumber)
         {
             var test = _homeRepository.GetTestByNumber(testNumber);
