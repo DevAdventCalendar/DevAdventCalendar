@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevAdventCalendarCompetition.Services
+namespace DevAdventCalendarCompetition
 {
     public class PaginatedList<T> : List<T>
     {
