@@ -19,8 +19,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         List<TestResultDto> GetAllTestResults();
 
-        PaginatedList<TestResultDto> GetPaginatedResults(int? pageIndex, int pageSize);
-
         int GetUserPosition(string userId);
 
         string PrepareUserEmailForRODO(string email);

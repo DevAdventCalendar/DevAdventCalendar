@@ -79,11 +79,11 @@ namespace DevAdventCalendarCompetition.Controllers
 
             const int pageSize = 50;
 
-            var paginatedResultListDto = _homeService.GetPaginatedResults(pageIndex, pageSize);
+            var testResultListDto = _homeService.GetAllTestResults();
 
             List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
 
-            foreach (var result in paginatedResultListDto)
+            foreach (var result in testResultListDto)
             {
                 totalTestResults.Add(new TotalTestResultEntryVm
                 {
