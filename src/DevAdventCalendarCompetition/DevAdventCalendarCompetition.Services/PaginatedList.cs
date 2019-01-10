@@ -25,7 +25,7 @@ namespace DevAdventCalendarCompetition.Services
         public bool HasNextPage => (PageIndex < TotalPages);
 
         public static  PaginatedList<T> Create(
-            IQueryable<T> source, int pageIndex, int pageSize)
+            List<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip(
