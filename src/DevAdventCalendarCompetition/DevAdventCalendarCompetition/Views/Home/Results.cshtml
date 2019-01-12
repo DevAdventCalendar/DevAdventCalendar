@@ -90,26 +90,26 @@ else
                 <div role="tabpanel" class="tab-pane active" id="totalresults">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th class="col-xs-1">#</th>
-                                <th>Użytkownik</th>
-                                <th>Poprawne odpowiedzi</th>
-                                <th>Błędne odpowiedzi</th>
-                                <th>Suma punktów</th>
-                            </tr>
+                        <tr>
+                            <th class="col-xs-1">#</th>
+                            <th>Użytkownik</th>
+                            <th>Poprawne odpowiedzi</th>
+                            <th>Błędne odpowiedzi</th>
+                            <th>Suma punktów</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @for (var i = 0; i < Model.TotalTestResults.Count; i++)
-                            {
-                                var testResult = Model.TotalTestResults[i];
-                                <tr>
-                                    <th scope="row" class="col-xs-1">@(i + 1)</th>
-                                    <td>@testResult.FullName</td>
-                                    <td>@testResult.CorrectAnswers</td>
-                                    <td>@testResult.WrongAnswers</td>
-                                    <td>@testResult.TotalPoints</td>
-                                </tr>
-                            }
+                        @for (var i = 0; i < Model.TotalTestResults.Count; i++)
+                        {
+                            var testResult = Model.TotalTestResults[i];
+                            <tr>
+                                <th scope="row" class="col-xs-1">@(Model.TotalTestResults.PageIndex <= 1 ? i + 1 : (Model.TotalTestResults.PageSize * (Model.TotalTestResults.PageIndex - 1)) + i + 1)</th>
+                                <td>@testResult.FullName</td>
+                                <td>@testResult.CorrectAnswers</td>
+                                <td>@testResult.WrongAnswers</td>
+                                <td>@testResult.TotalPoints</td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>
@@ -120,4 +120,20 @@ else
             }
         </div>
     </div>
+    
+    var prevDisabled = !Model.TotalTestResults.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.TotalTestResults.HasNextPage ? "disabled" : "";   
+
+    <a asp-controller="Home"
+       asp-action="Results"
+       asp-route-pageIndex="@(Model.TotalTestResults.PageIndex - 1)"
+       class="btn btn-default @prevDisabled">
+       Wstecz
+    </a>
+    <a asp-controller="Home"
+        asp-action="Results"
+        asp-route-pageIndex="@(Model.TotalTestResults.PageIndex + 1)"
+        class="btn btn-default @nextDisabled">
+        Dalej
+    </a>
 }
