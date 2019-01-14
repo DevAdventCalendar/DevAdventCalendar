@@ -31,7 +31,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return View(currentTestsDto);
         }
 
-        public ActionResult Results()
+        public ActionResult Results(int? pageIndex)
         {
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -77,6 +77,8 @@ namespace DevAdventCalendarCompetition.Controllers
             }).ToList();
             */
 
+            int pageSize = 50;
+
             var testResultListDto = _homeService.GetAllTestResults();
 
             List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
@@ -98,7 +100,7 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 CurrentUserPosition = _homeService.GetUserPosition(userId),
                 //SingleTestResults = singleTestResults,
-                TotalTestResults = totalTestResults
+                TotalTestResults = PaginatedList<TotalTestResultEntryVm>.Create(totalTestResults, pageIndex ?? 1, pageSize)
             };
 
             return View(vm);
