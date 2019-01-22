@@ -19,9 +19,9 @@ namespace DevAdventCalendarCompetition.Repository
 
         public TestAnswer GetEmptyAnswerForStartedTestByUser(string userId)
         {
-            return _dbContext.TestAnswers.FirstOrDefault(a => 
-                a.AnsweringTime == DateTime.MinValue && 
-                a.Answer == null && 
+            return _dbContext.TestAnswer.FirstOrDefault(a =>
+                a.AnsweringTime == DateTime.MinValue &&
+                //a.Answer == null && TODO: Correct checking for null answer
                 a.UserId == userId);
         }
     }

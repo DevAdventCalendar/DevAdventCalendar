@@ -32,7 +32,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             var testAnswer = new TestAnswer
             {
-                Answer = null,
+                //Answer = null, TODO: Correct checking for null answer
                 TestId = testId,
                 UserId = userId,
                 AnsweringTime = DateTime.MinValue,
@@ -45,7 +45,7 @@ namespace DevAdventCalendarCompetition.Services
         public void UpdatePuzzleTestAnswer(TestAnswerDto testAnswerDto, int moves, int gameDuration, string testEnd)
         {
             var testAnswer = _puzzleTestRepository.GetEmptyAnswerForStartedTestByUser(testAnswerDto.UserId);
-            testAnswer.Answer = moves.ToString();
+            //testAnswer.Answer = moves.ToString(); TODO: Correct checking for null answer
             testAnswer.AnsweringTime = DateTime.ParseExact(testEnd, "yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture);
             testAnswer.AnsweringTimeOffset = TimeSpan.FromSeconds(gameDuration);
 
@@ -57,7 +57,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             var testAnswer = _puzzleTestRepository.GetEmptyAnswerForStartedTestByUser(testAnswerDto.UserId);
 
-            testAnswer.Answer = moveCount.ToString();
+            // testAnswer.Answer = moveCount.ToString(); TODO: Correct checking for null answer
             testAnswer.AnsweringTime = DateTime.Now;
             testAnswer.AnsweringTimeOffset = TimeSpan.Zero;
 

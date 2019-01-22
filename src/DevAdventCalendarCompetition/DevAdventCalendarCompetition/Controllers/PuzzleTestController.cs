@@ -1,31 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using DevAdventCalendarCompetition.Data;
-using DevAdventCalendarCompetition.Models;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using DevAdventCalendarCompetition.Repository.Context;
-using DevAdventCalendarCompetition.Repository.Models;
+﻿using System.Security.Claims;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     public class PuzzleTestController : BaseTestController
     {
+        private IPuzzleTestService _puzzleTestService;
+
         public PuzzleTestController(IBaseTestService baseTestService, IPuzzleTestService puzzleTestService) : base(baseTestService)
         {
             _puzzleTestService = puzzleTestService;
         }
 
         [HttpGet]
-        [CanStartTest(TestNumber = 7)]
         public IActionResult Index()
         {
             var test = _baseTestService.GetTestByNumber(7);
@@ -44,7 +32,6 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        [CanStartTest(TestNumber = 7)]
         public IActionResult StartGame()
         {
             var test = _baseTestService.GetTestByNumber(7);
