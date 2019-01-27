@@ -80,8 +80,6 @@ namespace DevAdventCalendarCompetition.Repository.Models
         public string DiscountLogoUrl { get; set; }
 
         public string DiscountLogoPath { get; set; }
-
-        public string PlainAnswer { get; set; }
     }
 
     public enum TestStatus

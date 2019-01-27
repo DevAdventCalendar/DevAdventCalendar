@@ -17,11 +17,12 @@ namespace DevAdventCalendarCompetition.Repository
             _dbContext = dbContext;
         }
 
-        public TestAnswer GetEmptyAnswerForStartedTestByUser(string userId)
+        public TestAnswer GetEmptyAnswerForStartedTestByUser(string userId, int testId)
         {
             return _dbContext.TestAnswer.FirstOrDefault(a =>
                 a.AnsweringTime == DateTime.MinValue &&
-                //a.Answer == null && TODO: Correct checking for null answer
+                a.PlainAnswer == null &&
+                a.TestId == testId &&
                 a.UserId == userId);
         }
     }

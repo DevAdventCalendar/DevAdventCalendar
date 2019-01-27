@@ -13,5 +13,7 @@ namespace DevAdventCalendarCompetition.Services.Models
         public DateTime AnsweringTime { get; set; }
 
         public TimeSpan AnsweringTimeOffset { get; set; }
+
+        public string PlainAnswer { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace DevAdventCalendarCompetition.Controllers
 {
     public class PuzzleTestController : BaseTestController
     {
-        private IPuzzleTestService _puzzleTestService;
+        private readonly IPuzzleTestService _puzzleTestService;
 
         public PuzzleTestController(IBaseTestService baseTestService, IPuzzleTestService puzzleTestService) : base(baseTestService)
         {
@@ -16,25 +16,26 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var test = _baseTestService.GetTestByNumber(7);
+            var test = _baseTestService.GetTestByNumber(0);
             return View(test);
         }
 
         [HttpGet]
         public IActionResult CheckGameStarted()
         {
-            var testAnswer =_puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var puzzleTest = _baseTestService.GetTestByNumber(0);
+            var testAnswer =_puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier), puzzleTest.Id);
 
             if (testAnswer != null)
                 return Ok(true);
-            else
-                return BadRequest(false);
+
+            return BadRequest(false);
         }
 
         [HttpPost]
         public IActionResult StartGame()
         {
-            var test = _baseTestService.GetTestByNumber(7);
+            var test = _baseTestService.GetTestByNumber(0);
 
             if (test != null)
             {
@@ -50,7 +51,8 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public IActionResult UpdateGameResult(int moveCount, int gameDuration, string testEnd)
         {
-            var testAnswer = _puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var puzzleTest = _baseTestService.GetTestByNumber(0);
+            var testAnswer = _puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier), puzzleTest.Id);
 
             if (testAnswer != null)
             {
@@ -65,7 +67,8 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public IActionResult ResetGame(int moveCount)
         {
-            var testAnswer = _puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var puzzleTest = _baseTestService.GetTestByNumber(0);
+            var testAnswer = _puzzleTestService.GetEmptyAnswerForStartedTestByUser(User.FindFirstValue(ClaimTypes.NameIdentifier), puzzleTest.Id);
 
             if (testAnswer != null)
             {

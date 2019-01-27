@@ -7,6 +7,6 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 {
     public interface IPuzzleTestRepository
     {
-        TestAnswer GetEmptyAnswerForStartedTestByUser(string userId);
+        TestAnswer GetEmptyAnswerForStartedTestByUser(string userId, int testId);
     }
 }

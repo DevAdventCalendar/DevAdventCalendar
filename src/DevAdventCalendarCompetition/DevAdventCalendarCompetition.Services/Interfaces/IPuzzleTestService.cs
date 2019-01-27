@@ -7,7 +7,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IPuzzleTestService
     {
-        TestAnswerDto GetEmptyAnswerForStartedTestByUser(string userId);
+        TestAnswerDto GetEmptyAnswerForStartedTestByUser(string userId, int testId);
         void SaveEmptyTestAnswer(int testId, string userId);
         void UpdatePuzzleTestAnswer(TestAnswerDto testAnswerDto, int moves, int gameDuration, string testEnd);
         void ResetGame(TestAnswerDto testAnswerDto, int moveCount);
