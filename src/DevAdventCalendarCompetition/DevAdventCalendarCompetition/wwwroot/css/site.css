@@ -679,3 +679,10 @@ address .col .row {
 .cookies-text {
     font-size: 15px;
 }
+
+#mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    font-family: 'Mali', cursive;
+}
