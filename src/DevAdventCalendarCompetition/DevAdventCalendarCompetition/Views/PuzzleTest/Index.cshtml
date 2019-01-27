@@ -1,31 +1,41 @@
-﻿@{
+﻿@using DevAdventCalendarCompetition.Services.Models
+@model DevAdventCalendarCompetition.Services.Models.TestDto
+@{
     ViewBag.Title = "Puzzle";
 }
-<div class="jumbotron">
+
+@if (Model.Status == TestStatus.Started)
+{
     <h1>Puzzle </h1>
-</div>
-<div class="row">
-    <div class="col-md-12 col-lg-12">
-        <p>
-            Ułóż przesuwane puzzle ze znaną osobistością świata IT ;)
-        </p>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <p>
+                Ułóż przesuwane puzzle ze znaną osobistością świata IT ;)
+            </p>
+        </div>
     </div>
-</div>
-<div class="row game-container">
-    <div class="col-md-12 col-lg-12">
-        <div id="puzzle">
-            <div class="puzzle-container">
-                <figure><img src="images/bill-gates-800-1.jpg" alt="Bill Gates"></figure>
-            </div>
-        </div>       
+    <div class="row game-container">
+        <div class="col-md-12 col-lg-12">
+            <div id="puzzle">
+                <div class="puzzle-container">
+                    <figure><img src="images/bill-gates-800-1.jpg" alt="Bill Gates"></figure>
+                </div>
+            </div>       
+        </div>
     </div>
-</div>
-<div class="row ui">
-     <div class="col col-md-2 col-lg-2">
-        <button type="button" class="btn btn-primary" id="start">Start!</button>
-    </div>   
-    <div class="col col-md-2 col-lg-2">
-        <button type="button" class="btn btn-secondary" id="reset" disabled>Reset!</button>
+    <div class="row ui">
+        <div class="col col-md-2 col-lg-2">
+            <button type="button" class="btn btn-primary" id="start">Start!</button>
+        </div>   
+        <div class="col col-md-2 col-lg-2">
+            <button type="button" class="btn btn-secondary" id="reset" disabled>Reset!</button>
+        </div>
+        <div class="col col-md-8 col-lg-8"><h2 id="moveCounter"></h2></div>
     </div>
-    <div class="col col-md-8 col-lg-8"><h2 id="moveCounter"></h2></div>
-</div>
+}
+else
+{
+    <h1>Test wyłączony!</h1>
+}
+
