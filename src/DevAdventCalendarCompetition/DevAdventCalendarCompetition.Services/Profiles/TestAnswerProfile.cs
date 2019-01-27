@@ -9,7 +9,8 @@ namespace DevAdventCalendarCompetition.Services.Profiles
         public TestAnswerProfile()
         {
             CreateMap<TestAnswer, TestAnswerDto>()
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email));
+                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email))
+                .ForMember(dest => dest.PlainAnswer, opt => opt.MapFrom(src => src.PlainAnswer));
 
             CreateMap<TestAnswerDto, TestAnswer>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
@@ -22,7 +23,8 @@ namespace DevAdventCalendarCompetition.Services.Profiles
                 .ForMember(dest => dest.Test, opt => opt.Ignore())
                 .ForMember(dest => dest.TestId, opt => opt.Ignore())
                 .ForMember(dest => dest.AnsweringTime, opt => opt.Ignore())
-                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());
+                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore())
+                .ForMember(dest => dest.PlainAnswer, opt => opt.Ignore());
 
             CreateMap<Test, TestAnswer>()
                 .ForMember(dest => dest.Test, opt => opt.MapFrom(src => src))
@@ -30,7 +32,8 @@ namespace DevAdventCalendarCompetition.Services.Profiles
                 .ForMember(dest => dest.User, opt => opt.Ignore())
                 .ForMember(dest => dest.UserId, opt => opt.Ignore())
                 .ForMember(dest => dest.AnsweringTime, opt => opt.Ignore())
-                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());        
+                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore())
+                .ForMember(dest => dest.PlainAnswer, opt => opt.Ignore());        
         }
     }
 }

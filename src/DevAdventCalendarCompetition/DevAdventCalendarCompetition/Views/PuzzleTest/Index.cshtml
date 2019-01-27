@@ -4,7 +4,7 @@
     ViewBag.Title = "Puzzle";
 }
 
-@if (Model.Status == TestStatus.Started)
+@if (Model != null && Model.Status == TestStatus.Started)
 {
     <h1>Puzzle </h1>
 
@@ -15,7 +15,7 @@
             </p>
         </div>
     </div>
-    <div class="row game-container">
+    <div class="game-container">
         <div class="col-md-12 col-lg-12">
             <div id="puzzle">
                 <div class="puzzle-container">

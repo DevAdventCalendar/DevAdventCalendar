@@ -21,6 +21,7 @@ namespace DevAdventCalendarCompetition.Services
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
+            services.AddTransient<IPuzzleTestRepository, PuzzleTestRepository>();
 
             var config = configuration.GetSection("StringHasher");
             var stringSalt = config.GetValue<string>("Salt");
