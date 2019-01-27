@@ -32,6 +32,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
+            services.AddTransient<IPuzzleTestRepository, PuzzleTestRepository>();
 
             services.AddScoped<DbInitializer>();
 
@@ -59,6 +60,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IBaseTestService, BaseTestService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IManageService, ManageService>();
+            services.AddTransient<IPuzzleTestService, PuzzleTestService>();
             services.AddTransient<IdentityService>();
             return services;
         }
