@@ -52,6 +52,13 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 var user = await _accountService.FindByEmailAsync(model.Email);
 
+                if (user == null)
+                {
+                    _logger.LogWarning($"User {model.Email} not exists.");
+                    ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
+                    return View(model);
+                }
+
                 if (!user.EmailConfirmed)
                 {
                     _logger.LogInformation("User not confirmed.");
@@ -73,11 +80,9 @@ namespace DevAdventCalendarCompetition.Controllers
                     _logger.LogWarning("User account locked out.");
                     return RedirectToAction(nameof(Lockout));
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
-                    return View(model);
-                }
+
+                ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
+                return View(model);
             }
 
             // If we got this far, something failed, redisplay form
