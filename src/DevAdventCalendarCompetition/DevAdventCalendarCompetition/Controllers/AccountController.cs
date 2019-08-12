@@ -1,4 +1,7 @@
-﻿using DevAdventCalendarCompetition.Extensions;
+﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -6,9 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
