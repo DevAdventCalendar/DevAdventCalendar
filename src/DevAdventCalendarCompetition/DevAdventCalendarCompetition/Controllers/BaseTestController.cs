@@ -1,39 +1,38 @@
-﻿using DevAdventCalendarCompetition.Services.Interfaces;
+﻿using System;
+using System.Security.Claims;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Security.Claims;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     [Authorize]
     public class BaseTestController : Controller
     {
-        protected readonly IBaseTestService _baseTestService;
+        private readonly IBaseTestService baseTestService;
 
         public BaseTestController(IBaseTestService baseTestService)
         {
-            _baseTestService = baseTestService;
+            this.baseTestService = baseTestService;
         }
 
         public void SaveWrongAnswer(string wrongAnswer, int testNumber)
         {
-            var testDto = _baseTestService.GetTestByNumber(testNumber);
+            var testDto = this.baseTestService.GetTestByNumber(testNumber);
 
-            _baseTestService.AddTestWrongAnswer(User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.Id, wrongAnswer, DateTime.Now);
+            this.baseTestService.AddTestWrongAnswer(this.User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.Id, wrongAnswer, DateTime.Now);
         }
 
         public ActionResult SaveAnswerAndRedirect(int testNumber)
         {
-            var testDto = _baseTestService.GetTestByNumber(testNumber);
+            var testDto = this.baseTestService.GetTestByNumber(testNumber);
 
-            //TODO: check for null, error handling
+            // TODO: check for null, error handling
+            this.baseTestService.AddTestAnswer(testDto.Id, this.User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.StartDate.Value);
 
-            _baseTestService.AddTestAnswer(testDto.Id, User.FindFirstValue(ClaimTypes.NameIdentifier), testDto.StartDate.Value);
-
-            //TODO: use Automapper?
-            var testAnswerDto = _baseTestService.GetAnswerByTestId(testDto.Id);
+            // TODO: use Automapper?
+            var testAnswerDto = this.baseTestService.GetAnswerByTestId(testDto.Id);
 
             var testAnswerVm = new TestAnswerVm()
             {
@@ -45,7 +44,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var answerVm = new AnswerVm() { TestAnswerVm = testAnswerVm, TestNumber = testNumber };
 
-            return View("Answered", answerVm);
+            return this.View("Answered", answerVm);
         }
     }
 }

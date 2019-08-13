@@ -17,10 +17,10 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public ActionResult Index(int testNumber)
         {
-            var test = this._baseTestService.GetTestByNumber(testNumber);
+            var test = this.baseTestService.GetTestByNumber(testNumber);
             if (test != null)
             {
-                var userHasAnswered = this._baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
+                var userHasAnswered = this.baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
                 if (userHasAnswered)
                 {
                     test.HasUserAnswered = true;
@@ -41,14 +41,14 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult Index(int testNumber, string answer = "")
         {
-            var test = this._baseTestService.GetTestByNumber(testNumber);
+            var test = this.baseTestService.GetTestByNumber(testNumber);
 #pragma warning disable CA1062 // Validate arguments of public methods
             var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", " ", StringComparison.Ordinal);
 #pragma warning restore CA1062 // Validate arguments of public methods
 
             if (test != null)
             {
-                if (this._baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
+                if (this.baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
                 {
                     test.HasUserAnswered = true;
                     return this.View("Index", test);
@@ -60,7 +60,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.View("Index", test);
                 }
 
-                if (this._baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
+                if (this.baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
                 {
                     return this.SaveAnswerAndRedirect(testNumber);
                 }
