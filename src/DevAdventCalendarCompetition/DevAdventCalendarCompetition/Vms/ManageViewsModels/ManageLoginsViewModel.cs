@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevAdventCalendarCompetition.Vms
 {
-
     public class ManageLoginsViewModel
     {
-        public IList<UserLoginInfo> CurrentLogins { get; set; }
-        public IList<AuthenticationDescription> OtherLogins { get; set; }
-        public IList<AuthenticationScheme> ExternalProviders { get; set; }
+        public IList<UserLoginInfo> CurrentLogins { get; private set; }
+
+        public IList<AuthenticationDescription> OtherLogins { get; private set; }
+
+        public IList<AuthenticationScheme> ExternalProviders { get; private set; }
     }
 }
