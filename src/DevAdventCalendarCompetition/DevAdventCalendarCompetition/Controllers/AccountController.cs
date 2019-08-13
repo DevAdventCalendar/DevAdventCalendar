@@ -16,14 +16,15 @@ namespace DevAdventCalendarCompetition.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly IAccountService _accountService;
-        private readonly ILogger _logger;
+        private readonly IAccountService accountService;
+        private readonly ILogger logger;
 
-        public AccountController(IAccountService accountService,
+        public AccountController(
+            IAccountService accountService,
             ILogger<AccountController> logger)
         {
-            _accountService = accountService;
-            _logger = logger;
+            this.accountService = accountService;
+            this.logger = logger;
         }
 
         [TempData]
@@ -34,12 +35,12 @@ namespace DevAdventCalendarCompetition.Controllers
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme).ConfigureAwait(false);
 
             var model = new LoginViewModel();
 
-            ViewData["ReturnUrl"] = returnUrl;
-            return View(model);
+            this.ViewData["ReturnUrl"] = returnUrl;
+            return this.View(model);
         }
 
         [HttpPost]
@@ -47,62 +48,71 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            this.ViewData["ReturnUrl"] = returnUrl;
+            if (this.ModelState.IsValid)
             {
-                var user = await _accountService.FindByEmailAsync(model.Email);
+#pragma warning disable CA1062 // Validate arguments of public methods
+                var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
                 if (user == null)
                 {
-                    _logger.LogWarning($"User {model.Email} not exists.");
-                    ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
-                    return View(model);
+                    this.logger.LogWarning($"User {model.Email} not exists.");
+                    this.ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
+                    return this.View(model);
                 }
 
                 if (!user.EmailConfirmed)
                 {
-                    _logger.LogInformation("User not confirmed.");
-                    ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
-                    return View(model);
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogInformation("User not confirmed.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
+                    return this.View(model);
                 }
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
+                var result = await this.accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogInformation("User logged in.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    return this.RedirectToLocal(returnUrl);
                 }
 
-                ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
-                return View(model);
+                if (result.IsLockedOut)
+                {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogWarning("User account locked out.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    return this.RedirectToAction(nameof(this.Lockout));
+                }
+
+                this.ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
+                return this.View(model);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null, string email = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            ViewData["Email"] = email;
-            return View();
+            this.ViewData["ReturnUrl"] = returnUrl;
+            this.ViewData["Email"] = email;
+            return this.View();
         }
 
         [HttpPost]
@@ -110,35 +120,42 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            this.ViewData["ReturnUrl"] = returnUrl;
+            if (this.ModelState.IsValid)
             {
-                var user = _accountService.CreateApplicationUserByEmail(model.Email);
-                var result = await _accountService.CreateAsync(user, model.Password);
+#pragma warning disable CA1062 // Validate arguments of public methods
+                var user = this.accountService.CreateApplicationUserByEmail(model.Email);
+#pragma warning restore CA1062 // Validate arguments of public methods
+                var result = await this.accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogInformation("User created a new account with password.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
 
-                    var code = await _accountService.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                    var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
+                    await this.accountService.SendEmailConfirmationAsync(model.Email, callbackUrl).ConfigureAwait(false);
 
-                    return View("RegisterConfirmation");
+                    return this.View("RegisterConfirmation");
                 }
-                AddErrors(result);
+
+                this.AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _accountService.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            await this.accountService.SignOutAsync().ConfigureAwait(false);
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+            this.logger.LogInformation("User logged out.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            return this.RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [HttpPost]
@@ -147,9 +164,9 @@ namespace DevAdventCalendarCompetition.Controllers
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = _accountService.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return Challenge(properties, provider);
+            var redirectUrl = this.Url.Action(nameof(this.ExternalLoginCallback), "Account", new { returnUrl });
+            var properties = this.accountService.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return this.Challenge(properties, provider);
         }
 
         [HttpGet]
@@ -158,39 +175,42 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (remoteError != null)
             {
-                ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
-                return RedirectToAction(nameof(Login));
+                this.ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
+                return this.RedirectToAction(nameof(this.Login));
             }
-            var info = await _accountService.GetExternalLoginInfoAsync();
+
+            var info = await this.accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
             if (info == null)
             {
-                return RedirectToAction(nameof(Login));
+                return this.RedirectToAction(nameof(this.Login));
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey);
+            var result = await this.accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey).ConfigureAwait(false);
             if (result.Succeeded)
             {
-                _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                this.logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                return this.RedirectToLocal(returnUrl);
             }
 
             if (result.IsNotAllowed)
             {
-                return View("RegisterConfirmation");
+                return this.View("RegisterConfirmation");
             }
 
             if (result.IsLockedOut)
             {
-                return RedirectToAction(nameof(Lockout));
+                return this.RedirectToAction(nameof(this.Lockout));
             }
             else
             {
                 // If the user does not have an account, then ask the user to create an account.
-                ViewData["ReturnUrl"] = returnUrl;
-                ViewData["LoginProvider"] = info.LoginProvider;
+                this.ViewData["ReturnUrl"] = returnUrl;
+                this.ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+                return this.View("ExternalLogin", new ExternalLoginViewModel { Email = email });
             }
         }
 
@@ -199,36 +219,43 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, string returnUrl = null)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await _accountService.GetExternalLoginInfoAsync();
+                var info = await this.accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
                 if (info == null)
                 {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
                     throw new ApplicationException("Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
 
-                var user = _accountService.CreateApplicationUserByEmail(model.Email);
-                var result = await _accountService.CreateAsync(user, null);
+#pragma warning disable CA1062 // Validate arguments of public methods
+                var user = this.accountService.CreateApplicationUserByEmail(model.Email);
+#pragma warning restore CA1062 // Validate arguments of public methods
+                var result = await this.accountService.CreateAsync(user, null).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-                    result = await _accountService.AddLoginAsync(user, info);
+                    result = await this.accountService.AddLoginAsync(user, info).ConfigureAwait(false);
                     if (result.Succeeded)
                     {
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                        this.logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
 
-                        var code = await _accountService.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                        await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                        var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                        var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
+                        await this.accountService.SendEmailConfirmationAsync(model.Email, callbackUrl).ConfigureAwait(false);
 
-                        return View("RegisterConfirmation");
+                        return this.View("RegisterConfirmation");
                     }
                 }
-                AddErrors(result);
+
+                this.AddErrors(result);
             }
 
-            ViewData["ReturnUrl"] = returnUrl;
-            return View(nameof(ExternalLogin), model);
+            this.ViewData["ReturnUrl"] = returnUrl;
+            return this.View(nameof(this.ExternalLogin), model);
         }
 
         [HttpGet]
@@ -237,22 +264,24 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
-            var user = await _accountService.FindByIdAsync(userId);
+
+            var user = await this.accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
                 throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
-            var result = await _accountService.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            var result = await this.accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
+            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -260,33 +289,37 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var user = await _accountService.FindByEmailAsync(model.Email);
-                if (user == null || !(await _accountService.IsEmailConfirmedAsync(user)))
+#pragma warning disable CA1062 // Validate arguments of public methods
+                var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+#pragma warning restore CA1062 // Validate arguments of public methods
+                if (user == null || !(await this.accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                    return this.RedirectToAction(nameof(this.ForgotPasswordConfirmation));
                 }
 
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _accountService.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, user.Email, Request.Scheme);
-                await _accountService.SendEmailAsync(model.Email, "Reset hasła",
-                   $"Swoje hasło zresetujesz klikając na link: <a href='{callbackUrl}'>LINK</a>");
-                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                var code = await this.accountService.GeneratePasswordResetTokenAsync(user).ConfigureAwait(false);
+                var callbackUrl = this.Url.ResetPasswordCallbackLink(user.Id, code, user.Email, this.Request.Scheme);
+                await this.accountService.SendEmailAsync(
+                    model.Email,
+                    "Reset hasła",
+                    $"Swoje hasło zresetujesz klikając na link: <a href='{callbackUrl}'>LINK</a>").ConfigureAwait(false);
+                return this.RedirectToAction(nameof(this.ForgotPasswordConfirmation));
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
@@ -295,10 +328,14 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (code == null)
             {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
                 throw new ApplicationException("Kod musi być dostarczony do resetowania hasła.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+
             }
+
             var model = new ResetPasswordViewModel { Code = code, Email = email };
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -306,63 +343,107 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
-            var user = await _accountService.FindByEmailAsync(model.Email);
+
+#pragma warning disable CA1062 // Validate arguments of public methods
+            var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+#pragma warning restore CA1062 // Validate arguments of public methods
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
-            var result = await _accountService.ResetPasswordAsync(user, model.Code, model.Password);
+
+            var result = await this.accountService.ResetPasswordAsync(user, model.Code, model.Password).ConfigureAwait(false);
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
-            AddErrors(result);
-            
+
+            this.AddErrors(result);
+
             model = new ResetPasswordViewModel
             {
                 Email = model.Email
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
         public IActionResult AccessDenied()
         {
-            return View();
+            return this.View();
         }
 
         #region Helpers
+        public Task<IActionResult> Login(LoginViewModel model, Uri returnUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Register(Uri returnUrl, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> Register(RegisterViewModel model, Uri returnUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, Uri returnUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> Login(Uri returnUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult ExternalLogin(string provider, Uri returnUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> ExternalLoginCallback(string remoteError, Uri returnUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> ExternalLoginCallback(Uri returnUrl, string remoteError)
+        {
+            throw new NotImplementedException();
+        }
 
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                this.ModelState.AddModelError(string.Empty, error.Description);
             }
         }
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (this.Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
 
