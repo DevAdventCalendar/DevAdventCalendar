@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevAdventCalendarCompetition.Vms
 {
@@ -11,7 +12,7 @@ namespace DevAdventCalendarCompetition.Vms
         [Display(Name = "Kod")]
         public string Code { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public Uri ReturnUrl { get; set; }
 
         [Display(Name = "Zapamiętać przeglądarkę?")]
         public bool RememberBrowser { get; set; }
