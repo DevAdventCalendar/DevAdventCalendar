@@ -1,7 +1,9 @@
-﻿namespace DevAdventCalendarCompetition.Vms
+﻿using System;
+
+namespace DevAdventCalendarCompetition.Vms
 {
     public class ExternalLoginListViewModel
     {
-        public string ReturnUrl { get; set; }
+        public Uri ReturnUrl { get; set; }
     }
 }
