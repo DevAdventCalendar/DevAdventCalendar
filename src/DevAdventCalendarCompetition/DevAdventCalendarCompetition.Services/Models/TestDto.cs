@@ -35,6 +35,11 @@ namespace DevAdventCalendarCompetition.Services.Models
         public bool HasUserAnswered { get; set; }
 
         public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
+
+        public static implicit operator TestDto(TestDto v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public enum TestStatus
