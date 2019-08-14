@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevAdventCalendarCompetition.Vms
 {
-
     public class VerifyPhoneNumberViewModel
     {
         [Required(ErrorMessage = "Pole Kod jest obowiązkowe")]

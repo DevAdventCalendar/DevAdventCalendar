@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DevAdventCalendarCompetition.Vms
 {
-
     public class ChangePasswordViewModel
     {
         [Required(ErrorMessage = "Pole Bieżące hasło jest obowiązkowe")]
