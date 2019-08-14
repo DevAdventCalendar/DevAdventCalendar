@@ -3,7 +3,7 @@
 namespace DevAdventCalendarCompetition.Vms
 {
     public class ResetPasswordViewModel
-    { 
+    {
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Pole Hasło jest obowiązkowe")]
