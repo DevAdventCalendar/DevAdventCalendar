@@ -7,9 +7,9 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public int TestNumber { get; set; }
 
-        public List<SingleTestResultEntry> Entries { get; set; }
+        public List<SingleTestResultEntry> Entries { get; private set; }
 
-        public List<TotalTestResultEntryVm> TotalResults { get; set; }
+        public List<TotalTestResultEntryVm> TotalResults { get;  private set; }
 
         public bool TestEnded { get; set; }
 
@@ -17,15 +17,17 @@ namespace DevAdventCalendarCompetition.Vms
         {
             get
             {
-                if (EndDate.HasValue && StartDate.HasValue)
+                if (this.EndDate.HasValue && this.StartDate.HasValue)
                 {
-                    return EndDate.Value.Subtract(StartDate.Value);
+                    return this.EndDate.Value.Subtract(this.StartDate.Value);
                 }
+
                 return TimeSpan.Zero;
             }
         }
 
         public DateTime? EndDate { get; set; }
+
         public DateTime? StartDate { get; set; }
     }
 }
