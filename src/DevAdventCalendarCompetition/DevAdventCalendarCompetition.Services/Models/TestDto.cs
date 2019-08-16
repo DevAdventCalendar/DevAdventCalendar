@@ -2,6 +2,13 @@
 
 namespace DevAdventCalendarCompetition.Services.Models
 {
+    public enum TestStatus
+    {
+        NotStarted,
+        Started,
+        Ended
+    }
+
     public class TestDto
     {
         public int Id { get; set; }
@@ -14,7 +21,7 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string PlainAnswer { get; set; }
 
-        public string SponsorLogoUrl { get; set; }
+        public Uri SponsorLogoUrl { get; set; }
 
         public string SponsorName { get; set; }
 
@@ -26,9 +33,9 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string Discount { get; set; }
 
-        public string DiscountUrl { get; set; }
+        public Uri DiscountUrl { get; set; }
 
-        public string DiscountLogoUrl { get; set; }
+        public Uri DiscountLogoUrl { get; set; }
 
         public string DiscountLogoPath { get; set; }
 
@@ -40,10 +47,10 @@ namespace DevAdventCalendarCompetition.Services.Models
         {
             throw new NotImplementedException();
         }
-    }
 
-    public enum TestStatus
-    {
-        NotStarted, Started, Ended
+        public TestDto ToTestDto()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
