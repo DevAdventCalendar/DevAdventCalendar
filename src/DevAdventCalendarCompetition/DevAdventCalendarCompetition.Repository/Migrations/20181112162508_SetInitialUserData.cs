@@ -6,7 +6,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.InsertData(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[] { "1", "57c244a4-9d0a-4b58-9997-d1c920ca6a21", "Admin", null });
@@ -24,7 +26,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.DeleteData(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "UserId", "RoleId" },
                 keyValues: new object[] { "1", "1" });
