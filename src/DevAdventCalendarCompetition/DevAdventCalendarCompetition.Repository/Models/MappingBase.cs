@@ -8,14 +8,14 @@ namespace DevAdventCalendarCompetition.Repository.Models
     {
         protected MappingBase()
         {
-            //TODO fix this
-            //HasKey(e => e.Id);
+            // TODO fix this
+            // HasKey(e => e.Id);
         }
 
         public void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            //TODO fix or remove
-            //throw new NotImplementedException();
+            // TODO fix or remove
+            // throw new NotImplementedException();
         }
     }
 }
