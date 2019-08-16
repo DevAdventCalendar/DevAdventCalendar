@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
@@ -8,7 +8,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.CreateTable(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -191,7 +193,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.DropTable(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(

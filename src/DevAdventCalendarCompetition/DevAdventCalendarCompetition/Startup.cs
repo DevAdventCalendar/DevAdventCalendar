@@ -15,6 +15,23 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
+#pragma warning disable IDE0051 // Remove unused private members
+        private const string DockerEnvName = "Docker";
+#pragma warning restore IDE0051 // Remove unused private members
+
+        public Startup(IHostingEnvironment env)
+        {
+            var configurationBuilder = new ConfigurationBuilder()
+#pragma warning disable CA1062 // Validate arguments of public methods
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
+#pragma warning restore CA1062 // Validate arguments of public methods
+                .AddEnvironmentVariables();
+
+            this.Configuration = configurationBuilder.Build();
+        }
+
+        public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -42,7 +59,6 @@ namespace DevAdventCalendarCompetition
 
             app.UseHttpMethodOverride();
             app.UseHttpsRequestScheme();
-
             app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -56,23 +72,6 @@ namespace DevAdventCalendarCompetition
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-        #pragma warning disable IDE0051 // Remove unused private members
-        private const string DockerEnvName = "Docker";
-#pragma warning restore IDE0051 // Remove unused private members
-
-        public Startup(IHostingEnvironment env)
-        {
-            var configurationBuilder = new ConfigurationBuilder()
-#pragma warning disable CA1062 // Validate arguments of public methods
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
-#pragma warning restore CA1062 // Validate arguments of public methods
-                .AddEnvironmentVariables();
-
-            this.Configuration = configurationBuilder.Build();
-        }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
