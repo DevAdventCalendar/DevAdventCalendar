@@ -6,7 +6,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.AddColumn<string>(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 name: "Discount",
                 table: "Test",
                 nullable: true);
@@ -14,7 +16,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.DropColumn(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 name: "Discount",
                 table: "Test");
         }
