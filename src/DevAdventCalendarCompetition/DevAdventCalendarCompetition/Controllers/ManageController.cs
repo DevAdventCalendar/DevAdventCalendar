@@ -17,17 +17,19 @@ namespace DevAdventCalendarCompetition.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+#pragma warning disable IDE0051 // Remove unused private members
+        private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+#pragma warning restore IDE0051 // Remove unused private members
+
+        private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
+
         private readonly IManageService manageService;
         private readonly IAccountService accountService;
         private readonly ILogger logger;
-        private readonly UrlEncoder urlEncoder;
 
-#pragma warning disable IDE0051 // Remove unused private members
-#pragma warning disable SA1203 // Constants should appear before fields
-        private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
-#pragma warning restore SA1203 // Constants should appear before fields
-#pragma warning restore IDE0051 // Remove unused private members
-        private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
+#pragma warning disable IDE0052 // Remove unread private members
+        private readonly UrlEncoder urlEncoder;
+#pragma warning restore IDE0052 // Remove unread private members
 
         public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, UrlEncoder urlEncoder)
         {
@@ -228,8 +230,6 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.RedirectToAction(nameof(this.SetPassword));
         }
 
-        #region Helpers
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -258,7 +258,5 @@ namespace DevAdventCalendarCompetition.Controllers
 
             return result.ToString().ToUpper(CultureInfo.InvariantCulture);
         }
-
-        #endregion Helpers
-    }
+  }
 }

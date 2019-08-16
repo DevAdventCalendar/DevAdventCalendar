@@ -22,6 +22,6 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public DateTime Time { get; set; }
 
-        public String Answer { get; set; }
+        public string Answer { get; set; }
     }
 }
