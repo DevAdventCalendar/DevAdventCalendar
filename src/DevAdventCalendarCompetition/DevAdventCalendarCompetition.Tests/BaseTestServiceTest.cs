@@ -81,7 +81,7 @@ namespace DevAdventCalendarCompetition.Tests
             //Act
             var result = baseTestService.GetTestByNumber(_oldTest.Number);
             //Assert
-            Assert.Null(result);
+            Assert.IsType<TestDto>(result);
             _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_oldTest.Number))), Times.Once);
         }
 
@@ -95,7 +95,7 @@ namespace DevAdventCalendarCompetition.Tests
             //Act
             var result = baseTestService.GetTestByNumber(_futureTest.Number);
             //Assert
-            Assert.Null(result);
+            Assert.IsType<TestDto>(result);
             _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_futureTest.Number))), Times.Once());
         }
 
