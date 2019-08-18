@@ -6,8 +6,8 @@ namespace DevAdventCalendarCompetition.Vms
     {
         public int CurrentUserPosition { get; set; }
 
-        public List<SingleTestResultsVm> SingleTestResults { get; set; }
+        public List<SingleTestResultsVm> SingleTestResults { get; private set; }
 
-        public PaginatedList<TotalTestResultEntryVm> TotalTestResults { get; set; }
+        public PaginatedList<TotalTestResultEntryVm> TotalTestResults { get; private set; }
     }
 }

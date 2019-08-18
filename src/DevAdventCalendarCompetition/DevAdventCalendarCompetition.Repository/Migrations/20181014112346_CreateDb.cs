@@ -8,7 +8,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.DropIndex(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 name: "UserNameIndex",
                 table: "AspNetUsers");
 
@@ -108,7 +110,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.DropForeignKey(
+#pragma warning restore CA1062 // Validate arguments of public methods
                 name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                 table: "AspNetUserTokens");
 

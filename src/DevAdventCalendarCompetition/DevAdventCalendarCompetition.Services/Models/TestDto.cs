@@ -2,6 +2,13 @@
 
 namespace DevAdventCalendarCompetition.Services.Models
 {
+    public enum TestStatus
+    {
+        NotStarted,
+        Started,
+        Ended
+    }
+
     public class TestDto
     {
         public int Id { get; set; }
@@ -14,7 +21,7 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string PlainAnswer { get; set; }
 
-        public string SponsorLogoUrl { get; set; }
+        public Uri SponsorLogoUrl { get; set; }
 
         public string SponsorName { get; set; }
 
@@ -26,19 +33,24 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string Discount { get; set; }
 
-        public string DiscountUrl { get; set; }
+        public Uri DiscountUrl { get; set; }
 
-        public string DiscountLogoUrl { get; set; }
+        public Uri DiscountLogoUrl { get; set; }
 
         public string DiscountLogoPath { get; set; }
 
         public bool HasUserAnswered { get; set; }
 
         public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
-    }
 
-    public enum TestStatus
-    {
-        NotStarted, Started, Ended
+        public static implicit operator TestDto(TestDto v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TestDto ToTestDto()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
@@ -8,8 +8,11 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable("WrongAnswer",
-            columns: table => new
+#pragma warning disable CA1062 // Validate arguments of public methods
+            migrationBuilder.CreateTable(
+                "WrongAnswer",
+#pragma warning restore CA1062 // Validate arguments of public methods
+                columns: table => new
             {
                 Id = table.Column<int>(nullable: false)
                     .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
@@ -18,7 +21,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                 Answer = table.Column<string>(nullable: false),
                 TestId = table.Column<int>(nullable: false),
             },
-            constraints: table =>
+                constraints: table =>
             {
                 table.PrimaryKey("PK_WrongAnswer", x => x.Id);
                 table.ForeignKey(
@@ -48,7 +51,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             migrationBuilder.DropIndex(
+#pragma warning restore CA1062 // Validate arguments of public methods
               name: "IX_WrongAnswer_UserId",
               table: "WrongAnswer");
 

@@ -1,41 +1,47 @@
-﻿using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Vms;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Vms;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
-        protected IHomeService _homeService;
+        private IHomeService homeService;
 
         public HomeController(IHomeService homeService)
         {
-            _homeService = homeService;
+            this.homeService = homeService;
         }
 
         public ActionResult Index()
         {
-            var currentTestsDto = _homeService.GetCurrentTests();
+            var currentTestsDto = this.homeService.GetCurrentTests();
             if (currentTestsDto == null)
-                return View();
+            {
+                return this.View();
+            }
 
-            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return View(currentTestsDto);
+            {
+                return this.View(currentTestsDto);
+            }
 
-            ViewBag.CorrectAnswers = _homeService.GetCorrectAnswersCountForUser(userId);
+            this.ViewBag.CorrectAnswers = this.homeService.GetCorrectAnswersCountForUser(userId);
 
-            return View(currentTestsDto);
+            return this.View(currentTestsDto);
         }
 
         public ActionResult Results(int? pageIndex)
         {
-            var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return View();
+            {
+                return this.View();
+            }
 
             /* var testDtoList = _homeService.GetTestsWithUserAnswers();
 
@@ -79,7 +85,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             int pageSize = 50;
 
-            var testResultListDto = _homeService.GetAllTestResults();
+            var testResultListDto = this.homeService.GetAllTestResults();
 
             List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
 
@@ -89,7 +95,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     Position = result.Position,
                     UserId = result.UserId,
-                    FullName = _homeService.PrepareUserEmailForRODO(result.Email),
+                    FullName = this.homeService.PrepareUserEmailForRODO(result.Email),
                     CorrectAnswers = result.CorrectAnswersCount,
                     WrongAnswers = result.WrongAnswersCount,
                     TotalPoints = result.Points
@@ -98,74 +104,78 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var vm = new TestResultsVm()
             {
-                CurrentUserPosition = _homeService.GetUserPosition(userId),
-                //SingleTestResults = singleTestResults,
+                CurrentUserPosition = this.homeService.GetUserPosition(userId),
+
+                // SingleTestResults = singleTestResults,
                 TotalTestResults = PaginatedList<TotalTestResultEntryVm>.Create(totalTestResults, pageIndex ?? 1, pageSize)
             };
 
-            return View(vm);
+            return this.View(vm);
         }
 
         [HttpPost]
         public ActionResult CheckTestStatus(int testNumber)
         {
-            return Content(_homeService.CheckTestStatus(testNumber));
+            return this.Content(this.homeService.CheckTestStatus(testNumber));
         }
 
         public ActionResult Error()
         {
-            ViewBag.errorMessage = TempData["errorMessage"];
-            return View();
+            this.ViewBag.errorMessage = this.TempData["errorMessage"];
+            return this.View();
         }
 
         public ActionResult About()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Contact()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Sponsors()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Prizes()
         {
-            return View();
+            return this.View();
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult Rules()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult TestHasNotStarted(int number)
         {
-            return View(number);
+            return this.View(number);
         }
 
         public ActionResult TestHasEnded(int number)
         {
-            return View(number);
+            return this.View(number);
         }
 
         public ActionResult TestAnswered(int number)
         {
-            return View(number);
+            return this.View(number);
         }
 
         public ActionResult GetServerTime()
         {
-            return Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));
+#pragma warning disable CA1305 // Specify IFormatProvider
+            return this.Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));
+#pragma warning restore CA1305 // Specify IFormatProvider
+
         }
     }
 }
