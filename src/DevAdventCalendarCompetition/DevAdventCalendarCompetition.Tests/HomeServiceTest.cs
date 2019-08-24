@@ -24,20 +24,18 @@ namespace DevAdventCalendarCompetition.Tests
             Answers = null
         };
 
-        private IMapper _mapper;
-
-        private TestAnswer _testAnswer = new TestAnswer()
+        private readonly TestAnswer _testAnswer = new TestAnswer()
         {
             Id = 1,
             Test = new Test(),
             TestId = 1,
             User = new ApplicationUser(),
             UserId = "1",
-            AnsweringTimeOffset = default(TimeSpan),
+            AnsweringTimeOffset = default,
             AnsweringTime = DateTime.Now
         };
 
-        private List<Test> _testList = new List<Test>()
+        private readonly List<Test> _testList = new List<Test>()
         {
             new Test()
             {
@@ -49,7 +47,7 @@ namespace DevAdventCalendarCompetition.Tests
             }
         };
 
-        private Test _oldTest = new Test()
+        private readonly Test _oldTest = new Test()
         {
             Id = 1,
             Number = 1,
@@ -58,7 +56,7 @@ namespace DevAdventCalendarCompetition.Tests
             Answers = null
         };
 
-        private Test _futureTest = new Test()
+        private readonly Test _futureTest = new Test()
         {
             Id = 3,
             Number = 3,
@@ -66,6 +64,8 @@ namespace DevAdventCalendarCompetition.Tests
             EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
             Answers = null
         };
+
+        private IMapper _mapper;
 
         public HomeServiceTest()
         {

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DevAdventCalendarCompetition.Services.Profiles;
 using Xunit;
 
@@ -7,6 +8,7 @@ namespace DevAdventCalendarCompetition.Tests
     public class MapperTest
     {
         [Fact]
+        [Obsolete]
         public void TestProfileMappingsIsValid()
         {
             Mapper.Reset();
@@ -19,6 +21,7 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
+        [Obsolete]
         public void TestAnswerProfileIsValid()
         {
             Mapper.Reset();

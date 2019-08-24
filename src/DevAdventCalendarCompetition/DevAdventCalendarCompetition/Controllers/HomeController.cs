@@ -9,7 +9,7 @@ namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
-        private IHomeService homeService;
+        private readonly IHomeService homeService;
 
         public HomeController(IHomeService homeService)
         {

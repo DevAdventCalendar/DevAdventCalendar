@@ -10,7 +10,7 @@ namespace DevAdventCalendarCompetition.Controllers
     [Authorize]
     public class BaseTestController : Controller
     {
-        protected readonly IBaseTestService baseTestService;
+        private readonly IBaseTestService baseTestService;
 
         public BaseTestController(IBaseTestService baseTestService)
         {
