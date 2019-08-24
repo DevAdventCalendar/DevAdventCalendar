@@ -92,58 +92,66 @@ namespace DevAdventCalendarCompetition.Tests
         [Fact]
         public void GetCurrentTestDontGetOldTest()
         {
-            //Arrange
-            _homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(_oldTest);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(_homeRepositoryMock.Object, _mapper);
-            //Act
+            // Arrange
+            this._homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(this._oldTest);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var homeService = new HomeService(this._homeRepositoryMock.Object, this._mapper);
+
+            // Act
             var result = homeService.GetCurrentTest();
-            //Assert
+
+            // Assert
             Assert.Null(result);
-            _homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
+            this._homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
         }
 
         [Fact]
-        public void GetCurrentTest_DontGetFutureTest()
+        public void GetCurrentTestDontGetFutureTest()
         {
-            //Arrange
-            _homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(_futureTest);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(_homeRepositoryMock.Object, _mapper);
-            //Act
+            // Arrange
+            this._homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(this._futureTest);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var homeService = new HomeService(this._homeRepositoryMock.Object, this._mapper);
+
+            // Act
             var result = homeService.GetCurrentTest();
-            //Assert
+
+            // Assert
             Assert.Null(result);
-            _homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
+            this._homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
         }
 
         [Fact]
-        public void GetTestAnswerByUserId_ReturnTestAnswerDto()
+        public void GetTestAnswerByUserIdReturnTestAnswerDto()
         {
-            //Arrange
-            _homeRepositoryMock.Setup(mock => mock.GetTestAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(_testAnswer);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
-            var homeService = new HomeService(_homeRepositoryMock.Object, _mapper);
-            //Act
-            var result = homeService.GetTestAnswerByUserId(_testAnswer.UserId, _testAnswer.Id);
-            //Assert
+            // Arrange
+            this._homeRepositoryMock.Setup(mock => mock.GetTestAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(this._testAnswer);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
+            var homeService = new HomeService(this._homeRepositoryMock.Object, this._mapper);
+
+            // Act
+            var result = homeService.GetTestAnswerByUserId(this._testAnswer.UserId, this._testAnswer.Id);
+
+            // Assert
             Assert.IsType<TestAnswerDto>(result);
-            _homeRepositoryMock.Verify(mock => mock.GetTestAnswerByUserId(It.Is<string>(x => x.Equals(_testAnswer.UserId)), It.Is<int>(x => x.Equals(_testAnswer.Id))), Times.Once());
+            this._homeRepositoryMock.Verify(mock => mock.GetTestAnswerByUserId(It.Is<string>(x => x.Equals(this._testAnswer.UserId, StringComparison.Ordinal)), It.Is<int>(x => x.Equals(this._testAnswer.Id))), Times.Once());
         }
 
         [Fact]
-        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto()
+        public void GetTestsWithUserAnswersReturnTestWithAnswerListDto()
         {
-            //Arrange
-            _homeRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(_testList);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(_homeRepositoryMock.Object, _mapper);
-            //Act
+            // Arrange
+            this._homeRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(this._testList);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var homeService = new HomeService(this._homeRepositoryMock.Object, this._mapper);
+
+            // Act
             var result = homeService.GetTestsWithUserAnswers();
-            //Assert
+
+            // Assert
             Assert.IsType<List<TestWithAnswerListDto>>(result);
-            Assert.True(_testList.Count == result.Count);
-            _homeRepositoryMock.Verify(mock => mock.GetTestsWithUserAnswers(), Times.Once());
+            Assert.True(this._testList.Count == result.Count);
+            this._homeRepositoryMock.Verify(mock => mock.GetTestsWithUserAnswers(), Times.Once());
         }
     }
 }

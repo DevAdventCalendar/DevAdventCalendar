@@ -226,7 +226,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 if (info == null)
                 {
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    throw new ApplicationException("Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.");
+                    throw new ArgumentException("Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
 
@@ -270,7 +270,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
 
             var result = await this.accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
@@ -329,7 +329,7 @@ namespace DevAdventCalendarCompetition.Controllers
             if (code == null)
             {
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ApplicationException("Kod musi być dostarczony do resetowania hasła.");
+                throw new ArgumentException("Kod musi być dostarczony do resetowania hasła.");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
 
             }
@@ -386,7 +386,6 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View();
         }
 
-        #region Helpers
         public Task<IActionResult> Login(LoginViewModel model, Uri returnUrl)
         {
             throw new NotImplementedException();
@@ -446,7 +445,5 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
-
-        #endregion Helpers
     }
 }
