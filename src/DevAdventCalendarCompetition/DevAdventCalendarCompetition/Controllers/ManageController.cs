@@ -17,19 +17,14 @@ namespace DevAdventCalendarCompetition.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
-#pragma warning disable IDE0051 // Remove unused private members
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
-#pragma warning restore IDE0051 // Remove unused private members
-
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
         private readonly IManageService manageService;
         private readonly IAccountService accountService;
         private readonly ILogger logger;
 
-#pragma warning disable IDE0052 // Remove unread private members
         private readonly UrlEncoder urlEncoder;
-#pragma warning restore IDE0052 // Remove unread private members
 
         public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, UrlEncoder urlEncoder)
         {

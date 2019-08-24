@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Profiles;
 using Moq;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace DevAdventCalendarCompetition.Tests
@@ -14,9 +14,8 @@ namespace DevAdventCalendarCompetition.Tests
     public class HomeServiceTest
     {
         private readonly Mock<IHomeRepository> _homeRepositoryMock;
-        private IMapper _mapper;
 
-        private Test _currentTest = new Test()
+        private readonly Test _currentTest = new Test()
         {
             Id = 2,
             Number = 2,
@@ -25,6 +24,8 @@ namespace DevAdventCalendarCompetition.Tests
             Answers = null
         };
 
+        private IMapper _mapper;
+
         private TestAnswer _testAnswer = new TestAnswer()
         {
             Id = 1,
@@ -32,7 +33,7 @@ namespace DevAdventCalendarCompetition.Tests
             TestId = 1,
             User = new ApplicationUser(),
             UserId = "1",
-            AnsweringTimeOffset = new TimeSpan(),
+            AnsweringTimeOffset = default(TimeSpan),
             AnsweringTime = DateTime.Now
         };
 
@@ -68,26 +69,28 @@ namespace DevAdventCalendarCompetition.Tests
 
         public HomeServiceTest()
         {
-            _homeRepositoryMock = new Mock<IHomeRepository>();
+            this._homeRepositoryMock = new Mock<IHomeRepository>();
         }
 
         [Fact]
-        public void GetCurrentTest_ReturnCurrentTestDto()
+        public void GetCurrentTestReturnCurrentTestDto()
         {
-            //Arrange
-            _homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(_currentTest);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(_homeRepositoryMock.Object, _mapper);
-            //Act
+            // Arrange
+            this._homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(this._currentTest);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var homeService = new HomeService(this._homeRepositoryMock.Object, this._mapper);
+
+            // Act
             var result = homeService.GetCurrentTest();
-            //Assert
+
+            // Assert
             Assert.IsType<TestDto>(result);
-            Assert.Equal(result.Id, _currentTest.Id);
-            _homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
+            Assert.Equal(result.Id, this._currentTest.Id);
+            this._homeRepositoryMock.Verify(mock => mock.GetCurrentTest(), Times.Once());
         }
 
         [Fact]
-        public void GetCurrentTest_DontGetOldTest()
+        public void GetCurrentTestDontGetOldTest()
         {
             //Arrange
             _homeRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(_oldTest);
