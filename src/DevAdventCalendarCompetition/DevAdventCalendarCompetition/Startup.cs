@@ -74,6 +74,9 @@ namespace DevAdventCalendarCompetition
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+#pragma warning disable CA1041 // Provide ObsoleteAttribute message
+        [System.Obsolete]
+#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>

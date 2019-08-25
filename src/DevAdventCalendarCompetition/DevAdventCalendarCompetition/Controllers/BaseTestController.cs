@@ -10,7 +10,11 @@ namespace DevAdventCalendarCompetition.Controllers
     [Authorize]
     public class BaseTestController : Controller
     {
-        private readonly IBaseTestService baseTestService;
+#pragma warning disable CA1051 // Do not declare visible instance fields
+#pragma warning disable SA1401 // Fields should be private
+        protected readonly IBaseTestService baseTestService;
+#pragma warning restore SA1401 // Fields should be private
+#pragma warning restore CA1051 // Do not declare visible instance fields
 
         public BaseTestController(IBaseTestService baseTestService)
         {

@@ -119,7 +119,9 @@ namespace DevAdventCalendarCompetition.Controllers
             // TODO: move to service
             var resetEnabled = false;
             var resetEnabledString = "true"; // TODO get from AppSettings // ConfigurationManager.AppSettings["ResetEnabled"];
+#pragma warning disable CA1806 // Do not ignore method results
             bool.TryParse(resetEnabledString, out resetEnabled);
+#pragma warning restore CA1806 // Do not ignore method results
             if (!resetEnabled)
             {
                 return "Reset nie jest włączony.";
