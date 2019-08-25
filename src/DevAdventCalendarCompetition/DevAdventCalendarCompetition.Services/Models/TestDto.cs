@@ -4,9 +4,13 @@ namespace DevAdventCalendarCompetition.Services.Models
 {
     public enum TestStatus
     {
+#pragma warning disable SA1602 // Enumeration items should be documented
         NotStarted,
+
         Started,
+
         Ended
+#pragma warning restore SA1602 // Enumeration items should be documented
     }
 
     public class TestDto
@@ -45,7 +49,9 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public static implicit operator TestDto(TestDto v)
         {
+#pragma warning disable CA1065 // Do not raise exceptions in unexpected locations
             throw new NotImplementedException();
+#pragma warning restore CA1065 // Do not raise exceptions in unexpected locations
         }
 
         public TestDto ToTestDto()
