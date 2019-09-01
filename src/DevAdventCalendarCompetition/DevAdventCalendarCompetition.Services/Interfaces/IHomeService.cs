@@ -1,5 +1,5 @@
-﻿using DevAdventCalendarCompetition.Services.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DevAdventCalendarCompetition.Services.Models;
 
 namespace DevAdventCalendarCompetition.Services.Interfaces
 {

@@ -75,7 +75,7 @@ namespace DevAdventCalendarCompetition
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        //Should be fixed During Refactor
+        // Should be fixed During Refactor
         [Obsolete]
 
         public void ConfigureServices(IServiceCollection services)
