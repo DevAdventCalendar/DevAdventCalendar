@@ -63,7 +63,7 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
-        public void GetAllTestsReturnTestDtoList()
+        public void GetAllTests_ReturnTestDtoList()
         {
             // Arrange
             this._adminRepositoryMock.Setup(mock => mock.GetAll()).Returns(this._testList);
@@ -81,7 +81,7 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
-        public void GetTestByIdReturnTestDto()
+        public void GetTestBy_IdReturnTestDto()
         {
             // Arrange
             this._adminRepositoryMock.Setup(mock => mock.GetById(It.IsAny<int>())).Returns(this._currentTest);
@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
-        public void GetPreviousTestReturnPreviousTestDto()
+        public void GetPreviousTest_ReturnPreviousTestDto()
         {
             // Arrange
             this._baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(this._previousTest);

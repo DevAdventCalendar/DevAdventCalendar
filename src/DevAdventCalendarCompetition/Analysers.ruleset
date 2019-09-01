@@ -65,7 +65,7 @@
     <Rule Id="CA1701" Action="Error" />
     <Rule Id="CA1703" Action="Error" />
     <Rule Id="CA1704" Action="Error" />
-    <Rule Id="CA1707" Action="Error" />
+    <Rule Id="CA1707" Action="None" />
     <Rule Id="CA1709" Action="Error" />
     <Rule Id="CA1710" Action="Error" />
     <Rule Id="CA1711" Action="Error" />
@@ -340,6 +340,7 @@
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA0001" Action="None" />
+    <Rule Id="SA1117" Action="None" />
     <Rule Id="SA1200" Action="None" />
     <Rule Id="SA1309" Action="None" />
     <Rule Id="SA1413" Action="None" />

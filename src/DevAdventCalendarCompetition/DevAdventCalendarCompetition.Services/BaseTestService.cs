@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using System;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -18,16 +18,16 @@ namespace DevAdventCalendarCompetition.Services
             IMapper mapper,
             StringHasher stringHasher)
         {
-            _baseTestRepository = baseTestRepository;
-            _mapper = mapper;
-            _stringHasher = stringHasher;
+            this._baseTestRepository = baseTestRepository;
+            this._mapper = mapper;
+            this._stringHasher = stringHasher;
         }
 
         public TestDto GetTestByNumber(int testNumber)
         {
-            var test = _baseTestRepository.GetByNumber(testNumber);
+            var test = this._baseTestRepository.GetByNumber(testNumber);
 
-            var testDto = _mapper.Map<TestDto>(test);
+            var testDto = this._mapper.Map<TestDto>(test);
             return testDto;
         }
 
@@ -45,21 +45,22 @@ namespace DevAdventCalendarCompetition.Services
                 AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
             };
 
-            //TODO remove (for tests only)
-
-            _baseTestRepository.AddAnswer(testAnswer);
+            // TODO remove (for tests only)
+            this._baseTestRepository.AddAnswer(testAnswer);
         }
 
         public TestAnswerDto GetAnswerByTestId(int testId)
         {
-            var testAnswer = _baseTestRepository.GetAnswerByTestId(testId);
-            var testAnswerDto = _mapper.Map<TestAnswerDto>(testAnswer);
+            var testAnswer = this._baseTestRepository.GetAnswerByTestId(testId);
+            var testAnswerDto = this._mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
         }
 
+#pragma warning disable CA1725 // Parameter names should match base declaration
         public bool HasUserAnsweredTest(string userId, int testId)
+#pragma warning restore CA1725 // Parameter names should match base declaration
         {
-            return _baseTestRepository.HasUserAnsweredTest(userId, testId);
+            return this._baseTestRepository.HasUserAnsweredTest(userId, testId);
         }
 
         public void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate)
@@ -72,12 +73,12 @@ namespace DevAdventCalendarCompetition.Services
                 TestId = testId
             };
 
-            _baseTestRepository.AddWrongAnswer(testWrongAnswer);
+            this._baseTestRepository.AddWrongAnswer(testWrongAnswer);
         }
 
         public bool VerifyTestAnswer(string userAnswer, string correntAnswer)
         {
-            return _stringHasher.VerifyHash(userAnswer, correntAnswer);
+            return this._stringHasher.VerifyHash(userAnswer, correntAnswer);
         }
     }
 }
