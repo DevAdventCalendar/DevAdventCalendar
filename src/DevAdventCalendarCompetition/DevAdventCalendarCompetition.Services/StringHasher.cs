@@ -4,17 +4,6 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    public class HashParameters
-    {
-        public HashParameters(int iterations, byte[] salt)
-        {
-            Iterations = iterations;
-            Salt = salt;
-        }
-
-        public int Iterations { get; set; }
-        public byte[] Salt { get; set; }
-    }
 
     //solution basen on http://www.obviex.com/samples/hash.aspx
     public class StringHasher
