@@ -6,6 +6,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\hellg\Desktop\DevAdventCalendar\src\DevAdventCalendarCompetition\DevAdventCalendarCompetition.Repository\DevAdventCalendarCompetition.Repository.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Migrations\20181104174220_RenameTables.cs" />
     <Compile Remove="Migrations\20181104175222_RenameTables.cs" />
