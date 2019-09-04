@@ -50,7 +50,7 @@ namespace DevAdventCalendarCompetition.Services
             return await this._signInManager.GetExternalAuthenticationSchemesAsync().ConfigureAwait(false);
         }
 
-        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, Uri redirectUrl, string userId)
+        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, string userId)
         {
             return this._signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, userId);
         }
@@ -75,7 +75,17 @@ namespace DevAdventCalendarCompetition.Services
             return await this._userManager.RemoveLoginAsync(user, loginProvider, providerKey).ConfigureAwait(false);
         }
 
-        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, string userId)
+        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string redirectUrl, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, Uri redirectUrl, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AuthenticationProperties ConfigureExternalAuthenticationProperties(Uri redirectUrl, string userId)
         {
             throw new NotImplementedException();
         }

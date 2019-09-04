@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Vms;
@@ -172,10 +173,8 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult GetServerTime()
         {
-#pragma warning disable CA1305 // Specify IFormatProvider
-            return this.Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K"));
-#pragma warning restore CA1305 // Specify IFormatProvider
 
+            return this.Json(DateTime.Now.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

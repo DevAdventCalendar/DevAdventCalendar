@@ -21,9 +21,8 @@ namespace DevAdventCalendarCompetition.Tests
         [InlineData("P@ssw0rd")]
         public void AnswerIsValid(string value)
         {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
             string passwordHash = this._stringHasher.ComputeHash(PASSWORD);
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+
             this._stringHasher.VerifyHash(value, passwordHash);
         }
 
@@ -34,9 +33,8 @@ namespace DevAdventCalendarCompetition.Tests
         [InlineData("p@ssw0rD")]
         public void AnswerIsInvalid(string value)
         {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
             string passwordHash = this._stringHasher.ComputeHash(PASSWORD);
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+
             this._stringHasher.VerifyHash(value, passwordHash);
         }
 

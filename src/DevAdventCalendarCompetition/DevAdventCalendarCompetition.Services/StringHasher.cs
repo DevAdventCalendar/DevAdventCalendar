@@ -7,9 +7,11 @@ namespace DevAdventCalendarCompetition.Services
     // solution basen on http://www.obviex.com/samples/hash.aspx
     public class StringHasher
     {
+        private readonly HashParameters _hashParameters;
+
         public static string ComputeHash(string text)
         {
-            var saltBytes = _hashParameters.Salt;
+            byte saltBytes = _hashParameters.Salt;
 
             // Convert plain text into a byte array.
             byte[] textBytes = Encoding.UTF8.GetBytes(text);
@@ -48,10 +50,8 @@ namespace DevAdventCalendarCompetition.Services
 
         public StringHasher(HashParameters hashParameters)
         {
-            _hashParameters = hashParameters;
+            this._hashParameters = hashParameters;
         }
-
-        private HashParameters this._hashParameters;
 
         public bool VerifyHash(string text, string hashValue)
         {
@@ -75,7 +75,7 @@ namespace DevAdventCalendarCompetition.Services
 
             // If the computed hash matches the specified hash,
             // the plain text value must be correct.
-            return (hashValue == expectedHashString);
+            return hashValue == expectedHashString;
         }
     }
 }

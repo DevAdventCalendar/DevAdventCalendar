@@ -1,9 +1,10 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevAdventCalendarCompetition.Services.Interfaces
 {
@@ -19,7 +20,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync();
 
-        AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, string userId);
+        AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, Uri redirectUrl, string userId);
 
         Task<IdentityResult> SetEmailAsync(ApplicationUser user, string email);
 

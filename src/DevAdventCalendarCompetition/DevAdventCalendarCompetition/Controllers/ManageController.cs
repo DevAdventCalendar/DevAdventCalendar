@@ -233,9 +233,8 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         // TODO: move to service
-#pragma warning disable IDE0051 // Remove unused private members
         private string FormatKey(string unformattedKey)
-#pragma warning restore IDE0051 // Remove unused private members
+
         {
             var result = new StringBuilder();
             int currentPosition = 0;
