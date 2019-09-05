@@ -166,9 +166,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
             this.logger.LogInformation("User changed their password successfully.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
             this.StatusMessage = "Twoje hasło zostało zmienione";
 
             return this.RedirectToAction(nameof(this.ChangePassword));
@@ -209,13 +207,18 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
-            var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
-            if (!addPasswordResult.Succeeded)
+            if (model != null)
             {
-                this.AddErrors(addPasswordResult);
-                return this.View(model);
+                var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
+                if (!addPasswordResult.Succeeded)
+                {
+                    this.AddErrors(addPasswordResult);
+                    return this.View(model);
+                }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
             }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
@@ -234,7 +237,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
         // TODO: move to service
         private string FormatKey(string unformattedKey)
-
         {
             var result = new StringBuilder();
             int currentPosition = 0;

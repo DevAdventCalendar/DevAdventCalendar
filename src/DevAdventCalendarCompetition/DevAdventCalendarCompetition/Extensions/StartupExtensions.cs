@@ -93,24 +93,26 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UpdateDatabase(this IApplicationBuilder app)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods
-            using (var scope = app.ApplicationServices.CreateScope())
-#pragma warning restore CA1062 // Validate arguments of public methods
+            if (app != null)
             {
-                var init = scope.ServiceProvider.GetService<DbInitializer>();
-                init.Seed();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var init = scope.ServiceProvider.GetService<DbInitializer>();
+                    init.Seed();
+                }
             }
         }
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods
-            app.Use(next => context =>
-#pragma warning restore CA1062 // Validate arguments of public methods
+            if (app != null)
             {
-                context.Request.Scheme = "https";
-                return next(context);
-            });
+                app.Use(next => context =>
+                {
+                    context.Request.Scheme = "https";
+                    return next(context);
+                });
+            }
         }
     }
 }

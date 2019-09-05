@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -42,34 +43,35 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index(int testNumber, string answer = "")
         {
             var test = this.baseTestService.GetTestByNumber(testNumber);
-#pragma warning disable CA1062 // Validate arguments of public methods
-            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", " ", StringComparison.Ordinal);
-#pragma warning restore CA1062 // Validate arguments of public methods
 
-            if (test != null)
+            if (answer != null)
             {
-                if (this.baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
+                var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", " ", StringComparison.Ordinal);
+                if (test != null)
                 {
-                    test.HasUserAnswered = true;
-                    return this.View("Index", test);
+                    if (this.baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
+                    {
+                        test.HasUserAnswered = true;
+                        return this.View("Index", test);
+                    }
+
+                    if (test.Status == TestStatus.Ended || test.Status == TestStatus.NotStarted)
+                    {
+                        this.ModelState.AddModelError(" ", "Wystąpił błąd!");
+                        return this.View("Index", test);
+                    }
+
+                    if (this.baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
+                    {
+                        return this.SaveAnswerAndRedirect(testNumber);
+                    }
+
+                    this.SaveWrongAnswer(finalAnswer, testNumber);
+                    this.ModelState.AddModelError(" ", "Źle! Spróbuj ponownie :)");
                 }
 
-                if (test.Status == TestStatus.Ended || test.Status == TestStatus.NotStarted)
-                {
-                    this.ModelState.AddModelError(" ", "Wystąpił błąd!");
-                    return this.View("Index", test);
-                }
-
-                if (this.baseTestService.VerifyTestAnswer(finalAnswer, test.Answer))
-                {
-                    return this.SaveAnswerAndRedirect(testNumber);
-                }
-
-                this.SaveWrongAnswer(finalAnswer, testNumber);
-                this.ModelState.AddModelError(" ", "Źle! Spróbuj ponownie :)");
+                return this.View("Index", test);
             }
-
-            return this.View("Index", test);
         }
     }
 }

@@ -22,13 +22,16 @@ namespace DevAdventCalendarCompetition
 
         public Startup(IHostingEnvironment env)
         {
+            if (env != null)
+            {
             var configurationBuilder = new ConfigurationBuilder()
-#pragma warning disable CA1062 // Validate arguments of public methods
+
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
-#pragma warning restore CA1062 // Validate arguments of public methods
+
                 .AddEnvironmentVariables();
 
             this.Configuration = configurationBuilder.Build();
+            }
         }
 
         public IConfiguration Configuration { get; }

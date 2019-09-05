@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -37,41 +38,47 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult AddTest(TestVm model)
         {
-            if (this.ModelState.IsValid)
+            if (model != null)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
-                var dbTest = this.baseTestService.GetTestByNumber(model.Number);
-#pragma warning restore CA1062 // Validate arguments of public methods
-                if (dbTest != null)
+                if (this.ModelState.IsValid)
                 {
-                    this.ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
-                    return this.View(model);
+                    var dbTest = this.baseTestService.GetTestByNumber(model.Number);
+
+                    if (dbTest != null)
+                    {
+                        this.ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
+                        return this.View(model);
+                    }
+
+                    // automatically set start and end time
+                    var testDay = model.StartDate;
+                    model.StartDate = testDay.AddHours(12).AddMinutes(00);
+                    model.EndDate = testDay.AddHours(23).AddMinutes(59);
+
+                    var testDto = new TestDto
+                    {
+                        Number = model.Number,
+                        Description = model.Description,
+                        Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", " ", StringComparison.Ordinal),
+                        StartDate = model.StartDate,
+                        EndDate = model.EndDate,
+                        SponsorLogoUrl = model.SponsorLogoUrl,
+                        SponsorName = model.SponsorName,
+                        Discount = model.Discount,
+                        DiscountUrl = model.DiscountUrl,
+                        DiscountLogoUrl = model.DiscountLogoUrl,
+                        DiscountLogoPath = model.DiscountLogoPath
+                    };
+                    this.adminService.AddTest(testDto);
+                    return this.RedirectToAction("Index");
                 }
 
-                // automatically set start and end time
-                var testDay = model.StartDate;
-                model.StartDate = testDay.AddHours(12).AddMinutes(00);
-                model.EndDate = testDay.AddHours(23).AddMinutes(59);
-
-                var testDto = new TestDto
-                {
-                    Number = model.Number,
-                    Description = model.Description,
-                    Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", " ", StringComparison.Ordinal),
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
-                    SponsorLogoUrl = model.SponsorLogoUrl,
-                    SponsorName = model.SponsorName,
-                    Discount = model.Discount,
-                    DiscountUrl = model.DiscountUrl,
-                    DiscountLogoUrl = model.DiscountLogoUrl,
-                    DiscountLogoPath = model.DiscountLogoPath
-                };
-                this.adminService.AddTest(testDto);
-                return this.RedirectToAction("Index");
+                return this.View(model);
+               }
+            else
+            {
+                throw new ArgumentNullException();
             }
-
-            return this.View(model);
         }
 
         [HttpPost]

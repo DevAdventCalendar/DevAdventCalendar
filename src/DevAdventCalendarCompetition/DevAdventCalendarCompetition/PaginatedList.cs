@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevAdventCalendarCompetition
 {
-#pragma warning disable CA1710 // Identifiers should have correct suffix
+
     public class PaginatedList<T> : List<T>
-#pragma warning restore CA1710 // Identifiers should have correct suffix
+
     {
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {

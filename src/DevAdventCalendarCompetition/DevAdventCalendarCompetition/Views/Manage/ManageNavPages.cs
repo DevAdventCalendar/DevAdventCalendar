@@ -18,17 +18,19 @@ namespace DevAdventCalendarCompetition.Views.Manage
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods
+            if (viewContext != null)
+            {
             var activePage = viewContext.ViewData["ActivePage"] as string;
-#pragma warning restore CA1062 // Validate arguments of public methods
             return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase) ? "active" : null;
+            }
         }
 
         public static void AddActivePage(this ViewDataDictionary viewData, string activePage)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods
-            viewData[ActivePageKey] = activePage;
-#pragma warning restore CA1062 // Validate arguments of public methods
+            if (viewData != null)
+            {
+                viewData[ActivePageKey] = activePage;
+            }
         }
     }
 }
