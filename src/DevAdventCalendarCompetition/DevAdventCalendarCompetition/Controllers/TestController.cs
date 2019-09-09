@@ -43,6 +43,10 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index(int testNumber, string answer = "")
         {
             var test = this.baseTestService.GetTestByNumber(testNumber);
+            if (answer == null)
+            {
+                throw new ArgumentNullException(nameof(answer));
+            }
 
             if (answer != null)
             {

@@ -38,6 +38,12 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult AddTest(TestVm model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+
+            }
+
             if (model != null)
             {
                 if (this.ModelState.IsValid)
@@ -75,10 +81,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 return this.View(model);
                }
-            else
-            {
-                throw new ArgumentNullException();
-            }
         }
 
         [HttpPost]

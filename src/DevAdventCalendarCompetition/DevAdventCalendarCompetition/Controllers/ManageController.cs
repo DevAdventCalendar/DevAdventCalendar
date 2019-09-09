@@ -73,9 +73,12 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             var email = user.Email;
-#pragma warning disable CA1062 // Validate arguments of public methods
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (model.Email != email)
-#pragma warning restore CA1062 // Validate arguments of public methods
             {
                 var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
@@ -156,9 +159,13 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             var changePasswordResult = await this.manageService.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
             if (!changePasswordResult.Succeeded)
             {
                 this.AddErrors(changePasswordResult);
@@ -207,6 +214,11 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (model != null)
             {
                 var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
@@ -214,10 +226,6 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     this.AddErrors(addPasswordResult);
                     return this.View(model);
-                }
-                else
-                {
-                    throw new ArgumentNullException();
                 }
             }
 
