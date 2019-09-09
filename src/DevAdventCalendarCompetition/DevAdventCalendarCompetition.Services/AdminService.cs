@@ -52,9 +52,13 @@ namespace DevAdventCalendarCompetition.Services
 
         public void AddTest(TestDto testDto)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods
+            if (testDto == null)
+            {
+                throw new ArgumentNullException(nameof(testDto));
+            }
+
             string hashedAnswer = this._stringHasher.ComputeHash(testDto.Answer);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
             var test = this._mapper.Map<Test>(testDto);
             test.HashedAnswer = hashedAnswer;
             this._baseTestRepository.AddTest(test);
@@ -71,9 +75,13 @@ namespace DevAdventCalendarCompetition.Services
                 minutes = 20;
             }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
+            if (testDto == null)
+            {
+                throw new ArgumentNullException(nameof(testDto));
+            }
+
             testDto.StartDate = DateTime.Now;
-#pragma warning restore CA1062 // Validate arguments of public methods
+
             testDto.EndDate = DateTime.Now.AddMinutes(minutes);
             var test = this._mapper.Map<Test>(testDto);
             this._adminRepository.UpdateDates(test);
@@ -83,9 +91,13 @@ namespace DevAdventCalendarCompetition.Services
         public void UpdateTestEndDate(TestDto testDto, DateTime endTime)
 #pragma warning restore CA1725 // Parameter names should match base declaration
         {
-#pragma warning disable CA1062 // Validate arguments of public methods
+            if (testDto == null)
+            {
+                throw new ArgumentNullException(nameof(testDto));
+            }
+
             testDto.EndDate = endTime;
-#pragma warning restore CA1062 // Validate arguments of public methods
+
             var test = this._mapper.Map<Test>(testDto);
             this._adminRepository.UpdateEndDate(test);
         }
