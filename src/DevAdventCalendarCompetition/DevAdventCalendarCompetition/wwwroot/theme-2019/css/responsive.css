@@ -1,0 +1,781 @@
+@media screen and (max-width: 1199px){
+    .nav_area{
+        border-bottom: 1px solid #ddd;
+    }
+    .main_menu .offset_menu{
+        display: block;
+        overflow-x: scroll;
+    }
+    .menu_wrapper{
+        display: block;
+        padding: 40px 0;
+    }
+    .offset_menu .cross{
+        top: 0;
+    }
+    .offset_menu a{
+        line-height: 45px;
+    }
+
+    /* HEADER AREA CSS */
+    .graphical_elements{
+        height: 100%;
+    }
+    .hero_area .raindeer,
+    .hero_area .santa{
+        display: none;
+    }
+    .hero_area .gifts{
+        width: 100%;
+        text-align: center;
+        bottom: 138px;
+        left: 0;
+        -webkit-transform: translate(0, 50%);
+        -ms-transform: translate(0, 50%);
+        transform: translate(0, 50%);
+    }
+
+    /* DONATE PAGE CSS */
+    .donate_right_img img{
+        width: 100%;
+    }
+    .adreess_img img{
+        width: 72px;
+    }
+    .single_address.address img{
+        width: 60px;
+    }
+    .item_donation_wrapper{
+        padding-left: 0;
+    }
+
+    .payment_wrapper form select{
+        padding: 14px 21px 14px 20px;
+    }
+
+    /* PARTY PAGE CSS GOES HERE */
+    .pricing_right{
+        margin-left: 0;
+    }
+    .price_detail {
+        padding-left: 20px;
+    }
+    .pricing_right.fr{
+        margin-left: 6px;
+    }
+    .price span{
+        font-size: 16px;
+    }
+}
+/*
+////////////// MEDIUM DEVICES //////////////
+*/
+@media (min-width: 992px) and (max-width: 1199px){
+    /* MAINMENU CSS */
+    .main_menu .offset_menu{
+        padding-right: calc((100% - 970px)/2);
+        padding-left: 130px;
+    }
+
+    /*GET MUSIC CONTROL CSS*/
+    .control {
+        border-radius: 5px;
+        left: calc((100% - 1020px) / 2);
+        padding: 5px;
+        position: fixed;
+        top: 33px;
+        z-index: 999;
+    }
+
+    /* HERO AREA CSS */
+    .hero_area .santa{
+        width: 400px;
+        top: 111px;
+    }
+    .hero_area .santa img{
+        width: 100%;
+    }
+    .hero_area .gifts ul li:nth-child(1) img{
+        width: 95px;
+    }
+    .hero_area .gifts ul li:nth-child(5) img{
+        width: 90px;
+    }
+
+
+    /* COUNTDOWN SECTION */
+    .counter_area .right_side{
+        padding-bottom: 111px;
+        padding-top: 127px;
+    }
+    .figures ul li img{
+        width: 157px;
+    }
+    .figures ul li:first-child img{
+        width: 180px;
+    }
+    .countdown li{
+        padding: 0 30px;
+    }
+
+    /*  */
+    .hanging {
+        right: 67px;
+        width: 376px;
+    }
+    .tree{
+        bottom: 10px;
+    }
+
+    /* DONATE PAGE CSS */
+    .adreess_img{
+        right: ;
+    }
+    .donate_page .snata_with_bag{
+        right: calc(100% + 22px);
+    }
+
+    /* PARTY PAGE HTML */
+    .price{
+        padding: 58px 41px 45px;
+    }
+    .pricing_right.fr{
+        margin-left: 6px;
+    }
+
+    /* BLOG PAGE CSS*/
+    .blog_section .helf_section_content{
+        padding-bottom: 0;
+    }
+    .blog_section .tree{
+        bottom: 0;
+    }
+}
+
+
+/*////////////// TAB OR LARGE MOBILE PHONE //////////////*/
+@media (min-width: 768px) and (max-width: 991px){
+    p{
+        font-size: 15px;
+    }
+    /* MENU AREA CSS */
+    .main_menu .offset_menu{
+        padding-right: calc((100% - 750px)/2);
+        padding-left: 115px;
+    }
+
+    /*GET MUSIC CONTROL CSS*/
+    .control {
+        border-radius: 5px;
+        left: calc((100% - 800px) / 2);
+        padding: 5px;
+        position: fixed;
+        top: 33px;
+        z-index: 999;
+    }
+
+    /* HERO AREA CSS */
+    .hero_area .gifts ul{
+        display: inline-block;
+    }
+    .hero_area .gifts ul li:nth-child(1) img{
+        width: 90px;
+    }
+    .hero_area .gifts ul li:nth-child(5) img{
+        width: 100px;
+    }
+    .figures ul li img{
+        width: 125px;
+    }
+    .figures ul li:first-child img{
+        width: 136px;
+    }
+    .counter_area .right_side {
+        padding-bottom: 90px;
+        padding-top: 107px;
+    }
+
+    /* COUNTDOEN AREA CSS */
+    .countdown li{
+        padding: 0 20px;
+        font-size: 35px;
+    }
+    .countdown li span{
+        font-size: 12px;
+    }
+
+    /* SEND WISHES SECTION CSS*/
+    .send_wishes_section{
+        padding-top: 159px;
+        padding-bottom: 149px;
+    }
+
+    /* BLOG AREA */
+    .fat_snowman {
+        right: calc(50% + 5px);
+        width: 230px;
+    }
+    .fat_snowman img{
+        width: 100%;
+    }
+    .hanging {
+        right: 60px;
+        width: 294px;
+    }
+    .tree{
+        width: 230px;
+    }
+
+    /* CONTACT AREA */
+    .contact_image{
+        display: none;
+    }
+
+    /* FOOTER AREA CSS GOES HERE */
+    footer .legal_text{
+        margin-bottom: 0;
+    }
+    .social_icons {
+        margin-bottom: 63px;
+    }
+    .christmas_footer_logo img{
+        width: 100%;
+    }
+
+
+    /* DONATE PAGE CSS GOES HERE */
+    .xs-vm{
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+        margin-right: -4px;
+    }
+    .donate_page .snata_with_bag{
+        display: none;
+    }
+    .single_address p, .single_address a{
+        font-size: 14px;
+    }
+    .adreess_img img{
+        width: 72px;
+    }
+    .item_donation_wrapper .submit_btn{
+        margin-top: 52px;
+    }
+
+    /* PARTY PAGE CSS GOES HERE */
+    .price{
+        padding: 51px 33px 40px
+    }
+    .price p{
+        font-size: 28px;
+        line-height: 30px;
+    }
+    .blog_post p{
+        font-size: 15px;
+    }
+    .blog_post blockquote{
+        font-size: 16px;
+    }
+
+    /* BLOG PAGE CSS */
+    .post_image > img {
+         width: calc(100% - 20px);
+    }
+
+    /* COUNTDOWN PAGE CSS */
+    .countdown_section{
+        padding-top: 108px;
+        padding-bottom: 100px;
+    }
+}
+
+
+/*////////////// CUSTOM RESPONSIVE CSS //////////////*/
+@media screen and (max-width: 767px){
+
+    .area_title h3{
+        font-size: 22px;
+        line-height: 30px;
+    }
+
+    /* BREADCRUMB */
+    .page_title h3{
+        font-size: 20px;
+    }
+
+    .hero_area .gifts ul li:first-child img{
+        width: 100px;
+    }
+    .hero_area .gifts ul li:nth-child(3) img{
+        width: 130px;
+    }
+    .hero_area .gifts ul li:nth-child(5) img{
+        width: 90px;
+    }
+    .figures{
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .figures ul li{
+        width: 33%;
+    }
+    .figures ul li:first-child img{
+        width: 158px;
+    }
+    .figures ul li img{
+        width: 100%;
+    }
+
+
+    /*MENU ARES CSS*/
+    .offset_menu a{
+        font-size: 25px;
+        line-height: 40px;
+    }
+
+    /* COUNTER AREA */
+    .counter_area .left_side:after{
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 100%;
+        background: #272727;
+    }
+    .right_side{
+        overflow: hidden;
+    }
+    .sledge{
+        left: 0;
+        right: inherit;
+    }
+
+    /* PROMOT SECTION */
+    .bags,.snata_with_bag{
+        display: none;
+    }
+
+    .send_wishes_section{
+        padding-top: 129px;
+        padding-bottom: 119px;
+    }
+
+    /* BLOG AREA */
+    .blog_page .blog_area{
+        padding-top: 64px;
+        padding-bottom: 0;
+    }
+    .tree{
+        width: 228px;
+        right: 20px;
+        -webkit-transform: translateY(50%);
+        -ms-transform: translateY(50%);
+        transform: translateY(50%);
+        bottom: 50%;
+    }
+    .fat_snowman, .hanging{
+        display: none;
+    }
+    .blog_section .helf_section_content{
+        padding-bottom: 30px;
+    }
+
+    /*NEW YEAR*/
+    .new_year{
+        padding-top: 66px;
+        padding-bottom: 80px;
+    }
+    .new_year_wish .text h1, .new_year_wish .year{
+        font-size: 40px;
+    }
+    .event_section{
+        min-height: 373px;
+    }
+    .event_elements .half_width{
+        width: 100%;
+    }
+    .event_elements .deer,
+    .event_elements .snowm,
+    .baby_deer,
+    .sledge_moon{
+        display: none;
+    }
+    .contact_image{
+        display: none;
+    }
+    .message_field{
+        margin-top: 30px;
+    }
+    .christmas_footer_logo{
+        padding-top: 20px;
+    }
+    .legal_text,
+    .social_icons{
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    /* EVENT CONTETN AREA */
+    .event_content .left_contents{
+        text-align: center;
+    }
+    .event_content .right_contents{
+        margin-top: 50px;
+    }
+    .event_content .area_title{
+        padding-bottom: 10px;
+    }
+    .left_contents .area_title h3{
+        color: #c93232;
+    }
+    .event_content .right_contents .area_title h3{
+        color: #3a3a3a;
+        font-size: 22px;
+    }
+    .event_content .left_contents .area_title{
+        padding-bottom: 3px;
+    }
+    .event_content .right_contents p{
+        color: #3a3a3a;
+        font-size: 14px;
+        display: inline-block;
+    }
+
+    /*  footer area css */
+     .br-r{
+         border-right: none;
+     }
+    footer .social_icons{
+        margin-bottom: 0;
+    }
+    footer .christmas_footer_logo{
+        margin: 0;
+    }
+    footer .legal_text{
+        margin-top: 0;
+    }
+
+    /*DONATE PAGE CSS*/
+    .donate_right_img{
+        display: none;
+    }
+    .single_address.address{
+        padding-bottom: 20px;
+    }
+    .single_address{
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    .single_address p, .single_address a{
+        font-size: 14px;
+    }
+    .adreess_img img{
+        width: 45px;
+    }
+    .single_address.address img {
+        margin-top: 10px;
+        width: 40px;
+    }
+
+    .checkboxes.right_checkbox {
+        margin-left: 28px;
+    }
+    .checkboxes li input + label span{
+        margin-right: 10px;
+    }
+    .checkboxes li input + label{
+        font-size: 14px;
+    }
+    .payment_wrapper .radio_btns label{
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    .payment_wrapper .radio_btns input + label span{
+        margin-right: 10px;
+    }
+    .donate_method .donate_text p{
+        font-size: 24px;
+    }
+    .single_address.no-border .adreess_img{
+        top: -7px;
+    }
+
+    /* SEND WISHES SECTION */
+    .wishes_form{
+        margin-left: 0;
+    }
+    .wishes_form p{
+        text-align: center;
+    }
+    .text_field_wrapper,
+    .names_field.text_field_wrapper{
+        margin-bottom: 30px;
+        padding: 0;
+    }
+
+    .wishes_form .message_field{
+        margin-top: 0;
+    }
+
+    /* BLOG PAGE CSS GOES HERE */
+    .single_blog_wrapper {
+        padding: 63px 30px 80px;
+    }
+    .blog_post p{
+        font-size: 16px;
+    }
+    .single_related_post{
+        margin-bottom: 30px;
+    }
+
+
+    /* COUNTDOWN PAGE CSS */
+    .countdown_section{
+        padding-top: 108px;
+        padding-bottom: 100px;
+    }
+    .countdown_section .countdown li::after,
+    .countdown li::after{
+        right: 0px;
+    }
+    .countdown_section .countdown li::after{
+        right: 58px;
+    }
+    .countdown_section .countdown li,
+    .countdown li{
+        padding: 0 25px;
+    }
+    .countdown_section .countdown li:last-child{
+        padding-right: 0;
+    }
+    .countdown_section .countdown li::after{
+        left: initial;
+    }
+}
+
+/*////////////// EXTRA SMALL DEVICES //////////////*/
+@media (min-width: 480px) and (max-width: 767px){
+    .container{
+      width: 450px;
+    }
+
+    /* MENI AREA */
+    .main_menu .offset_menu{
+        padding-left: 100px;
+        padding-right: calc((100% - 450px)/2);
+    }
+
+    .m_sm_fullwidth{
+        width: 100%;
+    }
+
+    .control {
+        border-radius: 5px;
+        left: calc((100% - 500px) / 2);
+        padding: 5px;
+        position: fixed;
+        top: 33px;
+        z-index: 999;
+    }
+}
+
+/*////////////// EXTRA SMALL DEVICES //////////////*/
+@media (min-width: 300px) and (max-width: 479px){
+    .container{
+        width: 300px;
+    }
+    p{
+        font-size: 14px;
+    }
+    .xs_fullwidth{
+        width: 100%;
+    }
+    .area_title h3{
+        font-size: 22px;
+        line-height: 32px;
+    }
+    .chris_btn reveal animated{
+        line-height: 45px;
+        padding: 0 17px;
+        font-size: 13px;
+    }
+
+    .control {
+        border-radius: 5px;
+        left: calc((100% - 300px) / 2);
+        padding: 5px;
+        position: fixed;
+        top: 33px;
+        z-index: 999;
+    }
+
+    /* MENI ARERA CSS */
+    .main_menu .offset_menu{
+        padding: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* HERO AREA CSS  */
+    .hero_area{
+        height: 460px;
+    }
+    .hero_area .gifts{
+        bottom: 84px;
+    }
+    .top_content p{
+        font-size: 18px;
+        line-height: 45px;
+    }
+    .message p {
+      font-size: 35px;
+      line-height: 40px;
+    }
+    .hero_area_content{
+        top: 100px;
+    }
+    .hero_area .gifts ul li:first-child img{
+        width: 60px;
+    }
+    .hero_area .gifts ul li:nth-child(2) img{
+        width: 35px;
+    }
+    .hero_area .gifts ul li:nth-child(3) img{
+        width: 70px;
+    }
+    .hero_area .gifts ul li:nth-child(4) img{
+        width: 60px;
+    }
+    .hero_area .gifts ul li:nth-child(5) img{
+        width: 60px;
+    }
+
+    /* COUNTER AREA */
+    .counter_area .right_side{
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+    .figures ul li:first-child img{
+        width: 100px;
+    }
+    .countdown_section .countdown li:last-child,
+    .countdown li:last-child{
+        padding-right: 0;
+    }
+    .countdown_section .countdown li,
+    .countdown li{
+        padding: 0 12px;
+        font-size: 32px;
+    }
+    .countdown_section .countdown li span,
+    .countdown li span{
+        font-size: 12px;
+    }
+    .countdown_section .countdown li::after,
+    .countdown li:after{
+        display: none;
+    }
+
+
+    /* BLOG AREA */
+    .blog_section .left_side{
+        display: none;
+    }
+    .blog_section .right_side{
+        display: block;
+        width: 100%!important;
+    }
+    .tree{
+        display: none;
+    }
+
+    /* NEW YEAR */
+    .new_year_wish .text h1,
+    .new_year_wish .year{
+        font-size: 30px;
+    }
+    .new_year_wish .year{
+        padding: 0 85px 2px;
+    }
+
+    /* EVENT CONTENT AREA CSS */
+    .event_content .right_contents p{
+        font-size: 13px;
+    }
+    .event_content .right_contents .area_title h3{
+        font-size: 18px;
+    }
+
+    /* DONATE PAGE */
+    .single_step{
+        padding: 0 30px;
+    }
+    .single_step .step{
+        margin-bottom: 15px;
+    }
+    .step h2{
+        font-size: 40px;
+    }
+    .donate_btn{
+        padding: 0 20px;
+    }
+    .payment_wrapper{
+        margin-top: 30px;
+    }
+    .payment_wrapper .title{
+        margin-bottom: 20px;
+    }
+    .item_donation_wrapper .title, .payment_wrapper .title{
+        margin-bottom: 25px;
+    }
+
+    /* SEND WISHES */
+    .wishes_form .text_field{
+        width: 100%;
+    }
+    .wishes_form .text_field + .text_field{
+        margin-left: 0;
+    }
+
+    /* PARTY PAGE CSS */
+    .price{
+        padding: 48px 74px 35px;
+    }
+    .pricing_right{
+        margin-top: 20px!important;
+    }
+    .pricing_right.fr{
+        margin: 0;
+    }
+
+    /* BLOG PAGE CSS GOES HERE */
+    .blog_page .blog_area{
+        padding-bottom: 70px;
+    }
+    .single_blog_wrapper {
+        padding: 43px 20px 60px;
+    }
+    .blog_post blockquote{
+        padding: 33px 20px 45px;
+    }
+    .blog_title h2{
+        font-size: 25px;
+        line-height: 40px;
+    }
+    .blog_meta ul li{
+        line-height: 25px;
+    }
+    .blog_meta ul li:first-child::after{
+        display: none;
+    }
+    .blog_meta{
+        margin-bottom: 30px;
+    }
+
+    /* COUNTDOWN PAGE CSS GOES HERE */
+    .countdown li{
+
+    }
+}
