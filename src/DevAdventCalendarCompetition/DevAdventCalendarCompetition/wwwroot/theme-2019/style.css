@@ -2214,3 +2214,17 @@ footer{
 	right: 0;
 	bottom: 0;
 }
+
+/** OVERRIDES **/
+.title_white h3 {
+    color: #fff;
+}
+
+.area_title {
+    position: relative;
+    z-index: 1;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}

@@ -5,6 +5,37 @@
     var correctAnswersForUser = ViewBag.CorrectAnswers;
     var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
 }
+
+<!--================================
+      START COUNTDOWN AREA
+=================================-->
+<section class="countdown_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center area_title title_white mb-30">
+                    <h3>Zapnij pasy! Startujemy już za</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="countdown_wrapper">
+                    <ul class="countdown">
+                        <li>13</li>
+                        <li>13</li>
+                        <li>12</li>
+                        <li>58</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================================
+      END COUNTDOWN AREA
+=================================-->
+
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
     <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
         <span aria-hidden="true">&times;</span>
