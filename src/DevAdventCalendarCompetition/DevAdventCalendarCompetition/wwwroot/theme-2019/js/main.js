@@ -27,12 +27,12 @@
 
 
     /* COUNTDOWN INIT */
-    $('.countdown').countdown('2018/12/25', function(event) {
+    $('.countdown').countdown('2019/12/01', function(event) {
     var $this = $(this).html(event.strftime(''
-      + '<li>%D <span>days</span></li>  '
-      + '<li>%H <span>hours</span></li>  '
-      + '<li>%M <span>minutes</span></li>  '
-      + '<li>%S <span>seconeds</span></li> '));
+      + '<li>%D <span>dni</span></li>  '
+      + '<li>%H <span>minut</span></li>  '
+      + '<li>%M <span>godzin</span></li>  '
+      + '<li>%S <span>sekund</span></li> '));
     });
 
     // Replace all SVG images with inline SVG
@@ -174,4 +174,33 @@
         else {return getText;}
     });
 
+    $(function () {
+        var url = window.location.href;
+
+        $("[data-hide]").on("click", function () {
+            $("." + $(this).attr("data-hide")).hide();
+            /*
+             * via https://stackoverflow.com/a/13550556/2014064
+            */
+        });
+    });
+
 })(jQuery);
+
+function CheckTestStatus(testNumber) {
+    if (testNumber != null) {
+        $.post("/Home/CheckTestStatus",
+            {
+                testNumber: testNumber
+            },
+            function (result) {
+                if (result === "Ended") {
+                    $("#alert-text").text("Niestety, spóźniłeś się...");
+                    $("#tile-open-alert").show();
+                }
+            });
+    } else {
+        $("#alert-text").text("Nie możesz wejść!");
+        $("#tile-open-alert").show();
+    }
+}

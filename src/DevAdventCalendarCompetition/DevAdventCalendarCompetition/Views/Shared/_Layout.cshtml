@@ -98,8 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- MENU AREA STARTS HERE -->
-
+                        <!-- MENU AREA ENDS HERE -->
                     </div>
                 </div>
             </div>
@@ -107,9 +106,11 @@
         <!-- NAV AREA -->
     </section>
 
-<div>
-    @await Html.PartialAsync("_LoginPartial")
-</div>
+<!--
+    <div>
+        @await Html.PartialAsync("_LoginPartial")
+    </div>
+-->
 
 <div>
     @RenderBody()
@@ -126,8 +127,8 @@
                     <ul>
                         <li><a href="#"><span class="icofont icofont-social-facebook"></span></a></li>
                         <li><a href="#"><span class="icofont icofont-social-twitter"></span></a></li>
-                        <li><a href="#"><span class="icofont icofont-social-behance"></span></a></li>
-                        <li><a href="#"><span class="icofont icofont-social-pinterest"></span></a></li>
+                        <li><a href="#"><span class="icofont icofont-social-linkedin"></span></a></li>
+                        <li><a href="#"><span class="icofont icofont-social-github"></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -150,6 +151,30 @@
 <!--================================
       END FOOTER
 =================================-->
+
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+    </script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+
+<partial name="_CookieConsentPartial" />
+<partial name="_ValidationScriptsPartial" />
 
 <!--//////////////////// JS GOES HERE ////////////////-->
 
@@ -180,32 +205,5 @@
 <!-- Main js -->
 <script src="~/theme-2019/js/main.js"></script>
 
-
-<!--
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-    <partial name="_CookieConsentPartial" />
-    <partial name="_ValidationScriptsPartial" />
-    @RenderSection("Scripts", required: false)
--->
 </body>
 </html>
