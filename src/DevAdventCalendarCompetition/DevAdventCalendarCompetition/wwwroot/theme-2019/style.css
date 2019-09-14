@@ -2216,6 +2216,11 @@ footer{
 }
 
 /** OVERRIDES **/
+
+body {
+    overflow-x: hidden;
+}
+
 .title_white h3 {
     color: #fff;
 }
@@ -2227,4 +2232,31 @@ footer{
 
 .mb-30 {
     margin-bottom: 30px;
+}
+
+#mc_embed_signup input[type="text"],
+#mc_embed_signup input[type="email"] {
+    padding: 0 15px !important;
+    border: 1px solid #f2f2f2 !important;
+}
+
+#mc_embed_signup form {
+    padding: 0 !important;
+}
+
+#mc_embed_signup .text_field .input_icon {
+    top: 25px;
+}
+
+#mc_embed_signup .mc-field-group {
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    margin: 0 0 10px 0;
+}
+
+#mc_embed_signup input[type="submit"] {
+    margin: 0;
+    border: none;
+    width: 100%;
 }

@@ -116,64 +116,75 @@
     }
     else
     {
-        <div class="row content-centered">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 text-center">
-                <img id="santa" src="images/santa.JPG" alt="Święty Mikołaj" />
-                <h1><b>@Html.ActionLink("Zaloguj się", "Login", "Account")</b></h1>
-                <h3>i sprawdź, co dziś przygotowały dla Ciebie Elfy Świętego Mikołaja!</h3>
+    <!-- Begin Mailchimp Signup Form -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet">
 
-                <!-- Begin Mailchimp Signup Form -->
-                <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet">
-                <div id="mc_embed_signup">
-                    <form action="https://michalgellert.us14.list-manage.com/subscribe/post?u=8273a841f65d9cbb0055b7672&amp;id=76610be8a5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                        <div id="mc_embed_signup_scroll">
-                            <h2 class="text-center">Zachęcamy do zapisania się do newslettera!</h2>
-                            <div class="indicates-required"><span class="asterisk">*</span> pole obowiązkowe</div>
-                            <div class="mc-field-group">
-                                <label for="mce-EMAIL">
-                                    Email <span class="asterisk">*</span>
-                                </label>
-                                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-                            </div>
-                            <div class="mc-field-group">
-                                <label for="mce-FNAME">Imię </label>
-                                <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-                            </div>
-                            <div class="mc-field-group">
-                                <label for="mce-LNAME">Nazwisko </label>
-                                <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-                            </div>
-                            <div id="mce-responses" class="clear">
-                                <div class="response" id="mce-error-response" style="display: none"></div>
-                                <div class="response" id="mce-success-response" style="display: none"></div>
-                            </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8273a841f65d9cbb0055b7672_76610be8a5" tabindex="-1" value=""></div>
-                            <div class="clear content-centered"><input type="submit" value="Zapisz się" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    <section class="contact_area" id="mc_embed_signup">
+        <div class="container">
+            <div class="contact_area_wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="area_title">
+                            <h3>Zapisz się na newsletter</h3>
+                            <p>I nie przegap najważniejszych wydarzeń!</p>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-                <script>
-                    (function ($) {
-                        window.fnames = new Array();
-                        window.ftypes = new Array();
-                        fnames[0] = 'EMAIL';
-                        ftypes[0] = 'email';
-                        fnames[1] = 'FNAME';
-                        ftypes[1] = 'text';
-                        fnames[2] = 'LNAME';
-                        ftypes[2] = 'text';
-                        fnames[3] = 'ADDRESS';
-                        ftypes[3] = 'address';
-                        fnames[4] = 'PHONE';
-                        ftypes[4] = 'phone';
-                    }(jQuery));
-                    var $mcj = jQuery.noConflict(true);
-                </script>
-                <!--End mc_embed_signup-->
+                <div class="row">
+                    <div class="contact_form clearfix">
+                        <form action="https://michalgellert.us14.list-manage.com/subscribe/post?u=8273a841f65d9cbb0055b7672&amp;id=76610be8a5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="text_field mc-field-group">
+                                    <input type="email" placeholder="E-mail" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                <div class="text_field mc-field-group">
+                                    <input type="text" placeholder="Imię" value="" name="FNAME" class="" id="mce-FNAME">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                <div class="text_field mc-field-group">
+                                    <input type="text" placeholder="Nazwisko" value="" name="LNAME" class="" id="mce-LNAME">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                <div id="mce-responses" class="clear">
+                                    <div class="response" id="mce-error-response" style="display: none"></div>
+                                    <div class="response" id="mce-success-response" style="display: none"></div>
+                                </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8273a841f65d9cbb0055b7672_76610be8a5" tabindex="-1" value=""></div>
+                                <div class="clear content-centered"><input type="submit" value="Zapisz się" name="subscribe" id="mc-embedded-subscribe" class="chris_btn reveal animated" data-reveal-anim="fadeIn"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3"></div>
         </div>
-            }
-        </div>
+    </section>
+
+    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+    <script>
+        (function ($) {
+            window.fnames = new Array();
+            window.ftypes = new Array();
+            fnames[0] = 'EMAIL';
+            ftypes[0] = 'email';
+            fnames[1] = 'FNAME';
+            ftypes[1] = 'text';
+            fnames[2] = 'LNAME';
+            ftypes[2] = 'text';
+            fnames[3] = 'ADDRESS';
+            ftypes[3] = 'address';
+            fnames[4] = 'PHONE';
+            ftypes[4] = 'phone';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);
+    </script>
+    <!--End mc_embed_signup-->
+
+    }
+</div>
