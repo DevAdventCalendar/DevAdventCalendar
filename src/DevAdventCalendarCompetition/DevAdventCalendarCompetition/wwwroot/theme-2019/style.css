@@ -2230,6 +2230,10 @@ body {
     z-index: 1;
 }
 
+.mb-20 {
+    margin-bottom: 20px;
+}
+
 .mb-30 {
     margin-bottom: 30px;
 }
