@@ -35,13 +35,71 @@
       END COUNTDOWN AREA
 =================================-->
 
+<!--================================
+      START HOW IT WORKS
+=================================-->
+<div class="single_blog_section">
+    <div class="more_from_santa">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="related_post_area_title">
+                        <h3>Jak to działa?</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="single_related_post">
+                        <div class="title">
+                            <h4>Każdego dnia otwierasz<br/>jedno okienko kalendarza</h4>
+                        </div>
+<!--                        <div class="post_meta"><span>posted on 30-dec-2015</span></div>-->
+
+                        <div class="post_image">
+                            <img src="~/theme-2019/images/releted_post_img1.png" alt="images">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="single_related_post">
+                        <div class="title">
+                            <h4>Odpowiadasz na pytanie<br />i zbierasz punkty</h4>
+                        </div>
+<!--                        <div class="post_meta"><span>posted on 30-dec-2015</span></div>-->
+
+                        <div class="post_image">
+                            <img src="~/theme-2019/images/releted_post_img2.png" alt="images">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="single_related_post">
+                        <div class="title">
+                            <h4>25 grudnia<br />rozdajemy nagrody</h4>
+                        </div>
+<!--                        <div class="post_meta"><span>posted on 30-dec-2015</span></div>-->
+
+                        <div class="post_image">
+                            <img src="~/theme-2019/images/releted_post_img3.png" alt="images">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================================
+      END HOW IT WORKS
+=================================-->
+
 <div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
     <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
         <span aria-hidden="true">&times;</span>
     </button>
     <span id="alert-text"></span>
 </div>
-<div class="row">
+
     @if (User.Identity.IsAuthenticated)
     {
         if (correctAnswersForUser != null)
@@ -62,57 +120,65 @@
                 }
             </div>
         }
-        <div class="col content-centered">
-            <table class="calendar-content">
-                <tbody>
-                    @for (var i = 0; i < 4; i++)
-                    {
-                        <tr>
-                            @for (int j = 0; j < 6; j++)
-                            {
-                                var dayNumber = i * 6 + j + 1;
-                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
+    <div class="container">
 
-                                <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
+        @for (var i = 0; i < 4; i++)
+        {
+            <div class="row">
+
+                <div class="col-md-10">
+                    <div class="row">
+                        @for (int j = 0; j < 6; j++)
+                        {
+                            var dayNumber = i * 6 + j + 1;
+                            var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
+
+                            <div class="col-md-2">
+                                <div class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
                                     <div class="panel panel-default task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
                                         <div class="panel-body">
                                             DZIEŃ @dayNumber
                                             <div class="calendar-sponsor-img">
                                                 @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
                                                 {
-                                                    <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
-                                                        <img src="images/sponsor-logo-example.jpg" alt="Logo sponsora dnia" />
-                                                    </a>
+                                                <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
+                                                    <img src="images/sponsor-logo-example.jpg" alt="Logo sponsora dnia" />
+                                                </a>
                                                 }
                                                 else
                                                 {
-                                                    <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
+                                                <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
                                                 }
                                             </div>
                                         </div>
                                     </div>
-                                </td>
-                            }
-                            <td class="week-sponsor text-center">
-                                TYDZIEŃ @(i + 1)
-                                @if (i == 1)
-                                {
-                                    <a href="https://www.objectivity.co.uk/" target="_blank">
-                                        <img src="~/images/marketing/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
-                                    </a>
-                                }
-                                else if (i == 2)
-                                {
-                                    <a href="https://instapage.com" target="_blank">
-                                        <img src="~/images/marketing/instapage.jpg" alt="instapage" title="Instapage" class="img-responsive center-block" />
-                                    </a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                                </div><!-- calendar day -->
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="week-sponsor text-center">
+                        TYDZIEŃ @(i + 1)
+                        @if (i == 1)
+                        {
+                        <a href="https://www.objectivity.co.uk/" target="_blank">
+                            <img src="~/images/marketing/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
+                        </a>
+                        }
+                        else if (i == 2)
+                        {
+                        <a href="https://instapage.com" target="_blank">
+                            <img src="~/images/marketing/instapage.jpg" alt="instapage" title="Instapage" class="img-responsive center-block" />
+                        </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div><!-- container -->
     }
     else
     {
@@ -185,6 +251,4 @@
         var $mcj = jQuery.noConflict(true);
     </script>
     <!--End mc_embed_signup-->
-
     }
-</div>
