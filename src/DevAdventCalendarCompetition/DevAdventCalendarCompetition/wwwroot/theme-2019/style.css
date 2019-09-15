@@ -2238,6 +2238,69 @@ body {
     margin-bottom: 30px;
 }
 
+.link {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.link:hover {
+    color: #ddd;
+}
+
+.link_dark {
+    color: #222;
+}
+.link_dark:hover {
+    color: #555;
+}
+
+@media screen and (min-width: 768px) {
+    .person-wrapper {
+        display: flex;
+    }
+}
+
+.person {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-social-round {
+    display: inline-block;
+    line-height: 27px;
+    width: 27px;
+    background: #fff;
+    color: #c93232;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.icon-social-round:hover {
+    background: #ddd;
+    color: #c93232;
+}
+
+.icon-social-dark {
+    background: #222;
+    color: #fff;
+}
+
+.icon-social-dark:hover {
+    background: #555;
+    color: #fff;
+}
+
+.pricing_title {
+    padding-bottom: 10px;
+}
+
+.price_detail {
+    padding-left: 0;
+}
+
 #mc_embed_signup input[type="text"],
 #mc_embed_signup input[type="email"] {
     padding: 0 15px !important;
