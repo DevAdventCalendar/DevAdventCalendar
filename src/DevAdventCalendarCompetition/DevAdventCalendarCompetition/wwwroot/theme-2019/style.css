@@ -2234,8 +2234,16 @@ body {
     margin-bottom: 20px;
 }
 
+.mt-20 {
+    margin-top: 20px;
+}
+
 .mb-30 {
     margin-bottom: 30px;
+}
+
+.mt-30 {
+    margin-top: 30px;
 }
 
 .link {
@@ -2250,12 +2258,17 @@ body {
 .link_dark {
     color: #222;
 }
+
 .link_dark:hover {
     color: #555;
 }
 
 @media screen and (min-width: 768px) {
     .person-wrapper {
+        display: flex;
+    }
+
+    .prizes-wrapper {
         display: flex;
     }
 }
@@ -2299,6 +2312,43 @@ body {
 
 .price_detail {
     padding-left: 0;
+}
+
+.border {
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 0px 16px rgba(0,0,0,.11);
+    box-shadow: 0px 0px 16px rgba(0,0,0,.11);
+}
+
+.prize-wrapper {
+    padding: 20px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-flow: column;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex-fullheight {
+    height: 100%;
 }
 
 #mc_embed_signup input[type="text"],
