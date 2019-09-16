@@ -9,9 +9,14 @@ namespace DevAdventCalendarCompetition.Services
     {
         private readonly HashParameters _hashParameters;
 
-        public static string ComputeHash(string text)
+        public StringHasher(HashParameters hashParameters)
         {
-            byte saltBytes = _hashParameters.Salt;
+            this._hashParameters = hashParameters;
+        }
+
+        public string ComputeHash(string text)
+        {
+            byte[] saltBytes = this._hashParameters.Salt;
 
             // Convert plain text into a byte array.
             byte[] textBytes = Encoding.UTF8.GetBytes(text);
@@ -31,14 +36,16 @@ namespace DevAdventCalendarCompetition.Services
                 textWithSaltBytes[textBytes.Length + i] = saltBytes[i];
             }
 
-            // Initialize hashing algorithm class.
-            HashAlgorithm hash = new SHA256Managed();
-
             // Compute hash value of our text with appended salt.
             byte[] hashBytes = textWithSaltBytes;
-            for (int i = 0; i < _hashParameters.Iterations; i++)
+
+            // Initialize hashing algorithm class.
+            using (HashAlgorithm hash = new SHA256Managed())
             {
-                hashBytes = hash.ComputeHash(hashBytes);
+                for (int i = 0; i < this._hashParameters.Iterations; i++)
+                {
+                    hashBytes = hash.ComputeHash(hashBytes);
+                }
             }
 
             // Convert result into a base64-encoded string.
@@ -46,11 +53,6 @@ namespace DevAdventCalendarCompetition.Services
 
             // Return the result.
             return hashValue;
-        }
-
-        public StringHasher(HashParameters hashParameters)
-        {
-            this._hashParameters = hashParameters;
         }
 
         public bool VerifyHash(string text, string hashValue)

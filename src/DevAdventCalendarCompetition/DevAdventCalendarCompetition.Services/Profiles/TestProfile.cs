@@ -6,6 +6,8 @@ namespace DevAdventCalendarCompetition.Services.Profiles
 {
     public class TestProfile : Profile
     {
+        // disabled rule CA1506
+        // technical debt
         public TestProfile()
         {
             this.CreateMap<Test, TestDto>()

@@ -6,18 +6,16 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class HashParameters
     {
-        public HashParameters(int iterations, byte salt)
+        public HashParameters(int iterations, byte[] salt)
         {
             this.Iterations = iterations;
             this.Salt = salt;
         }
 
-        public HashParameters(int v1, byte[] v2)
-        {
-        }
-
         public int Iterations { get; set; }
 
-        public byte Salt { get; set; }
+#pragma warning disable CA1819 // Properties should not return arrays
+        public byte[] Salt { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
     }
 }

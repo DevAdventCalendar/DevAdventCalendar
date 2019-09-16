@@ -5,6 +5,8 @@ namespace DevAdventCalendarCompetition.Services.Models
 {
     public class TestDto
     {
+        public static bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
+
         public int Id { get; set; }
 
         public int Number { get; set; }
@@ -34,8 +36,6 @@ namespace DevAdventCalendarCompetition.Services.Models
         public string DiscountLogoPath { get; set; }
 
         public bool HasUserAnswered { get; set; }
-
-        public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
 
         public TestDto ToTestDto()
         {

@@ -108,7 +108,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 CurrentUserPosition = this.homeService.GetUserPosition(userId),
 
                 // SingleTestResults = singleTestResults,
-                TotalTestResults = PaginatedList<TotalTestResultEntryVm>.Create(totalTestResults, pageIndex ?? 1, pageSize)
+                TotalTestResults = new PaginatedCollection<TotalTestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize)
             };
 
             return this.View(vm);
@@ -173,8 +173,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult GetServerTime()
         {
-
-            return this.Json(DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            return this.Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K", CultureInfo.InvariantCulture));
         }
     }
 }

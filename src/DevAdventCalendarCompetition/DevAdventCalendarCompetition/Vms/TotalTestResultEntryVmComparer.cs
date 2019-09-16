@@ -8,9 +8,11 @@ namespace DevAdventCalendarCompetition.Vms
         public bool Equals(TotalTestResultEntryVm x, TotalTestResultEntryVm y)
         {
             if (x != null && y != null)
-                {
+            {
                 return x.UserId == y.UserId;
             }
+
+            return false;
         }
 
         public int GetHashCode(TotalTestResultEntryVm obj)
@@ -19,6 +21,8 @@ namespace DevAdventCalendarCompetition.Vms
             {
                 return obj.UserId.GetHashCode(StringComparison.CurrentCulture);
             }
+
+            return 0;
         }
     }
 }
