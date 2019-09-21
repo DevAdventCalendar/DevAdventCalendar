@@ -2263,6 +2263,10 @@ body {
     color: #555;
 }
 
+.white {
+    color: #fff;
+}
+
 @media screen and (min-width: 768px) {
     .person-wrapper {
         display: flex;
@@ -2351,6 +2355,10 @@ body {
     height: 100%;
 }
 
+.offset_menu a.active {
+    color: #fff;
+}
+
 #mc_embed_signup input[type="text"],
 #mc_embed_signup input[type="email"] {
     padding: 0 15px !important;
@@ -2376,4 +2384,17 @@ body {
     margin: 0;
     border: none;
     width: 100%;
+}
+
+.text_field_default {
+    margin: 0 0 5px 0;
+}
+
+.text_field_default input {
+    padding: 0 15px;
+}
+
+.chris_btn {
+    margin: 0;
+    border: none;
 }

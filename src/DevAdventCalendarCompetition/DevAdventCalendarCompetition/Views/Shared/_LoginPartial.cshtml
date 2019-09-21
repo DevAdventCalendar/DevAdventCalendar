@@ -16,8 +16,10 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Rejestruj</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a></li>
-    </ul>
+    <li class="mt-30">
+        <a asp-area="" asp-controller="Account" asp-action="Register" class="active">Rejestruj</a>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
+    </li>
 }
