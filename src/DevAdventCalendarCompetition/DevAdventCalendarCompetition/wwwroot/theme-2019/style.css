@@ -2398,3 +2398,13 @@ body {
     margin: 0;
     border: none;
 }
+
+.checkboxes li input + label.checkbox_dark {
+    color: #333;
+}
+.checkboxes li input + label.checkbox_dark span {
+    border: 1px solid rgba(0, 0, 0, 0.70);
+}
+.checkboxes li input + label.checkbox_dark span::before {
+    color: #333;
+}
