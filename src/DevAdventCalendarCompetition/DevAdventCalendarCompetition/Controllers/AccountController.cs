@@ -53,12 +53,15 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, Uri returnUrl = null)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
 
                 if (user == null)
                 {
@@ -125,12 +128,15 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, Uri returnUrl = null)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = this.accountService.CreateApplicationUserByEmail(model.Email);
-#pragma warning restore CA1062 // Validate arguments of public methods
                 var result = await this.accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
@@ -224,6 +230,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, Uri returnUrl = null)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (this.ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
@@ -235,9 +246,8 @@ namespace DevAdventCalendarCompetition.Controllers
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
                 }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = this.accountService.CreateApplicationUserByEmail(model.Email);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
                 var result = await this.accountService.CreateAsync(user, null).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
@@ -294,11 +304,14 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (this.ModelState.IsValid)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
                 if (user == null || !(await this.accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -348,14 +361,17 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
             var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
             if (user == null)
             {
                 // Don't reveal that the user does not exist
