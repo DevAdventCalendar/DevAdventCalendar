@@ -53,7 +53,7 @@ namespace DevAdventCalendarCompetition.Tests
             Number = 2,
             StartDate = DateTime.Today.AddHours(12),
             EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-            Status = Services.Models.TestStatus.Started
+            Status = TestStatus.Started
         };
 
         public AdminServiceTest()

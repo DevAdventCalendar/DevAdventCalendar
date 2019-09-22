@@ -16,8 +16,6 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-        private const string DockerEnvName = "Docker";
-
         public Startup(IHostingEnvironment env)
         {
             if (env is null)
