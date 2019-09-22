@@ -1,14 +1,15 @@
-﻿using DevAdventCalendarCompetition.Extensions;
+﻿using System;
+using System.Globalization;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.ManageViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -16,20 +17,17 @@ namespace DevAdventCalendarCompetition.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
-        private readonly IManageService _manageService;
-        private readonly IAccountService _accountService;
-        private readonly ILogger _logger;
-        private readonly UrlEncoder _urlEncoder;
-
-        private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
-        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, UrlEncoder urlEncoder)
+        private readonly IManageService manageService;
+        private readonly IAccountService accountService;
+        private readonly ILogger logger;
+
+        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger)
         {
-            _manageService = manageService;
-            _accountService = accountService;
-            _logger = logger;
-            _urlEncoder = urlEncoder;
+            this.manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
+            this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [TempData]
@@ -38,10 +36,10 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
             var model = new IndexViewModel
@@ -50,199 +48,196 @@ namespace DevAdventCalendarCompetition.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = this.StatusMessage
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
             var email = user.Email;
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (model.Email != email)
             {
-                var setEmailResult = await _manageService.SetEmailAsync(user, model.Email);
+                var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new ApplicationException($"Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem '{user.Id}'.");
+                    throw new ArgumentException($"Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem '{user.Id}'.");
                 }
             }
 
             var phoneNumber = user.PhoneNumber;
             if (model.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await _manageService.SetPhoneNumberAsync(user, model.PhoneNumber);
+                var setPhoneResult = await this.manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new ApplicationException($"Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem '{user.Id}'.");
+                    throw new ArgumentException($"Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem '{user.Id}'.");
                 }
             }
 
-            StatusMessage = "Profil został zaktualizowany";
-            return RedirectToAction(nameof(Index));
+            this.StatusMessage = "Profil został zaktualizowany";
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            var code = await _accountService.GenerateEmailConfirmationTokenAsync(User);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+            var code = await this.accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
+            var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
             var email = user.Email;
-            await _accountService.SendEmailConfirmationAsync(email, callbackUrl);
+            await this.accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl)).ConfigureAwait(false);
 
-            StatusMessage = "E-mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę odbiorczą";
-            return RedirectToAction(nameof(Index));
+            this.StatusMessage = "E-mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę odbiorczą";
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            var hasPassword = await _manageService.HasPasswordAsync(user);
+            var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
             if (!hasPassword)
             {
-                return RedirectToAction(nameof(SetPassword));
+                return this.RedirectToAction(nameof(this.SetPassword));
             }
 
-            var model = new ChangePasswordViewModel { StatusMessage = StatusMessage };
-            return View(model);
+            var model = new ChangePasswordViewModel { StatusMessage = this.StatusMessage };
+            return this.View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            var changePasswordResult = await _manageService.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var changePasswordResult = await this.manageService.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).ConfigureAwait(false);
+
             if (!changePasswordResult.Succeeded)
             {
-                AddErrors(changePasswordResult);
-                return View(model);
+                this.AddErrors(changePasswordResult);
+                return this.View(model);
             }
 
-            await _accountService.SignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Twoje hasło zostało zmienione";
+            await this.accountService.SignInAsync(user).ConfigureAwait(false);
+            this.logger.LogInformation("User changed their password successfully.");
+            this.StatusMessage = "Twoje hasło zostało zmienione";
 
-            return RedirectToAction(nameof(ChangePassword));
+            return this.RedirectToAction(nameof(this.ChangePassword));
         }
 
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            var hasPassword = await _manageService.HasPasswordAsync(user);
+            var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
 
             if (hasPassword)
             {
-                return RedirectToAction(nameof(ChangePassword));
+                return this.RedirectToAction(nameof(this.ChangePassword));
             }
 
-            var model = new SetPasswordViewModel { StatusMessage = StatusMessage };
-            return View(model);
+            var model = new SetPasswordViewModel { StatusMessage = this.StatusMessage };
+            return this.View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
-            var user = await _manageService.GetUserAsync(User);
+            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{_accountService.GetUserId(User)}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            var addPasswordResult = await _manageService.AddPasswordAsync(user, model.NewPassword);
-            if (!addPasswordResult.Succeeded)
+            if (model == null)
             {
-                AddErrors(addPasswordResult);
-                return View(model);
+                throw new ArgumentNullException(nameof(model));
             }
 
-            await _accountService.SignInAsync(user);
-            StatusMessage = "Your password has been set.";
+            if (model != null)
+            {
+                var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
+                if (!addPasswordResult.Succeeded)
+                {
+                    this.AddErrors(addPasswordResult);
+                    return this.View(model);
+                }
+            }
 
-            return RedirectToAction(nameof(SetPassword));
+            await this.accountService.SignInAsync(user).ConfigureAwait(false);
+            this.StatusMessage = "Your password has been set.";
+
+            return this.RedirectToAction(nameof(this.SetPassword));
         }
-
-        #region Helpers
 
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                this.ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-
-        //TODO: move to service
-        private string FormatKey(string unformattedKey)
-        {
-            var result = new StringBuilder();
-            int currentPosition = 0;
-            while (currentPosition + 4 < unformattedKey.Length)
-            {
-                result.Append(unformattedKey.Substring(currentPosition, 4)).Append(" ");
-                currentPosition += 4;
-            }
-            if (currentPosition < unformattedKey.Length)
-            {
-                result.Append(unformattedKey.Substring(currentPosition));
-            }
-
-            return result.ToString().ToLowerInvariant();
-        }
-       
-        #endregion Helpers
-    }
+  }
 }

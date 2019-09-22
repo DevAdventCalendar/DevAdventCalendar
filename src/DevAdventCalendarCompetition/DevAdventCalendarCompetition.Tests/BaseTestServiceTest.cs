@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Profiles;
 using Moq;
-using System;
 using Xunit;
 
 namespace DevAdventCalendarCompetition.Tests
@@ -13,7 +13,6 @@ namespace DevAdventCalendarCompetition.Tests
     public class BaseTestServiceTest
     {
         private readonly Mock<IBaseTestRepository> _baseTestRepositoryMock;
-        private readonly StringHasher _stringHasher;
         private IMapper _mapper;
 
         private Test _oldTest = new Test()
@@ -50,7 +49,7 @@ namespace DevAdventCalendarCompetition.Tests
             TestId = 1,
             User = new ApplicationUser(),
             UserId = "1",
-            AnsweringTimeOffset = new TimeSpan(),
+            AnsweringTimeOffset = default(TimeSpan),
             AnsweringTime = DateTime.Today
         };
 
@@ -67,98 +66,106 @@ namespace DevAdventCalendarCompetition.Tests
 
         public BaseTestServiceTest()
         {
-            _baseTestRepositoryMock = new Mock<IBaseTestRepository>();
+            this._baseTestRepositoryMock = new Mock<IBaseTestRepository>();
         }
 
         [Fact]
-        public void GetTestByNumber_DontGetOldTest()
+        public void GetTestByNumberDontGetOldTest()
         {
-            //Arrange
-            _baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(_oldTest);
+            // Arrange
+            this._baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(this._oldTest);
 
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
-            //Act
-            var result = baseTestService.GetTestByNumber(_oldTest.Number);
-            //Assert
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var baseTestService = new BaseTestService(this._baseTestRepositoryMock.Object, this._mapper, null);
+
+            // Act
+            var result = baseTestService.GetTestByNumber(this._oldTest.Number);
+
+            // Assert
             Assert.IsType<TestDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_oldTest.Number))), Times.Once);
+            this._baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(this._oldTest.Number))), Times.Once);
         }
 
         [Fact]
-        public void GetTestByNumber_DontGetFutureTest()
+        public void GetTestByNumberDontGetFutureTest()
         {
-            //Arange
-            _baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(_futureTest);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
-            //Act
-            var result = baseTestService.GetTestByNumber(_futureTest.Number);
-            //Assert
+            // Arange
+            this._baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(this._futureTest);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var baseTestService = new BaseTestService(this._baseTestRepositoryMock.Object, this._mapper, null);
+
+            // Act
+            var result = baseTestService.GetTestByNumber(this._futureTest.Number);
+
+            // Assert
             Assert.IsType<TestDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_futureTest.Number))), Times.Once());
+            this._baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(this._futureTest.Number))), Times.Once());
         }
 
         [Fact]
-        public void GetTestByNumber_ReturnCurrentTestDto()
+        public void GetTestByNumberReturnCurrentTestDto()
         {
-            //Arrange
-            _baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(_currentTest);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
-            //Act
-            var result = baseTestService.GetTestByNumber(_currentTest.Number);
-            //Assert
+            // Arrange
+            this._baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(this._currentTest);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var baseTestService = new BaseTestService(this._baseTestRepositoryMock.Object, this._mapper, null);
+
+            // Act
+            var result = baseTestService.GetTestByNumber(this._currentTest.Number);
+
+            // Assert
             Assert.IsType<TestDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(_currentTest.Number))), Times.Once());
+            this._baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(this._currentTest.Number))), Times.Once());
         }
 
         [Fact]
-        public void GetAnswerByTestId_ReturnTestAnswerDto()
+        public void GetAnswerByTestIdReturnTestAnswerDto()
         {
-            //Arrange
-            _baseTestRepositoryMock.Setup(mock => mock.GetAnswerByTestId(It.IsAny<int>())).Returns(_testAnswer);
-            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
-            //Act
-            var result = baseTestService.GetAnswerByTestId(_testAnswer.Id);
-            //Assert
+            // Arrange
+            this._baseTestRepositoryMock.Setup(mock => mock.GetAnswerByTestId(It.IsAny<int>())).Returns(this._testAnswer);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
+            var baseTestService = new BaseTestService(this._baseTestRepositoryMock.Object, this._mapper, null);
+
+            // Act
+            var result = baseTestService.GetAnswerByTestId(this._testAnswer.Id);
+
+            // Assert
             Assert.IsType<TestAnswerDto>(result);
-            _baseTestRepositoryMock.Verify(mock => mock.GetAnswerByTestId(It.Is<int>(x => x.Equals(_testAnswer.Id))), Times.Once());
+            this._baseTestRepositoryMock.Verify(mock => mock.GetAnswerByTestId(It.Is<int>(x => x.Equals(this._testAnswer.Id))), Times.Once());
         }
 
         [Fact]
         public void AddTestAnswer()
         {
-            //Arrange
-            _baseTestRepositoryMock.Setup(mock => mock.AddAnswer(It.IsAny<TestAnswer>()));
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
-            //Act
-            baseTestService.AddTestAnswer(_testAnswer.TestId, _testAnswer.UserId, DateTime.Now);
-            //Assert
-            _baseTestRepositoryMock.Verify(mock => mock.AddAnswer(It.Is<TestAnswer>(x => x.UserId == _testAnswer.UserId && x.TestId == _testAnswer.TestId)), Times.Once());
+            // Arrange
+            this._baseTestRepositoryMock.Setup(mock => mock.AddAnswer(It.IsAny<TestAnswer>()));
+            var baseTestService = new BaseTestService(this._baseTestRepositoryMock.Object, this._mapper, null);
+
+            // Act
+            baseTestService.AddTestAnswer(this._testAnswer.TestId, this._testAnswer.UserId, DateTime.Now);
+
+            // Assert
+            this._baseTestRepositoryMock.Verify(mock => mock.AddAnswer(It.Is<TestAnswer>(x => x.UserId == this._testAnswer.UserId && x.TestId == this._testAnswer.TestId)), Times.Once());
         }
 
         [Fact]
         public void AddTestWrongAnswer()
         {
-            //Arrange
-            _baseTestRepositoryMock.Setup(mock => mock.AddWrongAnswer(It.IsAny<TestWrongAnswer>()));
-            var baseTestService = new BaseTestService(_baseTestRepositoryMock.Object, _mapper, null);
+            // Arrange
+            this._baseTestRepositoryMock.Setup(mock => mock.AddWrongAnswer(It.IsAny<TestWrongAnswer>()));
+            var baseTestService = new BaseTestService(this._baseTestRepositoryMock.Object, this._mapper, null);
 
-            //Act
-            baseTestService.AddTestWrongAnswer(_testWrongAnswer.UserId, _testWrongAnswer.TestId, _testWrongAnswer.Answer, _testWrongAnswer.Time);
+            // Act
+            baseTestService.AddTestWrongAnswer(this._testWrongAnswer.UserId, this._testWrongAnswer.TestId, this._testWrongAnswer.Answer, this._testWrongAnswer.Time);
 
-            //Assert
-            _baseTestRepositoryMock.Verify(
+            // Assert
+            this._baseTestRepositoryMock.Verify(
                 mock => mock.AddWrongAnswer(
                     It.Is<TestWrongAnswer>(
-                        x => x.UserId == _testWrongAnswer.UserId
-                        && x.Time == _testWrongAnswer.Time
-                        && x.Answer == _testWrongAnswer.Answer
-                        && x.TestId == _testWrongAnswer.TestId
-                    )
-                ), Times.Once());
+                        x => x.UserId == this._testWrongAnswer.UserId
+                        && x.Time == this._testWrongAnswer.Time
+                        && x.Answer == this._testWrongAnswer.Answer
+                        && x.TestId == this._testWrongAnswer.TestId)), Times.Once());
         }
     }
 }

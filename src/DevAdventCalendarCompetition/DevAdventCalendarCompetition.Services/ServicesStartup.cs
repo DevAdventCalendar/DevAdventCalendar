@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Text;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -13,6 +13,11 @@ namespace DevAdventCalendarCompetition.Services
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
+            if (configuration is null)
+            {
+                throw new System.ArgumentNullException(nameof(configuration));
+            }
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
@@ -27,7 +32,7 @@ namespace DevAdventCalendarCompetition.Services
             var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
             services.AddScoped<StringHasher>(sh => new StringHasher(hashParameters));
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(ServicesStartup));
         }
     }
 }

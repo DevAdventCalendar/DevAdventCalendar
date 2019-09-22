@@ -1,3 +1,4 @@
+using System;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -93,20 +94,36 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UpdateDatabase(this IApplicationBuilder app)
         {
-            using (var scope = app.ApplicationServices.CreateScope())
+            if (app == null)
             {
-                var init = scope.ServiceProvider.GetService<DbInitializer>();
-                init.Seed();
+                throw new ArgumentNullException(nameof(app));
+            }
+
+            if (app != null)
+            {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var init = scope.ServiceProvider.GetService<DbInitializer>();
+                    init.Seed();
+                }
             }
         }
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
         {
-            app.Use(next => context =>
+            if (app == null)
             {
-                context.Request.Scheme = "https";
-                return next(context);
-            });
+                throw new ArgumentNullException(nameof(app));
+            }
+
+            if (app != null)
+            {
+                app.Use(next => context =>
+                {
+                    context.Request.Scheme = "https";
+                    return next(context);
+                });
+            }
         }
     }
 }

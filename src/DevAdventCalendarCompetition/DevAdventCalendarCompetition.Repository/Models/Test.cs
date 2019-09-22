@@ -4,41 +4,58 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
+    public enum TestStatus
+    {
+        NotStarted,
+        Started,
+        Ended
+    }
+
     [Table("Test")]
+
     public class Test : ModelBase
     {
+        private DateTime? endDate;
+
         public int Number { get; set; }
 
         public DateTime? StartDate { get; set; }
-
-        private DateTime? _endDate;
 
         public DateTime? EndDate
         {
             get
             {
-                if (!_endDate.HasValue)
+                if (!this.endDate.HasValue)
+                {
                     return null;
+                }
 
-                var value = DateTime.SpecifyKind(_endDate.Value, DateTimeKind.Local);
-
+                var value = DateTime.SpecifyKind(this.endDate.Value, DateTimeKind.Local);
                 return value;
             }
-            set { _endDate = value; }
+
+            set
+            {
+                this.endDate = value;
+            }
         }
 
-        public ICollection<TestAnswer> Answers { get; set; }
+#pragma warning disable CA2227 // Collection properties should be read only
+        public ICollection<TestAnswer> Answers { get;  set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
-        public ICollection<TestWrongAnswer> WrongAnswers { get; set; }
+        public ICollection<TestWrongAnswer> WrongAnswers { get; private set; }
 
         public bool HasStarted
         {
             get
             {
-                if (!StartDate.HasValue)
+                if (!this.StartDate.HasValue)
+                {
                     return false;
+                }
 
-                return DateTime.Now > StartDate.Value;
+                return DateTime.Now > this.StartDate.Value;
             }
         }
 
@@ -46,10 +63,12 @@ namespace DevAdventCalendarCompetition.Repository.Models
         {
             get
             {
-                if (!EndDate.HasValue)
+                if (!this.EndDate.HasValue)
+                {
                     return false;
+                }
 
-                return DateTime.Now > EndDate.Value;
+                return DateTime.Now > this.EndDate.Value;
             }
         }
 
@@ -57,17 +76,23 @@ namespace DevAdventCalendarCompetition.Repository.Models
         {
             get
             {
-                if (!HasStarted)
+                if (!this.HasStarted)
+                {
                     return TestStatus.NotStarted;
-                if (!HasEnded)
+                }
+
+                if (!this.HasEnded)
+                {
                     return TestStatus.Started;
+                }
+
                 return TestStatus.Ended;
             }
         }
 
         public string SponsorName { get; set; }
 
-        public string SponsorLogoUrl { get; set; }
+        public Uri SponsorLogoUrl { get; set; }
 
         public string Description { get; set; }
 
@@ -75,17 +100,12 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public string Discount { get; set; }
 
-        public string DiscountUrl { get; set; }
+        public Uri DiscountUrl { get; set; }
 
-        public string DiscountLogoUrl { get; set; }
+        public Uri DiscountLogoUrl { get; set; }
 
         public string DiscountLogoPath { get; set; }
 
         public string PlainAnswer { get; set; }
-    }
-
-    public enum TestStatus
-    {
-        NotStarted, Started, Ended
     }
 }

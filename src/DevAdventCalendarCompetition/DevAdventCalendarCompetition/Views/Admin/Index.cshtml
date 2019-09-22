@@ -1,4 +1,5 @@
 ﻿@using DevAdventCalendarCompetition.Services.Models
+@using  DevAdventCalendarCompetition.Repository.Models
 @model List<DevAdventCalendarCompetition.Services.Models.TestDto>
 
 @{
@@ -18,19 +19,19 @@
 
     if (previousTest != null && previousTest.Status != TestStatus.Ended)
     {
-        @Html.Partial("_TestPreviousNotEnded", currentTest)
+        @await Html.PartialAsync("_TestPreviousNotEnded", currentTest)
     }
     else if (currentTest.Status == TestStatus.NotStarted)
     {
         ViewData["Status"] = "Test nie rozpoczął się";
-        @Html.Partial("_TestNotStarted", currentTest)
+        @await Html.PartialAsync("_TestNotStarted", currentTest)
     }
     else if (currentTest.Status == TestStatus.Started)
     {
-        @Html.Partial("_TestStarted", currentTest)
+        @await Html.PartialAsync("_TestStarted", currentTest)
     }
     else
     {
-        @Html.Partial("_TestEnded", currentTest)
+        @await Html.PartialAsync("_TestEnded", currentTest)
     }
 }
