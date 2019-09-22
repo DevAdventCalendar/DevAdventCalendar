@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    // solution basen on http://www.obviex.com/samples/hash.aspx
+    // solution based on http://www.obviex.com/samples/hash.aspx
     public class StringHasher
     {
         private readonly HashParameters _hashParameters;

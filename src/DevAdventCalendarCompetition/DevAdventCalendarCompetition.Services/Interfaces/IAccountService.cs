@@ -50,5 +50,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user);
 
         Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string code, string password);
+
+        Task SendEmailConfirmationAsync(string email, string callbackUrl);
     }
 }

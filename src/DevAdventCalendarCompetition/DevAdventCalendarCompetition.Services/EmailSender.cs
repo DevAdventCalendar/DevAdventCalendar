@@ -20,26 +20,23 @@ namespace DevAdventCalendarCompetition.Services
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var smtpClient = new SmtpClient
+            using (var smtpClient = new SmtpClient
             {
                 Host = this.Host,
                 Port = this.Port,
                 EnableSsl = true,
                 Credentials = new NetworkCredential(this.UserName, this.Password)
-            };
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            })
 
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
+            using (var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
             {
                 Subject = subject,
                 IsBodyHtml = true,
                 Body = message
-            };
-#pragma warning restore CA2000 // Dispose objects before losing scope
-
-            return smtpClient.SendMailAsync(mailMessage);
+            })
+            {
+                return smtpClient.SendMailAsync(mailMessage);
+            }
         }
     }
 }

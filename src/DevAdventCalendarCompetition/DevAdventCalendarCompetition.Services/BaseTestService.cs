@@ -56,11 +56,9 @@ namespace DevAdventCalendarCompetition.Services
             return testAnswerDto;
         }
 
-#pragma warning disable CA1725 // Parameter names should match base declaration
-        public bool HasUserAnsweredTest(string userId, int testId)
-#pragma warning restore CA1725 // Parameter names should match base declaration
+        public bool HasUserAnsweredTest(string userId, int testNumber)
         {
-            return this._baseTestRepository.HasUserAnsweredTest(userId, testId);
+            return this._baseTestRepository.HasUserAnsweredTest(userId, testNumber);
         }
 
         public void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate)
