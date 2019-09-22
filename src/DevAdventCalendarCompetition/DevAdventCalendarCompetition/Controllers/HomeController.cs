@@ -14,7 +14,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public HomeController(IHomeService homeService)
         {
-            this.homeService = homeService;
+            this.homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
         }
 
         public ActionResult Index()

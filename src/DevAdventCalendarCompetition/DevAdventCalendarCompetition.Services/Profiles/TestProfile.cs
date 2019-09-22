@@ -14,7 +14,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
         {
             this.CreateMap<Test, TestDto>()
                 .ForMember(dest => dest.Answer, opt => opt.MapFrom(src => src.HashedAnswer))
-                .ForMember(dest => dest.HasUserAnswered, opt => opt.MapFrom(src => src.HashedAnswer));
+                .ForMember(dest => dest.HasUserAnswered, opt => opt.Ignore());
             this.CreateMap<TestDto, Test>()
                 .ForMember(dest => dest.Answers, opt => opt.Ignore())
                 .ForMember(dest => dest.HashedAnswer, opt => opt.Ignore())

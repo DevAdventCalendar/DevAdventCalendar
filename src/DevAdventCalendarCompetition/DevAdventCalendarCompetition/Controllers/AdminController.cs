@@ -17,8 +17,8 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public AdminController(IAdminService adminService, IBaseTestService baseTestService)
         {
-            this.adminService = adminService;
-            this.baseTestService = baseTestService;
+            this.adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
+            this.baseTestService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
         }
 
         public ActionResult Index()
@@ -121,11 +121,11 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public string Reset()
         {
-            // TODO: move to service
-            var resetEnabled = false;
             var resetEnabledString = "true"; // TODO get from AppSettings // ConfigurationManager.AppSettings["ResetEnabled"];
+
+            // TODO: move to service
 #pragma warning disable CA1806 // Do not ignore method results
-            bool.TryParse(resetEnabledString, out resetEnabled);
+            bool.TryParse(resetEnabledString, out bool resetEnabled);
 #pragma warning restore CA1806 // Do not ignore method results
             if (!resetEnabled)
             {

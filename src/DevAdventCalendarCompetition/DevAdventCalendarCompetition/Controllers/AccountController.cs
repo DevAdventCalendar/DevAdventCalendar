@@ -23,8 +23,8 @@ namespace DevAdventCalendarCompetition.Controllers
             IAccountService accountService,
             ILogger<AccountController> logger)
         {
-            this.accountService = accountService;
-            this.logger = logger;
+            this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [TempData]
@@ -32,8 +32,13 @@ namespace DevAdventCalendarCompetition.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public async Task<IActionResult> Login(Uri returnUrl = null)
         {
+            if (returnUrl is null)
+            {
+                throw new ArgumentNullException(nameof(returnUrl));
+            }
+
             // Clear the existing external cookie to ensure a clean login process
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme).ConfigureAwait(false);
 
@@ -46,7 +51,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, Uri returnUrl = null)
         {
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
@@ -80,7 +85,7 @@ namespace DevAdventCalendarCompetition.Controllers
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
                     this.logger.LogInformation("User logged in.");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
-                    return this.RedirectToLocal(returnUrl);
+                    return this.RedirectToLocal(returnUrl?.ToString());
                 }
 
                 if (result.IsLockedOut)
@@ -108,7 +113,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null, string email = null)
+        public IActionResult Register(Uri returnUrl = null, string email = null)
         {
             this.ViewData["ReturnUrl"] = returnUrl;
             this.ViewData["Email"] = email;
@@ -118,7 +123,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, Uri returnUrl = null)
         {
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
@@ -161,7 +166,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        public IActionResult ExternalLogin(string provider, Uri returnUrl = null)
         {
             // Request a redirect to the external login provider.
             var redirectUrl = this.Url.Action(nameof(this.ExternalLoginCallback), "Account", new { returnUrl });
@@ -171,7 +176,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        public async Task<IActionResult> ExternalLoginCallback(Uri returnUrl = null, string remoteError = null)
         {
             if (remoteError != null)
             {
@@ -192,7 +197,7 @@ namespace DevAdventCalendarCompetition.Controllers
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
                 this.logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
-                return this.RedirectToLocal(returnUrl);
+                return this.RedirectToLocal(returnUrl?.ToString());
             }
 
             if (result.IsNotAllowed)
@@ -217,7 +222,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, Uri returnUrl = null)
         {
             if (this.ModelState.IsValid)
             {
@@ -384,46 +389,6 @@ namespace DevAdventCalendarCompetition.Controllers
         public IActionResult AccessDenied()
         {
             return this.View();
-        }
-
-        public Task<IActionResult> Login(LoginViewModel model, Uri returnUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IActionResult Register(Uri returnUrl, string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> Register(RegisterViewModel model, Uri returnUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, Uri returnUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> Login(Uri returnUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IActionResult ExternalLogin(string provider, Uri returnUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> ExternalLoginCallback(string remoteError, Uri returnUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> ExternalLoginCallback(Uri returnUrl, string remoteError)
-        {
-            throw new NotImplementedException();
         }
 
         private void AddErrors(IdentityResult result)

@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Extensions;
@@ -139,14 +140,29 @@ namespace DevAdventCalendarCompetition.Services
             return await this._userManager.ResetPasswordAsync(user, code, password).ConfigureAwait(false);
         }
 
-        public Task SendEmailConfirmationAsync(string email, System.Uri callbackUrl)
+        public async Task SendEmailConfirmationAsync(string email, Uri callbackUrl)
         {
-            throw new System.NotImplementedException();
+            if (callbackUrl is null)
+            {
+                throw new ArgumentNullException(nameof(callbackUrl));
+            }
+
+            await this._emailSender.SendEmailConfirmationAsync(email, callbackUrl.ToString()).ConfigureAwait(false);
         }
 
-        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, System.Uri redirectUrl)
+        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, Uri redirectUrl)
         {
-            throw new System.NotImplementedException();
+            if (provider is null)
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (redirectUrl is null)
+            {
+                throw new ArgumentNullException(nameof(redirectUrl));
+            }
+
+            return this._signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl.ToString());
         }
     }
 }

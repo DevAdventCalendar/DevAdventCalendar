@@ -18,7 +18,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public BaseTestController(IBaseTestService baseTestService)
         {
-            this.baseTestService = baseTestService;
+            this.baseTestService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
         }
 
         public void SaveWrongAnswer(string wrongAnswer, int testNumber)

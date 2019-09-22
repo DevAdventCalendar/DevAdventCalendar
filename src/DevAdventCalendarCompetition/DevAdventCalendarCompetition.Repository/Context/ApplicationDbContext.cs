@@ -23,6 +23,23 @@ namespace DevAdventCalendarCompetition.Repository.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            if (builder is null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+
+            builder.Entity<Test>()
+                .Property(t => t.SponsorLogoUrl)
+                .HasConversion(v => v.ToString(), v => new Uri(v, UriKind.RelativeOrAbsolute));
+
+            builder.Entity<Test>()
+                .Property(t => t.DiscountUrl)
+                .HasConversion(v => v.ToString(), v => new Uri(v, UriKind.RelativeOrAbsolute));
+
+            builder.Entity<Test>()
+                .Property(t => t.DiscountLogoUrl)
+                .HasConversion(v => v.ToString(), v => new Uri(v, UriKind.RelativeOrAbsolute));
+
             base.OnModelCreating(builder);
 
             // Customize the ASP.NET Identity model and override the defaults if needed.

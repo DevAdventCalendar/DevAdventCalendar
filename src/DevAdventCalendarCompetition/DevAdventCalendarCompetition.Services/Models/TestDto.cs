@@ -38,10 +38,5 @@ namespace DevAdventCalendarCompetition.Services.Models
         public string DiscountLogoPath { get; set; }
 
         public bool HasUserAnswered { get; set; }
-
-        public TestDto ToTestDto()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -23,14 +23,11 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAccountService accountService;
         private readonly ILogger logger;
 
-        private readonly UrlEncoder urlEncoder;
-
-        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, UrlEncoder urlEncoder)
+        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger)
         {
-            this.manageService = manageService;
-            this.accountService = accountService;
-            this.logger = logger;
-            this.urlEncoder = urlEncoder;
+            this.manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
+            this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [TempData]
@@ -241,25 +238,6 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 this.ModelState.AddModelError(string.Empty, error.Description);
             }
-        }
-
-        // TODO: move to service
-        private string FormatKey(string unformattedKey)
-        {
-            var result = new StringBuilder();
-            int currentPosition = 0;
-            while (currentPosition + 4 < unformattedKey.Length)
-            {
-                result.Append(unformattedKey.Substring(currentPosition, 4)).Append(" ");
-                currentPosition += 4;
-            }
-
-            if (currentPosition < unformattedKey.Length)
-            {
-                result.Append(unformattedKey.Substring(currentPosition));
-            }
-
-            return result.ToString().ToUpper(CultureInfo.InvariantCulture);
         }
   }
 }

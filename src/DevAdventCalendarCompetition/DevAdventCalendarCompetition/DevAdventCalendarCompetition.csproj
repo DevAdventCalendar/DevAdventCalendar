@@ -5,11 +5,10 @@
     <UserSecretsId>aspnet-DevAdventCalendarCompetition-33CBD544-AB08-45ED-A959-D039E993B165</UserSecretsId>
     <CodeAnalysisRuleSet>..\Analysers.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+    <Product>DevAdventCalendar</Product>
+    <Company>DevAdventCalendar</Company>
+    <Authors>DevAdventCalendar</Authors>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
