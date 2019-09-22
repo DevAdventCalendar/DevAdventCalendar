@@ -8,7 +8,9 @@ namespace DevAdventCalendarCompetition.Services.Profiles
     {
         // disabled rule CA1506
         // technical debt
+#pragma warning disable CA1506
         public TestProfile()
+#pragma warning restore CA1506
         {
             this.CreateMap<Test, TestDto>()
                 .ForMember(dest => dest.Answer, opt => opt.MapFrom(src => src.HashedAnswer))

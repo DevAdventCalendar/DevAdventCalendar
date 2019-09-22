@@ -6,9 +6,11 @@ namespace DevAdventCalendarCompetition.Services.Profiles
 {
     public class TestAnswerProfile : Profile
     {
-         // disabled rule CA1506
-         // technical debt
+        // disabled rule CA1506
+        // technical debt
+#pragma warning disable CA1506
         public TestAnswerProfile()
+#pragma warning restore CA1506
         {
             this.CreateMap<TestAnswer, TestAnswerDto>()
                 .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email));

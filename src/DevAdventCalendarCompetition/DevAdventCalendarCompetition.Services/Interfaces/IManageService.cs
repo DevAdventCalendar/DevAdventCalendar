@@ -20,8 +20,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync();
 
-        AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, Uri redirectUrl, string userId);
-
         Task<IdentityResult> SetEmailAsync(ApplicationUser user, string email);
 
         Task<IdentityResult> SetPhoneNumberAsync(ApplicationUser user, string phoneNumber);

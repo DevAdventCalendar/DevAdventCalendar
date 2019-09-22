@@ -135,7 +135,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                     var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                     var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
-                    await this.accountService.SendEmailConfirmationAsync(model.Email, callbackUrl).ConfigureAwait(false);
+                    await this.accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
 
                     return this.View("RegisterConfirmation");
                 }
@@ -165,7 +165,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             // Request a redirect to the external login provider.
             var redirectUrl = this.Url.Action(nameof(this.ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = this.accountService.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            var properties = this.accountService.ConfigureExternalAuthenticationProperties(provider, new Uri(redirectUrl));
             return this.Challenge(properties, provider);
         }
 
@@ -245,7 +245,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                         var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                         var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
-                        await this.accountService.SendEmailConfirmationAsync(model.Email, callbackUrl).ConfigureAwait(false);
+                        await this.accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
 
                         return this.View("RegisterConfirmation");
                     }

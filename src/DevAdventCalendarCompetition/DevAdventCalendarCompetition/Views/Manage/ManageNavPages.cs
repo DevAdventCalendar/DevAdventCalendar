@@ -18,16 +18,13 @@ namespace DevAdventCalendarCompetition.Views.Manage
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {
-            if (viewContext == null)
+            if (viewContext is null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
             }
 
-            if (viewContext != null)
-            {
             var activePage = viewContext.ViewData["ActivePage"] as string;
             return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase) ? "active" : null;
-            }
         }
 
         public static void AddActivePage(this ViewDataDictionary viewData, string activePage)

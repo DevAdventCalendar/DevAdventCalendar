@@ -8,33 +8,27 @@ namespace DevAdventCalendarCompetition.Tests
     public class MapperTest
     {
         [Fact]
-#pragma warning disable CA1041 // Provide ObsoleteAttribute message
-        [Obsolete]
-#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public void TestProfileMappingsIsValid()
         {
-            Mapper.Reset();
-            Mapper.Initialize(cfg =>
+            var mockMapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<TestProfile>();
             });
+            var mapper = mockMapper.CreateMapper();
 
-            Mapper.Configuration.AssertConfigurationIsValid();
+            mapper.ConfigurationProvider.AssertConfigurationIsValid();
         }
 
         [Fact]
-#pragma warning disable CA1041 // Provide ObsoleteAttribute message
-        [Obsolete]
-#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public void TestAnswerProfileIsValid()
         {
-            Mapper.Reset();
-            Mapper.Initialize(cfg =>
+            var mockMapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<TestAnswerProfile>();
             });
+            var mapper = mockMapper.CreateMapper();
 
-            Mapper.Configuration.AssertConfigurationIsValid();
+            mapper.ConfigurationProvider.AssertConfigurationIsValid();
         }
     }
 }

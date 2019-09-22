@@ -16,14 +16,15 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-#pragma warning disable IDE0051 // Remove unused private members
         private const string DockerEnvName = "Docker";
-#pragma warning restore IDE0051 // Remove unused private members
 
         public Startup(IHostingEnvironment env)
         {
-            if (env != null)
+            if (env is null)
             {
+                throw new ArgumentNullException(nameof(env));
+            }
+
             var configurationBuilder = new ConfigurationBuilder()
 
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
@@ -31,7 +32,6 @@ namespace DevAdventCalendarCompetition
                 .AddEnvironmentVariables();
 
             this.Configuration = configurationBuilder.Build();
-            }
         }
 
         public IConfiguration Configuration { get; }
@@ -78,8 +78,7 @@ namespace DevAdventCalendarCompetition
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // Should be fixed During Refactor
-        [Obsolete]
+        [Obsolete("Should be fixed During Refactor")]
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -99,7 +98,7 @@ namespace DevAdventCalendarCompetition
             services
                 .RegisterDatabase(this.Configuration)
                 .RegisterServices(this.Configuration)
-                .AddAutoMapper()
+                .AddAutoMapper(typeof(Startup))
                 .AddExternalLoginProviders(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
