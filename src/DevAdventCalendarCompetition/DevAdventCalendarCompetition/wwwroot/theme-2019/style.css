@@ -2217,8 +2217,19 @@ footer{
 
 /** OVERRIDES **/
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_container {
+    flex-grow: 1;
 }
 
 .title_white h3 {
@@ -2261,6 +2272,16 @@ body {
 
 .link_dark:hover {
     color: #555;
+}
+
+.link_default {
+    color: #c93232;
+    text-decoration: underline;
+}
+
+.link_default:hover {
+    color: #c93232;
+    text-decoration: none;
 }
 
 .white {
@@ -2408,3 +2429,23 @@ body {
 .checkboxes li input + label.checkbox_dark span::before {
     color: #333;
 }
+
+.offset_menu .as_link {
+    font-size: 28px;
+    line-height: 53px;
+    font-weight: 700;
+    font-family: 'Roboto';
+    color: #b1b1b1;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.offset_menu .as_link:hover {
+    color: #ffffff;
+}
+
+
+

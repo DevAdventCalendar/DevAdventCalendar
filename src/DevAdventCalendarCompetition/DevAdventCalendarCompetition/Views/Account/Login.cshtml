@@ -59,7 +59,9 @@
                 </div>
 
                 <div class="form-group">
-                    <a asp-action="ForgotPassword">Zapomniałeś/aś hasła?</a> | <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Zarejestrować nowego użytkownika?</a>
+                    <a asp-action="ForgotPassword" class="link_default">Zapomniałeś/aś hasła?</a>
+                    |
+                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="link_default">Zarejestrować nowego użytkownika?</a>
                 </div>
             </form>
         </div>
