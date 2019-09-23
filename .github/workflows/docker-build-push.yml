@@ -10,13 +10,14 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
-    - uses: azure/docker-login@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Build the Docker image
       run: |
         cd src/DevAdventCalendarCompetition 
         docker build . --file Dockerfile --tag devadventcalendar/devadventcalendar:2019
     - name: Push the Docker image
-      run: docker push devadventcalendar/devadventcalendar:2019
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: |
+        echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
+        docker push devadventcalendar/devadventcalendar:2019
