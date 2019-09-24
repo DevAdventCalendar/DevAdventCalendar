@@ -21,4 +21,4 @@ jobs:
         password: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
         loginServer: docker.pkg.github.com
     - name: Push the Docker image
-      run: docker push docker.pkg.github.com/DevAdventCalendar/devadventcalendar/app:2019
+      run: docker push docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019
