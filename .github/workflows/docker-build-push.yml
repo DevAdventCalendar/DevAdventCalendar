@@ -18,6 +18,6 @@ jobs:
     - name: Build the Docker image
       run: |
         cd src/DevAdventCalendarCompetition 
-        docker build . --file Dockerfile --tag docker.pkg.github.com/DevAdventCalendar/DevAdventCalendar/app:2019
+        docker build . --file Dockerfile --tag docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019
     - name: Push the Docker image
-      run: docker push docker.pkg.github.com/DevAdventCalendar/DevAdventCalendar/app:2019
+      run: docker push docker.pkg.github.com/DevAdventCalendar/devadventcalendar/app:2019
