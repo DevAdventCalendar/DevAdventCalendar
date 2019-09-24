@@ -1,5 +1,5 @@
-﻿using DevAdventCalendarCompetition.Services;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using DevAdventCalendarCompetition.Services;
 using Xunit;
 
 namespace DevAdventCalendarCompetition.Tests
@@ -7,34 +7,23 @@ namespace DevAdventCalendarCompetition.Tests
     public class HashingTest
     {
         private const string PASSWORD = "P@ssw0rd";
-        private const int SALT_LENGTH = 32;
+        private const int SALTLENGTH = 32;
         private readonly StringHasher _stringHasher;
         private readonly HashParameters _hashParameters;
 
         public HashingTest()
         {
-            _hashParameters = new HashParameters(10, GenerateSalt());
-            _stringHasher = new StringHasher(_hashParameters);
-        }
-
-        private byte[] GenerateSalt()
-        {
-            byte[] salt = new byte[SALT_LENGTH];
-
-            using (RandomNumberGenerator random = new RNGCryptoServiceProvider())
-            {
-                random.GetNonZeroBytes(salt);
-            }
-
-            return salt;
+            this._hashParameters = new HashParameters(10, this.GenerateSalt());
+            this._stringHasher = new StringHasher(this._hashParameters);
         }
 
         [Theory]
         [InlineData("P@ssw0rd")]
         public void AnswerIsValid(string value)
         {
-            string passwordHash = _stringHasher.ComputeHash(PASSWORD);
-            _stringHasher.VerifyHash(value, passwordHash);
+            string passwordHash = this._stringHasher.ComputeHash(PASSWORD);
+
+            this._stringHasher.VerifyHash(value, passwordHash);
         }
 
         [Theory]
@@ -44,8 +33,21 @@ namespace DevAdventCalendarCompetition.Tests
         [InlineData("p@ssw0rD")]
         public void AnswerIsInvalid(string value)
         {
-            string passwordHash = _stringHasher.ComputeHash(PASSWORD);
-            _stringHasher.VerifyHash(value, passwordHash);
+            string passwordHash = this._stringHasher.ComputeHash(PASSWORD);
+
+            this._stringHasher.VerifyHash(value, passwordHash);
+        }
+
+        private byte[] GenerateSalt()
+        {
+            byte[] salt = new byte[SALTLENGTH];
+
+            using (RandomNumberGenerator random = new RNGCryptoServiceProvider())
+            {
+                random.GetNonZeroBytes(salt);
+            }
+
+            return salt;
         }
     }
 }

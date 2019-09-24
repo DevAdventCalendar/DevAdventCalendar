@@ -8,7 +8,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
     {
         public TestWrongAnswerProfile()
         {
-            CreateMap<Test, TestWrongAnswer>()
+            this.CreateMap<Test, TestWrongAnswer>()
                 .ForMember(dest => dest.Test, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.User, opt => opt.Ignore())
@@ -16,9 +16,9 @@ namespace DevAdventCalendarCompetition.Services.Profiles
                 .ForMember(dest => dest.Time, opt => opt.Ignore())
                 .ForMember(dest => dest.Answer, opt => opt.Ignore());
 
-            CreateMap<TestWrongAnswer, TestWrongAnswerDto>()
+            this.CreateMap<TestWrongAnswer, TestWrongAnswerDto>()
                 .ForMember(dest => dest.AnsweringTime, opt => opt.MapFrom(src => src.Time))
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.Email)); ;
+                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.Email));
         }
     }
 }

@@ -4,56 +4,19 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    public class HashParameters
-    {
-        public HashParameters(int iterations, byte[] salt)
-        {
-            Iterations = iterations;
-            Salt = salt;
-        }
-
-        public int Iterations { get; set; }
-        public byte[] Salt { get; set; }
-    }
-
-    //solution basen on http://www.obviex.com/samples/hash.aspx
+    // solution based on http://www.obviex.com/samples/hash.aspx
     public class StringHasher
     {
-        public StringHasher(HashParameters hashParameters)
-        {
-            _hashParameters = hashParameters;
-        }
-
         private readonly HashParameters _hashParameters;
 
-        public bool VerifyHash(string text, string hashValue)
+        public StringHasher(HashParameters hashParameters)
         {
-            // Convert base64-encoded hash value into a byte array.
-            byte[] hashWithSaltBytes = Convert.FromBase64String(hashValue);
-
-            // We must know size of hash (without salt).
-            int hashSizeInBits = 256;
-
-            // Convert size of hash from bits to bytes.
-            int hashSizeInBytes = hashSizeInBits / 8;
-
-            // Make sure that the specified hash value is long enough.
-            if (hashWithSaltBytes.Length < hashSizeInBytes)
-            {
-                return false;
-            }
-
-            // Compute a new hash string.
-            string expectedHashString = ComputeHash(text);
-
-            // If the computed hash matches the specified hash,
-            // the plain text value must be correct.
-            return (hashValue == expectedHashString);
+            this._hashParameters = hashParameters;
         }
 
         public string ComputeHash(string text)
         {
-            var saltBytes = _hashParameters.Salt;
+            byte[] saltBytes = this._hashParameters.Salt;
 
             // Convert plain text into a byte array.
             byte[] textBytes = Encoding.UTF8.GetBytes(text);
@@ -73,14 +36,16 @@ namespace DevAdventCalendarCompetition.Services
                 textWithSaltBytes[textBytes.Length + i] = saltBytes[i];
             }
 
-            // Initialize hashing algorithm class.
-            HashAlgorithm hash = new SHA256Managed();
-
             // Compute hash value of our text with appended salt.
             byte[] hashBytes = textWithSaltBytes;
-            for (int i = 0; i < _hashParameters.Iterations; i++)
+
+            // Initialize hashing algorithm class.
+            using (HashAlgorithm hash = new SHA256Managed())
             {
-                hashBytes = hash.ComputeHash(hashBytes);
+                for (int i = 0; i < this._hashParameters.Iterations; i++)
+                {
+                    hashBytes = hash.ComputeHash(hashBytes);
+                }
             }
 
             // Convert result into a base64-encoded string.
@@ -88,6 +53,31 @@ namespace DevAdventCalendarCompetition.Services
 
             // Return the result.
             return hashValue;
+        }
+
+        public bool VerifyHash(string text, string hashValue)
+        {
+            // Convert base64-encoded hash value into a byte array.
+            byte[] hashWithSaltBytes = Convert.FromBase64String(hashValue);
+
+            // We must know size of hash (without salt).
+            int hashSizeInBits = 256;
+
+            // Convert size of hash from bits to bytes.
+            int hashSizeInBytes = hashSizeInBits / 8;
+
+            // Make sure that the specified hash value is long enough.
+            if (hashWithSaltBytes.Length < hashSizeInBytes)
+            {
+                return false;
+            }
+
+            // Compute a new hash string.
+            string expectedHashString = this.ComputeHash(text);
+
+            // If the computed hash matches the specified hash,
+            // the plain text value must be correct.
+            return hashValue == expectedHashString;
         }
     }
 }

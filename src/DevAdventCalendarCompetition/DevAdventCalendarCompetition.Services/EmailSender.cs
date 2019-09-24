@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
-using DevAdventCalendarCompetition.Services.Interfaces;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Services.Interfaces;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -11,28 +11,32 @@ namespace DevAdventCalendarCompetition.Services
     public class EmailSender : IEmailSender
     {
         public string Host { get; set; }
+
         public int Port { get; set; }
+
         public string UserName { get; set; }
+
         public string Password { get; set; }
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            var smtpClient = new SmtpClient
+            using (var smtpClient = new SmtpClient
             {
-                Host = Host,
-                Port = Port,
+                Host = this.Host,
+                Port = this.Port,
                 EnableSsl = true,
-                Credentials = new NetworkCredential(UserName, Password)
-            };
+                Credentials = new NetworkCredential(this.UserName, this.Password)
+            })
 
-            var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
+            using (var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
             {
                 Subject = subject,
                 IsBodyHtml = true,
                 Body = message
-            };
-            
-            return smtpClient.SendMailAsync(mailMessage); 
+            })
+            {
+                return smtpClient.SendMailAsync(mailMessage);
+            }
         }
     }
 }

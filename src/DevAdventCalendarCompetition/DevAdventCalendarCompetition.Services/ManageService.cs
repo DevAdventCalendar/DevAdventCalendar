@@ -1,10 +1,11 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -14,63 +15,59 @@ namespace DevAdventCalendarCompetition.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public ManageService(UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager,
-          IEmailSender emailSender)
+        public ManageService(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IEmailSender emailSender)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _emailSender = emailSender;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._emailSender = emailSender;
         }
 
         public async Task<ApplicationUser> GetUserAsync(ClaimsPrincipal principal)
         {
-            return await _userManager.GetUserAsync(principal);
+            return await this._userManager.GetUserAsync(principal).ConfigureAwait(false);
         }
 
         public async Task<bool> HasPasswordAsync(ApplicationUser user)
         {
-            return await _userManager.HasPasswordAsync(user);
+            return await this._userManager.HasPasswordAsync(user).ConfigureAwait(false);
         }
 
         public async Task<IdentityResult> ChangePasswordAsync(ApplicationUser user, string oldPassword, string newPassword)
         {
-            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            return await this._userManager.ChangePasswordAsync(user, oldPassword, newPassword).ConfigureAwait(false);
         }
 
         public async Task<IList<UserLoginInfo>> GetLoginsAsync(ApplicationUser user)
         {
-            return await _userManager.GetLoginsAsync(user);
+            return await this._userManager.GetLoginsAsync(user).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
         {
-            return await _signInManager.GetExternalAuthenticationSchemesAsync();
-        }
-
-        public AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, string userId)
-        {
-            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, userId);
+            return await this._signInManager.GetExternalAuthenticationSchemesAsync().ConfigureAwait(false);
         }
 
         public async Task<IdentityResult> SetEmailAsync(ApplicationUser user, string email)
         {
-            return await _userManager.SetEmailAsync(user, email);
+            return await this._userManager.SetEmailAsync(user, email).ConfigureAwait(false);
         }
 
         public async Task<IdentityResult> SetPhoneNumberAsync(ApplicationUser user, string phoneNumber)
         {
-            return await _userManager.SetPhoneNumberAsync(user, phoneNumber);
+            return await this._userManager.SetPhoneNumberAsync(user, phoneNumber).ConfigureAwait(false);
         }
 
         public async Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string password)
         {
-            return await _userManager.AddPasswordAsync(user, password);
+            return await this._userManager.AddPasswordAsync(user, password).ConfigureAwait(false);
         }
 
         public async Task<IdentityResult> RemoveLoginAsync(ApplicationUser user, string loginProvider, string providerKey)
         {
-            return await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
+            return await this._userManager.RemoveLoginAsync(user, loginProvider, providerKey).ConfigureAwait(false);
         }
     }
 }

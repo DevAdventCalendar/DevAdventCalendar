@@ -1,5 +1,5 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Repository.Interfaces
 {

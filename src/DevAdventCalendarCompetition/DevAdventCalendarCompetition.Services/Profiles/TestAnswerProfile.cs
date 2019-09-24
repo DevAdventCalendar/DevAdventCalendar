@@ -6,17 +6,21 @@ namespace DevAdventCalendarCompetition.Services.Profiles
 {
     public class TestAnswerProfile : Profile
     {
+        // disabled rule CA1506
+        // technical debt
+#pragma warning disable CA1506
         public TestAnswerProfile()
+#pragma warning restore CA1506
         {
-            CreateMap<TestAnswer, TestAnswerDto>()
+            this.CreateMap<TestAnswer, TestAnswerDto>()
                 .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email));
 
-            CreateMap<TestAnswerDto, TestAnswer>()
+            this.CreateMap<TestAnswerDto, TestAnswer>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.Test, opt => opt.Ignore())
                 .ForMember(dest => dest.User, opt => opt.Ignore());
 
-            CreateMap<ApplicationUser, TestAnswer>()
+            this.CreateMap<ApplicationUser, TestAnswer>()
                 .ForMember(dest => dest.User, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Test, opt => opt.Ignore())
@@ -24,13 +28,13 @@ namespace DevAdventCalendarCompetition.Services.Profiles
                 .ForMember(dest => dest.AnsweringTime, opt => opt.Ignore())
                 .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());
 
-            CreateMap<Test, TestAnswer>()
+            this.CreateMap<Test, TestAnswer>()
                 .ForMember(dest => dest.Test, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.User, opt => opt.Ignore())
                 .ForMember(dest => dest.UserId, opt => opt.Ignore())
                 .ForMember(dest => dest.AnsweringTime, opt => opt.Ignore())
-                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());        
+                .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());
         }
     }
 }
