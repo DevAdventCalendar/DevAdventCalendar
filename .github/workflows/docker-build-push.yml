@@ -16,8 +16,8 @@ jobs:
         docker build . --file Dockerfile --tag devadventcalendar/devadventcalendar:2019
     - name: Push the Docker image
       env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       run: |
-        docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASSWORD
+        echo $DOCKER_PASSWORD | docker login index.docker.io --username $DOCKER_USERNAME --password-stdin
         docker push devadventcalendar/devadventcalendar:2019
