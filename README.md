@@ -13,7 +13,7 @@ DevAdventCalendar web app for online competition for programmers.
 2. Open `/src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln` in VisualStudio 2019.
 3. Install [CodeMaid](http://www.codemaid.net/) to cleanup files
 (use default config or just import the one from solution `/src/DevAdventCalendarCompetition/CodeMaid.config`).
-4. Install .Net Core SDK v2.2.
+4. Install [.Net Core SDK v2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2).
 
 ## Contributing
 
