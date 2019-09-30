@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -103,6 +105,17 @@ namespace DevAdventCalendarCompetition
                     c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
                 })
                 .AddMvc();
+
+            services.AddLocalization(o => o.ResourcesPath = "Resources");
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("pl-PL")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("pl-PL");
+            });
         }
     }
 }
