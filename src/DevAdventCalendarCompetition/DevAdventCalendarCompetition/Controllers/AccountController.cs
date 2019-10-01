@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
@@ -56,9 +57,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
 
                 if (user == null)
                 {
@@ -69,9 +68,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (!user.EmailConfirmed)
                 {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    this.logger.LogInformation("User not confirmed.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogInformation(LoggingMesseages.UserNotConfirmed);
                     this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
                     return this.View(model);
                 }

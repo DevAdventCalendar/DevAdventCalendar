@@ -9,6 +9,7 @@
     <Company>DevAdventCalendar</Company>
     <Authors>DevAdventCalendar</Authors>
     <Version>2.0.0</Version>
+    <NeutralLanguage>pl-PL</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -53,11 +54,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\LoggingMesseages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LoggingMesseages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="Views\Home\Error.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\LoggingMesseages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoggingMesseages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

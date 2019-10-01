@@ -111,10 +111,11 @@ namespace DevAdventCalendarCompetition
             {
                 var supportedCultures = new[]
                 {
-                    new CultureInfo("pl-PL")
+                    new CultureInfo("PL")
                 };
 
-                options.DefaultRequestCulture = new RequestCulture("pl-PL");
+                options.DefaultRequestCulture = new RequestCulture("PL");
+                options.SupportedCultures = supportedCultures;
             });
         }
     }
