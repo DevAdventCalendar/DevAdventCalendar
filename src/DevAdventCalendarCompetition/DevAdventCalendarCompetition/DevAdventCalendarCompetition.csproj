@@ -74,6 +74,7 @@
     <EmbeddedResource Update="Resources\LoggingMesseages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LoggingMesseages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LoggingMesseages</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

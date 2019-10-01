@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DevAdventCalendarCompetition.Resources {
+namespace LoggingMesseages {
     using System;
     
     
@@ -61,7 +61,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User not confirmed..
+        ///   Looks up a localized string similar to Musisz najpierw potwierdzić swoje konto!.
         /// </summary>
         public static string UserNotComfirmed {
             get {

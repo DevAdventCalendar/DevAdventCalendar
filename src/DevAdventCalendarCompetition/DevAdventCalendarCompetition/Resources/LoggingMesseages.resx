@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="UserNotComfirmed" xml:space="preserve">
-    <value>User not confirmed.</value>
+    <value>Musisz najpierw potwierdzić swoje konto!</value>
   </data>
 </root>

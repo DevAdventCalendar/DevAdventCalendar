@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using LoggingMesseages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -54,6 +55,16 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, Uri returnUrl = null)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (returnUrl is null)
+            {
+                throw new ArgumentNullException(nameof(returnUrl));
+            }
+
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
@@ -68,7 +79,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (!user.EmailConfirmed)
                 {
-                    this.logger.LogInformation(LoggingMesseages.UserNotConfirmed);
+                    this.logger.LogInformation(LoggingMesseages.UserNotComfirmed);
                     this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
                     return this.View(model);
                 }
