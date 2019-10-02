@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
@@ -6,8 +7,10 @@ using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -34,17 +37,12 @@ namespace DevAdventCalendarCompetition.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(Uri returnUrl = null)
         {
-            if (returnUrl is null)
-            {
-                throw new ArgumentNullException(nameof(returnUrl));
-            }
-
             // Clear the existing external cookie to ensure a clean login process
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme).ConfigureAwait(false);
 
             var model = new LoginViewModel();
 
-            this.ViewData["ReturnUrl"] = returnUrl;
+            this.ViewData["ReturnUrl"] = returnUrl ?? this.HomeUri();
             return this.View(model);
         }
 
@@ -349,7 +347,6 @@ namespace DevAdventCalendarCompetition.Controllers
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
                 throw new ArgumentException("Kod musi być dostarczony do resetowania hasła.");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
-
             }
 
             var model = new ResetPasswordViewModel { Code = code, Email = email };
@@ -425,6 +422,19 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
+        }
+
+        private Uri HomeUri()
+        {
+            var homePath = this.Url.Action(nameof(HomeController.Index), "Home");
+            var fullUrlString = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}://{1}{2}",
+                this.HttpContext.Request.Scheme,
+                this.HttpContext.Request.Host, homePath);
+            var uri = new Uri(fullUrlString);
+            var builder = new UriBuilder(uri);
+            return builder.Uri;
         }
     }
 }
