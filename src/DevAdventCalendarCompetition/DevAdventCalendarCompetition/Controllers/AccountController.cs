@@ -6,6 +6,7 @@ using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -19,16 +20,13 @@ namespace DevAdventCalendarCompetition.Controllers
     {
         private readonly IAccountService accountService;
         private readonly ILogger logger;
-        private readonly LinkGenerator linkGenerator;
 
         public AccountController(
             IAccountService accountService,
-            ILogger<AccountController> logger,
-            LinkGenerator linkGenerator)
+            ILogger<AccountController> logger)
         {
             this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.linkGenerator = linkGenerator ?? throw new ArgumentNullException(nameof(linkGenerator));
         }
 
         [TempData]
@@ -43,7 +41,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var model = new LoginViewModel();
 
-            this.ViewData["ReturnUrl"] = returnUrl ?? new Uri(this.linkGenerator.GetUriByAction(this.HttpContext, nameof(HomeController.Index), "Home"));
+            this.ViewData["ReturnUrl"] = returnUrl ?? this.HomeUri();
             return this.View(model);
         }
 
@@ -423,6 +421,15 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
+        }
+
+        private Uri HomeUri()
+        {
+            var homePath = this.Url.Action(nameof(HomeController.Index), "Home");
+            var scheme = this.HttpContext.Request.Scheme;
+            var defaultPort = scheme == "https" ? 443 : 80;
+            var builder = new UriBuilder(scheme: this.HttpContext.Request.Scheme, host: this.HttpContext.Request.Host.Host, port: this.HttpContext.Request.Host.Port ?? defaultPort, pathValue: homePath);
+            return builder.Uri;
         }
     }
 }
