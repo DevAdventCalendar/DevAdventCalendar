@@ -2407,6 +2407,16 @@ body {
     width: 100%;
 }
 
+#cookieConsent {
+    padding: 40px 0;
+    background: #333;
+}
+
+#cookieConsent p {
+    font-size: 14px;
+    color: #fff;
+}
+
 .text_field_default {
     margin: 0 0 5px 0;
 }
@@ -2418,6 +2428,17 @@ body {
 .chris_btn {
     margin: 0;
     border: none;
+    line-height: 51px;
+}
+
+.chris_btn_empty {
+    background: #fff;
+    color: #333;
+    border: 1px solid #eee;
+}
+
+.chris_btn_empty:hover {
+    color: #666;
 }
 
 .checkboxes li input + label.checkbox_dark {
@@ -2446,10 +2467,3 @@ body {
 .offset_menu .as_link:hover {
     color: #ffffff;
 }
-
-.chris_btn {
-    line-height: 51px;
-}
-
-
-
