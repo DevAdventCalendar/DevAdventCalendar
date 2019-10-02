@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoggingMesseages {
+namespace LoggingMessages {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LoggingMesseages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class LoggingMesseages {
+    public class LoggingMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LoggingMesseages() {
+        internal LoggingMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LoggingMesseages {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Resources.LoggingMesseages", typeof(LoggingMesseages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Resources.LoggingMessages", typeof(LoggingMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace LoggingMesseages {
         /// <summary>
         ///   Looks up a localized string similar to Musisz najpierw potwierdzić swoje konto!.
         /// </summary>
-        public static string UserNotComfirmed {
+        public static string UserIsNotConfirmed {
             get {
-                return ResourceManager.GetString("UserNotComfirmed", resourceCulture);
+                return ResourceManager.GetString("UserIsNotConfirmed", resourceCulture);
             }
         }
     }

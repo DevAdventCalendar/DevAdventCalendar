@@ -54,10 +54,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\LoggingMesseages.Designer.cs">
+    <Compile Update="Resources\LoggingMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>LoggingMesseages.resx</DependentUpon>
+      <DependentUpon>LoggingMessages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -71,9 +71,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\LoggingMesseages.resx">
+    <EmbeddedResource Update="Resources\LoggingMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>LoggingMesseages.Designer.cs</LastGenOutput>
+      <LastGenOutput>LoggingMessages.Designer.cs</LastGenOutput>
       <CustomToolNamespace>LoggingMesseages</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
