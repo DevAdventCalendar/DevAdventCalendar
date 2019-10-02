@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LoggingMessages {
+namespace DevLoggingMessages {
     using System;
     
     
@@ -61,11 +61,65 @@ namespace LoggingMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User created an account using {Name} provider..
+        /// </summary>
+        public static string CreatedUserNameProvider {
+            get {
+                return ResourceManager.GetString("CreatedUserNameProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania..
+        /// </summary>
+        public static string LoadingDataError {
+            get {
+                return ResourceManager.GetString("LoadingDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kod musi być dostarczony do resetowania hasła..
+        /// </summary>
+        public static string ResetPasswordCodeError {
+            get {
+                return ResourceManager.GetString("ResetPasswordCodeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User account locked out..
+        /// </summary>
+        public static string UserAccountIsLockedOut {
+            get {
+                return ResourceManager.GetString("UserAccountIsLockedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User logged in..
+        /// </summary>
+        public static string UserIsLoggedIn {
+            get {
+                return ResourceManager.GetString("UserIsLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Musisz najpierw potwierdzić swoje konto!.
         /// </summary>
         public static string UserIsNotConfirmed {
             get {
                 return ResourceManager.GetString("UserIsNotConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User logged in with {Name} provider..
+        /// </summary>
+        public static string UserLoginProvider {
+            get {
+                return ResourceManager.GetString("UserLoginProvider", resourceCulture);
             }
         }
     }

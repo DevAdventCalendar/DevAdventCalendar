@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using LoggingMessages;
+using DevLoggingMessages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -74,7 +74,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (!user.EmailConfirmed)
                 {
-                    this.logger.LogInformation(LoggingMessages.LoggingMessages.UserIsNotConfirmed);
+                    this.logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
                     this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
                     return this.View(model);
                 }
@@ -85,17 +85,14 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (result.Succeeded)
                 {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    this.logger.LogInformation("User logged in.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogInformation(LoggingMessages.UserIsLoggedIn);
                     return this.RedirectToLocal(returnUrl?.ToString());
                 }
 
                 if (result.IsLockedOut)
                 {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    this.logger.LogWarning("User account locked out.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    this.logger.LogWarning(LoggingMessages.UserAccountIsLockedOut);
+
                     return this.RedirectToAction(nameof(this.Lockout));
                 }
 
@@ -128,18 +125,20 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, Uri returnUrl = null)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = this.accountService.CreateApplicationUserByEmail(model.Email);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
                 var result = await this.accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
                     this.logger.LogInformation("User created a new account with password.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
 
                     var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                     var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
@@ -160,9 +159,9 @@ namespace DevAdventCalendarCompetition.Controllers
         public async Task<IActionResult> Logout()
         {
             await this.accountService.SignOutAsync().ConfigureAwait(false);
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-            this.logger.LogInformation("User logged out.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+
+            this.logger.LogInformation(LoggingMessages.UserIsLoggedIn);
+
             return this.RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -197,9 +196,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var result = await this.accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey).ConfigureAwait(false);
             if (result.Succeeded)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                this.logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                this.logger.LogInformation(LoggingMessages.UserLoginProvider, info.LoginProvider);
                 return this.RedirectToLocal(returnUrl?.ToString());
             }
 
@@ -227,29 +224,29 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, Uri returnUrl = null)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (this.ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await this.accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
                 if (info == null)
                 {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    throw new ArgumentException("Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                    throw new ArgumentException(LoggingMessages.LoadingDataError);
                 }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = this.accountService.CreateApplicationUserByEmail(model.Email);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
                 var result = await this.accountService.CreateAsync(user, null).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
                     result = await this.accountService.AddLoginAsync(user, info).ConfigureAwait(false);
                     if (result.Succeeded)
                     {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                        this.logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                        this.logger.LogInformation(LoggingMessages.CreatedUserNameProvider, info.LoginProvider);
 
                         var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                         var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
@@ -297,11 +294,15 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (this.ModelState.IsValid)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
                 if (user == null || !(await this.accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -336,10 +337,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (code == null)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Kod musi być dostarczony do resetowania hasła.");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
-
+                throw new ArgumentException(LoggingMessages.ResetPasswordCodeError);
             }
 
             var model = new ResetPasswordViewModel { Code = code, Email = email };
@@ -351,14 +349,18 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-#pragma warning disable CA1062 // Validate arguments of public methods
             var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
-#pragma warning restore CA1062 // Validate arguments of public methods
+
             if (user == null)
             {
                 // Don't reveal that the user does not exist

@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreatedUserNameProvider" xml:space="preserve">
+    <value>User created an account using {Name} provider.</value>
+  </data>
+  <data name="LoadingDataError" xml:space="preserve">
+    <value>Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.</value>
+  </data>
+  <data name="ResetPasswordCodeError" xml:space="preserve">
+    <value>Kod musi być dostarczony do resetowania hasła.</value>
+  </data>
+  <data name="UserAccountIsLockedOut" xml:space="preserve">
+    <value>User account locked out.</value>
+  </data>
+  <data name="UserIsLoggedIn" xml:space="preserve">
+    <value>User logged in.</value>
+  </data>
   <data name="UserIsNotConfirmed" xml:space="preserve">
     <value>Musisz najpierw potwierdzić swoje konto!</value>
+  </data>
+  <data name="UserLoginProvider" xml:space="preserve">
+    <value>User logged in with {Name} provider.</value>
   </data>
 </root>
