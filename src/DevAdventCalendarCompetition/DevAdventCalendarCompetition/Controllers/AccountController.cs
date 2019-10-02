@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
@@ -426,9 +427,13 @@ namespace DevAdventCalendarCompetition.Controllers
         private Uri HomeUri()
         {
             var homePath = this.Url.Action(nameof(HomeController.Index), "Home");
-            var scheme = this.HttpContext.Request.Scheme;
-            var defaultPort = scheme == "https" ? 443 : 80;
-            var builder = new UriBuilder(scheme: this.HttpContext.Request.Scheme, host: this.HttpContext.Request.Host.Host, port: this.HttpContext.Request.Host.Port ?? defaultPort, pathValue: homePath);
+            var fullUrlString = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}://{1}{2}",
+                this.HttpContext.Request.Scheme,
+                this.HttpContext.Request.Host, homePath);
+            var uri = new Uri(fullUrlString);
+            var builder = new UriBuilder(uri);
             return builder.Uri;
         }
     }
