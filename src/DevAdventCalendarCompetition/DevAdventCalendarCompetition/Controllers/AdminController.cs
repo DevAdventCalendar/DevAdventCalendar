@@ -4,6 +4,7 @@ using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevExeptionsMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -85,17 +86,13 @@ namespace DevAdventCalendarCompetition.Controllers
             var testDto = this.adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.NotStarted)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Test został uruchomiony");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                throw new ArgumentException(ExeptionsMessages.TestAlreadyRun);
             }
 
             var previousTestDto = this.adminService.GetPreviousTest(testDto.Number);
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Poprzedni test nie został zakończony");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                throw new ArgumentException(ExeptionsMessages.PreviousTestIsNotDone);
             }
 
             this.adminService.UpdateTestDates(testDto, minutesString);
@@ -109,9 +106,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var testDto = this.adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.Started)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Test został uruchomiony");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                throw new ArgumentException(ExeptionsMessages.TestAlreadyRun);
             }
 
             this.adminService.UpdateTestEndDate(testDto, DateTime.Now);

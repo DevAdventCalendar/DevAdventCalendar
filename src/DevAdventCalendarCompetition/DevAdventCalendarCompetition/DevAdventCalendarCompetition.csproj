@@ -54,6 +54,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Resources\ExeptionsMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExeptionsMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\LoggingMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -71,6 +76,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\ExeptionsMessages.resx">
+      <CustomToolNamespace>DevExeptionsMessages</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExeptionsMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\LoggingMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LoggingMessages.Designer.cs</LastGenOutput>
