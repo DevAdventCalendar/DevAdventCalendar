@@ -18,15 +18,15 @@ namespace DevAdventCalendarCompetition.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly IAccountService accountService;
-        private readonly ILogger logger;
+        private readonly IAccountService _accountService;
+        private readonly ILogger _logger;
 
         public AccountController(
             IAccountService accountService,
             ILogger<AccountController> logger)
         {
-            this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [TempData]
@@ -63,35 +63,35 @@ namespace DevAdventCalendarCompetition.Controllers
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-                var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+                var user = await this._accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
 
                 if (user == null)
                 {
-                    this.logger.LogWarning($"User {model.Email} not exists.");
+                    this._logger.LogWarning($"User {model.Email} not exists.");
                     this.ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
                     return this.View(model);
                 }
 
                 if (!user.EmailConfirmed)
                 {
-                    this.logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
+                    this._logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
                     this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
                     return this.View(model);
                 }
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await this.accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
+                var result = await this._accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
 
                 if (result.Succeeded)
                 {
-                    this.logger.LogInformation(LoggingMessages.UserIsLoggedIn);
+                    this._logger.LogInformation(LoggingMessages.UserIsLoggedIn);
                     return this.RedirectToLocal(returnUrl?.ToString());
                 }
 
                 if (result.IsLockedOut)
                 {
-                    this.logger.LogWarning(LoggingMessages.UserAccountIsLockedOut);
+                    this._logger.LogWarning(LoggingMessages.UserAccountIsLockedOut);
 
                     return this.RedirectToAction(nameof(this.Lockout));
                 }
@@ -133,16 +133,16 @@ namespace DevAdventCalendarCompetition.Controllers
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-                var user = this.accountService.CreateApplicationUserByEmail(model.Email);
+                var user = this._accountService.CreateApplicationUserByEmail(model.Email);
 
-                var result = await this.accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
+                var result = await this._accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-                    this.logger.LogInformation(LoggingMessages.NewAccount);
+                    this._logger.LogInformation(LoggingMessages.NewAccount);
 
-                    var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                    var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                     var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
-                    await this.accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
+                    await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
 
                     return this.View("RegisterConfirmation");
                 }
@@ -158,9 +158,9 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await this.accountService.SignOutAsync().ConfigureAwait(false);
+            await this._accountService.SignOutAsync().ConfigureAwait(false);
 
-            this.logger.LogInformation(LoggingMessages.UserIsLoggedIn);
+            this._logger.LogInformation(LoggingMessages.UserIsLoggedIn);
 
             return this.RedirectToAction(nameof(HomeController.Index), "Home");
         }
@@ -172,7 +172,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             // Request a redirect to the external login provider.
             var redirectUrl = this.Url.Action(nameof(this.ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = this.accountService.ConfigureExternalAuthenticationProperties(provider, new Uri(redirectUrl));
+            var properties = this._accountService.ConfigureExternalAuthenticationProperties(provider, new Uri(redirectUrl));
             return this.Challenge(properties, provider);
         }
 
@@ -186,17 +186,17 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction(nameof(this.Login));
             }
 
-            var info = await this.accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
+            var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
             if (info == null)
             {
                 return this.RedirectToAction(nameof(this.Login));
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await this.accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey).ConfigureAwait(false);
+            var result = await this._accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey).ConfigureAwait(false);
             if (result.Succeeded)
             {
-                this.logger.LogInformation(LoggingMessages.UserLoginProvider, info.LoginProvider);
+                this._logger.LogInformation(LoggingMessages.UserLoginProvider, info.LoginProvider);
                 return this.RedirectToLocal(returnUrl?.ToString());
             }
 
@@ -232,25 +232,25 @@ namespace DevAdventCalendarCompetition.Controllers
             if (this.ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await this.accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
+                var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
                 if (info == null)
                 {
                     throw new ArgumentException(LoggingMessages.LoadingDataError);
                 }
 
-                var user = this.accountService.CreateApplicationUserByEmail(model.Email);
+                var user = this._accountService.CreateApplicationUserByEmail(model.Email);
 
-                var result = await this.accountService.CreateAsync(user, null).ConfigureAwait(false);
+                var result = await this._accountService.CreateAsync(user, null).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-                    result = await this.accountService.AddLoginAsync(user, info).ConfigureAwait(false);
+                    result = await this._accountService.AddLoginAsync(user, info).ConfigureAwait(false);
                     if (result.Succeeded)
                     {
-                        this.logger.LogInformation(LoggingMessages.CreatedUserNameProvider, info.LoginProvider);
+                        this._logger.LogInformation(LoggingMessages.CreatedUserNameProvider, info.LoginProvider);
 
-                        var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                        var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                         var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
-                        await this.accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
+                        await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
 
                         return this.View("RegisterConfirmation");
                     }
@@ -272,13 +272,13 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
 
-            var user = await this.accountService.FindByIdAsync(userId).ConfigureAwait(false);
+            var user = await this._accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
 
-            var result = await this.accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
+            var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
             return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -301,9 +301,9 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (this.ModelState.IsValid)
             {
-                var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+                var user = await this._accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
 
-                if (user == null || !(await this.accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
+                if (user == null || !(await this._accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return this.RedirectToAction(nameof(this.ForgotPasswordConfirmation));
@@ -311,9 +311,9 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await this.accountService.GeneratePasswordResetTokenAsync(user).ConfigureAwait(false);
+                var code = await this._accountService.GeneratePasswordResetTokenAsync(user).ConfigureAwait(false);
                 var callbackUrl = this.Url.ResetPasswordCallbackLink(user.Id, code, user.Email, this.Request.Scheme);
-                await this.accountService.SendEmailAsync(
+                await this._accountService.SendEmailAsync(
                     model.Email,
                     "Reset hasła",
                     $"Swoje hasło zresetujesz klikając na link: <a href='{callbackUrl}'>LINK</a>").ConfigureAwait(false);
@@ -359,7 +359,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(model);
             }
 
-            var user = await this.accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+            var user = await this._accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
 
             if (user == null)
             {
@@ -367,7 +367,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
 
-            var result = await this.accountService.ResetPasswordAsync(user, model.Code, model.Password).ConfigureAwait(false);
+            var result = await this._accountService.ResetPasswordAsync(user, model.Code, model.Password).ConfigureAwait(false);
             if (result.Succeeded)
             {
                 return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
