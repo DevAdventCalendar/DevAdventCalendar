@@ -2434,7 +2434,7 @@ body {
 .chris_btn_empty {
     background: #fff;
     color: #333;
-    border: 1px solid #eee;
+    border: none;
 }
 
 .chris_btn_empty:hover {
