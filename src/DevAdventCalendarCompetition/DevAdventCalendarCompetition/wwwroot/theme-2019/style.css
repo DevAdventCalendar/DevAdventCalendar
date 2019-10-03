@@ -2467,3 +2467,8 @@ body {
 .offset_menu .as_link:hover {
     color: #ffffff;
 }
+
+.single_related_post .title {
+    z-index: 1;
+    position: relative;
+}
