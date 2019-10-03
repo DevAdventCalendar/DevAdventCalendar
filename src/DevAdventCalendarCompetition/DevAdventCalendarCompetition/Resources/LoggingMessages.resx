@@ -123,6 +123,12 @@
   <data name="LoadingDataError" xml:space="preserve">
     <value>Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.</value>
   </data>
+  <data name="NewAccount" xml:space="preserve">
+    <value>User created a new account with password.</value>
+  </data>
+  <data name="PasswordIsChangedSuccessfully" xml:space="preserve">
+    <value>User changed their password successfully.</value>
+  </data>
   <data name="ResetPasswordCodeError" xml:space="preserve">
     <value>Kod musi być dostarczony do resetowania hasła.</value>
   </data>

@@ -79,6 +79,24 @@ namespace DevLoggingMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User created a new account with password..
+        /// </summary>
+        public static string NewAccount {
+            get {
+                return ResourceManager.GetString("NewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User changed their password successfully..
+        /// </summary>
+        public static string PasswordIsChangedSuccessfully {
+            get {
+                return ResourceManager.GetString("PasswordIsChangedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kod musi być dostarczony do resetowania hasła..
         /// </summary>
         public static string ResetPasswordCodeError {

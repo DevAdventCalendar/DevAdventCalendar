@@ -138,7 +138,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var result = await this.accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-                    this.logger.LogInformation("User created a new account with password.");
+                    this.logger.LogInformation(LoggingMessages.NewAccount);
 
                     var code = await this.accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                     var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);

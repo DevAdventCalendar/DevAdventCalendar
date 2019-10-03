@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.ManageViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevLoggingMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -170,7 +171,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
-            this.logger.LogInformation("User changed their password successfully.");
+            this.logger.LogInformation(LoggingMessages.PasswordIsChangedSuccessfully);
             this.StatusMessage = "Twoje hasło zostało zmienione";
 
             return this.RedirectToAction(nameof(this.ChangePassword));
