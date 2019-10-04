@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetitio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition.Tests", "DevAdventCalendarCompetition.Tests\DevAdventCalendarCompetition.Tests.csproj", "{F91B714C-62D1-485A-B123-96C5439D0CD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.PointsCalculation.Tests", "DevAdventCalendarCompetition.PointsCalculation.Tests\DevAdventCalendarCompetition.PointsCalculation.Tests.csproj", "{244F0467-6BDD-4BEC-A4F8-07F0013500A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition.PointsCalculation.Tests", "DevAdventCalendarCompetition.PointsCalculation.Tests\DevAdventCalendarCompetition.PointsCalculation.Tests.csproj", "{244F0467-6BDD-4BEC-A4F8-07F0013500A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.PointsCalculation", "DevAdventCalendar.PointsCalculation\DevAdventCalendarCompetition.PointsCalculation.csproj", "{0D071057-D858-4BF0-BB32-91E74F5EC232}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{244F0467-6BDD-4BEC-A4F8-07F0013500A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{244F0467-6BDD-4BEC-A4F8-07F0013500A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{244F0467-6BDD-4BEC-A4F8-07F0013500A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D071057-D858-4BF0-BB32-91E74F5EC232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D071057-D858-4BF0-BB32-91E74F5EC232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D071057-D858-4BF0-BB32-91E74F5EC232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D071057-D858-4BF0-BB32-91E74F5EC232}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
