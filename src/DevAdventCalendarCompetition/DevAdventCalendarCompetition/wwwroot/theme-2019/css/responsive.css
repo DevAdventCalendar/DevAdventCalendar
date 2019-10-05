@@ -587,6 +587,14 @@
 
 /*////////////// EXTRA SMALL DEVICES //////////////*/
 @media (min-width: 300px) and (max-width: 479px){
+    .logo_container {
+        padding: 27px 0;
+    }
+
+    .logo_container a {
+        width: 200px;
+    }
+
     .container{
         width: 300px;
     }
