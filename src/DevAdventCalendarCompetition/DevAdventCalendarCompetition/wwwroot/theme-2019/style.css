@@ -2472,3 +2472,12 @@ body {
     z-index: 1;
     position: relative;
 }
+
+.logo_container {
+    padding: 13px 0;
+    text-align: left;
+}
+
+.logo_container a {
+    width: 280px;
+}

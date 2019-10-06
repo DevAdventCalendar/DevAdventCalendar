@@ -1,19 +1,35 @@
-﻿@{
+﻿<div class="breadcrumb_area">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb_wrapper">
+                <div class="page_title">
+                    <h3>Wyniki</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
     ViewBag.Title = "Wyniki";
 }
 @using Microsoft.AspNetCore.Http
 @model DevAdventCalendarCompetition.Vms.TestResultsVm
 @if (Model == null)
 {
-    <div class="row content-centered">
-        <div class="col text-center">
-            <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
-            <br />
-            <br />
-            <h2>Niestety, nie wziąłeś udziału w rywalizacji.</h2>
-            <h2>Zapraszamy za rok ;)</h2>
+    <section class="event_txt">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="party_text">
+                    <h1>
+                        Niestety, nie wziąłeś udziału w poprzedniej rywalizacji.
+                        <br> <span>ALE...</span> <br>
+                        Zapraszamy do tegorocznej edycji ;) <br/> <img src="~/theme-2019/images/heart.png" alt="heart" class="mt-20" />
+                    </h1>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 }
 else
 {
