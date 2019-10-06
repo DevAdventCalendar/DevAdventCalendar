@@ -9,15 +9,15 @@
 
 @if (showBanner)
 {
-    <nav id="cookieConsent" role="alert">
+    <nav id="cookieConsent" class="navbar navbar-default navbar-static-top" role="alert">
         <div class="container">
-            <div class="text-center">
-                <p>
+            <div>
+                <p class="navbar-text cookies-text">
                     Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.
                 </p>
-                <div>
-                    <a asp-controller="Home" asp-action="Privacy" class="chris_btn">Dowiedz się więcej</a>
-                    <button type="button" class="chris_btn chris_btn_empty" data-cookie-string="@cookieString">Akceptuj</button>
+                <div class="navbar-right">
+                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-info navbar-btn">Dowiedz się więcej</a>
+                    <button type="button" class="btn btn-default navbar-btn" data-cookie-string="@cookieString">Akceptuj</button>
                 </div>
             </div>
         </div>

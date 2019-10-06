@@ -3,21 +3,21 @@
 
 @if (IdentityService.IsSignedIn(User))
 {
-    <li class="mt-30">
-        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Witaj @IdentityService.GetUserName(User)!</a>
-    </li>
-    <li>
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-            <button type="submit" class="as_link">Wyloguj</button>
-        </form>
-    </li>
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Witaj @IdentityService.GetUserName(User)!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Wyloguj</button>
+            </li>
+        </ul>
+    </form>
 }
 else
 {
-    <li class="mt-30">
-        <a asp-area="" asp-controller="Account" asp-action="Register" class="active">Rejestruj</a>
-    </li>
-    <li>
-        <a asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
-    </li>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Rejestruj</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a></li>
+    </ul>
 }
