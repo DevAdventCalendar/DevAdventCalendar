@@ -88,11 +88,15 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 throw new ArgumentException(ExeptionsMessages.TestAlreadyRun);
             }
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            }
 
             var previousTestDto = this.adminService.GetPreviousTest(testDto.Number);
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
             {
                 throw new ArgumentException(ExeptionsMessages.PreviousTestIsNotDone);
+            }
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
             }
 
             this.adminService.UpdateTestDates(testDto, minutesString);
@@ -107,6 +111,8 @@ namespace DevAdventCalendarCompetition.Controllers
             if (testDto.Status != TestStatus.Started)
             {
                 throw new ArgumentException(ExeptionsMessages.TestAlreadyRun);
+            }
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
             }
 
             this.adminService.UpdateTestEndDate(testDto, DateTime.Now);

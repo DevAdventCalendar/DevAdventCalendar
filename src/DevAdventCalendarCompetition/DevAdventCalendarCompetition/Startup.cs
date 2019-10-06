@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using AutoMapper;
+﻿using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Services;
 using Microsoft.AspNetCore.Builder;
