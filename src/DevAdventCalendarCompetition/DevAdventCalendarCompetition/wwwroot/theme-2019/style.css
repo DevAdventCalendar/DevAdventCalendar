@@ -300,7 +300,8 @@ h1,h2,h3,h4,h5,h6{
   display: inline-block;
 }
 .logo_container a img {
-  width: 100%;
+  max-width: 100%;
+  display: inline-block;
 }
 .main_menu{
   display: inline-block;
