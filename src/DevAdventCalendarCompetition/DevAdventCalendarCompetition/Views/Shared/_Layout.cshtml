@@ -1,81 +1,150 @@
 ﻿<!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" lang="pl-PL">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/favicon.ico">
+    <meta charset="UTF-8">
+
+    <!-- viewport meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>DevAdventCalendar - programistyczny kalendarz adwentowy</title>
     <meta name="description" content="DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT. ">
     <meta property="og:image" content="https://www.devadventcalendar.pl/images/logo_big.JPG">
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74536209-2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'UA-74536209-2');
     </script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mali">
+    <!-- owl carousel css -->
+    <link rel="stylesheet" href="~/theme-2019/css/owl.carousel.css" />
+
+    <!-- font icofont -->
+    <link rel="stylesheet" href="~/theme-2019/css/icofont.css" />
+    <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/css/theme.css" />
-        <link rel="stylesheet" href="~/css/Site.css" />
-        <link rel="stylesheet" href="~/css/bootstrap-social.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/css/theme.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/bootstrap-social.min.css" asp-append-version="false" />
-    </environment>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Roboto+Slab:100,300,400,700" rel="stylesheet">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="~/theme-2019/css/bootstrap.min.css" />
+
+    <!-- bootstrap social -->
+    <link rel="stylesheet" href="~/css/bootstrap-social.css" />
+
+    <!-- animate css -->
+    <link rel="stylesheet" href="~/theme-2019/css/animate.css" />
+
+    <!-- style css -->
+    <link rel="stylesheet" href="~/theme-2019/style.css" />
+
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/theme-2019/css/responsive.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="~/theme-2019/images/favicon.png" />
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Otwórz menu</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img id="calendar-logo" src="~/images/logo.jpg" alt="Logo - prezent" />
-                    <img id="calendar-text" src="~/images/devadventcalendar.JPG" alt="DevAdventCalendar" />
-                </a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Results">Wyniki</a></li>
-                    <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Sponsors">Sponsorzy</a></li>
-                    <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Prizes">Nagrody</a></li>
-                    <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="About">O nas</a></li>
-                    <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
+    <!-- preloader -->
+    <div class="preloader">
+        <div class="preloader-container">
+            <span class="animated-preloader"></span>
+        </div>
+    </div>
+
+    <section class="header_area">
+        <!-- NAV AREA CSS -->
+        <div class="nav_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <!-- MENU AREA STARTS HERE -->
+                        <div class="menu_area">
+                            <div class="logo_container">
+                                <a asp-area="" asp-controller="Home" asp-action="Index">
+                                    <img src="~/theme-2019/images/logo.png" alt="logo Image">
+                                </a>
+                            </div>
+                            <div class="main_menu">
+                                <!-- nav toggle hamberger -->
+                                <a class="menu_toggler" href="#">
+                                    <div class="hamberger"></div>
+                                </a>
+
+                                <div class="offset_menu">
+                                    <div class="menu_wrapper">
+                                        <div class="cross">
+                                            <span class="left"></span>
+                                            <span class="right"></span>
+                                        </div>
+                                        <ul>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Results">Wyniki</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Sponsors">Sponsorzy</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Prizes">Nagrody</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="About">O nas</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+
+                                            @await Html.PartialAsync("_LoginPartial")
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MENU AREA ENDS HERE -->
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container body-content">
-        <hr />
-        @RenderBody()
+        <!-- NAV AREA -->
+    </section>
 
-        <footer class="footer">
-            <hr />
+    <main class="main_container">
+        @RenderBody()
+    </main>
+
+    <!--================================
+          START FOOTER
+    =================================-->
+    <footer>
+        <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-xs-8">
-                    <p>&copy; 2018 - DevAdventCalendar</p>
+                <div class="col-md-4 col-sm-4 br-r">
+                    <div class="social_icons">
+                        <ul>
+                            <li><a href="https://www.facebook.com/devadventcalendar/" target="_blank"><span class="icofont icofont-social-facebook"></span></a></li>
+                            <li><a href="https://twitter.com/dev_advent_cal" target="_blank"><span class="icofont icofont-social-twitter"></span></a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-sm-4 col-xs-4 text-right">
-                    <a href="~/regulamin.pdf" target="_blank">Regulamin</a>
+
+                <div class="col-md-4 col-sm-4 br-r">
+                    <div class="christmas_footer_logo">
+                        <img src="~/theme-2019/images/footer_logo.png" alt="Foogter logo">
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 ">
+                    <div class="legal_text">
+                        <p>
+                            © 2019 - DevAdventCalendar<br />
+                            <a href="~/regulamin.pdf" target="_blank">Regulamin</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
+    <!--================================
+          END FOOTER
+    =================================-->
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -100,6 +169,34 @@
 
     <partial name="_CookieConsentPartial" />
     <partial name="_ValidationScriptsPartial" />
+
+    <!--//////////////////// JS GOES HERE ////////////////-->
+    <!-- jquery latest version -->
+    <script src="~/theme-2019/js/jquery-1.12.3.js"></script>
+
+    <!-- bootstrap js -->
+    <script src="~/theme-2019/js/bootstrap.min.js"></script>
+
+    <!-- jquery easing 1.3 -->
+    <script src="~/theme-2019/js/jquery.easing1.3.js"></script>
+
+    <!-- Owl carousel js-->
+    <script src="~/theme-2019/js/owl.carousel.min.js"></script>
+
+    <!-- Snowfall js -->
+    <script src="~/theme-2019/js/snowfall.jquery.js"></script>
+
+    <!-- jquery count down js -->
+    <script src="~/theme-2019/js/jquery.countdown.min.js"></script>
+
+    <!-- waypoint js -->
+    <script src="~/theme-2019/js/waypoints.min.js"></script>
+
+    <!-- google map js -->
+    <!-- <script src="http://maps.googleapis.com/maps/api/js"></script> -->
+    <!-- Main js -->
+    <script src="~/theme-2019/js/main.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
