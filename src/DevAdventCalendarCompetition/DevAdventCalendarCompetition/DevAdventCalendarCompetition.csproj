@@ -54,10 +54,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\ExeptionsMessages.Designer.cs">
+    <Compile Update="Resources\ExceptionsMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ExeptionsMessages.resx</DependentUpon>
+      <DependentUpon>ExceptionsMessages.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\LoggingMessages.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -76,10 +76,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\ExeptionsMessages.resx">
+    <EmbeddedResource Update="Resources\ExceptionsMessages.resx">
       <CustomToolNamespace>DevExeptionsMessages</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExeptionsMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>ExceptionsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\LoggingMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

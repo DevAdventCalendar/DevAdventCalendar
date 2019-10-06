@@ -94,11 +94,6 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UpdateDatabase(this IApplicationBuilder app)
         {
-            if (app == null)
-            {
-                throw new ArgumentNullException(nameof(app));
-            }
-
             if (app != null)
             {
                 using (var scope = app.ApplicationServices.CreateScope())
@@ -111,11 +106,6 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
         {
-            if (app == null)
-            {
-                throw new ArgumentNullException(nameof(app));
-            }
-
             if (app != null)
             {
                 app.Use(next => context =>

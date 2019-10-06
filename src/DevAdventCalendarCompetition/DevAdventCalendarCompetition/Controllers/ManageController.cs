@@ -59,6 +59,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -103,6 +108,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -146,6 +156,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -201,6 +216,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -210,11 +230,6 @@ namespace DevAdventCalendarCompetition.Controllers
             if (user == null)
             {
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
-            }
-
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
             }
 
             if (model != null)
