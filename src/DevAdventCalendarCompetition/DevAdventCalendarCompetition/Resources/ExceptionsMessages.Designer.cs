@@ -99,15 +99,6 @@ namespace DevExeptionsMessages {
         /// <summary>
         ///   Looks up a localized string similar to Nie można załadować użytkownika z identyfikatorem &apos;{this.accountService.GetUserId(this.User)}&apos;..
         /// </summary>
-        public static string UserCouldNotBeLoaded {
-            get {
-                return ResourceManager.GetString("UserCouldNotBeLoaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nie można załadować użytkownika z identyfikatorem &apos;{this.accountService.GetUserId(this.User)}&apos;..
-        /// </summary>
         public static string UserWithIDCouldNotBeLoaded {
             get {
                 return ResourceManager.GetString("UserWithIDCouldNotBeLoaded", resourceCulture);

@@ -41,7 +41,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserCouldNotBeLoaded);
+                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
             }
 
             var model = new IndexViewModel
@@ -122,7 +122,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserCouldNotBeLoaded);
+                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
             }
 
             var code = await this.accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
@@ -140,7 +140,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserCouldNotBeLoaded);
+                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
             }
 
             var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
@@ -170,7 +170,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserCouldNotBeLoaded);
+                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
             }
 
             if (model == null)
