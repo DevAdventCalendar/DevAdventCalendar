@@ -129,7 +129,7 @@
   <data name="TestAlreadyRun" xml:space="preserve">
     <value>Test został uruchomiony</value>
   </data>
-  <data name="UserWithIDCouldNotBeLoaded" xml:space="preserve">
-    <value>Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.</value>
+  <data name="UserWithIdNotFound" xml:space="preserve">
+    <value>Nie można załadować użytkownika z identyfikatorem {0}.</value>
   </data>
 </root>

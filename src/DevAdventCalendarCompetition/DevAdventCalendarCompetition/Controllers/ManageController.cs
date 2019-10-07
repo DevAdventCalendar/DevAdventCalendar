@@ -41,7 +41,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var model = new IndexViewModel
@@ -73,7 +73,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var email = user.Email;
@@ -122,7 +122,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var code = await this.accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
@@ -140,7 +140,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
@@ -170,7 +170,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             if (model == null)
@@ -199,7 +199,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
@@ -230,7 +230,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(ExceptionsMessages.UserWithIDCouldNotBeLoaded);
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
