@@ -1,5 +1,5 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Repository.Interfaces
 {
@@ -12,7 +12,7 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
         TestAnswer GetTestAnswerByUserId(string userId, int testId);
 
         List<Test> GetAllTests();
-        
+
         List<Test> GetTestsWithUserAnswers();
 
         int GetCorrectAnswersCountForUser(string userId);

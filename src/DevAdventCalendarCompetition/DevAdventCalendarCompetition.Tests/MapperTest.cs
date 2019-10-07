@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DevAdventCalendarCompetition.Services.Profiles;
 using Xunit;
 
@@ -9,25 +10,25 @@ namespace DevAdventCalendarCompetition.Tests
         [Fact]
         public void TestProfileMappingsIsValid()
         {
-            Mapper.Reset();
-            Mapper.Initialize(cfg =>
+            var mockMapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<TestProfile>();
             });
+            var mapper = mockMapper.CreateMapper();
 
-            Mapper.Configuration.AssertConfigurationIsValid();
+            mapper.ConfigurationProvider.AssertConfigurationIsValid();
         }
 
         [Fact]
         public void TestAnswerProfileIsValid()
         {
-            Mapper.Reset();
-            Mapper.Initialize(cfg =>
+            var mockMapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<TestAnswerProfile>();
             });
+            var mapper = mockMapper.CreateMapper();
 
-            Mapper.Configuration.AssertConfigurationIsValid();
+            mapper.ConfigurationProvider.AssertConfigurationIsValid();
         }
     }
 }

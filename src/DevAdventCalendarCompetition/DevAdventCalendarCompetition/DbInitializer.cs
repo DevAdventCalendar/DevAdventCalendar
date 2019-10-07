@@ -9,12 +9,12 @@ namespace DevAdventCalendarCompetition
 
         public DbInitializer(ApplicationDbContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public void Seed()
         {
-            _context.Database.Migrate();
+            this._context.Database.Migrate();
         }
     }
 }

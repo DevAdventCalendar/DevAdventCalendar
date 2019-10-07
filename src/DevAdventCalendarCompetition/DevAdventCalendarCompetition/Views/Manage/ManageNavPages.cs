@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using System;
 
 namespace DevAdventCalendarCompetition.Views.Manage
 {
@@ -18,10 +18,26 @@ namespace DevAdventCalendarCompetition.Views.Manage
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {
+            if (viewContext is null)
+            {
+                throw new ArgumentNullException(nameof(viewContext));
+            }
+
             var activePage = viewContext.ViewData["ActivePage"] as string;
             return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase) ? "active" : null;
         }
 
-        public static void AddActivePage(this ViewDataDictionary viewData, string activePage) => viewData[ActivePageKey] = activePage;
+        public static void AddActivePage(this ViewDataDictionary viewData, string activePage)
+        {
+            if (viewData == null)
+            {
+                throw new ArgumentNullException(nameof(viewData));
+            }
+
+            if (viewData != null)
+            {
+                viewData[ActivePageKey] = activePage;
+            }
+        }
     }
 }
