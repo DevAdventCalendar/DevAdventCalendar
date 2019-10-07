@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.ManageViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevLoggingMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -102,6 +108,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -145,6 +156,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -170,7 +186,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
-            this.logger.LogInformation("User changed their password successfully.");
+            this.logger.LogInformation(LoggingMessages.PasswordIsChangedSuccessfully);
             this.StatusMessage = "Twoje hasło zostało zmienione";
 
             return this.RedirectToAction(nameof(this.ChangePassword));
@@ -200,6 +216,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -211,20 +232,12 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-
-            if (model != null)
-            {
-                var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
-                if (!addPasswordResult.Succeeded)
+            var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
+            if (!addPasswordResult.Succeeded)
                 {
                     this.AddErrors(addPasswordResult);
                     return this.View(model);
                 }
-            }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
             this.StatusMessage = "Your password has been set.";
