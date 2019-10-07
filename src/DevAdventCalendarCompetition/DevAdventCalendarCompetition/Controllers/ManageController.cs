@@ -232,15 +232,12 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
             }
 
-            if (model != null)
-            {
-                var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
-                if (!addPasswordResult.Succeeded)
+            var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
+            if (!addPasswordResult.Succeeded)
                 {
                     this.AddErrors(addPasswordResult);
                     return this.View(model);
                 }
-            }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
             this.StatusMessage = "Your password has been set.";

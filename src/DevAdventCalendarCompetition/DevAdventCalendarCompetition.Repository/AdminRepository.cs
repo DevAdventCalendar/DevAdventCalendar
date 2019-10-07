@@ -43,12 +43,15 @@ namespace DevAdventCalendarCompetition.Repository
 
         public void UpdateEndDate(Test test)
         {
+            if (test is null)
+            {
+                throw new System.ArgumentNullException(nameof(test));
+            }
+
             var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == test.Id);
             if (dbTest != null)
             {
-#pragma warning disable CA1062 // Validate arguments of public methods
                 dbTest.EndDate = test.EndDate;
-#pragma warning restore CA1062 // Validate arguments of public methods
                 this._dbContext.SaveChanges();
             }
         }
