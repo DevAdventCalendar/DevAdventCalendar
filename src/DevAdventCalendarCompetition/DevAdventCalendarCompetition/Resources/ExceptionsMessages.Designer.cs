@@ -61,6 +61,24 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem &apos;{user.Id}&apos;..
+        /// </summary>
+        public static string ErrorDuringEmailConfiguration {
+            get {
+                return ResourceManager.GetString("ErrorDuringEmailConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem &apos;{user.Id}&apos;.
+        /// </summary>
+        public static string ErrorDuringPhoneNumberConfiguration {
+            get {
+                return ResourceManager.GetString("ErrorDuringPhoneNumberConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poprzedni test nie został zakończony.
         /// </summary>
         public static string PreviousTestIsNotDone {
@@ -75,6 +93,24 @@ namespace DevExeptionsMessages {
         public static string TestAlreadyRun {
             get {
                 return ResourceManager.GetString("TestAlreadyRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie można załadować użytkownika z identyfikatorem &apos;{this.accountService.GetUserId(this.User)}&apos;..
+        /// </summary>
+        public static string UserCouldNotBeLoaded {
+            get {
+                return ResourceManager.GetString("UserCouldNotBeLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie można załadować użytkownika z identyfikatorem &apos;{this.accountService.GetUserId(this.User)}&apos;..
+        /// </summary>
+        public static string UserWithIDCouldNotBeLoaded {
+            get {
+                return ResourceManager.GetString("UserWithIDCouldNotBeLoaded", resourceCulture);
             }
         }
     }
