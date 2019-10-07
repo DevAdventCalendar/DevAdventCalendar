@@ -87,7 +87,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new InvalidOperationException(ExceptionsMessages.ErrorDuringEmailConfiguration);
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration));
                 }
             }
 
@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setPhoneResult = await this.manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new InvalidOperationException(ExceptionsMessages.ErrorDuringPhoneNumberConfiguration);
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration));
                 }
             }
 
