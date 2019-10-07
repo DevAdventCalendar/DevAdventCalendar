@@ -86,13 +86,13 @@ namespace DevAdventCalendarCompetition.Controllers
             var testDto = this._adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.NotStarted)
             {
-                throw new ArgumentException(ExceptionsMessages.TestAlreadyRun);
+                throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
             var previousTestDto = this._adminService.GetPreviousTest(testDto.Number);
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
             {
-                throw new ArgumentException(ExceptionsMessages.PreviousTestIsNotDone);
+                throw new InvalidOperationException(ExceptionsMessages.PreviousTestIsNotDone);
             }
 
             this._adminService.UpdateTestDates(testDto, minutesString);
@@ -106,7 +106,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var testDto = this._adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.Started)
             {
-                throw new ArgumentException(ExceptionsMessages.TestAlreadyRun);
+                throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
             this._adminService.UpdateTestEndDate(testDto, DateTime.Now);
