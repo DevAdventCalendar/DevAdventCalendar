@@ -62,4 +62,8 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\theme-2019\images\people\" />
+  </ItemGroup>
 </Project>
