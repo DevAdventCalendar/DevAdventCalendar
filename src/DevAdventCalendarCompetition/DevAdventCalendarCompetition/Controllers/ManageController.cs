@@ -73,7 +73,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var email = user.Email;
@@ -87,7 +87,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration));
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this.accountService.GetUserId(this.User)));
                 }
             }
 
@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setPhoneResult = await this.manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration));
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this.accountService.GetUserId(this.User)));
                 }
             }
 

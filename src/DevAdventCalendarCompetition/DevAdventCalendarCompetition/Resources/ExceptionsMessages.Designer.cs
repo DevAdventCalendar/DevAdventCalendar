@@ -61,7 +61,7 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem &apos;{user.Id}&apos;..
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem &apos;{0}&apos;..
         /// </summary>
         public static string ErrorDuringEmailConfiguration {
             get {
@@ -70,7 +70,7 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem &apos;{user.Id}&apos;.
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem &apos;{0}&apos;.
         /// </summary>
         public static string ErrorDuringPhoneNumberConfiguration {
             get {
