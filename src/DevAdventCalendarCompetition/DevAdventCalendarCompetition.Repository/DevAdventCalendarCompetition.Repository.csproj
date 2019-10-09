@@ -5,6 +5,9 @@
     <CodeAnalysisRuleSet>..\Analysers.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
   
   <ItemGroup>
     <Compile Remove="Migrations\20181104174220_RenameTables.cs" />

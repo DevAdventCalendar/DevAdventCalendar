@@ -41,7 +41,7 @@ Please note we have a [README](https://github.com/DevAdventCalendar/DevAdventCal
 
 9. Make sure your code compiles without errors.	
 
-10. Create a pull request (the template has already been created, simply complete it).	
+10. Create a pull request to the `develop` branch (the template has already been created, simply complete it)
 
 ## Suggest a new feature	
 We use GitHub issues to track public features. Suggest a new feature by opening a new issue.	

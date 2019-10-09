@@ -1,0 +1,16 @@
+name: Pull Request verification
+
+on: [pull_request]
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-16.04
+ 
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: |
+        cd src/DevAdventCalendarCompetition
+        docker build . --file Dockerfile --tag devadventcalendar/devadventcalendar:2019
