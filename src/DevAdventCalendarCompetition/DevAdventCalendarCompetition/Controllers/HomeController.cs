@@ -36,6 +36,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(currentTestsDto);
         }
 
+        [Route("Results")]
         public ActionResult Results(int? pageIndex)
         {
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -120,37 +121,44 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.Content(this._homeService.CheckTestStatus(testNumber));
         }
 
+        [Route(nameof(Error))]
         public ActionResult Error()
         {
             this.ViewBag.errorMessage = this.TempData["errorMessage"];
             return this.View();
         }
 
+        [Route(nameof(About))]
         public ActionResult About()
         {
             return this.View();
         }
 
+        [Route(nameof(Contact))]
         public ActionResult Contact()
         {
             return this.View();
         }
 
+        [Route(nameof(Sponsors))]
         public ActionResult Sponsors()
         {
             return this.View();
         }
 
+        [Route(nameof(Prizes))]
         public ActionResult Prizes()
         {
             return this.View();
         }
 
+        [Route(nameof(Privacy))]
         public IActionResult Privacy()
         {
             return this.View();
         }
 
+        [Route(nameof(Rules))]
         public ActionResult Rules()
         {
             return this.View();
