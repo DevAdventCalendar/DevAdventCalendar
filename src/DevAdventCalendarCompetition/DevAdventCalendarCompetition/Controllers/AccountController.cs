@@ -36,11 +36,6 @@ namespace DevAdventCalendarCompetition.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(Uri returnUrl = null)
         {
-            if (returnUrl is null)
-            {
-                throw new ArgumentNullException(nameof(returnUrl));
-            }
-
             // Clear the existing external cookie to ensure a clean login process
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme).ConfigureAwait(false);
 
