@@ -90,4 +90,8 @@
       <CustomToolNamespace>DevLoggingMessages</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
 </Project>
