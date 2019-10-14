@@ -16,4 +16,7 @@ jobs:
         dotnet restore
         dotnet build
         dotnet test
+    - name: Build the Docker image
+      run: |
+        cd src/DevAdventCalendarCompetition
         docker build . --file Dockerfile --tag devadventcalendar/devadventcalendar:2019
