@@ -10,11 +10,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build and test src code
+    - name: Build solution
       run: |
         cd src/DevAdventCalendarCompetition
         dotnet restore
         dotnet build
+        dotnet test
+    - name: Test solution
+      run: |
+        cd src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.Tests
         dotnet test
     - name: Build the Docker image
       run: |
