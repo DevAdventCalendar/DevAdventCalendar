@@ -94,36 +94,30 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UpdateDatabase(this IApplicationBuilder app)
         {
-            if (app == null)
+            if (app is null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            if (app != null)
-            {
-                using (var scope = app.ApplicationServices.CreateScope())
+            using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var init = scope.ServiceProvider.GetService<DbInitializer>();
                     init.Seed();
                 }
-            }
         }
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
         {
-            if (app == null)
+            if (app is null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            if (app != null)
-            {
-                app.Use(next => context =>
+            app.Use(next => context =>
                 {
                     context.Request.Scheme = "https";
                     return next(context);
                 });
-            }
         }
     }
 }

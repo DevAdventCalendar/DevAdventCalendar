@@ -4,6 +4,7 @@ using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevExeptionsMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,18 +13,18 @@ namespace DevAdventCalendarCompetition.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly IAdminService adminService;
+        private readonly IAdminService _adminService;
         private readonly IBaseTestService baseTestService;
 
         public AdminController(IAdminService adminService, IBaseTestService baseTestService)
         {
-            this.adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
+            this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
             this.baseTestService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
         }
 
         public ActionResult Index()
         {
-            var tests = this.adminService.GetAllTests();
+            var tests = this._adminService.GetAllTests();
             this.ViewBag.DateTime = DateTime.Now;
             this.ViewBag.DateTimeUtc = DateTime.UtcNow;
 
@@ -62,7 +63,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     Number = model.Number,
                     Description = model.Description,
-                    Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", " ", StringComparison.Ordinal),
+                    Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", string.Empty, StringComparison.Ordinal),
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
@@ -72,7 +73,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     DiscountLogoUrl = model.DiscountLogoUrl,
                     DiscountLogoPath = model.DiscountLogoPath
                 };
-                this.adminService.AddTest(testDto);
+                this._adminService.AddTest(testDto);
                 return this.RedirectToAction("Index");
             }
 
@@ -82,23 +83,19 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult StartTest(int testId, string minutesString)
         {
-            var testDto = this.adminService.GetTestById(testId);
+            var testDto = this._adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.NotStarted)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Test został uruchomiony");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
-            var previousTestDto = this.adminService.GetPreviousTest(testDto.Number);
+            var previousTestDto = this._adminService.GetPreviousTest(testDto.Number);
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Poprzedni test nie został zakończony");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                throw new InvalidOperationException(ExceptionsMessages.PreviousTestIsNotDone);
             }
 
-            this.adminService.UpdateTestDates(testDto, minutesString);
+            this._adminService.UpdateTestDates(testDto, minutesString);
 
             return this.RedirectToAction("Index");
         }
@@ -106,15 +103,13 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult EndTest(int testId)
         {
-            var testDto = this.adminService.GetTestById(testId);
+            var testDto = this._adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.Started)
             {
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new ArgumentException("Test został uruchomiony");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
+                throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
-            this.adminService.UpdateTestEndDate(testDto, DateTime.Now);
+            this._adminService.UpdateTestEndDate(testDto, DateTime.Now);
 
             return this.RedirectToAction("Index");
         }
@@ -132,8 +127,8 @@ namespace DevAdventCalendarCompetition.Controllers
                 return "Reset nie jest włączony.";
             }
 
-            this.adminService.ResetTestDates();
-            this.adminService.ResetTestAnswers();
+            this._adminService.ResetTestDates();
+            this._adminService.ResetTestAnswers();
 
             return "Dane zostały zresetowane.";
         }

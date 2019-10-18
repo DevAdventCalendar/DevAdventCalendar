@@ -10,16 +10,16 @@ namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHomeService homeService;
+        private readonly IHomeService _homeService;
 
         public HomeController(IHomeService homeService)
         {
-            this.homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
+            this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
         }
 
         public ActionResult Index()
         {
-            var currentTestsDto = this.homeService.GetCurrentTests();
+            var currentTestsDto = this._homeService.GetCurrentTests();
             if (currentTestsDto == null)
             {
                 return this.View();
@@ -31,11 +31,12 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(currentTestsDto);
             }
 
-            this.ViewBag.CorrectAnswers = this.homeService.GetCorrectAnswersCountForUser(userId);
+            this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
 
             return this.View(currentTestsDto);
         }
 
+        [Route("Results")]
         public ActionResult Results(int? pageIndex)
         {
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -86,7 +87,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             int pageSize = 50;
 
-            var testResultListDto = this.homeService.GetAllTestResults();
+            var testResultListDto = this._homeService.GetAllTestResults();
 
             List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
 
@@ -96,7 +97,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     Position = result.Position,
                     UserId = result.UserId,
-                    FullName = this.homeService.PrepareUserEmailForRODO(result.Email),
+                    FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
                     CorrectAnswers = result.CorrectAnswersCount,
                     WrongAnswers = result.WrongAnswersCount,
                     TotalPoints = result.Points
@@ -105,7 +106,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var vm = new TestResultsVm()
             {
-                CurrentUserPosition = this.homeService.GetUserPosition(userId),
+                CurrentUserPosition = this._homeService.GetUserPosition(userId),
 
                 // SingleTestResults = singleTestResults,
                 TotalTestResults = new PaginatedCollection<TotalTestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize)
@@ -117,40 +118,47 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult CheckTestStatus(int testNumber)
         {
-            return this.Content(this.homeService.CheckTestStatus(testNumber));
+            return this.Content(this._homeService.CheckTestStatus(testNumber));
         }
 
+        [Route(nameof(Error))]
         public ActionResult Error()
         {
             this.ViewBag.errorMessage = this.TempData["errorMessage"];
             return this.View();
         }
 
+        [Route(nameof(About))]
         public ActionResult About()
         {
             return this.View();
         }
 
+        [Route(nameof(Contact))]
         public ActionResult Contact()
         {
             return this.View();
         }
 
+        [Route(nameof(Sponsors))]
         public ActionResult Sponsors()
         {
             return this.View();
         }
 
+        [Route(nameof(Prizes))]
         public ActionResult Prizes()
         {
             return this.View();
         }
 
+        [Route(nameof(Privacy))]
         public IActionResult Privacy()
         {
             return this.View();
         }
 
+        [Route(nameof(Rules))]
         public ActionResult Rules()
         {
             return this.View();
