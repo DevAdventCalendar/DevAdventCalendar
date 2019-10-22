@@ -3,9 +3,35 @@
 }
 @model int
 
-<h2>@ViewBag.Title</h2>
-<div>
-    <p>
-        Test @Model sie zakończył. Sprawdź <a href="@Url.Action("Results")">wyniki</a> testu.
-    </p>
+<div class="breadcrumb_area">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb_wrapper">
+                <div class="page_title page_title--block text-center">
+                    <h3>@ViewBag.Title!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<section class="promot_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="related_post_area_title">
+                    <h3>Test @Model sie zakończył. Sprawdź <a href="@Url.Action("Results")" class="link_default">wyniki</a> testu.</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-sm-offset-2 col-md-offset-3">
+                <div class="promot_content_wrapper">
+                    <div class="gift_box">
+                        <img src="~/theme-2019/images/santa_with_bag.png" alt="Begger_santa">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
