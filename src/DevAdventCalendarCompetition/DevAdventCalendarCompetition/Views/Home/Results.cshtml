@@ -24,7 +24,8 @@
                     <h1>
                         Niestety, nie wziąłeś udziału w poprzedniej rywalizacji.
                         <br> <span>ALE...</span> <br>
-                        Zapraszamy do tegorocznej edycji ;) <br/> <img src="~/theme-2019/images/heart.png" alt="heart" class="mt-20" />
+                        Zapraszamy do tegorocznej edycji ;) <br/>
+                        <img src="~/theme-2019/images/gift_bag.png" alt="gifts" class="mt-20">
                     </h1>
                 </div>
             </div>
@@ -33,19 +34,30 @@
 }
 else
 {
-    <div class="text-center">
-        <img src="~/images/logo.jpg" width="200" />
-        <h1>Wyniki</h1>
-        @if (Model.CurrentUserPosition != 0)
-        {
-            <h2>Zajmujesz <b>@Model.CurrentUserPosition</b> miejsce!</h2>
-        }
-        else
-        {
-            <h2>Niestety, nie odpowiedziałeś na żadną zagadkę ;(</h2>
-        }
-    </div>
+    <section class="event_txt">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="party_text">
+                    @if (Model.CurrentUserPosition != 0)
+                    {
+                        <h1 class="mb-30">
+                            Zajmujesz <span>@Model.CurrentUserPosition</span> miejsce!
+                        </h1>
+                    }
+                    else
+                    {
+                        <h1 class="mb-30">
+                            Niestety, nie odpowiedziałeś na żadną zagadkę ;(
+                        </h1>
+                    }
+                    <img src="~/theme-2019/images/gift_bag.png" alt="gifts">
+                </div>
+            </div>
+        </div>
+    </section>
 
+
+    <!-- TODO -->
     <div class="row results">
         @*
             <ul class="nav nav-tabs" role="tablist">
