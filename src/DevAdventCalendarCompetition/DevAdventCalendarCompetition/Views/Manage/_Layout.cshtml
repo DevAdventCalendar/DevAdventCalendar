@@ -2,14 +2,24 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Zarządzanie kontem</h2>
+<div class="breadcrumb_area mb-30">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb_wrapper">
+                <div class="page_title">
+                    <h3>Zarządzanie kontem</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div>
+<div class="container mb-30">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 mb-30">
             @await Html.PartialAsync("_ManageNav")
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6">
             @RenderBody()
         </div>
     </div>
