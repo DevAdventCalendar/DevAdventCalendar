@@ -6,32 +6,38 @@
     ViewBag.Title = "Home Page";
 }
 
-<h3>Strona Administratora</h3>
-<h4>DateTime - @ViewBag.DateTime</h4>
-<h4>DateTimeUtc - @ViewBag.DateTimeUtc</h4>
-<div>
-    <a href="/Admin/AddTest" class="btn btn-default">Dodaj test</a>
-</div>
-@for (int i = 0; i < Model.Count; i++)
-{
-    var currentTest = Model[i];
-    var previousTest = i == 0 ? null : Model[i - 1];
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Strona Administratora</h3>
+            <h4>DateTime - @ViewBag.DateTime</h4>
+            <h4>DateTimeUtc - @ViewBag.DateTimeUtc</h4>
+            <div>
+                <a href="/Admin/AddTest" class="btn btn-default">Dodaj test</a>
+            </div>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var currentTest = Model[i];
+                var previousTest = i == 0 ? null : Model[i - 1];
 
-    if (previousTest != null && previousTest.Status != TestStatus.Ended)
-    {
-        @await Html.PartialAsync("_TestPreviousNotEnded", currentTest)
-    }
-    else if (currentTest.Status == TestStatus.NotStarted)
-    {
-        ViewData["Status"] = "Test nie rozpoczął się";
-        @await Html.PartialAsync("_TestNotStarted", currentTest)
-    }
-    else if (currentTest.Status == TestStatus.Started)
-    {
-        @await Html.PartialAsync("_TestStarted", currentTest)
-    }
-    else
-    {
-        @await Html.PartialAsync("_TestEnded", currentTest)
-    }
-}
+                if (previousTest != null && previousTest.Status != TestStatus.Ended)
+                {
+                    @await Html.PartialAsync("_TestPreviousNotEnded", currentTest)
+                }
+                else if (currentTest.Status == TestStatus.NotStarted)
+                {
+                    ViewData["Status"] = "Test nie rozpoczął się";
+                    @await Html.PartialAsync("_TestNotStarted", currentTest)
+                }
+                else if (currentTest.Status == TestStatus.Started)
+                {
+                    @await Html.PartialAsync("_TestStarted", currentTest)
+                }
+                else
+                {
+                    @await Html.PartialAsync("_TestEnded", currentTest)
+                }
+            }
+        </div>
+    </div>
+</div>
