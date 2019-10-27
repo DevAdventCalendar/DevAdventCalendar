@@ -2493,3 +2493,23 @@ body {
 .page_title--block {
     float: none;
 }
+
+.well {
+    background-color: #fafafa;
+    box-shadow: none;
+    border-color: #eee;
+}
+
+.nav-pills>li>a {
+    color: #333;
+    font-weight: 700;
+    border-radius: 0;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+    color: #c93232;
+    background-color: rgba(200, 50, 50, .1);
+    border-bottom: 1px solid #c93232;
+}
