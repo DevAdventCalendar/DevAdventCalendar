@@ -30,4 +30,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DevAdventCalendarCompetition.TestResultService\DevAdventCalendarCompetition.TestResultService.csproj" />
+  </ItemGroup>
+
 </Project>
