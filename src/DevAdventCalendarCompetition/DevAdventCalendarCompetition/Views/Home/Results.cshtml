@@ -56,112 +56,118 @@ else
         </div>
     </section>
 
+    var prevDisabled = !Model.TotalTestResults.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.TotalTestResults.HasNextPage ? "disabled" : "";
 
-    <!-- TODO -->
-    <div class="row results">
-        @*
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
+    <div class="container mb-100">
+        <div class="row results mb-30">
+            <div class="col-xs-12">
+                @*
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
 
-                @for (var j = 0; j < Model.SingleTestResults.Count; j++)
-                {
-                    var result = Model.SingleTestResults[j];
-                    var active = "";
+                        @for (var j = 0; j < Model.SingleTestResults.Count; j++)
+                        {
+                            var result = Model.SingleTestResults[j];
+                            var active = "";
 
-                    <li role="presentation"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
-                }
-            </ul>
-        *@
-        <!-- Tab panes -->
-        <div class="tab-content">
-            @*
-                @for (var j = 0; j < Model.SingleTestResults.Count; j++)
-                {
-                    var result = Model.SingleTestResults[j];
+                            <li role="presentation"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
+                        }
+                    </ul>
+                *@
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    @*
+                        @for (var j = 0; j < Model.SingleTestResults.Count; j++)
+                        {
+                            var result = Model.SingleTestResults[j];
 
-                    if (result.TestEnded)
+                            if (result.TestEnded)
+                            {
+                                <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-1">#</th>
+                                                <th>Użytkownik</th>
+                                                <th>Poprawne odpowiedzi</th>
+                                                <th>Błędne odpowiedzi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (var i = 0; i < result.Entries.Count; i++)
+                                            {
+                                                var testResult = result.Entries[i];
+                                                <tr>
+                                                    <th scope="row" class="col-xs-1">@(i + 1)</th>
+                                                    <td>@testResult.FullName</td>
+                                                    <td>@testResult.CorrectAnswersCount</td>
+                                                    <td>@testResult.WrongAnswersCount</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
+                            }
+                        }
+                    *@
+
+                    @if (Model.TotalTestResults != null)
                     {
-                        <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">
+                        <div role="tabpanel" class="tab-pane active" id="totalresults">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr>
-                                        <th class="col-xs-1">#</th>
-                                        <th>Użytkownik</th>
-                                        <th>Poprawne odpowiedzi</th>
-                                        <th>Błędne odpowiedzi</th>
-                                    </tr>
+                                <tr>
+                                    <th class="col-xs-1">#</th>
+                                    <th>Użytkownik</th>
+                                    <th>Poprawne odpowiedzi</th>
+                                    <th>Błędne odpowiedzi</th>
+                                    <th>Suma punktów</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @for (var i = 0; i < result.Entries.Count; i++)
-                                    {
-                                        var testResult = result.Entries[i];
-                                        <tr>
-                                            <th scope="row" class="col-xs-1">@(i + 1)</th>
-                                            <td>@testResult.FullName</td>
-                                            <td>@testResult.CorrectAnswersCount</td>
-                                            <td>@testResult.WrongAnswersCount</td>
-                                        </tr>
-                                    }
+                                @for (var i = 0; i < Model.TotalTestResults.Count; i++)
+                                {
+                                    var testResult = Model.TotalTestResults[i];
+                                    <tr>
+                                        <th scope="row" class="col-xs-1">@(Model.TotalTestResults.PageIndex <= 1 ? i + 1 : (Model.TotalTestResults.PageSize * (Model.TotalTestResults.PageIndex - 1)) + i + 1)</th>
+                                        <td>@testResult.FullName</td>
+                                        <td>@testResult.CorrectAnswers</td>
+                                        <td>@testResult.WrongAnswers</td>
+                                        <td>@testResult.TotalPoints</td>
+                                    </tr>
+                                }
                                 </tbody>
                             </table>
                         </div>
                     }
                     else
                     {
-                        <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
+                        <div role="tabpanel" class="tab-pane" id="totalresults">Testy jeszcze się nie zakończyły</div>
                     }
-                }
-            *@
-
-            @if (Model.TotalTestResults != null)
-            {
-                <div role="tabpanel" class="tab-pane active" id="totalresults">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th class="col-xs-1">#</th>
-                            <th>Użytkownik</th>
-                            <th>Poprawne odpowiedzi</th>
-                            <th>Błędne odpowiedzi</th>
-                            <th>Suma punktów</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @for (var i = 0; i < Model.TotalTestResults.Count; i++)
-                        {
-                            var testResult = Model.TotalTestResults[i];
-                            <tr>
-                                <th scope="row" class="col-xs-1">@(Model.TotalTestResults.PageIndex <= 1 ? i + 1 : (Model.TotalTestResults.PageSize * (Model.TotalTestResults.PageIndex - 1)) + i + 1)</th>
-                                <td>@testResult.FullName</td>
-                                <td>@testResult.CorrectAnswers</td>
-                                <td>@testResult.WrongAnswers</td>
-                                <td>@testResult.TotalPoints</td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
                 </div>
-            }
-            else
-            {
-                <div role="tabpanel" class="tab-pane" id="totalresults">Testy jeszcze się nie zakończyły</div>
-            }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <a asp-controller="Home"
+                   asp-action="Results"
+                   asp-route-pageIndex="@(Model.TotalTestResults.PageIndex - 1)"
+                   class="chris_btn @prevDisabled">
+                    Wstecz
+                </a>
+                <a asp-controller="Home"
+                   asp-action="Results"
+                   asp-route-pageIndex="@(Model.TotalTestResults.PageIndex + 1)"
+                   class="chris_btn @nextDisabled">
+                    Dalej
+                </a>
+            </div>
         </div>
     </div>
-    
-    var prevDisabled = !Model.TotalTestResults.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.TotalTestResults.HasNextPage ? "disabled" : "";   
-
-    <a asp-controller="Home"
-       asp-action="Results"
-       asp-route-pageIndex="@(Model.TotalTestResults.PageIndex - 1)"
-       class="btn btn-default @prevDisabled">
-       Wstecz
-    </a>
-    <a asp-controller="Home"
-        asp-action="Results"
-        asp-route-pageIndex="@(Model.TotalTestResults.PageIndex + 1)"
-        class="btn btn-default @nextDisabled">
-        Dalej
-    </a>
 }

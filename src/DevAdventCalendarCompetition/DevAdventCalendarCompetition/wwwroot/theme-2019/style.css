@@ -2439,10 +2439,18 @@ body {
     line-height: 51px;
 }
 
-.chris_btn_empty {
+.chris_btn_empty,
+.chris_btn.disabled {
     background: #fff;
     color: #333;
     border: none;
+}
+
+.chris_btn.disabled {
+    border: 1px solid #eee;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
 }
 
 .chris_btn_empty:hover {
@@ -2512,4 +2520,10 @@ body {
     color: #c93232;
     background-color: rgba(200, 50, 50, .1);
     border-bottom: 1px solid #c93232;
+}
+
+.table thead th {
+    background: #333;
+    color: #fff;
+    border-bottom: none !important;
 }
