@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<html prefix="og: http://ogp.me/ns#" lang="pl-PL">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>DevAdventCalendar - programistyczny kalendarz adwentowy</title>
+    <meta name="description" content="DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT. ">
+    <meta property="og:image" content="https://www.devadventcalendar.pl/images/logo_big.JPG">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74536209-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-74536209-2');
+    </script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mali">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/theme.css" />
+        <link rel="stylesheet" href="~/css/Site.css" />
+        <link rel="stylesheet" href="~/css/bootstrap-social.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/css/theme.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/bootstrap-social.min.css" asp-append-version="false" />
+    </environment>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Otwórz menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <img id="calendar-logo" src="~/images/logo.jpg" alt="Logo - prezent" />
+                <img id="calendar-text" src="~/images/devadventcalendar.JPG" alt="DevAdventCalendar" />
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Results">Wyniki</a></li>
+                <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Sponsors">Sponsorzy</a></li>
+                <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Prizes">Nagrody</a></li>
+                <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="About">O nas</a></li>
+                <li class="dropdown"><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+            </ul>
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </div>
+</nav>
+<div class="container body-content">
+    <hr />
+    @RenderBody()
+
+    <footer class="footer">
+        <hr />
+        <div class="row">
+            <div class="col-sm-8 col-xs-8">
+                <p>&copy; 2018 - DevAdventCalendar</p>
+            </div>
+            <div class="col-sm-4 col-xs-4 text-right">
+                <a href="~/regulamin.pdf" target="_blank">Regulamin</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+    </script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+    </script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+
+<partial name="_CookieConsentPartial" />
+<partial name="_ValidationScriptsPartial" />
+@RenderSection("Scripts", required: false)
+</body>
+</html>
