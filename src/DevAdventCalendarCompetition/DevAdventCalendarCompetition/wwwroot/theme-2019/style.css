@@ -2304,6 +2304,16 @@ body {
     .prizes-wrapper {
         display: flex;
     }
+
+    .prizes-wrapper-md {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .prizes-wrapper-md {
+        display: flex;
+    }
 }
 
 .person {
@@ -2512,4 +2522,28 @@ body {
     color: #c93232;
     background-color: rgba(200, 50, 50, .1);
     border-bottom: 1px solid #c93232;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.drop-shadow {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))
+}
+
+.task-inactive {
+    opacity: 0.5;
+}
+
+.task-active {
+    cursor: pointer;
+}
+
+.task-active .prize-wrapper {
+    transition: 0.3s;
+}
+
+.task-active .prize-wrapper:hover {
+    background: #eee;
 }
