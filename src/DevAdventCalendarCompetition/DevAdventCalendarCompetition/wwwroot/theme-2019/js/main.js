@@ -33,6 +33,11 @@
       + '<li>%H <span>minut</span></li>  '
       + '<li>%M <span>godzin</span></li>  '
       + '<li>%S <span>sekund</span></li> '));
+
+        if (event.strftime('%D%H%M%S') === '00000000') {
+            $('#countdown_active').hide(0);
+            $('#countdown_inactive').show(0);
+        }
     });
 
     // Replace all SVG images with inline SVG
