@@ -8,21 +8,21 @@ namespace DevAdventCalendarCompetition.Repository
 {
     public class AdminRepository : IAdminRepository
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public AdminRepository(ApplicationDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public List<Test> GetAll()
         {
-            return this.dbContext.Set<Test>().OrderBy(t => t.StartDate).ToList();
+            return this._dbContext.Set<Test>().OrderBy(t => t.StartDate).ToList();
         }
 
         public Test GetById(int testId)
         {
-            return this.dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
+            return this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
         }
 
         public void UpdateDates(Test test)
@@ -32,12 +32,12 @@ namespace DevAdventCalendarCompetition.Repository
                 throw new System.ArgumentNullException(nameof(test));
             }
 
-            var dbTest = this.dbContext.Set<Test>().FirstOrDefault(el => el.Id == test.Id);
+            var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == test.Id);
             if (dbTest != null)
             {
                 dbTest.StartDate = test.StartDate;
                 dbTest.EndDate = test.EndDate;
-                this.dbContext.SaveChanges();
+                this._dbContext.SaveChanges();
             }
         }
 
@@ -48,30 +48,30 @@ namespace DevAdventCalendarCompetition.Repository
                 throw new System.ArgumentNullException(nameof(test));
             }
 
-            var dbTest = this.dbContext.Set<Test>().FirstOrDefault(el => el.Id == test.Id);
+            var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == test.Id);
             if (dbTest != null)
             {
                 dbTest.EndDate = test.EndDate;
-                this.dbContext.SaveChanges();
+                this._dbContext.SaveChanges();
             }
         }
 
         public void ResetTestDates()
         {
-            var tests = this.dbContext.Set<Test>().ToList();
+            var tests = this._dbContext.Set<Test>().ToList();
             tests.ForEach(el =>
             {
                 el.StartDate = null;
                 el.EndDate = null;
             });
-            this.dbContext.SaveChanges();
+            this._dbContext.SaveChanges();
         }
 
         public void DeleteTestAnswers()
         {
-            var testAnswers = this.dbContext.Set<TestAnswer>().ToList();
-            this.dbContext.Set<TestAnswer>().RemoveRange(testAnswers);
-            this.dbContext.SaveChanges();
+            var testAnswers = this._dbContext.Set<TestAnswer>().ToList();
+            this._dbContext.Set<TestAnswer>().RemoveRange(testAnswers);
+            this._dbContext.SaveChanges();
         }
     }
 }

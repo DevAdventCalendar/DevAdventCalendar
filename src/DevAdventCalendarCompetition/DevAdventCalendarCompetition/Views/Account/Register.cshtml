@@ -1,4 +1,4 @@
-﻿﻿@using DevAdventCalendarCompetition.Services
+﻿@using DevAdventCalendarCompetition.Services
 @model RegisterViewModel
 
 @inject IdentityService IdentityService
@@ -68,11 +68,11 @@
                         <div class="row">
                             @foreach (var provider in externalProviders)
                             {
-                            <div class="col-xs-6 col-sm-3 col-md-6 col-lg-4 mb-20 text-center">
-                                <button style="width:150px" type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
-                                    <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
-                                </button>
-                            </div>
+                                <div class="col-xs-6 col-sm-3 col-md-6 col-lg-4 mb-20 text-center">
+                                    <button style="width:150px" type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
+                                        <i class="fab fa-@provider.Name.ToLower()"></i>@provider.Name
+                                    </button>
+                                </div>
                             }
                         </div>
                     </form>

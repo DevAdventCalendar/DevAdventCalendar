@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.ManageViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevExeptionsMessages;
+using DevLoggingMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +41,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var model = new IndexViewModel
@@ -58,6 +60,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(IndexViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -66,7 +73,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var email = user.Email;
@@ -80,7 +87,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new ArgumentException($"Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem '{user.Id}'.");
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this.accountService.GetUserId(this.User)));
                 }
             }
 
@@ -90,7 +97,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setPhoneResult = await this.manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new ArgumentException($"Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem '{user.Id}'.");
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this.accountService.GetUserId(this.User)));
                 }
             }
 
@@ -102,6 +109,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -110,7 +122,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var code = await this.accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
@@ -128,7 +140,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
@@ -145,6 +157,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -153,7 +170,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             if (model == null)
@@ -170,7 +187,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
-            this.logger.LogInformation("User changed their password successfully.");
+            this.logger.LogInformation(LoggingMessages.PasswordIsChangedSuccessfully);
             this.StatusMessage = "Twoje hasło zostało zmienione";
 
             return this.RedirectToAction(nameof(this.ChangePassword));
@@ -182,7 +199,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
             var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
@@ -200,6 +217,11 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
@@ -208,23 +230,15 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{this.accountService.GetUserId(this.User)}'.");
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
             }
 
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-
-            if (model != null)
-            {
-                var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
-                if (!addPasswordResult.Succeeded)
+            var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
+            if (!addPasswordResult.Succeeded)
                 {
                     this.AddErrors(addPasswordResult);
                     return this.View(model);
                 }
-            }
 
             await this.accountService.SignInAsync(user).ConfigureAwait(false);
             this.StatusMessage = "Your password has been set.";

@@ -2253,6 +2253,14 @@ body {
     margin-bottom: 30px;
 }
 
+.mt-100 {
+    margin-top: 100px;
+}
+
+.mb-100 {
+    margin-bottom: 100px;
+}
+
 .mt-30 {
     margin-top: 30px;
 }
@@ -2471,4 +2479,37 @@ body {
 .single_related_post .title {
     z-index: 1;
     position: relative;
+}
+
+.logo_container {
+    padding: 13px 0;
+    text-align: left;
+}
+
+.logo_container a {
+    width: 280px;
+}
+
+.page_title--block {
+    float: none;
+}
+
+.well {
+    background-color: #fafafa;
+    box-shadow: none;
+    border-color: #eee;
+}
+
+.nav-pills>li>a {
+    color: #333;
+    font-weight: 700;
+    border-radius: 0;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+    color: #c93232;
+    background-color: rgba(200, 50, 50, .1);
+    border-bottom: 1px solid #c93232;
 }

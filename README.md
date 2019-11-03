@@ -44,7 +44,7 @@ DevAdventCalendar web app for online competition for programmers.
     git push origin my-new-feature
     ```
 
-6. Create a pull request (the template has already been created, simply complete it)
+6. Create a pull request to `develop` branch (the template has already been created, simply complete it)
 
 ## Used Tools
 
