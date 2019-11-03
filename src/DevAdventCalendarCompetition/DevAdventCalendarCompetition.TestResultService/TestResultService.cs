@@ -5,13 +5,13 @@ using System.Text;
 namespace DevAdventCalendarCompetition.TestResultService
 {
     
-    class TestResultService 
-    {  
-        CalculateResults(dateFrom: DateTimeOffset : dateTo: DateTimeOffset)
+    class TestResultService : ITestResultPlaceRule, ITestResultPointsRule, ITestResultRepository
+    {
+        CalculateResults(dateFrom: DateTimeOffset : dateTo: DateTimeOffset);
 
-         CalculateWeeklyResults(WeekNumber int)
+        CalculateWeeklyResults(WeekNumber int);
 
-        SaveFinalResults()
+        SaveFinalResults();
 
         
     }
