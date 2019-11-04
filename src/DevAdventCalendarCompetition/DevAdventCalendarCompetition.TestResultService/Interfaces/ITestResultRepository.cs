@@ -5,16 +5,16 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     interface ITestResultRepository
     {
-        GetWrongAnswersCount(dateFrom: DateTimeOffset : dateTo: DateTimeOffset);
-        GetAnsweringTimeSum(dateFrom: DateTimeOffset : dateTo: DateTimeOffset);
-        GetCorrectAnswersCount(dateFrom: DateTimeOffset : dateTo: DateTimeOffset);
-        GetWeeklyResults(WeekNumber int);
-        GetFinalResults()
-        SaveFinalResults()
-        SaveUserWeeklyScore(userId int, WeekNumber int, Score int);
-        SaveUserWeeklyPlace(userId int, WeekNumber int, Place int);
-        SaveUserFinalScore(userId int, Place int);
-        SaveUserFinalPlace(userId int, Place int);
+       Task GetWrongAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        Task GetAnsweringTimeSum(DateTimeOffset dateFrom , DateTimeOffset dateTo);
+       Task GetCorrectAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        Task GetWeeklyResults(int WeekNumber );
+        void GetFinalResults();
+        void SaveFinalResults();
+        Task SaveUserWeeklyScore(int userId, int WeekNumber, int Score);
+        Task SaveUserWeeklyPlace(int userId, int WeekNumber , int Place);
+        Task SaveUserFinalScore(int userId, int Place); 
+        Task SaveUserFinalPlace(int userId,int  Place );
 
 
 

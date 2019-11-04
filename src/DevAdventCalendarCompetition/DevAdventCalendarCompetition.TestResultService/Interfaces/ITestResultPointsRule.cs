@@ -6,7 +6,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     interface ITestResultPointsRule
     {
-        Calculate();
+       void Calculate();
     }
 }
                    

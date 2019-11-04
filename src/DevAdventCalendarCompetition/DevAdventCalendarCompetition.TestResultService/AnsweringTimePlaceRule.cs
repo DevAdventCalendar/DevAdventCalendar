@@ -6,6 +6,6 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     class AnsweringTimePlaceRule
     {
-        GetUserOrder(users: List<User>);
+       void GetUserOrder(List<Object> users) { }
     }
 }
