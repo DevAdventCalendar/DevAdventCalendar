@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService;
-using Moq;
 using Xunit;
 
 namespace DevAdventCalendarCompetition.Tests
@@ -17,17 +15,19 @@ namespace DevAdventCalendarCompetition.Tests
             new TestAnswer { Id = 3, UserId = "1", TestId = 2, AnsweringTime = DateTime.Today.AddHours(-1), AnsweringTimeOffset = default }
         };
 
-        private Mock<ICorrectAnswerPointsRule> _correctAnswersPointRuleMock;
+        private ITestResultPointsRule _correctAnswersPointRule;
 
         public ResultCalculationTest()
         {
-            this._correctAnswersPointRuleMock = new Mock<ICorrectAnswerPointsRule>();
+            this._correctAnswersPointRule = new CorrectAnswerPointsRule();
         }
 
         [Fact]
-        public void GetUserCorrectAnswers_ReturnPointsCount()
+        public void GetUserCorrectAnswers_ReturnPositivePointsCount()
         {
-            this._correctAnswersPointRuleMock.Setup(mock => mock.CalculatePoints(this._answers));
+            var result = this._correctAnswersPointRule.CalculatePoints(this._answers);
+
+            Assert.True(result > 0, "User who answered one or more tests cannot get 0 points.");
         }
     }
 }
