@@ -2473,6 +2473,14 @@ body {
     color: #333;
 }
 
+.checkboxes .checkbox-label {
+    font-size: 14px;
+}
+
+.checkboxes .checkbox-label > span {
+    margin-right: 10px;
+}
+
 .offset_menu .as_link {
     font-size: 28px;
     line-height: 53px;
