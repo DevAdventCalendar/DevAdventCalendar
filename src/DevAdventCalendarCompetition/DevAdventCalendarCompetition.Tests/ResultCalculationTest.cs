@@ -17,17 +17,17 @@ namespace DevAdventCalendarCompetition.Tests
             new TestAnswer { Id = 3, UserId = "1", TestId = 2, AnsweringTime = DateTime.Today.AddHours(-1), AnsweringTimeOffset = default }
         };
 
-        private Mock<CorrectAnswerPointsRule> _correctAnswersPointRuleMock;
+        private Mock<ICorrectAnswerPointsRule> _correctAnswersPointRuleMock;
 
         public ResultCalculationTest()
         {
-            this._correctAnswersPointRuleMock = new Mock<CorrectAnswerPointsRule>();
+            this._correctAnswersPointRuleMock = new Mock<ICorrectAnswerPointsRule>();
         }
 
         [Fact]
         public void GetUserCorrectAnswers_ReturnPointsCount()
         {
-            this._correctAnswersPointRuleMock.Setup(mock => mock.Calculate());
+            this._correctAnswersPointRuleMock.Setup(mock => mock.CalculatePoints(this._answers));
         }
     }
 }
