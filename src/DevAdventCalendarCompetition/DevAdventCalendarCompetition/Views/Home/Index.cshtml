@@ -198,7 +198,7 @@
                             var dayNumber = i * 6 + j + 1;
                             var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
 
-                            <div class="col-sm-4 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
+                            <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
                                 <div class="border prize-wrapper flex-column flex-fullheight"
                                     @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
                                     <div class="area_title text-center mb-30">
@@ -221,7 +221,7 @@
                         }
 
                         <!-- sponsor -->
-                        <div class="col-sm-4 col-md-2 mb-30">
+                        <div class="col-xs-12 col-md-2 mb-30">
                             <div class="border prize-wrapper flex-column flex-fullheight">
                                 <div class="area_title text-center mb-30">
                                     <h4>SPONSOR</h4>
