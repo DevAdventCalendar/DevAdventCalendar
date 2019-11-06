@@ -4,7 +4,11 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    class WrongAnswerPointsRule
+    public class WrongAnswerPointsRule : ITestResultPointsRule
     {
+        public void Calculate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

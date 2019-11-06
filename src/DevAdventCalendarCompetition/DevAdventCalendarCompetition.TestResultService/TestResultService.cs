@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace DevAdventCalendarCompetition.TestResultService
 {
     
-    class TestResultService : ITestResultPlaceRule, ITestResultPointsRule, ITestResultRepository
+    public class TestResultService : ITestResultPlaceRule, ITestResultPointsRule, ITestResultRepository
     {
         public void Calculate()
         {
@@ -60,7 +60,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
         void  CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo) { }
 
-       void CalculateWeeklyResults(int WeekNumber) { }
+        void CalculateWeeklyResults(int WeekNumber) { }
 
         void SaveFinalResults() { }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    class AnsweringTimePlaceRule
+    public class AnsweringTimePlaceRule
     {
        void GetUserOrder(List<Object> users) { }
     }

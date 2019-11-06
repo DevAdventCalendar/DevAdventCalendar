@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    interface ITestResultPlaceRule
+    public interface ITestResultPlaceRule
     {
         void Calculate();
     }
