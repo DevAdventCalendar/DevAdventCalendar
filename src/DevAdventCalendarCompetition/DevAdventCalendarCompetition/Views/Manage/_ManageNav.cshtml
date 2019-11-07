@@ -1,6 +1,8 @@
 ﻿@using DevAdventCalendarCompetition.Views.Manage
 
-<ul class="nav nav-pills nav-stacked">
-    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profil</a></li>
-    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Zmiana hasła</a></li>
-</ul>
+<div class="well">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profil</a></li>
+        <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Zmiana hasła</a></li>
+    </ul>
+</div>

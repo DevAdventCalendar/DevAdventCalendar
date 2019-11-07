@@ -33,6 +33,11 @@
       + '<li>%H <span>minut</span></li>  '
       + '<li>%M <span>godzin</span></li>  '
       + '<li>%S <span>sekund</span></li> '));
+
+        if (event.strftime('%D%H%M%S') === '00000000') {
+            $('#countdown_active').hide(0);
+            $('#countdown_inactive').show(0);
+        }
     });
 
     // Replace all SVG images with inline SVG
@@ -183,6 +188,43 @@
              * via https://stackoverflow.com/a/13550556/2014064
             */
         });
+    });
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    $('#mc-embedded-subscribe-form').submit(function(e) {
+        $(this).find('.mce_inline_error').remove();
+
+        var $email = $(this).find('input[name="email"]');
+        var $name = $(this).find('input[name="name"]');
+        var $gdpr = $(this).find('input[name="gdpr"]');
+        var $gdprWrapper = $gdpr.closest('.gdpr-wrapper');
+
+        var email = $email.val();
+        var name = $name.val();
+
+        var isEmailValid = email && validateEmail(email);
+        var isNameValid = name;
+        var isGdprChecked = $gdpr.is(':checked');
+
+        if(!isEmailValid) {
+            $email.after('<div class="mce_inline_error">Nieprawidłowy email</div>');
+        }
+        if(!isNameValid) {
+            $name.after('<div class="mce_inline_error">To pole jest wymagane</div>');
+        }
+        if(!isGdprChecked) {
+            $gdprWrapper.after('<div class="mce_inline_error">Zaznaczenie zgody jest wymagane</div>');
+        }
+
+        if(isEmailValid && isNameValid && isGdprChecked) {
+            // submit
+        } else {
+            e.preventDefault();
+        }
     });
 
 })(jQuery);

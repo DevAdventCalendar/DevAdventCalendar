@@ -7,9 +7,9 @@
 }
 
 <!--================================
-      START COUNTDOWN AREA
+  START COUNTDOWN AREA
 =================================-->
-<section class="countdown_section">
+<section class="countdown_section" id="countdown_active">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -35,6 +35,65 @@
 <!--================================
       END COUNTDOWN AREA
 =================================-->
+
+
+<!--================================
+      START HERO-SECTION
+=================================-->
+<section class="header_area" id="countdown_inactive" style="display: none">
+    <!-- START HERO AREA CSS -->
+    <div class="hero_area">
+        <!-- graphical elemnts -->
+        <div class="graphical_elements clearfix">
+            <div class="santa reveal animated mt-50" data-reveal-anim="bounceInUp" data-anim-delay="0.3s">
+                <img src="~/theme-2019/images/santa_hero.png" alt="Santa Is Here">
+            </div>
+            <div class="gifts">
+                <ul>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem1.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem2.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem3.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem4.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem5.png" alt="Element"></li>
+                </ul>
+            </div>
+            <div class="raindeer reveal animated" data-reveal-anim="fadeInRight" data-anim-delay="0.3s">
+                <img src="~/theme-2019/images/hero_raindeer.png" alt="">
+            </div>
+        </div>
+        <!-- end graphical elements -->
+
+        <!-- hero area content -->
+        <div class="hero_area_content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content_wrapper">
+                            <div class="top_content">
+                                <p>Wesołych Świąt!</p>
+                            </div>
+                            <div class="message_slider">
+                                <div class="message">
+                                    <p>Gramy do <br> 24 grudnia</p>
+                                </div>
+                                <div class="message">
+                                    <p>Udanej <br> zabawy!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end hero area content -->
+    </div>
+    <!-- END HERO AREA CSS -->
+</section>
+<!--================================
+      END HERO-SECTION
+=================================-->
+
+
 <!--================================
       START HOW IT WORKS
 =================================-->
@@ -196,28 +255,22 @@ else
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="contact_form clearfix">
-                        <form action="https://michalgellert.us14.list-manage.com/subscribe/post?u=8273a841f65d9cbb0055b7672&amp;id=76610be8a5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                            <div class="col-md-3 col-sm-6">
+                <form action="https://michalgellert.pl/sendy/subscribe" method="post" id="mc-embedded-subscribe-form" accept-charset="utf-8" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div class="row">
+                        <div class="contact_form clearfix">
+                            <div class="col-md-4 col-sm-6">
                                 <div class="text_field mc-field-group">
-                                    <input type="email" placeholder="E-mail" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                                    <input type="email" placeholder="E-mail" value="" name="email" class="required email" id="mce-EMAIL">
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-md-4 col-sm-6">
                                 <div class="text_field mc-field-group">
-                                    <input type="text" placeholder="Imię" value="" name="FNAME" class="" id="mce-FNAME">
+                                    <input type="text" placeholder="Imię i nazwisko" value="" name="name" class="" id="mce-NAME">
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-sm-6">
-                                <div class="text_field mc-field-group">
-                                    <input type="text" placeholder="Nazwisko" value="" name="LNAME" class="" id="mce-LNAME">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-md-4 col-sm-6">
                                 <div id="mce-responses" class="clear">
                                     <div class="response" id="mce-error-response" style="display: none"></div>
                                     <div class="response" id="mce-success-response" style="display: none"></div>
@@ -225,30 +278,31 @@ else
                                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8273a841f65d9cbb0055b7672_76610be8a5" tabindex="-1" value=""></div>
                                 <div class="clear content-centered"><input type="submit" value="Zapisz się" name="subscribe" id="mc-embedded-subscribe" class="chris_btn reveal animated" data-reveal-anim="fadeIn"></div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="checkboxes gdpr-wrapper">
+                                <li>
+                                    <input type="checkbox" name="gdpr" id="mce-GDPR" class="hidden">
+                                    <label for="mce-GDPR" class="checkbox_dark checkbox-label">
+                                        <span></span>
+                                        <strong>Zgoda na przetwarzanie danych</strong>: Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj:
+                                    </label>
+                                    <a href="https://devadventcalendar.pl/regulamin.pdf">Regulamin.pdf</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="display:none;">
+                        <label for="hp">HP</label><br/>
+                        <input type="text" name="hp" id="hp"/>
+                    </div>
+                    <input type="hidden" name="list" value="qGHg763QCyy6QqNG50NV763i0Q"/>
+                    <input type="hidden" name="subform" value="yes"/>
+                </form>
             </div>
         </div>
     </section>
-
-    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-    <script>
-        (function ($) {
-            window.fnames = new Array();
-            window.ftypes = new Array();
-            fnames[0] = 'EMAIL';
-            ftypes[0] = 'email';
-            fnames[1] = 'FNAME';
-            ftypes[1] = 'text';
-            fnames[2] = 'LNAME';
-            ftypes[2] = 'text';
-            fnames[3] = 'ADDRESS';
-            ftypes[3] = 'address';
-            fnames[4] = 'PHONE';
-            ftypes[4] = 'phone';
-        }(jQuery));
-        var $mcj = jQuery.noConflict(true);
-    </script>
     <!--End mc_embed_signup-->
 }
