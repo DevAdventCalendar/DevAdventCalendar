@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService;
+using DevAdventCalendarCompetition.TestResultService.Interfaces;
 using Xunit;
 
 namespace DevAdventCalendarCompetition.Tests
@@ -15,19 +16,34 @@ namespace DevAdventCalendarCompetition.Tests
             new TestAnswer { Id = 3, UserId = "1", TestId = 2, AnsweringTime = DateTime.Today.AddHours(-1), AnsweringTimeOffset = default }
         };
 
-        private ITestResultPointsRule _correctAnswersPointRule;
+        private readonly List<TestWrongAnswer> _wrongAnswers = new List<TestWrongAnswer>
+        {
+            new TestWrongAnswer { Id = 1, UserId = "1", TestId = 1 },
+            new TestWrongAnswer { Id = 2, UserId = "1", TestId = 1 },
+            new TestWrongAnswer { Id = 3, UserId = "1", TestId = 2 }
+        };
+
+        private ITestResultPointsRule<TestAnswer> _correctAnswersPointsRule;
+        private ITestResultPointsRule<TestWrongAnswer> _wrongAnswerPointsRule;
 
         public ResultCalculationTest()
         {
-            this._correctAnswersPointRule = new CorrectAnswerPointsRule();
+            this._correctAnswersPointsRule = new CorrectAnswerPointsRule();
+            this._wrongAnswerPointsRule = new WrongAnswerPointsRule();
         }
 
         [Fact]
-        public void GetUserCorrectAnswers_ReturnPositivePointsCount()
+        public void UserWithCorrectAnswersShouldGetPositivePointsNumber()
         {
-            var result = this._correctAnswersPointRule.CalculatePoints(this._answers);
+            var result = this._correctAnswersPointsRule.CalculatePoints(this._answers);
 
             Assert.True(result > 0, "User who answered one or more tests cannot get 0 points.");
+        }
+
+        [Fact]
+        public void UserCannotGetLessThanZeroWrongAnswersPoints()
+        {
+            var result = this._wrongAnswerPointsRule.CalculatePoints(this._wrongAnswers);
         }
     }
 }
