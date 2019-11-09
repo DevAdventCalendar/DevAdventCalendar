@@ -5,9 +5,9 @@ using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    public interface ITestResultPointsRule
+    public interface ITestResultPointsRule<T>
     {
-       int CalculatePoints(List<TestAnswer> userAnswers);
+       int CalculatePoints(List<T> userAnswers);
     }
 }
                    

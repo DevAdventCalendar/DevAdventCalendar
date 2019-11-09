@@ -5,7 +5,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    public class CorrectAnswerPointsRule : ITestResultPointsRule
+    public class CorrectAnswerPointsRule : ITestResultPointsRule<TestAnswer>
     {
         public int CalculatePoints(List<TestAnswer> userAnswers)
         {
