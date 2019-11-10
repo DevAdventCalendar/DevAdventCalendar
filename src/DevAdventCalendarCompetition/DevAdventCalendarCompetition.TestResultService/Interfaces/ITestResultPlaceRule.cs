@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DevAdventCalendarCompetition.TestResultService
+namespace DevAdventCalendarCompetition.TestResultService.Interfaces
 {
     public interface ITestResultPlaceRule
     {
-        void Calculate();
+        List<CompetitionResult> GetUsersOrder(List<CompetitionResult> users);
     }
 }

@@ -1,18 +1,26 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
     public class TestResultRepository : ITestResultRepository
     {
-        public Task GetAnsweringTimeSum(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public Task<IEnumerable<ApplicationUser>> GetUsers()
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetCorrectAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public Task<int> GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             throw new NotImplementedException();
         }
@@ -22,12 +30,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             throw new NotImplementedException();
         }
 
-        public Task GetWeeklyResults(int WeekNumber)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> GetWrongAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public Task<int> GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             throw new NotImplementedException();
         }

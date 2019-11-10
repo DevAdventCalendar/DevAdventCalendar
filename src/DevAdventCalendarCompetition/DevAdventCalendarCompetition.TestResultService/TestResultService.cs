@@ -6,29 +6,44 @@ using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    
     public class TestResultService
     {
         private ITestResultRepository _testResultRepository;
         private ITestResultPointsRule _correctAnswersPointsRule;
         private ITestResultPointsRule _wrongAnswersPointsRule;
+        private ITestResultPlaceRule _answeringTimePlaceRule;
 
         public TestResultService()
         {
             this._testResultRepository = new TestResultRepository();
             this._correctAnswersPointsRule = new CorrectAnswerPointsRule();
             this._wrongAnswersPointsRule = new WrongAnswerPointsRule();
+            this._answeringTimePlaceRule = new AnsweringTimePlaceRule();
         }
 
-        public async void CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public async Task<List<CompetitionResult>> CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
+            // Collection for storing temporal results for specific time span
+
+            List<CompetitionResult> results = new List<CompetitionResult>();
+
             // Get users
 
-            var correctAnswersCount = await this._testResultRepository.GetCorrectAnswersCount(dateFrom, dateTo);
-            var wrongAnswersCount = await this._testResultRepository.GetWrongAnswersCount(dateFrom, dateTo);
+            var users = await this._testResultRepository.GetUsers(); // TODO: Update model - get distinct users
 
-            int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
-                                _wrongAnswersPointsRule.CalculatePoints(wrongAnswersCount);
+            foreach (var user in users)
+            {
+                var correctAnswersCount = await this._testResultRepository.GetCorrectAnswersCount(user.Id, dateFrom, dateTo);
+                var wrongAnswersCount = await this._testResultRepository.GetWrongAnswersCount(user.Id, dateFrom, dateTo);
+                var sumOffset = await this._testResultRepository.GetAnsweringTimeSum(user.Id, dateFrom, dateTo);
+
+                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
+                                    _wrongAnswersPointsRule.CalculatePoints(wrongAnswersCount);
+
+                results.Add(new CompetitionResult { UserId = user.Id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
+            }
+
+            return this._answeringTimePlaceRule.GetUsersOrder(results);
         }
 
         public void CalculateWeeklyResults(int weekNumber)
@@ -36,6 +51,8 @@ namespace DevAdventCalendarCompetition.TestResultService
             // Invoke CalculateResults with correct boundary dates according to weekNumber.
 
             // Save results to DB as weekly results.
+
+            throw new NotImplementedException();
         }
 
         public void SaveFinalResults()
@@ -45,6 +62,4 @@ namespace DevAdventCalendarCompetition.TestResultService
             throw new NotImplementedException();
         }
     }
-
- 
 }
