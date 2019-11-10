@@ -6,11 +6,11 @@ using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    public class CorrectAnswerPointsRule : ITestResultPointsRule<TestAnswer>
+    public class CorrectAnswerPointsRule : ITestResultPointsRule
     {
-        public int CalculatePoints(List<TestAnswer> userAnswers)
+        public int CalculatePoints(int answersCount)
         {
-            return userAnswers.Count * 100;
+            return answersCount * 100;
         }
     }
 }

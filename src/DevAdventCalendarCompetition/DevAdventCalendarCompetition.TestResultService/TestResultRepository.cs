@@ -12,7 +12,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             throw new NotImplementedException();
         }
 
-        public Task GetCorrectAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public Task<int> GetCorrectAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             throw new NotImplementedException();
         }
 
-        public Task GetWrongAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public Task<int> GetWrongAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             throw new NotImplementedException();
         }

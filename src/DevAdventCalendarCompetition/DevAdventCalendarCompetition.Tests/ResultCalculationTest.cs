@@ -23,8 +23,8 @@ namespace DevAdventCalendarCompetition.Tests
             new TestWrongAnswer { Id = 3, UserId = "1", TestId = 2 }
         };
 
-        private ITestResultPointsRule<TestAnswer> _correctAnswersPointsRule;
-        private ITestResultPointsRule<TestWrongAnswer> _wrongAnswerPointsRule;
+        private ITestResultPointsRule _correctAnswersPointsRule;
+        private ITestResultPointsRule _wrongAnswerPointsRule;
 
         public ResultCalculationTest()
         {
@@ -35,7 +35,7 @@ namespace DevAdventCalendarCompetition.Tests
         [Fact]
         public void UserWithCorrectAnswersShouldGetPositivePointsNumber()
         {
-            var result = this._correctAnswersPointsRule.CalculatePoints(this._answers);
+            var result = this._correctAnswersPointsRule.CalculatePoints(this._answers.Count);
 
             Assert.True(result > 0, "User who answered one or more tests cannot get 0 points.");
         }
@@ -43,7 +43,7 @@ namespace DevAdventCalendarCompetition.Tests
         [Fact]
         public void UserCannotGetLessThanZeroWrongAnswersPoints()
         {
-            var result = this._wrongAnswerPointsRule.CalculatePoints(this._wrongAnswers);
+            var result = this._wrongAnswerPointsRule.CalculatePoints(this._wrongAnswers.Count);
         }
     }
 }

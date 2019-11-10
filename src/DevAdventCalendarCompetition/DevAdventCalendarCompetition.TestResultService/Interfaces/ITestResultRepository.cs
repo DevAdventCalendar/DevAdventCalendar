@@ -5,9 +5,9 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     public interface ITestResultRepository
     {
-        Task GetWrongAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        Task<int> GetWrongAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo);
         Task GetAnsweringTimeSum(DateTimeOffset dateFrom , DateTimeOffset dateTo);
-        Task GetCorrectAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        Task<int> GetCorrectAnswersCount(DateTimeOffset dateFrom, DateTimeOffset dateTo);
         Task GetWeeklyResults(int WeekNumber );
         void GetFinalResults();
         void SaveFinalResults();

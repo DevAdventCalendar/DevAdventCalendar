@@ -6,9 +6,9 @@ using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
-    public class WrongAnswerPointsRule : ITestResultPointsRule<TestWrongAnswer>
+    public class WrongAnswerPointsRule : ITestResultPointsRule
     {
-        public int CalculatePoints(List<TestWrongAnswer> userAnswers)
+        public int CalculatePoints(int answersCount)
         {
             throw new NotImplementedException();
         }
