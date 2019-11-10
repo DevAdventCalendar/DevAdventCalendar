@@ -37,7 +37,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                 var wrongAnswersCount = await this._testResultRepository.GetWrongAnswersCount(user.Id, dateFrom, dateTo);
                 var sumOffset = await this._testResultRepository.GetAnsweringTimeSum(user.Id, dateFrom, dateTo);
 
-                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
+                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) -
                                     _wrongAnswersPointsRule.CalculatePoints(wrongAnswersCount);
 
                 results.Add(new CompetitionResult { UserId = user.Id, Points = overallPoints, AnsweringTimeOffset = sumOffset });

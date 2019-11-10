@@ -44,6 +44,8 @@ namespace DevAdventCalendarCompetition.Tests
         public void UserCannotGetLessThanZeroWrongAnswersPoints()
         {
             var result = this._wrongAnswerPointsRule.CalculatePoints(this._wrongAnswers.Count);
+
+            Assert.True(result > 0, "User with one or more wrong answers should get 0 or more penalty points.");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace DevAdventCalendarCompetition.TestResultService
     {
         public int CalculatePoints(int answersCount)
         {
-            throw new NotImplementedException();
+            return answersCount * 5;
         }
     }
 }
