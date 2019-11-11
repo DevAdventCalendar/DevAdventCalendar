@@ -167,7 +167,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             // Request a redirect to the external login provider.
             var redirectUrl = this.Url.Action(nameof(this.ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = this._accountService.ConfigureExternalAuthenticationProperties(provider, new Uri(redirectUrl));
+            var properties = this._accountService.ConfigureExternalAuthenticationProperties(provider, new Uri(redirectUrl, UriKind.RelativeOrAbsolute));
             return this.Challenge(properties, provider);
         }
 
