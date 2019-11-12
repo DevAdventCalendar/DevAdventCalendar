@@ -41,11 +41,11 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
-        public void UserCannotGetLessThanZeroBonusPoints()
+        public void ForGivenWrongAnswersCountProperBonusPointsShouldBeReturned()
         {
             var result = this._bonusPointsRule.CalculatePoints(this._wrongAnswers.Count);
 
-            Assert.True(result > 0, "User with one or more wrong answers should get 0 or more bonus points.");
+            Assert.Equal(15, result);
         }
     }
 }
