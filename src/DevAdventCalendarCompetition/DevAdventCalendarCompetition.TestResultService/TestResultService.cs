@@ -10,14 +10,14 @@ namespace DevAdventCalendarCompetition.TestResultService
     {
         private ITestResultRepository _testResultRepository;
         private ITestResultPointsRule _correctAnswersPointsRule;
-        private ITestResultPointsRule _wrongAnswersPointsRule;
+        private ITestResultPointsRule _bonusPointsRule;
         private ITestResultPlaceRule _answeringTimePlaceRule;
 
         public TestResultService()
         {
             this._testResultRepository = new TestResultRepository();
             this._correctAnswersPointsRule = new CorrectAnswerPointsRule();
-            this._wrongAnswersPointsRule = new WrongAnswerPointsRule();
+            this._bonusPointsRule = new BonusPointsRule();
             this._answeringTimePlaceRule = new AnsweringTimePlaceRule();
         }
 
@@ -37,8 +37,8 @@ namespace DevAdventCalendarCompetition.TestResultService
                 var wrongAnswersCount = await this._testResultRepository.GetWrongAnswersCount(user.Id, dateFrom, dateTo);
                 var sumOffset = await this._testResultRepository.GetAnsweringTimeSum(user.Id, dateFrom, dateTo);
 
-                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) -
-                                    _wrongAnswersPointsRule.CalculatePoints(wrongAnswersCount);
+                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
+                                    _bonusPointsRule.CalculatePoints(wrongAnswersCount);
 
                 results.Add(new CompetitionResult { UserId = user.Id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }

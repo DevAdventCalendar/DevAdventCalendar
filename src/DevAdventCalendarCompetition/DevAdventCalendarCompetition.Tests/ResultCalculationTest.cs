@@ -24,12 +24,12 @@ namespace DevAdventCalendarCompetition.Tests
         };
 
         private ITestResultPointsRule _correctAnswersPointsRule;
-        private ITestResultPointsRule _wrongAnswerPointsRule;
+        private ITestResultPointsRule _bonusPointsRule;
 
         public ResultCalculationTest()
         {
             this._correctAnswersPointsRule = new CorrectAnswerPointsRule();
-            this._wrongAnswerPointsRule = new WrongAnswerPointsRule();
+            this._bonusPointsRule = new BonusPointsRule();
         }
 
         [Fact]
@@ -41,11 +41,11 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
-        public void UserCannotGetLessThanZeroWrongAnswersPoints()
+        public void UserCannotGetLessThanZeroBonusPoints()
         {
-            var result = this._wrongAnswerPointsRule.CalculatePoints(this._wrongAnswers.Count);
+            var result = this._bonusPointsRule.CalculatePoints(this._wrongAnswers.Count);
 
-            Assert.True(result > 0, "User with one or more wrong answers should get 0 or more penalty points.");
+            Assert.True(result > 0, "User with one or more wrong answers should get 0 or more bonus points.");
         }
     }
 }
