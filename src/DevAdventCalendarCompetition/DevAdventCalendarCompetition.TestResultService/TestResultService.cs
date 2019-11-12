@@ -29,18 +29,18 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             // Get users
 
-            var users = await this._testResultRepository.GetUsers(); // TODO: Update model - get distinct users
+            var usersId = await this._testResultRepository.GetUsersId(); // TODO: Update model - get distinct users
 
-            foreach (var user in users)
+            foreach (var id in usersId)
             {
-                var correctAnswersCount = await this._testResultRepository.GetCorrectAnswersCount(user.Id, dateFrom, dateTo);
-                var wrongAnswersCount = await this._testResultRepository.GetWrongAnswersCount(user.Id, dateFrom, dateTo);
-                var sumOffset = await this._testResultRepository.GetAnsweringTimeSum(user.Id, dateFrom, dateTo);
+                var correctAnswersCount = await this._testResultRepository.GetCorrectAnswersCount(id, dateFrom, dateTo);
+                var wrongAnswersCount = await this._testResultRepository.GetWrongAnswersCount(id, dateFrom, dateTo);
+                var sumOffset = await this._testResultRepository.GetAnsweringTimeSum(id, dateFrom, dateTo);
 
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
                                     _bonusPointsRule.CalculatePoints(wrongAnswersCount);
 
-                results.Add(new CompetitionResult { UserId = user.Id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
+                results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }
 
             return this._answeringTimePlaceRule.GetUsersOrder(results);

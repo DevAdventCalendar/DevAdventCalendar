@@ -10,7 +10,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     public class TestResultRepository : ITestResultRepository
     {
-        public Task<IEnumerable<ApplicationUser>> GetUsers()
+        public Task<string[]> GetUsersId()
         {
             throw new NotImplementedException();
         }

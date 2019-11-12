@@ -8,7 +8,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Interfaces
 {
     public interface ITestResultRepository
     {
-        Task<IEnumerable<ApplicationUser>> GetUsers();
+        Task<string[]> GetUsersId();
         Task<int> GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
         Task<int> GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom , DateTimeOffset dateTo);
         Task<int> GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
