@@ -8,17 +8,20 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     public class TestResultService
     {
-        private ITestResultRepository _testResultRepository;
+        private readonly ITestResultRepository _testResultRepository;
         private ITestResultPointsRule _correctAnswersPointsRule;
         private ITestResultPointsRule _bonusPointsRule;
         private ITestResultPlaceRule _answeringTimePlaceRule;
 
-        public TestResultService()
+        public TestResultService(ITestResultRepository resultRepository,
+            ITestResultPointsRule resultPointsRule,
+            ITestResultPointsRule bonusPointsRule,
+            ITestResultPlaceRule timePlaceRule)
         {
-            this._testResultRepository = new TestResultRepository();
-            this._correctAnswersPointsRule = new CorrectAnswerPointsRule();
-            this._bonusPointsRule = new BonusPointsRule();
-            this._answeringTimePlaceRule = new AnsweringTimePlaceRule();
+            this._testResultRepository = resultRepository;
+            this._correctAnswersPointsRule = resultPointsRule;
+            this._bonusPointsRule = bonusPointsRule;
+            this._answeringTimePlaceRule = timePlaceRule;
         }
 
         public async Task<List<CompetitionResult>> CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo)
