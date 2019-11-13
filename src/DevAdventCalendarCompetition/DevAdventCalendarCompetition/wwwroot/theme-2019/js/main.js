@@ -30,8 +30,8 @@
     $('.countdown').countdown('2019/12/01', function(event) {
     var $this = $(this).html(event.strftime(''
       + '<li>%D <span>dni</span></li>  '
-      + '<li>%H <span>minut</span></li>  '
-      + '<li>%M <span>godzin</span></li>  '
+      + '<li>%H <span>godzin</span></li>  '
+      + '<li>%M <span>minut</span></li>  '
       + '<li>%S <span>sekund</span></li> '));
 
         if (event.strftime('%D%H%M%S') === '00000000') {
