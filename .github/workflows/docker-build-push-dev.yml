@@ -1,0 +1,23 @@
+name: Docker Image CI DEV
+
+on: 
+  push:
+    branches: 
+      - develop
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-16.04
+ 
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: |
+        cd src/DevAdventCalendarCompetition 
+        docker build . --file Dockerfile --tag docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019-dev
+    - name: Push the Docker image
+      run: |
+        docker login docker.pkg.github.com --username ${{ secrets.PACKAGE_REGISTRY_USER }} --password ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+        docker push docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019-dev
