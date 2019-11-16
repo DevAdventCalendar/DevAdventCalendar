@@ -14,9 +14,9 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public DateTime? EndDate { get; set; }
 
-        public ICollection<TestAnswerDto> Answers { get; set; }
+        public ICollection<TestAnswerDto> Answers { get; internal set; }
 
-        public ICollection<TestWrongAnswerDto> WrongAnswers { get; set; }
+        public ICollection<TestWrongAnswerDto> WrongAnswers { get; internal set; }
 
         public bool HasEnded { get; set; }
     }

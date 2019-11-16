@@ -1,94 +1,318 @@
 @using DevAdventCalendarCompetition.Services.Models
+@using DevAdventCalendarCompetition.Repository.Models
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
     var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
 }
-<div id="tile-open-alert" class="alert alert-warning collapse" role="alert">
-    <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <span id="alert-text"></span>
-</div>
-<div class="row">
-    @if (User.Identity.IsAuthenticated)
-    {
-        if (correctAnswersForUser != null)
-        {
-            <div class="col text-center correct-answers-info">
-                @if (correctAnswersForUser == 0)
-                {
-                    <h3>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie.<br/>Ale nie poddawaj się! Do boju!</h3>
-                }
-                else if (correctAnswersForUser == overallPossibleTestsCount)
-                {
-                    <h2><b>Gratulacje!</b></h2>
-                    <h3>Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h3>
-                }
-                else
-                {
-                    <h3>Twoje statystyki wyglądają następująco:<br /><b>@correctAnswersForUser/@overallPossibleTestsCount</b><br />otwartych okienek</h3>                   
-                }                
-            </div>
-        }
-        <div class="col content-centered">
-            <table class="calendar-content">
-                <tbody>
-                    @for (var i = 0; i < 4; i++)
-                    {
-                        <tr>
-                            @for (int j = 0; j < 6; j++)
-                            {
-                                var dayNumber = i * 6 + j + 1;
-                                var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
 
-                                <td class="calendar-day" @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
-                                    <div class="panel panel-default task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
-                                        <div class="panel-body">
-                                            DZIEŃ @dayNumber
-                                            <div class="calendar-sponsor-img">
-                                                @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
-                                                {
-                                                    <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
-                                                        <img src="images/sponsor-logo-example.jpg" alt="Logo sponsora dnia" />
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <img src="images/santa-nobackground.png" alt="Święty Mikołaj" />
-                                                }
-                                            </div>
-                                        </div>
+<!--================================
+  START COUNTDOWN AREA
+=================================-->
+<section class="countdown_section" id="countdown_active">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center area_title title_white mb-30">
+                    <h3>Zapnij pasy! Startujemy już za</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="countdown_wrapper">
+                    <ul class="countdown">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================================
+      END COUNTDOWN AREA
+=================================-->
+
+
+<!--================================
+      START HERO-SECTION
+=================================-->
+<section class="header_area" id="countdown_inactive" style="display: none">
+    <!-- START HERO AREA CSS -->
+    <div class="hero_area">
+        <!-- graphical elemnts -->
+        <div class="graphical_elements clearfix">
+            <div class="santa reveal animated mt-50" data-reveal-anim="bounceInUp" data-anim-delay="0.3s">
+                <img src="~/theme-2019/images/santa_hero.png" alt="Santa Is Here">
+            </div>
+            <div class="gifts">
+                <ul>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem1.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem2.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem3.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem4.png" alt="Element"></li>
+                    <li class="animate" ><img class="" src="~/theme-2019/images/hero_elem5.png" alt="Element"></li>
+                </ul>
+            </div>
+            <div class="raindeer reveal animated" data-reveal-anim="fadeInRight" data-anim-delay="0.3s">
+                <img src="~/theme-2019/images/hero_raindeer.png" alt="">
+            </div>
+        </div>
+        <!-- end graphical elements -->
+
+        <!-- hero area content -->
+        <div class="hero_area_content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content_wrapper">
+                            <div class="top_content">
+                                <p>Wesołych Świąt!</p>
+                            </div>
+                            <div class="message_slider">
+                                <div class="message">
+                                    <p>Gramy do <br> 24 grudnia</p>
+                                </div>
+                                <div class="message">
+                                    <p>Udanej <br> zabawy!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end hero area content -->
+    </div>
+    <!-- END HERO AREA CSS -->
+</section>
+<!--================================
+      END HERO-SECTION
+=================================-->
+
+
+<!--================================
+      START HOW IT WORKS
+=================================-->
+<div class="single_blog_section">
+    <div class="more_from_santa">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="related_post_area_title">
+                        <h3>Jak to działa?</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="single_related_post">
+                        <div class="title">
+                            <h4>Każdego dnia otwierasz<br />jedno okienko kalendarza</h4>
+                        </div>
+                        <!--                        <div class="post_meta"><span>posted on 30-dec-2015</span></div>-->
+
+                        <div class="post_image">
+                            <img src="~/theme-2019/images/releted_post_img1.png" alt="images">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="single_related_post">
+                        <div class="title">
+                            <h4>Odpowiadasz na pytanie<br />i zbierasz punkty</h4>
+                        </div>
+                        <!--                        <div class="post_meta"><span>posted on 30-dec-2015</span></div>-->
+
+                        <div class="post_image">
+                            <img src="~/theme-2019/images/releted_post_img2.png" alt="images">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="single_related_post">
+                        <div class="title">
+                            <h4>25 grudnia<br />rozdajemy nagrody</h4>
+                        </div>
+                        <!--                        <div class="post_meta"><span>posted on 30-dec-2015</span></div>-->
+
+                        <div class="post_image">
+                            <img src="~/theme-2019/images/releted_post_img3.png" alt="images">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================================
+      END HOW IT WORKS
+=================================-->
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (correctAnswersForUser != null)
+    {
+        <section class="event_txt">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="party_text">
+                        @if (correctAnswersForUser == 0)
+                        {
+                            <h1>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie.<br />Ale nie poddawaj się! Do boju!</h1>
+                        }
+                        else if (correctAnswersForUser == overallPossibleTestsCount)
+                        {
+                            <h1><span>Gratulacje!</span> <br />Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h1>                        }
+                        else
+                        {
+                            <h1>Twoje statystyki wyglądają następująco: <span>@correctAnswersForUser/@overallPossibleTestsCount</span> otwartych okienek</h1>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <div class="container-fluid mb-30">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div id="tile-open-alert" class="alert alert-warning collapse mb-30" role="alert">
+                    <button type="button" class="close" data-hide="alert" aria-label="Zamknij">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span id="alert-text"></span>
+                </div>
+            </div>
+        </div>
+        @for (var i = 0; i < 4; i++)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row prizes-wrapper prizes-wrapper-md">
+                        @for (int j = 0; j < 6; j++)
+                        {
+                            var dayNumber = i * 6 + j + 1;
+                            var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
+
+                            <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
+                                <div class="border prize-wrapper flex-column flex-fullheight"
+                                    @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
+                                    <div class="area_title text-center mb-30">
+                                        <h4>DZIEŃ @dayNumber</h4>
                                     </div>
-                                </td>
-                            }
-                            <td class="week-sponsor text-center">
-                                TYDZIEŃ @(i + 1)
-                                @if (i == 1)
-                                {
+                                    <div class="flex-centered flex-grow">
+                                        @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
+                                        {
+                                            <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
+                                                <img src="~/theme-2019/images/hero_elem1.png" alt="" title="Logo sponsora dnia" class="img-responsive center-block" />
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/theme-2019/images/bear.png" alt="" title="Otwórz dzień @dayNumber" class="img-responsive center-block drop-shadow" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- sponsor -->
+                        <div class="col-xs-12 col-md-2 mb-30">
+                            <div class="border prize-wrapper flex-column flex-fullheight">
+                                <div class="area_title text-center mb-30">
+                                    <h4>SPONSOR</h4>
+                                </div>
+                                <div class="flex-centered flex-grow">
+                                    @if (i == 1)
+                                    {
                                     <a href="https://www.objectivity.co.uk/" target="_blank">
                                         <img src="~/images/marketing/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
                                     </a>
-                                }
-                                else if (i == 2)
-                                {
+                                    }
+                                    else if (i == 2)
+                                    {
                                     <a href="https://instapage.com" target="_blank">
                                         <img src="~/images/marketing/instapage.jpg" alt="instapage" title="Instapage" class="img-responsive center-block" />
                                     </a>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                    }
+                                </div>
+                            </div>
+                        </div><!-- /sponsor -->
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div><!-- container -->
+}
+else
+{
+    <!-- Begin Mailchimp Signup Form -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet">
+
+    <section class="contact_area" id="mc_embed_signup">
+        <div class="container">
+            <div class="contact_area_wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="area_title">
+                            <h3>Zapisz się na newsletter</h3>
+                            <p>I nie przegap najważniejszych wydarzeń!</p>
+                        </div>
+                    </div>
+                </div>
+                <form action="https://michalgellert.pl/sendy/subscribe" method="post" id="mc-embedded-subscribe-form" accept-charset="utf-8" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div class="row">
+                        <div class="contact_form clearfix">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="text_field mc-field-group">
+                                    <input type="email" placeholder="E-mail" value="" name="email" class="required email" id="mce-EMAIL">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="text_field mc-field-group">
+                                    <input type="text" placeholder="Imię i nazwisko" value="" name="name" class="" id="mce-NAME">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6">
+                                <div id="mce-responses" class="clear">
+                                    <div class="response" id="mce-error-response" style="display: none"></div>
+                                    <div class="response" id="mce-success-response" style="display: none"></div>
+                                </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8273a841f65d9cbb0055b7672_76610be8a5" tabindex="-1" value=""></div>
+                                <div class="clear content-centered"><input type="submit" value="Zapisz się" name="subscribe" id="mc-embedded-subscribe" class="chris_btn reveal animated" data-reveal-anim="fadeIn"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <ul class="checkboxes gdpr-wrapper">
+                                <li>
+                                    <input type="checkbox" name="gdpr" id="mce-GDPR" class="hidden">
+                                    <label for="mce-GDPR" class="checkbox_dark checkbox-label">
+                                        <span></span>
+                                        <strong>Zgoda na przetwarzanie danych</strong>: Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj:
+                                    </label>
+                                    <a href="https://devadventcalendar.pl/regulamin.pdf">Regulamin.pdf</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="display:none;">
+                        <label for="hp">HP</label><br/>
+                        <input type="text" name="hp" id="hp"/>
+                    </div>
+                    <input type="hidden" name="list" value="qGHg763QCyy6QqNG50NV763i0Q"/>
+                    <input type="hidden" name="subform" value="yes"/>
+                </form>
+            </div>
         </div>
-    }
-    else
-    {
-        <div class="col text-center">
-            <img id="santa" src="images/santa.JPG" alt="Święty Mikołaj" />
-            <h1><b>@Html.ActionLink("Zaloguj się", "Login", "Account")</b></h1>
-            <h3>i sprawdź, co dziś przygotowały dla Ciebie Elfy Świętego Mikołaja!</h3>
-        </div>
-    }
-</div>
+    </section>
+    <!--End mc_embed_signup-->
+}

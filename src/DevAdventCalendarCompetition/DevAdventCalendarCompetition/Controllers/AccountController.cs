@@ -1,14 +1,16 @@
-﻿using DevAdventCalendarCompetition.Extensions;
+﻿using System;
+using System.Resources;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevLoggingMessages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -19,11 +21,12 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAccountService _accountService;
         private readonly ILogger _logger;
 
-        public AccountController(IAccountService accountService,
+        public AccountController(
+            IAccountService accountService,
             ILogger<AccountController> logger)
         {
-            _accountService = accountService;
-            _logger = logger;
+            this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [TempData]
@@ -31,199 +34,228 @@ namespace DevAdventCalendarCompetition.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public async Task<IActionResult> Login(Uri returnUrl = null)
         {
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme).ConfigureAwait(false);
 
             var model = new LoginViewModel();
 
-            ViewData["ReturnUrl"] = returnUrl;
-            return View(model);
+            this.ViewData["ReturnUrl"] = returnUrl;
+            return this.View(model);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, Uri returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            if (model is null)
             {
-                var user = await _accountService.FindByEmailAsync(model.Email);
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            this.ViewData["ReturnUrl"] = returnUrl;
+            if (this.ModelState.IsValid)
+            {
+                var user = await this._accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+
+                if (user == null)
+                {
+                    this._logger.LogWarning($"User {model.Email} not exists.");
+                    this.ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
+                    return this.View(model);
+                }
 
                 if (!user.EmailConfirmed)
                 {
-                    _logger.LogInformation("User not confirmed.");
-                    ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
-                    return View(model);
+                    this._logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
+                    this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
+                    return this.View(model);
                 }
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe);
+                var result = await this._accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    this._logger.LogInformation(LoggingMessages.UserIsLoggedIn);
+                    return this.RedirectToLocal(returnUrl?.ToString());
                 }
+
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
+                    this._logger.LogWarning(LoggingMessages.UserAccountIsLockedOut);
+
+                    return this.RedirectToAction(nameof(this.Lockout));
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
-                    return View(model);
-                }
+
+                this.ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
+                return this.View(model);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null, string email = null)
+        public IActionResult Register(Uri returnUrl = null, string email = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            ViewData["Email"] = email;
-            return View();
+            this.ViewData["ReturnUrl"] = returnUrl;
+            this.ViewData["Email"] = email;
+            return this.View();
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, Uri returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            if (model is null)
             {
-                var user = _accountService.CreateApplicationUserByEmail(model.Email);
-                var result = await _accountService.CreateAsync(user, model.Password);
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            this.ViewData["ReturnUrl"] = returnUrl;
+            if (this.ModelState.IsValid)
+            {
+                var user = this._accountService.CreateApplicationUserByEmail(model.Email);
+
+                var result = await this._accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    this._logger.LogInformation(LoggingMessages.NewAccount);
 
-                    var code = await _accountService.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                    var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
+                    await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
 
-                    return View("RegisterConfirmation");
+                    return this.View("RegisterConfirmation");
                 }
-                AddErrors(result);
+
+                this.AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _accountService.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            await this._accountService.SignOutAsync().ConfigureAwait(false);
+
+            this._logger.LogInformation(LoggingMessages.UserIsLoggedIn);
+
+            return this.RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        public IActionResult ExternalLogin(string provider, Uri returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = _accountService.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return Challenge(properties, provider);
+            var redirectUrl = this.Url.Action(nameof(this.ExternalLoginCallback), "Account", new { returnUrl });
+            var properties = this._accountService.ConfigureExternalAuthenticationProperties(provider, new Uri(redirectUrl, UriKind.RelativeOrAbsolute));
+            return this.Challenge(properties, provider);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        public async Task<IActionResult> ExternalLoginCallback(Uri returnUrl = null, string remoteError = null)
         {
             if (remoteError != null)
             {
-                ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
-                return RedirectToAction(nameof(Login));
+                this.ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
+                return this.RedirectToAction(nameof(this.Login));
             }
-            var info = await _accountService.GetExternalLoginInfoAsync();
+
+            var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
             if (info == null)
             {
-                return RedirectToAction(nameof(Login));
+                return this.RedirectToAction(nameof(this.Login));
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey);
+            var result = await this._accountService.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey).ConfigureAwait(false);
             if (result.Succeeded)
             {
-                _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                this._logger.LogInformation(LoggingMessages.UserLoginProvider, info.LoginProvider);
+                return this.RedirectToLocal(returnUrl?.ToString());
             }
 
             if (result.IsNotAllowed)
             {
-                return View("RegisterConfirmation");
+                return this.View("RegisterConfirmation");
             }
 
             if (result.IsLockedOut)
             {
-                return RedirectToAction(nameof(Lockout));
+                return this.RedirectToAction(nameof(this.Lockout));
             }
             else
             {
                 // If the user does not have an account, then ask the user to create an account.
-                ViewData["ReturnUrl"] = returnUrl;
-                ViewData["LoginProvider"] = info.LoginProvider;
+                this.ViewData["ReturnUrl"] = returnUrl;
+                this.ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+                return this.View("ExternalLogin", new ExternalLoginViewModel { Email = email });
             }
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, Uri returnUrl = null)
         {
-            if (ModelState.IsValid)
+            if (model is null)
             {
-                // Get the information about the user from the external login provider
-                var info = await _accountService.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    throw new ApplicationException("Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.");
-                }
-
-                var user = _accountService.CreateApplicationUserByEmail(model.Email);
-                var result = await _accountService.CreateAsync(user, null);
-                if (result.Succeeded)
-                {
-                    result = await _accountService.AddLoginAsync(user, info);
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-
-                        var code = await _accountService.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                        await _accountService.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                        return View("RegisterConfirmation");
-                    }
-                }
-                AddErrors(result);
+                throw new ArgumentNullException(nameof(model));
             }
 
-            ViewData["ReturnUrl"] = returnUrl;
-            return View(nameof(ExternalLogin), model);
+            if (this.ModelState.IsValid)
+            {
+                // Get the information about the user from the external login provider
+                var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
+                if (info == null)
+                {
+                    throw new ArgumentException(LoggingMessages.LoadingDataError);
+                }
+
+                var user = this._accountService.CreateApplicationUserByEmail(model.Email);
+
+                var result = await this._accountService.CreateAsync(user, null).ConfigureAwait(false);
+                if (result.Succeeded)
+                {
+                    result = await this._accountService.AddLoginAsync(user, info).ConfigureAwait(false);
+                    if (result.Succeeded)
+                    {
+                        this._logger.LogInformation(LoggingMessages.CreatedUserNameProvider, info.LoginProvider);
+
+                        var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                        var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
+                        await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
+
+                        return this.View("RegisterConfirmation");
+                    }
+                }
+
+                this.AddErrors(result);
+            }
+
+            this.ViewData["ReturnUrl"] = returnUrl;
+            return this.View(nameof(this.ExternalLogin), model);
         }
 
         [HttpGet]
@@ -232,22 +264,24 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
-            var user = await _accountService.FindByIdAsync(userId);
+
+            var user = await this._accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ApplicationException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
-            var result = await _accountService.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
+            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -255,33 +289,41 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (model is null)
             {
-                var user = await _accountService.FindByEmailAsync(model.Email);
-                if (user == null || !(await _accountService.IsEmailConfirmedAsync(user)))
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                var user = await this._accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+
+                if (user == null || !(await this._accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                    return this.RedirectToAction(nameof(this.ForgotPasswordConfirmation));
                 }
 
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _accountService.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, user.Email, Request.Scheme);
-                await _accountService.SendEmailAsync(model.Email, "Reset hasła",
-                   $"Swoje hasło zresetujesz klikając na link: <a href='{callbackUrl}'>LINK</a>");
-                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                var code = await this._accountService.GeneratePasswordResetTokenAsync(user).ConfigureAwait(false);
+                var callbackUrl = this.Url.ResetPasswordCallbackLink(user.Id, code, user.Email, this.Request.Scheme);
+                await this._accountService.SendEmailAsync(
+                    model.Email,
+                    "Reset hasła",
+                    $"Swoje hasło zresetujesz klikając na link: <a href='{callbackUrl}'>LINK</a>").ConfigureAwait(false);
+                return this.RedirectToAction(nameof(this.ForgotPasswordConfirmation));
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
@@ -290,10 +332,11 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (code == null)
             {
-                throw new ApplicationException("Kod musi być dostarczony do resetowania hasła.");
+                throw new ArgumentException(LoggingMessages.ResetPasswordCodeError);
             }
+
             var model = new ResetPasswordViewModel { Code = code, Email = email };
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -301,66 +344,71 @@ namespace DevAdventCalendarCompetition.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (model is null)
             {
-                return View(model);
+                throw new ArgumentNullException(nameof(model));
             }
-            var user = await _accountService.FindByEmailAsync(model.Email);
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var user = await this._accountService.FindByEmailAsync(model.Email).ConfigureAwait(false);
+
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
-            var result = await _accountService.ResetPasswordAsync(user, model.Code, model.Password);
+
+            var result = await this._accountService.ResetPasswordAsync(user, model.Code, model.Password).ConfigureAwait(false);
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+                return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
-            AddErrors(result);
-            
+
+            this.AddErrors(result);
+
             model = new ResetPasswordViewModel
             {
                 Email = model.Email
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         [HttpGet]
         public IActionResult AccessDenied()
         {
-            return View();
+            return this.View();
         }
-
-        #region Helpers
 
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                this.ModelState.AddModelError(string.Empty, error.Description);
             }
         }
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (this.Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
-
-        #endregion Helpers
     }
 }

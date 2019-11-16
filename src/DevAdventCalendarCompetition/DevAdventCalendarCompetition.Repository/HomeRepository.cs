@@ -1,10 +1,10 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -14,33 +14,33 @@ namespace DevAdventCalendarCompetition.Repository
 
         public HomeRepository(ApplicationDbContext dbContext)
         {
-            _dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public Test GetCurrentTest()
         {
-            return _dbContext.Set<Test>().FirstOrDefault(el => el.Status == TestStatus.Started);
+            return this._dbContext.Set<Test>().FirstOrDefault(el => el.Status == TestStatus.Started);
         }
 
         public Test GetTestByNumber(int testNumber)
         {
-            return _dbContext.Set<Test>().FirstOrDefault(t => t.Number == testNumber);
+            return this._dbContext.Set<Test>().FirstOrDefault(t => t.Number == testNumber);
         }
 
         public TestAnswer GetTestAnswerByUserId(string userId, int testId)
         {
-            return _dbContext.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == testId);
+            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == testId);
         }
 
         public List<Test> GetAllTests()
         {
-            return _dbContext.Set<Test>()
+            return this._dbContext.Set<Test>()
                 .OrderBy(t => t.Number).ToList();
         }
 
         public List<Test> GetTestsWithUserAnswers()
         {
-            return _dbContext.Set<Test>()
+            return this._dbContext.Set<Test>()
                 .Include(t => t.WrongAnswers)
                 .Include(t => t.Answers)
                 .ThenInclude(ta => ta.User)
@@ -49,7 +49,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetCorrectAnswersCountForUser(string userId)
         {
-            return _dbContext.Set<TestAnswer>()
+            return this._dbContext.Set<TestAnswer>()
                 .Where(a => a.UserId == userId)
                 .GroupBy(t => t.TestId)
                 .Count();
@@ -57,7 +57,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public List<Result> GetAllTestResults()
         {
-            return _dbContext.Set<Result>()
+            return this._dbContext.Set<Result>()
                 .Include(u => u.User)
                 .OrderBy(r => r.Id)
                 .ToList();
@@ -65,7 +65,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetUserPosition(string userId)
         {
-            var result = _dbContext.Results
+            var result = this._dbContext.Results
                 .FirstOrDefault(x => x.UserId == userId);
 
             if (result == null)
@@ -73,7 +73,7 @@ namespace DevAdventCalendarCompetition.Repository
                 return 0;
             }
 
-            var indexOfResult = _dbContext.Results
+            var indexOfResult = this._dbContext.Results
                 .OrderByDescending(r => r.Points)
                 .IndexOf(result);
 

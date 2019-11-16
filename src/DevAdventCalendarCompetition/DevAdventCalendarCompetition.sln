@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition", "DevAdventCalendarCompetition\DevAdventCalendarCompetition.csproj", "{ABEBFE43-9603-4F88-8551-42D05BF4365F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F91B714C-62D1-485A-B123-96C5439D0CD2} = {F91B714C-62D1-485A-B123-96C5439D0CD2}
+		{E1B14B60-0B8D-4F19-BFF1-B049CF780A36} = {E1B14B60-0B8D-4F19-BFF1-B049CF780A36}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition.Services", "DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj", "{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}"
 EndProject

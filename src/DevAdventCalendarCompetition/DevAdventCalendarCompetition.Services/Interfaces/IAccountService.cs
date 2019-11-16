@@ -1,8 +1,9 @@
-﻿using DevAdventCalendarCompetition.Repository.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevAdventCalendarCompetition.Services.Interfaces
 {
@@ -22,7 +23,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task<string> GenerateEmailConfirmationTokenAsync(ClaimsPrincipal principal);
 
-        Task SendEmailConfirmationAsync(string email, string callbackUrl);
+        Task SendEmailConfirmationAsync(string email, Uri callbackUrl);
 
         Task SendEmailAsync(string email, string subject, string message);
 
@@ -30,7 +31,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task SignOutAsync();
 
-        AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, string redirectUrl);
+        AuthenticationProperties ConfigureExternalAuthenticationProperties(string provider, Uri redirectUrl);
 
         Task<ExternalLoginInfo> GetExternalLoginInfoAsync(string userId = null);
 
@@ -49,5 +50,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user);
 
         Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string code, string password);
+
+        Task SendEmailConfirmationAsync(string email, string callbackUrl);
     }
 }

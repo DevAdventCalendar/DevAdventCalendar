@@ -16,17 +16,4 @@ namespace DevAdventCalendarCompetition.Vms
 
         public string UserId { get; set; }
     }
-
-    public class TotalTestResultEntryVmComparer : IEqualityComparer<TotalTestResultEntryVm>
-    {
-        public bool Equals(TotalTestResultEntryVm x, TotalTestResultEntryVm y)
-        {
-            return x.UserId == y.UserId;
-        }
-
-        public int GetHashCode(TotalTestResultEntryVm obj)
-        {
-            return obj.UserId.GetHashCode();
-        }
-    }
 }

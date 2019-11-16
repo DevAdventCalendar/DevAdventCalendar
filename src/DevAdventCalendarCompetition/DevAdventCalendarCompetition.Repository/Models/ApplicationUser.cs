@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
@@ -10,6 +10,6 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public string SecondName { get; set; }
 
-        public ICollection<TestAnswer> Answers { get; set; }
+        public ICollection<TestAnswer> Answers { get; private set; }
     }
 }

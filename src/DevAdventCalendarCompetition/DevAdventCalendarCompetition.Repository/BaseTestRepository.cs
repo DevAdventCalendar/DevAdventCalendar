@@ -1,7 +1,7 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+﻿using System.Linq;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
-using System.Linq;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -11,46 +11,46 @@ namespace DevAdventCalendarCompetition.Repository
 
         public BaseTestRepository(ApplicationDbContext dbContext)
         {
-            _dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public Test GetByNumber(int testNumber)
         {
-            return _dbContext.Set<Test>().FirstOrDefault(el => el.Number == testNumber);
+            return this._dbContext.Set<Test>().FirstOrDefault(el => el.Number == testNumber);
         }
 
         public void AddTest(Test test)
         {
-            _dbContext.Set<Test>().Add(test);
-            _dbContext.SaveChanges();
+            this._dbContext.Set<Test>().Add(test);
+            this._dbContext.SaveChanges();
         }
 
         public void AddAnswer(TestAnswer testAnswer)
         {
-            _dbContext.Set<TestAnswer>().Add(testAnswer);
-            _dbContext.SaveChanges();
+            this._dbContext.Set<TestAnswer>().Add(testAnswer);
+            this._dbContext.SaveChanges();
         }
 
         public void AddWrongAnswer(TestWrongAnswer wrongAnswer)
         {
-            _dbContext.Set<TestWrongAnswer>().Add(wrongAnswer);
-            _dbContext.SaveChanges();
+            this._dbContext.Set<TestWrongAnswer>().Add(wrongAnswer);
+            this._dbContext.SaveChanges();
         }
 
         public void UpdateAnswer(TestAnswer testAnswer)
         {
-            _dbContext.Set<TestAnswer>().Update(testAnswer);
-            _dbContext.SaveChanges();
+            this._dbContext.Set<TestAnswer>().Update(testAnswer);
+            this._dbContext.SaveChanges();
         }
 
         public TestAnswer GetAnswerByTestId(int testId)
         {
-            return _dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId);
+            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId);
         }
 
         public bool HasUserAnsweredTest(string userId, int testId)
         {
-            return _dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId && el.UserId == userId) != null;
+            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId && el.UserId == userId) != null;
         }
     }
 }

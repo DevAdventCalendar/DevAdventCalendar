@@ -1,9 +1,12 @@
-﻿using DevAdventCalendarCompetition.Models;
+﻿using System;
+using System.Globalization;
+using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevExeptionsMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -11,50 +14,55 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
-        private readonly IBaseTestService _baseTestService;
+        private readonly IBaseTestService baseTestService;
 
         public AdminController(IAdminService adminService, IBaseTestService baseTestService)
         {
-            _adminService = adminService;
-            _baseTestService = baseTestService;
+            this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
+            this.baseTestService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
         }
 
         public ActionResult Index()
         {
-            var tests = _adminService.GetAllTests();
-            ViewBag.DateTime = DateTime.Now;
-            ViewBag.DateTimeUtc = DateTime.UtcNow;
+            var tests = this._adminService.GetAllTests();
+            this.ViewBag.DateTime = DateTime.Now;
+            this.ViewBag.DateTimeUtc = DateTime.UtcNow;
 
-            return View(tests);
+            return this.View(tests);
         }
 
         public ActionResult AddTest()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
         public ActionResult AddTest(TestVm model)
         {
-            if (ModelState.IsValid)
+            if (model is null)
             {
-                var dbTest = _baseTestService.GetTestByNumber(model.Number);
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                var dbTest = this.baseTestService.GetTestByNumber(model.Number);
+
                 if (dbTest != null)
                 {
-                    ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
-                    return View(model);
+                    this.ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
+                    return this.View(model);
                 }
 
-                //automatically set start and end time
-                var testDay = model.StartDate;
-                model.StartDate = testDay.AddHours(12).AddMinutes(00);
-                model.EndDate = testDay.AddHours(23).AddMinutes(59);
+                // automatically set start and end time
+                model.StartDate = model.StartDate.AddHours(12).AddMinutes(00);
+                model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
 
                 var testDto = new TestDto
                 {
                     Number = model.Number,
                     Description = model.Description,
-                    Answer = model.Answer.ToUpper().Replace(" ", ""),
+                    Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", string.Empty, StringComparison.Ordinal),
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
@@ -64,51 +72,62 @@ namespace DevAdventCalendarCompetition.Controllers
                     DiscountLogoUrl = model.DiscountLogoUrl,
                     DiscountLogoPath = model.DiscountLogoPath
                 };
-                _adminService.AddTest(testDto);
-                return RedirectToAction("Index");
+                this._adminService.AddTest(testDto);
+                return this.RedirectToAction("Index");
             }
-            return View(model);
-        }
+
+            return this.View(model);
+               }
 
         [HttpPost]
         public ActionResult StartTest(int testId, string minutesString)
         {
-            var testDto = _adminService.GetTestById(testId);
+            var testDto = this._adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.NotStarted)
-                throw new ArgumentException("Test został uruchomiony");
+            {
+                throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
+            }
 
-            var previousTestDto = _adminService.GetPreviousTest(testDto.Number);
+            var previousTestDto = this._adminService.GetPreviousTest(testDto.Number);
             if (previousTestDto != null && previousTestDto.Status != TestStatus.Ended)
-                throw new ArgumentException("Poprzedni test nie został zakończony");
+            {
+                throw new InvalidOperationException(ExceptionsMessages.PreviousTestIsNotDone);
+            }
 
-            _adminService.UpdateTestDates(testDto, minutesString);
+            this._adminService.UpdateTestDates(testDto, minutesString);
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult EndTest(int testId)
         {
-            var testDto = _adminService.GetTestById(testId);
+            var testDto = this._adminService.GetTestById(testId);
             if (testDto.Status != TestStatus.Started)
-                throw new ArgumentException("Test został uruchomiony");
+            {
+                throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
+            }
 
-            _adminService.UpdateTestEndDate(testDto, DateTime.Now);
+            this._adminService.UpdateTestEndDate(testDto, DateTime.Now);
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         public string Reset()
         {
-            //TODO: move to service
-            var resetEnabled = false;
             var resetEnabledString = "true"; // TODO get from AppSettings // ConfigurationManager.AppSettings["ResetEnabled"];
-            bool.TryParse(resetEnabledString, out resetEnabled);
-            if (!resetEnabled)
-                return "Reset nie jest włączony.";
 
-            _adminService.ResetTestDates();
-            _adminService.ResetTestAnswers();
+            // TODO: move to service
+#pragma warning disable CA1806 // Do not ignore method results
+            bool.TryParse(resetEnabledString, out bool resetEnabled);
+#pragma warning restore CA1806 // Do not ignore method results
+            if (!resetEnabled)
+            {
+                return "Reset nie jest włączony.";
+            }
+
+            this._adminService.ResetTestDates();
+            this._adminService.ResetTestAnswers();
 
             return "Dane zostały zresetowane.";
         }
