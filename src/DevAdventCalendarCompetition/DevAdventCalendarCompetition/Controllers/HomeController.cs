@@ -152,12 +152,6 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View();
         }
 
-        [Route(nameof(Privacy))]
-        public IActionResult Privacy()
-        {
-            return this.View();
-        }
-
         [Route(nameof(Rules))]
         public ActionResult Rules()
         {
