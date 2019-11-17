@@ -8,15 +8,15 @@ namespace DevAdventCalendarCompetition.TestResultService.Interfaces
 {
     public interface ITestResultRepository
     {
-        Task<string[]> GetUsersId();
-        Task<int> GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
-        Task<int> GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom , DateTimeOffset dateTo);
-        Task<int> GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
-        void GetFinalResults();
+        string[] GetUsersId();
+        int GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        int GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        List<Result> GetFinalResults();
         void SaveFinalResults();
-        Task SaveUserWeeklyScore(int userId, int WeekNumber, int Score);
-        Task SaveUserWeeklyPlace(int userId, int WeekNumber , int Place);
-        Task SaveUserFinalScore(int userId, int Place); 
-        Task SaveUserFinalPlace(int userId,int  Place );
+        void SaveUserWeeklyScore(string userId, int weekNumber, int score);
+        void SaveUserWeeklyPlace(string userId, int weekNumber, int place);
+        void SaveUserFinalScore(string userId, int score); 
+        void SaveUserFinalPlace(string userId, int place);
     }
 }

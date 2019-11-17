@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
@@ -10,29 +13,50 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     public class TestResultRepository : ITestResultRepository
     {
-        public Task<string[]> GetUsersId()
+        private readonly ApplicationDbContext _dbContext;
+
+        public TestResultRepository(ApplicationDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<int> GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public string[] GetUsersId()
         {
-            throw new NotImplementedException();
+            return this._dbContext
+                .Users
+                .Select(u => u.Id)
+                .ToArray();
         }
 
-        public Task<int> GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public int GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
-            throw new NotImplementedException();
+            return _dbContext
+                .TestAnswer
+                .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
+                .Sum(a => a.AnsweringTimeOffset.Seconds);
         }
 
-        public void GetFinalResults()
+        public int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
-            throw new NotImplementedException();
+            return _dbContext
+                .TestAnswer
+                .Where(a => a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
+                .Count(a => a.UserId == userId);
         }
 
-        public Task<int> GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public List<Result> GetFinalResults()
         {
-            throw new NotImplementedException();
+            return _dbContext
+                .Results
+                .ToList();
+        }
+
+        public int GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return _dbContext
+                .TestWrongAnswer
+                .Where(a => a.Time > dateFrom && a.Time <= dateTo)
+                .Count(a => a.UserId == userId);
         }
 
         public void SaveFinalResults()
@@ -40,24 +64,110 @@ namespace DevAdventCalendarCompetition.TestResultService
             throw new NotImplementedException();
         }
 
-        public Task SaveUserFinalPlace(int userId, int Place)
+        public void SaveUserFinalPlace(string userId, int place)
         {
-            throw new NotImplementedException();
+            var userResult = _dbContext
+                .Results
+                .FirstOrDefault(r => r.UserId == userId);
+
+            if (userResult != null)
+            {
+                userResult.FinalPlace = place;
+                _dbContext.Update(userResult);
+            }
+            else
+            {
+                _dbContext.Results.Add(new Result { UserId = userId, FinalPlace = place });
+            }
+
+            _dbContext.SaveChanges();
         }
 
-        public Task SaveUserFinalScore(int userId, int Place)
+        public void SaveUserFinalScore(string userId, int score)
         {
-            throw new NotImplementedException();
+            var userResult = _dbContext
+                .Results
+                .FirstOrDefault(r => r.UserId == userId);
+
+            if (userResult != null)
+            {
+                userResult.FinalPoints = score;
+                _dbContext.Update(userResult);
+            }
+            else
+            {
+                _dbContext.Results.Add(new Result { UserId = userId, FinalPoints = score });
+            }
+
+            _dbContext.SaveChanges();
         }
 
-        public Task SaveUserWeeklyPlace(int userId, int WeekNumber, int Place)
+        public void SaveUserWeeklyPlace(string userId, int weekNumber, int place)
         {
-            throw new NotImplementedException();
+            var userResult = _dbContext
+                .Results
+                .FirstOrDefault(r => r.UserId == userId);
+
+            if (userResult != null)
+            {
+                var property = userResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Place"));
+                
+                if (property != null) 
+                    property.SetValue(userResult, place);
+                else
+                    throw new ArgumentException($"Missing week { weekNumber } in model.");
+
+                _dbContext.Update(userResult);
+            }
+            else
+            {
+                var newResult = new Result { UserId = userId };
+
+                var property = newResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Place"));
+
+                if (property != null)
+                    property.SetValue(newResult, place);
+                else
+                    throw new ArgumentException($"Missing week { weekNumber } in model.");
+
+                _dbContext.Results.Add(newResult);
+            }
+
+            _dbContext.SaveChanges();
         }
 
-        public Task SaveUserWeeklyScore(int userId, int WeekNumber, int Score)
+        public void SaveUserWeeklyScore(string userId, int weekNumber, int score)
         {
-            throw new NotImplementedException();
+            var userResult = _dbContext
+                .Results
+                .FirstOrDefault(r => r.UserId == userId);
+
+            if (userResult != null)
+            {
+                var property = userResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Score"));
+
+                if (property != null)
+                    property.SetValue(userResult, score);
+                else
+                    throw new ArgumentException($"Missing week { weekNumber } in model.");
+
+                _dbContext.Update(userResult);
+            }
+            else
+            {
+                var newResult = new Result { UserId = userId };
+
+                var property = newResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Score"));
+
+                if (property != null)
+                    property.SetValue(newResult, score);
+                else
+                    throw new ArgumentException($"Missing week { weekNumber } in model.");
+
+                _dbContext.Results.Add(newResult);
+            }
+
+            _dbContext.SaveChanges();
         }
     }
 }
