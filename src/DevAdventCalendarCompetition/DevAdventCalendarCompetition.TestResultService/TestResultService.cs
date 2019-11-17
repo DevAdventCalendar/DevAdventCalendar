@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
@@ -24,7 +25,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             this._answeringTimePlaceRule = timePlaceRule;
         }
 
-        public async Task<List<CompetitionResult>> CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public List<CompetitionResult> CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             // Collection for storing temporal results for specific time span
 
@@ -55,7 +56,16 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             // Save results to DB as weekly results.
 
-            throw new NotImplementedException();
+            DateTime dateFrom = DateTime.ParseExact($"2019-12-{ 02 + 7 * weekNumber }", "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            DateTime dateTo = dateFrom.AddDays(6);
+
+            var userResults = CalculateResults(dateFrom, dateTo);
+
+            foreach (var result in userResults)
+            {
+                _testResultRepository.SaveUserWeeklyPlace(result.UserId, weekNumber, result.Place);
+                _testResultRepository.SaveUserWeeklyScore(result.UserId, weekNumber, result.Points);
+            }
         }
 
         public void SaveFinalResults()

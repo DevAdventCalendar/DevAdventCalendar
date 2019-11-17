@@ -73,6 +73,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             if (userResult != null)
             {
                 userResult.FinalPlace = place;
+                _dbContext.Entry(userResult).Property(p => p.FinalPlace).IsModified = true;
                 _dbContext.Update(userResult);
             }
             else
@@ -92,6 +93,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             if (userResult != null)
             {
                 userResult.FinalPoints = score;
+                _dbContext.Entry(userResult).Property(p => p.FinalPoints).IsModified = true;
                 _dbContext.Update(userResult);
             }
             else
