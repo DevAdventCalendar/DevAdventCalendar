@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
-using System.Threading.Tasks;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
 namespace DevAdventCalendarCompetition.TestResultService
@@ -10,9 +8,9 @@ namespace DevAdventCalendarCompetition.TestResultService
     public class TestResultService
     {
         private readonly ITestResultRepository _testResultRepository;
-        private ITestResultPointsRule _correctAnswersPointsRule;
-        private ITestResultPointsRule _bonusPointsRule;
-        private ITestResultPlaceRule _answeringTimePlaceRule;
+        private readonly ITestResultPointsRule _correctAnswersPointsRule;
+        private readonly ITestResultPointsRule _bonusPointsRule;
+        private readonly ITestResultPlaceRule _answeringTimePlaceRule;
 
         public TestResultService(ITestResultRepository resultRepository,
             ITestResultPointsRule resultPointsRule,
