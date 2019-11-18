@@ -44,6 +44,8 @@ namespace DevAdventCalendarCompetition.TestResultService
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
                                     _bonusPointsRule.CalculatePoints(wrongAnswersCount);
 
+                Console.WriteLine($"\n\nResults for user: { usersId } - correct answers: { correctAnswersCount }, wrong answers: { wrongAnswersCount }, offset: { sumOffset }... Overall points: { overallPoints }");
+
                 results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }
 

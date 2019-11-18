@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevAdventCalendarCompetition.TestResultService
 {
@@ -101,70 +102,92 @@ namespace DevAdventCalendarCompetition.TestResultService
 
         public void SaveUserWeeklyPlace(string userId, int weekNumber, int place)
         {
+            Console.WriteLine($"\n\nGoing to save place for user { userId } and week { weekNumber }...");
+
             var userResult = _dbContext
                 .Results
                 .FirstOrDefault(r => r.UserId == userId);
 
-            if (userResult != null)
+            try
             {
-                var property = userResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Place"));
-                
-                if (property != null) 
-                    property.SetValue(userResult, place);
-                else
-                    throw new ArgumentException($"Missing week { weekNumber } in model.");
+                if (userResult != null)
+                {
+                    var property = userResult.GetType().GetProperties()
+                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Place"));
 
-                _dbContext.Update(userResult);
+                    if (property != null)
+                        property.SetValue(userResult, place);
+                    else
+                        throw new ArgumentException($"Missing week {weekNumber} in model.");
+
+                    _dbContext.Update(userResult);
+                }
+                else
+                {
+                    var newResult = new Result {UserId = userId};
+
+                    var property = newResult.GetType().GetProperties()
+                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Place"));
+
+                    if (property != null)
+                        property.SetValue(newResult, place);
+                    else
+                        throw new ArgumentException($"Missing week {weekNumber} in model.");
+
+                    _dbContext.Results.Add(newResult);
+                }
+
+                _dbContext.SaveChanges();
             }
-            else
+            catch (DbUpdateException e)
             {
-                var newResult = new Result { UserId = userId };
-
-                var property = newResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Place"));
-
-                if (property != null)
-                    property.SetValue(newResult, place);
-                else
-                    throw new ArgumentException($"Missing week { weekNumber } in model.");
-
-                _dbContext.Results.Add(newResult);
+                Console.WriteLine($"\n\nAn error occurred during saving place for user { userId } and week { weekNumber }: { e.Message }");
             }
-
-            _dbContext.SaveChanges();
         }
 
         public void SaveUserWeeklyScore(string userId, int weekNumber, int score)
         {
+            Console.WriteLine($"\n\nGoing to save score for user { userId } and week { weekNumber }...");
+
             var userResult = _dbContext
                 .Results
                 .FirstOrDefault(r => r.UserId == userId);
 
-            if (userResult != null)
+            try
             {
-                var property = userResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Score"));
+                if (userResult != null)
+                {
+                    var property = userResult.GetType().GetProperties()
+                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Score"));
 
-                if (property != null)
-                    property.SetValue(userResult, score);
+                    if (property != null)
+                        property.SetValue(userResult, score);
+                    else
+                        throw new ArgumentException($"Missing week {weekNumber} in model.");
+
+                    _dbContext.Update(userResult);
+                }
                 else
-                    throw new ArgumentException($"Missing week { weekNumber } in model.");
+                {
+                    var newResult = new Result {UserId = userId};
 
-                _dbContext.Update(userResult);
+                    var property = newResult.GetType().GetProperties()
+                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Score"));
+
+                    if (property != null)
+                        property.SetValue(newResult, score);
+                    else
+                        throw new ArgumentException($"Missing week {weekNumber} in model.");
+
+                    _dbContext.Results.Add(newResult);
+                }
+
+                _dbContext.SaveChanges();
             }
-            else
+            catch (DbUpdateException e)
             {
-                var newResult = new Result { UserId = userId };
-
-                var property = newResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ weekNumber.ToString() }Score"));
-
-                if (property != null)
-                    property.SetValue(newResult, score);
-                else
-                    throw new ArgumentException($"Missing week { weekNumber } in model.");
-
-                _dbContext.Results.Add(newResult);
+                Console.WriteLine($"\n\nAn error occurred during saving score for user { userId } and week { weekNumber }: { e.Message }");
             }
-
-            _dbContext.SaveChanges();
         }
     }
 }
