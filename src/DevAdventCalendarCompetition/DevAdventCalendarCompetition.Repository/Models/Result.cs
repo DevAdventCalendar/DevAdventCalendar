@@ -30,6 +30,12 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public int FinalPlace { get; set; }
 
+        public int CorrectAnswersCount { get; set; }
+
+        public int WrongAnswersCount { get; set; }
+
+        public int Points { get; set; }
+
         public ApplicationUser User { get; set; }
     }
 }

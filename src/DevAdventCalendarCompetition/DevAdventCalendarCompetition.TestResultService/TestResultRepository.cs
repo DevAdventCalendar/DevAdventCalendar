@@ -59,11 +59,6 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .Count(a => a.UserId == userId);
         }
 
-        public void SaveFinalResults()
-        {
-            throw new NotImplementedException();
-        }
-
         public void SaveUserFinalPlace(string userId, int place)
         {
             var userResult = _dbContext

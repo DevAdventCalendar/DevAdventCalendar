@@ -13,7 +13,6 @@ namespace DevAdventCalendarCompetition.TestResultService.Interfaces
         int GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
         int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
         List<Result> GetFinalResults();
-        void SaveFinalResults();
         void SaveUserWeeklyScore(string userId, int weekNumber, int score);
         void SaveUserWeeklyPlace(string userId, int weekNumber, int place);
         void SaveUserFinalScore(string userId, int score); 
