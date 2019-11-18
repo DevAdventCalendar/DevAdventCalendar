@@ -42,7 +42,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
                                     _bonusPointsRule.CalculatePoints(wrongAnswersCount);
 
-                Console.WriteLine($"\n\nResults for user: { usersId } - correct answers: { correctAnswersCount }, wrong answers: { wrongAnswersCount }, offset: { sumOffset }... Overall points: { overallPoints }");
+                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, wrong answers: { wrongAnswersCount }, offset: { sumOffset }... Overall points: { overallPoints }");
 
                 results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }
@@ -55,9 +55,8 @@ namespace DevAdventCalendarCompetition.TestResultService
             // Invoke CalculateResults with correct boundary dates according to weekNumber.
 
             // Save results to DB as weekly results.
-
-            DateTime dateFrom = DateTime.ParseExact($"2019-12-{ 02 + 7 * weekNumber }", "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            DateTime dateTo = dateFrom.AddDays(6);
+            DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 2 + 7 * weekNumber, 20, 0, 0, TimeSpan.Zero);
+            DateTime dateTo = dateFrom.DateTime.AddDays(6);
 
             var userResults = CalculateResults(dateFrom, dateTo);
 

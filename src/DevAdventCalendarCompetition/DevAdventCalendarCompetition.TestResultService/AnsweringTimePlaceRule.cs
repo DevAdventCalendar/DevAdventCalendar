@@ -8,7 +8,7 @@ namespace DevAdventCalendarCompetition.TestResultService
     {
         public List<CompetitionResult> GetUsersOrder(List<CompetitionResult> users)
         {
-            throw new NotImplementedException();
+            return users;
         }
 
     }

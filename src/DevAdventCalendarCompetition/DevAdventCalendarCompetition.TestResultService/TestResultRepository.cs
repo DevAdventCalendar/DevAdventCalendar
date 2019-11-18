@@ -154,7 +154,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                 if (userResult != null)
                 {
                     var property = userResult.GetType().GetProperties()
-                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Score"));
+                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Points"));
 
                     if (property != null)
                         property.SetValue(userResult, score);
@@ -168,7 +168,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                     var newResult = new Result {UserId = userId};
 
                     var property = newResult.GetType().GetProperties()
-                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Score"));
+                        .FirstOrDefault(p => p.Name.Contains($"Week{weekNumber.ToString()}Points"));
 
                     if (property != null)
                         property.SetValue(newResult, score);
