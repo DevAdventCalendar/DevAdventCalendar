@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191118124021_ResultUpdate")]
+    [Migration("20191118152226_ResultUpdate")]
     partial class ResultUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,13 +82,9 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CorrectAnswersCount");
-
                     b.Property<int>("FinalPlace");
 
                     b.Property<int>("FinalPoints");
-
-                    b.Property<int>("Points");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -105,8 +101,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<int>("Week3Place");
 
                     b.Property<int>("Week3Points");
-
-                    b.Property<int>("WrongAnswersCount");
 
                     b.HasKey("Id");
 

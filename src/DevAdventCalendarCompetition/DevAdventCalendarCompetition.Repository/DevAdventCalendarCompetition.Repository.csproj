@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20181104175222_RenameTables.cs" />
     <Compile Remove="Migrations\20191118122911_ResultUpdate.cs" />
     <Compile Remove="Migrations\20191118122911_ResultUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20191118124021_ResultUpdate.cs" />
+    <Compile Remove="Migrations\20191118124021_ResultUpdate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
