@@ -17,7 +17,7 @@ services:
   app:
     image: docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019
     container_name: devcal-app
-    env_file: app.2019.env
+    env_file: app.env
     networks: 
       - devcal
       - traefik

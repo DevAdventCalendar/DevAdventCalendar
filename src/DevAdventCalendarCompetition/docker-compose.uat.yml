@@ -5,7 +5,7 @@ services:
     container_name: devcal-db-uat
     ports:
       - '1435:1433'
-    env_file: db.test.env
+    env_file: db.uat.env
     volumes:
       - /data/devcal-db-uat:/var/opt/mssql
     networks:
@@ -17,7 +17,7 @@ services:
   app-uat:
     image: docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019-dev
     container_name: devcal-app-uat
-    env_file: app.2019.dev.env
+    env_file: app.uat.env
     networks: 
       - devcal-uat
       - traefik
