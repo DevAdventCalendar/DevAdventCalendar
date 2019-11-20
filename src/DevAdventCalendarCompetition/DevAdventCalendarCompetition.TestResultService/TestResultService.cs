@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             // Invoke CalculateResults with correct boundary dates according to weekNumber.
 
             // Save results to DB as weekly results.
-            DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 2 + 7 * weekNumber, 20, 0, 0, TimeSpan.Zero);
+            DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0, TimeSpan.Zero);
             DateTime dateTo = dateFrom.DateTime.AddDays(6);
 
             var userResults = CalculateResults(dateFrom, dateTo);
