@@ -1,37 +1,37 @@
 version: '3.7'
 services:
-  db:
+  db-2018:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-    container_name: devcal-db
+    container_name: devcal-db-2018
     ports:
-      - '1433:1433'
+      - '1434:1433'
     env_file: db.env
     volumes:
-      - /data/devcal-db:/var/opt/mssql
+      - /data/devcal-db-2018:/var/opt/mssql
     networks:
       - devcal
     labels: 
       - "traefik.enable=false"
     restart: unless-stopped
 
-  app:
-    image: docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019
-    container_name: devcal-app
-    env_file: app.2019.env
+  app-2018:
+    image: devadventcalendar/devadventcalendar
+    container_name: devcal-app-2018
+    env_file: app.env
     networks: 
-      - devcal
+      - devcal-2018
       - traefik
     labels: 
-      - "traefik.frontend.rule=Host:devadventcalendar.pl,www.devadventcalendar.pl"
+      - "traefik.frontend.rule=Host:2018.devadventcalendar.pl"
       - "traefik.enable=true"
       - "traefik.port=80"
       - "traefik.docker.network=traefik"
     depends_on:
-      - db
+      - db-2018
     restart: unless-stopped
 
 networks:
   traefik:
     external: true
-  devcal:
+  devcal-2018:
     external: false
