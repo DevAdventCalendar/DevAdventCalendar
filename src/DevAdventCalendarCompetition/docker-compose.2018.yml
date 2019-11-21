@@ -9,7 +9,7 @@ services:
     volumes:
       - /data/devcal-db-2018:/var/opt/mssql
     networks:
-      - devcal
+      - devcal-2018
     labels: 
       - "traefik.enable=false"
     restart: unless-stopped
