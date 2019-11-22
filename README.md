@@ -2,6 +2,10 @@
 
 DevAdventCalendar web app for online competition for programmers.
 
+|Build  |Deployment
+|:-----:|:--------:|
+|[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI%22)|[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/1/1)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=1)
+
 ## Getting started
 
 1. Clone repository
