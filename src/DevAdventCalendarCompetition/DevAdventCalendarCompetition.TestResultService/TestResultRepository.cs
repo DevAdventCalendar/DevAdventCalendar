@@ -53,6 +53,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             return _dbContext
                 .TestWrongAnswer
                 .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
+                .Select(t => new { Time = t.Time.ToString("yyyy-MM-dd") })
                 .GroupBy(a => a.Time)
                 .Select(c => c.Count())
                 .ToArray();

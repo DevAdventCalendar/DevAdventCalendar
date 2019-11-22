@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
 namespace DevAdventCalendarCompetition.TestResultService
@@ -36,11 +37,13 @@ namespace DevAdventCalendarCompetition.TestResultService
             foreach (var id in usersId)
             {
                 var correctAnswersCount = this._testResultRepository.GetCorrectAnswersCount(id, dateFrom, dateTo);
-                var wrongAnswersCount = this._testResultRepository.GetWrongAnswersCount(id, dateFrom, dateTo);
+                var wrongAnswersCount = this._testResultRepository.GetWrongAnswersCountPerDay(id, dateFrom, dateTo);
                 var sumOffset = this._testResultRepository.GetAnsweringTimeSum(id, dateFrom, dateTo);
 
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
-                                    _bonusPointsRule.CalculatePoints(wrongAnswersCount);
+                                    wrongAnswersCount
+                                        .Select(p => _bonusPointsRule.CalculatePoints(p))
+                                        .Sum();
 
                 Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, wrong answers: { wrongAnswersCount }, offset: { sumOffset }... Overall points: { overallPoints }");
 
