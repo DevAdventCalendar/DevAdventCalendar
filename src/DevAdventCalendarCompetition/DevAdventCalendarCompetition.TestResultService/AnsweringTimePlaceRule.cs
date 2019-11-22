@@ -17,7 +17,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                         UserId = r.UserId, 
                         Points = r.Points, 
                         AnsweringTimeOffset = r.AnsweringTimeOffset, 
-                        Place = index })
+                        Place = index + 1 })
                 .ToList();
         }
     }
