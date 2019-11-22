@@ -65,8 +65,8 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             foreach (var result in userResults)
             {
-                _testResultRepository.SaveUserWeeklyPlace(result.UserId, weekNumber, result.Place);
                 _testResultRepository.SaveUserWeeklyScore(result.UserId, weekNumber, result.Points);
+                _testResultRepository.SaveUserWeeklyPlace(result.UserId, weekNumber, result.Place);
             }
         }
 

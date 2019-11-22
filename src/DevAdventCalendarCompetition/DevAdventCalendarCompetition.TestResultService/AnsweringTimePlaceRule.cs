@@ -10,7 +10,14 @@ namespace DevAdventCalendarCompetition.TestResultService
         public List<CompetitionResult> GetUsersOrder(List<CompetitionResult> users)
         {
             return users
-                .OrderBy(u => u.AnsweringTimeOffset)
+                .OrderByDescending(u => u.Points)
+                    .ThenBy(u => u.AnsweringTimeOffset)
+                .Select((r, index) => new CompetitionResult 
+                    { 
+                        UserId = r.UserId, 
+                        Points = r.Points, 
+                        AnsweringTimeOffset = r.AnsweringTimeOffset, 
+                        Place = index })
                 .ToList();
         }
     }
