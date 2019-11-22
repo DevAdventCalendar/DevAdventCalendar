@@ -48,12 +48,14 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .ToList();
         }
 
-        public int GetWrongAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public int[] GetWrongAnswersCountPerDay(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             return _dbContext
                 .TestWrongAnswer
-                .Where(a => a.Time > dateFrom && a.Time <= dateTo)
-                .Count(a => a.UserId == userId);
+                .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
+                .GroupBy(a => a.Time)
+                .Select(c => c.Count())
+                .ToArray();
         }
 
         public void SaveUserFinalPlace(string userId, int place)
