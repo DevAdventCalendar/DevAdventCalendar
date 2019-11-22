@@ -31,19 +31,15 @@ namespace DevAdventCalendarCompetition.Models
         [Display(Name = "Logo sponsora (ścieżka)")]
         public Uri SponsorLogoUrl { get; set; }
 
-        [Required(ErrorMessage = "Pole Zniżka jest obowiązkowe")]
         [Display(Name = "Zniżka")]
         public string Discount { get; set; }
 
-        [Required(ErrorMessage = "Pole Link zniżki jest obowiązkowe")]
         [Display(Name = "Link zniżki")]
         public Uri DiscountUrl { get; set; }
 
-        [Required(ErrorMessage = "Pole Link loga zniżki jest obowiązkowe")]
         [Display(Name = "Link loga zniżki")]
         public Uri DiscountLogoUrl { get; set; }
 
-        [Required(ErrorMessage = "Pole Ścieżka do loga zniżki jest obowiązkowe")]
         [Display(Name = "Ścieżka do loga zniżki")]
         public string DiscountLogoPath { get; set; }
     }

@@ -31,6 +31,11 @@
                     <span asp-validation-for="StartDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="EndDate"></label>
+                    <input asp-for="EndDate" class="form-control" type="text" value="@DateTime.Parse($"{DateTime.Now.Year}-12-24").ToShortDateString()" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="SponsorName"></label>
                     <input asp-for="SponsorName" class="form-control" />
                     <span asp-validation-for="SponsorName" class="text-danger"></span>

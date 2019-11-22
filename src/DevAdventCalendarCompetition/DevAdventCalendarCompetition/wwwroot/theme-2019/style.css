@@ -2255,6 +2255,10 @@ body {
     margin-bottom: 30px;
 }
 
+.mb-50 {
+    margin-bottom: 50px;
+}
+
 .mt-50 {
     margin-top: 50px;
 }
@@ -2574,4 +2578,8 @@ body {
 
 .task-active .prize-wrapper:hover {
     background: #eee;
+}
+
+.text-primary {
+    color: #c93232;
 }
