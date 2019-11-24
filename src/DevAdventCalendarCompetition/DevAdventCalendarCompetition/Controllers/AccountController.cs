@@ -273,6 +273,11 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
 
+            if (user.EmailConfirmed)
+            {
+                return this.View("EmailAlreadyConfirmed");
+            }
+
             var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
             return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
