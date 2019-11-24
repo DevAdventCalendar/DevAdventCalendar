@@ -48,9 +48,8 @@ DevAdventCalendar web app for online competition for programmers.
 
 ## Debugging
 
- Need to configure in `appsettings.development.json` the email account to send emails.
- Also, is necesseary to change `EnvironmentName`  
-ASPNETCORE_ENVIRONMENT to Development
+ In order to send e-mails you need to set up an e-mail account in `appsettings.development.json`.
+ Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
 
 ![ENVIRONMENT](docs/Pictures/screen.png/?raw=true)
 
