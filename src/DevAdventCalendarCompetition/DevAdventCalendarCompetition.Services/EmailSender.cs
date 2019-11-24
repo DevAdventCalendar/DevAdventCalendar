@@ -18,7 +18,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public string Password { get; set; }
 
-        public Task SendEmailAsync(string email, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string message)
         {
             using (var smtpClient = new SmtpClient
             {
@@ -28,14 +28,14 @@ namespace DevAdventCalendarCompetition.Services
                 Credentials = new NetworkCredential(this.UserName, this.Password)
             })
 
-            using (var mailMessage = new MailMessage("devadventcalendar@gmail.com", email)
+            using (var mailMessage = new MailMessage(this.UserName, email)
             {
                 Subject = subject,
                 IsBodyHtml = true,
                 Body = message
             })
             {
-                return smtpClient.SendMailAsync(mailMessage);
+                await smtpClient.SendMailAsync(mailMessage).ConfigureAwait(false);
             }
         }
     }
