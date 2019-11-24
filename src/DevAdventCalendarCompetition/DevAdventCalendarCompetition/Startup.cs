@@ -40,6 +40,7 @@ namespace DevAdventCalendarCompetition
         public static void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UpdateDatabase();
+            app.UseForwardedHeaders();
 
             if (env.IsDevelopment())
             {
@@ -116,6 +117,12 @@ namespace DevAdventCalendarCompetition
 
                 options.DefaultRequestCulture = new RequestCulture("pl-PL");
                 options.SupportedCultures = supportedCultures;
+            });
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
         }
     }
