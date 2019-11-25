@@ -9,7 +9,7 @@ namespace DevAdventCalendarCompetition.Vms
 
         public List<SingleTestResultEntry> Entries { get; private set; }
 
-        public List<TotalTestResultEntryVm> TotalResults { get;  private set; }
+        public List<TestResultEntryVm> TotalResults { get;  private set; }
 
         public bool TestEnded { get; set; }
 

@@ -89,18 +89,20 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var testResultListDto = this._homeService.GetAllTestResults();
 
-            List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
+            List<TestResultEntryVm> totalTestResults = new List<TestResultEntryVm>();
 
             foreach (var result in testResultListDto)
             {
-                totalTestResults.Add(new TotalTestResultEntryVm
+                totalTestResults.Add(new TestResultEntryVm
                 {
-                    Position = result.Position,
+                    Week1Points = result.Week1Points,
+                    Week1Place = result.Week1Place,
+                    Week2Points = result.Week1Points,
+                    Week2Place = result.Week1Place,
+                    Week3Points = result.Week1Points,
+                    Week3Place = result.Week1Place,
                     UserId = result.UserId,
                     FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
-                    CorrectAnswers = result.CorrectAnswersCount,
-                    WrongAnswers = result.WrongAnswersCount,
-                    TotalPoints = result.Points
                 });
             }
 
@@ -109,7 +111,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 CurrentUserPosition = this._homeService.GetUserPosition(userId),
 
                 // SingleTestResults = singleTestResults,
-                TotalTestResults = new PaginatedCollection<TotalTestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize)
+                TotalTestResults = new PaginatedCollection<TestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize)
             };
 
             return this.View(vm);
