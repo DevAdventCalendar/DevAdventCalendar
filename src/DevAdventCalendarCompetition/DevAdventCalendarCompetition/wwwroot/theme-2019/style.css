@@ -247,6 +247,14 @@ h1,h2,h3,h4,h5,h6{
 	cursor: pointer;
 }
 
+div.toggle.btn {
+    float: right;
+}
+
+div.form-group.form-toogle {
+    margin-top: 20px;
+}
+
 
 /* BREADCRUMB */
 .page_title h3 {
