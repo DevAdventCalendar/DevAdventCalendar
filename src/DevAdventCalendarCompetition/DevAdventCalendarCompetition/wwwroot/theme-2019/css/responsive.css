@@ -131,7 +131,7 @@
     .adreess_img{
         right: ;
     }
-    .donate_page .snata_with_bag{
+    .donate_page .santa_with_bag{
         right: calc(100% + 22px);
     }
 
@@ -250,7 +250,7 @@
         float: none;
         margin-right: -4px;
     }
-    .donate_page .snata_with_bag{
+    .donate_page .santa_with_bag{
         display: none;
     }
     .single_address p, .single_address a{
@@ -353,7 +353,7 @@
     }
 
     /* PROMOT SECTION */
-    .bags,.snata_with_bag{
+    .bags,.santa_with_bag{
         display: none;
     }
 
