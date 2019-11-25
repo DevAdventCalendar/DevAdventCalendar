@@ -1079,10 +1079,10 @@ h1,h2,h3,h4,h5,h6{
   display: inline-block;
   margin-top: 45px;
 }
-.snata_with_bag{
+.santa_with_bag{
 	position: absolute;
 }
-.snata_with_bag {
+.santa_with_bag {
   position: absolute;
   right: calc(100% - 32px);
   top: 60px;
@@ -1500,7 +1500,7 @@ footer{
 	background-size: contain;
 	position: relative;
 }
-.donate_page .snata_with_bag {
+.donate_page .santa_with_bag {
   position: absolute;
   right: calc(100% + 90px);
   top: -71px;
