@@ -17,6 +17,12 @@ namespace DevAdventCalendarCompetition.Models.ManageViewModels
         [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name="Chcę otrzymywać notyfikacje email")]
+        public bool EmailNotificationsEnabled { get; set; }
+
+        [Display(Name = "Chcę otrzymywać notyfikacje push")]
+        public bool PushNotificationsEnabled { get; set; }
+
         public string StatusMessage { get; set; }
     }
 }
