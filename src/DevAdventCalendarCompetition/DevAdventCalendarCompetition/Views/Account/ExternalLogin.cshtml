@@ -3,31 +3,48 @@
     ViewData["Title"] = "Rejestracja";
 }
 
-<h2>@ViewData["Title"]</h2>
-<div class="content-centered">
-    <section class="center-block">
-        <h4>Połącz swoje konto @ViewData["LoginProvider"]</h4>
-
-        <p class="text-info">
-            Zostałeś pomyślnie uwierzytelniony za pomocą serwisu <strong>@ViewData["LoginProvider"]</strong>.
-            Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.
-        </p>
-
+<div class="breadcrumb_area mb-30">
+    <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <form asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <button type="submit" class="btn btn-default">Zarejestruj</button>
-                </form>
+            <div class="breadcrumb_wrapper">
+                <div class="page_title">
+                    <h3>@ViewData["Title"]</h3>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
+
+<div class="container mb-30">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="area_title">
+                <h3 class="black mb-20">Połącz swoje konto @ViewData["LoginProvider"]</h3>
+            </div>
+            <p>
+                Zostałeś pomyślnie uwierzytelniony za pomocą serwisu <strong>@ViewData["LoginProvider"]</strong>.
+                Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.
+            </p>
+
+            <form asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="contact_form">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <div class="text_field text_field_default">
+                                <input asp-for="Email" placeholder="Email" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="chris_btn">Zarejestruj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

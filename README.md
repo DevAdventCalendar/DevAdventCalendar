@@ -50,6 +50,13 @@ DevAdventCalendar web app for online competition for programmers.
 
 6. Create a pull request to `develop` branch (the template has already been created, simply complete it)
 
+## Debugging
+
+ In order to send e-mails you need to set up an e-mail account in `appsettings.development.json`.
+ Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
+
+![ENVIRONMENT](docs/Pictures/screen.png/?raw=true)
+
 ## Used Tools
 
 ### Swagger

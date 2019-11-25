@@ -193,31 +193,34 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row prizes-wrapper prizes-wrapper-md">
-                        @for (int j = 0; j < 6; j++)
+                        @for (int j = 0; j < 7; j++)
                         {
-                            var dayNumber = i * 6 + j + 1;
+                            var dayNumber = i * 7 + j + 1;
                             var testForDay = Model.FirstOrDefault(t => t.StartDate.Value.Day == dayNumber);
-
-                            <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
-                                <div class="border prize-wrapper flex-column flex-fullheight"
-                                    @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
-                                    <div class="area_title text-center mb-30">
-                                        <h4>DZIEŃ @dayNumber</h4>
-                                    </div>
-                                    <div class="flex-centered flex-grow">
-                                        @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
-                                        {
-                                            <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
-                                                <img src="~/theme-2019/images/hero_elem1.png" alt="" title="Logo sponsora dnia" class="img-responsive center-block" />
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <img src="~/theme-2019/images/bear.png" alt="" title="Otwórz dzień @dayNumber" class="img-responsive center-block drop-shadow" />
-                                        }
+                            if (dayNumber <= 24) {
+                                <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
+                                    <div class="border prize-wrapper flex-column flex-fullheight"
+                                        @(testForDay == null || testForDay.Status != TestStatus.Started ? "onclick=CheckTestStatus(" + testForDay?.Number + ")" : "")>
+                                        <div class="area_title text-center mb-30">
+                                            <h4>DZIEŃ @dayNumber</h4>
+                                        </div>
+                                        <div class="flex-centered flex-grow">
+                                            @if (testForDay != null && testForDay.Status != TestStatus.NotStarted)
+                                            {
+                                                <a asp-controller="Test" asp-action="Index" asp-route-testNumber=@testForDay.Number>
+                                                    <img src="~/theme-2019/images/hero_elem1.png" alt="" title="Logo sponsora dnia" class="img-responsive center-block" />
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <img src="~/theme-2019/images/bear.png" alt="" title="Otwórz dzień @dayNumber" class="img-responsive center-block drop-shadow" />
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            } else {
+                                <div class="col-xs-6 col-md-2"></div>
+                            }
                         }
 
                         <!-- sponsor -->
