@@ -9,7 +9,7 @@ namespace DevAdventCalendarCompetition.Vms
         public List<SingleTestResultsVm> SingleTestResults { get; private set; }
 
 #pragma warning disable CA2227 // Collection properties should be read only
-        public PaginatedCollection<TestResultEntryVm> TotalTestResults { get; set; }
+        public Dictionary<int, PaginatedCollection<TestResultEntryVm>> TotalTestResults { get; set; }
 #pragma warning restore CA2227 // Collection properties should be read only
     }
 }

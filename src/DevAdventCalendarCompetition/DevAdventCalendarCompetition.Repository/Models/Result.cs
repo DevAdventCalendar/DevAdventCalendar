@@ -14,15 +14,14 @@ namespace DevAdventCalendarCompetition.Repository.Models
         [ForeignKey("User")]
         public string UserId { get; set; }
 
-        [Required]
-        public int CorrectAnswersCount { get; set; }
+        // [Required]
+        // public int CorrectAnswersCount { get; set; }
 
-        [Required]
-        public int WrongAnswersCount { get; set; }
+        // [Required]
+        // public int WrongAnswersCount { get; set; }
 
-        [Required]
-        public int Points { get; set; }
-
+        // [Required]
+        // public int Points { get; set; }
         public ApplicationUser User { get; set; }
 
         public int Week1Points { get; set; }

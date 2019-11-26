@@ -74,7 +74,7 @@ namespace DevAdventCalendarCompetition.Repository
             }
 
             var indexOfResult = this._dbContext.Results
-                .OrderByDescending(r => r.Points)
+                .OrderByDescending(r => r.Week1Place)
                 .IndexOf(result);
 
             return ++indexOfResult;

@@ -87,23 +87,32 @@ namespace DevAdventCalendarCompetition.Controllers
 
             int pageSize = 50;
 
+            var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryVm>>();
             var testResultListDto = this._homeService.GetAllTestResults();
 
-            List<TestResultEntryVm> totalTestResults = new List<TestResultEntryVm>();
-
-            foreach (var result in testResultListDto)
+            for (var i = 1; i < testResultListDto.Count; i++)
             {
-                totalTestResults.Add(new TestResultEntryVm
+                if (testResultListDto.TryGetValue(i, out var results))
                 {
-                    Week1Points = result.Week1Points,
-                    Week1Place = result.Week1Place,
-                    Week2Points = result.Week1Points,
-                    Week2Place = result.Week1Place,
-                    Week3Points = result.Week1Points,
-                    Week3Place = result.Week1Place,
-                    UserId = result.UserId,
-                    FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
-                });
+                    var totalTestResults = new List<TestResultEntryVm>();
+
+                    foreach (var result in results)
+                    {
+                        totalTestResults.Add(new TestResultEntryVm
+                        {
+                            Week1Points = result.Week1Points,
+                            Week1Place = result.Week1Place,
+                            Week2Points = result.Week1Points,
+                            Week2Place = result.Week1Place,
+                            Week3Points = result.Week1Points,
+                            Week3Place = result.Week1Place,
+                            UserId = result.UserId,
+                            FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
+                        });
+                    }
+
+                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize));
+                }
             }
 
             var vm = new TestResultsVm()
@@ -111,7 +120,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 CurrentUserPosition = this._homeService.GetUserPosition(userId),
 
                 // SingleTestResults = singleTestResults,
-                TotalTestResults = new PaginatedCollection<TestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize)
+                TotalTestResults = paginatedResults
             };
 
             return this.View(vm);
