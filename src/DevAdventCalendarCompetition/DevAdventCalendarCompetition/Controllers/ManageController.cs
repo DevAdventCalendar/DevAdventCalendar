@@ -24,12 +24,14 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IManageService manageService;
         private readonly IAccountService accountService;
         private readonly ILogger logger;
+        private readonly INotificationService _emailNotificationService;
 
-        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger)
+        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService)
         {
             this.manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
             this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this._emailNotificationService = emailNotificationService;
         }
 
         [TempData]
@@ -50,6 +52,8 @@ namespace DevAdventCalendarCompetition.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
+                EmailNotificationsEnabled = user.EmailNotificationsEnabled,
+                PushNotificationsEnabled = user.PushNotificationsEnabled,
                 StatusMessage = this.StatusMessage
             };
 
@@ -82,6 +86,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentNullException(nameof(model));
             }
 
+            var shouldSendVerificationEmail = false;
             if (model.Email != email)
             {
                 var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
@@ -89,6 +94,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this.accountService.GetUserId(this.User)));
                 }
+
+                shouldSendVerificationEmail = true;
+                model.EmailNotificationsEnabled = false;
             }
 
             var phoneNumber = user.PhoneNumber;
@@ -99,6 +107,37 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this.accountService.GetUserId(this.User)));
                 }
+            }
+
+            if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
+            {
+                user.EmailNotificationsEnabled = model.EmailNotificationsEnabled;
+                var updateEmailNotificationPreferencesSucceeded =
+                    await this._emailNotificationService
+                        .SetSubscriptionPreferenceAsync(user.Email, user.EmailNotificationsEnabled && user.EmailConfirmed)
+                        .ConfigureAwait(false)
+                    && (await this.manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+
+                if (updateEmailNotificationPreferencesSucceeded == false)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailNotificationsPreferenceChange, this.accountService.GetUserId(this.User)));
+                }
+            }
+
+            if (model.PushNotificationsEnabled != user.PushNotificationsEnabled)
+            {
+                user.PushNotificationsEnabled = model.PushNotificationsEnabled;
+                var updatePushNotificationPreferencesSucceeded = (await this.manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+
+                if (updatePushNotificationPreferencesSucceeded == false)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPushNotificationsPreferenceChange, this.accountService.GetUserId(this.User)));
+                }
+            }
+
+            if (shouldSendVerificationEmail)
+            {
+                return await this.SendVerificationEmail(model).ConfigureAwait(false);
             }
 
             this.StatusMessage = "Profil został zaktualizowany";

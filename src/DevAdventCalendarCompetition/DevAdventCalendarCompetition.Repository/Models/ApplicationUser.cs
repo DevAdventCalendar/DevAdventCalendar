@@ -11,5 +11,9 @@ namespace DevAdventCalendarCompetition.Repository.Models
         public string SecondName { get; set; }
 
         public ICollection<TestAnswer> Answers { get; private set; }
+
+        public bool EmailNotificationsEnabled { get; set; }
+
+        public bool PushNotificationsEnabled { get; set; }
     }
 }
