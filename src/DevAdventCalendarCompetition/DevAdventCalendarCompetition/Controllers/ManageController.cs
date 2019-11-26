@@ -86,6 +86,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentNullException(nameof(model));
             }
 
+            var shouldSendVerificationEmail = false;
             if (model.Email != email)
             {
                 var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
@@ -93,6 +94,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this.accountService.GetUserId(this.User)));
                 }
+
+                shouldSendVerificationEmail = true;
+                model.EmailNotificationsEnabled = false;
             }
 
             var phoneNumber = user.PhoneNumber;
@@ -110,7 +114,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 user.EmailNotificationsEnabled = model.EmailNotificationsEnabled;
                 var updateEmailNotificationPreferencesSucceeded =
                     await this._emailNotificationService
-                        .SetSubscriptionPreferenceAsync(user.Email, model.EmailNotificationsEnabled)
+                        .SetSubscriptionPreferenceAsync(user.Email, user.EmailNotificationsEnabled && user.EmailConfirmed)
                         .ConfigureAwait(false)
                     && (await this.manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
 
@@ -129,6 +133,11 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPushNotificationsPreferenceChange, this.accountService.GetUserId(this.User)));
                 }
+            }
+
+            if (shouldSendVerificationEmail)
+            {
+                return await this.SendVerificationEmail(model).ConfigureAwait(false);
             }
 
             this.StatusMessage = "Profil został zaktualizowany";

@@ -26,7 +26,7 @@
                 else
                 {
                     <input asp-for="Email" />
-                    <button asp-action="SendVerificationEmail" class="btn btn-link">Wyślij weryfikacyjny e-mail</button>
+                    <button asp-action="SendVerificationEmail" class="btn btn-link">Wyślij ponownie weryfikacyjny e-mail</button>
                 }
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
@@ -37,11 +37,18 @@
             </div>
             <div class="form-group form-toogle">
                 <label asp-for="EmailNotificationsEnabled"></label>
-                <input asp-for="EmailNotificationsEnabled" checked data-toggle="toggle" data-onstyle="danger" data-on="tak" data-off="nie" />
+                @if (Model.IsEmailConfirmed)
+                {
+                    <input asp-for="EmailNotificationsEnabled" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="tak" data-off="nie" />
+                }
+                else
+                {
+                    <input asp-for="EmailNotificationsEnabled" data-toggle="toggle" data-offstyle="danger" data-off="nie" disabled />
+                }
             </div>
             <div class="form-group form-toogle">
                 <label asp-for="PushNotificationsEnabled"></label>
-                <input asp-for="PushNotificationsEnabled" checked data-toggle="toggle" data-onstyle="danger" data-on="tak" data-off="nie" />
+                <input asp-for="PushNotificationsEnabled" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="tak" data-off="nie" />
             </div>
             <button type="submit" class="chris_btn reveal">Zapisz</button>
         </form>
