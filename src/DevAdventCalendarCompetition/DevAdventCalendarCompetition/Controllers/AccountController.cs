@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -228,7 +228,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
             if (info == null)
             {
-                throw new ArgumentException(LoggingMessages.LoadingDataError);
+                throw new InvalidOperationException(LoggingMessages.LoadingDataError);
             }
 
             if (this.ModelState.IsValid)
