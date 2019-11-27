@@ -160,16 +160,19 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="party_text">
-                        @if (correctAnswersForUser == 0)
+                        @if (DateTime.Today.Month == 12)
                         {
-                            <h1>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie.<br />Ale nie poddawaj się! Do boju!</h1>
-                        }
-                        else if (correctAnswersForUser == overallPossibleTestsCount)
-                        {
-                            <h1><span>Gratulacje!</span> <br />Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h1>                        }
-                        else
-                        {
-                            <h1>Twoje statystyki wyglądają następująco: <span>@correctAnswersForUser/@overallPossibleTestsCount</span> otwartych okienek</h1>
+                            @if (correctAnswersForUser == 0)
+                            {
+                                <h1>Oj niedobrze, nie odpowiedziałeś jeszcze ani razu poprawnie.<br />Ale nie poddawaj się! Do boju!</h1>
+                            }
+                            else if (correctAnswersForUser == overallPossibleTestsCount)
+                            {
+                                <h1><span>Gratulacje!</span> <br />Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</h1>                        }
+                            else
+                            {
+                                <h1>Twoje statystyki wyglądają następująco: <span>@correctAnswersForUser/@overallPossibleTestsCount</span> otwartych okienek</h1>
+                            }
                         }
                     </div>
                 </div>
