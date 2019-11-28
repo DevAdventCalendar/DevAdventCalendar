@@ -74,11 +74,27 @@ namespace DevAdventCalendarCompetition.Repository
                 return 0;
             }
 
-            var indexOfResult = this._dbContext.Results
-                .OrderByDescending(r => r.Week1Place)
-                .IndexOf(result);
+            if (result.FinalPlace > 0)
+            {
+                return result.FinalPlace.Value;
+            }
 
-            return ++indexOfResult;
+            if (result.Week3Place > 0)
+            {
+                return result.Week3Place.Value;
+            }
+
+            if (result.Week2Place > 0)
+            {
+                return result.Week2Place.Value;
+            }
+
+            if (result.Week1Place > 0)
+            {
+                return result.Week1Place.Value;
+            }
+
+            return 0;
         }
 
         public List<Result> GetTestResultsForDateRange(int weekNumber)
