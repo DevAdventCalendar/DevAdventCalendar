@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -78,6 +79,41 @@ namespace DevAdventCalendarCompetition.Repository
                 .IndexOf(result);
 
             return ++indexOfResult;
+        }
+
+        public List<Result> GetTestResultsForDateRange(int weekNumber)
+        {
+            switch (weekNumber)
+            {
+                case 1:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.Week1Points != null && r.Week1Points >= 0)
+                        .OrderBy(r => r.Week1Place)
+                        .ToList();
+                case 2:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.Week2Points != null && r.Week2Points >= 0)
+                        .OrderBy(r => r.Week2Place)
+                        .ToList();
+                case 3:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.Week3Points != null && r.Week3Points >= 0)
+                        .OrderBy(r => r.Week3Place)
+                        .ToList();
+                case 4:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.FinalPoints != null && r.FinalPoints >= 0)
+                        .OrderBy(r => r.FinalPlace)
+                        .ToList();
+                default:
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    throw new ArgumentException("Invalid week number.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            }
         }
     }
 }

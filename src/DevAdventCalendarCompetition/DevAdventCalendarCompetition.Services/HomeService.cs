@@ -58,13 +58,33 @@ namespace DevAdventCalendarCompetition.Services
         public Dictionary<int, List<TestResultDto>> GetAllTestResults()
         {
             var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
+            var week1results = this._homeRepository.GetTestResultsForDateRange(1);
 
-            /*
-             * TODO: Get all results from repo for every weeks' dates range
-             */
+            if (week1results != null)
+            {
+                testResultDictionary.Add(1, this._mapper.Map<List<TestResultDto>>(week1results));
 
-            var testResultList = this._homeRepository.GetAllTestResults();
-            var testResultsDtoList = this._mapper.Map<List<TestResultDto>>(testResultList);
+                var week2results = this._homeRepository.GetTestResultsForDateRange(2);
+
+                if (week2results != null && week2results.Count > 0)
+                {
+                    testResultDictionary.Add(2, this._mapper.Map<List<TestResultDto>>(week2results));
+
+                    var week3results = this._homeRepository.GetTestResultsForDateRange(3);
+
+                    if (week3results != null && week3results.Count > 0)
+                    {
+                        testResultDictionary.Add(3, this._mapper.Map<List<TestResultDto>>(week3results));
+
+                        var fullResults = this._homeRepository.GetTestResultsForDateRange(4);
+
+                        if (fullResults != null && fullResults.Count > 0)
+                        {
+                            testResultDictionary.Add(4, this._mapper.Map<List<TestResultDto>>(fullResults));
+                        }
+                    }
+                }
+            }
 
             return testResultDictionary;
         }

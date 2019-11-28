@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Repository.Interfaces
@@ -20,5 +21,7 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
         List<Result> GetAllTestResults();
 
         int GetUserPosition(string userId);
+
+        List<Result> GetTestResultsForDateRange(int weekNumber);
     }
 }

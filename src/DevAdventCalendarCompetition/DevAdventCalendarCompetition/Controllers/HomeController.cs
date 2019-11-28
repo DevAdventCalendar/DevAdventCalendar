@@ -90,7 +90,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryVm>>();
             var testResultListDto = this._homeService.GetAllTestResults();
 
-            for (var i = 1; i < testResultListDto.Count; i++)
+            for (var i = 1; i <= testResultListDto.Count; i++)
             {
                 if (testResultListDto.TryGetValue(i, out var results))
                 {
@@ -102,10 +102,12 @@ namespace DevAdventCalendarCompetition.Controllers
                         {
                             Week1Points = result.Week1Points,
                             Week1Place = result.Week1Place,
-                            Week2Points = result.Week1Points,
-                            Week2Place = result.Week1Place,
-                            Week3Points = result.Week1Points,
-                            Week3Place = result.Week1Place,
+                            Week2Points = result.Week2Points,
+                            Week2Place = result.Week2Place,
+                            Week3Points = result.Week3Points,
+                            Week3Place = result.Week3Place,
+                            FinalPoints = result.FinalPoints,
+                            FinalPlace = result.FinalPlace,
                             UserId = result.UserId,
                             FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
                         });
