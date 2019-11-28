@@ -9,8 +9,8 @@
         <tr>
             <th class="col-xs-1">#</th>
             <th>Użytkownik</th>
-            <th>Poprawne odpowiedzi</th>
-            <th>Błędne odpowiedzi</th>
+            @*<th>Poprawne odpowiedzi</th>
+            <th>Błędne odpowiedzi</th>*@
             <th>Suma punktów</th>
         </tr>
     </thead>
@@ -21,11 +21,11 @@
             <tr>
                 <th scope="row" class="col-xs-1">@(entries.PageIndex <= 1 ? i + 1 : (entries.PageSize * (entries.PageIndex - 1)) + i + 1)</th>
                 <td>@testResult.FullName</td>
-                <td>@testResult.CorrectAnswers</td>
-                <td>@testResult.WrongAnswers</td>
+                @*<td>@testResult.CorrectAnswers</td>
+                <td>@testResult.WrongAnswers</td>*@
                 @if (entries.FirstOrDefault().FinalPoints >= 0)
                 {
-                    <td>@testResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"FinalPoints")).GetValue(testResult).ToString()</td>
+                    <td>@testResult.FinalPoints</td>
                 }
                 else
                 {
