@@ -23,13 +23,18 @@
                 <td>@testResult.FullName</td>
                 @*<td>@testResult.CorrectAnswers</td>
                 <td>@testResult.WrongAnswers</td>*@
-                @if (entries.FirstOrDefault().FinalPoints >= 0)
+                @if (entries.FirstOrDefault().FinalPoints != null)
                 {
                     <td>@testResult.FinalPoints</td>
                 }
                 else
                 {
-                    <td>@testResult.GetType().GetProperties().FirstOrDefault(p => p.Name.Contains($"Week{ Model.Key }Points")).GetValue(testResult).ToString()</td>
+                    var score = testResult.GetType()
+                        .GetProperties()
+                        .FirstOrDefault(p => p.Name.Contains($"Week{Model.Key}Points"))
+                        .GetValue(testResult) as int?; 
+
+                    <td>@score.Value</td>
                 }
             </tr>
         }

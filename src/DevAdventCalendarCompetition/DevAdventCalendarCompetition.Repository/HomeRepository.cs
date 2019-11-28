@@ -76,22 +76,22 @@ namespace DevAdventCalendarCompetition.Repository
 
             if (result.FinalPlace > 0)
             {
-                return result.FinalPlace;
+                return result.FinalPlace.Value;
             }
 
             if (result.Week3Place > 0)
             {
-                return result.Week3Place;
+                return result.Week3Place.Value;
             }
 
             if (result.Week2Place > 0)
             {
-                return result.Week2Place;
+                return result.Week2Place.Value;
             }
 
             if (result.Week1Place > 0)
             {
-                return result.Week1Place;
+                return result.Week1Place.Value;
             }
 
             return 0;
@@ -104,25 +104,25 @@ namespace DevAdventCalendarCompetition.Repository
                 case 1:
                     return this._dbContext.Results
                         .Include(u => u.User)
-                        .Where(r => r.Week1Points >= 0)
+                        .Where(r => r.Week1Points != null)
                         .OrderBy(r => r.Week1Place)
                         .ToList();
                 case 2:
                     return this._dbContext.Results
                         .Include(u => u.User)
-                        .Where(r => r.Week2Points >= 0)
+                        .Where(r => r.Week2Points != null)
                         .OrderBy(r => r.Week2Place)
                         .ToList();
                 case 3:
                     return this._dbContext.Results
                         .Include(u => u.User)
-                        .Where(r => r.Week3Points >= 0)
+                        .Where(r => r.Week3Points != null)
                         .OrderBy(r => r.Week3Place)
                         .ToList();
                 case 4:
                     return this._dbContext.Results
                         .Include(u => u.User)
-                        .Where(r => r.FinalPoints >= 0)
+                        .Where(r => r.FinalPoints != null)
                         .OrderBy(r => r.FinalPlace)
                         .ToList();
                 default:
