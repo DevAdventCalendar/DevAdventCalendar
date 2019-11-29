@@ -6,7 +6,7 @@ namespace DevAdventCalendarCompetition.Services.Models
     public class TestDto
     {
 #pragma warning disable CA1822
-        public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
+        public bool IsAdvent => true;
 
 #pragma warning restore CA1822
         public int Id { get; set; }
