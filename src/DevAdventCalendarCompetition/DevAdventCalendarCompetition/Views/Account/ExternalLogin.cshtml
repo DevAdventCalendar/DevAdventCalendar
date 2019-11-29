@@ -1,4 +1,5 @@
-﻿@model ExternalLoginViewModel
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model ExternalLoginViewModel
 @{
     ViewData["Title"] = "Rejestracja";
 }
@@ -33,7 +34,7 @@
                             <div class="text_field text_field_default">
                                 <input asp-for="Email" placeholder="Email" />
                             </div>
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <span class="text-danger">@Html.ValidationSummary()</span>
                         </div>
                     </div>
                     <div class="col-sm-3">
