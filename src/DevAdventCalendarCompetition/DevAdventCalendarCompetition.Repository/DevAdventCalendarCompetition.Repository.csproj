@@ -16,6 +16,8 @@
     <Compile Remove="Migrations\20191118122911_ResultUpdate.Designer.cs" />
     <Compile Remove="Migrations\20191118124021_ResultUpdate.cs" />
     <Compile Remove="Migrations\20191118124021_ResultUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20191128232925_NullableResultsFields.cs" />
+    <Compile Remove="Migrations\20191128232925_NullableResultsFields.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
