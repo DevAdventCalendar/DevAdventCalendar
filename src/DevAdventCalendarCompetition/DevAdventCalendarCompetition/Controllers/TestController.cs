@@ -66,7 +66,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             this.SaveWrongAnswer(finalAnswer, testNumber);
-            this.ModelState.AddModelError(" ", "Źle! Spróbuj ponownie :)");
+            this.ModelState.AddModelError("Answer", "Źle! Spróbuj ponownie :)");
 
             return this.View("Index", test);
         }
