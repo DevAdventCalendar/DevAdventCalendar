@@ -1,0 +1,61 @@
+﻿using DevAdventCalendarCompetition.TestResultService.Interfaces;
+using System;
+using System.Diagnostics;
+using System.Linq;
+
+namespace DevAdventCalendarCompetition.TestResultService
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            using (var context = new TestResultDbContextFactory().CreateDbContext())
+            {
+                ITestResultRepository repository = new TestResultRepository(context);
+                ITestResultPointsRule correctAnswersPointsRule = new CorrectAnswerPointsRule();
+                ITestResultPointsRule bonusPointsRule = new BonusPointsRule();
+                ITestResultPlaceRule placeRule = new AnsweringTimePlaceRule();
+
+                TestResultService service = new TestResultService(repository,
+                    correctAnswersPointsRule,
+                    bonusPointsRule,
+                    placeRule);
+
+                var numberOfWeek = args.FirstOrDefault();
+                if (numberOfWeek == null)
+                {
+                    
+                    DateTimeOffset startDateTimeOffset = new DateTimeOffset(DateTime.Today.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
+                    Trace.WriteLine($"Start date {startDateTimeOffset}");
+                    DateTimeOffset endDateTimeOffset = new DateTimeOffset(DateTime.Today.Year, 12, 24, 23, 59, 59, TimeSpan.Zero);
+                    Trace.WriteLine($"End date {endDateTimeOffset}");
+
+                    Trace.WriteLine($"Starting calculating points...");
+                    service.CalculateResults(startDateTimeOffset, endDateTimeOffset);
+                    Trace.WriteLine($"Finished calculating points");
+                }
+                else
+                {
+                    var isWeekNumberValid = int.TryParse(numberOfWeek, out int numberOfWeekInt);
+                    if(isWeekNumberValid)
+                    {
+                        if (numberOfWeekInt > 0 && numberOfWeekInt < 4)
+                        {
+                            Trace.WriteLine($"Starting calculating points for week {numberOfWeek}...");
+                            service.CalculateWeeklyResults(numberOfWeekInt);
+                            Trace.WriteLine($"Finished calculating points for week {numberOfWeek}");
+                        }
+                        else
+                        {
+                            throw new Exception("Parametr numeru tygodnia przyjmuje wartość od 1 do 3");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Podaj prawidłową wartość numeru tygodnia");
+                    }                    
+                }                
+            }
+        }
+    }
+}

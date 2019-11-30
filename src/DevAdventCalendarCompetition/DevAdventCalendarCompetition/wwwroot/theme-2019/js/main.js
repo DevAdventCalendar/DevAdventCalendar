@@ -27,7 +27,7 @@
 
 
     /* COUNTDOWN INIT */
-    $('.countdown').countdown('2019/12/01', function(event) {
+    $('.countdown').countdown('2019/12/01 20:00:00', function(event) {
     var $this = $(this).html(event.strftime(''
       + '<li>%D <span>dni</span></li>  '
       + '<li>%H <span>godzin</span></li>  '
@@ -242,7 +242,16 @@ function CheckTestStatus(testNumber) {
                 }
             });
     } else {
-        $("#alert-text").text("Nie możesz wejść!");
+        $("#alert-text").text("Nie możesz wejść! Cierpliwości...");
         $("#tile-open-alert").show();
+    }
+}
+
+function GetResult(number) {
+    if (number == 20) {
+        return "odpowiedź to: 'kutia z makiem'";
+    }
+    else {
+        return "To nie ten numer! Spróbuj jeszcze raz...";
     }
 }
