@@ -4,14 +4,16 @@ using DevAdventCalendarCompetition.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevAdventCalendarCompetition.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191125210918_NotificationsPreferences")]
+    partial class NotificationsPreferences
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,25 +86,15 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FinalPlace");
+                    b.Property<int>("CorrectAnswersCount");
 
-                    b.Property<int?>("FinalPoints");
+                    b.Property<int>("Points");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<int?>("Week1Place");
-
-                    b.Property<int?>("Week1Points");
-
-                    b.Property<int?>("Week2Place");
-
-                    b.Property<int?>("Week2Points");
-
-                    b.Property<int?>("Week3Place");
-
-                    b.Property<int?>("Week3Points");
+                    b.Property<int>("WrongAnswersCount");
 
                     b.HasKey("Id");
 

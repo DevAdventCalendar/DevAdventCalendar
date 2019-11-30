@@ -27,5 +27,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string password);
 
         Task<IdentityResult> RemoveLoginAsync(ApplicationUser user, string loginProvider, string providerKey);
+
+        Task<IdentityResult> UpdateUserAsync(ApplicationUser user);
     }
 }
