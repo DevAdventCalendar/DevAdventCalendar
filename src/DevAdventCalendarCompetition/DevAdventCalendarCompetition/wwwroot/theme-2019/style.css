@@ -247,6 +247,14 @@ h1,h2,h3,h4,h5,h6{
 	cursor: pointer;
 }
 
+div.toggle.btn {
+    float: right;
+}
+
+div.form-group.form-toogle {
+    margin-top: 20px;
+}
+
 
 /* BREADCRUMB */
 .page_title h3 {
@@ -834,6 +842,7 @@ h1,h2,h3,h4,h5,h6{
 	-webkit-box-shadow: 0px 0px 16px rgba(0,0,0,.11);
 	box-shadow: 0px 0px 16px rgba(0,0,0,.11);
 	position: relative;
+    z-index: 1;
 }
 .graphical_elements{
 	position: relative;
@@ -1078,10 +1087,10 @@ h1,h2,h3,h4,h5,h6{
   display: inline-block;
   margin-top: 45px;
 }
-.snata_with_bag{
+.santa_with_bag{
 	position: absolute;
 }
-.snata_with_bag {
+.santa_with_bag {
   position: absolute;
   right: calc(100% - 32px);
   top: 60px;
@@ -1379,6 +1388,7 @@ h1,h2,h3,h4,h5,h6{
 	transform: translate(-50%, -50%);
 	top: 50%;
 }
+
 .message_field {
   margin-bottom: 22px;
 }
@@ -1498,7 +1508,7 @@ footer{
 	background-size: contain;
 	position: relative;
 }
-.donate_page .snata_with_bag {
+.donate_page .santa_with_bag {
   position: absolute;
   right: calc(100% + 90px);
   top: -71px;
@@ -2253,6 +2263,14 @@ body {
     margin-bottom: 30px;
 }
 
+.mb-50 {
+    margin-bottom: 50px;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
 .mt-100 {
     margin-top: 100px;
 }
@@ -2302,6 +2320,16 @@ body {
     }
 
     .prizes-wrapper {
+        display: flex;
+    }
+
+    .prizes-wrapper-md {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .prizes-wrapper-md {
         display: flex;
     }
 }
@@ -2439,10 +2467,18 @@ body {
     line-height: 51px;
 }
 
-.chris_btn_empty {
+.chris_btn_empty,
+.chris_btn.disabled {
     background: #fff;
     color: #333;
     border: none;
+}
+
+.chris_btn.disabled {
+    border: 1px solid #eee;
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
 }
 
 .chris_btn_empty:hover {
@@ -2457,6 +2493,14 @@ body {
 }
 .checkboxes li input + label.checkbox_dark span::before {
     color: #333;
+}
+
+.checkboxes .checkbox-label {
+    font-size: 14px;
+}
+
+.checkboxes .checkbox-label > span {
+    margin-right: 10px;
 }
 
 .offset_menu .as_link {
@@ -2512,4 +2556,38 @@ body {
     color: #c93232;
     background-color: rgba(200, 50, 50, .1);
     border-bottom: 1px solid #c93232;
+}
+
+.table thead th {
+    background: #333;
+    color: #fff;
+    border-bottom: none !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.drop-shadow {
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.3))
+}
+
+.task-inactive {
+    opacity: 0.5;
+}
+
+.task-active {
+    cursor: pointer;
+}
+
+.task-active .prize-wrapper {
+    transition: 0.3s;
+}
+
+.task-active .prize-wrapper:hover {
+    background: #eee;
+}
+
+.text-primary {
+    color: #c93232;
 }

@@ -4,6 +4,7 @@ using System.IO;
 using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -26,9 +27,7 @@ namespace DevAdventCalendarCompetition
             }
 
             var configurationBuilder = new ConfigurationBuilder()
-
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
-
                 .AddEnvironmentVariables();
 
             this.Configuration = configurationBuilder.Build();
@@ -40,6 +39,7 @@ namespace DevAdventCalendarCompetition
         public static void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UpdateDatabase();
+            app.UseForwardedHeaders();
 
             if (env.IsDevelopment())
             {
@@ -82,13 +82,6 @@ namespace DevAdventCalendarCompetition
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(this.Configuration.GetValue<string>("DataProtection:Keys")))
                 .SetApplicationName("DevAdventCalendar");
@@ -107,16 +100,9 @@ namespace DevAdventCalendarCompetition
                 .AddMvc();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                var supportedCultures = new[]
-                {
-                    new CultureInfo("pl-PL")
-                };
+            services.ConfigureOptions(this.Configuration);
 
-                options.DefaultRequestCulture = new RequestCulture("pl-PL");
-                options.SupportedCultures = supportedCultures;
-            });
+            services.AddHttpClient();
         }
     }
 }

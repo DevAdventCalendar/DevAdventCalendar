@@ -9,7 +9,7 @@
 
     <title>DevAdventCalendar - programistyczny kalendarz adwentowy</title>
     <meta name="description" content="DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT. ">
-    <meta property="og:image" content="https://www.devadventcalendar.pl/images/logo_big.JPG">
+    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/DAC2019.png">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74536209-2"></script>
@@ -36,6 +36,9 @@
 
     <!-- bootstrap social -->
     <link rel="stylesheet" href="~/css/bootstrap-social.css" />
+    
+    <!-- bootstrap toggle -->
+    <link rel="stylesheet" href="~/theme-2019/css/bootstrap4-toggle.min.css" />
 
     <!-- animate css -->
     <link rel="stylesheet" href="~/theme-2019/css/animate.css" />
@@ -85,7 +88,7 @@
                                             <span class="right"></span>
                                         </div>
                                         <ul>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Index">&#9924;</a></li>
                                             <li><a asp-area="" asp-controller="Home" asp-action="Results">Wyniki</a></li>
                                             <li><a asp-area="" asp-controller="Home" asp-action="Sponsors">Sponsorzy</a></li>
                                             <li><a asp-area="" asp-controller="Home" asp-action="Prizes">Nagrody</a></li>
@@ -93,6 +96,7 @@
                                             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
 
                                             <!-- login partial -->
+                                            @await Html.PartialAsync("_LoginPartial")
                                         </ul>
                                     </div>
                                 </div>
@@ -121,13 +125,14 @@
                         <ul>
                             <li><a href="https://www.facebook.com/devadventcalendar/" target="_blank"><span class="icofont icofont-social-facebook"></span></a></li>
                             <li><a href="https://twitter.com/dev_advent_cal" target="_blank"><span class="icofont icofont-social-twitter"></span></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCVyWg3P3hqUfE70btpVobfQ" target="_blank"><span class="icofont icofont-social-youtube-play"></span></a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4 br-r">
                     <div class="christmas_footer_logo">
-                        <img src="~/theme-2019/images/footer_logo.png" alt="Foogter logo">
+                        <img src="~/theme-2019/images/footer_logo.png" alt="Footer logo">
                     </div>
                 </div>
 
@@ -135,6 +140,7 @@
                     <div class="legal_text">
                         <p>
                             © 2019 - DevAdventCalendar<br />
+                            <a href="~/polityka.pdf" target="_blank">Polityka prywatności</a>
                             <a href="~/regulamin.pdf" target="_blank">Regulamin</a>
                         </p>
                     </div>
@@ -176,6 +182,9 @@
 
     <!-- bootstrap js -->
     <script src="~/theme-2019/js/bootstrap.min.js"></script>
+
+    <!-- bootstrap toggle -->
+    <script src="~/theme-2019/js/bootstrap4-toggle.min.js"></script>
 
     <!-- jquery easing 1.3 -->
     <script src="~/theme-2019/js/jquery.easing1.3.js"></script>

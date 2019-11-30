@@ -1,10 +1,27 @@
-﻿<div class="content-centered">
-    <div class="row text-center">
-        <h3>
-            Twój email został już potwierdzony. @Html.ActionLink("Zaloguj się!", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-        </h3>
-        <h3>
-            <b>@Html.ActionLink("Zaloguj się!", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</b>
-        </h3>
+﻿<div class="breadcrumb_area mb-30">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb_wrapper">
+                <div class="page_title">
+                    <h3>Potwierdzenie rejestracji</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-30">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="area_title">
+                <h3 class="black mb-20">Email został już potwierdzony.</h3>
+                <p>Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</p>
+                <div class="row">
+                    <div class="col-sm-3">
+                        @Html.ActionLink("Zaloguj się!", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "chris_btn", id = "loginLink" })
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

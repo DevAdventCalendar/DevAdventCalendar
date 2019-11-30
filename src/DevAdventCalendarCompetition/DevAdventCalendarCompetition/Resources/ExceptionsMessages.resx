@@ -132,4 +132,10 @@
   <data name="UserWithIdNotFound" xml:space="preserve">
     <value>Nie można załadować użytkownika z identyfikatorem {0}.</value>
   </data>
+  <data name="ErrorDuringEmailNotificationsPreferenceChange" xml:space="preserve">
+    <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień email dla użytkownika z identyfikatorem {0}.</value>
+  </data>
+  <data name="ErrorDuringPushNotificationsPreferenceChange" xml:space="preserve">
+    <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}.</value>
+  </data>
 </root>

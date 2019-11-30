@@ -1,84 +1,97 @@
 ﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
 
-<div class="row">
-    <div class="col-md-12">
-        @if (Model == null)
-        {
-            <div class="row content-centered">
-                <div class="col text-center">
-                    <img id="santa" src="~/images/santa.JPG" alt="Święty Mikołaj" />
-                    <br />
-                    <br />
-                    <h4>Gdy na zegarze 12 wybije</h4>
-                    <h4>okienko swą zagadkę odkryje...</h4>
-                    <h4>Nieotwarte okienka swe tajemnice</h4>
-                    <h4>na zawsze pozostawią ukryte.</h4>
-                    <h4>Wiec spiesz się i co dzień okienka otwieraj.</h4>
-                    <h4>Zdobywaj zniżki i nagrody zbieraj!</h4>
+    <div class="breadcrumb_area">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb_wrapper">
+                    <div class="page_title">
+                        <h3>ZAGADKA @Model.Number</h3>
+                    </div>
                 </div>
             </div>
-        }
-        else
-        {
-            if (Model.SponsorLogoUrl != null && Model.IsAdvent)
-            {
-                <div id="day-sponsor" class="text-center">
-                    <h2>Sponsorem dnia jest</h2>
-                    <h3>@Model.SponsorName</h3>
-                    <img src="images/@Model.SponsorLogoUrl" alt="@Model.SponsorName" width=165 />
-                </div>
-            }
+        </div>
+    </div>
 
-            if (Model.Discount != null && Model.IsAdvent)
-            {
-                <br />
-                <div class="discount text-center">
-                    <h3>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</h3>
-                    <h4>@Model.Discount</h4>
+    <section class="event_txt mb-30">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="party_text">
+                    <h1 class="mb-30">@Model.Description</h1>
 
-                    @if (Model.DiscountLogoUrl != null && Model.DiscountUrl != null)
+                    @if (Model == null)
                     {
-                        <div class="discount-links">
-                            <a href="@Model.DiscountUrl" target="_blank">LINK</a>
-                            <a href="@Model.DiscountLogoUrl" target="_blank">
-                                <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath" />
-                            </a>
+                        <div class="row content-centered">
+                            <div class="col text-center">
+                                <h4>Gdy na zegarze 20 wybije</h4>
+                                <h4>okienko swoją zagadkę odkryje...</h4>
+                                <h4>Wiec spiesz się i co dzień okienka otwieraj.</h4>
+                                <h4>Zdobywaj punkty i nagrody zbieraj!</h4>
+                            </div>
                         </div>
                     }
+                    else
+                    {
+                        if (Model.SponsorLogoUrl != null && Model.IsAdvent)
+                        {
+                            <div id="day-sponsor" class="text-center mt-50 mb-50">
+                                <h4 class="mb-20 text-primary">Sponsorem dnia jest</h4>
+                                <h1 class="mb-20">@Model.SponsorName</h1>
+                                <img src="images/@Model.SponsorLogoUrl" alt="@Model.SponsorName" width="165" />
+                            </div>
+                        }
+
+                        if (Model.Discount != null && Model.IsAdvent)
+                        {
+                            <div class="discount text-center mt-50 mb-50">
+                                <h3 class="mb-20">A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</h3>
+                                <h4 class="mb-20">@Model.Discount</h4>
+
+                                @if (Model.DiscountLogoUrl != null && Model.DiscountUrl != null)
+                                {
+                                    <div class="discount-links">
+                                        <a href="@Model.DiscountUrl" target="_blank">LINK</a>
+                                        <a href="@Model.DiscountLogoUrl" target="_blank">
+                                            <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath" />
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                        if (Model.HasUserAnswered)
+                        {
+                            <h3 class="mb-30 text-primary">Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</h3>
+                        }
+                        else if (Model.IsAdvent)
+                        {
+                            using (Html.BeginForm(FormMethod.Post))
+                            {
+                                <div class="mt-50 mb-50">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group mt-20">
+                                        <h4 class="mb-20"><label for="answer">Twoja odpowiedź</label></h4>
+                                        <input id="answer" name="answer" type="text" class="form-control" required style="text-transform: uppercase">
+                                        <p>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</p>
+                                    </div>
+                                    <button type="submit" class="chris_btn">Wyślij</button>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <h3 class="mb-30 text-primary">Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</h3>
+                        }
+
+                        if (!Model.IsAdvent && !string.IsNullOrEmpty(Model.PlainAnswer))
+                        {
+                            <h4 class="mb-30">Poprawna odpowiedź: @Model.PlainAnswer</h4>
+                        }
+                    }
+                    
+                    @*<div>Odpowiedź do zagadki nr 6: "sernik z rodzynkami"</div>*@
+                    <img src="~/theme-2019/images/gift_bag.png" alt="" class="mt-30" />
+
                 </div>
-                <br />
-            }
-
-            <h2>ZAGADKA @Model.Number</h2>
-            <h3>@Model.Description</h3>
-            <br />
-
-            if (Model.HasUserAnswered)
-            {
-                <h3>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</h3>
-            }
-            else if (Model.IsAdvent)
-            {
-                using (Html.BeginForm(FormMethod.Post))
-                {
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        <label for='answer'>Twoja odpowiedź</label>
-                        <input id='answer' name="answer" type="text" class="form-control" style="text-transform: uppercase">
-                        <p class="small">Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</p>
-                    </div>
-                    <button type="submit" class="btn btn-default">Wyślij</button>
-                }
-            }
-            else
-            {
-                <h3>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</h3>
-            }
-
-            if (!Model.IsAdvent && !string.IsNullOrEmpty(Model.PlainAnswer))
-            {
-                <h4>Poprawna odpowiedź: @Model.PlainAnswer</h4>
-            }
-        }
-    </div>
-</div>
+            </div>
+        </div>
+    </section>

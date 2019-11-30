@@ -34,6 +34,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<bool>("EmailNotificationsEnabled");
+
                     b.Property<string>("FirstName");
 
                     b.Property<bool>("LockoutEnabled");
@@ -51,6 +53,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<bool>("PushNotificationsEnabled");
 
                     b.Property<string>("SecondName");
 
@@ -80,25 +84,25 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FinalPlace");
+                    b.Property<int?>("FinalPlace");
 
-                    b.Property<int>("FinalPoints");
+                    b.Property<int?>("FinalPoints");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<int>("Week1Place");
+                    b.Property<int?>("Week1Place");
 
-                    b.Property<int>("Week1Points");
+                    b.Property<int?>("Week1Points");
 
-                    b.Property<int>("Week2Place");
+                    b.Property<int?>("Week2Place");
 
-                    b.Property<int>("Week2Points");
+                    b.Property<int?>("Week2Points");
 
-                    b.Property<int>("Week3Place");
+                    b.Property<int?>("Week3Place");
 
-                    b.Property<int>("Week3Points");
+                    b.Property<int?>("Week3Points");
 
                     b.HasKey("Id");
 

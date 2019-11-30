@@ -128,6 +128,12 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View();
         }
 
+        [Route("11111100011")]
+        public ActionResult Surprise()
+        {
+            return this.View();
+        }
+
         [Route(nameof(About))]
         public ActionResult About()
         {
@@ -148,12 +154,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
         [Route(nameof(Prizes))]
         public ActionResult Prizes()
-        {
-            return this.View();
-        }
-
-        [Route(nameof(Privacy))]
-        public IActionResult Privacy()
         {
             return this.View();
         }
