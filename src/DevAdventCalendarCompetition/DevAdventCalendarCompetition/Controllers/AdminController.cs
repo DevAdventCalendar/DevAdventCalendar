@@ -56,7 +56,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
 
                 // automatically set start and end time
-                model.StartDate = model.StartDate.AddHours(12).AddMinutes(00);
+                model.StartDate = model.StartDate.AddHours(20).AddMinutes(00);
                 model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
 
                 var testDto = new TestDto
