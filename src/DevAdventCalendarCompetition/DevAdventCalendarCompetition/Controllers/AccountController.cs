@@ -76,7 +76,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await this._accountService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe).ConfigureAwait(false);
+                var result = await this._accountService.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe).ConfigureAwait(false);
 
                 if (result.Succeeded)
                 {
@@ -138,7 +138,6 @@ namespace DevAdventCalendarCompetition.Controllers
                     var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                     var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
                     await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
-
                     return this.View("RegisterConfirmation");
                 }
 
