@@ -69,5 +69,10 @@ namespace DevAdventCalendarCompetition.Services
         {
             return await this._userManager.RemoveLoginAsync(user, loginProvider, providerKey).ConfigureAwait(false);
         }
+
+        public async Task<IdentityResult> UpdateUserAsync(ApplicationUser user)
+        {
+            return await this._userManager.UpdateAsync(user).ConfigureAwait(false);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -34,6 +34,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<bool>("EmailNotificationsEnabled");
+
                     b.Property<string>("FirstName");
 
                     b.Property<bool>("LockoutEnabled");
@@ -51,6 +53,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<bool>("PushNotificationsEnabled");
 
                     b.Property<string>("SecondName");
 
@@ -80,15 +84,25 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CorrectAnswersCount");
+                    b.Property<int?>("FinalPlace");
 
-                    b.Property<int>("Points");
+                    b.Property<int?>("FinalPoints");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<int>("WrongAnswersCount");
+                    b.Property<int?>("Week1Place");
+
+                    b.Property<int?>("Week1Points");
+
+                    b.Property<int?>("Week2Place");
+
+                    b.Property<int?>("Week2Points");
+
+                    b.Property<int?>("Week3Place");
+
+                    b.Property<int?>("Week3Points");
 
                     b.HasKey("Id");
 
@@ -316,7 +330,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
             modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.TestWrongAnswer", b =>
                 {
                     b.HasOne("DevAdventCalendarCompetition.Repository.Models.Test", "Test")
-                        .WithMany()
+                        .WithMany("WrongAnswers")
                         .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade);
 

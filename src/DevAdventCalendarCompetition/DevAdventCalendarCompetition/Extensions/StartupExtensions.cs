@@ -1,12 +1,17 @@
 using System;
+using System.Globalization;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +60,7 @@ namespace DevAdventCalendarCompetition.Extensions
                     return emailSender;
                 });
 
+            services.AddTransient<INotificationService, EmailNotificationService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAdminService, AdminService>();
             services.AddTransient<IBaseTestService, BaseTestService>();
@@ -100,10 +106,10 @@ namespace DevAdventCalendarCompetition.Extensions
             }
 
             using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var init = scope.ServiceProvider.GetService<DbInitializer>();
-                    init.Seed();
-                }
+            {
+                var init = scope.ServiceProvider.GetService<DbInitializer>();
+                init.Seed();
+            }
         }
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
@@ -118,6 +124,42 @@ namespace DevAdventCalendarCompetition.Extensions
                     context.Request.Scheme = "https";
                     return next(context);
                 });
+        }
+
+        public static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("pl-PL")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("pl-PL");
+                options.SupportedCultures = supportedCultures;
+            });
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+
+            services.Configure<EmailNotificationOptions>(configuration.GetSection("EmailNotification"));
+
+            return services;
         }
     }
 }

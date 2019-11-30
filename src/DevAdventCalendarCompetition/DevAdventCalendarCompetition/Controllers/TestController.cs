@@ -46,7 +46,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var test = this.baseTestService.GetTestByNumber(testNumber);
 
-            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", " ", StringComparison.Ordinal);
+            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", string.Empty, StringComparison.Ordinal);
 
             if (this.baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
                     {
@@ -66,7 +66,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             this.SaveWrongAnswer(finalAnswer, testNumber);
-            this.ModelState.AddModelError(" ", "Źle! Spróbuj ponownie :)");
+            this.ModelState.AddModelError("Answer", "Źle! Spróbuj ponownie :)");
 
             return this.View("Index", test);
         }

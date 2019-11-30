@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Repository.Interfaces
@@ -17,8 +18,14 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         int GetCorrectAnswersCountForUser(string userId);
 
+        int GetCorrectAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+
+        int GetWrongAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+
         List<Result> GetAllTestResults();
 
         int GetUserPosition(string userId);
+
+        List<Result> GetTestResultsForWeek(int weekNumber);
     }
 }

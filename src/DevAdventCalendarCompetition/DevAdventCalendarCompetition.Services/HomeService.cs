@@ -55,12 +55,38 @@ namespace DevAdventCalendarCompetition.Services
             return testWithAnswersDtoList;
         }
 
-        public List<TestResultDto> GetAllTestResults()
+        public Dictionary<int, List<TestResultDto>> GetAllTestResults()
         {
-            var testResultList = this._homeRepository.GetAllTestResults();
-            var testResultsDtoList = this._mapper.Map<List<TestResultDto>>(testResultList);
+            var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
+            var week1results = this._homeRepository.GetTestResultsForWeek(1);
 
-            return testResultsDtoList;
+            if (week1results != null)
+            {
+                testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1results)));
+
+                var week2results = this._homeRepository.GetTestResultsForWeek(2);
+
+                if (week2results != null && week2results.Count > 0)
+                {
+                    testResultDictionary.Add(2, this.FillResultsWithAnswersStats(2, this._mapper.Map<List<TestResultDto>>(week2results)));
+
+                    var week3results = this._homeRepository.GetTestResultsForWeek(3);
+
+                    if (week3results != null && week3results.Count > 0)
+                    {
+                        testResultDictionary.Add(3, this.FillResultsWithAnswersStats(3, this._mapper.Map<List<TestResultDto>>(week3results)));
+
+                        var fullResults = this._homeRepository.GetTestResultsForWeek(4);
+
+                        if (fullResults != null && fullResults.Count > 0)
+                        {
+                            testResultDictionary.Add(4, this.FillResultsWithAnswersStats(4, this._mapper.Map<List<TestResultDto>>(fullResults)));
+                        }
+                    }
+                }
+            }
+
+            return testResultDictionary;
         }
 
         public string CheckTestStatus(int testNumber)
@@ -93,6 +119,44 @@ namespace DevAdventCalendarCompetition.Services
                 m => string.IsNullOrEmpty(m.Groups[3].Value)
                     ? m.Groups[2].Value + "..." + m.Groups[4].Value + "..." + m.Groups[5].Value
                     : m.Groups[3].Value + "..." + m.Groups[4].Value + "..." + m.Groups[5].Value);
+        }
+
+        private List<TestResultDto> FillResultsWithAnswersStats(int weekNumber, List<TestResultDto> results)
+        {
+            foreach (var result in results)
+            {
+                DateTimeOffset dateFrom;
+                DateTimeOffset dateTo;
+
+                switch (weekNumber)
+                {
+                    case 1:
+                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
+                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
+                        break;
+                    case 2:
+                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
+                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
+                        break;
+                    case 3:
+                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
+                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 22, 20, 0, 0, TimeSpan.Zero);
+                        break;
+                    default:
+                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
+                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 25, 20, 0, 0, TimeSpan.Zero);
+                        break;
+                }
+
+                var correctAnswersCount = this._homeRepository.GetCorrectAnswersCountForUserAndDateRange(result.UserId, dateFrom, dateTo);
+                var wrongAnswersCount =
+                    this._homeRepository.GetWrongAnswersCountForUserAndDateRange(result.UserId, dateFrom, dateTo);
+
+                result.CorrectAnswersCount = correctAnswersCount;
+                result.WrongAnswersCount = wrongAnswersCount;
+            }
+
+            return results;
         }
     }
 }

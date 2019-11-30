@@ -242,7 +242,16 @@ function CheckTestStatus(testNumber) {
                 }
             });
     } else {
-        $("#alert-text").text("Nie możesz wejść!");
+        $("#alert-text").text("Nie możesz wejść! Cierpliwości...");
         $("#tile-open-alert").show();
+    }
+}
+
+function GetResult(number) {
+    if (number == 20) {
+        return "odpowiedź to: 'kutia z makiem'";
+    }
+    else {
+        return "To nie ten numer! Spróbuj jeszcze raz...";
     }
 }

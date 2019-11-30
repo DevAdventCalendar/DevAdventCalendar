@@ -1,0 +1,83 @@
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace DevAdventCalendarCompetition.Repository.Migrations
+{
+    public partial class ResultUpdate : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            if (migrationBuilder != null)
+            {
+                migrationBuilder.DropTable(
+                    name: "Results");
+
+                migrationBuilder.CreateTable(
+                    name: "Results",
+                    columns: table => new
+                    {
+                        Id = table.Column<int>(nullable: false)
+                            .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        UserId = table.Column<string>(maxLength: 450, nullable: false),
+                        Week1Points = table.Column<int>(nullable: true),
+                        Week1Place = table.Column<int>(nullable: true),
+                        Week2Points = table.Column<int>(nullable: true),
+                        Week2Place = table.Column<int>(nullable: true),
+                        Week3Points = table.Column<int>(nullable: true),
+                        Week3Place = table.Column<int>(nullable: true),
+                        FinalPoints = table.Column<int>(nullable: true),
+                        FinalPlace = table.Column<int>(nullable: true)
+                    },
+                    constraints: table =>
+                    {
+                        table.PrimaryKey("PK_Results", x => x.Id);
+                        table.ForeignKey(
+                            name: "FK_Results_AspNetUsers_UserId",
+                            column: x => x.UserId,
+                            principalTable: "AspNetUsers",
+                            principalColumn: "Id",
+                            onDelete: ReferentialAction.Cascade);
+                    });
+
+                migrationBuilder.CreateIndex(
+                    name: "IX_Results_UserId",
+                    table: "Results",
+                    column: "UserId");
+            }
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            if (migrationBuilder != null)
+            {
+                migrationBuilder.DropTable(
+                    name: "Results");
+
+                migrationBuilder.CreateTable("Results", table => new
+                    {
+                        Id = table.Column<int>(nullable: false)
+                            .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        UserId = table.Column<string>(maxLength: 450, nullable: false),
+                        CorrectAnswersCount = table.Column<int>(nullable: false),
+                        WrongAnswersCount = table.Column<int>(nullable: false),
+                        Points = table.Column<int>(nullable: false)
+                    },
+                    constraints: table =>
+                    {
+                        table.PrimaryKey("PK_Results", x => x.Id);
+                        table.ForeignKey(
+                            name: "FK_Results_AspNetUsers_UserId",
+                            column: x => x.UserId,
+                            principalTable: "AspNetUsers",
+                            principalColumn: "Id",
+                            onDelete: ReferentialAction.Cascade);
+                    });
+
+                migrationBuilder.CreateIndex(
+                    name: "IX_Results_UserId",
+                    table: "Results",
+                    column: "UserId");
+            }
+        }
+    }
+}

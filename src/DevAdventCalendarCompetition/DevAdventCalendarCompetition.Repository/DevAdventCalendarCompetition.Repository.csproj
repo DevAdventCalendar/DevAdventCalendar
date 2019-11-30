@@ -12,6 +12,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181104174220_RenameTables.cs" />
     <Compile Remove="Migrations\20181104175222_RenameTables.cs" />
+    <Compile Remove="Migrations\20191118122911_ResultUpdate.cs" />
+    <Compile Remove="Migrations\20191118122911_ResultUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20191118124021_ResultUpdate.cs" />
+    <Compile Remove="Migrations\20191118124021_ResultUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20191128232925_NullableResultsFields.cs" />
+    <Compile Remove="Migrations\20191128232925_NullableResultsFields.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +29,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
