@@ -19,14 +19,14 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         Id = table.Column<int>(nullable: false)
                             .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                         UserId = table.Column<string>(maxLength: 450, nullable: false),
-                        Week1Points = table.Column<int>(nullable: false),
-                        Week1Place = table.Column<int>(nullable: false),
-                        Week2Points = table.Column<int>(nullable: false),
-                        Week2Place = table.Column<int>(nullable: false),
-                        Week3Points = table.Column<int>(nullable: false),
-                        Week3Place = table.Column<int>(nullable: false),
-                        FinalPoints = table.Column<int>(nullable: false),
-                        FinalPlace = table.Column<int>(nullable: false)
+                        Week1Points = table.Column<int>(nullable: true),
+                        Week1Place = table.Column<int>(nullable: true),
+                        Week2Points = table.Column<int>(nullable: true),
+                        Week2Place = table.Column<int>(nullable: true),
+                        Week3Points = table.Column<int>(nullable: true),
+                        Week3Place = table.Column<int>(nullable: true),
+                        FinalPoints = table.Column<int>(nullable: true),
+                        FinalPlace = table.Column<int>(nullable: true)
                     },
                     constraints: table =>
                     {
