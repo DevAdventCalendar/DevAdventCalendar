@@ -48,12 +48,12 @@
 
                                 @if (Model.DiscountLogoUrl != null && Model.DiscountUrl != null)
                                 {
-                                <div class="discount-links">
-                                    <a href="@Model.DiscountUrl" target="_blank">LINK</a>
-                                    <a href="@Model.DiscountLogoUrl" target="_blank">
-                                        <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath" />
-                                    </a>
-                                </div>
+                                    <div class="discount-links">
+                                        <a href="@Model.DiscountUrl" target="_blank">LINK</a>
+                                        <a href="@Model.DiscountLogoUrl" target="_blank">
+                                            <img src="images/@Model.DiscountLogoPath" alt="@Model.DiscountLogoPath" />
+                                        </a>
+                                    </div>
                                 }
                             </div>
                         }
@@ -87,8 +87,10 @@
                             <h4 class="mb-30">Poprawna odpowiedź: @Model.PlainAnswer</h4>
                         }
                     }
+                    
+                    @*<div>Odpowiedź do zagadki nr 6: "sernik z rodzynkami"</div>*@
+                    <img src="~/theme-2019/images/gift_bag.png" alt="" class="mt-30" />
 
-                    <img src="~/theme-2019/images/gift_bag.png" alt="" class="mt-30">
                 </div>
             </div>
         </div>

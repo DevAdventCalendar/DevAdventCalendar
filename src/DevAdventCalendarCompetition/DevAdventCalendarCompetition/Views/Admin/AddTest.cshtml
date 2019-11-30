@@ -9,7 +9,6 @@
             @using (Html.BeginForm(FormMethod.Post))
             {
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Number"></label>
                     <input asp-for="Number" class="form-control" value="1" required />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -224,15 +224,15 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentNullException(nameof(model));
             }
 
+            // Get the information about the user from the external login provider
+            var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
+            if (info == null)
+            {
+                throw new InvalidOperationException(LoggingMessages.LoadingDataError);
+            }
+
             if (this.ModelState.IsValid)
             {
-                // Get the information about the user from the external login provider
-                var info = await this._accountService.GetExternalLoginInfoAsync().ConfigureAwait(false);
-                if (info == null)
-                {
-                    throw new ArgumentException(LoggingMessages.LoadingDataError);
-                }
-
                 var user = this._accountService.CreateApplicationUserByEmail(model.Email);
 
                 var result = await this._accountService.CreateAsync(user, null).ConfigureAwait(false);
@@ -255,6 +255,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             this.ViewData["ReturnUrl"] = returnUrl;
+            this.ViewData["LoginProvider"] = info.LoginProvider;
             return this.View(nameof(this.ExternalLogin), model);
         }
 
@@ -400,7 +401,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             foreach (var error in result.Errors)
             {
-                this.ModelState.AddModelError(string.Empty, error.Description);
+                this.ModelState.AddModelError(error.Code, error.Description);
             }
         }
 

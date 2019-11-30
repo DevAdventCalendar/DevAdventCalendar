@@ -101,6 +101,12 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View();
         }
 
+        [Route("11111100011")]
+        public ActionResult Surprise()
+        {
+            return this.View();
+        }
+
         [Route(nameof(About))]
         public ActionResult About()
         {
