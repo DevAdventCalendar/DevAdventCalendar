@@ -142,22 +142,22 @@ namespace DevAdventCalendarCompetition.Controllers
                     await this._emailNotificationService
                         .SetSubscriptionPreferenceAsync(user.Email, user.EmailNotificationsEnabled && user.EmailConfirmed)
                         .ConfigureAwait(false)
-                    && (await this.manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+                    && (await this._manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
 
                 if (updateEmailNotificationPreferencesSucceeded == false)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailNotificationsPreferenceChange, this.accountService.GetUserId(this.User)));
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailNotificationsPreferenceChange, this._accountService.GetUserId(this.User)));
                 }
             }
 
             if (model.PushNotificationsEnabled != user.PushNotificationsEnabled)
             {
                 user.PushNotificationsEnabled = model.PushNotificationsEnabled;
-                var updatePushNotificationPreferencesSucceeded = (await this.manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+                var updatePushNotificationPreferencesSucceeded = (await this._manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
 
                 if (updatePushNotificationPreferencesSucceeded == false)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPushNotificationsPreferenceChange, this.accountService.GetUserId(this.User)));
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPushNotificationsPreferenceChange, this._accountService.GetUserId(this.User)));
                 }
             }
 
