@@ -4,9 +4,11 @@ namespace DevAdventCalendarCompetition.TestResultService
 {
     public class BonusPointsRule : ITestResultPointsRule
     {
+        private const int MaxBonus = 30;
+
         public int CalculatePoints(int answersCount)
         {
-            return 30 - answersCount * 5;
+            return MaxBonus - answersCount * 5;
         }
     }
 }
