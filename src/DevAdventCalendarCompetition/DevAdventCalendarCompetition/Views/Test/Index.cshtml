@@ -58,6 +58,13 @@
                             </div>
                         }
 
+                        var errorMessage = Html.ValidationMessageFor(m => m.Answer);
+
+                        if (!string.IsNullOrEmpty(errorMessage.ToString()))
+                        {
+                            <h3 class="mb-30 text-primary">@errorMessage</h3>
+                        }
+                        
                         if (Model.HasUserAnswered)
                         {
                             <h3 class="mb-30 text-primary">Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</h3>
@@ -87,7 +94,7 @@
                             <h4 class="mb-30">Poprawna odpowiedź: @Model.PlainAnswer</h4>
                         }
                     }
-                    
+
                     @*<div>Odpowiedź do zagadki nr 6: "sernik z rodzynkami"</div>*@
                     <img src="~/theme-2019/images/gift_bag.png" alt="" class="mt-30" />
 
