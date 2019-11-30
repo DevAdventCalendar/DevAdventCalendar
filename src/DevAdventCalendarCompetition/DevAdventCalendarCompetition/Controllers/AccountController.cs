@@ -135,9 +135,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 {
                     this._logger.LogInformation(LoggingMessages.NewAccount);
 
-                    // var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
-                    // var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
-                    // await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
+                    var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+                    var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
+                    await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
                     return this.View("RegisterConfirmation");
                 }
 
