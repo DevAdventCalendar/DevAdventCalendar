@@ -21,17 +21,17 @@ namespace DevAdventCalendarCompetition.Controllers
     {
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
-        private readonly IManageService manageService;
-        private readonly IAccountService accountService;
-        private readonly ILogger logger;
+        private readonly IManageService _manageService;
+        private readonly IAccountService _accountService;
+        private readonly ILogger _logger;
         private readonly INotificationService _emailNotificationService;
 
         public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService)
         {
-            this.manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
-            this.accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this._emailNotificationService = emailNotificationService;
+            this._manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
+            this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
+            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
         }
 
         [TempData]
@@ -40,10 +40,10 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
             var model = new IndexViewModel
@@ -74,10 +74,10 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(model);
             }
 
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
             var email = user.Email;
@@ -89,10 +89,10 @@ namespace DevAdventCalendarCompetition.Controllers
             var shouldSendVerificationEmail = false;
             if (model.Email != email)
             {
-                var setEmailResult = await this.manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
+                var setEmailResult = await this._manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this.accountService.GetUserId(this.User)));
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this._accountService.GetUserId(this.User)));
                 }
 
                 shouldSendVerificationEmail = true;
@@ -102,10 +102,36 @@ namespace DevAdventCalendarCompetition.Controllers
             var phoneNumber = user.PhoneNumber;
             if (model.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await this.manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
+                var setPhoneResult = await this._manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
                 if (!setPhoneResult.Succeeded)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this.accountService.GetUserId(this.User)));
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this._accountService.GetUserId(this.User)));
+                }
+            }
+
+            if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
+            {
+                user.EmailNotificationsEnabled = model.EmailNotificationsEnabled;
+                var updateEmailNotificationPreferencesSucceeded =
+                    await this._emailNotificationService
+                        .SetSubscriptionPreferenceAsync(user.Email, user.EmailNotificationsEnabled && user.EmailConfirmed)
+                        .ConfigureAwait(false)
+                    && (await this._manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+
+                if (updateEmailNotificationPreferencesSucceeded == false)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailNotificationsPreferenceChange, this._accountService.GetUserId(this.User)));
+                }
+            }
+
+            if (model.PushNotificationsEnabled != user.PushNotificationsEnabled)
+            {
+                user.PushNotificationsEnabled = model.PushNotificationsEnabled;
+                var updatePushNotificationPreferencesSucceeded = (await this._manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+
+                if (updatePushNotificationPreferencesSucceeded == false)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPushNotificationsPreferenceChange, this._accountService.GetUserId(this.User)));
                 }
             }
 
@@ -140,6 +166,11 @@ namespace DevAdventCalendarCompetition.Controllers
                 return await this.SendVerificationEmail(model).ConfigureAwait(false);
             }
 
+            if (shouldSendVerificationEmail)
+            {
+                return await this.SendVerificationEmail(model).ConfigureAwait(false);
+            }
+
             this.StatusMessage = "Profil został zaktualizowany";
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -158,16 +189,16 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(model);
             }
 
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            var code = await this.accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
+            var code = await this._accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
             var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
             var email = user.Email;
-            await this.accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl)).ConfigureAwait(false);
+            await this._accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl)).ConfigureAwait(false);
 
             this.StatusMessage = "E-mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę odbiorczą";
             return this.RedirectToAction(nameof(this.Index));
@@ -176,13 +207,13 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
+            var hasPassword = await this._manageService.HasPasswordAsync(user).ConfigureAwait(false);
             if (!hasPassword)
             {
                 return this.RedirectToAction(nameof(this.SetPassword));
@@ -206,10 +237,10 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(model);
             }
 
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
             if (model == null)
@@ -217,7 +248,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentNullException(nameof(model));
             }
 
-            var changePasswordResult = await this.manageService.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).ConfigureAwait(false);
+            var changePasswordResult = await this._manageService.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).ConfigureAwait(false);
 
             if (!changePasswordResult.Succeeded)
             {
@@ -225,8 +256,8 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(model);
             }
 
-            await this.accountService.SignInAsync(user).ConfigureAwait(false);
-            this.logger.LogInformation(LoggingMessages.PasswordIsChangedSuccessfully);
+            await this._accountService.SignInAsync(user).ConfigureAwait(false);
+            this._logger.LogInformation(LoggingMessages.PasswordIsChangedSuccessfully);
             this.StatusMessage = "Twoje hasło zostało zmienione";
 
             return this.RedirectToAction(nameof(this.ChangePassword));
@@ -235,13 +266,13 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            var hasPassword = await this.manageService.HasPasswordAsync(user).ConfigureAwait(false);
+            var hasPassword = await this._manageService.HasPasswordAsync(user).ConfigureAwait(false);
 
             if (hasPassword)
             {
@@ -266,20 +297,20 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View(model);
             }
 
-            var user = await this.manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
             if (user == null)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this.accountService.GetUserId(this.User)));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            var addPasswordResult = await this.manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
+            var addPasswordResult = await this._manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
             if (!addPasswordResult.Succeeded)
                 {
                     this.AddErrors(addPasswordResult);
                     return this.View(model);
                 }
 
-            await this.accountService.SignInAsync(user).ConfigureAwait(false);
+            await this._accountService.SignInAsync(user).ConfigureAwait(false);
             this.StatusMessage = "Your password has been set.";
 
             return this.RedirectToAction(nameof(this.SetPassword));

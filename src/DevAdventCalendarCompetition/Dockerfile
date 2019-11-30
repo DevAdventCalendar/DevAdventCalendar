@@ -6,6 +6,7 @@ COPY *.sln .
 COPY ./DevAdventCalendarCompetition/*.csproj ./DevAdventCalendarCompetition/
 COPY ./DevAdventCalendarCompetition.Repository/*.csproj ./DevAdventCalendarCompetition.Repository/
 COPY ./DevAdventCalendarCompetition.Services/*.csproj ./DevAdventCalendarCompetition.Services/
+COPY ./DevAdventCalendarCompetition.TestResultService/*.csproj ./DevAdventCalendarCompetition.TestResultService/
 COPY ./DevAdventCalendarCompetition.Tests/*.csproj ./DevAdventCalendarCompetition.Tests/
 RUN dotnet restore
 
