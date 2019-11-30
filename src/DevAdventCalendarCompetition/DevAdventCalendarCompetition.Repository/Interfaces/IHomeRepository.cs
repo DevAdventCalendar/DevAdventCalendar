@@ -18,10 +18,14 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         int GetCorrectAnswersCountForUser(string userId);
 
+        int GetCorrectAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+
+        int GetWrongAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+
         List<Result> GetAllTestResults();
 
         int GetUserPosition(string userId);
 
-        List<Result> GetTestResultsForDateRange(int weekNumber);
+        List<Result> GetTestResultsForWeek(int weekNumber);
     }
 }

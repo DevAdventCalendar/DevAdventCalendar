@@ -12,8 +12,6 @@ namespace DevAdventCalendarCompetition.Vms
 
         public int WrongAnswers { get; set; }
 
-        public int TotalPoints { get; set; }
-
         public string UserId { get; set; }
 
         public int? Week1Points { get; set; }

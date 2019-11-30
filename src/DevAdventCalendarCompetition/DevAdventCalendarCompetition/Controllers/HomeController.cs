@@ -109,6 +109,8 @@ namespace DevAdventCalendarCompetition.Controllers
                             FinalPoints = result.FinalPoints,
                             FinalPlace = result.FinalPlace,
                             UserId = result.UserId,
+                            CorrectAnswers = result.CorrectAnswersCount,
+                            WrongAnswers = result.WrongAnswersCount,
                             FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
                         });
                     }
