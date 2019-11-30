@@ -48,7 +48,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var answerVm = new AnswerVm() { TestAnswerVm = testAnswerVm, TestNumber = testNumber };
 
-            return this.View("Answered", answerVm);
+            return this.View("TestAnswered", answerVm);
         }
     }
 }
