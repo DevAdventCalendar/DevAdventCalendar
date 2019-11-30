@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace DevAdventCalendarCompetition.Vms
 {
-    public class TotalTestResultEntryVmComparer : IEqualityComparer<TotalTestResultEntryVm>
+    public class TotalTestResultEntryVmComparer : IEqualityComparer<TestResultEntryVm>
     {
-        public bool Equals(TotalTestResultEntryVm x, TotalTestResultEntryVm y)
+        public bool Equals(TestResultEntryVm x, TestResultEntryVm y)
         {
             if (x != null && y != null)
             {
@@ -15,7 +15,7 @@ namespace DevAdventCalendarCompetition.Vms
             return false;
         }
 
-        public int GetHashCode(TotalTestResultEntryVm obj)
+        public int GetHashCode(TestResultEntryVm obj)
         {
             if (obj != null)
             {

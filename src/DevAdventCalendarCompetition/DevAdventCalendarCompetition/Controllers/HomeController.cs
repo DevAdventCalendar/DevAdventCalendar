@@ -45,71 +45,44 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View();
             }
 
-            /* var testDtoList = _homeService.GetTestsWithUserAnswers();
-
-            var singleTestResults = testDtoList.Select(testDto => new SingleTestResultsVm()
-            {
-                TestNumber = testDto.Number,
-                TestEnded = testDto.HasEnded,
-                EndDate = testDto.EndDate,
-                StartDate = testDto.StartDate,
-                Entries = testDto.Answers
-                    .Select(
-                        ta =>
-                            new SingleTestResultEntry()
-                            {
-                                UserId = ta.UserId,
-                                FullName = _homeService.PrepareUserEmailForRODO(ta.UserFullName),
-                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == ta.UserId),
-                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == ta.UserId)
-                            })
-                    .Union(testDto.WrongAnswers
-                    .Select(
-                        wa =>
-                            new SingleTestResultEntry()
-                            {
-                                UserId = wa.UserId,
-                                FullName = _homeService.PrepareUserEmailForRODO(wa.UserFullName),
-                                CorrectAnswersCount = testDto.Answers.Count(a => a.UserId == wa.UserId),
-                                WrongAnswersCount = testDto.WrongAnswers.Count(w => w.UserId == wa.UserId)
-                            }))
-                    .GroupBy(e => new { e.FullName, e.CorrectAnswersCount, e.WrongAnswersCount })
-                    .Select(e => new SingleTestResultEntry
-                    {
-                        FullName = e.Key.FullName,
-                        CorrectAnswersCount = e.Key.CorrectAnswersCount,
-                        WrongAnswersCount = e.Key.WrongAnswersCount
-                    })
-                    .OrderByDescending(e => e.CorrectAnswersCount)
-                    .ToList()
-            }).ToList();
-            */
-
             int pageSize = 50;
 
+            var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryVm>>();
             var testResultListDto = this._homeService.GetAllTestResults();
 
-            List<TotalTestResultEntryVm> totalTestResults = new List<TotalTestResultEntryVm>();
-
-            foreach (var result in testResultListDto)
+            for (var i = 1; i <= testResultListDto.Count; i++)
             {
-                totalTestResults.Add(new TotalTestResultEntryVm
+                if (testResultListDto.TryGetValue(i, out var results))
                 {
-                    Position = result.Position,
-                    UserId = result.UserId,
-                    FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
-                    CorrectAnswers = result.CorrectAnswersCount,
-                    WrongAnswers = result.WrongAnswersCount,
-                    TotalPoints = result.Points
-                });
+                    var totalTestResults = new List<TestResultEntryVm>();
+
+                    foreach (var result in results)
+                    {
+                        totalTestResults.Add(new TestResultEntryVm
+                        {
+                            Week1Points = result.Week1Points,
+                            Week1Place = result.Week1Place,
+                            Week2Points = result.Week2Points,
+                            Week2Place = result.Week2Place,
+                            Week3Points = result.Week3Points,
+                            Week3Place = result.Week3Place,
+                            FinalPoints = result.FinalPoints,
+                            FinalPlace = result.FinalPlace,
+                            UserId = result.UserId,
+                            CorrectAnswers = result.CorrectAnswersCount,
+                            WrongAnswers = result.WrongAnswersCount,
+                            FullName = this._homeService.PrepareUserEmailForRODO(result.Email),
+                        });
+                    }
+
+                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize));
+                }
             }
 
             var vm = new TestResultsVm()
             {
                 CurrentUserPosition = this._homeService.GetUserPosition(userId),
-
-                // SingleTestResults = singleTestResults,
-                TotalTestResults = new PaginatedCollection<TotalTestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize)
+                TotalTestResults = paginatedResults
             };
 
             return this.View(vm);

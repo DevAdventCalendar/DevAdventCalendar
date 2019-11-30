@@ -1,0 +1,59 @@
+﻿@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Vms.TestResultEntryVm>>
+@{
+    var entries = Model.Value;                                                                                             
+    var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Value.HasNextPage ? "disabled" : "";
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="col-xs-1">#</th>
+            <th>Użytkownik</th>
+            <th>Poprawne odpowiedzi</th>
+            <th>Błędne odpowiedzi</th>
+            <th>Suma punktów</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < entries.Count; i++)
+        {
+            var testResult = entries[i];
+            <tr>
+                <th scope="row" class="col-xs-1">@(entries.PageIndex <= 1 ? i + 1 : (entries.PageSize * (entries.PageIndex - 1)) + i + 1)</th>
+                <td>@testResult.FullName</td>
+                <td>@testResult.CorrectAnswers</td>
+                <td>@testResult.WrongAnswers</td>
+                @if (entries.FirstOrDefault().FinalPoints != null)
+                {
+                    <td>@testResult.FinalPoints</td>
+                }
+                else
+                {
+                    var score = testResult.GetType()
+                        .GetProperties()
+                        .FirstOrDefault(p => p.Name.Contains($"Week{Model.Key}Points"))
+                        .GetValue(testResult) as int?; 
+
+                    <td>@score.Value</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-xs-12">
+        <a asp-controller="Home"
+           asp-action="Results"
+           asp-route-pageIndex="@(entries.PageIndex - 1)"
+           class="chris_btn @prevDisabled">
+            Wstecz
+        </a>
+        <a asp-controller="Home"
+           asp-action="Results"
+           asp-route-pageIndex="@(entries.PageIndex + 1)"
+           class="chris_btn @nextDisabled">
+            Dalej
+        </a>
+    </div>
+</div>
