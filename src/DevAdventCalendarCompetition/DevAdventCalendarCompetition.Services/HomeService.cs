@@ -60,7 +60,7 @@ namespace DevAdventCalendarCompetition.Services
             var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
             var week1results = this._homeRepository.GetTestResultsForWeek(1);
 
-            if (week1results != null)
+            if (week1results != null && week1results.Count > 0)
             {
                 testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1results)));
 
