@@ -46,7 +46,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var test = this.baseTestService.GetTestByNumber(testNumber);
 
-            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", " ", StringComparison.Ordinal);
+            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", string.Empty, StringComparison.Ordinal);
 
             if (this.baseTestService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
                     {
