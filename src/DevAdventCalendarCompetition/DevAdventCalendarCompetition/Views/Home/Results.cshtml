@@ -13,6 +13,7 @@
 @{
     ViewBag.Title = "Wyniki";
 }
+@using DevAdventCalendarCompetition.Vms
 @using Microsoft.AspNetCore.Http
 @model DevAdventCalendarCompetition.Vms.TestResultsVm
 @if (Model == null)
@@ -22,8 +23,6 @@
             <div class="col-md-12">
                 <div class="party_text">
                     <h1>
-                        Niestety, nie wziąłeś udziału w poprzedniej rywalizacji.
-                        <br> <span>ALE...</span> <br>
                         Zapraszamy do tegorocznej edycji ;) <br/>
                         <img src="~/theme-2019/images/gift_bag.png" alt="gifts" class="mt-20">
                     </h1>
@@ -55,118 +54,107 @@ else
             </div>
         </div>
     </section>
-
-    var prevDisabled = !Model.TotalTestResults.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.TotalTestResults.HasNextPage ? "disabled" : "";
-
     <div class="container mb-100">
         <div class="row results mb-30">
             <div class="col-xs-12">
-                @*
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#totalresults" role="tab" data-toggle="tab">Wszystkie wyniki</a></li>
-
-                        @for (var j = 0; j < Model.SingleTestResults.Count; j++)
-                        {
-                            var result = Model.SingleTestResults[j];
-                            var active = "";
-
-                            <li role="presentation"><a href="#test@(result.TestNumber)" role="tab" data-toggle="tab">Test @result.TestNumber</a></li>
-                        }
-                    </ul>
-                *@
+                
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    @*
-                        @for (var j = 0; j < Model.SingleTestResults.Count; j++)
-                        {
-                            var result = Model.SingleTestResults[j];
 
-                            if (result.TestEnded)
+                @if (Model.TotalTestResults != null)
+                {
+                    <ul class="nav nav-tabs" id="results" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab">Tydzień 1</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab">Tydzień 2</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab">Tydzień 3</a>
+                        </li>
+                        <li role="presentation" >
+                            <a href="#full" aria-controls="full" role="tab" data-toggle="tab">Pełny ranking</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="week1">
+                            @if (Model.TotalTestResults.TryGetValue(1, out var week1results))
                             {
-                                <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="col-xs-1">#</th>
-                                                <th>Użytkownik</th>
-                                                <th>Poprawne odpowiedzi</th>
-                                                <th>Błędne odpowiedzi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @for (var i = 0; i < result.Entries.Count; i++)
-                                            {
-                                                var testResult = result.Entries[i];
-                                                <tr>
-                                                    <th scope="row" class="col-xs-1">@(i + 1)</th>
-                                                    <td>@testResult.FullName</td>
-                                                    <td>@testResult.CorrectAnswersCount</td>
-                                                    <td>@testResult.WrongAnswersCount</td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
+                                await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(1, week1results));
                             }
                             else
                             {
-                                <div role="tabpanel" class="tab-pane" id="test@(result.TestNumber)">Test jeszcze się nie zakończył.</div>
+                                <br />
+                                <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
+                                    <h4 class="mb-30">
+                                        Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00.
+                                    </h4>
+                                </div>
+
+                                <img src="~/theme-2019/images/hanging.svg" alt="">
                             }
-                        }
-                    *@
-
-                    @if (Model.TotalTestResults != null)
-                    {
-                        <div role="tabpanel" class="tab-pane active" id="totalresults">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th class="col-xs-1">#</th>
-                                    <th>Użytkownik</th>
-                                    <th>Poprawne odpowiedzi</th>
-                                    <th>Błędne odpowiedzi</th>
-                                    <th>Suma punktów</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @for (var i = 0; i < Model.TotalTestResults.Count; i++)
-                                {
-                                    var testResult = Model.TotalTestResults[i];
-                                    <tr>
-                                        <th scope="row" class="col-xs-1">@(Model.TotalTestResults.PageIndex <= 1 ? i + 1 : (Model.TotalTestResults.PageSize * (Model.TotalTestResults.PageIndex - 1)) + i + 1)</th>
-                                        <td>@testResult.FullName</td>
-                                        <td>@testResult.CorrectAnswers</td>
-                                        <td>@testResult.WrongAnswers</td>
-                                        <td>@testResult.TotalPoints</td>
-                                    </tr>
-                                }
-                                </tbody>
-                            </table>
                         </div>
-                    }
-                    else
-                    {
-                        <div role="tabpanel" class="tab-pane" id="totalresults">Testy jeszcze się nie zakończyły</div>
-                    }
-                </div>
-            </div>
-        </div>
+                        <div role="tabpanel" class="tab-pane" id="week2">
+                            @if (Model.TotalTestResults.TryGetValue(2, out var week2results))
+                            {
+                                await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(2, week2results));
+                            }
+                            else
+                            {
+                                <br />
+                                <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
+                                    <h4 class="mb-30">
+                                        Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00.
+                                    </h4>
+                                </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <a asp-controller="Home"
-                   asp-action="Results"
-                   asp-route-pageIndex="@(Model.TotalTestResults.PageIndex - 1)"
-                   class="chris_btn @prevDisabled">
-                    Wstecz
-                </a>
-                <a asp-controller="Home"
-                   asp-action="Results"
-                   asp-route-pageIndex="@(Model.TotalTestResults.PageIndex + 1)"
-                   class="chris_btn @nextDisabled">
-                    Dalej
-                </a>
+                                <img src="~/theme-2019/images/hanging.svg" alt="">
+                            }
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="week3">
+                            @if (Model.TotalTestResults.TryGetValue(3, out var week3results))
+                            {
+                                await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(3, week3results));
+                            }
+                            else
+                            {
+                                <br />
+
+                                <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
+                                    <h4 class="mb-30">
+                                        Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.
+                                    </h4>
+                                </div>
+
+                                <img src="~/theme-2019/images/hanging.svg" alt="">
+                            }
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="full">
+                            @if (Model.TotalTestResults.TryGetValue(4, out var finalResults))
+                            {
+                                await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(4, finalResults));
+                            }
+                            else
+                            {
+                                <br />
+                                <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
+                                    <h4 class="mb-30">
+                                        Ostateczne wyniki poznasz w środę, 25 grudnia.
+                                    </h4>
+                                </div>
+
+                                <img src="~/theme-2019/images/hanging.svg" alt="">
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div role="tabpanel" class="tab-pane" id="totalresults">Testy jeszcze się nie zakończyły</div>
+                }
+                </div>
             </div>
         </div>
     </div>

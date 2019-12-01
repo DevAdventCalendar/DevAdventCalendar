@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -55,6 +58,28 @@ namespace DevAdventCalendarCompetition.Repository
                 .Count();
         }
 
+        public int GetCorrectAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return this._dbContext
+                .TestAnswer
+                .Where(a => a.UserId == userId &&
+                            a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
+                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                .GroupBy(t => t.TestId)
+                .Count();
+        }
+
+        public int GetWrongAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return this._dbContext
+                .TestWrongAnswer
+                .Where(a => a.UserId == userId &&
+                            a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
+                            a.Time.CompareTo(dateTo.DateTime) < 0)
+                .GroupBy(t => t.TestId)
+                .Count();
+        }
+
         public List<Result> GetAllTestResults()
         {
             return this._dbContext.Set<Result>()
@@ -73,11 +98,62 @@ namespace DevAdventCalendarCompetition.Repository
                 return 0;
             }
 
-            var indexOfResult = this._dbContext.Results
-                .OrderByDescending(r => r.FinalPoints)
-                .IndexOf(result);
+            if (result.FinalPlace > 0)
+            {
+                return result.FinalPlace.Value;
+            }
 
-            return ++indexOfResult;
+            if (result.Week3Place > 0)
+            {
+                return result.Week3Place.Value;
+            }
+
+            if (result.Week2Place > 0)
+            {
+                return result.Week2Place.Value;
+            }
+
+            if (result.Week1Place > 0)
+            {
+                return result.Week1Place.Value;
+            }
+
+            return 0;
+        }
+
+        public List<Result> GetTestResultsForWeek(int weekNumber)
+        {
+            switch (weekNumber)
+            {
+                case 1:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.Week1Points != null)
+                        .OrderBy(r => r.Week1Place)
+                        .ToList();
+                case 2:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.Week2Points != null)
+                        .OrderBy(r => r.Week2Place)
+                        .ToList();
+                case 3:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.Week3Points != null)
+                        .OrderBy(r => r.Week3Place)
+                        .ToList();
+                case 4:
+                    return this._dbContext.Results
+                        .Include(u => u.User)
+                        .Where(r => r.FinalPoints != null)
+                        .OrderBy(r => r.FinalPlace)
+                        .ToList();
+                default:
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    throw new ArgumentException("Invalid week number.");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            }
         }
     }
 }
