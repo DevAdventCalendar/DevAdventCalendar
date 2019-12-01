@@ -249,7 +249,7 @@ function CheckTestStatus(testNumber) {
 
 function GetResult(number) {
     if (number == 20) {
-        return "odpowiedź to: 'kutia z makiem'";
+        return "odpowiedź to: 'kutia'";
     }
     else {
         return "To nie ten numer! Spróbuj jeszcze raz...";
