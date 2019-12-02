@@ -1,4 +1,4 @@
-﻿<div class="breadcrumb_area">
+<div class="breadcrumb_area">
     <div class="container">
         <div class="row">
             <div class="breadcrumb_wrapper">
@@ -42,12 +42,17 @@ else
                         <h1 class="mb-30">
                             Zajmujesz <span>@Model.CurrentUserPosition</span> miejsce!
                         </h1>
+                        <p>
+                            Punkty są zliczane raz w tygodniu. Twoja pozycja odnosi się do ostatniego zamkniętego tygodnia
+                            lub do całości konkursu, jeśli ten został już zakończony.
+                        </p>
                     }
                     else
                     {
-                        <h1 class="mb-30">
-                            Niestety, nie odpowiedziałeś na żadną zagadkę ;(
-                        </h1>
+                        <h1 class="mb-30">Wyniki już niedługo...</h1>
+                        <p>
+                            Twoja pozycja będzie dostępna po zliczeniu wyników z pierwszego tygodnia konkursu.
+                        </p>
                     }
                     <img src="~/theme-2019/images/gift_bag.png" alt="gifts">
                 </div>
