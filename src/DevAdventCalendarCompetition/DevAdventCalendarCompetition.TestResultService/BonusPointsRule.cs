@@ -8,7 +8,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
         public int CalculatePoints(int answersCount)
         {
-            return MaxBonus - answersCount * 5;
+            return answersCount > 6 ? 0 : MaxBonus - answersCount * 5;
         }
     }
 }
