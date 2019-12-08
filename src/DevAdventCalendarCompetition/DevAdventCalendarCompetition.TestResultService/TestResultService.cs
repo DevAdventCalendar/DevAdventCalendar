@@ -37,14 +37,19 @@ namespace DevAdventCalendarCompetition.TestResultService
             foreach (var id in usersId)
             {
                 var correctAnswersCount = this._testResultRepository.GetCorrectAnswersCount(id, dateFrom, dateTo);
-                var wrongAnswersCount = this._testResultRepository.GetWrongAnswersCountPerDay(id, dateFrom, dateTo);
+                var wrongAnswersCounts = this._testResultRepository.GetWrongAnswersCountPerDay(id, dateFrom, dateTo);
                 var sumOffset = this._testResultRepository.GetAnsweringTimeSum(id, dateFrom, dateTo);
 
-                var bonus = wrongAnswersCount == null || wrongAnswersCount.Length == 0
-                    ? 30
-                    : wrongAnswersCount
-                        .Select(p => _bonusPointsRule.CalculatePoints(p))
-                        .Sum();
+                var bonus = 0;
+
+                if (correctAnswersCount > 0)
+                {
+                    bonus = wrongAnswersCounts == null || wrongAnswersCounts.Length == 0
+                        ? 30
+                        : wrongAnswersCounts
+                            .Select(p => _bonusPointsRule.CalculatePoints(p))
+                            .Sum();
+                }
 
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) + bonus;
 
