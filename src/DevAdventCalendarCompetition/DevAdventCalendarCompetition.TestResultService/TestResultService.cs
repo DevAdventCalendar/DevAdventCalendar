@@ -59,7 +59,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             // Save results to DB as weekly results.
             DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0, TimeSpan.Zero);
-            DateTime dateTo = dateFrom.DateTime.AddDays(6);
+            DateTime dateTo = dateFrom.DateTime.AddDays(7);
 
             var userResults = CalculateResults(dateFrom, dateTo);
 
