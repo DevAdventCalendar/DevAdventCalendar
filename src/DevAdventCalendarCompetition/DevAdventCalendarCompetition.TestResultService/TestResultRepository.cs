@@ -52,23 +52,14 @@ namespace DevAdventCalendarCompetition.TestResultService
         {
             return _dbContext
                 .Test
-                .GroupJoin(_dbContext.TestWrongAnswer, 
-                    t => t.Id, 
+                .GroupJoin(_dbContext.TestWrongAnswer,
+                    t => t.Id,
                     w => w.TestId,
                     (t, w) => new
                     {
                         TestId = t.Id,
                         StartDate = t.StartDate.Value,
                         WrongAnswers = w.Where(answer => answer.UserId == userId)
-                    })
-                .Join(_dbContext.TestAnswer.Where(answer => answer.UserId != userId), 
-                    t => t.TestId, 
-                    answer => answer.TestId,
-                    (t, answers) => new
-                    {
-                        TestId = t.TestId,
-                        StartDate = t.StartDate,
-                        WrongAnswers = t.WrongAnswers
                     })
                 .Where(a => a.StartDate >= dateFrom.DateTime && a.StartDate <= dateTo)
                 .Select(t => t.WrongAnswers.Count())
