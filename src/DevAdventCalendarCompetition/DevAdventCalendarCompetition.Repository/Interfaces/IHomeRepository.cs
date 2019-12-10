@@ -22,6 +22,10 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         int GetWrongAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
 
+        IDictionary<string, int> GetCorrectAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo);
+
+        IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo);
+
         List<Result> GetAllTestResults();
 
         int GetUserPosition(string userId);

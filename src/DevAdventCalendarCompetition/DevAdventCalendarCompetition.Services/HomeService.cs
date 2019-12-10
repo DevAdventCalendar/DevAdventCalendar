@@ -123,36 +123,38 @@ namespace DevAdventCalendarCompetition.Services
 
         private List<TestResultDto> FillResultsWithAnswersStats(int weekNumber, List<TestResultDto> results)
         {
+            DateTimeOffset dateFrom;
+            DateTimeOffset dateTo;
+
+            switch (weekNumber)
+            {
+                case 1:
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
+                    break;
+                case 2:
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
+                    break;
+                case 3:
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 22, 20, 0, 0, TimeSpan.Zero);
+                    break;
+                default:
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 25, 20, 0, 0, TimeSpan.Zero);
+                    break;
+            }
+
+            var correctAnswers = this._homeRepository.GetCorrectAnswersPerUserForDateRange(dateFrom, dateTo);
+            var wrongAnswers = this._homeRepository.GetWrongAnswersPerUserForDateRange(dateFrom, dateTo);
+
             foreach (var result in results)
             {
-                DateTimeOffset dateFrom;
-                DateTimeOffset dateTo;
-
-                switch (weekNumber)
-                {
-                    case 1:
-                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
-                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
-                        break;
-                    case 2:
-                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
-                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
-                        break;
-                    case 3:
-                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
-                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 22, 20, 0, 0, TimeSpan.Zero);
-                        break;
-                    default:
-                        dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
-                        dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 25, 20, 0, 0, TimeSpan.Zero);
-                        break;
-                }
-
-                var correctAnswersCount = this._homeRepository.GetCorrectAnswersCountForUserAndDateRange(result.UserId, dateFrom, dateTo);
-                var wrongAnswersCount =
-                    this._homeRepository.GetWrongAnswersCountForUserAndDateRange(result.UserId, dateFrom, dateTo);
-
+                correctAnswers.TryGetValue(result.UserId, out var correctAnswersCount);
                 result.CorrectAnswersCount = correctAnswersCount;
+
+                wrongAnswers.TryGetValue(result.UserId, out var wrongAnswersCount);
                 result.WrongAnswersCount = wrongAnswersCount;
             }
 

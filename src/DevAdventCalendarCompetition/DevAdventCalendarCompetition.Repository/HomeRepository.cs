@@ -80,6 +80,28 @@ namespace DevAdventCalendarCompetition.Repository
                 .Count();
         }
 
+        public IDictionary<string, int> GetCorrectAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return this._dbContext
+                .TestAnswer
+                .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
+                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                .GroupBy(a => a.UserId)
+                .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        }
+
+        public IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return this._dbContext
+                .TestWrongAnswer
+                .Where(a => a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
+                            a.Time.CompareTo(dateTo.DateTime) < 0)
+                .GroupBy(a => a.UserId)
+                .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        }
+
         public List<Result> GetAllTestResults()
         {
             return this._dbContext.Set<Result>()
