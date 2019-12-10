@@ -44,9 +44,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
                 if (correctAnswersCount > 0)
                 {
-                    bonus = wrongAnswersCounts == null || wrongAnswersCounts.Length == 0 || wrongAnswersCounts.All(c => c == 0)
-                        ? 30
-                        : wrongAnswersCounts
+                    bonus = wrongAnswersCounts
                             .Select(p => _bonusPointsRule.CalculatePoints(p))
                             .Sum();
                 }
