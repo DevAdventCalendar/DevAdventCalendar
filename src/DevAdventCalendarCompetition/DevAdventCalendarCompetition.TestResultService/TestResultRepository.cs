@@ -61,7 +61,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                         StartDate = t.StartDate.Value,
                         WrongAnswers = w.Where(answer => answer.UserId == userId)
                     })
-                .Where(a => a.StartDate >= dateFrom.DateTime && a.StartDate <= dateTo)
+                .Where(a => a.StartDate >= dateFrom.DateTime && a.StartDate < dateTo)
                 .Select(t => t.WrongAnswers.Count())
                 .ToArray();
         }
