@@ -58,23 +58,23 @@ namespace DevAdventCalendarCompetition.Services
         public Dictionary<int, List<TestResultDto>> GetAllTestResults()
         {
             var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
-            var week1results = this._homeRepository.GetTestResultsForWeek(1);
+            var week1Results = this._homeRepository.GetTestResultsForWeek(1);
 
-            if (week1results != null && week1results.Count > 0)
+            if (week1Results != null && week1Results.Count > 0)
             {
-                testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1results)));
+                testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1Results)));
 
-                var week2results = this._homeRepository.GetTestResultsForWeek(2);
+                var week2Results = this._homeRepository.GetTestResultsForWeek(2);
 
-                if (week2results != null && week2results.Count > 0)
+                if (week2Results != null && week2Results.Count > 0)
                 {
-                    testResultDictionary.Add(2, this.FillResultsWithAnswersStats(2, this._mapper.Map<List<TestResultDto>>(week2results)));
+                    testResultDictionary.Add(2, this.FillResultsWithAnswersStats(2, this._mapper.Map<List<TestResultDto>>(week2Results)));
 
-                    var week3results = this._homeRepository.GetTestResultsForWeek(3);
+                    var week3Results = this._homeRepository.GetTestResultsForWeek(3);
 
-                    if (week3results != null && week3results.Count > 0)
+                    if (week3Results != null && week3Results.Count > 0)
                     {
-                        testResultDictionary.Add(3, this.FillResultsWithAnswersStats(3, this._mapper.Map<List<TestResultDto>>(week3results)));
+                        testResultDictionary.Add(3, this.FillResultsWithAnswersStats(3, this._mapper.Map<List<TestResultDto>>(week3Results)));
 
                         var fullResults = this._homeRepository.GetTestResultsForWeek(4);
 

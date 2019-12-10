@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
 namespace DevAdventCalendarCompetition.Repository
 {
@@ -58,28 +55,6 @@ namespace DevAdventCalendarCompetition.Repository
                 .Count();
         }
 
-        public int GetCorrectAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
-        {
-            return this._dbContext
-                .TestAnswer
-                .Where(a => a.UserId == userId &&
-                            a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
-                .GroupBy(t => t.TestId)
-                .Count();
-        }
-
-        public int GetWrongAnswersCountForUserAndDateRange(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
-        {
-            return this._dbContext
-                .TestWrongAnswer
-                .Where(a => a.UserId == userId &&
-                            a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.Time.CompareTo(dateTo.DateTime) < 0)
-                .GroupBy(t => t.TestId)
-                .Count();
-        }
-
         public IDictionary<string, int> GetCorrectAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             return this._dbContext
@@ -100,14 +75,6 @@ namespace DevAdventCalendarCompetition.Repository
                 .GroupBy(a => a.UserId)
                 .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-        }
-
-        public List<Result> GetAllTestResults()
-        {
-            return this._dbContext.Set<Result>()
-                .Include(u => u.User)
-                .OrderBy(r => r.Id)
-                .ToList();
         }
 
         public int GetUserPosition(string userId)
