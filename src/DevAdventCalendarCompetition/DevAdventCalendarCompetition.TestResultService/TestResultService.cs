@@ -37,15 +37,23 @@ namespace DevAdventCalendarCompetition.TestResultService
             foreach (var id in usersId)
             {
                 var correctAnswersCount = this._testResultRepository.GetCorrectAnswersCount(id, dateFrom, dateTo);
-                var wrongAnswersCount = this._testResultRepository.GetWrongAnswersCountPerDay(id, dateFrom, dateTo);
+                var wrongAnswersCounts = this._testResultRepository.GetWrongAnswersCountPerDay(id, dateFrom, dateTo);
                 var sumOffset = this._testResultRepository.GetAnsweringTimeSum(id, dateFrom, dateTo);
 
-                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) +
-                                    wrongAnswersCount
-                                        .Select(p => _bonusPointsRule.CalculatePoints(p))
-                                        .Sum();
+                var bonus = 0;
 
-                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, wrong answers: { wrongAnswersCount }, offset: { sumOffset }... Overall points: { overallPoints }");
+                if (correctAnswersCount > 0)
+                {
+                    bonus = wrongAnswersCounts == null || wrongAnswersCounts.Length == 0
+                        ? 30
+                        : wrongAnswersCounts
+                            .Select(p => _bonusPointsRule.CalculatePoints(p))
+                            .Sum();
+                }
+
+                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) + bonus;
+
+                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, bonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
 
                 results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }
@@ -59,7 +67,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             // Save results to DB as weekly results.
             DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0, TimeSpan.Zero);
-            DateTime dateTo = dateFrom.DateTime.AddDays(6);
+            DateTime dateTo = dateFrom.DateTime.AddDays(7);
 
             var userResults = CalculateResults(dateFrom, dateTo);
 
