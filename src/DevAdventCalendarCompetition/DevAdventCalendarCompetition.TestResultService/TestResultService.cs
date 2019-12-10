@@ -44,16 +44,22 @@ namespace DevAdventCalendarCompetition.TestResultService
 
                 if (correctAnswersCount > 0)
                 {
-                    bonus = wrongAnswersCounts == null || wrongAnswersCounts.Length == 0
+                    bonus = wrongAnswersCounts == null || wrongAnswersCounts.Length == 0 || wrongAnswersCounts.All(c => c == 0)
                         ? 30
                         : wrongAnswersCounts
                             .Select(p => _bonusPointsRule.CalculatePoints(p))
                             .Sum();
                 }
 
+                if (correctAnswersCount == 0)
+                {
+                    Console.WriteLine($"User did not answer any question.");
+                }
+
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) + bonus;
 
-                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, bonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
+                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, wrong answers per day: { string.Join(',', wrongAnswersCounts) } " +
+                                  $"\nbonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
 
                 results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }
@@ -66,8 +72,10 @@ namespace DevAdventCalendarCompetition.TestResultService
             // Invoke CalculateResults with correct boundary dates according to weekNumber.
 
             // Save results to DB as weekly results.
-            DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0, TimeSpan.Zero);
-            DateTime dateTo = dateFrom.DateTime.AddDays(7);
+            DateTime dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0, TimeSpan.Zero).DateTime;
+            DateTime dateTo = dateFrom.AddDays(7);
+
+            Console.WriteLine($"\nCurrent week number: { weekNumber }, dates from: { dateFrom.ToString(CultureInfo.InvariantCulture) }, to: { dateTo.ToString(CultureInfo.InvariantCulture) }");
 
             var userResults = CalculateResults(dateFrom, dateTo);
 
