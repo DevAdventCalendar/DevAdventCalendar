@@ -25,12 +25,12 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .ToArray();
         }
 
-        public int GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public double GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             return _dbContext
                 .TestAnswer
                 .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
-                .Sum(a => a.AnsweringTimeOffset.Seconds);
+                .Sum(a => a.AnsweringTimeOffset.TotalMilliseconds);
         }
 
         public int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
@@ -50,12 +50,22 @@ namespace DevAdventCalendarCompetition.TestResultService
 
         public int[] GetWrongAnswersCountPerDay(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
+            var abb = _dbContext
+                .TestWrongAnswer
+                .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
+                .Select(t => new { Time = t.Time.ToString("yyyy-MM-dd") })
+                .ToList();
+
+            var bbb = abb.GroupBy(a => a.Time)
+                .Select(a => a.Count())
+                .ToArray();
+
             return _dbContext
                 .TestWrongAnswer
                 .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
                 .Select(t => new { Time = t.Time.ToString("yyyy-MM-dd") })
                 .GroupBy(a => a.Time)
-                .Select(c => c.Count())
+                .Select(a => a.Count())
                 .ToArray();
         }
 

@@ -6,7 +6,7 @@
 
         public int Points { get; set; }
 
-        public int AnsweringTimeOffset { get; set; }
+        public double AnsweringTimeOffset { get; set; }
 
         public int Place { get; set; }
     }

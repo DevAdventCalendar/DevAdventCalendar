@@ -8,7 +8,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Interfaces
     {
         string[] GetUsersId();
         int[] GetWrongAnswersCountPerDay(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
-        int GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        double GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
         int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
         List<Result> GetFinalResults();
         void SaveUserWeeklyScore(string userId, int weekNumber, int score);
