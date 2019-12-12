@@ -63,6 +63,14 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests.Models
                     User = this._userModel.userE,
                     Week1Points = 0,
                     Week1Place = 5
+                },
+                new Result()
+                {
+                    Id = 6,
+                    UserId = this._userModel.userF.Id,
+                    User = this._userModel.userF,
+                    Week1Points = 0,
+                    Week1Place = 6
                 }
             };
         }

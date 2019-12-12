@@ -34,7 +34,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userD,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10)
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10),
+                AnsweringTimeOffset = new TimeSpan(0, 10, 0)
             });
 
             dbContext.TestAnswer.Add(new TestAnswer()
@@ -44,7 +45,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userD,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
-                AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(5)
+                AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(5),
+                AnsweringTimeOffset = new TimeSpan(0, 5, 0)
             });
 
             //userC
@@ -56,17 +58,19 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userC,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10)
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10),
+                AnsweringTimeOffset = new TimeSpan(0, 10, 0)
             });
 
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 4,
-                UserId = this._userModel.userD.Id,
-                User = this._userModel.userD,
+                UserId = this._userModel.userC.Id,
+                User = this._userModel.userC,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
-                AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(15)
+                AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(15),
+                AnsweringTimeOffset = new TimeSpan(0, 15, 0)
             });
 
             //userB
@@ -78,7 +82,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userB,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                AnsweringTime = this._testModel.test1.StartDate.Value.AddDays(1)
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(2),
+                AnsweringTimeOffset = new TimeSpan(2, 0, 0)
             });
 
             dbContext.TestAnswer.Add(new TestAnswer()
@@ -88,7 +93,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userB,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
-                AnsweringTime = this._testModel.test2.StartDate.Value.AddDays(1).AddMilliseconds(10)
+                AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2).AddMilliseconds(10),
+                AnsweringTimeOffset = new TimeSpan(2, 0, 0, 0, 10)
             });
 
             //userA
@@ -100,7 +106,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userA,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                AnsweringTime = this._testModel.test1.StartDate.Value.AddDays(1).AddMilliseconds(5)
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(2).AddMilliseconds(5),
+                AnsweringTimeOffset = new TimeSpan(2, 0, 0, 0, 5)
             });
 
             dbContext.TestAnswer.Add(new TestAnswer()
@@ -110,8 +117,9 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userA,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
-                AnsweringTime = this._testModel.test2.StartDate.Value.AddDays(1)
-            });
+                AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2),
+                AnsweringTimeOffset = new TimeSpan(2, 0, 0)
+            }); ;
         }
     }
 }

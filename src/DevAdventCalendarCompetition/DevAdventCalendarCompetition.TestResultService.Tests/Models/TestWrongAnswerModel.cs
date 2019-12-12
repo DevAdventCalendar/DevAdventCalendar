@@ -20,16 +20,30 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
         public void PrepareTestWrongAnswerRows(ApplicationDbContext dbContext)
         {
+            // ToDo: User with: 1 correct answer and 1 wrong anwers (on different puzzle)
+            // ToDo: User with: 2 correct answers and 2 wrong anwers (both on same puzzle)
             if (dbContext is null)
             {
                 throw new ArgumentNullException(nameof(dbContext));
             }
 
-            //userD - no wrong answers
+            //userE - 1 wrong answer (0 correct answers)
 
-            //userC - no wrong answers
+            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            {
+                Id = 11,
+                UserId = this._userModel.userE.Id,
+                User = this._userModel.userE,
+                TestId = this._testModel.test1.Id,
+                Test = this._testModel.test1,
+                Time = this._testModel.test1.StartDate.Value.AddHours(1)
+            });
 
-            //userB - 2 wrong answers
+            //userD - no wrong answers (2 correct answers)
+
+            //userC - no wrong answers (2 correct answers)
+
+            //userB - 2 wrong answers (2 correct answers)
 
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
@@ -38,7 +52,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userB,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                Time = this._testModel.test1.StartDate.Value.AddHours(10)
+                Time = this._testModel.test1.StartDate.Value.AddHours(1)
             });
 
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
@@ -48,10 +62,10 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userB,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                Time = this._testModel.test1.StartDate.Value.AddHours(11)
+                Time = this._testModel.test1.StartDate.Value.AddHours(1)
             });
 
-            //userA - 2 wrong answers
+            //userA - 2 wrong answers (2 correct answers)
 
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
@@ -60,7 +74,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userA,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                Time = this._testModel.test1.StartDate.Value.AddHours(10)
+                Time = this._testModel.test1.StartDate.Value.AddHours(1)
             });
 
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
@@ -70,7 +84,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = this._userModel.userA,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
-                Time = this._testModel.test2.StartDate.Value.AddHours(25)
+                Time = this._testModel.test2.StartDate.Value.AddHours(1)
             });
         }
     }

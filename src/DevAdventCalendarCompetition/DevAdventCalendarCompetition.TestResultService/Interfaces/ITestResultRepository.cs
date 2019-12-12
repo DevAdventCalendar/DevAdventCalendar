@@ -7,13 +7,14 @@ namespace DevAdventCalendarCompetition.TestResultService.Interfaces
     public interface ITestResultRepository
     {
         string[] GetUsersId();
-        int[] GetWrongAnswersCountPerDay(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
-        double GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
-        int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo);
+        IEnumerable<WrongAnswerData> GetWrongAnswersCountPerDay(string userId, DateTime dateFrom, DateTime dateTo);
+        double GetAnsweringTimeSum(string userId, DateTime dateFrom, DateTime dateTo);
+        IEnumerable<DateTime> GetCorrectAnswersDates(string userId, DateTime dateFrom, DateTime dateTo);
         List<Result> GetFinalResults();
         void SaveUserWeeklyScore(string userId, int weekNumber, int score);
         void SaveUserWeeklyPlace(string userId, int weekNumber, int place);
         void SaveUserFinalScore(string userId, int score); 
         void SaveUserFinalPlace(string userId, int place);
+        ApplicationUser GetUserById(string id);
     }
 }
