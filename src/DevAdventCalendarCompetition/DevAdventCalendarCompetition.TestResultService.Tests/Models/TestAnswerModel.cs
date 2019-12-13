@@ -9,12 +9,10 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 {
     internal class TestAnswerModel
     {
-        private readonly UserModel _userModel;
         private readonly TestModel _testModel;
 
-        internal TestAnswerModel(UserModel userModel, TestModel testModel)
+        internal TestAnswerModel(TestModel testModel)
         {
-            this._userModel = userModel;
             this._testModel = testModel;
         }
 
@@ -29,8 +27,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 14,
-                UserId = this._userModel.userI.Id,
-                User = this._userModel.userI,
+                UserId = UserModel.userI.Id,
+                User = UserModel.userI,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddDays(8),
@@ -42,8 +40,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 13,
-                UserId = this._userModel.userH.Id,
-                User = this._userModel.userH,
+                UserId = UserModel.userH.Id,
+                User = UserModel.userH,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10),
@@ -55,8 +53,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 12,
-                UserId = this._userModel.userG.Id,
-                User = this._userModel.userG,
+                UserId = UserModel.userG.Id,
+                User = UserModel.userG,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(3),
@@ -66,8 +64,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 11,
-                UserId = this._userModel.userG.Id,
-                User = this._userModel.userG,
+                UserId = UserModel.userG.Id,
+                User = UserModel.userG,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(10),
@@ -83,8 +81,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 1,
-                UserId = this._userModel.userD.Id,
-                User = this._userModel.userD,
+                UserId = UserModel.userD.Id,
+                User = UserModel.userD,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10),
@@ -94,8 +92,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 2,
-                UserId = this._userModel.userD.Id,
-                User = this._userModel.userD,
+                UserId = UserModel.userD.Id,
+                User = UserModel.userD,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(5),
@@ -107,8 +105,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 3,
-                UserId = this._userModel.userC.Id,
-                User = this._userModel.userC,
+                UserId = UserModel.userC.Id,
+                User = UserModel.userC,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10),
@@ -118,8 +116,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 4,
-                UserId = this._userModel.userC.Id,
-                User = this._userModel.userC,
+                UserId = UserModel.userC.Id,
+                User = UserModel.userC,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(15),
@@ -131,8 +129,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 5,
-                UserId = this._userModel.userB.Id,
-                User = this._userModel.userB,
+                UserId = UserModel.userB.Id,
+                User = UserModel.userB,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(2),
@@ -142,8 +140,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 6,
-                UserId = this._userModel.userB.Id,
-                User = this._userModel.userB,
+                UserId = UserModel.userB.Id,
+                User = UserModel.userB,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2).AddMilliseconds(10),
@@ -155,8 +153,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 7,
-                UserId = this._userModel.userA.Id,
-                User = this._userModel.userA,
+                UserId = UserModel.userA.Id,
+                User = UserModel.userA,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(2).AddMilliseconds(5),
@@ -166,8 +164,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestAnswer.Add(new TestAnswer()
             {
                 Id = 8,
-                UserId = this._userModel.userA.Id,
-                User = this._userModel.userA,
+                UserId = UserModel.userA.Id,
+                User = UserModel.userA,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2),

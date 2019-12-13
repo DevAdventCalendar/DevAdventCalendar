@@ -1,4 +1,5 @@
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.TestResultService.Tests.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,9 +49,13 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             var results = testResultRepository.GetFinalResults();
 
             //Assert
-            Assert.Equal(
-                expectedResult.Where(x => x.Week1Points == 0).Select(x => x.UserId).ToList(),
-                results.Where(x => x.Week1Points == 0).Select(x => x.UserId).ToList());
+            var expectedResultItems = expectedResult.Where(x => x.Week1Points == 0).Select(x => x.UserId).ToList();
+            var resultItems = results.Where(x => x.Week1Points == 0).Select(x => x.UserId).ToList();
+            Assert.Equal(expectedResultItems.Count, resultItems.Count);
+            foreach (var item in expectedResultItems)
+            {
+                Assert.Contains(item, resultItems);
+            }
         }
 
 
@@ -69,12 +74,12 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
             //Assert
             Assert.Equal(
-                results.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault(),
-                results.Where(x => x.UserId == "2").Select(x => x.Week1Points).FirstOrDefault());
+                results.Where(x => x.UserId == UserModel.userA.Id).Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == UserModel.userB.Id).Select(x => x.Week1Points).FirstOrDefault());
 
             Assert.Equal(
-                expectedResult.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault(),
-                results.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault());
+                expectedResult.Where(x => x.UserId == UserModel.userA.Id).Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == UserModel.userA.Id).Select(x => x.Week1Points).FirstOrDefault());
         }
 
         [Fact]
@@ -91,10 +96,10 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
             //Assert
             Assert.Equal(
-                results.Where(x => x.UserId == "4").Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == UserModel.userD.Id).Select(x => x.Week1Points).FirstOrDefault(),
                 2 * (100+30));
             Assert.Equal(
-                results.Where(x => x.UserId == "3").Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == UserModel.userC.Id).Select(x => x.Week1Points).FirstOrDefault(),
                 2 * (100 + 30));
         }
 
@@ -112,16 +117,16 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
             //Assert
             Assert.Equal(
-                results.Where(x => x.UserId == "4").Select(x => x.Week1Points).FirstOrDefault(),
-                results.Where(x => x.UserId == "3").Select(x => x.Week1Points).FirstOrDefault());
+                results.Where(x => x.UserId == UserModel.userD.Id).Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == UserModel.userC.Id).Select(x => x.Week1Points).FirstOrDefault());
 
             Assert.Equal(
                 2,
-                results.Where(x => x.UserId == "3").Select(x => x.Week1Place).FirstOrDefault());
+                results.Where(x => x.UserId == UserModel.userC.Id).Select(x => x.Week1Place).FirstOrDefault());
 
             Assert.Equal(
                 1,
-                results.Where(x => x.UserId == "4").Select(x => x.Week1Place).FirstOrDefault());
+                results.Where(x => x.UserId == UserModel.userD.Id).Select(x => x.Week1Place).FirstOrDefault());
         }
 
         [Fact]
@@ -139,7 +144,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Assert
             Assert.Equal(
                 0,
-                results.FirstOrDefault(x => x.UserId == "5").Week1Points.Value);
+                results.FirstOrDefault(x => x.UserId == UserModel.userE.Id).Week1Points.Value);
         }
 
         [Fact]
@@ -157,7 +162,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Assert
             Assert.Equal(
                 0,
-                results.FirstOrDefault(x => x.UserId == "9").Week1Points.Value);
+                results.FirstOrDefault(x => x.UserId == UserModel.userI.Id).Week1Points.Value);
         }
 
         private object GetWeek1Result(Result result)

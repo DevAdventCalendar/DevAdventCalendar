@@ -12,7 +12,6 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 {
     public class TestResultServiceTestBase
     {
-        private readonly UserModel userModel;
         private readonly TestModel testModel;
         private readonly TestAnswerModel testAnswerModel;
         private readonly TestWrongAnswerModel testWrongAnswerModel;
@@ -20,16 +19,15 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
         public TestResultServiceTestBase()
         {
-            userModel = new UserModel();
             testModel = new TestModel();
-            testAnswerModel = new TestAnswerModel(userModel, testModel);
-            testWrongAnswerModel = new TestWrongAnswerModel(userModel, testModel);
+            testAnswerModel = new TestAnswerModel(testModel);
+            testWrongAnswerModel = new TestWrongAnswerModel(testModel);
             
         }
 
         public List<Result> GetExpectedResultModel()
         {
-            var resultModel = new ResultModel(userModel);
+            var resultModel = new ResultModel();
             return resultModel.GetResultList(dbContext);
         }
 
@@ -48,7 +46,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
         {
             if (await dbContext.Users.CountAsync() <= 0)
             {
-                userModel.PrepareUserRows(dbContext);
+                UserModel.PrepareUserRows(dbContext);
                 await dbContext.SaveChangesAsync();
             }
 

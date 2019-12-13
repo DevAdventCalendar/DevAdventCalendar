@@ -9,12 +9,10 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 {
     internal class TestWrongAnswerModel
     {
-        private readonly UserModel _userModel;
         private readonly TestModel _testModel;
 
-        internal TestWrongAnswerModel(UserModel userModel, TestModel testModel)
+        internal TestWrongAnswerModel(TestModel testModel)
         {
-            this._userModel = userModel;
             this._testModel = testModel;
         }
 
@@ -31,8 +29,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 11,
-                UserId = this._userModel.userH.Id,
-                User = this._userModel.userH,
+                UserId = UserModel.userH.Id,
+                User = UserModel.userH,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 Time = this._testModel.test2.StartDate.Value.AddHours(1)
@@ -42,8 +40,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 12,
-                UserId = this._userModel.userG.Id,
-                User = this._userModel.userG,
+                UserId = UserModel.userG.Id,
+                User = UserModel.userG,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
@@ -52,8 +50,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 13,
-                UserId = this._userModel.userG.Id,
-                User = this._userModel.userG,
+                UserId = UserModel.userG.Id,
+                User = UserModel.userG,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 Time = this._testModel.test1.StartDate.Value.AddHours(2)
@@ -66,8 +64,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 14,
-                UserId = this._userModel.userE.Id,
-                User = this._userModel.userE,
+                UserId = UserModel.userE.Id,
+                User = UserModel.userE,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
@@ -82,8 +80,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 1,
-                UserId = this._userModel.userB.Id,
-                User = this._userModel.userB,
+                UserId = UserModel.userB.Id,
+                User = UserModel.userB,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
@@ -92,8 +90,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 2,
-                UserId = this._userModel.userB.Id,
-                User = this._userModel.userB,
+                UserId = UserModel.userB.Id,
+                User = UserModel.userB,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
@@ -104,8 +102,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 3,
-                UserId = this._userModel.userA.Id,
-                User = this._userModel.userA,
+                UserId = UserModel.userA.Id,
+                User = UserModel.userA,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
@@ -114,8 +112,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
             {
                 Id = 8,
-                UserId = this._userModel.userA.Id,
-                User = this._userModel.userA,
+                UserId = UserModel.userA.Id,
+                User = UserModel.userA,
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 Time = this._testModel.test2.StartDate.Value.AddHours(1)
