@@ -35,7 +35,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
         //}
 
         [Fact]
-        public async Task OnlyUsersWithNoCorrectAnswersHaveZeroPoints()
+        public async Task UsersWithNoCorrectAnswersHaveZeroPoints()
         {
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
@@ -49,8 +49,8 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
             //Assert
             Assert.Equal(
-                expectedResult.Where(x => x.Week1Points == 0).Select(x => GetWeek1Result(x)).ToList(), //3
-                results.Where(x => x.Week1Points == 0).Select(x => GetWeek1Result(x)).ToList());    //2
+                expectedResult.Where(x => x.Week1Points == 0).Select(x => x.UserId).ToList(),
+                results.Where(x => x.Week1Points == 0).Select(x => x.UserId).ToList());
         }
 
 
@@ -69,12 +69,12 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
             //Assert
             Assert.Equal(
-                results.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault(),    //should be 250
-                results.Where(x => x.UserId == "2").Select(x => x.Week1Points).FirstOrDefault());    //should be 250, is 220
+                results.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == "2").Select(x => x.Week1Points).FirstOrDefault());
 
             Assert.Equal(
-                expectedResult.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault(),    //should be 250
-                results.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault());    //250
+                expectedResult.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault(),
+                results.Where(x => x.UserId == "1").Select(x => x.Week1Points).FirstOrDefault());
         }
 
         [Fact]
@@ -124,9 +124,45 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
                 results.Where(x => x.UserId == "4").Select(x => x.Week1Place).FirstOrDefault());
         }
 
+        [Fact]
+        public async Task UserWithWrongAnswerButNoCorrectAnswerShouldHaveZeroPoints()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+
+            //Act
+            service.CalculateWeeklyResults(1);
+            var results = testResultRepository.GetFinalResults();
+
+            //Assert
+            Assert.Equal(
+                0,
+                results.FirstOrDefault(x => x.UserId == "5").Week1Points.Value);
+        }
+
+        [Fact]
+        public async Task UserWithCorrectAnswerAfterRankingPerionShouldHaveZeroPoints()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+
+            //Act
+            service.CalculateWeeklyResults(1);
+            var results = testResultRepository.GetFinalResults();
+
+            //Assert
+            Assert.Equal(
+                0,
+                results.FirstOrDefault(x => x.UserId == "9").Week1Points.Value);
+        }
+
         private object GetWeek1Result(Result result)
         {
-            return new { UserdId = result.UserId, Week1Point = result.Week1Points, Week1Place = result.Week1Place };
+            return new { UserdId = result.UserId, Week1Points = result.Week1Points, Week1Place = result.Week1Place };
         }
     }
 }

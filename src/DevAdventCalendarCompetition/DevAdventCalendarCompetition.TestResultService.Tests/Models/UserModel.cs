@@ -50,6 +50,27 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests.Models
             Email = "f@test.com"
         };
 
+        internal readonly ApplicationUser userG = new ApplicationUser()
+        {
+            Id = "7",
+            UserName = "G",
+            Email = "g@test.com"
+        };
+
+        internal readonly ApplicationUser userH = new ApplicationUser()
+        {
+            Id = "8",
+            UserName = "H",
+            Email = "h@test.com"
+        };
+
+        internal readonly ApplicationUser userI = new ApplicationUser()
+        {
+            Id = "9",
+            UserName = "I",
+            Email = "i@test.com"
+        };
+
         internal void PrepareUserRows(ApplicationDbContext dbContext)
         {
             if (dbContext is null)
@@ -63,6 +84,9 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests.Models
             dbContext.Users.Add(this.userD);
             dbContext.Users.Add(this.userE);
             dbContext.Users.Add(this.userF);
+            dbContext.Users.Add(this.userG);
+            dbContext.Users.Add(this.userH);
+            dbContext.Users.Add(this.userI);
         }
     }
 }

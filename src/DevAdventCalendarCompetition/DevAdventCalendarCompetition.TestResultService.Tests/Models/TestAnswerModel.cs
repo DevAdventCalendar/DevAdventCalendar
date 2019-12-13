@@ -9,8 +9,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 {
     internal class TestAnswerModel
     {
-        private UserModel _userModel;
-        private TestModel _testModel;
+        private readonly UserModel _userModel;
+        private readonly TestModel _testModel;
 
         internal TestAnswerModel(UserModel userModel, TestModel testModel)
         {
@@ -24,6 +24,59 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             {
                 throw new ArgumentNullException(nameof(dbContext));
             }
+
+            //userI - 1 correct answer (after ranking time)
+            dbContext.TestAnswer.Add(new TestAnswer()
+            {
+                Id = 14,
+                UserId = this._userModel.userI.Id,
+                User = this._userModel.userI,
+                TestId = this._testModel.test1.Id,
+                Test = this._testModel.test1,
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddDays(8),
+                AnsweringTimeOffset = new TimeSpan(192, 0, 0)
+            });
+
+            //userH - 1 correct answer
+
+            dbContext.TestAnswer.Add(new TestAnswer()
+            {
+                Id = 13,
+                UserId = this._userModel.userH.Id,
+                User = this._userModel.userH,
+                TestId = this._testModel.test1.Id,
+                Test = this._testModel.test1,
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddMinutes(10),
+                AnsweringTimeOffset = new TimeSpan(0, 10, 0)
+            });
+
+            //userG - 2 correct answers
+
+            dbContext.TestAnswer.Add(new TestAnswer()
+            {
+                Id = 12,
+                UserId = this._userModel.userG.Id,
+                User = this._userModel.userG,
+                TestId = this._testModel.test1.Id,
+                Test = this._testModel.test1,
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(3),
+                AnsweringTimeOffset = new TimeSpan(3, 0, 0)
+            });
+
+            dbContext.TestAnswer.Add(new TestAnswer()
+            {
+                Id = 11,
+                UserId = this._userModel.userG.Id,
+                User = this._userModel.userG,
+                TestId = this._testModel.test2.Id,
+                Test = this._testModel.test2,
+                AnsweringTime = this._testModel.test2.StartDate.Value.AddMinutes(10),
+                AnsweringTimeOffset = new TimeSpan(0, 10, 0)
+            });
+
+            //userF - 0 correct answers
+
+            //userE - 0 correct answers
 
             //userD
 
