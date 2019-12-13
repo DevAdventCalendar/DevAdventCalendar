@@ -32,7 +32,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddDays(8),
-                AnsweringTimeOffset = new TimeSpan(192, 0, 0)
+                AnsweringTimeOffset = new TimeSpan(8, 0, 0, 0)
             });
 
             //userH - 1 correct answer
@@ -145,7 +145,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 TestId = this._testModel.test2.Id,
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2).AddMilliseconds(10),
-                AnsweringTimeOffset = new TimeSpan(2, 0, 0, 0, 10)
+                AnsweringTimeOffset = new TimeSpan(0, 2, 0, 0, 10)
             });
 
             //userA
@@ -158,7 +158,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
                 AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(2).AddMilliseconds(5),
-                AnsweringTimeOffset = new TimeSpan(2, 0, 0, 0, 5)
+                AnsweringTimeOffset = new TimeSpan(0, 2, 0, 0, 5)
             });
 
             dbContext.TestAnswer.Add(new TestAnswer()
