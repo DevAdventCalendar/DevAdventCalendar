@@ -25,20 +25,20 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .ToArray();
         }
 
-        public int GetAnsweringTimeSum(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public double GetAnsweringTimeSum(string userId, DateTime dateFrom, DateTime dateTo)
         {
             return _dbContext
                 .TestAnswer
                 .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
-                .Sum(a => a.AnsweringTimeOffset.Seconds);
+                .Sum(a => (a.AnsweringTime - a.Test.StartDate.Value).TotalMilliseconds);
         }
 
-        public int GetCorrectAnswersCount(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public IEnumerable<DateTime> GetCorrectAnswersDates(string userId, DateTime dateFrom, DateTime dateTo)
         {
             return _dbContext
                 .TestAnswer
-                .Where(a => a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
-                .Count(a => a.UserId == userId);
+                .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
+                .Select(a => a.Test.StartDate.Value.Date);
         }
 
         public List<Result> GetFinalResults()
@@ -48,14 +48,14 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .ToList();
         }
 
-        public int[] GetWrongAnswersCountPerDay(string userId, DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public IEnumerable<WrongAnswerData> GetWrongAnswersCountPerDay(string userId, DateTime dateFrom, DateTime dateTo)
         {
             return _dbContext
                 .TestWrongAnswer
                 .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
-                .Select(t => new { Time = t.Time.ToString("yyyy-MM-dd") })
-                .GroupBy(a => a.Time)
-                .Select(c => c.Count())
+                .Select(t => new { TestStartDate = t.Test.StartDate.Value.Date })
+                .GroupBy(a => a.TestStartDate)
+                .Select(a => new WrongAnswerData(a.Key, a.Count()))
                 .ToArray();
         }
 
@@ -187,6 +187,13 @@ namespace DevAdventCalendarCompetition.TestResultService
             {
                 Console.WriteLine($"\n\nAn error occurred during saving score for user { userId } and week { weekNumber }: { e.Message }");
             }
+        }
+
+        public ApplicationUser GetUserById(string id)
+        {
+            return _dbContext
+                .Users
+                .FirstOrDefault(r => r.Id == id);
         }
     }
 }
