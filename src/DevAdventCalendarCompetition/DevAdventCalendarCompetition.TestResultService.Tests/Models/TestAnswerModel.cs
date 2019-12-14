@@ -57,8 +57,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = UserModel.userG,
                 TestId = this._testModel.test1.Id,
                 Test = this._testModel.test1,
-                AnsweringTime = this._testModel.test1.StartDate.Value.AddHours(3),
-                AnsweringTimeOffset = new TimeSpan(3, 0, 0)
+                AnsweringTime = this._testModel.test1.StartDate.Value.AddDays(1).AddHours(2),
+                AnsweringTimeOffset = new TimeSpan(1,2, 0, 0)
             });
 
             dbContext.TestAnswer.Add(new TestAnswer()
@@ -170,7 +170,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 Test = this._testModel.test2,
                 AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2),
                 AnsweringTimeOffset = new TimeSpan(2, 0, 0)
-            }); ;
+            });
         }
     }
 }

@@ -30,7 +30,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             return _dbContext
                 .TestAnswer
                 .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
-                .Sum(a => a.AnsweringTimeOffset.TotalMilliseconds);
+                .Sum(a => (a.AnsweringTime - a.Test.StartDate.Value).TotalMilliseconds);
         }
 
         public IEnumerable<DateTime> GetCorrectAnswersDates(string userId, DateTime dateFrom, DateTime dateTo)

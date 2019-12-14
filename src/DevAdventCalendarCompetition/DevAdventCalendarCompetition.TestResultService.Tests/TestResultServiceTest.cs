@@ -1,7 +1,5 @@
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -15,25 +13,28 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
         //bug3: users who answer day after a test starting (ex. 02.12) have the same offset as people who answer on starting day (ex. 01.12)
 
         //Test for everything (final results)
-        //[Fact]
-        //public async Task GetWeek1CorrectRanking()
-        //{
-        //    //Arrange
-        //    TestResultServiceTestBase testBase = new TestResultServiceTestBase();
-        //    TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-        //    var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
-        //    var expectedResult = testBase.GetExpectedResultModel();
+        [Fact]
+        public async Task GetWeek1CorrectRanking()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var expectedResult = testBase.GetExpectedResultModel();
 
-        //    //Act
-        //    service.CalculateWeeklyResults(1);
-        //    var results = testResultRepository.GetFinalResults();
+            //Act
+            service.CalculateWeeklyResults(1);
+            var results = testResultRepository.GetFinalResults();
 
-        //    //Assert
-        //    Assert.Equal(
-        //        expectedResult.Select(x => GetWeek1Result(x)).ToList(),
-        //        results.Select(x => GetWeek1Result(x)).ToList());
-
-        //}
+            //Assert
+            var expectedResultItems = expectedResult.Select(x => GetWeek1Result(x)).ToList();
+            var resultItems = results.Select(x => GetWeek1Result(x)).ToList();
+            Assert.Equal(expectedResultItems.Count, resultItems.Count);
+            foreach (var item in expectedResultItems)
+            {
+                Assert.Contains(item, resultItems);
+            }
+        }
 
         [Fact]
         public async Task UsersWithNoCorrectAnswersHaveZeroPoints()
@@ -57,7 +58,6 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
                 Assert.Contains(item, resultItems);
             }
         }
-
 
         [Fact]
         public async Task UsersWithTheSameCorrectAnswersAndTheSameBonusHaveTheSamePoints()
@@ -167,7 +167,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 
         private object GetWeek1Result(Result result)
         {
-            return new { UserdId = result.UserId, Week1Points = result.Week1Points, Week1Place = result.Week1Place };
+            return new { UserdId = result.UserId, Week1Points = result.Week1Points, Week1Place = result.Week1Points != 0 ? result.Week1Place : int.MaxValue };
         }
     }
 }
