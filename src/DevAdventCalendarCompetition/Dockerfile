@@ -8,6 +8,7 @@ COPY ./DevAdventCalendarCompetition.Repository/*.csproj ./DevAdventCalendarCompe
 COPY ./DevAdventCalendarCompetition.Services/*.csproj ./DevAdventCalendarCompetition.Services/
 COPY ./DevAdventCalendarCompetition.TestResultService/*.csproj ./DevAdventCalendarCompetition.TestResultService/
 COPY ./DevAdventCalendarCompetition.Tests/*.csproj ./DevAdventCalendarCompetition.Tests/
+COPY ./DevAdventCalendarCompetition.TestResultService.Tests/*.csproj ./DevAdventCalendarCompetition.TestResultService.Tests/
 RUN dotnet restore
 
 # copy everything else
@@ -15,6 +16,10 @@ COPY . .
 
 # run unit tests
 WORKDIR /app/DevAdventCalendarCompetition.Tests
+RUN dotnet test -c Release
+
+# run unit tests for results
+WORKDIR /app/DevAdventCalendarCompetition.TestResultService.Tests
 RUN dotnet test -c Release
 
 # publish app
