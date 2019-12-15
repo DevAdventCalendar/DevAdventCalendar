@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
@@ -24,7 +23,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             this._answeringTimePlaceRule = timePlaceRule;
         }
 
-        public List<CompetitionResult> CalculateResults(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        public List<CompetitionResult> CalculateResults(DateTime dateFrom, DateTime dateTo)
         {
             // Collection for storing temporal results for specific time span
 
@@ -36,28 +35,21 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             foreach (var id in usersId)
             {
-                var correctAnswersCount = this._testResultRepository.GetCorrectAnswersCount(id, dateFrom, dateTo);
+                var user = this._testResultRepository.GetUserById(id); // ToDo: Temporarily for debugging
+                var correctAnswerDates = this._testResultRepository.GetCorrectAnswersDates(id, dateFrom, dateTo);
                 var wrongAnswersCounts = this._testResultRepository.GetWrongAnswersCountPerDay(id, dateFrom, dateTo);
                 var sumOffset = this._testResultRepository.GetAnsweringTimeSum(id, dateFrom, dateTo);
 
                 var bonus = 0;
-
-                if (correctAnswersCount > 0)
+                foreach (var correctAnswerDate in correctAnswerDates)
                 {
-                    bonus = wrongAnswersCounts
-                            .Select(p => _bonusPointsRule.CalculatePoints(p))
-                            .Sum();
+                    var wrongAnswers = wrongAnswersCounts.FirstOrDefault(w => w.TestStartDate == correctAnswerDate);
+                    bonus += _bonusPointsRule.CalculatePoints(wrongAnswers != null ? wrongAnswers.Count : 0);
                 }
 
-                if (correctAnswersCount == 0)
-                {
-                    Console.WriteLine($"User did not answer any question.");
-                }
+                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswerDates.Count()) + bonus;
 
-                int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswersCount) + bonus;
-
-                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswersCount }, wrong answers per day: { string.Join(',', wrongAnswersCounts) } " +
-                                  $"\nbonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
+                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswerDates.Count() }, bonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
 
                 results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }
@@ -70,10 +62,9 @@ namespace DevAdventCalendarCompetition.TestResultService
             // Invoke CalculateResults with correct boundary dates according to weekNumber.
 
             // Save results to DB as weekly results.
-            DateTime dateFrom = new DateTimeOffset(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0, TimeSpan.Zero).DateTime;
-            DateTime dateTo = dateFrom.AddDays(7);
 
-            Console.WriteLine($"\nCurrent week number: { weekNumber }, dates from: { dateFrom.ToString(CultureInfo.InvariantCulture) }, to: { dateTo.ToString(CultureInfo.InvariantCulture) }");
+            DateTime dateFrom = new DateTime(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0);
+            DateTime dateTo = dateFrom.AddDays(7);
 
             var userResults = CalculateResults(dateFrom, dateTo);
 

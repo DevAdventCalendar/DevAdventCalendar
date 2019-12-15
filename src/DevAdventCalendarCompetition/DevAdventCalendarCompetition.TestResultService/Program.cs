@@ -24,10 +24,10 @@ namespace DevAdventCalendarCompetition.TestResultService
                 var numberOfWeek = args.FirstOrDefault();
                 if (numberOfWeek == null)
                 {
-                    
-                    DateTimeOffset startDateTimeOffset = new DateTimeOffset(DateTime.Today.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
+
+                    DateTime startDateTimeOffset = new DateTime(DateTime.Today.Year, 12, 1, 20, 0, 0);
                     Trace.WriteLine($"Start date {startDateTimeOffset}");
-                    DateTimeOffset endDateTimeOffset = new DateTimeOffset(DateTime.Today.Year, 12, 24, 23, 59, 59, TimeSpan.Zero);
+                    DateTime endDateTimeOffset = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 59);
                     Trace.WriteLine($"End date {endDateTimeOffset}");
 
                     Trace.WriteLine($"Starting calculating points...");
