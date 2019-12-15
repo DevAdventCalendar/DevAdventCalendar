@@ -25,10 +25,16 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             
         }
 
-        public List<Result> GetExpectedResultModel()
+        public List<Result> GetExpectedWeek1ResultModel()
         {
             var resultModel = new ResultModel();
-            return resultModel.GetResultList(dbContext);
+            return resultModel.GetWeek1ResultList(dbContext);
+        }
+
+        public List<Result> GetExpectedWeek2ResultModel()
+        {
+            var resultModel = new ResultModel();
+            return resultModel.GetWeek2ResultList(dbContext);
         }
 
         public async Task<TestResultRepository> GetTestResultRepositoryAsync()

@@ -26,6 +26,18 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             //userI - 1 correct answer (after ranking time)
             dbContext.TestAnswer.Add(new TestAnswer()
             {
+                Id = 15,
+                UserId = UserModel.userI.Id,
+                User = UserModel.userI,
+                TestId = this._testModel.test8.Id,
+                Test = this._testModel.test8,
+                AnsweringTime = this._testModel.test8.StartDate.Value.AddMinutes(1),
+                AnsweringTimeOffset = new TimeSpan(0, 1, 0)
+            });
+
+
+            dbContext.TestAnswer.Add(new TestAnswer()
+            {
                 Id = 14,
                 UserId = UserModel.userI.Id,
                 User = UserModel.userI,

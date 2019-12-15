@@ -37,7 +37,9 @@ namespace DevAdventCalendarCompetition.TestResultService
         {
             return _dbContext
                 .TestAnswer
-                .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
+                .Where(a => a.UserId == userId)
+                .Where(a => a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
+                .Where(a => a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
                 .Select(a => a.Test.StartDate.Value.Date);
         }
 
