@@ -22,7 +22,7 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo);
 
-        int GetUserPosition(string userId);
+        int[] GetUserPositions(string userId);
 
         List<Result> GetTestResultsForWeek(int weekNumber);
     }

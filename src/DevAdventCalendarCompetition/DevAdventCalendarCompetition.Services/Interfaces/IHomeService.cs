@@ -19,7 +19,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Dictionary<int, List<TestResultDto>> GetAllTestResults();
 
-        int GetUserPosition(string userId);
+        int[] GetUserPositions(string userId);
 
         string PrepareUserEmailForRODO(string email);
     }

@@ -77,37 +77,37 @@ namespace DevAdventCalendarCompetition.Repository
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
-        public int GetUserPosition(string userId)
+        public int[] GetUserPositions(string userId)
         {
             var result = this._dbContext.Results
                 .FirstOrDefault(x => x.UserId == userId);
 
-            if (result == null)
+            var userPositions = new int[4];
+
+            if (result != null)
             {
-                return 0;
+                if (result.FinalPlace > 0)
+                {
+                    userPositions[3] = result.FinalPlace.Value;
+                }
+
+                if (result.Week3Place > 0)
+                {
+                    userPositions[2] = result.Week3Place.Value;
+                }
+
+                if (result.Week2Place > 0)
+                {
+                    userPositions[1] = result.Week2Place.Value;
+                }
+
+                if (result.Week1Place > 0)
+                {
+                    userPositions[0] = result.Week1Place.Value;
+                }
             }
 
-            if (result.FinalPlace > 0)
-            {
-                return result.FinalPlace.Value;
-            }
-
-            if (result.Week3Place > 0)
-            {
-                return result.Week3Place.Value;
-            }
-
-            if (result.Week2Place > 0)
-            {
-                return result.Week2Place.Value;
-            }
-
-            if (result.Week1Place > 0)
-            {
-                return result.Week1Place.Value;
-            }
-
-            return 0;
+            return userPositions;
         }
 
         public List<Result> GetTestResultsForWeek(int weekNumber)

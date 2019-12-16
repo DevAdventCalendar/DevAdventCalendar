@@ -37,14 +37,35 @@ else
         <div class="container">
             <div class="col-md-12">
                 <div class="party_text">
-                    @if (Model.CurrentUserPosition != 0)
+                    @if (Model.Week1UserPosition != 0)
                     {
                         <h1 class="mb-30">
-                            Zajmujesz <span>@Model.CurrentUserPosition</span> miejsce!
+                            1. Tydzień - <span>@Model.Week1UserPosition</span> miejsce!
                         </h1>
+
+                        @if (Model.Week2UserPosition != 0)
+                         {
+                             <h1 class="mb-30">
+                                 2. Tydzień - <span>@Model.Week2UserPosition</span> miejsce!
+                             </h1>
+
+                             @if (Model.Week3UserPosition != 0)
+                              {
+                                  <h1 class="mb-30">
+                                      3. Tydzień - <span>@Model.Week3UserPosition</span> miejsce!
+                                  </h1>
+
+                                  @if (Model.FinalUserPosition != 0)
+                                   {
+                                       <h1 class="mb-30">
+                                           Wynik całego konkursu - <span>@Model.FinalUserPosition</span> miejsce!
+                                       </h1>
+                                   }
+                              }
+                         }
                         <p>
-                            Punkty są zliczane raz w tygodniu. Twoja pozycja odnosi się do ostatniego zamkniętego tygodnia
-                            lub do całości konkursu, jeśli ten został już zakończony.
+                            Punkty są zliczane raz w tygodniu. Zajęte przez Ciebie miejsce określane jest za każdy ostatnio zamknięty tydzień
+                            lub za całość konkursu, jeśli ten został już zakończony.
                         </p>
                     }
                     else
