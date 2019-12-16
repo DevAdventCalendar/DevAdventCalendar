@@ -101,7 +101,7 @@ namespace DevAdventCalendarCompetition.Services
             return this._homeRepository.GetCorrectAnswersCountForUser(userId);
         }
 
-        public int GetUserPosition(string userId)
+        public UserPosition GetUserPosition(string userId)
         {
             return this._homeRepository.GetUserPosition(userId);
         }

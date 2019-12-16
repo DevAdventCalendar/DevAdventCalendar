@@ -37,15 +37,29 @@ else
         <div class="container">
             <div class="col-md-12">
                 <div class="party_text">
-                    @if (Model.CurrentUserPosition != 0)
+                    @if (Model.UserFinalPosition != 0)
                     {
                         <h1 class="mb-30">
-                            Zajmujesz <span>@Model.CurrentUserPosition</span> miejsce!
+                            W całym konkursie zajmujesz  <span>@Model.UserFinalPosition</span> miejsce!
                         </h1>
-                        <p>
-                            Punkty są zliczane raz w tygodniu. Twoja pozycja odnosi się do ostatniego zamkniętego tygodnia
-                            lub do całości konkursu, jeśli ten został już zakończony.
-                        </p>
+                    }
+                    @if (Model.UserWeek3Position != 0)
+                    {
+                        <h1 class="mb-30">
+                            W trzecim tygodniu zajmujesz  <span>@Model.UserWeek3Position</span> miejsce!
+                        </h1>
+                    }
+                    @if (Model.UserWeek2Position != 0)
+                    {
+                        <h1 class="mb-30">
+                            W drugim tygodniu zajmujesz  <span>@Model.UserWeek2Position</span> miejsce!
+                        </h1>
+                    }
+                    @if (Model.UserWeek1Position != 0)
+                    {
+                        <h1 class="mb-30">
+                            W pierwszym tygodniu zajmujesz <span>@Model.UserWeek1Position</span> miejsce!
+                        </h1>
                     }
                     else
                     {
