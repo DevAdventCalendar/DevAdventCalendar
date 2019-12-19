@@ -37,21 +37,36 @@ else
         <div class="container">
             <div class="col-md-12">
                 <div class="party_text">
-                    @if (Model.CurrentUserPosition != 0)
+                    @if (Model.UserFinalPosition != 0)
                     {
                         <h1 class="mb-30">
-                            Zajmujesz <span>@Model.CurrentUserPosition</span> miejsce!
+                            W całym konkursie zajmujesz  <span>@Model.UserFinalPosition</span> miejsce!
                         </h1>
-                        <p>
-                            Punkty są zliczane raz w tygodniu. Twoja pozycja odnosi się do ostatniego zamkniętego tygodnia
-                            lub do całości konkursu, jeśli ten został już zakończony.
-                        </p>
                     }
-                    else
+                    @if (Model.UserWeek3Position != 0)
+                    {
+                        <h1 class="mb-30">
+                            W trzecim tygodniu zajmujesz  <span>@Model.UserWeek3Position</span> miejsce!
+                        </h1>
+                    }
+                    @if (Model.UserWeek2Position != 0)
+                    {
+                        <h1 class="mb-30">
+                            W drugim tygodniu zajmujesz  <span>@Model.UserWeek2Position</span> miejsce!
+                        </h1>
+                    }
+                    @if (Model.UserWeek1Position != 0)
+                    {
+                        <h1 class="mb-30">
+                            W pierwszym tygodniu zajmujesz <span>@Model.UserWeek1Position</span> miejsce!
+                        </h1>
+                    }
+
+                    @if(Model.UserWeek1Position == 0 && Model.UserWeek2Position == 0 && Model.UserWeek3Position == 0 && Model.UserFinalPosition == 0)
                     {
                         <h1 class="mb-30">Wyniki już niedługo...</h1>
                         <p>
-                            Twoja pozycja będzie dostępna po zliczeniu wyników z pierwszego tygodnia konkursu.
+                            Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu).
                         </p>
                     }
                     <img src="~/theme-2019/images/gift_bag.png" alt="gifts">

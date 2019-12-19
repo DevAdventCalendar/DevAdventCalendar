@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
 
@@ -47,6 +48,11 @@ namespace DevAdventCalendarCompetition.TestResultService
                     bonus += _bonusPointsRule.CalculatePoints(wrongAnswers != null ? wrongAnswers.Count : 0);
                 }
 
+                if (correctAnswerDates.Count() == 0)
+                {
+                    Console.WriteLine($"User did not answer any question.");
+                }
+
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswerDates.Count()) + bonus;
 
                 Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswerDates.Count() }, bonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
@@ -64,6 +70,9 @@ namespace DevAdventCalendarCompetition.TestResultService
             // Save results to DB as weekly results.
             DateTime dateFrom = new DateTime(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), 20, 0, 0);
             DateTime dateTo = dateFrom.AddDays(7);
+
+            Console.WriteLine($"\nCurrent week number: { weekNumber }, dates from: { dateFrom.ToString(CultureInfo.InvariantCulture) }, to: { dateTo.ToString(CultureInfo.InvariantCulture) }");
+
 
             var userResults = CalculateResults(dateFrom, dateTo);
 

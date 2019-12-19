@@ -25,13 +25,13 @@ namespace DevAdventCalendarCompetition.TestResultService
                 if (numberOfWeek == null)
                 {
 
-                    DateTime startDateTimeOffset = new DateTime(DateTime.Today.Year, 12, 1, 20, 0, 0);
-                    Trace.WriteLine($"Start date {startDateTimeOffset}");
-                    DateTime endDateTimeOffset = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 59);
-                    Trace.WriteLine($"End date {endDateTimeOffset}");
+                    DateTime startDateTime = new DateTime(DateTime.Today.Year, 12, 1, 20, 0, 0);
+                    Trace.WriteLine($"Start date {startDateTime}");
+                    DateTime endDateTime = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 59);
+                    Trace.WriteLine($"End date {endDateTime}");
 
                     Trace.WriteLine($"Starting calculating points...");
-                    service.CalculateResults(startDateTimeOffset, endDateTimeOffset);
+                    service.CalculateResults(startDateTime, endDateTime);
                     Trace.WriteLine($"Finished calculating points");
                 }
                 else
