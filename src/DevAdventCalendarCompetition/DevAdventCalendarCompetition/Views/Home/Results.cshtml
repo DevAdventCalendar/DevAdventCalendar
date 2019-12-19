@@ -61,11 +61,12 @@ else
                             W pierwszym tygodniu zajmujesz <span>@Model.UserWeek1Position</span> miejsce!
                         </h1>
                     }
-                    else
+
+                    @if(Model.UserWeek1Position == 0 && Model.UserWeek2Position == 0 && Model.UserWeek3Position == 0 && Model.UserFinalPosition == 0)
                     {
                         <h1 class="mb-30">Wyniki już niedługo...</h1>
                         <p>
-                            Twoja pozycja będzie dostępna po zliczeniu wyników z pierwszego tygodnia konkursu.
+                            Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu).
                         </p>
                     }
                     <img src="~/theme-2019/images/gift_bag.png" alt="gifts">
