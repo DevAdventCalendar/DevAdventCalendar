@@ -79,9 +79,13 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
             }
 
+            var userPosition = this._homeService.GetUserPosition(userId);
             var vm = new TestResultsVm()
             {
-                CurrentUserPosition = this._homeService.GetUserPosition(userId),
+                UserWeek1Position = userPosition.Week1Place ?? 0,
+                UserWeek2Position = userPosition.Week2Place ?? 0,
+                UserWeek3Position = userPosition.Week3Place ?? 0,
+                UserFinalPosition = userPosition.FinalPlace ?? 0,
                 TotalTestResults = paginatedResults
             };
 
