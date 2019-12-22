@@ -24,15 +24,9 @@ namespace DevAdventCalendarCompetition.TestResultService
                 var numberOfWeek = args.FirstOrDefault();
                 if (numberOfWeek == null)
                 {
-
-                    DateTime startDateTime = new DateTime(DateTime.Today.Year, 12, 1, 20, 0, 0);
-                    Trace.WriteLine($"Start date {startDateTime}");
-                    DateTime endDateTime = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 59);
-                    Trace.WriteLine($"End date {endDateTime}");
-
-                    Trace.WriteLine($"Starting calculating points...");
-                    service.CalculateResults(startDateTime, endDateTime);
-                    Trace.WriteLine($"Finished calculating points");
+                    Trace.WriteLine($"Starting calculating final points...");
+                    service.CalculateFinalResults();
+                    Trace.WriteLine($"Finished calculating final points");
                 }
                 else
                 {
