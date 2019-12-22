@@ -175,5 +175,89 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests.Models
                 }
             };
         }
+
+        public List<Result> GetFinalResultList(ApplicationDbContext dbContext)
+        {
+            if (dbContext is null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
+
+            return new List<Result>()
+            {
+                new Result()
+                {
+                    Id = 5,
+                    UserId = UserModel.userD.Id,
+                    User = UserModel.userD,
+                    FinalPoints = 260,
+                    FinalPlace = 1
+                },
+                new Result()
+                {
+                    Id = 4,
+                    UserId = UserModel.userC.Id,
+                    User = UserModel.userC,
+                    FinalPoints = 260,
+                    FinalPlace = 2
+                },
+                new Result()
+                {
+                    Id = 1,
+                    UserId = UserModel.userI.Id,
+                    User = UserModel.userI,
+                    FinalPoints = 260,
+                    FinalPlace = 3
+                },
+                new Result()
+                {
+                    Id = 2,
+                    UserId = UserModel.userA.Id,
+                    User = UserModel.userA,
+                    FinalPoints = 250,
+                    FinalPlace = 4
+                },
+                new Result()
+                {
+                    Id = 3,
+                    UserId = UserModel.userB.Id,
+                    User = UserModel.userB,
+                    FinalPoints = 250,
+                    FinalPlace = 5
+                },
+                new Result()
+                {
+                    Id = 8,
+                    UserId = UserModel.userG.Id,
+                    User = UserModel.userG,
+                    FinalPoints = 250,
+                    FinalPlace = 6
+                },
+                new Result()
+                {
+                    Id = 9,
+                    UserId = UserModel.userH.Id,
+                    User = UserModel.userH,
+                    FinalPoints = 130,
+                    FinalPlace = 7
+                },
+                new Result()
+                {
+                    Id = 6,
+                    UserId = UserModel.userE.Id,
+                    User = UserModel.userE,
+                    FinalPoints = 0,
+                    FinalPlace = 8
+                },
+                new Result()
+                {
+                    Id = 7,
+                    UserId = UserModel.userF.Id,
+                    User = UserModel.userF,
+                    FinalPoints = 0,
+                    FinalPlace = 9
+                }
+            };
+        }
     }
 }

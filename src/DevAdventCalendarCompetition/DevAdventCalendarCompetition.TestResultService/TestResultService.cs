@@ -73,7 +73,6 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             Console.WriteLine($"\nCurrent week number: { weekNumber }, dates from: { dateFrom.ToString(CultureInfo.InvariantCulture) }, to: { dateTo.ToString(CultureInfo.InvariantCulture) }");
 
-
             var userResults = CalculateResults(dateFrom, dateTo);
 
             foreach (var result in userResults)
@@ -83,11 +82,21 @@ namespace DevAdventCalendarCompetition.TestResultService
             }
         }
 
-        public void SaveFinalResults()
+        public void CalculateFinalResults()
         {
-            // Check results from all weeks and calculate final points and place for users.
+            // Save results to DB as weekly results.
+            DateTime dateFrom = new DateTime(DateTime.Today.Year, 12, 1, 20, 0, 0);
+            DateTime dateTo = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 59);
 
-            throw new NotImplementedException();
+            Console.WriteLine($"\nFinal results, dates from: { dateFrom.ToString(CultureInfo.InvariantCulture) }, to: { dateTo.ToString(CultureInfo.InvariantCulture) }");
+
+            var userResults = CalculateResults(dateFrom, dateTo);
+
+            foreach (var result in userResults)
+            {
+                _testResultRepository.SaveUserFinalScore(result.UserId, result.Points);
+                _testResultRepository.SaveUserFinalPlace(result.UserId, result.Place);
+            }
         }
     }
 }
