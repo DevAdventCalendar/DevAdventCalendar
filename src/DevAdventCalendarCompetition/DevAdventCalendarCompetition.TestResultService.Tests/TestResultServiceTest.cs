@@ -1,5 +1,6 @@
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -8,11 +9,32 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
 {
     public class TestResultServiceTest
     {
-        //bug1: there is more than 2 users with 0 points
-        //bug2: the order of users with no correct answers is random
-        //bug3: users who answer day after a test starting (ex. 02.12) have the same offset as people who answer on starting day (ex. 01.12)
-
         //Test for everything (final results)
+        [Fact]
+        public async Task GetFinalCorrectRanking()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var expectedResult = testBase.GetExpectedFinalResultModel();
+
+            //Act
+            service.CalculateFinalResults();
+            var results = testResultRepository.GetFinalResults();
+
+            //Assert
+            var expectedResultItems = expectedResult.Select(x => GetFinalResult(x)).ToList();
+            var resultItems = results.Select(x => GetFinalResult(x)).ToList();
+            Assert.Equal(expectedResultItems.Count, resultItems.Count);
+            foreach (var item in expectedResultItems)
+            {
+                Assert.Contains(item, resultItems);
+            }
+        }
+
+
+        //Test for everything (week 1 results)
         [Fact]
         public async Task GetWeek1CorrectRanking()
         {
@@ -36,6 +58,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             }
         }
 
+        //Test for everything (week 2 results)
         [Fact]
         public async Task GetWeek2CorrectRanking()
         {
@@ -196,6 +219,11 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
         private object GetWeek2Result(Result result)
         {
             return new { UserdId = result.UserId, Week2Points = result.Week2Points, Week2Place = result.Week2Points != 0 ? result.Week2Place : int.MaxValue };
+        }
+
+        private object GetFinalResult(Result result)
+        {
+            return new { UserdId = result.UserId, FinalPoints = result.FinalPoints, FinalPlace = result.FinalPoints != 0 ? result.FinalPlace : int.MaxValue };
         }
     }
 }
