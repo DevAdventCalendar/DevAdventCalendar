@@ -1,11 +1,12 @@
 version: '3.7'
 services:
-  devcal-app-uat:
+  devcal-db-uat:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     container_name: devcal-db-uat
     env_file: db.uat.env
     volumes:
-      - /data/devcal-db-uat:/var/opt/mssql
+      - /mnt/data/devcal-db-uat:/var/opt/mssql
+      - /mnt/backup/devcal-db-uat:/backup
     networks:
       - devcal-uat
     labels: 
