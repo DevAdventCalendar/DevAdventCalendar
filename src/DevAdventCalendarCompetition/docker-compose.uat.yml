@@ -9,7 +9,9 @@ services:
       - /mnt/backup/devcal-db-uat:/backup
     networks:
       - devcal-uat
-    labels: 
+    ports:
+      - 127.0.0.1:1433:1433
+    labels:
       - "traefik.enable=false"
     restart: unless-stopped
 
