@@ -3,8 +3,6 @@ services:
   db-uat:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     container_name: devcal-db-uat
-    ports:
-      - '1435:1433'
     env_file: db.uat.env
     volumes:
       - /data/devcal-db-uat:/var/opt/mssql
