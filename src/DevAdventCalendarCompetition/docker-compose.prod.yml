@@ -1,35 +1,41 @@
 version: '3.7'
 services:
-  db:
+  devcal-db-prod:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-    container_name: devcal-db
-    env_file: db.env
+    container_name: devcal-db-prod
+    env_file: db.prod.env
     volumes:
-      - /data/devcal-db:/var/opt/mssql
+      - /mnt/data/devcal-db-prod:/var/opt/mssql
+      - /mnt/backup/devcal-db-prod:/backup
     networks:
-      - devcal
+      - devcal-prod
+    ports:
+      - 127.0.0.1:1436:1433
     labels: 
       - "traefik.enable=false"
     restart: unless-stopped
 
-  app:
+  devcal-app-prod:
     image: docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019
-    container_name: devcal-app
-    env_file: app.env
+    container_name: devcal-app-prod
+    env_file: app.prod.env
     networks: 
-      - devcal
+      - devcal-prod
       - traefik
     labels: 
-      - "traefik.frontend.rule=Host:devadventcalendar.pl,www.devadventcalendar.pl"
       - "traefik.enable=true"
-      - "traefik.port=80"
-      - "traefik.docker.network=traefik"
+      - "traefik.http.routers.devcal-app-prod.entrypoints=https"
+      - "traefik.http.routers.devcal-app-prod.rule=Host(`devadventcalendar.pl`) || Host(`www.devadventcalendar.pl`)"
+      - "traefik.http.routers.devcal-app-prod.tls=true"
+      - "traefik.http.routers.devcal-app-prod.tls.certresolver=le"
+      - "traefik.http.routers.devcal-app-prod.service=devcal-app-prod"
+      - "traefik.http.services.devcal-app-prod.loadbalancer.server.port=80"
     depends_on:
-      - db
+      - devcal-db-prod
     restart: unless-stopped
 
 networks:
   traefik:
     external: true
-  devcal:
-    external: false
+  devcal-prod:
+    external: true
