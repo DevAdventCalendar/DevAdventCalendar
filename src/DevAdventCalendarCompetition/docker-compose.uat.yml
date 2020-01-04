@@ -10,7 +10,7 @@ services:
     networks:
       - devcal-uat
     ports:
-      - 127.0.0.1:1433:1433
+      - 127.0.0.1:1435:1433
     labels:
       - "traefik.enable=false"
     restart: unless-stopped
