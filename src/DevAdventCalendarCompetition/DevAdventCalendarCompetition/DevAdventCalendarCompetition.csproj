@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-DevAdventCalendarCompetition-33CBD544-AB08-45ED-A959-D039E993B165</UserSecretsId>
     <CodeAnalysisRuleSet>..\Analysers.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -24,6 +24,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.HttpOverrides" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />

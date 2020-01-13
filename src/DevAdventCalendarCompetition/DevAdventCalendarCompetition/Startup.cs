@@ -11,15 +11,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             if (env is null)
             {
@@ -36,7 +38,7 @@ namespace DevAdventCalendarCompetition
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public static void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UpdateDatabase();
             app.UseForwardedHeaders();
@@ -97,8 +99,8 @@ namespace DevAdventCalendarCompetition
                 {
                     c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
                 })
-                .AddMvc();
 
+               .AddMvc();
             services.AddLocalization(o => o.ResourcesPath = "Resources");
             services.ConfigureOptions(this.Configuration);
 
