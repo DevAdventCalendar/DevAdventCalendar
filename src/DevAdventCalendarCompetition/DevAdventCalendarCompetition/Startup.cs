@@ -103,6 +103,7 @@ namespace DevAdventCalendarCompetition
                .AddMvc();
             services.AddLocalization(o => o.ResourcesPath = "Resources");
             services.ConfigureOptions(this.Configuration);
+            services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddHttpClient();
         }
