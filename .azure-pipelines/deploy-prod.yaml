@@ -3,7 +3,7 @@ trigger:
 
 jobs:
 - deployment: Deploy
-  displayName: Deploy
+  displayName: 'Deploy Prod'
   environment:
     name: server
     resourceType: VirtualMachine
@@ -14,5 +14,5 @@ jobs:
         - checkout: self
 
         - template: steps/docker-compose.yaml
-          parameterts:
-            stage: $(Stage)
+          parameters:
+            stage: 'prod'

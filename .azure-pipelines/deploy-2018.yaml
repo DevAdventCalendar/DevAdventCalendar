@@ -11,5 +11,5 @@ jobs:
         - checkout: self
 
         - template: steps/docker-compose.yaml
-          parameterts:
+          parameters:
             stage: '2018'

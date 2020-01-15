@@ -14,5 +14,5 @@ jobs:
         - checkout: self
 
         - template: steps/docker-compose.yaml
-          parameterts:
+          parameters:
             stage: 'uat'
