@@ -1,6 +1,9 @@
+trigger:
+- dev_uat
+
 jobs:
 - deployment: Deploy
-  displayName: Deploy
+  displayName: 'Deploy UAT'
   environment:
     name: server
     resourceType: VirtualMachine
@@ -9,4 +12,7 @@ jobs:
       deploy:
         steps:
         - checkout: self
-        - script: hostname
+
+        - template: steps/docker-compose.yaml
+          parameterts:
+            stage: 'uat'

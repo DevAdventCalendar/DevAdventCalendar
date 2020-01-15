@@ -1,0 +1,15 @@
+jobs:
+- deployment: Deploy
+  displayName: 'Deploy 2018'
+  environment:
+    name: server
+    resourceType: VirtualMachine
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self
+
+        - template: steps/docker-compose.yaml
+          parameterts:
+            stage: '2018'
