@@ -1,6 +1,9 @@
 parameters:
   stage: ''
 
+variables:
+  ProjectPath: $(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition
+
 steps:
 - task: DownloadSecureFile@1
   inputs:
@@ -15,14 +18,14 @@ steps:
   inputs:
     SourceFolder: '$(Agent.TempDirectory)'
     Contents: '**/*.env'
-    TargetFolder: '$(System.DefaultWorkingDirectory)/master/src/DevAdventCalendarCompetition'
+    TargetFolder: '$(ProjectPath)'
 
 - task: DockerCompose@0
   displayName: 'Pull images'
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: 'GitHub Package Registry'
-    dockerComposeFile: '$(System.DefaultWorkingDirectory)/master/src/DevAdventCalendarCompetition/docker-compose.${{ parameters.stage }}.yml'
+    dockerComposeFile: '$(ProjectPath)/docker-compose.${{ parameters.stage }}.yml'
     projectName: 'devcal-${{ parameters.stage }}'
     dockerComposeCommand: pull
 
@@ -31,12 +34,12 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: 'GitHub Package Registry'
-    dockerComposeFile: '$(System.DefaultWorkingDirectory)/master/src/DevAdventCalendarCompetition/docker-compose.${{ parameters.stage }}.yml'
+    dockerComposeFile: '$(ProjectPath)/docker-compose.${{ parameters.stage }}.yml'
     projectName: 'devcal-${{ parameters.stage }}'
     dockerComposeCommand: 'up -d'
 
 - task: DeleteFiles@1
   displayName: 'Delete .env files'
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/master/src/DevAdventCalendarCompetition'
+    SourceFolder: '$(ProjectPath)'
     Contents: '**/*.env'
