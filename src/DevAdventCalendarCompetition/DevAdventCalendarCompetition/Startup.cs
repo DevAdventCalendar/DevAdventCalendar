@@ -99,11 +99,10 @@ namespace DevAdventCalendarCompetition
                 {
                     c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
                 })
+                .AddMvc(options => options.EnableEndpointRouting = false);
 
-               .AddMvc();
             services.AddLocalization(o => o.ResourcesPath = "Resources");
             services.ConfigureOptions(this.Configuration);
-            services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddHttpClient();
         }
