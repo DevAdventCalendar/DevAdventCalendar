@@ -11,7 +11,12 @@ namespace DevAdventCalendarCompetition
     {
         public PaginatedCollection(List<T> source, int pageIndex, int pageSize)
         {
-            var count = source.Count();
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var count = source.Count;
             var items = source.Skip(
                     (pageIndex - 1) * pageSize)
                 .Take(pageSize).ToList();
