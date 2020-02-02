@@ -21,18 +21,9 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-        public Startup(IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            if (env is null)
-            {
-                throw new ArgumentNullException(nameof(env));
-            }
-
-            var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
-                .AddEnvironmentVariables();
-
-            this.Configuration = configurationBuilder.Build();
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -40,9 +31,6 @@ namespace DevAdventCalendarCompetition
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UpdateDatabase();
-            app.UseForwardedHeaders();
-
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -52,9 +40,15 @@ namespace DevAdventCalendarCompetition
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
+            app.UpdateDatabase();
+            app.UseForwardedHeaders();
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
@@ -64,26 +58,37 @@ namespace DevAdventCalendarCompetition
             });
 
             app.UseHttpMethodOverride();
+
             app.UseHttpsRequestScheme();
+
+            app.UseRouting();
+
+            // app.UseAuthorization();
             app.UseAuthentication();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickApp API V1");
             });
-            app.UseMvc(routes =>
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        [Obsolete("Should be fixed During Refactor")]
-
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(this.Configuration.GetValue<string>("DataProtection:Keys")))
                 .SetApplicationName("DevAdventCalendar");
@@ -97,7 +102,7 @@ namespace DevAdventCalendarCompetition
                 .AddExternalLoginProviders(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new Info { Title = "QuickApp API", Version = "v1" });
+                    c.SwaggerDoc("v1", new Info { Title = "DevAdventCalendar API", Version = "v1" });
                 })
                 .AddMvc(options => options.EnableEndpointRouting = false);
 
