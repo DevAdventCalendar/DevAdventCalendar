@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace DevAdventCalendarCompetition
@@ -102,7 +103,7 @@ namespace DevAdventCalendarCompetition
                 .AddExternalLoginProviders(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new Info { Title = "DevAdventCalendar API", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo() { Title = "DevAdventCalendar API", Version = "v1" });
                 })
                 .AddMvc(options => options.EnableEndpointRouting = false);
 
