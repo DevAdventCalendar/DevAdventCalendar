@@ -2,7 +2,6 @@
 using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.AccountViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -302,7 +301,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 if (user == null || !(await this._accountService.IsEmailConfirmedAsync(user).ConfigureAwait(false)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                     return this.Redirect("EmailIsNotExist.cshtml");
+                    return this.RedirectToAction(nameof(this.ForgotPasswordConfirmation));
                 }
 
                 // For more information on how to enable account confirmation and password reset please
