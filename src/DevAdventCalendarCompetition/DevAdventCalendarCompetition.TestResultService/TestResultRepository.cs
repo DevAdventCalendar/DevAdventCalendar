@@ -56,6 +56,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .TestWrongAnswer
                 .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
                 .Select(t => new { TestStartDate = t.Test.StartDate.Value.Date })
+                .AsEnumerable()
                 .GroupBy(a => a.TestStartDate)
                 .Select(a => new WrongAnswerData(a.Key, a.Count()))
                 .ToArray();
