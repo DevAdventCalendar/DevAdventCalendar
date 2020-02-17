@@ -51,6 +51,7 @@ namespace DevAdventCalendarCompetition.Repository
         {
             return this._dbContext.Set<TestAnswer>()
                 .Where(a => a.UserId == userId)
+                .AsEnumerable()
                 .GroupBy(t => t.TestId)
                 .Count();
         }
@@ -61,6 +62,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .TestAnswer
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -72,6 +74,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .TestWrongAnswer
                 .Where(a => a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.Time.CompareTo(dateTo.DateTime) < 0)
+                .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
