@@ -14,8 +14,7 @@
       "launchUrl": "https://localhost:44301/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "ancmHostingModel": "InProcess"
+      }
     },
     "DevAdventCalendarCompetition": {
       "commandName": "Project",
