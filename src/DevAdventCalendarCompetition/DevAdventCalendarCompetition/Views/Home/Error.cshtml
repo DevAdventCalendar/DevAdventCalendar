@@ -1,4 +1,6 @@
-﻿<div class="breadcrumb_area">
+﻿@model DevAdventCalendarCompetition.Models.HomeViewModels.ErrorViewModel
+
+<div class="breadcrumb_area">
     <div class="container">
         <div class="row">
             <div class="breadcrumb_wrapper">
@@ -14,8 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center">
-                <h1 class="mb-30">Ups... Coś poszło nie tak...</h1>
-                <p>Nasze elfy już nad tym pracują ;-)</p>
+                @Model.Message
             </div>
         </div>
     </div>
