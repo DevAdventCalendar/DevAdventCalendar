@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +11,7 @@ namespace DevAdventCalendarCompetition
     {
         public PaginatedCollection(List<T> source, int pageIndex, int pageSize)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
+            _ = source ?? throw new ArgumentNullException(nameof(source));
 
             var count = source.Count;
             var items = source.Skip(
