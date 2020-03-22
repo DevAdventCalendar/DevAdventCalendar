@@ -23,7 +23,10 @@ namespace DevAdventCalendarCompetition
     {
         public Startup(IWebHostEnvironment env)
         {
-            _ = env ?? throw new ArgumentNullException(nameof(env));
+            if (env == null)
+            {
+                throw new ArgumentNullException(nameof(env));
+            }
 
             var configurationBuilder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false)
@@ -96,7 +99,7 @@ namespace DevAdventCalendarCompetition
                 .AddExternalLoginProviders(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "QuickApp API", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevAdventCalendar API", Version = "v1" });
                 });
 
             services

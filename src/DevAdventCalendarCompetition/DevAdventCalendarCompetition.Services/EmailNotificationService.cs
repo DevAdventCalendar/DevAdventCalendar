@@ -17,7 +17,10 @@ namespace DevAdventCalendarCompetition.Services
 
         public EmailNotificationService(IHttpClientFactory httpClientFactory, IOptionsMonitor<EmailNotificationOptions> optionsAccessor)
         {
-            _ = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
+            if (httpClientFactory == null)
+            {
+                throw new ArgumentNullException(nameof(httpClientFactory));
+            }
 
             this._httpClient = httpClientFactory.CreateClient(nameof(EmailNotificationService));
             this._optionsAccessor = optionsAccessor;
