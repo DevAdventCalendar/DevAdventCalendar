@@ -101,7 +101,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [Route(nameof(Error))]
-        public ActionResult Error([FromQuery(Name ="sc")]int statusCode)
+        public ActionResult Error([FromQuery]int statusCode)
         {
             return this.View(new ErrorViewModel
             {
