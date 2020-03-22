@@ -6,8 +6,6 @@ using DevAdventCalendarCompetition.Services.Interfaces;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    // This class is used by the application to send email for account confirmation and password reset.
-    // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
         public string Host { get; set; }
@@ -18,24 +16,23 @@ namespace DevAdventCalendarCompetition.Services
 
         public string Password { get; set; }
 
+        public string From { get; set; }
+
+        public bool Ssl { get; set; }
+
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            using (var smtpClient = new SmtpClient
+            using (var smtpClient = new SmtpClient(this.Host, this.Port) { EnableSsl = this.Ssl })
             {
-                Host = this.Host,
-                Port = this.Port,
-                EnableSsl = true,
-                Credentials = new NetworkCredential(this.UserName, this.Password)
-            })
+                if (!string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password))
+                {
+                    smtpClient.Credentials = new NetworkCredential(this.UserName, this.Password);
+                }
 
-            using (var mailMessage = new MailMessage(this.UserName, email)
-            {
-                Subject = subject,
-                IsBodyHtml = true,
-                Body = message
-            })
-            {
-                await smtpClient.SendMailAsync(mailMessage).ConfigureAwait(false);
+                using (var mailMessage = new MailMessage(this.From, email, subject, message) { IsBodyHtml = true })
+                {
+                    await smtpClient.SendMailAsync(mailMessage).ConfigureAwait(false);
+                }
             }
         }
     }

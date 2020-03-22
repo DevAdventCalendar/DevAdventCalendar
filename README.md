@@ -55,10 +55,19 @@ DevAdventCalendar web app for online competition for programmers.
 
 ## Debugging
 
- In order to send e-mails you need to set up an e-mail account in `appsettings.development.json`.
- Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
+In order to send e-mails:
+
+* set up an e-mail account in `appsettings.development.json` file
+
+* OR execute `docker container run -d -p 8025:8025 -p 1025:1025 mailhog/mailhog` command to run fake SMTP server in [Docker](#docker) container, then you can visit `http://localhost:8025/` to watch your e-mails
+
+Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
 
 ![ENVIRONMENT](docs/Pictures/screen.png/?raw=true)
+
+## Start the application
+
+Just run `docker-compose up` command in the `/src/DevAdventCalendarCompetition/` directory and after successful start of services visit `http://localhost:8081/` in your browser.
 
 ## Used Tools
 
@@ -76,6 +85,10 @@ Can be access by: pagedomain (or localhost)/swagger/
 
 Docker is an open platform that enables developers and administrators to build images, ship, and run distributed applications in a loosely isolated environment called a container. This approach enables efficient application lifecycle management between development, QA, and production environments.
 
-Application is using Docker to work  on VPS. Additional Docker-compose helping with configure for all of this
+Application is using Docker to work on VPS. Additional Docker-compose helping with configure for all of this
 
 [Docker documentation](https://docs.microsoft.com/pl-pl/dotnet/core/docker/intro-net-docker)
+
+#### MailHog
+
+MailHog is an email testing tool for developers. More info on [GitHub](https://github.com/mailhog/MailHog) page.
