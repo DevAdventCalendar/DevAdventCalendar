@@ -59,6 +59,17 @@ In order to send e-mails:
 
 * set up an e-mail account in `appsettings.development.json` file
 
+```json
+"Email": {
+    "Smtp": {	
+      "Host": "smtp.gmail.com",	
+      "Port": 587,	
+      "Username": "email_to_change",
+      "Password": "password_to_change"
+    }
+}
+```
+
 * OR execute `docker container run -d -p 8025:8025 -p 1025:1025 mailhog/mailhog` command to run fake SMTP server in [Docker](#docker) container, then you can visit `http://localhost:8025/` to watch your e-mails
 
 Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
