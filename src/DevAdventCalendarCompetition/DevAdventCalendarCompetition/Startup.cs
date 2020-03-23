@@ -49,7 +49,7 @@ namespace DevAdventCalendarCompetition
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("/Error?statusCode={0}");
                 app.UseHsts();
             }
 
