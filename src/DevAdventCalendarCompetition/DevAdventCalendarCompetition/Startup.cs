@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
 using AutoMapper;
 using DevAdventCalendarCompetition.Extensions;
-using DevAdventCalendarCompetition.Repository.Context;
-using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Builder;
@@ -12,9 +10,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,9 +21,18 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            this.Configuration = configuration;
+            if (env == null)
+            {
+                throw new ArgumentNullException(nameof(env));
+            }
+
+            var configurationBuilder = new ConfigurationBuilder()
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false)
+                .AddEnvironmentVariables();
+
+            this.Configuration = configurationBuilder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +40,9 @@ namespace DevAdventCalendarCompetition
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UpdateDatabase();
+            app.UseForwardedHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -44,45 +52,38 @@ namespace DevAdventCalendarCompetition
             else
             {
                 app.UseStatusCodePagesWithRedirects("/Error?statusCode={0}");
-
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            app.UpdateDatabase();
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseCookiePolicy();
+
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
             app.UseHttpMethodOverride();
-
             app.UseHttpsRequestScheme();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickApp API V1");
             });
-            app.UseEndpoints(endpoints =>
+
+            app.UseEndpoints(routes =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                routes.MapRazorPages();
+                routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete("Should be fixed During Refactor")]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataProtection()
@@ -98,16 +99,20 @@ namespace DevAdventCalendarCompetition
                 .AddExternalLoginProviders(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo() { Title = "DevAdventCalendar API", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevAdventCalendar API", Version = "v1" });
                 });
+
+            services
+                .AddControllersWithViews()
+                .AddNewtonsoftJson();
+            services
+                .AddRazorPages()
+                .AddNewtonsoftJson();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");
             services.ConfigureOptions(this.Configuration);
 
-            services.AddHttpClient();
-
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddHttpClient(nameof(EmailNotificationService));
         }
     }
 }
