@@ -4,10 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition", "DevAdventCalendarCompetition\DevAdventCalendarCompetition.csproj", "{ABEBFE43-9603-4F88-8551-42D05BF4365F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F91B714C-62D1-485A-B123-96C5439D0CD2} = {F91B714C-62D1-485A-B123-96C5439D0CD2}
-		{E1B14B60-0B8D-4F19-BFF1-B049CF780A36} = {E1B14B60-0B8D-4F19-BFF1-B049CF780A36}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition.Services", "DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj", "{08ACB8DC-1C8C-4C74-8EEF-A1F2E51B6620}"
 EndProject
@@ -17,7 +13,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetitio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition.TestResultService", "DevAdventCalendarCompetition.TestResultService\DevAdventCalendarCompetition.TestResultService.csproj", "{61350750-F9BB-4569-9BC4-0EF7CBC23C8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevAdventCalendarCompetition.TestResultService.Tests", "DevAdventCalendarCompetition.TestResultService.Tests\DevAdventCalendarCompetition.TestResultService.Tests.csproj", "{8BCF955A-A084-42D6-9D5A-A3E8FC10FFB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevAdventCalendarCompetition.TestResultService.Tests", "DevAdventCalendarCompetition.TestResultService.Tests\DevAdventCalendarCompetition.TestResultService.Tests.csproj", "{8BCF955A-A084-42D6-9D5A-A3E8FC10FFB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2DCD7FDB-32E7-4C8E-AFE4-E6C2C0195503}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Analysers.ruleset = Analysers.ruleset
+		AnalysersTests.ruleset = AnalysersTests.ruleset
+		Directory.Build.props = Directory.Build.props
+		docker-compose.2018.yml = docker-compose.2018.yml
+		docker-compose.prod.yml = docker-compose.prod.yml
+		docker-compose.uat.yml = docker-compose.uat.yml
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		nginx.conf = nginx.conf
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
