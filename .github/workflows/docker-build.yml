@@ -6,11 +6,24 @@ jobs:
 
   build:
  
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
  
     steps:
     - uses: actions/checkout@v1
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.200
+        
+    - name: Build
+      run: dotnet build -c Release --no-cache ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
+        
+    - name: Run the Unit Tests
+      run: dotnet test -c Release --no-build ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
+    
     - name: Build the Docker image
+      if: success()
       run: |
         cd src/DevAdventCalendarCompetition
         docker build . --file Dockerfile --tag devadventcalendar/devadventcalendar:2019
