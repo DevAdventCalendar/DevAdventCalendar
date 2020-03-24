@@ -14,19 +14,12 @@ RUN dotnet restore
 # copy everything else
 COPY . .
 
-# run unit tests
-WORKDIR /app/DevAdventCalendarCompetition.Tests
-RUN dotnet test -c Release
-
-# run unit tests for results
-WORKDIR /app/DevAdventCalendarCompetition.TestResultService.Tests
-RUN dotnet test -c Release
-
 # publish app
 WORKDIR /app/DevAdventCalendarCompetition
 RUN dotnet publish -c Release -o /out
 WORKDIR /out
 
+LABEL maintainer="DevAdventCalendar (devadventcalendar@gmail.com)"
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /out
