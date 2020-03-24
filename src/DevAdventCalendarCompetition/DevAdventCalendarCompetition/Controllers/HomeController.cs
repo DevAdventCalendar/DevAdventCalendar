@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Models.HomeViewModels;
+using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Mvc;
@@ -99,10 +101,12 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [Route(nameof(Error))]
-        public ActionResult Error()
+        public ActionResult Error([FromQuery]int statusCode)
         {
-            this.ViewBag.errorMessage = this.TempData["errorMessage"];
-            return this.View();
+            return this.View(new ErrorViewModel
+            {
+                Message = ErrorMessagesProvider.GetMessageBody(statusCode)
+            });
         }
 
         [Route("11111100011")]

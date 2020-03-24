@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Product>DevAdventCalendar</Product>
+    <Company>DevAdventCalendar</Company>
+    <Authors>DevAdventCalendar</Authors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)Analysers.ruleset</CodeAnalysisRuleSet>
+ </PropertyGroup>
+</Project>

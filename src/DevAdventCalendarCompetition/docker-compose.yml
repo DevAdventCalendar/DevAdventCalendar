@@ -7,6 +7,8 @@ services:
     environment:
       SA_PASSWORD: "DevCal123!."
       ACCEPT_EULA: "Y"
+    volumes:
+      - dbdata:/var/lib/mysql
 
   web:
     build:
@@ -16,15 +18,26 @@ services:
       - 44394:443 
     environment:
       ASPNETCORE_ENVIRONMENT: "Docker"
-    links:
+    depends_on:
       - db
 
   proxy:
     image: nginx:latest
     ports:
-      - 80:80
+      - 8081:80
       - 443:443
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    links:
+    depends_on:
       - web
+      
+  mailhog:
+    image: mailhog/mailhog
+    ports: 
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    depends_on:
+      - web
+      
+volumes:
+  dbdata:

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -11,25 +12,29 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class EmailNotificationService : INotificationService
     {
-        private readonly IHttpClientFactory _clientFactory;
+        private readonly HttpClient _httpClient;
         private readonly IOptionsMonitor<EmailNotificationOptions> _optionsAccessor;
 
-        public EmailNotificationService(IHttpClientFactory clientFactory, IOptionsMonitor<EmailNotificationOptions> optionsAccessor)
+        public EmailNotificationService(IHttpClientFactory httpClientFactory, IOptionsMonitor<EmailNotificationOptions> optionsAccessor)
         {
-            this._clientFactory = clientFactory;
+            if (httpClientFactory == null)
+            {
+                throw new ArgumentNullException(nameof(httpClientFactory));
+            }
+
+            this._httpClient = httpClientFactory.CreateClient(nameof(EmailNotificationService));
             this._optionsAccessor = optionsAccessor;
         }
 
         public async Task<bool> SetSubscriptionPreferenceAsync(string email, bool subscribe)
         {
             using (var request = new HttpRequestMessage())
-            using (var client = this._clientFactory.CreateClient())
             {
                 this.ConfigureRequest(request, email, subscribe);
 
                 try
                 {
-                    var response = await client.SendAsync(request).ConfigureAwait(false);
+                    var response = await this._httpClient.SendAsync(request).ConfigureAwait(false);
                     return response.IsSuccessStatusCode;
                 }
                 catch (HttpRequestException)
