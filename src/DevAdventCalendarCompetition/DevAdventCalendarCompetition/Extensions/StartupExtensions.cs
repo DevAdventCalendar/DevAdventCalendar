@@ -46,7 +46,7 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IEmailSender, EmailSender>(
+            services.AddSingleton<IEmailSender, EmailSender>(
                 sender =>
                 {
                     var emailSender = new EmailSender
@@ -54,7 +54,9 @@ namespace DevAdventCalendarCompetition.Extensions
                         Host = configuration.GetValue<string>("Email:Smtp:Host"),
                         Port = configuration.GetValue<int>("Email:Smtp:Port"),
                         UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
-                        Password = configuration.GetValue<string>("Email:Smtp:Password")
+                        Password = configuration.GetValue<string>("Email:Smtp:Password"),
+                        From = configuration.GetValue<string>("Email:Smtp:From"),
+                        Ssl = configuration.GetValue<bool?>("Email:Smtp:Ssl") ?? false,
                     };
 
                     return emailSender;

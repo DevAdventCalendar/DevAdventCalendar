@@ -34,6 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj" />
     <ProjectReference Include="..\DevAdventCalendarCompetition.TestResultService\DevAdventCalendarCompetition.TestResultService.csproj" />
+    <ProjectReference Include="..\DevAdventCalendarCompetition\DevAdventCalendarCompetition.csproj" />
   </ItemGroup>
 
 </Project>
