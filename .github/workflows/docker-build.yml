@@ -7,7 +7,9 @@ jobs:
   build:
  
     runs-on: ubuntu-18.04
- 
+    env:
+      COVERAGE_RESULTS: ${{ github.workspace }}/CoverageResults/coverage.json
+
     steps:
     - uses: actions/checkout@v1
     
@@ -20,8 +22,17 @@ jobs:
       run: dotnet build -c Release --no-cache ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
         
     - name: Run the Unit Tests
-      run: dotnet test -c Release --no-build ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
+      run: dotnet test -c Release --no-build /p:CollectCoverage=true /p:CoverletOutput=${COVERAGE_RESULTS} /p:MergeWith=${COVERAGE_RESULTS} ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
     
+    - name: Upload coverage to Codecov  
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ${COVERAGE_RESULTS}
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
+
     - name: Build the Docker image
       if: success()
       run: |
