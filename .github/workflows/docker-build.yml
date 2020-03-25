@@ -28,7 +28,7 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ${COVERAGE_RESULTS}
+        file: ${{ env.COVERAGE_RESULTS }}
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: true
