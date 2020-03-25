@@ -22,7 +22,7 @@ jobs:
       run: dotnet build -c Release --no-cache ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
         
     - name: Run the Unit Tests
-      run: dotnet test -c Release --no-build /p:CollectCoverage=true /p:CoverletOutput=${COVERAGE_RESULTS} /p:MergeWith=${COVERAGE_RESULTS} ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
+      run: dotnet test -c Release --no-build /p:CollectCoverage=true /p:CoverletOutput=${COVERAGE_RESULTS} /p:MergeWith=${COVERAGE_RESULTS} /p:CoverletOutputFormat=\"opencover,json\" -m:1 ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
     
     - name: Upload coverage to Codecov  
       uses: codecov/codecov-action@v1
