@@ -1,4 +1,4 @@
-﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
+@model DevAdventCalendarCompetition.Services.Models.TestDto
 
     <div class="breadcrumb_area">
         <div class="container">
@@ -16,7 +16,8 @@
         <div class="container">
             <div class="col-md-12">
                 <div class="party_text">
-                    <h1 class="mb-30">@Model.Description</h1>
+                    <h1 id="model" class="mb-30">@Model.Description</h1>
+
 
                     @if (Model == null)
                     {
@@ -64,7 +65,7 @@
                         {
                             <h3 class="mb-30 text-primary">@errorMessage</h3>
                         }
-                        
+
                         if (Model.HasUserAnswered)
                         {
                             <h3 class="mb-30 text-primary">Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</h3>
@@ -99,6 +100,10 @@
                         <img src="~/theme-2019/images/gift_bag.png" alt="" class="mt-30" />
                         <!-- "Odpowiedź do zagadki: karp" -->
                     </div>
+                    <script src="~/js/site.js">
+                        refresh = document.getElementById("model"); {
+                            function refreshAt()
+                        }</script>
 
                 </div>
             </div>
