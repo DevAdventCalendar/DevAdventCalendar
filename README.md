@@ -57,15 +57,17 @@ DevAdventCalendar web app for online competition for programmers.
 
 In order to send e-mails:
 
-* set up an e-mail account in `appsettings.development.json` file
+* set up an e-mail account in `appsettings.development.json` file (remember to enable the "Access less secure applications" option for the selected mailbox)
 
 ```json
 "Email": {
-    "Smtp": {	
-      "Host": "smtp.gmail.com",	
-      "Port": 587,	
+    "Smtp": {
+      "Host": "smtp.gmail.com",
+      "Port": 587,
       "Username": "email_to_change",
-      "Password": "password_to_change"
+      "Password": "password_to_change",
+      "From": "email_to_change",
+      "Ssl": yes
     }
 }
 ```
