@@ -82,6 +82,14 @@ Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: 
 
 Open PowerShell with administrator rights. Go to path `cd <your_path>/src/DevAdventCalendarCompetition/` run `docker-compose build` and `docker-compose up` command in the `/src/DevAdventCalendarCompetition/` directory and after successful start of services visit `http://localhost:8081/` in your browser.
 
+## Test user
+
+There is already created test user with admin rights:
+
+Login: `devadventcalendar@gmail.com`
+
+Password: `P@ssw0rd`
+
 ## Used Tools
 
 ### Swagger
