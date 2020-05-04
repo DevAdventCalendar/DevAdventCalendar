@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 using DevAdventCalendarCompetition.Services;
 using Xunit;
 
@@ -13,7 +13,7 @@ namespace DevAdventCalendarCompetition.Tests
 
         public HashingTest()
         {
-            this._hashParameters = new HashParameters(10, this.GenerateSalt());
+            this._hashParameters = new HashParameters(10, GenerateSalt());
             this._stringHasher = new StringHasher(this._hashParameters);
         }
 
@@ -38,7 +38,7 @@ namespace DevAdventCalendarCompetition.Tests
             this._stringHasher.VerifyHash(value, passwordHash);
         }
 
-        private byte[] GenerateSalt()
+        private static byte[] GenerateSalt()
         {
             byte[] salt = new byte[SALTLENGTH];
 
