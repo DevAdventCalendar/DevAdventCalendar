@@ -91,7 +91,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.RedirectToAction(nameof(this.Lockout));
                 }
 
-                this.ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
+                this.ModelState.AddModelError("Email", "Niepoprawna próba logowania.");
                 return this.View(model);
             }
 
