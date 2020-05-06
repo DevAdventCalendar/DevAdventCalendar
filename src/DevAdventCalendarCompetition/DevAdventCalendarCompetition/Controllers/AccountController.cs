@@ -63,14 +63,14 @@ namespace DevAdventCalendarCompetition.Controllers
                 if (user == null)
                 {
                     this._logger.LogWarning($"User {model.Email} not exists.");
-                    this.ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
+                    this.ModelState.AddModelError("Email", "Nie znaleziono takiego konta.");
                     return this.View(model);
                 }
 
                 if (!user.EmailConfirmed)
                 {
                     this._logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
-                    this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
+                    this.ModelState.AddModelError("Email", "Musisz najpierw potwierdzić swoje konto!");
                     return this.View(model);
                 }
 
