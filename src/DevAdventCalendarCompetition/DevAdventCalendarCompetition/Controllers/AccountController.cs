@@ -141,7 +141,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.View("RegisterConfirmation");
                 }
 
-                this.AddErrors(result);
+                this.AddErrors(result, "ConfirmPassword");
             }
 
             // If we got this far, something failed, redisplay form
@@ -250,7 +250,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     }
                 }
 
-                this.AddErrors(result);
+                this.AddErrors(result, "Email");
             }
 
             this.ViewData["ReturnUrl"] = returnUrl;
@@ -373,7 +373,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
 
-            this.AddErrors(result);
+            this.AddErrors(result, "ConfirmPassword");
 
             model = new ResetPasswordViewModel
             {
@@ -396,11 +396,11 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View();
         }
 
-        private void AddErrors(IdentityResult result)
+        private void AddErrors(IdentityResult result, string key)
         {
             foreach (var error in result.Errors)
             {
-                this.ModelState.AddModelError(error.Code, error.Description);
+                this.ModelState.AddModelError(key, error.Description);
             }
         }
 
