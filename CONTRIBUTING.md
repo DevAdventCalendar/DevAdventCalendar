@@ -13,7 +13,7 @@ Please note we have a [CODE_OF_CONDUCT.md](https://github.com/DevAdventCalendar/
 1. Clone repository
 
     ```git
-    git clone https://github.com/WTobor/DevAdventCalendar.git
+    git clone https://github.com/DevAdventCalendar/DevAdventCalendar.git
     ```
 
 2. Install [.Net Core SDK v3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1). 
