@@ -39,6 +39,9 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
+# Coverlet is a Code Coverage Tool
+coverage*[.json, .xml, .info]
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/

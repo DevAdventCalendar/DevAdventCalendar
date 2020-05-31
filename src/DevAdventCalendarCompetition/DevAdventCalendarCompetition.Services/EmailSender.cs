@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using MimeKit;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -22,18 +23,34 @@ namespace DevAdventCalendarCompetition.Services
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            using (var smtpClient = new SmtpClient(this.Host, this.Port) { EnableSsl = this.Ssl })
-            {
-                if (!string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password))
-                {
-                    smtpClient.Credentials = new NetworkCredential(this.UserName, this.Password);
-                }
+            var mailMesage = this.CreateMailMessage(subject, message);
+            mailMesage.From.Add(InternetAddress.Parse(this.From));
+            mailMesage.To.Add(InternetAddress.Parse(email));
 
-                using (var mailMessage = new MailMessage(this.From, email, subject, message) { IsBodyHtml = true })
-                {
-                    await smtpClient.SendMailAsync(mailMessage).ConfigureAwait(false);
-                }
+            using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
+            {
+                await smtpClient.ConnectAsync(this.Host, this.Port, this.Ssl);
+                await smtpClient.AuthenticateAsync(this.UserName, this.Password);
+                await smtpClient.SendAsync(mailMesage);
+                await smtpClient.DisconnectAsync(true);
             }
+        }
+
+        private MimeMessage CreateMailMessage(string subject, string body)
+        {
+            var bodyBuilder = new MimeKit.BodyBuilder
+            {
+                HtmlBody = body
+            };
+
+            var message = new MimeMessage
+            {
+                Sender = MailboxAddress.Parse(this.From),
+                Subject = subject,
+                Body = bodyBuilder.ToMessageBody()
+            };
+
+            return message;
         }
     }
 }

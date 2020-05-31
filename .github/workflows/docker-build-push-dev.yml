@@ -10,7 +10,8 @@ jobs:
   build:
  
     runs-on: ubuntu-18.04
- 
+    env:
+      PACKAGE_REGISTRY_USER: devadventcalendar
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
@@ -19,5 +20,5 @@ jobs:
         docker build . --file Dockerfile --tag docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019-dev
     - name: Push the Docker image
       run: |
-        docker login docker.pkg.github.com --username ${{ secrets.PACKAGE_REGISTRY_USER }} --password ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+        docker login docker.pkg.github.com --username ${{ env.PACKAGE_REGISTRY_USER }} --password ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
         docker push docker.pkg.github.com/devadventcalendar/devadventcalendar/app:2019-dev

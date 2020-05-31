@@ -63,14 +63,14 @@ namespace DevAdventCalendarCompetition.Controllers
                 if (user == null)
                 {
                     this._logger.LogWarning($"User {model.Email} not exists.");
-                    this.ModelState.AddModelError(string.Empty, "Nie znaleziono takiego konta.");
+                    this.ModelState.AddModelError("Email", "Nie znaleziono takiego konta.");
                     return this.View(model);
                 }
 
                 if (!user.EmailConfirmed)
                 {
                     this._logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
-                    this.ModelState.AddModelError(string.Empty, "Musisz najpierw potwierdzić swoje konto!");
+                    this.ModelState.AddModelError("Email", "Musisz najpierw potwierdzić swoje konto!");
                     return this.View(model);
                 }
 
@@ -91,7 +91,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.RedirectToAction(nameof(this.Lockout));
                 }
 
-                this.ModelState.AddModelError(string.Empty, "Niepoprawna próba logowania.");
+                this.ModelState.AddModelError("Email", "Niepoprawna próba logowania.");
                 return this.View(model);
             }
 
@@ -141,7 +141,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.View("RegisterConfirmation");
                 }
 
-                this.AddErrors(result);
+                this.AddErrors(result, "ConfirmPassword");
             }
 
             // If we got this far, something failed, redisplay form
@@ -250,7 +250,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     }
                 }
 
-                this.AddErrors(result);
+                this.AddErrors(result, "Email");
             }
 
             this.ViewData["ReturnUrl"] = returnUrl;
@@ -373,7 +373,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction(nameof(this.ResetPasswordConfirmation));
             }
 
-            this.AddErrors(result);
+            this.AddErrors(result, "ConfirmPassword");
 
             model = new ResetPasswordViewModel
             {
@@ -396,11 +396,11 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View();
         }
 
-        private void AddErrors(IdentityResult result)
+        private void AddErrors(IdentityResult result, string key)
         {
             foreach (var error in result.Errors)
             {
-                this.ModelState.AddModelError(error.Code, error.Description);
+                this.ModelState.AddModelError(key, error.Description);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using DevAdventCalendarCompetition.Models;
@@ -51,7 +51,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (dbTest != null)
                 {
-                    this.ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
+                    this.ModelState.AddModelError("Number", "Test o podanym numerze już istnieje.");
                     return this.View(model);
                 }
 

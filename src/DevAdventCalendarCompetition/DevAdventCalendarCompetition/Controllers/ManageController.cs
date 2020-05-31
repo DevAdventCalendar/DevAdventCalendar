@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -320,7 +320,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             foreach (var error in result.Errors)
             {
-                this.ModelState.AddModelError(string.Empty, error.Description);
+                this.ModelState.AddModelError("Result", error.Description);
             }
         }
   }
