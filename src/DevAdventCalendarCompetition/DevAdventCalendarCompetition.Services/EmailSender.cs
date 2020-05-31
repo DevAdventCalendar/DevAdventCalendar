@@ -17,27 +17,22 @@ namespace DevAdventCalendarCompetition.Services
 
         public string Password { get; set; }
 
-        public string FromEmail { get; set; }
-
-        public string FromName { get; set; }
+        public string From { get; set; }
 
         public bool Ssl { get; set; }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            if (!string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password))
-            {
-                var mailMesage = this.CreateMailMessage(subject, message);
-                mailMesage.From.Add(InternetAddress.Parse(this.FromEmail));
-                mailMesage.To.Add(InternetAddress.Parse(email));
+            var mailMesage = this.CreateMailMessage(subject, message);
+            mailMesage.From.Add(InternetAddress.Parse(this.From));
+            mailMesage.To.Add(InternetAddress.Parse(email));
 
-                using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
-                {
-                    await smtpClient.ConnectAsync(this.Host, this.Port, true).ConfigureAwait(false);
-                    await smtpClient.AuthenticateAsync(this.UserName, this.Password).ConfigureAwait(false);
-                    await smtpClient.SendAsync(mailMesage).ConfigureAwait(false);
-                    await smtpClient.DisconnectAsync(true).ConfigureAwait(false);
-                }
+            using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
+            {
+                await smtpClient.ConnectAsync(this.Host, this.Port, this.Ssl);
+                await smtpClient.AuthenticateAsync(this.UserName, this.Password);
+                await smtpClient.SendAsync(mailMesage);
+                await smtpClient.DisconnectAsync(true);
             }
         }
 
@@ -50,7 +45,7 @@ namespace DevAdventCalendarCompetition.Services
 
             var message = new MimeMessage
             {
-                Sender = new MailboxAddress(this.FromName, this.FromEmail),
+                Sender = MailboxAddress.Parse(this.From),
                 Subject = subject,
                 Body = bodyBuilder.ToMessageBody()
             };

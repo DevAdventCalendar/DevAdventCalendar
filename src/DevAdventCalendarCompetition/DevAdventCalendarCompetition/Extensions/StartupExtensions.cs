@@ -55,8 +55,7 @@ namespace DevAdventCalendarCompetition.Extensions
                         Port = configuration.GetValue<int>("Email:Smtp:Port"),
                         UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
                         Password = configuration.GetValue<string>("Email:Smtp:Password"),
-                        FromEmail = configuration.GetValue<string>("Email:Smtp:From:Email"),
-                        FromName = configuration.GetValue<string>("Email:Smtp:From:Name"),
+                        From = configuration.GetValue<string>("Email:Smtp:From"),
                         Ssl = configuration.GetValue<bool?>("Email:Smtp:Ssl") ?? false,
                     };
 
