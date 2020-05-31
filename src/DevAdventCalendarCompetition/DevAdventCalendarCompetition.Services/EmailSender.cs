@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using MimeKit;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -16,24 +17,45 @@ namespace DevAdventCalendarCompetition.Services
 
         public string Password { get; set; }
 
-        public string From { get; set; }
+        public string FromEmail { get; set; }
+
+        public string FromName { get; set; }
 
         public bool Ssl { get; set; }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            using (var smtpClient = new SmtpClient(this.Host, this.Port) { EnableSsl = this.Ssl })
+            if (!string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password))
             {
-                if (!string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password))
-                {
-                    smtpClient.Credentials = new NetworkCredential(this.UserName, this.Password);
-                }
+                var mailMesage = this.CreateMailMessage(subject, message);
+                mailMesage.From.Add(InternetAddress.Parse(this.FromEmail));
+                mailMesage.To.Add(InternetAddress.Parse(email));
 
-                using (var mailMessage = new MailMessage(this.From, email, subject, message) { IsBodyHtml = true })
+                using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
                 {
-                    await smtpClient.SendMailAsync(mailMessage).ConfigureAwait(false);
+                    await smtpClient.ConnectAsync(this.Host, this.Port, true).ConfigureAwait(false);
+                    await smtpClient.AuthenticateAsync(this.UserName, this.Password).ConfigureAwait(false);
+                    await smtpClient.SendAsync(mailMesage).ConfigureAwait(false);
+                    await smtpClient.DisconnectAsync(true).ConfigureAwait(false);
                 }
             }
+        }
+
+        private MimeMessage CreateMailMessage(string subject, string body)
+        {
+            var bodyBuilder = new MimeKit.BodyBuilder
+            {
+                HtmlBody = body
+            };
+
+            var message = new MimeMessage
+            {
+                Sender = new MailboxAddress(this.FromName, this.FromEmail),
+                Subject = subject,
+                Body = bodyBuilder.ToMessageBody()
+            };
+
+            return message;
         }
     }
 }
