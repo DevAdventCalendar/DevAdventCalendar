@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Models.TestViewModels;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

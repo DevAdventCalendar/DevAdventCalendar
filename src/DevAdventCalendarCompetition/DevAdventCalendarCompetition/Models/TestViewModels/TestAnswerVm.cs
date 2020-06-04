@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace DevAdventCalendarCompetition.Vms
+namespace DevAdventCalendarCompetition.Models.TestViewModels
 {
     public class TestAnswerVm
     {

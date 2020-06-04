@@ -1,4 +1,4 @@
-﻿namespace DevAdventCalendarCompetition.Vms
+namespace DevAdventCalendarCompetition.Models.TestViewModels
 {
     public class AnswerVm
     {

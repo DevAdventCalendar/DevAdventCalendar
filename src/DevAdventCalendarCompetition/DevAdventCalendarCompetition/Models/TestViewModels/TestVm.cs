@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DevAdventCalendarCompetition.Models
+namespace DevAdventCalendarCompetition.Models.TestViewModels
 {
     public class TestVm
     {
