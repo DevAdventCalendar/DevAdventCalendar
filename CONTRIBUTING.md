@@ -8,6 +8,10 @@ When contributing to this repository, please first discuss the change you wish t
 
 Please note we have a [CODE_OF_CONDUCT.md](https://github.com/DevAdventCalendar/DevAdventCalendar/blob/develop/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
+## Board
+
+There is prepared [board](https://github.com/DevAdventCalendar/DevAdventCalendar/projects/1) with tasks grouped by column `To do`, `In progress`, `Needs review`, `Reviewer approved` and `Done`.
+
 ## Getting started
 
 1. Clone repository
