@@ -46,7 +46,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 AnsweringTimeOffset = testAnswerDto.AnsweringTimeOffset
             };
 
-            var answerVm = new AnswerViewModel() { TestAnswerVm = testAnswerVm, TestNumber = testNumber };
+            var answerVm = new AnswerViewModel() { TestAnswerViewModel = testAnswerVm, TestNumber = testNumber };
 
             return this.View("TestAnswered", answerVm);
         }
