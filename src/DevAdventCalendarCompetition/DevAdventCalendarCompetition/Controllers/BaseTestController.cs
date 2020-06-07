@@ -38,7 +38,7 @@ namespace DevAdventCalendarCompetition.Controllers
             // TODO: use Automapper?
             var testAnswerDto = this.baseTestService.GetAnswerByTestId(testDto.Id);
 
-            var testAnswerVm = new TestAnswerViewModel()
+            var testAnswerViewModel = new TestAnswerViewModel()
             {
                 TestId = testAnswerDto.TestId,
                 UserId = testAnswerDto.UserId,
@@ -46,9 +46,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 AnsweringTimeOffset = testAnswerDto.AnsweringTimeOffset
             };
 
-            var answerVm = new AnswerViewModel() { TestAnswerViewModel = testAnswerVm, TestNumber = testNumber };
+            var answerViewModel = new AnswerViewModel() { TestAnswerViewModel = testAnswerViewModel, TestNumber = testNumber };
 
-            return this.View("TestAnswered", answerVm);
+            return this.View("TestAnswered", answerViewModel);
         }
     }
 }
