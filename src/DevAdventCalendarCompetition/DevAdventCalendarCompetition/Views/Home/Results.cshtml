@@ -13,9 +13,9 @@
 @{
     ViewBag.Title = "Wyniki";
 }
-@using DevAdventCalendarCompetition.Models.TestViewModels
+@using DevAdventCalendarCompetition.Models.Test
 @using Microsoft.AspNetCore.Http
-@model DevAdventCalendarCompetition.Models.TestViewModels.TestResultsVm
+@model DevAdventCalendarCompetition.Models.Test.TestResultsViewModel
 @if (Model == null)
 {
     <section class="event_txt">
@@ -102,7 +102,7 @@ else
                             <div role="tabpanel" class="tab-pane active" id="week1">
                                 @if (Model.TotalTestResults.TryGetValue(1, out var week1results))
                                 {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(1, week1results));
+                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(1, week1results));
                                 }
                                 else
                                 {
@@ -119,7 +119,7 @@ else
                             <div role="tabpanel" class="tab-pane" id="week2">
                                 @if (Model.TotalTestResults.TryGetValue(2, out var week2results))
                                 {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(2, week2results));
+                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(2, week2results));
                                 }
                                 else
                                 {
@@ -136,7 +136,7 @@ else
                             <div role="tabpanel" class="tab-pane" id="week3">
                                 @if (Model.TotalTestResults.TryGetValue(3, out var week3results))
                                 {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(3, week3results));
+                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(3, week3results));
                                 }
                                 else
                                 {
@@ -154,7 +154,7 @@ else
                             <div role="tabpanel" class="tab-pane" id="full">
                                 @if (Model.TotalTestResults.TryGetValue(4, out var finalResults))
                                 {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryVm>>(4, finalResults));
+                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(4, finalResults));
                                 }
                                 else
                                 {

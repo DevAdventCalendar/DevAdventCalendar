@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace DevAdventCalendarCompetition.Models.ManageViewModels
+namespace DevAdventCalendarCompetition.Models.Manage
 {
     public class ChangePasswordViewModel
     {

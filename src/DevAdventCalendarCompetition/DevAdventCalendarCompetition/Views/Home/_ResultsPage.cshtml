@@ -1,4 +1,4 @@
-@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Models.TestViewModels.TestResultEntryVm>>
+@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Models.Test.TestResultEntryViewModel>>
 @{
     var entries = Model.Value;
     var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";

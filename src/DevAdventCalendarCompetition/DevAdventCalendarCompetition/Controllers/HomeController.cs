@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
-using DevAdventCalendarCompetition.Models.HomeViewModels;
-using DevAdventCalendarCompetition.Models.TestViewModels;
+using DevAdventCalendarCompetition.Models.Home;
+using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -49,18 +49,18 @@ namespace DevAdventCalendarCompetition.Controllers
 
             int pageSize = 50;
 
-            var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryVm>>();
+            var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryViewModel>>();
             var testResultListDto = this._homeService.GetAllTestResults();
 
             for (var i = 1; i <= testResultListDto.Count; i++)
             {
                 if (testResultListDto.TryGetValue(i, out var results))
                 {
-                    var totalTestResults = new List<TestResultEntryVm>();
+                    var totalTestResults = new List<TestResultEntryViewModel>();
 
                     foreach (var result in results)
                     {
-                        totalTestResults.Add(new TestResultEntryVm
+                        totalTestResults.Add(new TestResultEntryViewModel
                         {
                             Week1Points = result.Week1Points,
                             Week1Place = result.Week1Place,
@@ -77,12 +77,12 @@ namespace DevAdventCalendarCompetition.Controllers
                         });
                     }
 
-                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize));
+                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex ?? 1, pageSize));
                 }
             }
 
             var userPosition = this._homeService.GetUserPosition(userId);
-            var vm = new TestResultsVm()
+            var vm = new TestResultsViewModel()
             {
                 UserWeek1Position = userPosition.Week1Place ?? 0,
                 UserWeek2Position = userPosition.Week2Place ?? 0,

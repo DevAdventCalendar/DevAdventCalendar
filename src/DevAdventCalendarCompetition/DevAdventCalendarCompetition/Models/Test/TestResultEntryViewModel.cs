@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace DevAdventCalendarCompetition.Models.TestViewModels
+namespace DevAdventCalendarCompetition.Models.Test
 {
-    public class TestResultEntryVm
+    public class TestResultEntryViewModel
     {
         public string FullName { get; set; }
 

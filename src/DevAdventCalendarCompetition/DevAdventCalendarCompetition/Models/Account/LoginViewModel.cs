@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace DevAdventCalendarCompetition.Models.AccountViewModels
+namespace DevAdventCalendarCompetition.Models.Account
 {
     public class LoginViewModel
     {

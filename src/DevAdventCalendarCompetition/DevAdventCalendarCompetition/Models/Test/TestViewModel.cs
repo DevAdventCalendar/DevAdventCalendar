@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DevAdventCalendarCompetition.Models.TestViewModels
+namespace DevAdventCalendarCompetition.Models.Test
 {
-    public class TestVm
+    public class TestViewModel
     {
         [Required(ErrorMessage = "Pole Numer jest obowiązkowe")]
         [Display(Name = "Numer")]

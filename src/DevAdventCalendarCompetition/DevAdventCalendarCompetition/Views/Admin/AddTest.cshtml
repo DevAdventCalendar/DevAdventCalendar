@@ -1,4 +1,4 @@
-@model DevAdventCalendarCompetition.Models.TestViewModels.TestVm
+@model DevAdventCalendarCompetition.Models.Test.TestViewModel
 @{
     ViewData["Title"] = "Dodaj nowy test";
 }
@@ -8,65 +8,65 @@
         <div class="col-md-12">
             @using (Html.BeginForm(FormMethod.Post))
             {
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <label asp-for="Number"></label>
-                <input asp-for="Number" class="form-control" value="1" required />
-                <span asp-validation-for="Number" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Answer"></label>
-                <input asp-for="Answer" class="form-control" />
-                <span asp-validation-for="Answer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate"></label>
-                <input asp-for="StartDate" class="form-control" type="text" value="@DateTime.Now.ToShortDateString()" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate"></label>
-                <input asp-for="EndDate" class="form-control" type="text" value="@DateTime.Parse($"{DateTime.Now.Year}-12-24").ToShortDateString()" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SponsorName"></label>
-                <input asp-for="SponsorName" class="form-control" />
-                <span asp-validation-for="SponsorName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SponsorLogoUrl"></label>
-                <input asp-for="SponsorLogoUrl" class="form-control" />
-                <span asp-validation-for="SponsorLogoUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Discount"></label>
-                <input asp-for="Discount" class="form-control" />
-                <span asp-validation-for="Discount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiscountUrl"></label>
-                <input asp-for="DiscountUrl" class="form-control" />
-                <span asp-validation-for="DiscountUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiscountLogoUrl"></label>
-                <input asp-for="DiscountLogoUrl" class="form-control" />
-                <span asp-validation-for="DiscountLogoUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiscountLogoPath"></label>
-                <input asp-for="DiscountLogoPath" class="form-control" />
-                <span asp-validation-for="DiscountLogoPath" class="text-danger"></span>
-            </div>
-            <div class="content-centered">
-                <button type="submit" class="btn btn-default">Dodaj</button>
-            </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label asp-for="Number"></label>
+                    <input asp-for="Number" class="form-control" value="1" required />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Answer"></label>
+                    <input asp-for="Answer" class="form-control" />
+                    <span asp-validation-for="Answer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate"></label>
+                    <input asp-for="StartDate" class="form-control" type="text" value="@DateTime.Now.ToShortDateString()" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate"></label>
+                    <input asp-for="EndDate" class="form-control" type="text" value="@DateTime.Parse($"{DateTime.Now.Year}-12-24").ToShortDateString()" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SponsorName"></label>
+                    <input asp-for="SponsorName" class="form-control" />
+                    <span asp-validation-for="SponsorName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SponsorLogoUrl"></label>
+                    <input asp-for="SponsorLogoUrl" class="form-control" />
+                    <span asp-validation-for="SponsorLogoUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Discount"></label>
+                    <input asp-for="Discount" class="form-control" />
+                    <span asp-validation-for="Discount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscountUrl"></label>
+                    <input asp-for="DiscountUrl" class="form-control" />
+                    <span asp-validation-for="DiscountUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscountLogoUrl"></label>
+                    <input asp-for="DiscountLogoUrl" class="form-control" />
+                    <span asp-validation-for="DiscountLogoUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscountLogoPath"></label>
+                    <input asp-for="DiscountLogoPath" class="form-control" />
+                    <span asp-validation-for="DiscountLogoPath" class="text-danger"></span>
+                </div>
+                <div class="content-centered">
+                    <button type="submit" class="btn btn-default">Dodaj</button>
+                </div>
             }
             <form class="form" method="POST" action=""></form>
         </div>

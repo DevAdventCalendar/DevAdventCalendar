@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Html;
 
-namespace DevAdventCalendarCompetition.Models.HomeViewModels
+namespace DevAdventCalendarCompetition.Models.Home
 {
     public class ErrorViewModel
     {
