@@ -3,7 +3,7 @@ using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
-using DevAdventCalendarCompetition.Models.AccountViewModels;
+using DevAdventCalendarCompetition.Models.Account;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevLoggingMessages;
 using Microsoft.AspNetCore.Authentication;

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace DevAdventCalendarCompetition.Vms
+namespace DevAdventCalendarCompetition.Models.Test
 {
-    public class TestResultsVm
+    public class TestResultsViewModel
     {
         public int UserFinalPosition { get; set; }
 
@@ -13,7 +13,7 @@ namespace DevAdventCalendarCompetition.Vms
         public int UserWeek3Position { get; set; }
 
 #pragma warning disable CA2227 // Collection properties should be read only
-        public Dictionary<int, PaginatedCollection<TestResultEntryVm>> TotalTestResults { get; set; }
+        public Dictionary<int, PaginatedCollection<TestResultEntryViewModel>> TotalTestResults { get; set; }
 #pragma warning restore CA2227 // Collection properties should be read only
     }
 }

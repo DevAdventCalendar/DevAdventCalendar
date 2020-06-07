@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace DevAdventCalendarCompetition.Models.ManageViewModels
+namespace DevAdventCalendarCompetition.Models.Manage
 {
     public class IndexViewModel
     {
@@ -17,7 +17,7 @@ namespace DevAdventCalendarCompetition.Models.ManageViewModels
         [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
 
-        [Display(Name="Chcę otrzymywać notyfikacje email")]
+        [Display(Name = "Chcę otrzymywać notyfikacje email")]
         public bool EmailNotificationsEnabled { get; set; }
 
         [Display(Name = "Chcę otrzymywać notyfikacje push")]

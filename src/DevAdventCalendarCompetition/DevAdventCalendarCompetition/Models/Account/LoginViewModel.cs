@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace DevAdventCalendarCompetition.Vms
+namespace DevAdventCalendarCompetition.Models.Account
 {
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Pole Email jest obowiązkowe")]
-        [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Podaj prawidłowy format adresu email")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Pole Hasło jest obowiązkowe")]
@@ -14,7 +14,7 @@ namespace DevAdventCalendarCompetition.Vms
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [Display(Name = "Zapamiętaj mnie?")]
+        [Display(Name = "Zapamiętać mnie?")]
         public bool RememberMe { get; set; }
     }
 }

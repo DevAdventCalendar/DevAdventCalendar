@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
@@ -38,7 +39,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTest(TestVm model)
+        public ActionResult AddTest(TestViewModel model)
         {
             if (model is null)
             {
@@ -78,7 +79,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             return this.View(model);
-               }
+        }
 
         [HttpPost]
         public ActionResult StartTest(int testId, string minutesString)
