@@ -5,9 +5,11 @@ DevAdventCalendar web app for online competition for programmers : [www.devadven
 [![Follow DevAdventCalendar](https://img.shields.io/twitter/follow/dev_advent_cal?label=Follow%20%40dev_advent_cal&style=social)](https://twitter.com/dev_advent_cal)
 [![Follow DevAdventCalendar](https://img.shields.io/badge/FB-Dev%20Advent%20Calendar-blue)](https://www.facebook.com/devadventcalendar/)
 
-|Build  |Deployment| Quality | Coverage |
-|:-----:|:--------:|:-------:|:--------:|
-|[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI%22)|[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/1/1)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=1)|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevAdventCalendar_DevAdventCalendar&metric=alert_status)](https://sonarcloud.io/dashboard?id=DevAdventCalendar_DevAdventCalendar)|[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar)|
+|Environment |Build  |Deployment| Quality | Coverage |
+|:----------:|:-----:|:--------:|:-------:|:--------:|
+| PROD |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/1/1)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=1) |[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevAdventCalendar_DevAdventCalendar&metric=alert_status)](https://sonarcloud.io/dashboard?id=DevAdventCalendar_DevAdventCalendar) |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop)|
+| DEV |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI%20DEV/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI+DEV%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/2/2)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=2) | |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop_uat/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop_uat)|
+
 
 ## Projects in solution
 
