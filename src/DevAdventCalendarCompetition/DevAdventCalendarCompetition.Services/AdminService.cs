@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using AutoMapper;
+using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -10,44 +11,39 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class AdminService : IAdminService
     {
-        private readonly IAdminRepository _adminRepository;
-        private readonly IBaseTestRepository _baseTestRepository;
+        private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
         private readonly StringHasher _stringHasher;
+        private readonly IUnitOfWork _unitOfWork;
 
         public AdminService(
-            IAdminRepository adminRepository,
-            IBaseTestRepository baseTestRepository,
+            ITestRepository adminRepository,
             IMapper mapper,
-            StringHasher stringHasher)
+            StringHasher stringHasher,
+            IUnitOfWork unitOfWork)
         {
-            this._adminRepository = adminRepository;
-            this._baseTestRepository = baseTestRepository;
+            this._testRepository = adminRepository;
             this._mapper = mapper;
             this._stringHasher = stringHasher;
+            this._unitOfWork = unitOfWork;
         }
 
         public List<TestDto> GetAllTests()
         {
-            var testList = this._adminRepository.GetAll();
-            var testDtoList = this._mapper.Map<List<TestDto>>(testList);
-            return testDtoList;
+            var tests = this._testRepository.GetAll();
+            return this._mapper.Map<List<TestDto>>(tests);
         }
 
-#pragma warning disable CA1725 // Parameter names should match base declaration
-        public TestDto GetTestById(int testId)
-#pragma warning restore CA1725 // Parameter names should match base declaration
+        public TestDto GetTestById(int id)
         {
-            var test = this._adminRepository.GetById(testId);
-            var testDto = this._mapper.Map<TestDto>(test);
-            return testDto;
+            var test = this._testRepository.GetById(id);
+            return this._mapper.Map<TestDto>(test);
         }
 
         public TestDto GetPreviousTest(int testNumber)
         {
-            var test = this._baseTestRepository.GetByNumber(testNumber - 1);
-            var testDto = this._mapper.Map<TestDto>(test);
-            return testDto;
+            var test = this._testRepository.GetByNumber(testNumber - 1);
+            return this._mapper.Map<TestDto>(test);
         }
 
         public void AddTest(TestDto testDto)
@@ -58,16 +54,16 @@ namespace DevAdventCalendarCompetition.Services
             }
 
             string hashedAnswer = this._stringHasher.ComputeHash(testDto.Answer);
-
             var test = this._mapper.Map<Test>(testDto);
             test.HashedAnswer = hashedAnswer;
-            this._baseTestRepository.AddTest(test);
+            this._testRepository.AddTest(test);
+            this._unitOfWork.Commit();
         }
 
-#pragma warning disable CA1725 // Parameter names should match base declaration
-        public void UpdateTestDates(TestDto testDto, string minutesString)
-#pragma warning restore CA1725 // Parameter names should match base declaration
+        public void UpdateTestDates(int testId, string minutesString)
         {
+            var test = this._testRepository.GetById(testId);
+
             uint minutes = 0;
             var parsed = uint.TryParse(minutesString, out minutes);
             if (!parsed)
@@ -75,41 +71,29 @@ namespace DevAdventCalendarCompetition.Services
                 minutes = 20;
             }
 
-            if (testDto == null)
-            {
-                throw new ArgumentNullException(nameof(testDto));
-            }
-
-            testDto.StartDate = DateTime.Now;
-
-            testDto.EndDate = DateTime.Now.AddMinutes(minutes);
-            var test = this._mapper.Map<Test>(testDto);
-            this._adminRepository.UpdateDates(test);
+            test.StartDate = DateTime.Now;
+            test.EndDate = DateTime.Now.AddMinutes(minutes);
+            this._unitOfWork.Commit();
         }
 
-#pragma warning disable CA1725 // Parameter names should match base declaration
-        public void UpdateTestEndDate(TestDto testDto, DateTime endTime)
-#pragma warning restore CA1725 // Parameter names should match base declaration
+        public void UpdateTestEndDate(int testId, DateTime endTime)
         {
-            if (testDto == null)
-            {
-                throw new ArgumentNullException(nameof(testDto));
-            }
+            var test = this._testRepository.GetById(testId);
 
-            testDto.EndDate = endTime;
-
-            var test = this._mapper.Map<Test>(testDto);
-            this._adminRepository.UpdateEndDate(test);
+            test.EndDate = endTime;
+            this._unitOfWork.Commit();
         }
 
         public void ResetTestDates()
         {
-            this._adminRepository.ResetTestDates();
-        }
+            var tests = this._testRepository.GetAll();
+            tests.ForEach(el =>
+            {
+                el.StartDate = null;
+                el.EndDate = null;
+            });
 
-        public void ResetTestAnswers()
-        {
-            this._adminRepository.DeleteTestAnswers();
+            this._unitOfWork.Commit();
         }
     }
 }

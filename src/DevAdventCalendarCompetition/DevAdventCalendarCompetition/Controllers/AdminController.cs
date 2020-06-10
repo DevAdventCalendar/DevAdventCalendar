@@ -96,7 +96,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(ExceptionsMessages.PreviousTestIsNotDone);
             }
 
-            this._adminService.UpdateTestDates(testDto, minutesString);
+            this._adminService.UpdateTestDates(testDto.Id, minutesString);
 
             return this.RedirectToAction("Index");
         }
@@ -110,7 +110,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
-            this._adminService.UpdateTestEndDate(testDto, DateTime.Now);
+            this._adminService.UpdateTestEndDate(testDto.Id, DateTime.Now);
 
             return this.RedirectToAction("Index");
         }
@@ -141,8 +141,9 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             this._adminService.ResetTestDates();
-            this._adminService.ResetTestAnswers();
 
+            // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // this._adminService.ResetTestAnswers;
             return "Dane zostały zresetowane.";
         }
     }
