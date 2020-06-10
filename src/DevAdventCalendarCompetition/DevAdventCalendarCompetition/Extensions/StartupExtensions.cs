@@ -1,5 +1,7 @@
 using System;
 using System.Globalization;
+using System.Text;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -22,6 +24,11 @@ namespace DevAdventCalendarCompetition.Extensions
     {
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new System.ArgumentNullException(nameof(configuration));
+            }
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
@@ -35,9 +42,10 @@ namespace DevAdventCalendarCompetition.Extensions
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            services.AddTransient<IAdminRepository, AdminRepository>();
+            services.AddTransient<ITestRepository, TestRepository>();
             services.AddTransient<IBaseTestRepository, BaseTestRepository>();
             services.AddTransient<IHomeRepository, HomeRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<DbInitializer>();
 
@@ -46,6 +54,11 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new System.ArgumentNullException(nameof(configuration));
+            }
+
             services.AddSingleton<IEmailSender, EmailSender>(
                 sender =>
                 {
@@ -69,11 +82,24 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IdentityService>();
+
+            services.AddAutoMapper(typeof(AdminService));
+
+            var config = configuration.GetSection("StringHasher");
+            var stringSalt = config.GetValue<string>("Salt");
+            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
+            services.AddScoped(s => new StringHasher(hashParameters));
+
             return services;
         }
 
         public static IServiceCollection AddExternalLoginProviders(this IServiceCollection services, IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new System.ArgumentNullException(nameof(configuration));
+            }
+
             services.AddAuthentication()
             .AddFacebook(facebookOptions =>
             {
@@ -102,7 +128,7 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UpdateDatabase(this IApplicationBuilder app)
         {
-            if (app is null)
+            if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
@@ -116,7 +142,7 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
         {
-            if (app is null)
+            if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }

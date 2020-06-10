@@ -90,12 +90,9 @@ namespace DevAdventCalendarCompetition
                 .PersistKeysToFileSystem(new DirectoryInfo(this.Configuration.GetValue<string>("DataProtection:Keys")))
                 .SetApplicationName("DevAdventCalendar");
 
-            ServicesStartup.Configure(services, this.Configuration);
-
             services
                 .RegisterDatabase(this.Configuration)
                 .RegisterServices(this.Configuration)
-                .AddAutoMapper(typeof(Startup))
                 .AddExternalLoginProviders(this.Configuration)
                 .AddSwaggerGen(c =>
                 {
