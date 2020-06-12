@@ -61,6 +61,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Niestety, spóźniłeś się z odpowiedzią na to pytanie :(.
+        /// </summary>
+        public static string DelayedAnswer {
+            get {
+                return ResourceManager.GetString("DelayedAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ho ho! Już odpowiedziałeś na to pytanie, brawo :).
         /// </summary>
         public static string HasUserAnsweredQuestion {
