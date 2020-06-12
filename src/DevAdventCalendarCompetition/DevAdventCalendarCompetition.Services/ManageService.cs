@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -53,11 +53,6 @@ namespace DevAdventCalendarCompetition.Services
         public async Task<IdentityResult> SetEmailAsync(ApplicationUser user, string email)
         {
             return await this._userManager.SetEmailAsync(user, email).ConfigureAwait(false);
-        }
-
-        public async Task<IdentityResult> SetPhoneNumberAsync(ApplicationUser user, string phoneNumber)
-        {
-            return await this._userManager.SetPhoneNumberAsync(user, phoneNumber).ConfigureAwait(false);
         }
 
         public async Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string password)

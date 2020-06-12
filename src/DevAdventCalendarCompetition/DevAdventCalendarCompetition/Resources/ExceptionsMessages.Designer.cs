@@ -79,15 +79,6 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas ustawiania numeru telefonu dla użytkownika z identyfikatorem &apos;{0}&apos;.
-        /// </summary>
-        public static string ErrorDuringPhoneNumberConfiguration {
-            get {
-                return ResourceManager.GetString("ErrorDuringPhoneNumberConfiguration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}..
         /// </summary>
         public static string ErrorDuringPushNotificationsPreferenceChange {
