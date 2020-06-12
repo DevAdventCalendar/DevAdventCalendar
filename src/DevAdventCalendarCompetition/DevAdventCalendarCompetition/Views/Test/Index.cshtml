@@ -1,4 +1,5 @@
 @model DevAdventCalendarCompetition.Services.Models.TestDto
+@using static DevAdventCalendarCompetition.Resources.ViewsTestMessages 
 
     <div class="breadcrumb_area">
         <div class="container">
@@ -68,7 +69,7 @@
 
                         if (Model.HasUserAnswered)
                         {
-                            <h3 class="mb-30 text-primary">Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</h3>
+                            <h3 class="mb-30 text-primary">@HasUserAnsweredQuestion</h3>
                         }
                         else if (Model.IsAdvent)
                         {
