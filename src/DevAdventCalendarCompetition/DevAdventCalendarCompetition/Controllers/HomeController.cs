@@ -95,7 +95,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(vm);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult CheckTestStatus(int testNumber)
         {
             return this.Content(this._homeService.CheckTestStatus(testNumber));
