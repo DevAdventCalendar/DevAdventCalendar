@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DelayedAnswer" xml:space="preserve">
-    <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
-  </data>
   <data name="HasUserAnsweredQuestion" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
+  </data>
+  <data name="YouAreLateWithAnswer" xml:space="preserve">
+    <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
   </data>
 </root>
