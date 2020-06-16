@@ -63,9 +63,9 @@ namespace DevAdventCalendarCompetition.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ho ho! Już odpowiedziałeś na to pytanie, brawo :).
         /// </summary>
-        public static string HasUserAnsweredQuestion {
+        public static string UserAlreadyAnswered {
             get {
-                return ResourceManager.GetString("HasUserAnsweredQuestion", resourceCulture);
+                return ResourceManager.GetString("UserAlreadyAnswered", resourceCulture);
             }
         }
         
