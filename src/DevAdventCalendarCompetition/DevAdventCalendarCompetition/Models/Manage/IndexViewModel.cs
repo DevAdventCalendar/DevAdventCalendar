@@ -13,10 +13,6 @@ namespace DevAdventCalendarCompetition.Models.Manage
         [EmailAddress(ErrorMessage = "Podaj prawidłowy format adresu email")]
         public string Email { get; set; }
 
-        [Phone(ErrorMessage = "Podaj prawidłowy format numeru telefonu")]
-        [Display(Name = "Numer telefonu")]
-        public string PhoneNumber { get; set; }
-
         [Display(Name = "Chcę otrzymywać notyfikacje email")]
         public bool EmailNotificationsEnabled { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -21,8 +21,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync();
 
         Task<IdentityResult> SetEmailAsync(ApplicationUser user, string email);
-
-        Task<IdentityResult> SetPhoneNumberAsync(ApplicationUser user, string phoneNumber);
 
         Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string password);
 

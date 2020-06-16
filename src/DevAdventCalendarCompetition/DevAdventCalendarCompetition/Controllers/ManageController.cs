@@ -50,7 +50,6 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 EmailNotificationsEnabled = user.EmailNotificationsEnabled,
                 PushNotificationsEnabled = user.PushNotificationsEnabled,
@@ -97,16 +96,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 shouldSendVerificationEmail = true;
                 model.EmailNotificationsEnabled = false;
-            }
-
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await this._manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this._accountService.GetUserId(this.User)));
-                }
             }
 
             if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
