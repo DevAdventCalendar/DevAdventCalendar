@@ -66,10 +66,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ViewsTestMessages.Designer.cs">
+    <Compile Update="Resources\ViewsMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ViewsTestMessages.resx</DependentUpon>
+      <DependentUpon>ViewsMessages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -97,9 +97,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ViewsTestMessages.resx">
+    <EmbeddedResource Update="Resources\ViewsMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ViewsTestMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>ViewsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
