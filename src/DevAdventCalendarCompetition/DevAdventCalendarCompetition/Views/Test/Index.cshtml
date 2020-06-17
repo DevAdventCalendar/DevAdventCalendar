@@ -1,12 +1,13 @@
 @model DevAdventCalendarCompetition.Services.Models.TestDto
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages 
+@using System.Globalization 
 
     <div class="breadcrumb_area">
         <div class="container">
             <div class="row">
                 <div class="breadcrumb_wrapper">
                     <div class="page_title">
-                        <h3>ZAGADKA @Model.Number</h3>
+                        <h3>@string.Format(CultureInfo.InvariantCulture, @Puzzle, @Model.Number)</h3>
                     </div>
                 </div>
             </div>
@@ -18,16 +19,14 @@
             <div class="col-md-12">
                 <div class="party_text">
                     <h1 class="mb-30">@Model.Description</h1>
-
-
                     @if (Model == null)
                     {
                         <div class="row content-centered">
                             <div class="col text-center">
-                                <h4>Gdy na zegarze 20 wybije</h4>
-                                <h4>okienko swoją zagadkę odkryje...</h4>
-                                <h4>Wiec spiesz się i co dzień okienka otwieraj.</h4>
-                                <h4>Zdobywaj punkty i nagrody zbieraj!</h4>
+                                <h4>@IntroParagraph1</h4>
+                                <h4>@IntroParagraph2</h4>
+                                <h4>@IntroParagraph3</h4>
+                                <h4>@IntroParagraph4</h4>
                             </div>
                         </div>
                     }
@@ -36,7 +35,7 @@
                         if (Model.SponsorLogoUrl != null && Model.IsAdvent)
                         {
                             <div id="day-sponsor" class="text-center mt-50 mb-50">
-                                <h4 class="mb-20 text-primary">Sponsorem dnia jest</h4>
+                                <h4 class="mb-20 text-primary">@SponsorOfTheDay</h4>
                                 <h1 class="mb-20">@Model.SponsorName</h1>
                                 <img src="images/@Model.SponsorLogoUrl" alt="@Model.SponsorName" width="165" />
                             </div>
@@ -45,7 +44,7 @@
                         if (Model.Discount != null && Model.IsAdvent)
                         {
                             <div class="discount text-center mt-50 mb-50">
-                                <h3 class="mb-20">A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</h3>
+                                <h3 class="mb-20">@GiftFromElfs</h3>
                                 <h4 class="mb-20">@Model.Discount</h4>
 
                                 @if (Model.DiscountLogoUrl != null && Model.DiscountUrl != null)
@@ -78,11 +77,11 @@
                                 <div class="mt-50 mb-50">
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group mt-20">
-                                        <h4 class="mb-20"><label for="answer">Twoja odpowiedź</label></h4>
+                                        <h4 class="mb-20"><label for="answer">@YourAnswer</label></h4>
                                         <input id="answer" name="answer" type="text" class="form-control" required style="text-transform: uppercase">
-                                        <p>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</p>
+                                        <p>@WeRemovedWhiteSpaces</p>
                                     </div>
-                                    <button type="submit" class="chris_btn">Wyślij</button>
+                                    <button type="submit" class="chris_btn">@Send</button>
                                 </div>
                             }
                         }
@@ -93,7 +92,7 @@
 
                         if (!Model.IsAdvent && !string.IsNullOrEmpty(Model.PlainAnswer))
                         {
-                            <h4 class="mb-30">Poprawna odpowiedź: @Model.PlainAnswer</h4>
+                            <h4 class="mb-30">@string.Format(CultureInfo.InvariantCulture, CorrectAnswer, @Model.PlainAnswer)</h4>
                         }
                     }
 

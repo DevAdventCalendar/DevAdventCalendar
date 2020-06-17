@@ -117,10 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CorrectAnswer" xml:space="preserve">
+    <value>Poprawna odpowiedź: {0}</value>
+  </data>
+  <data name="GiftFromElfs" xml:space="preserve">
+    <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
+  </data>
+  <data name="IntroParagraph1" xml:space="preserve">
+    <value>Gdy na zegarze 20 wybije</value>
+  </data>
+  <data name="IntroParagraph2" xml:space="preserve">
+    <value>okienko swoją zagadkę odkryje...</value>
+  </data>
+  <data name="IntroParagraph3" xml:space="preserve">
+    <value>Wiec spiesz się i co dzień okienka otwieraj.</value>
+  </data>
+  <data name="IntroParagraph4" xml:space="preserve">
+    <value>Zdobywaj punkty i nagrody zbieraj!</value>
+  </data>
+  <data name="Puzzle" xml:space="preserve">
+    <value>Zagadka {0}</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Wyślij</value>
+  </data>
+  <data name="SponsorOfTheDay" xml:space="preserve">
+    <value>Sponsorem dnia jest</value>
+  </data>
   <data name="UserAlreadyAnswered" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
   </data>
+  <data name="WeRemovedWhiteSpaces" xml:space="preserve">
+    <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
+  </data>
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
+  </data>
+  <data name="YourAnswer" xml:space="preserve">
+    <value>Twoja odpowiedź</value>
   </data>
 </root>

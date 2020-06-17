@@ -61,6 +61,87 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poprawna odpowiedź: {0}.
+        /// </summary>
+        public static string CorrectAnswer {
+            get {
+                return ResourceManager.GetString("CorrectAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka.
+        /// </summary>
+        public static string GiftFromElfs {
+            get {
+                return ResourceManager.GetString("GiftFromElfs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gdy na zegarze 20 wybije.
+        /// </summary>
+        public static string IntroParagraph1 {
+            get {
+                return ResourceManager.GetString("IntroParagraph1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to okienko swoją zagadkę odkryje....
+        /// </summary>
+        public static string IntroParagraph2 {
+            get {
+                return ResourceManager.GetString("IntroParagraph2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiec spiesz się i co dzień okienka otwieraj..
+        /// </summary>
+        public static string IntroParagraph3 {
+            get {
+                return ResourceManager.GetString("IntroParagraph3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zdobywaj punkty i nagrody zbieraj!.
+        /// </summary>
+        public static string IntroParagraph4 {
+            get {
+                return ResourceManager.GetString("IntroParagraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zagadka {0}.
+        /// </summary>
+        public static string Puzzle {
+            get {
+                return ResourceManager.GetString("Puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyślij.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sponsorem dnia jest.
+        /// </summary>
+        public static string SponsorOfTheDay {
+            get {
+                return ResourceManager.GetString("SponsorOfTheDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ho ho! Już odpowiedziałeś na to pytanie, brawo :).
         /// </summary>
         public static string UserAlreadyAnswered {
@@ -70,11 +151,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi.
+        /// </summary>
+        public static string WeRemovedWhiteSpaces {
+            get {
+                return ResourceManager.GetString("WeRemovedWhiteSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Niestety, spóźniłeś się z odpowiedzią na to pytanie :(.
         /// </summary>
         public static string YouAreLateWithAnswer {
             get {
                 return ResourceManager.GetString("YouAreLateWithAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoja odpowiedź.
+        /// </summary>
+        public static string YourAnswer {
+            get {
+                return ResourceManager.GetString("YourAnswer", resourceCulture);
             }
         }
     }
