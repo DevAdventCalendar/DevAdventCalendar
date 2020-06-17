@@ -70,6 +70,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ten adres email już mamy w swojej bazie :).
+        /// </summary>
+        public static string EmailAlreadyInDatabase {
+            get {
+                return ResourceManager.GetString("EmailAlreadyInDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka.
         /// </summary>
         public static string GiftFromElfs {
@@ -115,11 +124,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Newsletter.
+        /// </summary>
+        public static string Newsletter {
+            get {
+                return ResourceManager.GetString("Newsletter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zagadka {0}.
         /// </summary>
         public static string Puzzle {
             get {
                 return ResourceManager.GetString("Puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brakuje zgody na przetwarzanie danych :(.
+        /// </summary>
+        public static string RodoAgreeMissing {
+            get {
+                return ResourceManager.GetString("RodoAgreeMissing", resourceCulture);
             }
         }
         
@@ -142,11 +169,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :).
+        /// </summary>
+        public static string ThankYouForSubscription {
+            get {
+                return ResourceManager.GetString("ThankYouForSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ho ho! Już odpowiedziałeś na to pytanie, brawo :).
         /// </summary>
         public static string UserAlreadyAnswered {
             get {
                 return ResourceManager.GetString("UserAlreadyAnswered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usunęliśmy Twój adres email z bazy.
+        /// </summary>
+        public static string WeDeletedYourEmail {
+            get {
+                return ResourceManager.GetString("WeDeletedYourEmail", resourceCulture);
             }
         }
         
@@ -165,6 +210,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string YouAreLateWithAnswer {
             get {
                 return ResourceManager.GetString("YouAreLateWithAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dziękujemy za zainteresowanie :) Na Twojej skrzynce powinna już czekać wiadomość, kliknij link w niej zawarty, aby potwierdzić swój email :).
+        /// </summary>
+        public static string YouHaveEmailPleaseConfirm {
+            get {
+                return ResourceManager.GetString("YouHaveEmailPleaseConfirm", resourceCulture);
             }
         }
         

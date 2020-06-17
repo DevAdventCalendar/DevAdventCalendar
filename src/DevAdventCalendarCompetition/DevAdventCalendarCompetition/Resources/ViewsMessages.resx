@@ -120,6 +120,9 @@
   <data name="CorrectAnswer" xml:space="preserve">
     <value>Poprawna odpowiedź: {0}</value>
   </data>
+  <data name="EmailAlreadyInDatabase" xml:space="preserve">
+    <value>Ten adres email już mamy w swojej bazie :)</value>
+  </data>
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
   </data>
@@ -135,8 +138,14 @@
   <data name="IntroParagraph4" xml:space="preserve">
     <value>Zdobywaj punkty i nagrody zbieraj!</value>
   </data>
+  <data name="Newsletter" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
   <data name="Puzzle" xml:space="preserve">
     <value>Zagadka {0}</value>
+  </data>
+  <data name="RodoAgreeMissing" xml:space="preserve">
+    <value>Brakuje zgody na przetwarzanie danych :(</value>
   </data>
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
@@ -144,14 +153,23 @@
   <data name="SponsorOfTheDay" xml:space="preserve">
     <value>Sponsorem dnia jest</value>
   </data>
+  <data name="ThankYouForSubscription" xml:space="preserve">
+    <value>Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :)</value>
+  </data>
   <data name="UserAlreadyAnswered" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
+  </data>
+  <data name="WeDeletedYourEmail" xml:space="preserve">
+    <value>Usunęliśmy Twój adres email z bazy</value>
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
     <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
   </data>
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
+  </data>
+  <data name="YouHaveEmailPleaseConfirm" xml:space="preserve">
+    <value>Dziękujemy za zainteresowanie :) Na Twojej skrzynce powinna już czekać wiadomość, kliknij link w niej zawarty, aby potwierdzić swój email :)</value>
   </data>
   <data name="YourAnswer" xml:space="preserve">
     <value>Twoja odpowiedź</value>
