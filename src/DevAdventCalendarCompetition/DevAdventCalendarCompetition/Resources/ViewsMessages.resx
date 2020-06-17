@@ -117,14 +117,53 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>O nas</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Akceptuj</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Powrót</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
   <data name="CorrectAnswer" xml:space="preserve">
     <value>Poprawna odpowiedź: {0}</value>
+  </data>
+  <data name="DevelopmentErrorFullDescription1" xml:space="preserve">
+    <value>Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred.</value>
+  </data>
+  <data name="DevelopmentErrorFullDescription2" xml:space="preserve">
+    <value>&lt;strong&gt;Development environment should not be enabled in deployed applications&lt;/strong&gt;, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the &lt;strong&gt;ASPNETCORE_ENVIRONMENT&lt;/strong&gt; environment variable to &lt;strong&gt;Development&lt;/strong&gt;, and restarting the application.</value>
+  </data>
+  <data name="DevelopmentMode" xml:space="preserve">
+    <value>Development Mode</value>
   </data>
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error.</value>
+  </data>
+  <data name="ErrorDesc" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
+  </data>
+  <data name="GoodAnswer" xml:space="preserve">
+    <value>Odpowiedź poprawna!</value>
+  </data>
+  <data name="Gratulations" xml:space="preserve">
+    <value>Gratulacje!</value>
+  </data>
+  <data name="HeadDescription" xml:space="preserve">
+    <value>DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT.</value>
+  </data>
+  <data name="HeadTitle" xml:space="preserve">
+    <value>DevAdventCalendar - programistyczny kalendarz adwentowy</value>
   </data>
   <data name="IntroParagraph1" xml:space="preserve">
     <value>Gdy na zegarze 20 wybije</value>
@@ -138,11 +177,38 @@
   <data name="IntroParagraph4" xml:space="preserve">
     <value>Zdobywaj punkty i nagrody zbieraj!</value>
   </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Dowiedz się więcej</value>
+  </data>
+  <data name="LockOut" xml:space="preserve">
+    <value>Zablokowany</value>
+  </data>
+  <data name="LockOutDescription" xml:space="preserve">
+    <value>To konto zostało zablokowane. Spróbuj ponownie później</value>
+  </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Twoje konto</value>
+  </data>
   <data name="Newsletter" xml:space="preserve">
     <value>Newsletter</value>
   </data>
+  <data name="Policy" xml:space="preserve">
+    <value>Regulamin</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Polityka prywatności</value>
+  </data>
+  <data name="Prizes" xml:space="preserve">
+    <value>Nagrody</value>
+  </data>
   <data name="Puzzle" xml:space="preserve">
     <value>Zagadka {0}</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Rejestruj</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Wyniki</value>
   </data>
   <data name="RodoAgreeMissing" xml:space="preserve">
     <value>Brakuje zgody na przetwarzanie danych :(</value>
@@ -150,8 +216,17 @@
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
   </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Zaloguj</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
   <data name="SponsorOfTheDay" xml:space="preserve">
     <value>Sponsorem dnia jest</value>
+  </data>
+  <data name="Sponsors" xml:space="preserve">
+    <value>Sponsorzy</value>
   </data>
   <data name="ThankYouForSubscription" xml:space="preserve">
     <value>Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :)</value>
@@ -164,6 +239,9 @@
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
     <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
+  </data>
+  <data name="WeUseCookies" xml:space="preserve">
+    <value>Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.</value>
   </data>
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>

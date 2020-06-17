@@ -61,11 +61,74 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O nas.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Akceptuj.
+        /// </summary>
+        public static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Powrót.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontakt.
+        /// </summary>
+        public static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poprawna odpowiedź: {0}.
         /// </summary>
         public static string CorrectAnswer {
             get {
                 return ResourceManager.GetString("CorrectAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred..
+        /// </summary>
+        public static string DevelopmentErrorFullDescription1 {
+            get {
+                return ResourceManager.GetString("DevelopmentErrorFullDescription1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;strong&gt;Development environment should not be enabled in deployed applications&lt;/strong&gt;, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the &lt;strong&gt;ASPNETCORE_ENVIRONMENT&lt;/strong&gt; environment variable to &lt;strong&gt;Development&lt;/strong&gt;, and restarting the application..
+        /// </summary>
+        public static string DevelopmentErrorFullDescription2 {
+            get {
+                return ResourceManager.GetString("DevelopmentErrorFullDescription2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Development Mode.
+        /// </summary>
+        public static string DevelopmentMode {
+            get {
+                return ResourceManager.GetString("DevelopmentMode", resourceCulture);
             }
         }
         
@@ -79,11 +142,65 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error..
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing your request..
+        /// </summary>
+        public static string ErrorDesc {
+            get {
+                return ResourceManager.GetString("ErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka.
         /// </summary>
         public static string GiftFromElfs {
             get {
                 return ResourceManager.GetString("GiftFromElfs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odpowiedź poprawna!.
+        /// </summary>
+        public static string GoodAnswer {
+            get {
+                return ResourceManager.GetString("GoodAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gratulacje!.
+        /// </summary>
+        public static string Gratulations {
+            get {
+                return ResourceManager.GetString("Gratulations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT..
+        /// </summary>
+        public static string HeadDescription {
+            get {
+                return ResourceManager.GetString("HeadDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DevAdventCalendar - programistyczny kalendarz adwentowy.
+        /// </summary>
+        public static string HeadTitle {
+            get {
+                return ResourceManager.GetString("HeadTitle", resourceCulture);
             }
         }
         
@@ -124,6 +241,42 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dowiedz się więcej.
+        /// </summary>
+        public static string LearnMore {
+            get {
+                return ResourceManager.GetString("LearnMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zablokowany.
+        /// </summary>
+        public static string LockOut {
+            get {
+                return ResourceManager.GetString("LockOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To konto zostało zablokowane. Spróbuj ponownie później.
+        /// </summary>
+        public static string LockOutDescription {
+            get {
+                return ResourceManager.GetString("LockOutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje konto.
+        /// </summary>
+        public static string ManageYourAccount {
+            get {
+                return ResourceManager.GetString("ManageYourAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Newsletter.
         /// </summary>
         public static string Newsletter {
@@ -133,11 +286,56 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Regulamin.
+        /// </summary>
+        public static string Policy {
+            get {
+                return ResourceManager.GetString("Policy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polityka prywatności.
+        /// </summary>
+        public static string PrivacyPolicy {
+            get {
+                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nagrody.
+        /// </summary>
+        public static string Prizes {
+            get {
+                return ResourceManager.GetString("Prizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zagadka {0}.
         /// </summary>
         public static string Puzzle {
             get {
                 return ResourceManager.GetString("Puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejestruj.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyniki.
+        /// </summary>
+        public static string Results {
+            get {
+                return ResourceManager.GetString("Results", resourceCulture);
             }
         }
         
@@ -160,11 +358,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaloguj.
+        /// </summary>
+        public static string SignIn {
+            get {
+                return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyloguj.
+        /// </summary>
+        public static string SignOut {
+            get {
+                return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sponsorem dnia jest.
         /// </summary>
         public static string SponsorOfTheDay {
             get {
                 return ResourceManager.GetString("SponsorOfTheDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sponsorzy.
+        /// </summary>
+        public static string Sponsors {
+            get {
+                return ResourceManager.GetString("Sponsors", resourceCulture);
             }
         }
         
@@ -201,6 +426,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string WeRemovedWhiteSpaces {
             get {
                 return ResourceManager.GetString("WeRemovedWhiteSpaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies..
+        /// </summary>
+        public static string WeUseCookies {
+            get {
+                return ResourceManager.GetString("WeUseCookies", resourceCulture);
             }
         }
         
