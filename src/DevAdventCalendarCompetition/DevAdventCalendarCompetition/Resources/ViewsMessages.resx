@@ -123,8 +123,20 @@
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
   </data>
+  <data name="AccountManagement" xml:space="preserve">
+    <value>Zarządzanie kontem</value>
+  </data>
+  <data name="AddLocalAccount" xml:space="preserve">
+    <value>Nie masz lokalnego loginu/hasła dla tej strony. Dodaj lokalne konto, żeby móc się logować.</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Zmiana hasła</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>Zmień hasło</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
@@ -201,6 +213,9 @@
   <data name="Prizes" xml:space="preserve">
     <value>Nagrody</value>
   </data>
+  <data name="Profil" xml:space="preserve">
+    <value>Profil</value>
+  </data>
   <data name="Puzzle" xml:space="preserve">
     <value>Zagadka {0}</value>
   </data>
@@ -213,8 +228,17 @@
   <data name="RodoAgreeMissing" xml:space="preserve">
     <value>Brakuje zgody na przetwarzanie danych :(</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
+  </data>
+  <data name="SendVerificationEmail" xml:space="preserve">
+    <value>Wyślij ponownie weryfikacyjny e-mail</value>
+  </data>
+  <data name="SetPassword" xml:space="preserve">
+    <value>Ustaw hasło</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Zaloguj</value>
