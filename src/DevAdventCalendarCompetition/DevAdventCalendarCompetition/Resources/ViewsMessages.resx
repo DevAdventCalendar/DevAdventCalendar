@@ -150,8 +150,20 @@
   <data name="AccountManagement" xml:space="preserve">
     <value>Zarządzanie kontem</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
   <data name="AddLocalAccount" xml:space="preserve">
     <value>Nie masz lokalnego loginu/hasła dla tej strony. Dodaj lokalne konto, żeby móc się logować.</value>
+  </data>
+  <data name="AddNewTest" xml:space="preserve">
+    <value>Dodaj nowy test</value>
+  </data>
+  <data name="AddNewTest2" xml:space="preserve">
+    <value>Dodaj test</value>
+  </data>
+  <data name="AdminPage" xml:space="preserve">
+    <value>Strona Administratora</value>
   </data>
   <data name="AnswerIsBorsch" xml:space="preserve">
     <value>Odpowiedź to: "barszcz"</value>
@@ -168,6 +180,12 @@
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
   </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Oblicz</value>
+  </data>
+  <data name="Calculate2" xml:space="preserve">
+    <value>Oblicz wyniki</value>
+  </data>
   <data name="CalendarWindow" xml:space="preserve">
     <value>okienko kalendarza</value>
   </data>
@@ -176,6 +194,9 @@
   </data>
   <data name="ChangeYourPassword" xml:space="preserve">
     <value>Zmień hasło</value>
+  </data>
+  <data name="CompleteTestEalier" xml:space="preserve">
+    <value>Zakończ test wcześniej</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
@@ -203,6 +224,9 @@
   </data>
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>Czas zakończenia:</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error.</value>
@@ -309,6 +333,12 @@
   <data name="OpenPuzzles" xml:space="preserve">
     <value>otwartych okienek</value>
   </data>
+  <data name="PlannedTestEnd" xml:space="preserve">
+    <value>Planowany czas zakończenia:</value>
+  </data>
+  <data name="PlannedTestStart" xml:space="preserve">
+    <value>Planowany czas rozpoczęcia:</value>
+  </data>
   <data name="PleaseContactUs" xml:space="preserve">
     <value>Zapraszamy do kontaktu</value>
   </data>
@@ -414,11 +444,29 @@
   <data name="SponsorsAndPartners" xml:space="preserve">
     <value>Sponsorzy i partnerzy</value>
   </data>
+  <data name="StartTest" xml:space="preserve">
+    <value>Rozpocznij</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Czas rozpoczęcia:</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="StatusTestIsOver" xml:space="preserve">
+    <value>Status: Test zakończony</value>
+  </data>
   <data name="SubscribeNewsletter" xml:space="preserve">
     <value>Zapisz się na newsletter</value>
   </data>
   <data name="Suprise" xml:space="preserve">
     <value>Niespodzianka</value>
+  </data>
+  <data name="TestDuration" xml:space="preserve">
+    <value>Ustaw, ile ma trwać test (w minutach)</value>
+  </data>
+  <data name="TestDurationDefaults" xml:space="preserve">
+    <value>domyślnie  20 minut</value>
   </data>
   <data name="TestHasEnded" xml:space="preserve">
     <value>Test się zakończył</value>
@@ -432,11 +480,17 @@
   <data name="TestNotStarted" xml:space="preserve">
     <value>Test się nie rozpoczął</value>
   </data>
+  <data name="TestPreviousNotEnded" xml:space="preserve">
+    <value>Poprzedni test nie zakończył się</value>
+  </data>
   <data name="tests" xml:space="preserve">
     <value>testu</value>
   </data>
   <data name="TestsAreActive" xml:space="preserve">
     <value>Testy jeszcze się nie zakończyły</value>
+  </data>
+  <data name="TestStarted" xml:space="preserve">
+    <value>Test rozpoczął się</value>
   </data>
   <data name="ThankYou" xml:space="preserve">
     <value>Dziękujemy! Bez Was nie było by to możliwe!</value>
@@ -470,6 +524,9 @@
   </data>
   <data name="WeeklySponsors" xml:space="preserve">
     <value>Sponsorzy tygodni</value>
+  </data>
+  <data name="WeekNumber" xml:space="preserve">
+    <value>Numer tygodnia (1, 2, 3 lub 4 - dla wszystkich wyników)</value>
   </data>
   <data name="WelcomeToTheGame" xml:space="preserve">
     <value>Zapraszamy do tegorocznej edycji ;)</value>

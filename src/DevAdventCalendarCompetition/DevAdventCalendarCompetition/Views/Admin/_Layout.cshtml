@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+<!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" lang="pl-PL">
 <head>
     <meta charset="UTF-8">
@@ -86,11 +88,11 @@
                                         </div>
                                         <ul>
                                             <li><a asp-area="" asp-controller="Home" asp-action="Index">&#9924;</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Results">Wyniki</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Sponsors">Sponsorzy</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Prizes">Nagrody</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="About">O nas</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Results">@Results</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Sponsors">@Sponsors</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Prizes">@Prizes</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="About">@About</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">@Contact</a></li>
 
                                             <!-- login partial -->
                                             @await Html.PartialAsync("_LoginPartial")
@@ -138,8 +140,8 @@
                     <div class="legal_text">
                         <p>
                             © 2019 - DevAdventCalendar<br />
-                            <a href="~/polityka.pdf" target="_blank">Polityka prywatności</a>
-                            <a href="~/regulamin.pdf" target="_blank">Regulamin</a>
+                            <a href="~/polityka.pdf" target="_blank">@PrivacyPolicy</a>
+                            <a href="~/regulamin.pdf" target="_blank">@Policy</a>
                         </p>
                     </div>
                 </div>

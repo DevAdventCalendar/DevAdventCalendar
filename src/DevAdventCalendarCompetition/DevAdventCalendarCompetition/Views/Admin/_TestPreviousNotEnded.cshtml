@@ -1,14 +1,15 @@
-﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
+@model DevAdventCalendarCompetition.Services.Models.TestDto
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 <div class="row">
     <div class="col-md-12">
         <h3>Test @Model.Number</h3>
 
         <p>
-            <b>Status: </b>Poprzedni test nie zakończył się
+            <b>@Status </b>@TestPreviousNotEnded
         </p>
         <p>
-            <b>Planowany czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongDateString() @Model.StartDate.Value.ToShortTimeString() - <b>Planowany czas zakończenia: @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()</b>
+            <b>@PlannedTestStart </b> @Model.StartDate.Value.ToLongDateString() @Model.StartDate.Value.ToShortTimeString() - <b>@PlannedTestEnd @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()</b>
         </p>
     </div>
 </div>

@@ -160,11 +160,47 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie masz lokalnego loginu/hasła dla tej strony. Dodaj lokalne konto, żeby móc się logować..
         /// </summary>
         public static string AddLocalAccount {
             get {
                 return ResourceManager.GetString("AddLocalAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj nowy test.
+        /// </summary>
+        public static string AddNewTest {
+            get {
+                return ResourceManager.GetString("AddNewTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodaj test.
+        /// </summary>
+        public static string AddNewTest2 {
+            get {
+                return ResourceManager.GetString("AddNewTest2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strona Administratora.
+        /// </summary>
+        public static string AdminPage {
+            get {
+                return ResourceManager.GetString("AdminPage", resourceCulture);
             }
         }
         
@@ -214,6 +250,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oblicz.
+        /// </summary>
+        public static string Calculate {
+            get {
+                return ResourceManager.GetString("Calculate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oblicz wyniki.
+        /// </summary>
+        public static string Calculate2 {
+            get {
+                return ResourceManager.GetString("Calculate2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to okienko kalendarza.
         /// </summary>
         public static string CalendarWindow {
@@ -237,6 +291,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string ChangeYourPassword {
             get {
                 return ResourceManager.GetString("ChangeYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zakończ test wcześniej.
+        /// </summary>
+        public static string CompleteTestEalier {
+            get {
+                return ResourceManager.GetString("CompleteTestEalier", resourceCulture);
             }
         }
         
@@ -318,6 +381,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string EmailAlreadyInDatabase {
             get {
                 return ResourceManager.GetString("EmailAlreadyInDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czas zakończenia:.
+        /// </summary>
+        public static string EndTime {
+            get {
+                return ResourceManager.GetString("EndTime", resourceCulture);
             }
         }
         
@@ -637,6 +709,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Planowany czas zakończenia:.
+        /// </summary>
+        public static string PlannedTestEnd {
+            get {
+                return ResourceManager.GetString("PlannedTestEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Planowany czas rozpoczęcia:.
+        /// </summary>
+        public static string PlannedTestStart {
+            get {
+                return ResourceManager.GetString("PlannedTestStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zapraszamy do kontaktu.
         /// </summary>
         public static string PleaseContactUs {
@@ -952,6 +1042,42 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rozpocznij.
+        /// </summary>
+        public static string StartTest {
+            get {
+                return ResourceManager.GetString("StartTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czas rozpoczęcia:.
+        /// </summary>
+        public static string StartTime {
+            get {
+                return ResourceManager.GetString("StartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status:.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status: Test zakończony.
+        /// </summary>
+        public static string StatusTestIsOver {
+            get {
+                return ResourceManager.GetString("StatusTestIsOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zapisz się na newsletter.
         /// </summary>
         public static string SubscribeNewsletter {
@@ -966,6 +1092,24 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string Suprise {
             get {
                 return ResourceManager.GetString("Suprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ustaw, ile ma trwać test (w minutach).
+        /// </summary>
+        public static string TestDuration {
+            get {
+                return ResourceManager.GetString("TestDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to domyślnie  20 minut.
+        /// </summary>
+        public static string TestDurationDefaults {
+            get {
+                return ResourceManager.GetString("TestDurationDefaults", resourceCulture);
             }
         }
         
@@ -1006,6 +1150,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poprzedni test nie zakończył się.
+        /// </summary>
+        public static string TestPreviousNotEnded {
+            get {
+                return ResourceManager.GetString("TestPreviousNotEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to testu.
         /// </summary>
         public static string tests {
@@ -1020,6 +1173,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string TestsAreActive {
             get {
                 return ResourceManager.GetString("TestsAreActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test rozpoczął się.
+        /// </summary>
+        public static string TestStarted {
+            get {
+                return ResourceManager.GetString("TestStarted", resourceCulture);
             }
         }
         
@@ -1119,6 +1281,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string WeeklySponsors {
             get {
                 return ResourceManager.GetString("WeeklySponsors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numer tygodnia (1, 2, 3 lub 4 - dla wszystkich wyników).
+        /// </summary>
+        public static string WeekNumber {
+            get {
+                return ResourceManager.GetString("WeekNumber", resourceCulture);
             }
         }
         

@@ -1,6 +1,8 @@
-﻿@model TestVm
+@model TestVm
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 @{
-    ViewData["Title"] = "Dodaj nowy test";
+    ViewData["Title"] = @AddNewTest;
 }
 
 <div class="container mt-30 mb-30">
@@ -65,7 +67,7 @@
                     <span asp-validation-for="DiscountLogoPath" class="text-danger"></span>
                 </div>
                 <div class="content-centered">
-                    <button type="submit" class="btn btn-default">Dodaj</button>
+                    <button type="submit" class="btn btn-default">@Add</button>
                 </div>
             }
             <form class="form" method="POST" action=""></form>
