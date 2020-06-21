@@ -1,41 +1,43 @@
-﻿<div class="donate_page">
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+<div class="donate_page">
     @*<section class="promot_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="promot_content_wrapper">
-                        <div class="promt_content area_title">
-                            <h3>Sponsorzy</h3>
-                        </div>
-                        <div class="santa_with_bag reveal animated" data-reveal-anim="bounceIn" data-anim-delay="0.3s">
-                            <img src="~/theme-2019/images/gift_bag.png" alt="Begger_santa">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="promot_content_wrapper">
+                            <div class="promt_content area_title">
+                                <h3>Sponsorzy</h3>
+                            </div>
+                            <div class="santa_with_bag reveal animated" data-reveal-anim="bounceIn" data-anim-delay="0.3s">
+                                <img src="~/theme-2019/images/gift_bag.png" alt="Begger_santa">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
 
     @*<div class="container mb-100 mt-100">
-        <div class="row">
-            <div class="col-12 mb-30 mt-30 text-center">
-                <div class="area_title mb-30">
-                    <h3>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku? </h3>
-                </div>
+            <div class="row">
+                <div class="col-12 mb-30 mt-30 text-center">
+                    <div class="area_title mb-30">
+                        <h3>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku? </h3>
+                    </div>
 
-                <a href="mailto:devadventcalendar@gmail.com" class="chris_btn reveal animated" data-reveal-anim="fadeIn">
-                    Skontaktuj się z nami
-                </a>
+                    <a href="mailto:devadventcalendar@gmail.com" class="chris_btn reveal animated" data-reveal-anim="fadeIn">
+                        Skontaktuj się z nami
+                    </a>
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <div class="breadcrumb_area">
         <div class="container">
             <div class="row">
                 <div class="breadcrumb_wrapper">
                     <div class="page_title page_title--block text-center">
-                        <h3>Sponsorzy i partnerzy</h3>
+                        <h3>@SponsorsAndPartners</h3>
                     </div>
                 </div>
             </div>
@@ -47,7 +49,7 @@
 
             <div class="row">
                 <div class="col text-center">
-                    <h1 class="mb-30">Sponsorzy tygodni</h1>
+                    <h1 class="mb-30">@WeeklySponsors</h1>
                 </div>
             </div>
 
@@ -72,7 +74,7 @@
 
             <div class="row">
                 <div class="col text-center">
-                    <h1 class="mb-30">Sponsorzy nagród</h1>
+                    <h1 class="mb-30">@SponsorsAndAwards</h1>
                 </div>
             </div>
 
@@ -101,13 +103,13 @@
             </div>
         </div>
     </section>
-    
+
     <section class="event_txt">
         <div class="container">
 
             <div class="row">
                 <div class="col text-center">
-                    <h1 class="mt-30 mb-30">Patroni medialni</h1>
+                    <h1 class="mt-30 mb-30">@MediaPartners</h1>
                 </div>
             </div>
 
@@ -210,7 +212,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row prizes-wrapper">
                 <div class="col-sm-2 mb-30">
                     <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
@@ -222,5 +224,5 @@
             </div>
 
         </div>
-</section>
+    </section>
 </div>

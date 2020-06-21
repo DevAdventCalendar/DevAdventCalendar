@@ -120,6 +120,30 @@
   <data name="About" xml:space="preserve">
     <value>O nas</value>
   </data>
+  <data name="AboutDarekGrund" xml:space="preserve">
+    <value>Frontend developer. Z komputerami i programowaniem związany od czasów Amigi 500. Prywatnie miłośnik kawy, książki użytkowej i długich wycieczek. Zafascynowany kierunkiem w jakim rozwija się technologia.</value>
+  </data>
+  <data name="AboutKamilSmieszek" xml:space="preserve">
+    <value>Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi spalić nieco benzyny na torze wyścigowym i tworzyć trance.</value>
+  </data>
+  <data name="AboutMichalGellert" xml:space="preserve">
+    <value>Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na www.michalgellert.pl.</value>
+  </data>
+  <data name="AboutMikolajJakubowski" xml:space="preserve">
+    <value>Wykonawca aplikacji z 2017 roku i twórca logo. Programista różnych technologii m.in. PHP, Java, .NET, zależy co na daną chwilę potrzeba. Artysta zarówno kodując jak i hobbystycznie. Uwielbia rysować zarówno cyfrowo jak i standardowo. Ponadto crossfiter, mąż i tata.</value>
+  </data>
+  <data name="AboutOliwiaMatusik" xml:space="preserve">
+    <value>Junior .Net Dev. Wolontariuszka i inicjatorka Geek Girls Carrots Katowice. Uzależniona od kawy, miłośniczka nowych technologii i Sci-Fi i Fantasy. Wolny czas lubi aktywnie spędzać trenując pole dance i ćwicząc jogę.</value>
+  </data>
+  <data name="AboutParykLotzwi" xml:space="preserve">
+    <value>Programista .NET, fan(atyk) automatyzacji. Pasjonat programowania i czystego kodu. Aktywny uczestnik lokalnych konferencji i grup programistycznych. Po godzinach miłośnik książek, filmów, seriali i gier fantasy oraz sci-fi.</value>
+  </data>
+  <data name="AboutRadekMaziarka" xml:space="preserve">
+    <value>Solution Architect, Team Leader i programista w obszarze .NET prowadzący prezentacje i szkolenia, a także organizujący konferencje programistyczne. Po pracy pomaga firmom w projektach IT oraz wspomaga technologicznie Stowarzyszenie Libertariańskie. Zwolennik dostarczania wartości małymi krokami.</value>
+  </data>
+  <data name="AboutWeronika" xml:space="preserve">
+    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na www.programmer-girl.com i aktywnie udziela się we wrocławskim świecie IT. Współorganizator Wrocławskiej grupy .NET oraz konferencji Wroc#.</value>
+  </data>
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
   </data>
@@ -129,8 +153,23 @@
   <data name="AddLocalAccount" xml:space="preserve">
     <value>Nie masz lokalnego loginu/hasła dla tej strony. Dodaj lokalne konto, żeby móc się logować.</value>
   </data>
+  <data name="AnswerIsBorsch" xml:space="preserve">
+    <value>Odpowiedź to: "barszcz"</value>
+  </data>
+  <data name="AnswerQuestions" xml:space="preserve">
+    <value>Odpowiadasz na pytania</value>
+  </data>
+  <data name="Awards" xml:space="preserve">
+    <value>Nagrody</value>
+  </data>
+  <data name="AwardsOfTheWeek" xml:space="preserve">
+    <value>Nagrody tygodni</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
+  </data>
+  <data name="CalendarWindow" xml:space="preserve">
+    <value>okienko kalendarza</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmiana hasła</value>
@@ -144,6 +183,12 @@
   <data name="CorrectAnswer" xml:space="preserve">
     <value>Poprawna odpowiedź: {0}</value>
   </data>
+  <data name="CorrectAnswers" xml:space="preserve">
+    <value>Poprawne odpowiedzi</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>DZIEŃ {0}</value>
+  </data>
   <data name="DevelopmentErrorFullDescription1" xml:space="preserve">
     <value>Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred.</value>
   </data>
@@ -152,6 +197,9 @@
   </data>
   <data name="DevelopmentMode" xml:space="preserve">
     <value>Development Mode</value>
+  </data>
+  <data name="DontMissEvents" xml:space="preserve">
+    <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
@@ -162,8 +210,35 @@
   <data name="ErrorDesc" xml:space="preserve">
     <value>An error occurred while processing your request.</value>
   </data>
+  <data name="ErrorInPolish" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="EveryDayYouOpen" xml:space="preserve">
+    <value>Każdego dnia otwierasz</value>
+  </data>
+  <data name="FastenYourSeatbelt" xml:space="preserve">
+    <value>Zapnij pasy! Startujemy już za</value>
+  </data>
+  <data name="FbEvents" xml:space="preserve">
+    <value>Wydarzenie na FB</value>
+  </data>
+  <data name="FullList" xml:space="preserve">
+    <value>Pełny ranking</value>
+  </data>
+  <data name="Fun" xml:space="preserve">
+    <value>Zabawy</value>
+  </data>
+  <data name="GetCool" xml:space="preserve">
+    <value>Zdobywasz fajne</value>
+  </data>
+  <data name="GetPoints" xml:space="preserve">
+    <value>i zbierasz punkty</value>
+  </data>
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
+  </data>
+  <data name="Gifts" xml:space="preserve">
+    <value>nagrody</value>
   </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
@@ -171,11 +246,20 @@
   <data name="Gratulations" xml:space="preserve">
     <value>Gratulacje!</value>
   </data>
+  <data name="Have" xml:space="preserve">
+    <value>Udanej</value>
+  </data>
   <data name="HeadDescription" xml:space="preserve">
     <value>DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT.</value>
   </data>
   <data name="HeadTitle" xml:space="preserve">
     <value>DevAdventCalendar - programistyczny kalendarz adwentowy</value>
+  </data>
+  <data name="Helion100" xml:space="preserve">
+    <value>Bon 100 zł do Heliona</value>
+  </data>
+  <data name="HowItWorks" xml:space="preserve">
+    <value>Jak to działa?</value>
   </data>
   <data name="IntroParagraph1" xml:space="preserve">
     <value>Gdy na zegarze 20 wybije</value>
@@ -198,14 +282,44 @@
   <data name="LockOutDescription" xml:space="preserve">
     <value>To konto zostało zablokowane. Spróbuj ponownie później</value>
   </data>
+  <data name="MainAwards" xml:space="preserve">
+    <value>Nagrody główne</value>
+  </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Twoje konto</value>
+  </data>
+  <data name="MediaPartners" xml:space="preserve">
+    <value>Patroni medialni</value>
+  </data>
+  <data name="MerryChristmas" xml:space="preserve">
+    <value>Wesołych Świąt!</value>
+  </data>
+  <data name="MK850" xml:space="preserve">
+    <value>Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE</value>
   </data>
   <data name="Newsletter" xml:space="preserve">
     <value>Newsletter</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Dalej</value>
+  </data>
+  <data name="Nozbe" xml:space="preserve">
+    <value>Licencja Nozbe Solo na 6 mscy</value>
+  </data>
+  <data name="OpenPuzzles" xml:space="preserve">
+    <value>otwartych okienek</value>
+  </data>
+  <data name="PleaseContactUs" xml:space="preserve">
+    <value>Zapraszamy do kontaktu</value>
+  </data>
   <data name="Policy" xml:space="preserve">
     <value>Regulamin</value>
+  </data>
+  <data name="Presents" xml:space="preserve">
+    <value>Mikołaj ma dla Was wyjątkowe prezenty</value>
+  </data>
+  <data name="PresentsDesc" xml:space="preserve">
+    <value>Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym</value>
   </data>
   <data name="PrivacyPolicy" xml:space="preserve">
     <value>Polityka prywatności</value>
@@ -216,14 +330,29 @@
   <data name="Profil" xml:space="preserve">
     <value>Profil</value>
   </data>
+  <data name="ProgrammingBook" xml:space="preserve">
+    <value>Książka "Programowanie funkcyjne w języku C#"</value>
+  </data>
   <data name="Puzzle" xml:space="preserve">
     <value>Zagadka {0}</value>
+  </data>
+  <data name="Raspberry4" xml:space="preserve">
+    <value>Raspberry Pi 4 model B WiFi DualBand Bluetooth 2GB RAM 1,5GHz</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Rejestruj</value>
   </data>
+  <data name="Regulation" xml:space="preserve">
+    <value>Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj</value>
+  </data>
   <data name="Results" xml:space="preserve">
     <value>Wyniki</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Wstecz</value>
+  </data>
+  <data name="RodoAgree" xml:space="preserve">
+    <value>Zgoda na przetwarzanie danych</value>
   </data>
   <data name="RodoAgreeMissing" xml:space="preserve">
     <value>Brakuje zgody na przetwarzanie danych :(</value>
@@ -231,11 +360,32 @@
   <data name="Save" xml:space="preserve">
     <value>Zapisz</value>
   </data>
+  <data name="ScoresCommingSoon" xml:space="preserve">
+    <value>Wyniki już niedługo...</value>
+  </data>
+  <data name="ScoresDesc1" xml:space="preserve">
+    <value>Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu).</value>
+  </data>
+  <data name="ScoresDesc2" xml:space="preserve">
+    <value>Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00.</value>
+  </data>
+  <data name="ScoresDesc3" xml:space="preserve">
+    <value>Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00.</value>
+  </data>
+  <data name="ScoresDesc4" xml:space="preserve">
+    <value>Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.</value>
+  </data>
+  <data name="ScoresDesc5" xml:space="preserve">
+    <value>Ostateczne wyniki poznasz w środę, 25 grudnia</value>
+  </data>
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
   </data>
   <data name="SendVerificationEmail" xml:space="preserve">
     <value>Wyślij ponownie weryfikacyjny e-mail</value>
+  </data>
+  <data name="Sennheiser" xml:space="preserve">
+    <value>Słuchawki Sennheiser 4.50 BTNC Wireless</value>
   </data>
   <data name="SetPassword" xml:space="preserve">
     <value>Ustaw hasło</value>
@@ -246,14 +396,65 @@
   <data name="SignOut" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
+  <data name="smResults" xml:space="preserve">
+    <value>wyniku</value>
+  </data>
+  <data name="SocialMedia" xml:space="preserve">
+    <value>media społecznościowe:</value>
+  </data>
   <data name="SponsorOfTheDay" xml:space="preserve">
     <value>Sponsorem dnia jest</value>
   </data>
   <data name="Sponsors" xml:space="preserve">
     <value>Sponsorzy</value>
   </data>
+  <data name="SponsorsAndAwards" xml:space="preserve">
+    <value>Sponsorzy nagród</value>
+  </data>
+  <data name="SponsorsAndPartners" xml:space="preserve">
+    <value>Sponsorzy i partnerzy</value>
+  </data>
+  <data name="SubscribeNewsletter" xml:space="preserve">
+    <value>Zapisz się na newsletter</value>
+  </data>
+  <data name="Suprise" xml:space="preserve">
+    <value>Niespodzianka</value>
+  </data>
+  <data name="TestHasEnded" xml:space="preserve">
+    <value>Test się zakończył</value>
+  </data>
+  <data name="TestIsNotYetStarted" xml:space="preserve">
+    <value>Test {0} się jeszcze nie rozpoczął. Proszę poczekaj na otwarcie testu.</value>
+  </data>
+  <data name="TestIsOver" xml:space="preserve">
+    <value>Test {0} sie zakończył. Sprawdź</value>
+  </data>
+  <data name="TestNotStarted" xml:space="preserve">
+    <value>Test się nie rozpoczął</value>
+  </data>
+  <data name="tests" xml:space="preserve">
+    <value>testu</value>
+  </data>
+  <data name="TestsAreActive" xml:space="preserve">
+    <value>Testy jeszcze się nie zakończyły</value>
+  </data>
+  <data name="ThankYou" xml:space="preserve">
+    <value>Dziękujemy! Bez Was nie było by to możliwe!</value>
+  </data>
   <data name="ThankYouForSubscription" xml:space="preserve">
     <value>Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :)</value>
+  </data>
+  <data name="TicketWrocSharp" xml:space="preserve">
+    <value>Bilet na konferencję Wroc#</value>
+  </data>
+  <data name="TotalScore" xml:space="preserve">
+    <value>Suma punktów</value>
+  </data>
+  <data name="UnitlDecember" xml:space="preserve">
+    <value>24 grudnia</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Użytkownik</value>
   </data>
   <data name="UserAlreadyAnswered" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
@@ -261,11 +462,38 @@
   <data name="WeDeletedYourEmail" xml:space="preserve">
     <value>Usunęliśmy Twój adres email z bazy</value>
   </data>
+  <data name="Week" xml:space="preserve">
+    <value>TYDZIEŃ {0}</value>
+  </data>
+  <data name="WeekLowerCase" xml:space="preserve">
+    <value>Tydzień</value>
+  </data>
+  <data name="WeeklySponsors" xml:space="preserve">
+    <value>Sponsorzy tygodni</value>
+  </data>
+  <data name="WelcomeToTheGame" xml:space="preserve">
+    <value>Zapraszamy do tegorocznej edycji ;)</value>
+  </data>
+  <data name="WePlay" xml:space="preserve">
+    <value>Gramy do</value>
+  </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
     <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
   </data>
   <data name="WeUseCookies" xml:space="preserve">
     <value>Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.</value>
+  </data>
+  <data name="WrongAnswers" xml:space="preserve">
+    <value>Błędne odpowiedzi</value>
+  </data>
+  <data name="Xiaomi" xml:space="preserve">
+    <value>Xiaomi Redmi Airdots</value>
+  </data>
+  <data name="XiaomiBand4" xml:space="preserve">
+    <value>Xiaomi Mi Band 4</value>
+  </data>
+  <data name="YouAnsweredCorrectly" xml:space="preserve">
+    <value>Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</value>
   </data>
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
@@ -273,7 +501,13 @@
   <data name="YouHaveEmailPleaseConfirm" xml:space="preserve">
     <value>Dziękujemy za zainteresowanie :) Na Twojej skrzynce powinna już czekać wiadomość, kliknij link w niej zawarty, aby potwierdzić swój email :)</value>
   </data>
+  <data name="YouHaventAnswered" xml:space="preserve">
+    <value>Nie odpowiedziałeś jeszcze na żadną zagadkę...</value>
+  </data>
   <data name="YourAnswer" xml:space="preserve">
     <value>Twoja odpowiedź</value>
+  </data>
+  <data name="YourStats" xml:space="preserve">
+    <value>Twoje statystyki wyglądają następująco:</value>
   </data>
 </root>

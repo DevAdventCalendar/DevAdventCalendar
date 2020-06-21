@@ -1,6 +1,8 @@
-﻿@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Vms.TestResultEntryVm>>
+@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Vms.TestResultEntryVm>>
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 @{
-    var entries = Model.Value;                                                                                             
+    var entries = Model.Value;
     var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Value.HasNextPage ? "disabled" : "";
 }
@@ -8,10 +10,10 @@
     <thead>
         <tr>
             <th class="col-xs-1">#</th>
-            <th>Użytkownik</th>
-            <th>Poprawne odpowiedzi</th>
-            <th>Błędne odpowiedzi</th>
-            <th>Suma punktów</th>
+            <th>@User</th>
+            <th>@CorrectAnswers</th>
+            <th>@WrongAnswers</th>
+            <th>@TotalScore</th>
         </tr>
     </thead>
     <tbody>
@@ -32,7 +34,7 @@
                     var score = testResult.GetType()
                         .GetProperties()
                         .FirstOrDefault(p => p.Name.Contains($"Week{Model.Key}Points"))
-                        .GetValue(testResult) as int?; 
+                        .GetValue(testResult) as int?;
 
                     <td>@score.Value</td>
                 }
@@ -47,13 +49,13 @@
            asp-action="Results"
            asp-route-pageIndex="@(entries.PageIndex - 1)"
            class="chris_btn @prevDisabled">
-            Wstecz
+            @Return
         </a>
         <a asp-controller="Home"
            asp-action="Results"
            asp-route-pageIndex="@(entries.PageIndex + 1)"
            class="chris_btn @nextDisabled">
-            Dalej
+            @Next
         </a>
     </div>
 </div>

@@ -70,6 +70,78 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Frontend developer. Z komputerami i programowaniem związany od czasów Amigi 500. Prywatnie miłośnik kawy, książki użytkowej i długich wycieczek. Zafascynowany kierunkiem w jakim rozwija się technologia..
+        /// </summary>
+        public static string AboutDarekGrund {
+            get {
+                return ResourceManager.GetString("AboutDarekGrund", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi spalić nieco benzyny na torze wyścigowym i tworzyć trance..
+        /// </summary>
+        public static string AboutKamilSmieszek {
+            get {
+                return ResourceManager.GetString("AboutKamilSmieszek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na www.michalgellert.pl..
+        /// </summary>
+        public static string AboutMichalGellert {
+            get {
+                return ResourceManager.GetString("AboutMichalGellert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wykonawca aplikacji z 2017 roku i twórca logo. Programista różnych technologii m.in. PHP, Java, .NET, zależy co na daną chwilę potrzeba. Artysta zarówno kodując jak i hobbystycznie. Uwielbia rysować zarówno cyfrowo jak i standardowo. Ponadto crossfiter, mąż i tata..
+        /// </summary>
+        public static string AboutMikolajJakubowski {
+            get {
+                return ResourceManager.GetString("AboutMikolajJakubowski", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Junior .Net Dev. Wolontariuszka i inicjatorka Geek Girls Carrots Katowice. Uzależniona od kawy, miłośniczka nowych technologii i Sci-Fi i Fantasy. Wolny czas lubi aktywnie spędzać trenując pole dance i ćwicząc jogę..
+        /// </summary>
+        public static string AboutOliwiaMatusik {
+            get {
+                return ResourceManager.GetString("AboutOliwiaMatusik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Programista .NET, fan(atyk) automatyzacji. Pasjonat programowania i czystego kodu. Aktywny uczestnik lokalnych konferencji i grup programistycznych. Po godzinach miłośnik książek, filmów, seriali i gier fantasy oraz sci-fi..
+        /// </summary>
+        public static string AboutParykLotzwi {
+            get {
+                return ResourceManager.GetString("AboutParykLotzwi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solution Architect, Team Leader i programista w obszarze .NET prowadzący prezentacje i szkolenia, a także organizujący konferencje programistyczne. Po pracy pomaga firmom w projektach IT oraz wspomaga technologicznie Stowarzyszenie Libertariańskie. Zwolennik dostarczania wartości małymi krokami..
+        /// </summary>
+        public static string AboutRadekMaziarka {
+            get {
+                return ResourceManager.GetString("AboutRadekMaziarka", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na www.programmer-girl.com i aktywnie udziela się we wrocławskim świecie IT. Współorganizator Wrocławskiej grupy .NET oraz konferencji Wroc#..
+        /// </summary>
+        public static string AboutWeronika {
+            get {
+                return ResourceManager.GetString("AboutWeronika", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Akceptuj.
         /// </summary>
         public static string Accept {
@@ -97,11 +169,56 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Odpowiedź to: &quot;barszcz&quot;.
+        /// </summary>
+        public static string AnswerIsBorsch {
+            get {
+                return ResourceManager.GetString("AnswerIsBorsch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odpowiadasz na pytania.
+        /// </summary>
+        public static string AnswerQuestions {
+            get {
+                return ResourceManager.GetString("AnswerQuestions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nagrody.
+        /// </summary>
+        public static string Awards {
+            get {
+                return ResourceManager.GetString("Awards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nagrody tygodni.
+        /// </summary>
+        public static string AwardsOfTheWeek {
+            get {
+                return ResourceManager.GetString("AwardsOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Powrót.
         /// </summary>
         public static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to okienko kalendarza.
+        /// </summary>
+        public static string CalendarWindow {
+            get {
+                return ResourceManager.GetString("CalendarWindow", resourceCulture);
             }
         }
         
@@ -142,6 +259,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poprawne odpowiedzi.
+        /// </summary>
+        public static string CorrectAnswers {
+            get {
+                return ResourceManager.GetString("CorrectAnswers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DZIEŃ {0}.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Swapping to &lt;strong&gt;Development&lt;/strong&gt; environment will display more detailed information about the error that occurred..
         /// </summary>
         public static string DevelopmentErrorFullDescription1 {
@@ -165,6 +300,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string DevelopmentMode {
             get {
                 return ResourceManager.GetString("DevelopmentMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I nie przegap najważniejszych wydarzeń!.
+        /// </summary>
+        public static string DontMissEvents {
+            get {
+                return ResourceManager.GetString("DontMissEvents", resourceCulture);
             }
         }
         
@@ -196,11 +340,92 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Błąd.
+        /// </summary>
+        public static string ErrorInPolish {
+            get {
+                return ResourceManager.GetString("ErrorInPolish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Każdego dnia otwierasz.
+        /// </summary>
+        public static string EveryDayYouOpen {
+            get {
+                return ResourceManager.GetString("EveryDayYouOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapnij pasy! Startujemy już za.
+        /// </summary>
+        public static string FastenYourSeatbelt {
+            get {
+                return ResourceManager.GetString("FastenYourSeatbelt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wydarzenie na FB.
+        /// </summary>
+        public static string FbEvents {
+            get {
+                return ResourceManager.GetString("FbEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pełny ranking.
+        /// </summary>
+        public static string FullList {
+            get {
+                return ResourceManager.GetString("FullList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zabawy.
+        /// </summary>
+        public static string Fun {
+            get {
+                return ResourceManager.GetString("Fun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zdobywasz fajne.
+        /// </summary>
+        public static string GetCool {
+            get {
+                return ResourceManager.GetString("GetCool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to i zbierasz punkty.
+        /// </summary>
+        public static string GetPoints {
+            get {
+                return ResourceManager.GetString("GetPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka.
         /// </summary>
         public static string GiftFromElfs {
             get {
                 return ResourceManager.GetString("GiftFromElfs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nagrody.
+        /// </summary>
+        public static string Gifts {
+            get {
+                return ResourceManager.GetString("Gifts", resourceCulture);
             }
         }
         
@@ -223,6 +448,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Udanej.
+        /// </summary>
+        public static string Have {
+            get {
+                return ResourceManager.GetString("Have", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT..
         /// </summary>
         public static string HeadDescription {
@@ -237,6 +471,24 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string HeadTitle {
             get {
                 return ResourceManager.GetString("HeadTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bon 100 zł do Heliona.
+        /// </summary>
+        public static string Helion100 {
+            get {
+                return ResourceManager.GetString("Helion100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jak to działa?.
+        /// </summary>
+        public static string HowItWorks {
+            get {
+                return ResourceManager.GetString("HowItWorks", resourceCulture);
             }
         }
         
@@ -304,11 +556,47 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nagrody główne.
+        /// </summary>
+        public static string MainAwards {
+            get {
+                return ResourceManager.GetString("MainAwards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Twoje konto.
         /// </summary>
         public static string ManageYourAccount {
             get {
                 return ResourceManager.GetString("ManageYourAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patroni medialni.
+        /// </summary>
+        public static string MediaPartners {
+            get {
+                return ResourceManager.GetString("MediaPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wesołych Świąt!.
+        /// </summary>
+        public static string MerryChristmas {
+            get {
+                return ResourceManager.GetString("MerryChristmas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE.
+        /// </summary>
+        public static string MK850 {
+            get {
+                return ResourceManager.GetString("MK850", resourceCulture);
             }
         }
         
@@ -322,11 +610,65 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dalej.
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licencja Nozbe Solo na 6 mscy.
+        /// </summary>
+        public static string Nozbe {
+            get {
+                return ResourceManager.GetString("Nozbe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to otwartych okienek.
+        /// </summary>
+        public static string OpenPuzzles {
+            get {
+                return ResourceManager.GetString("OpenPuzzles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapraszamy do kontaktu.
+        /// </summary>
+        public static string PleaseContactUs {
+            get {
+                return ResourceManager.GetString("PleaseContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Regulamin.
         /// </summary>
         public static string Policy {
             get {
                 return ResourceManager.GetString("Policy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mikołaj ma dla Was wyjątkowe prezenty.
+        /// </summary>
+        public static string Presents {
+            get {
+                return ResourceManager.GetString("Presents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym.
+        /// </summary>
+        public static string PresentsDesc {
+            get {
+                return ResourceManager.GetString("PresentsDesc", resourceCulture);
             }
         }
         
@@ -358,11 +700,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Książka &quot;Programowanie funkcyjne w języku C#&quot;.
+        /// </summary>
+        public static string ProgrammingBook {
+            get {
+                return ResourceManager.GetString("ProgrammingBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zagadka {0}.
         /// </summary>
         public static string Puzzle {
             get {
                 return ResourceManager.GetString("Puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raspberry Pi 4 model B WiFi DualBand Bluetooth 2GB RAM 1,5GHz.
+        /// </summary>
+        public static string Raspberry4 {
+            get {
+                return ResourceManager.GetString("Raspberry4", resourceCulture);
             }
         }
         
@@ -376,11 +736,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj.
+        /// </summary>
+        public static string Regulation {
+            get {
+                return ResourceManager.GetString("Regulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wyniki.
         /// </summary>
         public static string Results {
             get {
                 return ResourceManager.GetString("Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wstecz.
+        /// </summary>
+        public static string Return {
+            get {
+                return ResourceManager.GetString("Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zgoda na przetwarzanie danych.
+        /// </summary>
+        public static string RodoAgree {
+            get {
+                return ResourceManager.GetString("RodoAgree", resourceCulture);
             }
         }
         
@@ -403,6 +790,60 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wyniki już niedługo....
+        /// </summary>
+        public static string ScoresCommingSoon {
+            get {
+                return ResourceManager.GetString("ScoresCommingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu)..
+        /// </summary>
+        public static string ScoresDesc1 {
+            get {
+                return ResourceManager.GetString("ScoresDesc1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00..
+        /// </summary>
+        public static string ScoresDesc2 {
+            get {
+                return ResourceManager.GetString("ScoresDesc2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00..
+        /// </summary>
+        public static string ScoresDesc3 {
+            get {
+                return ResourceManager.GetString("ScoresDesc3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00..
+        /// </summary>
+        public static string ScoresDesc4 {
+            get {
+                return ResourceManager.GetString("ScoresDesc4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ostateczne wyniki poznasz w środę, 25 grudnia.
+        /// </summary>
+        public static string ScoresDesc5 {
+            get {
+                return ResourceManager.GetString("ScoresDesc5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wyślij.
         /// </summary>
         public static string Send {
@@ -417,6 +858,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string SendVerificationEmail {
             get {
                 return ResourceManager.GetString("SendVerificationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Słuchawki Sennheiser 4.50 BTNC Wireless.
+        /// </summary>
+        public static string Sennheiser {
+            get {
+                return ResourceManager.GetString("Sennheiser", resourceCulture);
             }
         }
         
@@ -448,6 +898,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to wyniku.
+        /// </summary>
+        public static string smResults {
+            get {
+                return ResourceManager.GetString("smResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to media społecznościowe:.
+        /// </summary>
+        public static string SocialMedia {
+            get {
+                return ResourceManager.GetString("SocialMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sponsorem dnia jest.
         /// </summary>
         public static string SponsorOfTheDay {
@@ -466,11 +934,146 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sponsorzy nagród.
+        /// </summary>
+        public static string SponsorsAndAwards {
+            get {
+                return ResourceManager.GetString("SponsorsAndAwards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sponsorzy i partnerzy.
+        /// </summary>
+        public static string SponsorsAndPartners {
+            get {
+                return ResourceManager.GetString("SponsorsAndPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisz się na newsletter.
+        /// </summary>
+        public static string SubscribeNewsletter {
+            get {
+                return ResourceManager.GetString("SubscribeNewsletter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niespodzianka.
+        /// </summary>
+        public static string Suprise {
+            get {
+                return ResourceManager.GetString("Suprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test się zakończył.
+        /// </summary>
+        public static string TestHasEnded {
+            get {
+                return ResourceManager.GetString("TestHasEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test {0} się jeszcze nie rozpoczął. Proszę poczekaj na otwarcie testu..
+        /// </summary>
+        public static string TestIsNotYetStarted {
+            get {
+                return ResourceManager.GetString("TestIsNotYetStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test {0} sie zakończył. Sprawdź.
+        /// </summary>
+        public static string TestIsOver {
+            get {
+                return ResourceManager.GetString("TestIsOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test się nie rozpoczął.
+        /// </summary>
+        public static string TestNotStarted {
+            get {
+                return ResourceManager.GetString("TestNotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to testu.
+        /// </summary>
+        public static string tests {
+            get {
+                return ResourceManager.GetString("tests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Testy jeszcze się nie zakończyły.
+        /// </summary>
+        public static string TestsAreActive {
+            get {
+                return ResourceManager.GetString("TestsAreActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dziękujemy! Bez Was nie było by to możliwe!.
+        /// </summary>
+        public static string ThankYou {
+            get {
+                return ResourceManager.GetString("ThankYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :).
         /// </summary>
         public static string ThankYouForSubscription {
             get {
                 return ResourceManager.GetString("ThankYouForSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilet na konferencję Wroc#.
+        /// </summary>
+        public static string TicketWrocSharp {
+            get {
+                return ResourceManager.GetString("TicketWrocSharp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suma punktów.
+        /// </summary>
+        public static string TotalScore {
+            get {
+                return ResourceManager.GetString("TotalScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 24 grudnia.
+        /// </summary>
+        public static string UnitlDecember {
+            get {
+                return ResourceManager.GetString("UnitlDecember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Użytkownik.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
             }
         }
         
@@ -493,6 +1096,51 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TYDZIEŃ {0}.
+        /// </summary>
+        public static string Week {
+            get {
+                return ResourceManager.GetString("Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tydzień.
+        /// </summary>
+        public static string WeekLowerCase {
+            get {
+                return ResourceManager.GetString("WeekLowerCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sponsorzy tygodni.
+        /// </summary>
+        public static string WeeklySponsors {
+            get {
+                return ResourceManager.GetString("WeeklySponsors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapraszamy do tegorocznej edycji ;).
+        /// </summary>
+        public static string WelcomeToTheGame {
+            get {
+                return ResourceManager.GetString("WelcomeToTheGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gramy do.
+        /// </summary>
+        public static string WePlay {
+            get {
+                return ResourceManager.GetString("WePlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi.
         /// </summary>
         public static string WeRemovedWhiteSpaces {
@@ -507,6 +1155,42 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string WeUseCookies {
             get {
                 return ResourceManager.GetString("WeUseCookies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błędne odpowiedzi.
+        /// </summary>
+        public static string WrongAnswers {
+            get {
+                return ResourceManager.GetString("WrongAnswers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xiaomi Redmi Airdots.
+        /// </summary>
+        public static string Xiaomi {
+            get {
+                return ResourceManager.GetString("Xiaomi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xiaomi Mi Band 4.
+        /// </summary>
+        public static string XiaomiBand4 {
+            get {
+                return ResourceManager.GetString("XiaomiBand4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach..
+        /// </summary>
+        public static string YouAnsweredCorrectly {
+            get {
+                return ResourceManager.GetString("YouAnsweredCorrectly", resourceCulture);
             }
         }
         
@@ -529,11 +1213,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie odpowiedziałeś jeszcze na żadną zagadkę....
+        /// </summary>
+        public static string YouHaventAnswered {
+            get {
+                return ResourceManager.GetString("YouHaventAnswered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Twoja odpowiedź.
         /// </summary>
         public static string YourAnswer {
             get {
                 return ResourceManager.GetString("YourAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje statystyki wyglądają następująco:.
+        /// </summary>
+        public static string YourStats {
+            get {
+                return ResourceManager.GetString("YourStats", resourceCulture);
             }
         }
     }
