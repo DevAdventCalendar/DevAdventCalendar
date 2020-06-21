@@ -151,6 +151,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brak dostępu.
+        /// </summary>
+        public static string AccessDenied {
+            get {
+                return ResourceManager.GetString("AccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zarządzanie kontem.
         /// </summary>
         public static string AccountManagement {
@@ -295,11 +304,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wybierz sposób uwierzytelniania dwuetapowego:.
+        /// </summary>
+        public static string Choose2Fa {
+            get {
+                return ResourceManager.GetString("Choose2Fa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zakończ test wcześniej.
         /// </summary>
         public static string CompleteTestEalier {
             get {
                 return ResourceManager.GetString("CompleteTestEalier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdzenie rejestracji.
+        /// </summary>
+        public static string ConfirmEmail {
+            get {
+                return ResourceManager.GetString("ConfirmEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdź hasło.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
             }
         }
         
@@ -327,6 +363,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string CorrectAnswers {
             get {
                 return ResourceManager.GetString("CorrectAnswers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Załóż nowe konto.
+        /// </summary>
+        public static string CreateNewAccount {
+            get {
+                return ResourceManager.GetString("CreateNewAccount", resourceCulture);
             }
         }
         
@@ -385,11 +430,65 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email potwierdzony..
+        /// </summary>
+        public static string EmailConfirmed {
+            get {
+                return ResourceManager.GetString("EmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twój e-mail został potwierdzony. Naciśnij poniższy przycisk, aby się zalogować..
+        /// </summary>
+        public static string EmailConfirmedDesc {
+            get {
+                return ResourceManager.GetString("EmailConfirmedDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email został już potwierdzony..
+        /// </summary>
+        public static string EmailForRegistrationConfirmed {
+            get {
+                return ResourceManager.GetString("EmailForRegistrationConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować..
+        /// </summary>
+        public static string EmailForRegistrationConfirmedDesc {
+            get {
+                return ResourceManager.GetString("EmailForRegistrationConfirmedDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Czas zakończenia:.
         /// </summary>
         public static string EndTime {
             get {
                 return ResourceManager.GetString("EndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wpisz kod weryfikacyjny.
+        /// </summary>
+        public static string EnterVerifyCode {
+            get {
+                return ResourceManager.GetString("EnterVerifyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podaj swój email.
+        /// </summary>
+        public static string EnterYourEmail {
+            get {
+                return ResourceManager.GetString("EnterYourEmail", resourceCulture);
             }
         }
         
@@ -430,6 +529,42 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zostałeś pomyślnie uwierzytelniony za pomocą serwisu.
+        /// </summary>
+        public static string ExternalLogin1 {
+            get {
+                return ResourceManager.GetString("ExternalLogin1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację..
+        /// </summary>
+        public static string ExternalLogin2 {
+            get {
+                return ResourceManager.GetString("ExternalLogin2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd logowania.
+        /// </summary>
+        public static string ExternalLoginFailure {
+            get {
+                return ResourceManager.GetString("ExternalLoginFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niepoprawne logowanie zewnętrznym serwisem.
+        /// </summary>
+        public static string ExternalLoginFailureDesc {
+            get {
+                return ResourceManager.GetString("ExternalLoginFailureDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zapnij pasy! Startujemy już za.
         /// </summary>
         public static string FastenYourSeatbelt {
@@ -444,6 +579,60 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string FbEvents {
             get {
                 return ResourceManager.GetString("FbEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapomniałeś/aś hasła?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przypomnienie hasła.
+        /// </summary>
+        public static string ForgotPasswordConfirmation {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jeśli konto skojarzone z podanym mailem istnieje, na ten adres został wysłany link umożliwiający zmianę hasła..
+        /// </summary>
+        public static string ForgotPasswordConfirmationDesc1 {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmationDesc1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sprawdź swoją skrzynkę :)..
+        /// </summary>
+        public static string ForgotPasswordConfirmationDesc2 {
+            get {
+                return ResourceManager.GetString("ForgotPasswordConfirmationDesc2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Na podany adres email wyślemy Ci link do zmiany hasła.
+        /// </summary>
+        public static string ForgotPasswordIntro {
+            get {
+                return ResourceManager.GetString("ForgotPasswordIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to aby się zalogować..
+        /// </summary>
+        public static string ForLogging {
+            get {
+                return ResourceManager.GetString("ForLogging", resourceCulture);
             }
         }
         
@@ -498,6 +687,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string Gifts {
             get {
                 return ResourceManager.GetString("Gifts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przejdź na.
+        /// </summary>
+        public static string Go {
+            get {
+                return ResourceManager.GetString("Go", resourceCulture);
             }
         }
         
@@ -619,11 +817,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To konto zostało zablokowane. Spróbuj ponownie później..
+        /// </summary>
+        public static string LockOutDesc {
+            get {
+                return ResourceManager.GetString("LockOutDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To konto zostało zablokowane. Spróbuj ponownie później.
         /// </summary>
         public static string LockOutDescription {
             get {
                 return ResourceManager.GetString("LockOutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaloguj się!.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaloguj używając loginu i hasła.
+        /// </summary>
+        public static string LogInUsingPassword {
+            get {
+                return ResourceManager.GetString("LogInUsingPassword", resourceCulture);
             }
         }
         
@@ -673,6 +898,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zarejestrować nowego użytkownika?.
+        /// </summary>
+        public static string NewRegistration {
+            get {
+                return ResourceManager.GetString("NewRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Newsletter.
         /// </summary>
         public static string Newsletter {
@@ -691,6 +925,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie masz dostępu do tego zasobu..
+        /// </summary>
+        public static string NoAccessToResources {
+            get {
+                return ResourceManager.GetString("NoAccessToResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Licencja Nozbe Solo na 6 mscy.
         /// </summary>
         public static string Nozbe {
@@ -705,6 +948,33 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string OpenPuzzles {
             get {
                 return ResourceManager.GetString("OpenPuzzles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hasło.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset hasła.
+        /// </summary>
+        public static string PasswordReset {
+            get {
+                return ResourceManager.GetString("PasswordReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje hasło zostało zresetowane!.
+        /// </summary>
+        public static string PasswordWasReset {
+            get {
+                return ResourceManager.GetString("PasswordWasReset", resourceCulture);
             }
         }
         
@@ -826,11 +1096,74 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zanim się zalogujesz, prosimy o potwierdzenie rejestracji..
+        /// </summary>
+        public static string RegisterConfirmationDesc {
+            get {
+                return ResourceManager.GetString("RegisterConfirmationDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Na Twój adres e-mail została wysłana wiadomość z linkiem potwierdzającym..
+        /// </summary>
+        public static string RegisterConfirmationDescEmail {
+            get {
+                return ResourceManager.GetString("RegisterConfirmationDescEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejestracja.
+        /// </summary>
+        public static string Registration {
+            get {
+                return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdzenie rejestracji.
+        /// </summary>
+        public static string RegistrationConfirmed {
+            get {
+                return ResourceManager.GetString("RegistrationConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zarejestruj.
+        /// </summary>
+        public static string RegistrationOther {
+            get {
+                return ResourceManager.GetString("RegistrationOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj.
         /// </summary>
         public static string Regulation {
             get {
                 return ResourceManager.GetString("Regulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resetuj.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string ResetShort {
+            get {
+                return ResourceManager.GetString("ResetShort", resourceCulture);
             }
         }
         
@@ -943,6 +1276,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wyślij kod weryfikacyjny.
+        /// </summary>
+        public static string SendCode {
+            get {
+                return ResourceManager.GetString("SendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wyślij ponownie weryfikacyjny e-mail.
         /// </summary>
         public static string SendVerificationEmail {
@@ -979,11 +1321,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to stronę logowania.
+        /// </summary>
+        public static string SignInPage {
+            get {
+                return ResourceManager.GetString("SignInPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wyloguj.
         /// </summary>
         public static string SignOut {
             get {
                 return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pomyślnie się wylogowałeś..
+        /// </summary>
+        public static string SignOutDesc {
+            get {
+                return ResourceManager.GetString("SignOutDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wylogowany.
+        /// </summary>
+        public static string SingOutOther {
+            get {
+                return ResourceManager.GetString("SingOutOther", resourceCulture);
             }
         }
         
@@ -1092,6 +1461,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string Suprise {
             get {
                 return ResourceManager.GetString("Suprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Połącz swoje konto.
+        /// </summary>
+        public static string SwichAccount {
+            get {
+                return ResourceManager.GetString("SwichAccount", resourceCulture);
             }
         }
         
@@ -1231,6 +1609,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lub zaloguj przez.
+        /// </summary>
+        public static string UseOtherLogin {
+            get {
+                return ResourceManager.GetString("UseOtherLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Użytkownik.
         /// </summary>
         public static string User {
@@ -1245,6 +1632,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string UserAlreadyAnswered {
             get {
                 return ResourceManager.GetString("UserAlreadyAnswered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weryfikacja.
+        /// </summary>
+        public static string VerifyCode {
+            get {
+                return ResourceManager.GetString("VerifyCode", resourceCulture);
             }
         }
         

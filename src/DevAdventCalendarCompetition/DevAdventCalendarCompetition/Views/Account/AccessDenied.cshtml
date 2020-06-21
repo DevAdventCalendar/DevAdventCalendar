@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Brak dostępu";
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+@{
+    ViewData["Title"] = @AccessDenied;
 }
 
 <header>
     <h2 class="text-danger">@ViewData["Title"]</h2>
-    <p class="text-danger">Nie masz dostępu do tego zasobu.</p>
+    <p class="text-danger">@NoAccessToResources</p>
 </header>

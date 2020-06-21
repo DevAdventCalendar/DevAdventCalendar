@@ -1,6 +1,8 @@
-﻿@model DevAdventCalendarCompetition.Vms.VerifyCodeViewModel
+@model DevAdventCalendarCompetition.Vms.VerifyCodeViewModel
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 @{
-    ViewBag.Title = "Weryfikacja";
+    ViewBag.Title = @VerifyCode;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,7 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.Hidden("provider", @Model.Provider)
     @Html.Hidden("rememberMe", @Model.RememberMe)
-    <h4>Wpisz kod weryfikacyjny</h4>
+    <h4>@EnterVerifyCode</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">

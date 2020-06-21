@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Zablokowany";
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+@{
+    ViewData["Title"] = @LockOut;
 }
 
 <header>
     <h2 class="text-danger">@ViewData["Title"]</h2>
-    <p class="text-danger">To konto zostało zablokowane. Spróbuj ponownie później.</p>
+    <p class="text-danger">@LockOutDesc</p>
 </header>

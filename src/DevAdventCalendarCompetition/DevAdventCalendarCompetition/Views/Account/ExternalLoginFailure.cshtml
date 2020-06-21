@@ -1,8 +1,10 @@
-﻿@{
-    ViewBag.Title = "Błąd logowania";
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+@{
+    ViewBag.Title = @ExternalLoginFailure;
 }
 
 <hgroup>
     <h2>@ViewBag.Title</h2>
-    <h3 class="text-danger">Niepoprawne logowanie zewnętrznym serwisem</h3>
+    <h3 class="text-danger">@ExternalLoginFailureDesc</h3>
 </hgroup>

@@ -147,6 +147,9 @@
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
   </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Brak dostępu</value>
+  </data>
   <data name="AccountManagement" xml:space="preserve">
     <value>Zarządzanie kontem</value>
   </data>
@@ -195,8 +198,17 @@
   <data name="ChangeYourPassword" xml:space="preserve">
     <value>Zmień hasło</value>
   </data>
+  <data name="Choose2Fa" xml:space="preserve">
+    <value>Wybierz sposób uwierzytelniania dwuetapowego:</value>
+  </data>
   <data name="CompleteTestEalier" xml:space="preserve">
     <value>Zakończ test wcześniej</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Potwierdzenie rejestracji</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Potwierdź hasło</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
@@ -206,6 +218,9 @@
   </data>
   <data name="CorrectAnswers" xml:space="preserve">
     <value>Poprawne odpowiedzi</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Załóż nowe konto</value>
   </data>
   <data name="Day" xml:space="preserve">
     <value>DZIEŃ {0}</value>
@@ -225,8 +240,26 @@
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
   </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Email potwierdzony.</value>
+  </data>
+  <data name="EmailConfirmedDesc" xml:space="preserve">
+    <value>Twój e-mail został potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
+  </data>
+  <data name="EmailForRegistrationConfirmed" xml:space="preserve">
+    <value>Email został już potwierdzony.</value>
+  </data>
+  <data name="EmailForRegistrationConfirmedDesc" xml:space="preserve">
+    <value>Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
+  </data>
   <data name="EndTime" xml:space="preserve">
     <value>Czas zakończenia:</value>
+  </data>
+  <data name="EnterVerifyCode" xml:space="preserve">
+    <value>Wpisz kod weryfikacyjny</value>
+  </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Podaj swój email</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error.</value>
@@ -240,11 +273,41 @@
   <data name="EveryDayYouOpen" xml:space="preserve">
     <value>Każdego dnia otwierasz</value>
   </data>
+  <data name="ExternalLogin1" xml:space="preserve">
+    <value>Zostałeś pomyślnie uwierzytelniony za pomocą serwisu</value>
+  </data>
+  <data name="ExternalLogin2" xml:space="preserve">
+    <value>Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.</value>
+  </data>
+  <data name="ExternalLoginFailure" xml:space="preserve">
+    <value>Błąd logowania</value>
+  </data>
+  <data name="ExternalLoginFailureDesc" xml:space="preserve">
+    <value>Niepoprawne logowanie zewnętrznym serwisem</value>
+  </data>
   <data name="FastenYourSeatbelt" xml:space="preserve">
     <value>Zapnij pasy! Startujemy już za</value>
   </data>
   <data name="FbEvents" xml:space="preserve">
     <value>Wydarzenie na FB</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Zapomniałeś/aś hasła?</value>
+  </data>
+  <data name="ForgotPasswordConfirmation" xml:space="preserve">
+    <value>Przypomnienie hasła</value>
+  </data>
+  <data name="ForgotPasswordConfirmationDesc1" xml:space="preserve">
+    <value>Jeśli konto skojarzone z podanym mailem istnieje, na ten adres został wysłany link umożliwiający zmianę hasła.</value>
+  </data>
+  <data name="ForgotPasswordConfirmationDesc2" xml:space="preserve">
+    <value>Sprawdź swoją skrzynkę :).</value>
+  </data>
+  <data name="ForgotPasswordIntro" xml:space="preserve">
+    <value>Na podany adres email wyślemy Ci link do zmiany hasła</value>
+  </data>
+  <data name="ForLogging" xml:space="preserve">
+    <value>aby się zalogować.</value>
   </data>
   <data name="FullList" xml:space="preserve">
     <value>Pełny ranking</value>
@@ -263,6 +326,9 @@
   </data>
   <data name="Gifts" xml:space="preserve">
     <value>nagrody</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Przejdź na</value>
   </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
@@ -303,8 +369,17 @@
   <data name="LockOut" xml:space="preserve">
     <value>Zablokowany</value>
   </data>
+  <data name="LockOutDesc" xml:space="preserve">
+    <value>To konto zostało zablokowane. Spróbuj ponownie później.</value>
+  </data>
   <data name="LockOutDescription" xml:space="preserve">
     <value>To konto zostało zablokowane. Spróbuj ponownie później</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Zaloguj się!</value>
+  </data>
+  <data name="LogInUsingPassword" xml:space="preserve">
+    <value>Zaloguj używając loginu i hasła</value>
   </data>
   <data name="MainAwards" xml:space="preserve">
     <value>Nagrody główne</value>
@@ -321,17 +396,32 @@
   <data name="MK850" xml:space="preserve">
     <value>Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE</value>
   </data>
+  <data name="NewRegistration" xml:space="preserve">
+    <value>Zarejestrować nowego użytkownika?</value>
+  </data>
   <data name="Newsletter" xml:space="preserve">
     <value>Newsletter</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Dalej</value>
   </data>
+  <data name="NoAccessToResources" xml:space="preserve">
+    <value>Nie masz dostępu do tego zasobu.</value>
+  </data>
   <data name="Nozbe" xml:space="preserve">
     <value>Licencja Nozbe Solo na 6 mscy</value>
   </data>
   <data name="OpenPuzzles" xml:space="preserve">
     <value>otwartych okienek</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="PasswordReset" xml:space="preserve">
+    <value>Reset hasła</value>
+  </data>
+  <data name="PasswordWasReset" xml:space="preserve">
+    <value>Twoje hasło zostało zresetowane!</value>
   </data>
   <data name="PlannedTestEnd" xml:space="preserve">
     <value>Planowany czas zakończenia:</value>
@@ -372,8 +462,29 @@
   <data name="Register" xml:space="preserve">
     <value>Rejestruj</value>
   </data>
+  <data name="RegisterConfirmationDesc" xml:space="preserve">
+    <value>Zanim się zalogujesz, prosimy o potwierdzenie rejestracji.</value>
+  </data>
+  <data name="RegisterConfirmationDescEmail" xml:space="preserve">
+    <value>Na Twój adres e-mail została wysłana wiadomość z linkiem potwierdzającym.</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Rejestracja</value>
+  </data>
+  <data name="RegistrationConfirmed" xml:space="preserve">
+    <value>Potwierdzenie rejestracji</value>
+  </data>
+  <data name="RegistrationOther" xml:space="preserve">
+    <value>Zarejestruj</value>
+  </data>
   <data name="Regulation" xml:space="preserve">
     <value>Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Resetuj</value>
+  </data>
+  <data name="ResetShort" xml:space="preserve">
+    <value>Reset</value>
   </data>
   <data name="Results" xml:space="preserve">
     <value>Wyniki</value>
@@ -411,6 +522,9 @@
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
   </data>
+  <data name="SendCode" xml:space="preserve">
+    <value>Wyślij kod weryfikacyjny</value>
+  </data>
   <data name="SendVerificationEmail" xml:space="preserve">
     <value>Wyślij ponownie weryfikacyjny e-mail</value>
   </data>
@@ -423,8 +537,17 @@
   <data name="SignIn" xml:space="preserve">
     <value>Zaloguj</value>
   </data>
+  <data name="SignInPage" xml:space="preserve">
+    <value>stronę logowania</value>
+  </data>
   <data name="SignOut" xml:space="preserve">
     <value>Wyloguj</value>
+  </data>
+  <data name="SignOutDesc" xml:space="preserve">
+    <value>Pomyślnie się wylogowałeś.</value>
+  </data>
+  <data name="SingOutOther" xml:space="preserve">
+    <value>Wylogowany</value>
   </data>
   <data name="smResults" xml:space="preserve">
     <value>wyniku</value>
@@ -461,6 +584,9 @@
   </data>
   <data name="Suprise" xml:space="preserve">
     <value>Niespodzianka</value>
+  </data>
+  <data name="SwichAccount" xml:space="preserve">
+    <value>Połącz swoje konto</value>
   </data>
   <data name="TestDuration" xml:space="preserve">
     <value>Ustaw, ile ma trwać test (w minutach)</value>
@@ -507,11 +633,17 @@
   <data name="UnitlDecember" xml:space="preserve">
     <value>24 grudnia</value>
   </data>
+  <data name="UseOtherLogin" xml:space="preserve">
+    <value>Lub zaloguj przez</value>
+  </data>
   <data name="User" xml:space="preserve">
     <value>Użytkownik</value>
   </data>
   <data name="UserAlreadyAnswered" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
+  </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>Weryfikacja</value>
   </data>
   <data name="WeDeletedYourEmail" xml:space="preserve">
     <value>Usunęliśmy Twój adres email z bazy</value>
