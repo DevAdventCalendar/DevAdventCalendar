@@ -80,6 +80,10 @@ Login: `devadventcalendar@gmail.com`
 
 Password: `P@ssw0rd`
 
+## Test environment
+
+Test environment is running on dev.devadventcalendar.pl with automatic deployment from develop_uat branch.
+
 ## Sending emails
 
 Application sends emails with registration informations and notifications. In order to test these functionalities, you must configure the mailbox that the application will use - use option A) or B).
