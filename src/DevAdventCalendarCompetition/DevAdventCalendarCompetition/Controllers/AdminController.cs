@@ -16,12 +16,12 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
-        private readonly IBaseTestService baseTestService;
+        private readonly ITestService _testService;
 
-        public AdminController(IAdminService adminService, IBaseTestService baseTestService)
+        public AdminController(IAdminService adminService, ITestService baseTestService)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
-            this.baseTestService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
+            this._testService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
         }
 
         public ActionResult Index()
@@ -48,7 +48,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (this.ModelState.IsValid)
             {
-                var dbTest = this.baseTestService.GetTestByNumber(model.Number);
+                var dbTest = this._testService.GetTestByNumber(model.Number);
 
                 if (dbTest != null)
                 {
@@ -96,7 +96,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(ExceptionsMessages.PreviousTestIsNotDone);
             }
 
-            this._adminService.UpdateTestDates(testDto, minutesString);
+            this._adminService.UpdateTestDates(testDto.Id, minutesString);
 
             return this.RedirectToAction("Index");
         }
@@ -110,7 +110,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
-            this._adminService.UpdateTestEndDate(testDto, DateTime.Now);
+            this._adminService.UpdateTestEndDate(testDto.Id, DateTime.Now);
 
             return this.RedirectToAction("Index");
         }

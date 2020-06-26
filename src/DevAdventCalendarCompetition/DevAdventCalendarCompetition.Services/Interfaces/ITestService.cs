@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using DevAdventCalendarCompetition.Services.Models;
 
 namespace DevAdventCalendarCompetition.Services.Interfaces
 {
-    public interface IBaseTestService
+    public interface ITestService
     {
         TestDto GetTestByNumber(int testNumber);
 

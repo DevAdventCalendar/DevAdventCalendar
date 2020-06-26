@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoMapper;
@@ -11,20 +11,26 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class HomeService : IHomeService
     {
-        private readonly IHomeRepository _homeRepository;
+        private readonly IResultsRepository _resultsRepository;
+        private readonly ITestAnswerRepository _testAnswerRepository;
+        private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
 
         public HomeService(
-            IHomeRepository homeRepository,
+            IResultsRepository homeRepository,
+            ITestAnswerRepository testAnwserRepository,
+            ITestRepository testRepository,
             IMapper mapper)
         {
-            this._homeRepository = homeRepository;
+            this._resultsRepository = homeRepository;
+            this._testAnswerRepository = testAnwserRepository;
+            this._testRepository = testRepository;
             this._mapper = mapper;
         }
 
         public TestDto GetCurrentTest()
         {
-            var test = this._homeRepository.GetCurrentTest();
+            var test = this._testRepository.GetCurrentTest();
             if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
             {
                 return null;
@@ -36,21 +42,21 @@ namespace DevAdventCalendarCompetition.Services
 
         public TestAnswerDto GetTestAnswerByUserId(string userId, int testId)
         {
-            var testAnswer = this._homeRepository.GetTestAnswerByUserId(userId, testId);
+            var testAnswer = this._testAnswerRepository.GetTestAnswerByUserId(userId, testId);
             var testAnswerDto = this._mapper.Map<TestAnswerDto>(testAnswer);
             return testAnswerDto;
         }
 
         public List<TestDto> GetCurrentTests()
         {
-            var testList = this._homeRepository.GetAllTests();
+            var testList = this._testRepository.GetAll();
             var allTestsDtoList = this._mapper.Map<List<TestDto>>(testList);
             return allTestsDtoList;
         }
 
         public List<TestWithAnswerListDto> GetTestsWithUserAnswers()
         {
-            var testList = this._homeRepository.GetTestsWithUserAnswers();
+            var testList = this._testRepository.GetTestsWithUserAnswers();
             var testWithAnswersDtoList = this._mapper.Map<List<TestWithAnswerListDto>>(testList);
             return testWithAnswersDtoList;
         }
@@ -58,25 +64,25 @@ namespace DevAdventCalendarCompetition.Services
         public Dictionary<int, List<TestResultDto>> GetAllTestResults()
         {
             var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
-            var week1Results = this._homeRepository.GetTestResultsForWeek(1);
+            var week1Results = this._resultsRepository.GetTestResultsForWeek(1);
 
             if (week1Results != null && week1Results.Count > 0)
             {
                 testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1Results)));
 
-                var week2Results = this._homeRepository.GetTestResultsForWeek(2);
+                var week2Results = this._resultsRepository.GetTestResultsForWeek(2);
 
                 if (week2Results != null && week2Results.Count > 0)
                 {
                     testResultDictionary.Add(2, this.FillResultsWithAnswersStats(2, this._mapper.Map<List<TestResultDto>>(week2Results)));
 
-                    var week3Results = this._homeRepository.GetTestResultsForWeek(3);
+                    var week3Results = this._resultsRepository.GetTestResultsForWeek(3);
 
                     if (week3Results != null && week3Results.Count > 0)
                     {
                         testResultDictionary.Add(3, this.FillResultsWithAnswersStats(3, this._mapper.Map<List<TestResultDto>>(week3Results)));
 
-                        var fullResults = this._homeRepository.GetTestResultsForWeek(4);
+                        var fullResults = this._resultsRepository.GetTestResultsForWeek(4);
 
                         if (fullResults != null && fullResults.Count > 0)
                         {
@@ -91,19 +97,19 @@ namespace DevAdventCalendarCompetition.Services
 
         public string CheckTestStatus(int testNumber)
         {
-            var test = this._homeRepository.GetTestByNumber(testNumber);
+            var test = this._testRepository.GetByNumber(testNumber);
 
             return test == null ? TestStatus.NotStarted.ToString() : test.Status.ToString();
         }
 
         public int GetCorrectAnswersCountForUser(string userId)
         {
-            return this._homeRepository.GetCorrectAnswersCountForUser(userId);
+            return this._testAnswerRepository.GetCorrectAnswersCountForUser(userId);
         }
 
         public UserPosition GetUserPosition(string userId)
         {
-            return this._homeRepository.GetUserPosition(userId);
+            return this._resultsRepository.GetUserPosition(userId);
         }
 
         public string PrepareUserEmailForRODO(string email)
@@ -146,8 +152,8 @@ namespace DevAdventCalendarCompetition.Services
                     break;
             }
 
-            var correctAnswers = this._homeRepository.GetCorrectAnswersPerUserForDateRange(dateFrom, dateTo);
-            var wrongAnswers = this._homeRepository.GetWrongAnswersPerUserForDateRange(dateFrom, dateTo);
+            var correctAnswers = this._testAnswerRepository.GetCorrectAnswersPerUserForDateRange(dateFrom, dateTo);
+            var wrongAnswers = this._testAnswerRepository.GetWrongAnswersPerUserForDateRange(dateFrom, dateTo);
 
             foreach (var result in results)
             {
