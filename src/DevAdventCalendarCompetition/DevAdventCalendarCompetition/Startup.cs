@@ -77,7 +77,6 @@ namespace DevAdventCalendarCompetition
 
             app.UseEndpoints(routes =>
             {
-                routes.MapRazorPages();
                 routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
@@ -96,9 +95,6 @@ namespace DevAdventCalendarCompetition
             services
                 .AddControllersWithViews()
                 .AddNewtonsoftJson();
-            services
-               .AddRazorPages()
-               .AddNewtonsoftJson();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");
             services.ConfigureOptions(this.Configuration);
