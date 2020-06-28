@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DevAdventCalendarCompetition.Vms
+namespace DevAdventCalendarCompetition.Models.Manage
 {
     public class ChangePasswordViewModel
     {
@@ -14,14 +10,16 @@ namespace DevAdventCalendarCompetition.Vms
         public string OldPassword { get; set; }
 
         [Required(ErrorMessage = "Pole Nowe hasło jest obowiązkowe")]
-        [StringLength(100, ErrorMessage = "Długość {0} powinna być większa niż {2}.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Długość hasła w polu {0} powinna być większa niż {2} i mniejsza niż {1}", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź nowe hasło")]
-        [Compare("NewPassword", ErrorMessage = "Nowe hasło i hasło potwierdzające nie pasują do siebie.")]
+        [Compare("NewPassword", ErrorMessage = "Hasła nie pasują do siebie")]
         public string ConfirmPassword { get; set; }
+
+        public string StatusMessage { get; set; }
     }
 }

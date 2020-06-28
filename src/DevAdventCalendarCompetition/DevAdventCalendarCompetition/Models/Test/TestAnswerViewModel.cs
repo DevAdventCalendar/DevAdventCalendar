@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
-namespace DevAdventCalendarCompetition.Vms
+namespace DevAdventCalendarCompetition.Models.Test
 {
-    public class TestAnswerVm
+    public class TestAnswerViewModel
     {
         public int TestId { get; set; }
 

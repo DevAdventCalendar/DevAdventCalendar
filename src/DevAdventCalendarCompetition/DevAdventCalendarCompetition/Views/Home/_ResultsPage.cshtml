@@ -1,6 +1,6 @@
-﻿@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Vms.TestResultEntryVm>>
+@model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Models.Test.TestResultEntryViewModel>>
 @{
-    var entries = Model.Value;                                                                                             
+    var entries = Model.Value;
     var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Value.HasNextPage ? "disabled" : "";
 }
@@ -32,7 +32,7 @@
                     var score = testResult.GetType()
                         .GetProperties()
                         .FirstOrDefault(p => p.Name.Contains($"Week{Model.Key}Points"))
-                        .GetValue(testResult) as int?; 
+                        .GetValue(testResult) as int?;
 
                     <td>@score.Value</td>
                 }
