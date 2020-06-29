@@ -49,7 +49,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public List<TestDto> GetCurrentTests()
         {
-            var testList = this._testRepository.GetAll();
+            var testList = this._testRepository.GetAllTests();
             var allTestsDtoList = this._mapper.Map<List<TestDto>>(testList);
             return allTestsDtoList;
         }
@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public string CheckTestStatus(int testNumber)
         {
-            var test = this._testRepository.GetByNumber(testNumber);
+            var test = this._testRepository.GetTestByNumber(testNumber);
 
             return test == null ? TestStatus.NotStarted.ToString() : test.Status.ToString();
         }

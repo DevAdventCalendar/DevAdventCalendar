@@ -17,17 +17,17 @@ namespace DevAdventCalendarCompetition.Repository
             this._dbContext = dbContext;
         }
 
-        public List<Test> GetAll()
+        public List<Test> GetAllTests()
         {
             return this._dbContext.Set<Test>().OrderBy(t => t.StartDate).ToList();
         }
 
-        public Test GetById(int testId)
+        public Test GetTestById(int testId)
         {
             return this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
         }
 
-        public Test GetByNumber(int testNumber)
+        public Test GetTestByNumber(int testNumber)
         {
             return this._dbContext.Set<Test>().FirstOrDefault(el => el.Number == testNumber);
         }
@@ -52,7 +52,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .OrderBy(el => el.Number).ToList();
         }
 
-        public void UpdateDates(int testId, DateTime startDate, DateTime endDate)
+        public void UpdateTestDates(int testId, DateTime startDate, DateTime endDate)
         {
             var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
             if (dbTest != null)
@@ -63,7 +63,7 @@ namespace DevAdventCalendarCompetition.Repository
             }
         }
 
-        public void UpdateEndDate(int testId, DateTime endDate)
+        public void UpdateTestEndDate(int testId, DateTime endDate)
         {
             var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
 

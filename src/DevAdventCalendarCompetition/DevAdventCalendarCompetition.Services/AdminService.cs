@@ -29,7 +29,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public List<TestDto> GetAllTests()
         {
-            var testList = this._testRepository.GetAll();
+            var testList = this._testRepository.GetAllTests();
             var testDtoList = this._mapper.Map<List<TestDto>>(testList);
             return testDtoList;
         }
@@ -38,14 +38,14 @@ namespace DevAdventCalendarCompetition.Services
         public TestDto GetTestById(int testId)
 #pragma warning restore CA1725 // Parameter names should match base declaration
         {
-            var test = this._testRepository.GetById(testId);
+            var test = this._testRepository.GetTestById(testId);
             var testDto = this._mapper.Map<TestDto>(test);
             return testDto;
         }
 
         public TestDto GetPreviousTest(int testNumber)
         {
-            var test = this._testRepository.GetByNumber(testNumber - 1);
+            var test = this._testRepository.GetTestByNumber(testNumber - 1);
             var testDto = this._mapper.Map<TestDto>(test);
             return testDto;
         }
@@ -75,12 +75,12 @@ namespace DevAdventCalendarCompetition.Services
             var startDate = DateTime.Now;
             var endDate = DateTime.Now.AddMinutes(minutes);
 
-            this._testRepository.UpdateDates(testId, startDate, endDate);
+            this._testRepository.UpdateTestDates(testId, startDate, endDate);
         }
 
         public void UpdateTestEndDate(int testId, DateTime endTime)
         {
-            this._testRepository.UpdateEndDate(testId, endTime);
+            this._testRepository.UpdateTestEndDate(testId, endTime);
         }
 
         public void ResetTestDates()

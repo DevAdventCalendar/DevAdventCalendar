@@ -6,11 +6,11 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 {
     public interface ITestRepository
     {
-        List<Test> GetAll();
+        List<Test> GetAllTests();
 
-        Test GetById(int testId);
+        Test GetTestById(int testId);
 
-        Test GetByNumber(int testNumber);
+        Test GetTestByNumber(int testNumber);
 
         Test GetCurrentTest();
 
@@ -18,9 +18,9 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         void AddTest(Test test);
 
-        void UpdateDates(int testId, DateTime startDate, DateTime endDate);
+        void UpdateTestDates(int testId, DateTime startDate, DateTime endDate);
 
-        void UpdateEndDate(int testId, DateTime endDate);
+        void UpdateTestEndDate(int testId, DateTime endDate);
 
         void ResetTestDates();
     }

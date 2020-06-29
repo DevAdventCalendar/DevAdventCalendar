@@ -30,7 +30,7 @@ namespace DevAdventCalendarCompetition.Tests
         {
             // Arrange
             var testList = GetTestList();
-            this._testRepositoryMock.Setup(mock => mock.GetAll()).Returns(testList);
+            this._testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(testList);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
@@ -47,7 +47,7 @@ namespace DevAdventCalendarCompetition.Tests
         {
             // Arrange
             var test = GetTest();
-            this._testRepositoryMock.Setup(mock => mock.GetById(It.IsAny<int>())).Returns(test);
+            this._testRepositoryMock.Setup(mock => mock.GetTestById(It.IsAny<int>())).Returns(test);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
@@ -68,7 +68,7 @@ namespace DevAdventCalendarCompetition.Tests
             var currentTest = GetTest();
             var previousTest = GetPreviousTest();
             var previousTestId = currentTest.Number - 1;
-            this._testRepositoryMock.Setup(mock => mock.GetByNumber(previousTestId)).Returns(previousTest);
+            this._testRepositoryMock.Setup(mock => mock.GetTestByNumber(previousTestId)).Returns(previousTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
@@ -94,7 +94,7 @@ namespace DevAdventCalendarCompetition.Tests
             adminService.UpdateTestDates(test.Id, "20");
 
             // Assert
-            this._testRepositoryMock.Verify(mock => mock.UpdateDates(test.Id, It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once());
+            this._testRepositoryMock.Verify(mock => mock.UpdateTestDates(test.Id, It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once());
         }
 
         [Fact]
@@ -110,7 +110,7 @@ namespace DevAdventCalendarCompetition.Tests
             adminService.UpdateTestEndDate(test.Id, newDate);
 
             // Assert
-            this._testRepositoryMock.Verify(mock => mock.UpdateEndDate(test.Id, newDate), Times.Once());
+            this._testRepositoryMock.Verify(mock => mock.UpdateTestEndDate(test.Id, newDate), Times.Once());
         }
 
         private static List<Test> GetTestList() => new List<Test>()

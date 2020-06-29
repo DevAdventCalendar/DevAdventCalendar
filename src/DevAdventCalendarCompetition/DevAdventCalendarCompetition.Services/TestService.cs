@@ -28,7 +28,7 @@ namespace DevAdventCalendarCompetition.Services
 
         public TestDto GetTestByNumber(int testNumber)
         {
-            var test = this._testRepository.GetByNumber(testNumber);
+            var test = this._testRepository.GetTestByNumber(testNumber);
 
             var testDto = this._mapper.Map<TestDto>(test);
             return testDto;
