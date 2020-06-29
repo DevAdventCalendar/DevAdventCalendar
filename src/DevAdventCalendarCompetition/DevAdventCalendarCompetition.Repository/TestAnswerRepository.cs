@@ -50,13 +50,6 @@ namespace DevAdventCalendarCompetition.Repository
             return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId && el.UserId == userId) != null;
         }
 
-        public void DeleteTestAnswers()
-        {
-            var testAnswers = this._dbContext.Set<TestAnswer>().ToList();
-            this._dbContext.Set<TestAnswer>().RemoveRange(testAnswers);
-            this._dbContext.SaveChanges();
-        }
-
         public int GetCorrectAnswersCountForUser(string userId)
         {
             return this._dbContext.Set<TestAnswer>()

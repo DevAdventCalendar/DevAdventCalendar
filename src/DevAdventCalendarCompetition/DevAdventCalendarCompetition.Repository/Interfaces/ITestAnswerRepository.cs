@@ -23,7 +23,5 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
         void AddAnswer(TestAnswer testAnswer);
 
         void AddWrongAnswer(TestWrongAnswer wrongAnswer);
-
-        void DeleteTestAnswers();
     }
 }

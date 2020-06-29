@@ -73,16 +73,5 @@ namespace DevAdventCalendarCompetition.Repository
                 this._dbContext.SaveChanges();
             }
         }
-
-        public void ResetTestDates()
-        {
-            var tests = this._dbContext.Set<Test>().ToList();
-            tests.ForEach(el =>
-            {
-                el.StartDate = null;
-                el.EndDate = null;
-            });
-            this._dbContext.SaveChanges();
-        }
     }
 }

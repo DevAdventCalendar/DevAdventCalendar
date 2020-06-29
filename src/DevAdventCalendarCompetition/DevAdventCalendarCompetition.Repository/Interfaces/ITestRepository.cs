@@ -21,7 +21,5 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
         void UpdateTestDates(int testId, DateTime startDate, DateTime endDate);
 
         void UpdateTestEndDate(int testId, DateTime endDate);
-
-        void ResetTestDates();
     }
 }

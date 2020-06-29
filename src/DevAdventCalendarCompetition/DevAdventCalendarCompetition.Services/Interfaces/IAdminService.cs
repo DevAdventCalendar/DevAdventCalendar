@@ -17,9 +17,5 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         void UpdateTestDates(int testId, string minutesString);
 
         void UpdateTestEndDate(int testId, DateTime endTime);
-
-        void ResetTestDates();
-
-        void ResetTestAnswers();
     }
 }

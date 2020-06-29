@@ -82,15 +82,5 @@ namespace DevAdventCalendarCompetition.Services
         {
             this._testRepository.UpdateTestEndDate(testId, endTime);
         }
-
-        public void ResetTestDates()
-        {
-            this._testRepository.ResetTestDates();
-        }
-
-        public void ResetTestAnswers()
-        {
-            this._testAnswerRepository.DeleteTestAnswers();
-        }
     }
 }

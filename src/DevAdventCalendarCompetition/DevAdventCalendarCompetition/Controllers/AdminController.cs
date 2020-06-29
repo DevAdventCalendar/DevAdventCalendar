@@ -114,36 +114,5 @@ namespace DevAdventCalendarCompetition.Controllers
 
             return this.RedirectToAction("Index");
         }
-
-        [HttpPost]
-        public ActionResult CalculateResults(int weekNumber)
-        {
-            if (weekNumber < 1 && weekNumber > 4)
-            {
-                return this.BadRequest("Błędny numer tygodnia.");
-            }
-
-            Process.Start(@"c:\\Windows\\System32\\cmd.exe", weekNumber.ToString(CultureInfo.CurrentCulture.DateTimeFormat));
-            return this.Ok();
-        }
-
-        public string Reset()
-        {
-            var resetEnabledString = "true"; // TODO get from AppSettings // ConfigurationManager.AppSettings["ResetEnabled"];
-
-            // TODO: move to service
-#pragma warning disable CA1806 // Do not ignore method results
-            bool.TryParse(resetEnabledString, out bool resetEnabled);
-#pragma warning restore CA1806 // Do not ignore method results
-            if (!resetEnabled)
-            {
-                return "Reset nie jest włączony.";
-            }
-
-            this._adminService.ResetTestDates();
-            this._adminService.ResetTestAnswers();
-
-            return "Dane zostały zresetowane.";
-        }
     }
 }
