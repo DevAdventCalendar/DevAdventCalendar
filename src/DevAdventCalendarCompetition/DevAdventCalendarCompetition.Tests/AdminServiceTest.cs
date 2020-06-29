@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -56,6 +58,7 @@ namespace DevAdventCalendarCompetition.Tests
 
             // Assert
             result.Should().BeOfType<TestDto>();
+            result.Id.Should().Be(test.Id);
             result.Number.Should().Be(test.Number);
             result.StartDate.Should().Be(test.StartDate);
             result.EndDate.Should().Be(test.EndDate);
@@ -65,15 +68,15 @@ namespace DevAdventCalendarCompetition.Tests
         public void GetPreviousTest_ReturnPreviousTestDto()
         {
             // Arrange
-            var currentTest = GetTest();
-            var previousTest = GetPreviousTest();
-            var previousTestId = currentTest.Number - 1;
-            this._testRepositoryMock.Setup(mock => mock.GetTestByNumber(previousTestId)).Returns(previousTest);
+            var currentTestNumber = GetTest().Number;
+            var previousTestNumber = currentTestNumber - 1;
+            var previousTest = GetTest(previousTestNumber);
+            this._testRepositoryMock.Setup(mock => mock.GetTestByNumber(previousTestNumber)).Returns(previousTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
             // Act
-            var result = adminService.GetPreviousTest(currentTest.Number);
+            var result = adminService.GetPreviousTest(currentTestNumber);
 
             // Assert
             result.Should().BeOfType<TestDto>();
@@ -113,42 +116,34 @@ namespace DevAdventCalendarCompetition.Tests
             this._testRepositoryMock.Verify(mock => mock.UpdateTestEndDate(test.Id, newDate), Times.Once());
         }
 
+        private static Test GetTest(int number = 2) => GetTestList().First(t => t.Number == number);
+
         private static List<Test> GetTestList() => new List<Test>()
         {
             new Test()
             {
                 Id = 1,
                 Number = 1,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
                 Answers = null
             },
             new Test()
             {
                 Id = 2,
                 Number = 2,
-                StartDate = DateTime.Today.AddHours(10),
-                EndDate = DateTime.Today.AddHours(22).AddMinutes(0),
+                StartDate = DateTime.Today.AddHours(12),
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+                Answers = null
+            },
+            new Test()
+            {
+                Id = 3,
+                Number = 3,
+                StartDate = DateTime.Today.AddDays(1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
                 Answers = null
             }
-        };
-
-        private static Test GetTest() => new Test()
-        {
-            Id = 2,
-            Number = 2,
-            StartDate = DateTime.Today.AddHours(11).AddMinutes(20),
-            EndDate = DateTime.Today.AddHours(23).AddMinutes(50),
-            Answers = null
-        };
-
-        private static Test GetPreviousTest() => new Test()
-        {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today.AddDays(-2).AddHours(12),
-            EndDate = DateTime.Today.AddDays(-2).AddHours(23).AddMinutes(59),
-            Answers = null
         };
     }
 }

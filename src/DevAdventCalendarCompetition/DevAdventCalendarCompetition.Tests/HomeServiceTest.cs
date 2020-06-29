@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -27,7 +28,7 @@ namespace DevAdventCalendarCompetition.Tests
         public void GetCurrentTest_ReturnCurrentTestDto()
         {
             // Arrange
-            var currentTest = GetCurrentTest();
+            var currentTest = GetTest();
             this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(currentTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
@@ -44,8 +45,9 @@ namespace DevAdventCalendarCompetition.Tests
         public void GetCurrentTest_DontGetOldTest()
         {
             // Arrange
-            var oldTest = GetOldTest();
-            this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(oldTest);
+            var currentTestNumber = GetTest().Number;
+            var previousTest = GetTest(currentTestNumber - 1);
+            this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(previousTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
@@ -60,8 +62,9 @@ namespace DevAdventCalendarCompetition.Tests
         public void GetCurrentTest_DontGetFutureTest()
         {
             // Arrange
-            var futureTest = GetFutureTest();
-            this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(futureTest);
+            var currentTestNumber = GetTest().Number;
+            var nextTest = GetTest(currentTestNumber + 1);
+            this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(nextTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
             var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
@@ -105,13 +108,34 @@ namespace DevAdventCalendarCompetition.Tests
             Assert.True(testList.Count == result.Count);
         }
 
-        private static Test GetCurrentTest() => new Test()
+        private static Test GetTest(int number = 2) => GetTestList().First(t => t.Number == number);
+
+        private static List<Test> GetTestList() => new List<Test>()
         {
-            Id = 2,
-            Number = 2,
-            StartDate = DateTime.Today.AddHours(12),
-            EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-            Answers = null
+            new Test()
+            {
+                Id = 1,
+                Number = 1,
+                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
+                Answers = null
+            },
+            new Test()
+            {
+                Id = 2,
+                Number = 2,
+                StartDate = DateTime.Today.AddHours(12),
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+                Answers = null
+            },
+            new Test()
+            {
+                Id = 3,
+                Number = 3,
+                StartDate = DateTime.Today.AddDays(1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
+                Answers = null
+            }
         };
 
         private static TestAnswer GetTestAnswer() => new TestAnswer()
@@ -123,36 +147,6 @@ namespace DevAdventCalendarCompetition.Tests
             UserId = "1",
             AnsweringTimeOffset = default,
             AnsweringTime = DateTime.Now
-        };
-
-        private static List<Test> GetTestList() => new List<Test>()
-        {
-            new Test()
-            {
-                Id = 1,
-                Number = 1,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                Answers = null
-            }
-        };
-
-        private static Test GetOldTest() => new Test()
-        {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today.AddDays(-2).AddHours(12),
-            EndDate = DateTime.Today.AddDays(-2).AddHours(23).AddMinutes(59),
-            Answers = null
-        };
-
-        private static Test GetFutureTest() => new Test()
-        {
-            Id = 3,
-            Number = 3,
-            StartDate = DateTime.Today.AddDays(1).AddHours(12),
-            EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-            Answers = null
         };
     }
 }
