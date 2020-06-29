@@ -61,7 +61,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ups... Coś poszło nie tak.. Nasze elfy już nad tym pracują ;-).
+        ///   Looks up a localized string similar to Ups... Coś poszło nie tak... Nasze elfy już nad tym pracują ;-).
         /// </summary>
         internal static string Default {
             get {

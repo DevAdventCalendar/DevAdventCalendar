@@ -14,7 +14,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = ErrorMessagesProvider.GetMessageBody(404);
 
             // Assert
-            Assert.Contains("<p>Niestety, podana strona nie istnieje :(</p>", result.Value, StringComparison.InvariantCulture);
+            Assert.Contains("Niestety, podana strona nie istnieje :(", result.Value, StringComparison.InvariantCulture);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = ErrorMessagesProvider.GetMessageBody(0);
 
             // Assert
-            Assert.Contains($"<h1 class=\"mb-30\">Ups... Coś poszło nie tak...</h1>\r\n<p>Nasze elfy już nad tym pracują ;-)</p>", result.Value, StringComparison.InvariantCulture);
+            Assert.Contains($"Ups... Coś poszło nie tak... Nasze elfy już nad tym pracują ;-)", result.Value, StringComparison.InvariantCulture);
         }
     }
 }

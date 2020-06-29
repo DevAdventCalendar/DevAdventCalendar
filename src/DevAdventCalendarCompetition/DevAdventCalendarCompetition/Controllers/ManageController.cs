@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
-using DevAdventCalendarCompetition.Models.ManageViewModels;
+using DevAdventCalendarCompetition.Models.Manage;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevExeptionsMessages;
 using DevLoggingMessages;
@@ -50,7 +50,6 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 EmailNotificationsEnabled = user.EmailNotificationsEnabled,
                 PushNotificationsEnabled = user.PushNotificationsEnabled,
@@ -97,16 +96,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 shouldSendVerificationEmail = true;
                 model.EmailNotificationsEnabled = false;
-            }
-
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await this._manageService.SetPhoneNumberAsync(user, model.PhoneNumber).ConfigureAwait(false);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPhoneNumberConfiguration, this._accountService.GetUserId(this.User)));
-                }
             }
 
             if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
@@ -274,10 +263,10 @@ namespace DevAdventCalendarCompetition.Controllers
 
             var addPasswordResult = await this._manageService.AddPasswordAsync(user, model.NewPassword).ConfigureAwait(false);
             if (!addPasswordResult.Succeeded)
-                {
-                    this.AddErrors(addPasswordResult);
-                    return this.View(model);
-                }
+            {
+                this.AddErrors(addPasswordResult);
+                return this.View(model);
+            }
 
             await this._accountService.SignInAsync(user).ConfigureAwait(false);
             this.StatusMessage = "Your password has been set.";
@@ -292,5 +281,5 @@ namespace DevAdventCalendarCompetition.Controllers
                 this.ModelState.AddModelError("Result", error.Description);
             }
         }
-  }
+    }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +38,7 @@ namespace DevAdventCalendarCompetition.Controllers
             // TODO: use Automapper?
             var testAnswerDto = this.baseTestService.GetAnswerByTestId(testDto.Id);
 
-            var testAnswerVm = new TestAnswerVm()
+            var testAnswerViewModel = new TestAnswerViewModel()
             {
                 TestId = testAnswerDto.TestId,
                 UserId = testAnswerDto.UserId,
@@ -46,9 +46,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 AnsweringTimeOffset = testAnswerDto.AnsweringTimeOffset
             };
 
-            var answerVm = new AnswerVm() { TestAnswerVm = testAnswerVm, TestNumber = testNumber };
+            var answerViewModel = new AnswerViewModel() { TestAnswerViewModel = testAnswerViewModel, TestNumber = testNumber };
 
-            return this.View("TestAnswered", answerVm);
+            return this.View("TestAnswered", answerViewModel);
         }
     }
 }
