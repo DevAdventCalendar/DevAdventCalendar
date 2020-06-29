@@ -30,15 +30,8 @@ namespace DevAdventCalendarCompetition.Controllers
                 test.HasUserAnswered = true;
                 return this.View(test);
             }
-            else
-            {
-                if ((test.StartDate <= DateTime.Now && !(DateTime.Now > test.EndDate)) || !test.IsAdvent)
-                {
-                    return this.View(test);
-                }
-            }
 
-            return this.View();
+            return this.View(test);
         }
 
         [HttpPost]
