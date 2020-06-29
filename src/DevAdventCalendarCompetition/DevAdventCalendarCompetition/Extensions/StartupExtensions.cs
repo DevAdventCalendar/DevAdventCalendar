@@ -54,28 +54,6 @@ namespace DevAdventCalendarCompetition.Extensions
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            services.AddSingleton<IEmailSender, EmailSender>(sender =>
-            {
-                var emailSender = new EmailSender
-                {
-                    Host = configuration.GetValue<string>("Email:Smtp:Host"),
-                    Port = configuration.GetValue<int>("Email:Smtp:Port"),
-                    UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
-                    Password = configuration.GetValue<string>("Email:Smtp:Password"),
-                    From = configuration.GetValue<string>("Email:Smtp:From"),
-                    Ssl = configuration.GetValue<bool?>("Email:Smtp:Ssl") ?? false,
-                };
-
-                return emailSender;
-            });
-
-            services.AddAutoMapper(typeof(AdminService));
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevAdventCalendar API", Version = "v1" });
-            });
-
             services.AddTransient<INotificationService, EmailNotificationService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAdminService, AdminService>();
@@ -85,10 +63,11 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IdentityService>();
 
-            var config = configuration.GetSection("StringHasher");
-            var stringSalt = config.GetValue<string>("Salt");
-            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
-            services.AddScoped(sh => new StringHasher(hashParameters));
+            services.AddAutoMapper(typeof(AdminService));
+
+            services.RegisterEmailService(configuration);
+            services.RegisterStringHasherService(configuration);
+            services.RegisterSwagger();
 
             return services;
         }
@@ -187,6 +166,55 @@ namespace DevAdventCalendarCompetition.Extensions
 
             services.Configure<EmailNotificationOptions>(configuration.GetSection("EmailNotification"));
 
+            return services;
+        }
+
+        private static IServiceCollection RegisterEmailService(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.AddSingleton<IEmailSender, EmailSender>(sender =>
+            {
+                var emailSender = new EmailSender
+                {
+                    Host = configuration.GetValue<string>("Email:Smtp:Host"),
+                    Port = configuration.GetValue<int>("Email:Smtp:Port"),
+                    UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
+                    Password = configuration.GetValue<string>("Email:Smtp:Password"),
+                    From = configuration.GetValue<string>("Email:Smtp:From"),
+                    Ssl = configuration.GetValue<bool?>("Email:Smtp:Ssl") ?? false,
+                };
+
+                return emailSender;
+            });
+
+            return services;
+        }
+
+        private static IServiceCollection RegisterStringHasherService(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            var config = configuration.GetSection("StringHasher");
+            var stringSalt = config.GetValue<string>("Salt");
+            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
+            services.AddScoped(sh => new StringHasher(hashParameters));
+
+            return services;
+        }
+
+        private static IServiceCollection RegisterSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevAdventCalendar API", Version = "v1" });
+            });
             return services;
         }
     }
