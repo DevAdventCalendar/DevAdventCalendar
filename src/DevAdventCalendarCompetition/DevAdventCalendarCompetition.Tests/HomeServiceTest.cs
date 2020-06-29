@@ -15,14 +15,12 @@ namespace DevAdventCalendarCompetition.Tests
     {
         private readonly Mock<ITestRepository> _testRepositoryMock;
         private readonly Mock<ITestAnswerRepository> _testAnswerRepositoryMock;
-        private readonly Mock<IResultsRepository> _resultsRepositoryMock;
         private IMapper _mapper;
 
         public HomeServiceTest()
         {
             this._testRepositoryMock = new Mock<ITestRepository>();
             this._testAnswerRepositoryMock = new Mock<ITestAnswerRepository>();
-            this._resultsRepositoryMock = new Mock<IResultsRepository>();
         }
 
         [Fact]
@@ -32,7 +30,7 @@ namespace DevAdventCalendarCompetition.Tests
             var currentTest = GetCurrentTest();
             this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(currentTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(this._resultsRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
             // Act
             var result = homeService.GetCurrentTest();
@@ -49,7 +47,7 @@ namespace DevAdventCalendarCompetition.Tests
             var oldTest = GetOldTest();
             this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(oldTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(this._resultsRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
             // Act
             var result = homeService.GetCurrentTest();
@@ -65,7 +63,7 @@ namespace DevAdventCalendarCompetition.Tests
             var futureTest = GetFutureTest();
             this._testRepositoryMock.Setup(mock => mock.GetCurrentTest()).Returns(futureTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(this._resultsRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
             // Act
             var result = homeService.GetCurrentTest();
@@ -81,7 +79,7 @@ namespace DevAdventCalendarCompetition.Tests
             var testAnswer = GetTestAnswer();
             this._testAnswerRepositoryMock.Setup(mock => mock.GetTestAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
-            var homeService = new HomeService(this._resultsRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
             // Act
             var result = homeService.GetTestAnswerByUserId(testAnswer.UserId, testAnswer.Id);
@@ -97,7 +95,7 @@ namespace DevAdventCalendarCompetition.Tests
             var testList = GetTestList();
             this._testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(testList);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(this._resultsRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
             // Act
             var result = homeService.GetTestsWithUserAnswers();
