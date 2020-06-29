@@ -16,12 +16,12 @@ namespace DevAdventCalendarCompetition.Services
 
         public TestService(
             ITestRepository baseTestRepository,
-            ITestAnswerRepository testAnwserRepository,
+            ITestAnswerRepository testAnswerRepository,
             IMapper mapper,
             StringHasher stringHasher)
         {
             this._testRepository = baseTestRepository;
-            this._testAnswerRepository = testAnwserRepository;
+            this._testAnswerRepository = testAnswerRepository;
             this._mapper = mapper;
             this._stringHasher = stringHasher;
         }

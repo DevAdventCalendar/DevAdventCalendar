@@ -16,11 +16,11 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IMapper _mapper;
 
         public HomeService(
-            ITestAnswerRepository testAnwserRepository,
+            ITestAnswerRepository testAnswerRepository,
             ITestRepository testRepository,
             IMapper mapper)
         {
-            this._testAnswerRepository = testAnwserRepository;
+            this._testAnswerRepository = testAnswerRepository;
             this._testRepository = testRepository;
             this._mapper = mapper;
         }

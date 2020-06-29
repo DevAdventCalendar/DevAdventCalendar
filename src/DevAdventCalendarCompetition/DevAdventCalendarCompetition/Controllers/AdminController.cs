@@ -18,10 +18,10 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAdminService _adminService;
         private readonly ITestService _testService;
 
-        public AdminController(IAdminService adminService, ITestService baseTestService)
+        public AdminController(IAdminService adminService, ITestService testService)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
-            this._testService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
+            this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
         }
 
         public ActionResult Index()
