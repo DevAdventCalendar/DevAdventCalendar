@@ -38,12 +38,13 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(currentTestsDto);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult CheckTestStatus(int testNumber)
         {
             return this.Content(this._homeService.CheckTestStatus(testNumber));
         }
 
+        [HttpGet]
         [Route(nameof(Error))]
         public ActionResult Error([FromQuery]int statusCode)
         {
@@ -53,57 +54,67 @@ namespace DevAdventCalendarCompetition.Controllers
             });
         }
 
+        [HttpGet]
         [Route("11111100011")]
         public ActionResult Surprise()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(About))]
         public ActionResult About()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Contact))]
         public ActionResult Contact()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Sponsors))]
         public ActionResult Sponsors()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Prizes))]
         public ActionResult Prizes()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Rules))]
         public ActionResult Rules()
         {
             return this.View();
         }
 
+        [HttpGet]
         public ActionResult TestHasNotStarted(int number)
         {
             return this.View(number);
         }
 
+        [HttpGet]
         public ActionResult TestHasEnded(int number)
         {
             return this.View(number);
         }
 
+        [HttpGet]
         public ActionResult TestAnswered(int number)
         {
             return this.View(number);
         }
 
+        [HttpGet]
         public ActionResult GetServerTime()
         {
             return this.Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K", CultureInfo.InvariantCulture));
