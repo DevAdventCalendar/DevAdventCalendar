@@ -1,5 +1,7 @@
 using System;
 using System.Globalization;
+using System.Text;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -15,6 +17,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace DevAdventCalendarCompetition.Extensions
 {
@@ -26,18 +29,18 @@ namespace DevAdventCalendarCompetition.Extensions
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
-                    {
-                        config.SignIn.RequireConfirmedEmail = true;
-                    })
-                    .AddErrorDescriber<CustomIdentityErrorDescriber>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            })
+            .AddErrorDescriber<CustomIdentityErrorDescriber>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
-            services.AddTransient<IAdminRepository, AdminRepository>();
-            services.AddTransient<IBaseTestRepository, BaseTestRepository>();
-            services.AddTransient<IHomeRepository, HomeRepository>();
+            services.AddTransient<ITestRepository, TestRepository>();
+            services.AddTransient<ITestAnswerRepository, TestAnswerRepository>();
+            services.AddTransient<IResultsRepository, ResultsRepository>();
 
             services.AddScoped<DbInitializer>();
 
@@ -46,34 +49,36 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IEmailSender, EmailSender>(
-                sender =>
-                {
-                    var emailSender = new EmailSender
-                    {
-                        Host = configuration.GetValue<string>("Email:Smtp:Host"),
-                        Port = configuration.GetValue<int>("Email:Smtp:Port"),
-                        UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
-                        Password = configuration.GetValue<string>("Email:Smtp:Password"),
-                        From = configuration.GetValue<string>("Email:Smtp:From"),
-                        Ssl = configuration.GetValue<bool?>("Email:Smtp:Ssl") ?? false,
-                    };
-
-                    return emailSender;
-                });
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
 
             services.AddTransient<INotificationService, EmailNotificationService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAdminService, AdminService>();
-            services.AddTransient<IBaseTestService, BaseTestService>();
+            services.AddTransient<ITestService, TestService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<IResultsService, ResultsService>();
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IdentityService>();
+
+            services.AddAutoMapper(typeof(AdminService));
+
+            services.RegisterEmailService(configuration);
+            services.RegisterStringHasherService(configuration);
+            services.RegisterSwagger();
+
             return services;
         }
 
         public static IServiceCollection AddExternalLoginProviders(this IServiceCollection services, IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
             services.AddAuthentication()
             .AddFacebook(facebookOptions =>
             {
@@ -116,16 +121,16 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static void UseHttpsRequestScheme(this IApplicationBuilder app)
         {
-            if (app is null)
+            if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
             app.Use(next => context =>
-                {
-                    context.Request.Scheme = "https";
-                    return next(context);
-                });
+            {
+                context.Request.Scheme = "https";
+                return next(context);
+            });
         }
 
         public static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
@@ -161,6 +166,55 @@ namespace DevAdventCalendarCompetition.Extensions
 
             services.Configure<EmailNotificationOptions>(configuration.GetSection("EmailNotification"));
 
+            return services;
+        }
+
+        private static IServiceCollection RegisterEmailService(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.AddSingleton<IEmailSender, EmailSender>(sender =>
+            {
+                var emailSender = new EmailSender
+                {
+                    Host = configuration.GetValue<string>("Email:Smtp:Host"),
+                    Port = configuration.GetValue<int>("Email:Smtp:Port"),
+                    UserName = configuration.GetValue<string>("Email:Smtp:UserName"),
+                    Password = configuration.GetValue<string>("Email:Smtp:Password"),
+                    From = configuration.GetValue<string>("Email:Smtp:From"),
+                    Ssl = configuration.GetValue<bool?>("Email:Smtp:Ssl") ?? false,
+                };
+
+                return emailSender;
+            });
+
+            return services;
+        }
+
+        private static IServiceCollection RegisterStringHasherService(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            var config = configuration.GetSection("StringHasher");
+            var stringSalt = config.GetValue<string>("Salt");
+            var hashParameters = new HashParameters(config.GetValue<int>("Iterations"), Encoding.ASCII.GetBytes(stringSalt));
+            services.AddScoped(sh => new StringHasher(hashParameters));
+
+            return services;
+        }
+
+        private static IServiceCollection RegisterSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevAdventCalendar API", Version = "v1" });
+            });
             return services;
         }
     }

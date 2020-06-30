@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Models;
 
@@ -17,11 +17,5 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         string CheckTestStatus(int testNumber);
 
         int GetCorrectAnswersCountForUser(string userId);
-
-        Dictionary<int, List<TestResultDto>> GetAllTestResults();
-
-        UserPosition GetUserPosition(string userId);
-
-        string PrepareUserEmailForRODO(string email);
     }
 }

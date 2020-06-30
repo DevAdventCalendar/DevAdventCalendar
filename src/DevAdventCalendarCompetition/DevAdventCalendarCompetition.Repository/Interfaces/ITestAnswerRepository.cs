@@ -1,20 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Repository.Interfaces
 {
-    public interface IHomeRepository
+    public interface ITestAnswerRepository
     {
-        Test GetCurrentTest();
-
-        Test GetTestByNumber(int testNumber);
+        TestAnswer GetAnswerByTestId(int testId);
 
         TestAnswer GetTestAnswerByUserId(string userId, int testId);
-
-        List<Test> GetAllTests();
-
-        List<Test> GetTestsWithUserAnswers();
 
         int GetCorrectAnswersCountForUser(string userId);
 
@@ -22,8 +16,12 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo);
 
-        UserPosition GetUserPosition(string userId);
+        bool HasUserAnsweredTest(string userId, int testId);
 
-        List<Result> GetTestResultsForWeek(int weekNumber);
+        void UpdateAnswer(TestAnswer testAnswer);
+
+        void AddAnswer(TestAnswer testAnswer);
+
+        void AddWrongAnswer(TestWrongAnswer wrongAnswer);
     }
 }
