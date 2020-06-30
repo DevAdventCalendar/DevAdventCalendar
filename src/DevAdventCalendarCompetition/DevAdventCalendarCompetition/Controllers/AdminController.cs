@@ -114,5 +114,17 @@ namespace DevAdventCalendarCompetition.Controllers
 
             return this.RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult CalculateResults(int weekNumber)
+        {
+            if (weekNumber < 1 && weekNumber > 4)
+            {
+                return this.BadRequest("Błędny numer tygodnia.");
+            }
+
+            Process.Start(@"c:\\Windows\\System32\\cmd.exe", weekNumber.ToString(CultureInfo.CurrentCulture.DateTimeFormat));
+            return this.Ok();
+        }
     }
 }
