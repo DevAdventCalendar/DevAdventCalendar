@@ -231,7 +231,7 @@
 
 function CheckTestStatus(testNumber) {
     if (testNumber != null) {
-        $.post("/Home/CheckTestStatus",
+        $.get("/Home/CheckTestStatus",
             {
                 testNumber: testNumber
             },
