@@ -82,7 +82,7 @@ Password: `P@ssw0rd`
 
 ## Test environment
 
-Test environment is running on https://dev.devadventcalendar.pl/ with automatic deployment from develop_uat branch.
+Test environment is running on [dev.devadventcalendar.pl](https://dev.devadventcalendar.pl/) with automatic deployment from develop_uat branch.
 
 ## Sending emails
 
