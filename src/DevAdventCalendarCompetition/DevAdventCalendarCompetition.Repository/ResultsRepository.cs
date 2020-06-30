@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DevAdventCalendarCompetition.Repository.Context;
@@ -8,76 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevAdventCalendarCompetition.Repository
 {
-    public class HomeRepository : IHomeRepository
+    public class ResultsRepository : IResultsRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public HomeRepository(ApplicationDbContext dbContext)
+        public ResultsRepository(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
-        }
-
-        public Test GetCurrentTest()
-        {
-            return this._dbContext.Set<Test>().FirstOrDefault(el => el.Status == TestStatus.Started);
-        }
-
-        public Test GetTestByNumber(int testNumber)
-        {
-            return this._dbContext.Set<Test>().FirstOrDefault(t => t.Number == testNumber);
-        }
-
-        public TestAnswer GetTestAnswerByUserId(string userId, int testId)
-        {
-            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == testId);
-        }
-
-        public List<Test> GetAllTests()
-        {
-            return this._dbContext.Set<Test>()
-                .OrderBy(t => t.Number).ToList();
-        }
-
-        public List<Test> GetTestsWithUserAnswers()
-        {
-            return this._dbContext.Set<Test>()
-                .Include(t => t.WrongAnswers)
-                .Include(t => t.Answers)
-                .ThenInclude(ta => ta.User)
-                .OrderBy(el => el.Number).ToList();
-        }
-
-        public int GetCorrectAnswersCountForUser(string userId)
-        {
-            return this._dbContext.Set<TestAnswer>()
-                .Where(a => a.UserId == userId)
-                .AsEnumerable()
-                .GroupBy(t => t.TestId)
-                .Count();
-        }
-
-        public IDictionary<string, int> GetCorrectAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
-        {
-            return this._dbContext
-                .TestAnswer
-                .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
-                .AsEnumerable()
-                .GroupBy(a => a.UserId)
-                .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-        }
-
-        public IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
-        {
-            return this._dbContext
-                .TestWrongAnswer
-                .Where(a => a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.Time.CompareTo(dateTo.DateTime) < 0)
-                .AsEnumerable()
-                .GroupBy(a => a.UserId)
-                .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
         public UserPosition GetUserPosition(string userId)

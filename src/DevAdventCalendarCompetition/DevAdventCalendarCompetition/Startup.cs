@@ -77,36 +77,23 @@ namespace DevAdventCalendarCompetition
 
             app.UseEndpoints(routes =>
             {
-                routes.MapRazorPages();
                 routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        [Obsolete("Should be fixed During Refactor")]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(this.Configuration.GetValue<string>("DataProtection:Keys")))
                 .SetApplicationName("DevAdventCalendar");
 
-            ServicesStartup.Configure(services, this.Configuration);
-
             services
                 .RegisterDatabase(this.Configuration)
                 .RegisterServices(this.Configuration)
-                .AddAutoMapper(typeof(Startup))
-                .AddExternalLoginProviders(this.Configuration)
-                .AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevAdventCalendar API", Version = "v1" });
-                });
+                .AddExternalLoginProviders(this.Configuration);
 
             services
                 .AddControllersWithViews()
-                .AddNewtonsoftJson();
-            services
-                .AddRazorPages()
                 .AddNewtonsoftJson();
 
             services.AddLocalization(o => o.ResourcesPath = "Resources");

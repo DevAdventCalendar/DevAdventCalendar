@@ -1,11 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Profiles;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -13,133 +17,133 @@ namespace DevAdventCalendarCompetition.Tests
 {
     public class AdminServiceTest
     {
-        private readonly Mock<IAdminRepository> _adminRepositoryMock;
-        private readonly Mock<IBaseTestRepository> _baseTestRepositoryMock;
+        private readonly Mock<ITestRepository> _testRepositoryMock;
+        private readonly Mock<ITestAnswerRepository> _testAnswerRepositoryMock;
         private IMapper _mapper;
-
-        private List<Test> _testList = new List<Test>()
-        {
-            new Test()
-            {
-                Id = 1,
-                Number = 1,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                Answers = null
-            }
-        };
-
-        private Test _currentTest = new Test()
-        {
-            Id = 2,
-            Number = 2,
-            StartDate = DateTime.Today.AddHours(12),
-            EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-            Answers = null
-        };
-
-        private Test _previousTest = new Test()
-        {
-            Id = 1,
-            Number = 1,
-            StartDate = DateTime.Today.AddDays(-2).AddHours(12),
-            EndDate = DateTime.Today.AddDays(-2).AddHours(23).AddMinutes(59),
-            Answers = null
-        };
-
-        private TestDto _testDto = new TestDto()
-        {
-            Id = 2,
-            Number = 2,
-            StartDate = DateTime.Today.AddHours(12),
-            EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-            Status = TestStatus.Started
-        };
 
         public AdminServiceTest()
         {
-            this._adminRepositoryMock = new Mock<IAdminRepository>();
-            this._baseTestRepositoryMock = new Mock<IBaseTestRepository>();
+            this._testRepositoryMock = new Mock<ITestRepository>();
+            this._testAnswerRepositoryMock = new Mock<ITestAnswerRepository>();
         }
 
         [Fact]
         public void GetAllTests_ReturnTestDtoList()
         {
             // Arrange
-            this._adminRepositoryMock.Setup(mock => mock.GetAll()).Returns(this._testList);
+            var testList = GetTestList();
+            this._testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(testList);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._adminRepositoryMock.Object, this._baseTestRepositoryMock.Object, this._mapper, null);
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
             // Act
             var result = adminService.GetAllTests();
 
             // Assert
-            Assert.IsType<List<TestDto>>(result);
-            Assert.True(this._testList.Count == result.Count);
-            this._adminRepositoryMock.Verify(mock => mock.GetAll(), Times.Once())
-;
+            result.Should().BeOfType<List<TestDto>>();
+            result.Count.Should().Be(testList.Count);
         }
 
         [Fact]
         public void GetTestBy_IdReturnTestDto()
         {
             // Arrange
-            this._adminRepositoryMock.Setup(mock => mock.GetById(It.IsAny<int>())).Returns(this._currentTest);
+            var test = GetTest();
+            this._testRepositoryMock.Setup(mock => mock.GetTestById(It.IsAny<int>())).Returns(test);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._adminRepositoryMock.Object, this._baseTestRepositoryMock.Object, this._mapper, null);
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
             // Act
-            var result = adminService.GetTestById(this._currentTest.Id);
+            var result = adminService.GetTestById(test.Id);
 
             // Assert
-            Assert.IsType<TestDto>(result);
-            this._adminRepositoryMock.Verify(mock => mock.GetById(It.Is<int>(x => x.Equals(this._currentTest.Id))), Times.Once());
+            result.Should().BeOfType<TestDto>();
+            result.Id.Should().Be(test.Id);
+            result.Number.Should().Be(test.Number);
+            result.StartDate.Should().Be(test.StartDate);
+            result.EndDate.Should().Be(test.EndDate);
         }
 
         [Fact]
         public void GetPreviousTest_ReturnPreviousTestDto()
         {
             // Arrange
-            this._baseTestRepositoryMock.Setup(mock => mock.GetByNumber(It.IsAny<int>())).Returns(this._previousTest);
+            var currentTestNumber = GetTest().Number;
+            var previousTestNumber = currentTestNumber - 1;
+            var previousTest = GetTest(previousTestNumber);
+            this._testRepositoryMock.Setup(mock => mock.GetTestByNumber(previousTestNumber)).Returns(previousTest);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._adminRepositoryMock.Object, this._baseTestRepositoryMock.Object, this._mapper, null);
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
             // Act
-            var result = adminService.GetPreviousTest(this._currentTest.Number);
+            var result = adminService.GetPreviousTest(currentTestNumber);
 
             // Assert
-            Assert.IsType<TestDto>(result);
-            this._baseTestRepositoryMock.Verify(mock => mock.GetByNumber(It.Is<int>(x => x.Equals(this._previousTest.Number))), Times.Once());
+            result.Should().BeOfType<TestDto>();
+            result.Number.Should().Be(previousTest.Number);
+            result.StartDate.Should().Be(previousTest.StartDate);
+            result.EndDate.Should().Be(previousTest.EndDate);
         }
 
         [Fact]
         public void UpdateTestDates()
         {
             // Arrange
-            this._adminRepositoryMock.Setup(mock => mock.UpdateDates(It.IsAny<Test>()));
+            var test = GetTest();
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._adminRepositoryMock.Object, this._baseTestRepositoryMock.Object, this._mapper, null);
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
             // Act
-            adminService.UpdateTestDates(this._testDto, "20");
+            adminService.UpdateTestDates(test.Id, "20");
 
             // Assert
-            this._adminRepositoryMock.Verify(mock => mock.UpdateDates(It.Is<Test>(x => x.Number == this._testDto.Number && x.Id == this._testDto.Id && x.StartDate == this._testDto.StartDate && x.EndDate == this._testDto.EndDate)), Times.Once());
+            this._testRepositoryMock.Verify(mock => mock.UpdateTestDates(test.Id, It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once());
         }
 
         [Fact]
         public void UpdateTestEndDate()
         {
             // Arrange
-            this._adminRepositoryMock.Setup(mock => mock.UpdateEndDate(It.IsAny<Test>()));
+            var test = GetTest();
+            var newDate = DateTime.Today.AddHours(23).AddMinutes(20);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._adminRepositoryMock.Object, this._baseTestRepositoryMock.Object, this._mapper, null);
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
 
             // Act
-            adminService.UpdateTestEndDate(this._testDto, (DateTime)this._testDto.EndDate);
+            adminService.UpdateTestEndDate(test.Id, newDate);
 
             // Assert
-            this._adminRepositoryMock.Verify(mock => mock.UpdateEndDate(It.Is<Test>(x => x.Number == this._testDto.Number && x.Id == this._testDto.Id && x.StartDate == this._testDto.StartDate && x.EndDate == this._testDto.EndDate)), Times.Once());
+            this._testRepositoryMock.Verify(mock => mock.UpdateTestEndDate(test.Id, newDate), Times.Once());
         }
+
+        private static Test GetTest(int number = 2) => GetTestList().First(t => t.Number == number);
+
+        private static List<Test> GetTestList() => new List<Test>()
+        {
+            new Test()
+            {
+                Id = 1,
+                Number = 1,
+                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
+                Answers = null
+            },
+            new Test()
+            {
+                Id = 2,
+                Number = 2,
+                StartDate = DateTime.Today.AddHours(12),
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+                Answers = null
+            },
+            new Test()
+            {
+                Id = 3,
+                Number = 3,
+                StartDate = DateTime.Today.AddDays(1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
+                Answers = null
+            }
+        };
     }
 }
