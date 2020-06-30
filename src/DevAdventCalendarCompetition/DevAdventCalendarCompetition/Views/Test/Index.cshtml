@@ -70,7 +70,7 @@
                         {
                             <h3 class="mb-30 text-primary">@UserAlreadyAnswered</h3>
                         }
-                        else if (Model.IsAdvent)
+                        else if (Model.IsAdvent && (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate))
                         {
                             using (Html.BeginForm(FormMethod.Post))
                             {
