@@ -1,9 +1,13 @@
 # DevAdventCalendar
 
-DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](www.devadventcalenar.pl)
+<p align="center">
+<img src="docs/Pictures/dac2019-logo.png" width="400">
+</p>
 
 [![Follow DevAdventCalendar](https://img.shields.io/twitter/follow/dev_advent_cal?label=Follow%20%40dev_advent_cal&style=social)](https://twitter.com/dev_advent_cal)
 [![Follow DevAdventCalendar](https://img.shields.io/badge/FB-Dev%20Advent%20Calendar-blue)](https://www.facebook.com/devadventcalendar/)
+
+DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](www.devadventcalenar.pl)
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/DevAdventCalendar/DevAdventCalendar)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/DevAdventCalendar/DevAdventCalendar)
