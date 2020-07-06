@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,9 +6,10 @@ using System.Text;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
-    [Table("Results")]
-    public class Result : ModelBase
+    public class Result
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(450)]
         [ForeignKey("User")]
