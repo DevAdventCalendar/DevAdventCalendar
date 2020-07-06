@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevAdventCalendarCompetition.Models.Test
@@ -23,7 +24,9 @@ namespace DevAdventCalendarCompetition.Models.Test
 
         [Required(ErrorMessage = "Pole Odpowiedź jest obowiązkowe")]
         [Display(Name = "Odpowiedź")]
-        public string Answer { get; set; }
+#pragma warning disable CA2227 // Collection properties should be read only
+        public List<string> Answers { get; set; } = new List<string>();
+#pragma warning restore CA2227 // Collection properties should be read only
 
         [Display(Name = "Nazwa sponsora")]
         public string SponsorName { get; set; }

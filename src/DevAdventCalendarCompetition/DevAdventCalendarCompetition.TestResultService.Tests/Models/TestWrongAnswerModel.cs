@@ -1,4 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
 using System;
@@ -26,7 +26,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             //userI -  correct answer (after ranking period) 0 wrong answers
 
             //userH - 1 wrong answer and 1 correct answer (on different puzzles)
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 11,
                 UserId = UserModel.userH.Id,
@@ -37,7 +37,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             });
 
             //userG - 2 wrong answers on same puzzle (2 correct answers) after 24h
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 12,
                 UserId = UserModel.userG.Id,
@@ -47,7 +47,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
             });
 
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 13,
                 UserId = UserModel.userG.Id,
@@ -61,7 +61,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userE - 1 wrong answer (0 correct answers)
 
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 14,
                 UserId = UserModel.userE.Id,
@@ -77,7 +77,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userB - 2 wrong answers on same puzzle (2 correct answers)
 
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 1,
                 UserId = UserModel.userB.Id,
@@ -87,7 +87,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
             });
 
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 2,
                 UserId = UserModel.userB.Id,
@@ -99,7 +99,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userA - 2 wrong answers on different puzzles (2 correct answers)
 
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 3,
                 UserId = UserModel.userA.Id,
@@ -109,7 +109,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 Time = this._testModel.test1.StartDate.Value.AddHours(1)
             });
 
-            dbContext.TestWrongAnswer.Add(new TestWrongAnswer()
+            dbContext.UserTestWrongAnswers.Add(new UserTestWrongAnswer()
             {
                 Id = 8,
                 UserId = UserModel.userA.Id,

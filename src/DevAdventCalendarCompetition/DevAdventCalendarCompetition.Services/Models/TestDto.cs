@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Services.Models
@@ -6,7 +7,7 @@ namespace DevAdventCalendarCompetition.Services.Models
     public class TestDto
     {
 #pragma warning disable CA1822
-        public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
+        public bool IsAdvent => true; /*DateTime.Now.Month == 12 && DateTime.Now.Day < 25;*/
 
 #pragma warning restore CA1822
         public int Id { get; set; }
@@ -15,9 +16,9 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public string Description { get; set; }
 
-        public string Answer { get; set; }
-
-        public string PlainAnswer { get; set; }
+#pragma warning disable CA2227 // Collection properties should be read only
+        public List<TestAnswerDto> Answers { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
         public Uri SponsorLogoUrl { get; set; }
 
