@@ -1,4 +1,5 @@
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
+@using System.Globalization
 
 <div class="breadcrumb_area">
     <div class="container">
@@ -68,7 +69,7 @@ else
                     {
                         <h1 class="mb-30">@ScoresCommingSoon</h1>
                         <p>
-                            @ScoresDesc1
+                            @ScoreDescriptionPart1
                         </p>
                     }
                     <img src="~/theme-2019/images/gift_bag.png" alt="gifts">
@@ -87,13 +88,13 @@ else
                     {
                         <ul class="nav nav-tabs" id="results" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab">@WeekLowerCase 1</a>
+                                <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 1)</a>
                             </li>
                             <li role="presentation">
-                                <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab">@WeekLowerCase 2</a>
+                                <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 2)</a>
                             </li>
                             <li role="presentation">
-                                <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab">@WeekLowerCase 3</a>
+                                <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 3)</a>
                             </li>
                             <li role="presentation">
                                 <a href="#full" aria-controls="full" role="tab" data-toggle="tab">@FullList</a>
@@ -111,7 +112,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoresDesc2
+                                            @ScoreDescriptionPart2
                                         </h4>
                                     </div>
 
@@ -128,7 +129,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoresDesc3
+                                            @ScoreDescriptionPart3
                                         </h4>
                                     </div>
 
@@ -146,7 +147,7 @@ else
 
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoresDesc4
+                                            @ScoreDescriptionPart4
                                         </h4>
                                     </div>
 
@@ -163,7 +164,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoresDesc5
+                                            @ScoreDescriptionPart5
                                         </h4>
                                     </div>
 

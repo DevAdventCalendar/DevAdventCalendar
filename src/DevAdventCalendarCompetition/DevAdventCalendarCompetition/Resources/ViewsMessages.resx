@@ -175,7 +175,7 @@
     <value>Odpowiedź to: "barszcz"</value>
   </data>
   <data name="AnswerQuestions" xml:space="preserve">
-    <value>Odpowiadasz na pytania</value>
+    <value>Odpowiadasz na pytania &lt;br/&gt; i zbierasz punkty</value>
   </data>
   <data name="Awards" xml:space="preserve">
     <value>Nagrody</value>
@@ -191,9 +191,6 @@
   </data>
   <data name="Calculate2" xml:space="preserve">
     <value>Oblicz wyniki</value>
-  </data>
-  <data name="CalendarWindow" xml:space="preserve">
-    <value>okienko kalendarza</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmiana hasła</value>
@@ -277,7 +274,7 @@
     <value>Błąd</value>
   </data>
   <data name="EveryDayYouOpen" xml:space="preserve">
-    <value>Każdego dnia otwierasz</value>
+    <value>Każdego dnia otwierasz &lt;br/&gt;okienko kalendarza</value>
   </data>
   <data name="ExternalLoginFailure" xml:space="preserve">
     <value>Błąd logowania</value>
@@ -318,20 +315,11 @@
   <data name="FullList" xml:space="preserve">
     <value>Pełny ranking</value>
   </data>
-  <data name="Fun" xml:space="preserve">
-    <value>Zabawy</value>
-  </data>
   <data name="GetCool" xml:space="preserve">
-    <value>Zdobywasz fajne</value>
-  </data>
-  <data name="GetPoints" xml:space="preserve">
-    <value>i zbierasz punkty</value>
+    <value>Zdobywasz fajne &lt;br/&gt; nagrody</value>
   </data>
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
-  </data>
-  <data name="Gifts" xml:space="preserve">
-    <value>nagrody</value>
   </data>
   <data name="Go" xml:space="preserve">
     <value>Przejdź na</value>
@@ -342,8 +330,8 @@
   <data name="Gratulations" xml:space="preserve">
     <value>Gratulacje!</value>
   </data>
-  <data name="Have" xml:space="preserve">
-    <value>Udanej</value>
+  <data name="HaveFun" xml:space="preserve">
+    <value>Udanej &lt;br&gt; Zabawy</value>
   </data>
   <data name="HeadDescription" xml:space="preserve">
     <value>DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT.</value>
@@ -498,23 +486,23 @@
   <data name="Save" xml:space="preserve">
     <value>Zapisz</value>
   </data>
-  <data name="ScoresCommingSoon" xml:space="preserve">
-    <value>Wyniki już niedługo...</value>
-  </data>
-  <data name="ScoresDesc1" xml:space="preserve">
+  <data name="ScoreDescriptionPart1" xml:space="preserve">
     <value>Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu).</value>
   </data>
-  <data name="ScoresDesc2" xml:space="preserve">
+  <data name="ScoreDescriptionPart2" xml:space="preserve">
     <value>Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00.</value>
   </data>
-  <data name="ScoresDesc3" xml:space="preserve">
+  <data name="ScoreDescriptionPart3" xml:space="preserve">
     <value>Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00.</value>
   </data>
-  <data name="ScoresDesc4" xml:space="preserve">
+  <data name="ScoreDescriptionPart4" xml:space="preserve">
     <value>Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.</value>
   </data>
-  <data name="ScoresDesc5" xml:space="preserve">
+  <data name="ScoreDescriptionPart5" xml:space="preserve">
     <value>Ostateczne wyniki poznasz w środę, 25 grudnia</value>
+  </data>
+  <data name="ScoresCommingSoon" xml:space="preserve">
+    <value>Wyniki już niedługo...</value>
   </data>
   <data name="Send" xml:space="preserve">
     <value>Wyślij</value>
@@ -545,9 +533,6 @@
   </data>
   <data name="SingOutOther" xml:space="preserve">
     <value>Wylogowany</value>
-  </data>
-  <data name="smResults" xml:space="preserve">
-    <value>wyniku</value>
   </data>
   <data name="SocialMedia" xml:space="preserve">
     <value>media społecznościowe:</value>
@@ -603,8 +588,8 @@
   <data name="TestPreviousNotEnded" xml:space="preserve">
     <value>Poprzedni test nie zakończył się</value>
   </data>
-  <data name="tests" xml:space="preserve">
-    <value>testu</value>
+  <data name="TestResults" xml:space="preserve">
+    <value>wyniku testu.</value>
   </data>
   <data name="TestsAreActive" xml:space="preserve">
     <value>Testy jeszcze się nie zakończyły</value>
@@ -624,9 +609,6 @@
   <data name="TotalScore" xml:space="preserve">
     <value>Suma punktów</value>
   </data>
-  <data name="UnitlDecember" xml:space="preserve">
-    <value>24 grudnia</value>
-  </data>
   <data name="UseOtherLogin" xml:space="preserve">
     <value>Lub zaloguj przez</value>
   </data>
@@ -643,10 +625,7 @@
     <value>Usunęliśmy Twój adres email z bazy</value>
   </data>
   <data name="Week" xml:space="preserve">
-    <value>TYDZIEŃ {0}</value>
-  </data>
-  <data name="WeekLowerCase" xml:space="preserve">
-    <value>Tydzień</value>
+    <value>Tydzień {0}</value>
   </data>
   <data name="WeeklySponsors" xml:space="preserve">
     <value>Sponsorzy tygodni</value>
@@ -657,8 +636,8 @@
   <data name="WelcomeToTheGame" xml:space="preserve">
     <value>Zapraszamy do tegorocznej edycji ;)</value>
   </data>
-  <data name="WePlay" xml:space="preserve">
-    <value>Gramy do</value>
+  <data name="WePlayUntilDecember" xml:space="preserve">
+    <value>Gramy do&lt;br&gt;24 grudnia.</value>
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
     <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
