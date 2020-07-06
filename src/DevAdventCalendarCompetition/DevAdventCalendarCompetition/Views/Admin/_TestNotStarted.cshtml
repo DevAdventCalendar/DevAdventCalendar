@@ -1,14 +1,14 @@
-﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
+@model DevAdventCalendarCompetition.Services.Models.TestDto
 
 <div class="row">
     <div class="col-md-12">
         <h3>Test @Model.Number</h3>
 
         <p>
-            <b>Status: </b>@ViewData["Status"]
+            <strong>Status: </strong>@ViewData["Status"]
         </p>
         <p>
-            <b>Czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <b>Czas zakończenia: </b> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
+            <strong>Czas rozpoczęcia: </strong> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <strong>Czas zakończenia: </strong> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
         </p>
     </div>
     <div class="col-md-12">
