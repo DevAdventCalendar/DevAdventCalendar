@@ -8,11 +8,11 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
     {
         TestDto GetCurrentTest();
 
-        TestAnswerDto GetTestAnswerByUserId(string userId, int testId);
+        UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId);
 
         List<TestDto> GetCurrentTests();
 
-        List<TestWithAnswerListDto> GetTestsWithUserAnswers();
+        List<TestWithUserCorrectAnswerListDto> GetTestsWithUserAnswers();
 
         string CheckTestStatus(int testNumber);
 
