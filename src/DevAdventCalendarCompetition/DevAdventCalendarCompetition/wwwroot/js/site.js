@@ -17,21 +17,21 @@ $(function () {
     });
 
     var count = 0;
-    $("#ansbtnadd").on("click", function () {
-        $("#ans").clone().appendTo("#answers");
+    $("#addAnswer").on("click", function () {
+        $("#answer").clone().appendTo("#answers");
         if (count === 0) {
-            $("#ansbtnremove").removeClass(function (index, currentClass) {
+            $("#removeAnswer").removeClass(function (index, currentClass) {
                 return "hidden";
             });
         }
         count++;
     });
 
-    $("#ansbtnremove").on("click", function () {
-        $("#answers #ans").last().remove();
+    $("#removeAnswer").on("click", function () {
+        $("#answers #answer").last().remove();
         count--;
         if (count === 0) {
-            $("#ansbtnremove").addClass(function (index, currentClass) {
+            $("#removeAnswer").addClass(function (index, currentClass) {
                 return "hidden";
             });
         }

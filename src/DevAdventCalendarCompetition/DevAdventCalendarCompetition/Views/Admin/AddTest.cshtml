@@ -19,15 +19,15 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group" id="ans">
+            <div class="form-group" id="answer">
                 <label asp-for="Answers"></label>
                 <input asp-for="Answers" class="form-control" />
                 <span asp-validation-for="Answers" class="text-danger"></span>
             </div>
             <div id="answers">
             </div>
-            <button type="button" id="ansbtnadd" class="btn btn-default">Dodaj kolejna</button>
-            <button type="button" id="ansbtnremove" class="btn btn-default hidden">Usun</button>
+            <button type="button" id="addAnswer" class="btn btn-default">Dodaj kolejna</button>
+            <button type="button" id="removeAnswer" class="btn btn-default hidden">Usun</button>
             <div class="form-group">
                 <label asp-for="StartDate"></label>
                 <input asp-for="StartDate" class="form-control" type="text" value="@DateTime.Now.ToShortDateString()" />
