@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -150,6 +150,9 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>Brak dostępu</value>
   </data>
+  <data name="AccountBlockedDescription" xml:space="preserve">
+    <value>To konto zostało zablokowane. Spróbuj ponownie później.</value>
+  </data>
   <data name="AccountManagement" xml:space="preserve">
     <value>Zarządzanie kontem</value>
   </data>
@@ -204,11 +207,11 @@
   <data name="CompleteTestEalier" xml:space="preserve">
     <value>Zakończ test wcześniej</value>
   </data>
-  <data name="ConfirmEmail" xml:space="preserve">
-    <value>Potwierdzenie rejestracji</value>
-  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Potwierdź hasło</value>
+  </data>
+  <data name="ConnectAccount" xml:space="preserve">
+    <value>Połącz swoje konto</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
@@ -240,16 +243,19 @@
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
   </data>
+  <data name="EmailConfirmation" xml:space="preserve">
+    <value>Potwierdzenie rejestracji</value>
+  </data>
   <data name="EmailConfirmed" xml:space="preserve">
     <value>Email potwierdzony.</value>
   </data>
-  <data name="EmailConfirmedDesc" xml:space="preserve">
+  <data name="EmailConfirmedDescription" xml:space="preserve">
     <value>Twój e-mail został potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
   </data>
   <data name="EmailForRegistrationConfirmed" xml:space="preserve">
     <value>Email został już potwierdzony.</value>
   </data>
-  <data name="EmailForRegistrationConfirmedDesc" xml:space="preserve">
+  <data name="EmailForRegistrationConfirmedDescription" xml:space="preserve">
     <value>Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
   </data>
   <data name="EndTime" xml:space="preserve">
@@ -273,17 +279,17 @@
   <data name="EveryDayYouOpen" xml:space="preserve">
     <value>Każdego dnia otwierasz</value>
   </data>
-  <data name="ExternalLogin1" xml:space="preserve">
-    <value>Zostałeś pomyślnie uwierzytelniony za pomocą serwisu</value>
-  </data>
-  <data name="ExternalLogin2" xml:space="preserve">
-    <value>Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.</value>
-  </data>
   <data name="ExternalLoginFailure" xml:space="preserve">
     <value>Błąd logowania</value>
   </data>
   <data name="ExternalLoginFailureDesc" xml:space="preserve">
     <value>Niepoprawne logowanie zewnętrznym serwisem</value>
+  </data>
+  <data name="ExternalRegistrationDescriptionPart1" xml:space="preserve">
+    <value>Zostałeś pomyślnie uwierzytelniony za pomocą serwisu</value>
+  </data>
+  <data name="ExternalRegistrationDescriptionPart2" xml:space="preserve">
+    <value>Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.</value>
   </data>
   <data name="FastenYourSeatbelt" xml:space="preserve">
     <value>Zapnij pasy! Startujemy już za</value>
@@ -292,19 +298,19 @@
     <value>Wydarzenie na FB</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Zapomniałeś/aś hasła?</value>
-  </data>
-  <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Przypomnienie hasła</value>
   </data>
-  <data name="ForgotPasswordConfirmationDesc1" xml:space="preserve">
+  <data name="ForgotPasswordConfirmationPart1" xml:space="preserve">
     <value>Jeśli konto skojarzone z podanym mailem istnieje, na ten adres został wysłany link umożliwiający zmianę hasła.</value>
   </data>
-  <data name="ForgotPasswordConfirmationDesc2" xml:space="preserve">
+  <data name="ForgotPasswordConfirmationPart2" xml:space="preserve">
     <value>Sprawdź swoją skrzynkę :).</value>
   </data>
-  <data name="ForgotPasswordIntro" xml:space="preserve">
+  <data name="ForgotPasswordDescription" xml:space="preserve">
     <value>Na podany adres email wyślemy Ci link do zmiany hasła</value>
+  </data>
+  <data name="ForgotPasswordQuestion" xml:space="preserve">
+    <value>Zapomniałeś/aś hasła?</value>
   </data>
   <data name="ForLogging" xml:space="preserve">
     <value>aby się zalogować.</value>
@@ -368,12 +374,6 @@
   </data>
   <data name="LockOut" xml:space="preserve">
     <value>Zablokowany</value>
-  </data>
-  <data name="LockOutDesc" xml:space="preserve">
-    <value>To konto zostało zablokowane. Spróbuj ponownie później.</value>
-  </data>
-  <data name="LockOutDescription" xml:space="preserve">
-    <value>To konto zostało zablokowane. Spróbuj ponownie później</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Zaloguj się!</value>
@@ -460,7 +460,7 @@
     <value>Raspberry Pi 4 model B WiFi DualBand Bluetooth 2GB RAM 1,5GHz</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Rejestruj</value>
+    <value>Zarejestruj</value>
   </data>
   <data name="RegisterConfirmationDesc" xml:space="preserve">
     <value>Zanim się zalogujesz, prosimy o potwierdzenie rejestracji.</value>
@@ -471,11 +471,8 @@
   <data name="Registration" xml:space="preserve">
     <value>Rejestracja</value>
   </data>
-  <data name="RegistrationConfirmed" xml:space="preserve">
+  <data name="RegistrationConfirmation" xml:space="preserve">
     <value>Potwierdzenie rejestracji</value>
-  </data>
-  <data name="RegistrationOther" xml:space="preserve">
-    <value>Zarejestruj</value>
   </data>
   <data name="Regulation" xml:space="preserve">
     <value>Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj</value>
@@ -584,9 +581,6 @@
   </data>
   <data name="Suprise" xml:space="preserve">
     <value>Niespodzianka</value>
-  </data>
-  <data name="SwichAccount" xml:space="preserve">
-    <value>Połącz swoje konto</value>
   </data>
   <data name="TestDuration" xml:space="preserve">
     <value>Ustaw, ile ma trwać test (w minutach)</value>

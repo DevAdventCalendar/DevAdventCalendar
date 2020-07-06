@@ -21,11 +21,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="area_title">
-                <h3 class="black mb-20">@SwichAccount @ViewData["LoginProvider"]</h3>
+                <h3 class="black mb-20">@ConnectAccount @ViewData["LoginProvider"]</h3>
             </div>
             <p>
-                @ExternalLogin1 <strong>@ViewData["LoginProvider"]</strong>.
-                @ExternalLogin2
+                @ExternalRegistrationDescriptionPart1 <strong>@ViewData["LoginProvider"]</strong>.
+                @ExternalRegistrationDescriptionPart2
             </p>
 
             <form asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="contact_form">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <button type="submit" class="chris_btn">@RegistrationOther</button>
+                        <button type="submit" class="chris_btn">@Register</button>
                     </div>
                 </div>
             </form>
