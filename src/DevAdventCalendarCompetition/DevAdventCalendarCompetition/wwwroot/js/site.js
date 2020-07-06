@@ -15,6 +15,27 @@ $(function () {
             $(this).closest("li").addClass("active");
         }
     });
+
+    var count = 0;
+    $("#ansbtnadd").on("click", function () {
+        $("#ans").clone().appendTo("#answers");
+        if (count === 0) {
+            $("#ansbtnremove").removeClass(function (index, currentClass) {
+                return "hidden";
+            });
+        }
+        count++;
+    });
+
+    $("#ansbtnremove").on("click", function () {
+        $("#answers #ans").last().remove();
+        count--;
+        if (count === 0) {
+            $("#ansbtnremove").addClass(function (index, currentClass) {
+                return "hidden";
+            });
+        }
+    });
 });
 
 function CheckTestStatus(testNumber) {

@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -60,11 +61,17 @@ namespace DevAdventCalendarCompetition.Controllers
                 model.StartDate = model.StartDate.AddHours(20).AddMinutes(00);
                 model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
 
+                var answers = model.Answers.Select(a => new TestAnswerDto()
+                {
+                    Answer = a.ToUpper(CultureInfo.InvariantCulture)
+                        .Replace(" ", string.Empty, StringComparison.Ordinal)
+                }).ToList();
+
                 var testDto = new TestDto
                 {
                     Number = model.Number,
                     Description = model.Description,
-                    Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", string.Empty, StringComparison.Ordinal),
+                    Answers = answers,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
