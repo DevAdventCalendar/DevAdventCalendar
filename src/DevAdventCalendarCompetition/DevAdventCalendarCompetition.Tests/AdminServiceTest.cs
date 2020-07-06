@@ -18,13 +18,13 @@ namespace DevAdventCalendarCompetition.Tests
     public class AdminServiceTest
     {
         private readonly Mock<ITestRepository> _testRepositoryMock;
-        private readonly Mock<ITestAnswerRepository> _testAnswerRepositoryMock;
+        private readonly Mock<IUserTestAnswersRepository> _testAnswerRepositoryMock;
         private IMapper _mapper;
 
         public AdminServiceTest()
         {
             this._testRepositoryMock = new Mock<ITestRepository>();
-            this._testAnswerRepositoryMock = new Mock<ITestAnswerRepository>();
+            this._testAnswerRepositoryMock = new Mock<IUserTestAnswersRepository>();
         }
 
         [Fact]
@@ -126,7 +126,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 1,
                 StartDate = DateTime.Today.AddDays(-1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             },
             new Test()
             {
@@ -134,7 +134,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 2,
                 StartDate = DateTime.Today.AddHours(12),
                 EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             },
             new Test()
             {
@@ -142,7 +142,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 3,
                 StartDate = DateTime.Today.AddDays(1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             }
         };
     }
