@@ -165,7 +165,7 @@
   <data name="AddNewTest" xml:space="preserve">
     <value>Dodaj nowy test</value>
   </data>
-  <data name="AddNewTest2" xml:space="preserve">
+  <data name="AddTest" xml:space="preserve">
     <value>Dodaj test</value>
   </data>
   <data name="AdminPage" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="Calculate" xml:space="preserve">
     <value>Oblicz</value>
   </data>
-  <data name="Calculate2" xml:space="preserve">
+  <data name="CalculateResults" xml:space="preserve">
     <value>Oblicz wyniki</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
@@ -321,11 +321,11 @@
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
   </data>
-  <data name="Go" xml:space="preserve">
-    <value>Przejdź na</value>
-  </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
+  </data>
+  <data name="GoTo" xml:space="preserve">
+    <value>Przejdź na</value>
   </data>
   <data name="Gratulations" xml:space="preserve">
     <value>Gratulacje!</value>

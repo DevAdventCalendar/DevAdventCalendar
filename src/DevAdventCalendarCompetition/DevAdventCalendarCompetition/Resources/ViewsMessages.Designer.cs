@@ -207,9 +207,9 @@ namespace DevAdventCalendarCompetition.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dodaj test.
         /// </summary>
-        public static string AddNewTest2 {
+        public static string AddTest {
             get {
-                return ResourceManager.GetString("AddNewTest2", resourceCulture);
+                return ResourceManager.GetString("AddTest", resourceCulture);
             }
         }
         
@@ -279,9 +279,9 @@ namespace DevAdventCalendarCompetition.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Oblicz wyniki.
         /// </summary>
-        public static string Calculate2 {
+        public static string CalculateResults {
             get {
-                return ResourceManager.GetString("Calculate2", resourceCulture);
+                return ResourceManager.GetString("CalculateResults", resourceCulture);
             }
         }
         
@@ -673,20 +673,20 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Przejdź na.
-        /// </summary>
-        public static string Go {
-            get {
-                return ResourceManager.GetString("Go", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Odpowiedź poprawna!.
         /// </summary>
         public static string GoodAnswer {
             get {
                 return ResourceManager.GetString("GoodAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przejdź na.
+        /// </summary>
+        public static string GoTo {
+            get {
+                return ResourceManager.GetString("GoTo", resourceCulture);
             }
         }
         
