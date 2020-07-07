@@ -10,9 +10,6 @@ namespace DevAdventCalendarCompetition.Repository.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(450)]
-        [ForeignKey("User")]
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
