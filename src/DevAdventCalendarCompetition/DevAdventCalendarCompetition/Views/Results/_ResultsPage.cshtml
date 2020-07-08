@@ -5,13 +5,14 @@
     var nextDisabled = !Model.Value.HasNextPage ? "disabled" : "";
 }
 <table class="table table-striped">
+    <caption></caption>
     <thead>
         <tr>
-            <th class="col-xs-1">#</th>
-            <th>Użytkownik</th>
-            <th>Poprawne odpowiedzi</th>
-            <th>Błędne odpowiedzi</th>
-            <th>Suma punktów</th>
+            <th scope="col"  class="col-xs-1">#</th>
+            <th scope="col" >Użytkownik</th>
+            <th scope="col" >Poprawne odpowiedzi</th>
+            <th scope="col" >Błędne odpowiedzi</th>
+            <th scope="col" >Suma punktów</th>
         </tr>
     </thead>
     <tbody>
@@ -43,14 +44,14 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <a asp-controller="Home"
-           asp-action="Results"
+        <a asp-controller="Results"
+           asp-action="Index"
            asp-route-pageIndex="@(entries.PageIndex - 1)"
            class="chris_btn @prevDisabled">
             Wstecz
         </a>
-        <a asp-controller="Home"
-           asp-action="Results"
+        <a asp-controller="Results"
+           asp-action="Index"
            asp-route-pageIndex="@(entries.PageIndex + 1)"
            class="chris_btn @nextDisabled">
             Dalej

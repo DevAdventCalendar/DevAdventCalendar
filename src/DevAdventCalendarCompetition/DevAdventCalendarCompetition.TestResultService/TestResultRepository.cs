@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DevAdventCalendarCompetition.Repository.Context;
@@ -28,7 +28,7 @@ namespace DevAdventCalendarCompetition.TestResultService
         public double GetAnsweringTimeSum(string userId, DateTime dateFrom, DateTime dateTo)
         {
             return _dbContext
-                .TestAnswer
+                .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
                 .Sum(a => (a.AnsweringTime - a.Test.StartDate.Value).TotalMilliseconds);
         }
@@ -36,7 +36,7 @@ namespace DevAdventCalendarCompetition.TestResultService
         public IEnumerable<DateTime> GetCorrectAnswersDates(string userId, DateTime dateFrom, DateTime dateTo)
         {
             return _dbContext
-                .TestAnswer
+                .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId)
                 .Where(a => a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
                 .Where(a => a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
@@ -53,7 +53,7 @@ namespace DevAdventCalendarCompetition.TestResultService
         public IEnumerable<WrongAnswerData> GetWrongAnswersCountPerDay(string userId, DateTime dateFrom, DateTime dateTo)
         {
             return _dbContext
-                .TestWrongAnswer
+                .UserTestWrongAnswers
                 .Where(a => a.Time >= dateFrom && a.Time <= dateTo && a.UserId == userId)
                 .Select(t => new { TestStartDate = t.Test.StartDate.Value.Date })
                 .AsEnumerable()

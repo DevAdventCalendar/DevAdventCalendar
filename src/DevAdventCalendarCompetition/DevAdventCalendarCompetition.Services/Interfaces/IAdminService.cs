@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DevAdventCalendarCompetition.Services.Models;
 
@@ -14,12 +14,8 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         void AddTest(TestDto testDto);
 
-        void UpdateTestDates(TestDto test, string minutesString);
+        void UpdateTestDates(int testId, string minutesString);
 
-        void UpdateTestEndDate(TestDto test, DateTime endTime);
-
-        void ResetTestDates();
-
-        void ResetTestAnswers();
+        void UpdateTestEndDate(int testId, DateTime endTime);
     }
 }

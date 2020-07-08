@@ -1,4 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -71,14 +71,14 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests.Models
                 throw new ArgumentNullException(nameof(dbContext));
             }
 
-            dbContext.Test.Add(this.test1);
-            dbContext.Test.Add(this.test2);
-            dbContext.Test.Add(this.test3);
-            dbContext.Test.Add(this.test4);
-            dbContext.Test.Add(this.test5);
-            dbContext.Test.Add(this.test6);
-            dbContext.Test.Add(this.test7);
-            dbContext.Test.Add(this.test8);
+            dbContext.Tests.Add(this.test1);
+            dbContext.Tests.Add(this.test2);
+            dbContext.Tests.Add(this.test3);
+            dbContext.Tests.Add(this.test4);
+            dbContext.Tests.Add(this.test5);
+            dbContext.Tests.Add(this.test6);
+            dbContext.Tests.Add(this.test7);
+            dbContext.Tests.Add(this.test8);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService;
@@ -9,18 +9,18 @@ namespace DevAdventCalendarCompetition.Tests
 {
     public class ResultCalculationTest
     {
-        private readonly List<TestAnswer> _answers = new List<TestAnswer>
+        private readonly List<UserTestCorrectAnswer> _answers = new List<UserTestCorrectAnswer>
         {
-            new TestAnswer { Id = 1, UserId = "1", TestId = 1, AnsweringTime = DateTime.Now, AnsweringTimeOffset = default },
-            new TestAnswer { Id = 2, UserId = "1", TestId = 1, AnsweringTime = DateTime.Today.AddHours(-2), AnsweringTimeOffset = default },
-            new TestAnswer { Id = 3, UserId = "1", TestId = 2, AnsweringTime = DateTime.Today.AddHours(-1), AnsweringTimeOffset = default }
+            new UserTestCorrectAnswer { Id = 1, UserId = "1", TestId = 1, AnsweringTime = DateTime.Now, AnsweringTimeOffset = default },
+            new UserTestCorrectAnswer { Id = 2, UserId = "1", TestId = 1, AnsweringTime = DateTime.Today.AddHours(-2), AnsweringTimeOffset = default },
+            new UserTestCorrectAnswer { Id = 3, UserId = "1", TestId = 2, AnsweringTime = DateTime.Today.AddHours(-1), AnsweringTimeOffset = default }
         };
 
-        private readonly List<TestWrongAnswer> _wrongAnswers = new List<TestWrongAnswer>
+        private readonly List<UserTestWrongAnswer> _wrongAnswers = new List<UserTestWrongAnswer>
         {
-            new TestWrongAnswer { Id = 1, UserId = "1", TestId = 1 },
-            new TestWrongAnswer { Id = 2, UserId = "1", TestId = 1 },
-            new TestWrongAnswer { Id = 3, UserId = "1", TestId = 2 }
+            new UserTestWrongAnswer { Id = 1, UserId = "1", TestId = 1 },
+            new UserTestWrongAnswer { Id = 2, UserId = "1", TestId = 1 },
+            new UserTestWrongAnswer { Id = 3, UserId = "1", TestId = 2 }
         };
 
         private readonly List<CompetitionResult> _results = new List<CompetitionResult>
