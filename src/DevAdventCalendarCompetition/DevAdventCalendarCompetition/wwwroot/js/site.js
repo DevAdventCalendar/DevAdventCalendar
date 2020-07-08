@@ -18,7 +18,7 @@ $(function () {
 
     var count = 0;
     $("#addAnswer").on("click", function () {
-        $("#answer").clone().appendTo("#answers");
+        $("#answer").clone().find("input").val("").appendTo("#answers");
         if (count === 0) {
             $("#removeAnswer").removeClass(function (index, currentClass) {
                 return "hidden";
@@ -51,8 +51,16 @@ function CheckTestStatus(testNumber) {
                 }
             });
     } else {
-        $("#alert-text").text("Nie możesz wejść!");
+        $("#alert-text").text("Nie możesz wejść! Cierpliwości...");
         $("#tile-open-alert").show();
+    }
+}
+
+function GetResult(number) {
+    if (number == 20) {
+        return "odpowiedź to: 'kutia'";
+    } else {
+        return "To nie ten numer! Spróbuj jeszcze raz...";
     }
 }
 
