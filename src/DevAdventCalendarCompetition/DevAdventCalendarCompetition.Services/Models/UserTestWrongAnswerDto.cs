@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace DevAdventCalendarCompetition.Services.Models
 {
-    public class TestWrongAnswerDto
+    public class UserTestWrongAnswerDto
     {
         public int TestId { get; set; }
 

@@ -59,7 +59,7 @@
                             </div>
                         }
 
-                        var errorMessage = Html.ValidationMessageFor(m => m.Answer);
+                        var errorMessage = Html.ValidationMessageFor(m => m.Answers);
 
                         if (!string.IsNullOrEmpty(errorMessage.ToString()))
                         {
@@ -88,11 +88,6 @@
                         else
                         {
                             <h3 class="mb-30 text-primary">Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</h3>
-                        }
-
-                        if (!Model.IsAdvent && !string.IsNullOrEmpty(Model.PlainAnswer))
-                        {
-                            <h4 class="mb-30">Poprawna odpowiedź: @Model.PlainAnswer</h4>
                         }
                     }
 

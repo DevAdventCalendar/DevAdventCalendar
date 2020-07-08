@@ -15,6 +15,28 @@ $(function () {
             $(this).closest("li").addClass("active");
         }
     });
+
+    var count = 0;
+    $("#addAnswer").on("click", function () {
+        var ans = $("#answer").clone().appendTo("#answers");
+        ans.find("input").val("");
+        if (count === 0) {
+            $("#removeAnswer").removeClass(function (index, currentClass) {
+                return "hidden";
+            });
+        }
+        count++;
+    });
+
+    $("#removeAnswer").on("click", function () {
+        $("#answers #answer").last().remove();
+        count--;
+        if (count === 0) {
+            $("#removeAnswer").addClass(function (index, currentClass) {
+                return "hidden";
+            });
+        }
+    });
 });
 
 function CheckTestStatus(testNumber) {
@@ -30,8 +52,16 @@ function CheckTestStatus(testNumber) {
                 }
             });
     } else {
-        $("#alert-text").text("Nie możesz wejść!");
+        $("#alert-text").text("Nie możesz wejść! Cierpliwości...");
         $("#tile-open-alert").show();
+    }
+}
+
+function GetResult(number) {
+    if (number == 20) {
+        return "odpowiedź to: 'kutia'";
+    } else {
+        return "To nie ten numer! Spróbuj jeszcze raz...";
     }
 }
 

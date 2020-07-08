@@ -226,32 +226,4 @@
             e.preventDefault();
         }
     });
-
 })(jQuery);
-
-function CheckTestStatus(testNumber) {
-    if (testNumber != null) {
-        $.get("/Home/CheckTestStatus",
-            {
-                testNumber: testNumber
-            },
-            function (result) {
-                if (result === "Ended") {
-                    $("#alert-text").text("Niestety, spóźniłeś się...");
-                    $("#tile-open-alert").show();
-                }
-            });
-    } else {
-        $("#alert-text").text("Nie możesz wejść! Cierpliwości...");
-        $("#tile-open-alert").show();
-    }
-}
-
-function GetResult(number) {
-    if (number == 20) {
-        return "odpowiedź to: 'kutia'";
-    }
-    else {
-        return "To nie ten numer! Spróbuj jeszcze raz...";
-    }
-}

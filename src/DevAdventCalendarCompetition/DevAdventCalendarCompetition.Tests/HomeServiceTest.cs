@@ -15,13 +15,13 @@ namespace DevAdventCalendarCompetition.Tests
     public class HomeServiceTest
     {
         private readonly Mock<ITestRepository> _testRepositoryMock;
-        private readonly Mock<ITestAnswerRepository> _testAnswerRepositoryMock;
+        private readonly Mock<IUserTestAnswersRepository> _testAnswerRepositoryMock;
         private IMapper _mapper;
 
         public HomeServiceTest()
         {
             this._testRepositoryMock = new Mock<ITestRepository>();
-            this._testAnswerRepositoryMock = new Mock<ITestAnswerRepository>();
+            this._testAnswerRepositoryMock = new Mock<IUserTestAnswersRepository>();
         }
 
         [Fact]
@@ -80,15 +80,15 @@ namespace DevAdventCalendarCompetition.Tests
         {
             // Arrange
             var testAnswer = GetTestAnswer();
-            this._testAnswerRepositoryMock.Setup(mock => mock.GetTestAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
+            this._testAnswerRepositoryMock.Setup(mock => mock.GetCorrectAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
             var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
 
             // Act
-            var result = homeService.GetTestAnswerByUserId(testAnswer.UserId, testAnswer.Id);
+            var result = homeService.GetCorrectAnswerByUserId(testAnswer.UserId, testAnswer.Id);
 
             // Assert
-            Assert.IsType<TestAnswerDto>(result);
+            Assert.IsType<UserTestCorrectAnswerDto>(result);
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace DevAdventCalendarCompetition.Tests
             var result = homeService.GetTestsWithUserAnswers();
 
             // Assert
-            Assert.IsType<List<TestWithAnswerListDto>>(result);
+            Assert.IsType<List<TestWithUserCorrectAnswerListDto>>(result);
             Assert.True(testList.Count == result.Count);
         }
 
@@ -118,7 +118,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 1,
                 StartDate = DateTime.Today.AddDays(-1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             },
             new Test()
             {
@@ -126,7 +126,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 2,
                 StartDate = DateTime.Today.AddHours(12),
                 EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             },
             new Test()
             {
@@ -134,11 +134,11 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 3,
                 StartDate = DateTime.Today.AddDays(1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             }
         };
 
-        private static TestAnswer GetTestAnswer() => new TestAnswer()
+        private static UserTestCorrectAnswer GetTestAnswer() => new UserTestCorrectAnswer()
         {
             Id = 1,
             Test = new Test(),

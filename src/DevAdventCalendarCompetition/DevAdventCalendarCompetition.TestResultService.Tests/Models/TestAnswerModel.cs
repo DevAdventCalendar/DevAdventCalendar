@@ -1,4 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
 using System;
@@ -24,7 +24,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             }
 
             //userI - 1 correct answer (after ranking time)
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 15,
                 UserId = UserModel.userI.Id,
@@ -36,7 +36,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             });
 
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 14,
                 UserId = UserModel.userI.Id,
@@ -49,7 +49,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userH - 1 correct answer
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 13,
                 UserId = UserModel.userH.Id,
@@ -62,7 +62,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userG - 2 correct answers
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 12,
                 UserId = UserModel.userG.Id,
@@ -73,7 +73,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 AnsweringTimeOffset = new TimeSpan(1,2, 0, 0)
             });
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 11,
                 UserId = UserModel.userG.Id,
@@ -90,7 +90,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userD
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 1,
                 UserId = UserModel.userD.Id,
@@ -101,7 +101,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 AnsweringTimeOffset = new TimeSpan(0, 10, 0)
             });
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 2,
                 UserId = UserModel.userD.Id,
@@ -114,7 +114,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userC
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 3,
                 UserId = UserModel.userC.Id,
@@ -125,7 +125,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 AnsweringTimeOffset = new TimeSpan(0, 10, 0)
             });
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 4,
                 UserId = UserModel.userC.Id,
@@ -138,7 +138,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userB
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 5,
                 UserId = UserModel.userB.Id,
@@ -149,7 +149,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 AnsweringTimeOffset = new TimeSpan(2, 0, 0)
             });
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 6,
                 UserId = UserModel.userB.Id,
@@ -162,7 +162,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
 
             //userA
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 7,
                 UserId = UserModel.userA.Id,
@@ -173,7 +173,7 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 AnsweringTimeOffset = new TimeSpan(0, 2, 0, 0, 5)
             });
 
-            dbContext.TestAnswer.Add(new TestAnswer()
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 8,
                 UserId = UserModel.userA.Id,
