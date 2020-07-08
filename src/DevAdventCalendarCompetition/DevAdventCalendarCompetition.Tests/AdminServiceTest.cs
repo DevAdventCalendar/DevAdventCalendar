@@ -86,6 +86,23 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
+        public void AddTest_AddCorrectAmountOfAnswers()
+        {
+            // Arrange
+            var test = GetTestDto();
+            this._testRepositoryMock.Setup(mock => mock.AddTest(It.IsAny<Test>()));
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var stringHasher = new StringHasher(new HashParameters(100, new byte[] { 1, 2 }));
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, stringHasher);
+
+            // Act
+            adminService.AddTest(test);
+
+            // Assert
+            this._testRepositoryMock.Verify(mock => mock.AddTest(It.Is<Test>(t => t.HashedAnswers.Count == test.Answers.Count)));
+        }
+
+        [Fact]
         public void UpdateTestDates()
         {
             // Arrange
@@ -143,6 +160,19 @@ namespace DevAdventCalendarCompetition.Tests
                 StartDate = DateTime.Today.AddDays(1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
                 HashedAnswers = null
+            }
+        };
+
+        private static TestDto GetTestDto() => new TestDto()
+        {
+            Id = 1,
+            Number = 1,
+            Description = "Blabla",
+            Answers = new List<TestAnswerDto>()
+            {
+                new TestAnswerDto() { Answer = "Answer1" },
+                new TestAnswerDto() { Answer = "Answer2" },
+                new TestAnswerDto() { Answer = "Answer3" }
             }
         };
     }
