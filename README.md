@@ -1,66 +1,55 @@
 # DevAdventCalendar
 
-DevAdventCalendar web app for online competition for programmers.
+DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](www.devadventcalenar.pl)
 
 [![Follow DevAdventCalendar](https://img.shields.io/twitter/follow/dev_advent_cal?label=Follow%20%40dev_advent_cal&style=social)](https://twitter.com/dev_advent_cal)
 [![Follow DevAdventCalendar](https://img.shields.io/badge/FB-Dev%20Advent%20Calendar-blue)](https://www.facebook.com/devadventcalendar/)
 
-|Build  |Deployment| Quality |
-|:-----:|:--------:|:-------:|
-|[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI%22)|[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/1/1)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=1)|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevAdventCalendar_DevAdventCalendar&metric=alert_status)](https://sonarcloud.io/dashboard?id=DevAdventCalendar_DevAdventCalendar)|
+![GitHub issues](https://img.shields.io/github/issues-raw/DevAdventCalendar/DevAdventCalendar)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/DevAdventCalendar/DevAdventCalendar)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/DevAdventCalendar/DevAdventCalendar)
 
-## Getting started
+![GitHub contributors](https://img.shields.io/github/contributors/DevAdventCalendar/DevAdventCalendar)
+![GitHub last commit](https://img.shields.io/github/last-commit/DevAdventCalendar/DevAdventCalendar)
 
-1. Clone repository
 
-    ```git
-    git clone https://github.com/WTobor/DevAdventCalendar.git
-    ```
+|Environment |Build  |Deployment| Quality | Coverage |
+|:----------:|:-----:|:--------:|:-------:|:--------:|
+| PROD |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/1/1)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=1) |[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevAdventCalendar_DevAdventCalendar&metric=alert_status)](https://sonarcloud.io/dashboard?id=DevAdventCalendar_DevAdventCalendar) |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop)|
+| DEV |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI%20DEV/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI+DEV%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/2/2)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=2) | |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop_uat/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop_uat)|
 
-2. Open `/src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln` in VisualStudio 2019.
-3. Install [CodeMaid](http://www.codemaid.net/) to cleanup files
-(use default config or just import the one from solution `/src/DevAdventCalendarCompetition/CodeMaid.config`).
-4. Install [.Net Core SDK v2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2).
+
+## Projects in solution
+
+- **DevAdventCalendarCompetition** - main project with Controllers and Views
+- **DevAdventCalendarCompetition.Services** - class library for logic operations
+- **DevAdventCalendarCompetition.Repository** - class library for database operations
+- **DevAdventCalendarCompetition.Tests** - unit tests for DevAdventCalendarCompetition.Services (xUnit)
+
+- **DevAdventCalendarCompetition.TestResultService** - external service calculating user points based on a custom algorithm
+- **DevAdventCalendarCompetition.TestResultService.Tests** - unit tests for TestResultService (xUnit)
 
 ## Contributing
 
-1. Fork it!
-2. Checkout branch `develop`
+Please read [CONTRIBUTING.md](https://github.com/DevAdventCalendar/DevAdventCalendar/blob/develop/CONTRIBUTING.md) for details.
 
-    ```git
-    git checkout develop
-    ```
+## Suggest a new feature
 
-3. Create your branch (from branch `develop`)
+We use GitHub issues to track public features. Suggest a new feature by opening a new issue (the template has already been created, simply complete it).
 
-    ```git
-    git checkout -b my-new-feature
-    ```
+## Report bug
 
-    We are using git-flow, so create branch `feature/new-feature` (for new features) or `hotfix/new-hotfix` (for fixing bugs).
-
-4. Commit your changes (remember to check if code compiles without errors and tests pass)
-
-    ```git
-    git commit -m 'Add some feature'
-    ```
-
-5. Push to the branch
-
-    ```git
-    git push origin my-new-feature
-    ```
-
-6. Create a pull request to `develop` branch (the template has already been created, simply complete it)
-
-## Debugging
-
- In order to send e-mails you need to set up an e-mail account in `appsettings.development.json`.
- Also, it is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
-
-![ENVIRONMENT](docs/Pictures/screen.png/?raw=true)
+We use GitHub issues to track public bugs. Report a bug by opening a new issue of type bug (the template has already been created, simply complete it).
 
 ## Used Tools
+
+### Docker
+
+Docker is an open platform that enables developers and administrators to build images, ship, and run distributed applications in a loosely isolated environment called a container. This approach enables efficient application lifecycle management between development, QA, and production environments.
+
+Application is using Docker to work on VPS. Additional Docker-compose helping with configure for all of this
+
+[Docker documentation](https://docs.microsoft.com/pl-pl/dotnet/core/docker/intro-net-docker)
 
 ### Swagger
 
@@ -72,10 +61,6 @@ Can be access by: pagedomain (or localhost)/swagger/
 
 [Swagger documentation](https://docs.microsoft.com/pl-pl/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-2.1)
 
-### Docker
+#### MailHog
 
-Docker is an open platform that enables developers and administrators to build images, ship, and run distributed applications in a loosely isolated environment called a container. This approach enables efficient application lifecycle management between development, QA, and production environments.
-
-Application is using Docker to work  on VPS. Additional Docker-compose helping with configure for all of this
-
-[Docker documentation](https://docs.microsoft.com/pl-pl/dotnet/core/docker/intro-net-docker)
+MailHog is an email testing tool for developers. More info on [GitHub](https://github.com/mailhog/MailHog) page.

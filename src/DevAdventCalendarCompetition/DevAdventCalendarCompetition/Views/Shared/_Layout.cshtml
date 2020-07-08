@@ -9,7 +9,7 @@
 
     <title>DevAdventCalendar - programistyczny kalendarz adwentowy</title>
     <meta name="description" content="DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT. ">
-    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/DAC2019.png">
+    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/dac2019-social.png">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74536209-2"></script>
@@ -36,7 +36,7 @@
 
     <!-- bootstrap social -->
     <link rel="stylesheet" href="~/css/bootstrap-social.css" />
-    
+
     <!-- bootstrap toggle -->
     <link rel="stylesheet" href="~/theme-2019/css/bootstrap4-toggle.min.css" />
 
@@ -96,7 +96,7 @@
                                             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
 
                                             <!-- login partial -->
-                                            @await Html.PartialAsync("_LoginPartial")
+                                            <partial name="_LoginPartial" />
                                         </ul>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
     <script src="~/theme-2019/js/owl.carousel.min.js"></script>
 
     <!-- Snowfall js -->
-    <script src="~/theme-2019/js/snowfall.jquery.js"></script>
+    <script src="~/theme-2019/js/snowfall.js"></script>
 
     <!-- jquery count down js -->
     <script src="~/theme-2019/js/jquery.countdown.min.js"></script>

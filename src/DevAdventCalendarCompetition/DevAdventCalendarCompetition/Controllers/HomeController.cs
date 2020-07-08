@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
+using DevAdventCalendarCompetition.Models.Home;
+using DevAdventCalendarCompetition.Models.Test;
+using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Vms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -36,6 +38,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(currentTestsDto);
         }
 
+        [HttpGet]
         [Route("Results")]
         public ActionResult Results(int? pageIndex)
         {
@@ -47,18 +50,18 @@ namespace DevAdventCalendarCompetition.Controllers
 
             int pageSize = 50;
 
-            var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryVm>>();
+            var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryViewModel>>();
             var testResultListDto = this._homeService.GetAllTestResults();
 
             for (var i = 1; i <= testResultListDto.Count; i++)
             {
                 if (testResultListDto.TryGetValue(i, out var results))
                 {
-                    var totalTestResults = new List<TestResultEntryVm>();
+                    var totalTestResults = new List<TestResultEntryViewModel>();
 
                     foreach (var result in results)
                     {
-                        totalTestResults.Add(new TestResultEntryVm
+                        totalTestResults.Add(new TestResultEntryViewModel
                         {
                             Week1Points = result.Week1Points,
                             Week1Place = result.Week1Place,
@@ -75,12 +78,12 @@ namespace DevAdventCalendarCompetition.Controllers
                         });
                     }
 
-                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryVm>(totalTestResults, pageIndex ?? 1, pageSize));
+                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex ?? 1, pageSize));
                 }
             }
 
             var userPosition = this._homeService.GetUserPosition(userId);
-            var vm = new TestResultsVm()
+            var vm = new TestResultsViewModel()
             {
                 UserWeek1Position = userPosition.Week1Place ?? 0,
                 UserWeek2Position = userPosition.Week2Place ?? 0,
@@ -92,70 +95,83 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(vm);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult CheckTestStatus(int testNumber)
         {
             return this.Content(this._homeService.CheckTestStatus(testNumber));
         }
 
+        [HttpGet]
         [Route(nameof(Error))]
-        public ActionResult Error()
+        public ActionResult Error([FromQuery]int statusCode)
         {
-            this.ViewBag.errorMessage = this.TempData["errorMessage"];
-            return this.View();
+            return this.View(new ErrorViewModel
+            {
+                Message = ErrorMessagesProvider.GetMessageBody(statusCode)
+            });
         }
 
+        [HttpGet]
         [Route("11111100011")]
         public ActionResult Surprise()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(About))]
         public ActionResult About()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Contact))]
         public ActionResult Contact()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Sponsors))]
         public ActionResult Sponsors()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Prizes))]
         public ActionResult Prizes()
         {
             return this.View();
         }
 
+        [HttpGet]
         [Route(nameof(Rules))]
         public ActionResult Rules()
         {
             return this.View();
         }
 
+        [HttpGet]
         public ActionResult TestHasNotStarted(int number)
         {
             return this.View(number);
         }
 
+        [HttpGet]
         public ActionResult TestHasEnded(int number)
         {
             return this.View(number);
         }
 
+        [HttpGet]
         public ActionResult TestAnswered(int number)
         {
             return this.View(number);
         }
 
+        [HttpGet]
         public ActionResult GetServerTime()
         {
             return this.Json(DateTime.Now.ToString("yyyy'-'MM'-'ddTHH':'mm':'ss.fff%K", CultureInfo.InvariantCulture));

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using DevAdventCalendarCompetition.Models;
+using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
@@ -38,7 +39,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTest(TestVm model)
+        public ActionResult AddTest(TestViewModel model)
         {
             if (model is null)
             {
@@ -51,7 +52,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (dbTest != null)
                 {
-                    this.ModelState.AddModelError(nameof(model.Number), "Test o podanym numerze już istnieje.");
+                    this.ModelState.AddModelError("Number", "Test o podanym numerze już istnieje.");
                     return this.View(model);
                 }
 
@@ -78,7 +79,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             return this.View(model);
-               }
+        }
 
         [HttpPost]
         public ActionResult StartTest(int testId, string minutesString)

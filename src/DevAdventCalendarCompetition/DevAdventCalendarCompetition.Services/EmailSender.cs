@@ -1,13 +1,12 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using MimeKit;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    // This class is used by the application to send email for account confirmation and password reset.
-    // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
         public string Host { get; set; }
@@ -18,25 +17,40 @@ namespace DevAdventCalendarCompetition.Services
 
         public string Password { get; set; }
 
+        public string From { get; set; }
+
+        public bool Ssl { get; set; }
+
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            using (var smtpClient = new SmtpClient
-            {
-                Host = this.Host,
-                Port = this.Port,
-                EnableSsl = true,
-                Credentials = new NetworkCredential(this.UserName, this.Password)
-            })
+            var mailMesage = this.CreateMailMessage(subject, message);
+            mailMesage.From.Add(InternetAddress.Parse(this.From));
+            mailMesage.To.Add(InternetAddress.Parse(email));
 
-            using (var mailMessage = new MailMessage(this.UserName, email)
+            using (var smtpClient = new MailKit.Net.Smtp.SmtpClient())
             {
-                Subject = subject,
-                IsBodyHtml = true,
-                Body = message
-            })
-            {
-                await smtpClient.SendMailAsync(mailMessage).ConfigureAwait(false);
+                await smtpClient.ConnectAsync(this.Host, this.Port, this.Ssl);
+                await smtpClient.AuthenticateAsync(this.UserName, this.Password);
+                await smtpClient.SendAsync(mailMesage);
+                await smtpClient.DisconnectAsync(true);
             }
+        }
+
+        private MimeMessage CreateMailMessage(string subject, string body)
+        {
+            var bodyBuilder = new MimeKit.BodyBuilder
+            {
+                HtmlBody = body
+            };
+
+            var message = new MimeMessage
+            {
+                Sender = MailboxAddress.Parse(this.From),
+                Subject = subject,
+                Body = bodyBuilder.ToMessageBody()
+            };
+
+            return message;
         }
     }
 }

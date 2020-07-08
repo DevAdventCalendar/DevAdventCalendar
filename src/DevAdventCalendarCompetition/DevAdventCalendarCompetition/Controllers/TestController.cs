@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (test.Status == TestStatus.Ended || test.Status == TestStatus.NotStarted)
             {
-                this.ModelState.AddModelError(" ", "Wystąpił błąd!");
+                this.ModelState.AddModelError("Answer", "Wystąpił błąd!");
                 return this.View("Index", test);
             }
 
