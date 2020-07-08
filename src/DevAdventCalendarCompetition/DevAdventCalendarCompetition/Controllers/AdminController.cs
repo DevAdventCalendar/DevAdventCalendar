@@ -61,7 +61,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 model.StartDate = model.StartDate.AddHours(20).AddMinutes(00);
                 model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
 
-                var answers = model.Answers.Select(a => new TestAnswerDto()
+                var answers = model.Answers.Where(a => !string.IsNullOrWhiteSpace(a)).Select(a => new TestAnswerDto()
                 {
                     Answer = a.ToUpper(CultureInfo.InvariantCulture)
                         .Replace(" ", string.Empty, StringComparison.Ordinal)

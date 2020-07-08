@@ -18,7 +18,8 @@ $(function () {
 
     var count = 0;
     $("#addAnswer").on("click", function () {
-        $("#answer").clone().find("input").val("").appendTo("#answers");
+        var ans = $("#answer").clone().appendTo("#answers");
+        ans.find("input").val("");
         if (count === 0) {
             $("#removeAnswer").removeClass(function (index, currentClass) {
                 return "hidden";

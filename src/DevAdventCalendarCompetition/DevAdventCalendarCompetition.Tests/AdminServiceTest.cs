@@ -167,7 +167,7 @@ namespace DevAdventCalendarCompetition.Tests
         {
             Id = 1,
             Number = 1,
-            Description = "Blabla",
+            Description = "TestDescription",
             Answers = new List<TestAnswerDto>()
             {
                 new TestAnswerDto() { Answer = "Answer1" },
