@@ -147,6 +147,9 @@
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
   </data>
+  <data name="AcceptTermsOfUse" xml:space="preserve">
+    <value>Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj</value>
+  </data>
   <data name="AccessDenied" xml:space="preserve">
     <value>Brak dostępu</value>
   </data>
@@ -177,9 +180,6 @@
   <data name="AnswerQuestions" xml:space="preserve">
     <value>Odpowiadasz na pytania &lt;br/&gt; i zbierasz punkty</value>
   </data>
-  <data name="Awards" xml:space="preserve">
-    <value>Nagrody</value>
-  </data>
   <data name="AwardsOfTheWeek" xml:space="preserve">
     <value>Nagrody tygodni</value>
   </data>
@@ -206,6 +206,9 @@
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Potwierdź hasło</value>
+  </data>
+  <data name="Congrats" xml:space="preserve">
+    <value>Gratulacje!</value>
   </data>
   <data name="ConnectAccount" xml:space="preserve">
     <value>Połącz swoje konto</value>
@@ -265,12 +268,6 @@
     <value>Podaj swój email</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error.</value>
-  </data>
-  <data name="ErrorDesc" xml:space="preserve">
-    <value>An error occurred while processing your request.</value>
-  </data>
-  <data name="ErrorInPolish" xml:space="preserve">
     <value>Błąd</value>
   </data>
   <data name="EveryDayYouOpen" xml:space="preserve">
@@ -279,7 +276,7 @@
   <data name="ExternalLoginFailure" xml:space="preserve">
     <value>Błąd logowania</value>
   </data>
-  <data name="ExternalLoginFailureDesc" xml:space="preserve">
+  <data name="ExternalLoginFailureDescription" xml:space="preserve">
     <value>Niepoprawne logowanie zewnętrznym serwisem</value>
   </data>
   <data name="ExternalRegistrationDescriptionPart1" xml:space="preserve">
@@ -288,10 +285,7 @@
   <data name="ExternalRegistrationDescriptionPart2" xml:space="preserve">
     <value>Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.</value>
   </data>
-  <data name="FastenYourSeatbelt" xml:space="preserve">
-    <value>Zapnij pasy! Startujemy już za</value>
-  </data>
-  <data name="FbEvents" xml:space="preserve">
+  <data name="FbEvent" xml:space="preserve">
     <value>Wydarzenie na FB</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
@@ -315,7 +309,7 @@
   <data name="FullList" xml:space="preserve">
     <value>Pełny ranking</value>
   </data>
-  <data name="GetCool" xml:space="preserve">
+  <data name="GetCoolPrizes" xml:space="preserve">
     <value>Zdobywasz fajne &lt;br/&gt; nagrody</value>
   </data>
   <data name="GiftFromElfs" xml:space="preserve">
@@ -326,9 +320,6 @@
   </data>
   <data name="GoTo" xml:space="preserve">
     <value>Przejdź na</value>
-  </data>
-  <data name="Gratulations" xml:space="preserve">
-    <value>Gratulacje!</value>
   </data>
   <data name="HaveFun" xml:space="preserve">
     <value>Udanej &lt;br&gt; Zabawy</value>
@@ -369,7 +360,7 @@
   <data name="LogInUsingPassword" xml:space="preserve">
     <value>Zaloguj używając loginu i hasła</value>
   </data>
-  <data name="MainAwards" xml:space="preserve">
+  <data name="MainPrizes" xml:space="preserve">
     <value>Nagrody główne</value>
   </data>
   <data name="ManageYourAccount" xml:space="preserve">
@@ -384,7 +375,7 @@
   <data name="MK850" xml:space="preserve">
     <value>Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE</value>
   </data>
-  <data name="NewRegistration" xml:space="preserve">
+  <data name="NewRegistrationQuestion" xml:space="preserve">
     <value>Zarejestrować nowego użytkownika?</value>
   </data>
   <data name="Newsletter" xml:space="preserve">
@@ -420,13 +411,10 @@
   <data name="PleaseContactUs" xml:space="preserve">
     <value>Zapraszamy do kontaktu</value>
   </data>
-  <data name="Policy" xml:space="preserve">
-    <value>Regulamin</value>
-  </data>
   <data name="Presents" xml:space="preserve">
     <value>Mikołaj ma dla Was wyjątkowe prezenty</value>
   </data>
-  <data name="PresentsDesc" xml:space="preserve">
+  <data name="PresentsDescription" xml:space="preserve">
     <value>Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym</value>
   </data>
   <data name="PrivacyPolicy" xml:space="preserve">
@@ -450,10 +438,10 @@
   <data name="Register" xml:space="preserve">
     <value>Zarejestruj</value>
   </data>
-  <data name="RegisterConfirmationDesc" xml:space="preserve">
+  <data name="RegisterConfirmationDescription" xml:space="preserve">
     <value>Zanim się zalogujesz, prosimy o potwierdzenie rejestracji.</value>
   </data>
-  <data name="RegisterConfirmationDescEmail" xml:space="preserve">
+  <data name="RegisterConfirmationDescriptionEmail" xml:space="preserve">
     <value>Na Twój adres e-mail została wysłana wiadomość z linkiem potwierdzającym.</value>
   </data>
   <data name="Registration" xml:space="preserve">
@@ -461,9 +449,6 @@
   </data>
   <data name="RegistrationConfirmation" xml:space="preserve">
     <value>Potwierdzenie rejestracji</value>
-  </data>
-  <data name="Regulation" xml:space="preserve">
-    <value>Zostawiając tutaj swojego maila zgadzasz się na postanowienia regulaminu dostępnego tutaj</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resetuj</value>
@@ -528,7 +513,7 @@
   <data name="SignOut" xml:space="preserve">
     <value>Wyloguj</value>
   </data>
-  <data name="SignOutDesc" xml:space="preserve">
+  <data name="SignOutSuccess" xml:space="preserve">
     <value>Pomyślnie się wylogowałeś.</value>
   </data>
   <data name="SingOutOther" xml:space="preserve">
@@ -566,6 +551,9 @@
   </data>
   <data name="Suprise" xml:space="preserve">
     <value>Niespodzianka</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Regulamin</value>
   </data>
   <data name="TestDuration" xml:space="preserve">
     <value>Ustaw, ile ma trwać test (w minutach)</value>
@@ -641,6 +629,9 @@
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
     <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
+  </data>
+  <data name="WeStartIn" xml:space="preserve">
+    <value>Zapnij pasy! Startujemy już za</value>
   </data>
   <data name="WeUseCookies" xml:space="preserve">
     <value>Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.</value>
