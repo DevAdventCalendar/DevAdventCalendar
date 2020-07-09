@@ -10,7 +10,7 @@ using DevAdventCalendarCompetition.Services.Profiles;
 using Moq;
 using Xunit;
 
-namespace DevAdventCalendarCompetition.Tests
+namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class HomeServiceTest
     {

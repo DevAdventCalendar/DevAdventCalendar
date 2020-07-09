@@ -2,7 +2,7 @@ using System;
 using DevAdventCalendarCompetition.Providers;
 using Xunit;
 
-namespace DevAdventCalendarCompetition.Tests
+namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class ErrorMessagesProviderTest
     {

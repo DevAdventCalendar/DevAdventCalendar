@@ -13,7 +13,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace DevAdventCalendarCompetition.Tests
+namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class AdminServiceTest
     {
