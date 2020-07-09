@@ -216,6 +216,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Skontaktuj się z nami</value>
+  </data>
   <data name="CorrectAnswer" xml:space="preserve">
     <value>Poprawna odpowiedź: {0}</value>
   </data>
@@ -239,6 +242,9 @@
   </data>
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
+  </data>
+  <data name="DoYouWantBeSponsor2019" xml:space="preserve">
+    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?</value>
   </data>
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
@@ -287,6 +293,9 @@
   </data>
   <data name="FbEvent" xml:space="preserve">
     <value>Wydarzenie na FB</value>
+  </data>
+  <data name="FinalScoreDescription" xml:space="preserve">
+    <value>Ostateczne wyniki poznasz w środę, 25 grudnia</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Przypomnienie hasła</value>
@@ -408,6 +417,9 @@
   <data name="PlannedTestStart" xml:space="preserve">
     <value>Planowany czas rozpoczęcia:</value>
   </data>
+  <data name="PleaseConfirmEmail" xml:space="preserve">
+    <value>Dziękujemy za zainteresowanie :) Na Twojej skrzynce powinna już czekać wiadomość, kliknij link w niej zawarty, aby potwierdzić swój email :)</value>
+  </data>
   <data name="PleaseContactUs" xml:space="preserve">
     <value>Zapraszamy do kontaktu</value>
   </data>
@@ -417,13 +429,19 @@
   <data name="PresentsDescription" xml:space="preserve">
     <value>Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym</value>
   </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Wstecz</value>
+  </data>
   <data name="PrivacyPolicy" xml:space="preserve">
     <value>Polityka prywatności</value>
   </data>
   <data name="Prizes" xml:space="preserve">
     <value>Nagrody</value>
   </data>
-  <data name="Profil" xml:space="preserve">
+  <data name="PrizesSponsors" xml:space="preserve">
+    <value>Sponsorzy nagród</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
     <value>Profil</value>
   </data>
   <data name="ProgrammingBook" xml:space="preserve">
@@ -459,9 +477,6 @@
   <data name="Results" xml:space="preserve">
     <value>Wyniki</value>
   </data>
-  <data name="Return" xml:space="preserve">
-    <value>Wstecz</value>
-  </data>
   <data name="RodoAgree" xml:space="preserve">
     <value>Zgoda na przetwarzanie danych</value>
   </data>
@@ -471,22 +486,10 @@
   <data name="Save" xml:space="preserve">
     <value>Zapisz</value>
   </data>
-  <data name="ScoreDescriptionPart1" xml:space="preserve">
+  <data name="ScoreDescription" xml:space="preserve">
     <value>Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu).</value>
   </data>
-  <data name="ScoreDescriptionPart2" xml:space="preserve">
-    <value>Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00.</value>
-  </data>
-  <data name="ScoreDescriptionPart3" xml:space="preserve">
-    <value>Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00.</value>
-  </data>
-  <data name="ScoreDescriptionPart4" xml:space="preserve">
-    <value>Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.</value>
-  </data>
-  <data name="ScoreDescriptionPart5" xml:space="preserve">
-    <value>Ostateczne wyniki poznasz w środę, 25 grudnia</value>
-  </data>
-  <data name="ScoresCommingSoon" xml:space="preserve">
+  <data name="ScoresWillBeSoon" xml:space="preserve">
     <value>Wyniki już niedługo...</value>
   </data>
   <data name="Send" xml:space="preserve">
@@ -528,9 +531,6 @@
   <data name="Sponsors" xml:space="preserve">
     <value>Sponsorzy</value>
   </data>
-  <data name="SponsorsAndAwards" xml:space="preserve">
-    <value>Sponsorzy nagród</value>
-  </data>
   <data name="SponsorsAndPartners" xml:space="preserve">
     <value>Sponsorzy i partnerzy</value>
   </data>
@@ -549,7 +549,7 @@
   <data name="SubscribeNewsletter" xml:space="preserve">
     <value>Zapisz się na newsletter</value>
   </data>
-  <data name="Suprise" xml:space="preserve">
+  <data name="Surprise" xml:space="preserve">
     <value>Niespodzianka</value>
   </data>
   <data name="TermsOfUse" xml:space="preserve">
@@ -615,6 +615,15 @@
   <data name="Week" xml:space="preserve">
     <value>Tydzień {0}</value>
   </data>
+  <data name="Week1ScoreDescription" xml:space="preserve">
+    <value>Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00.</value>
+  </data>
+  <data name="Week2ScoreDescription" xml:space="preserve">
+    <value>Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00.</value>
+  </data>
+  <data name="Week3ScoreDescription" xml:space="preserve">
+    <value>Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.</value>
+  </data>
   <data name="WeeklySponsors" xml:space="preserve">
     <value>Sponsorzy tygodni</value>
   </data>
@@ -650,9 +659,6 @@
   </data>
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
-  </data>
-  <data name="YouHaveEmailPleaseConfirm" xml:space="preserve">
-    <value>Dziękujemy za zainteresowanie :) Na Twojej skrzynce powinna już czekać wiadomość, kliknij link w niej zawarty, aby potwierdzić swój email :)</value>
   </data>
   <data name="YouHaventAnswered" xml:space="preserve">
     <value>Nie odpowiedziałeś jeszcze na żadną zagadkę...</value>

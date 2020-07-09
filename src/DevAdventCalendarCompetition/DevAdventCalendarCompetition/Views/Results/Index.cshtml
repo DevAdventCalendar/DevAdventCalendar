@@ -67,9 +67,9 @@ else
 
                     @if (Model.UserWeek1Position == 0 && Model.UserWeek2Position == 0 && Model.UserWeek3Position == 0 && Model.UserFinalPosition == 0)
                     {
-                        <h1 class="mb-30">@ScoresCommingSoon</h1>
+                        <h1 class="mb-30">@ScoresWillBeSoon</h1>
                         <p>
-                            @ScoreDescriptionPart1
+                            @ScoreDescription
                         </p>
                     }
                     <img src="~/theme-2019/images/gift_bag.png" alt="gifts">
@@ -112,7 +112,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoreDescriptionPart2
+                                            @Week1ScoreDescription
                                         </h4>
                                     </div>
 
@@ -129,7 +129,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoreDescriptionPart3
+                                            @Week2ScoreDescription
                                         </h4>
                                     </div>
 
@@ -147,7 +147,7 @@ else
 
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoreDescriptionPart4
+                                            @Week3ScoreDescription
                                         </h4>
                                     </div>
 
@@ -164,7 +164,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            @ScoreDescriptionPart5
+                                            @FinalScoreDescription
                                         </h4>
                                     </div>
 
