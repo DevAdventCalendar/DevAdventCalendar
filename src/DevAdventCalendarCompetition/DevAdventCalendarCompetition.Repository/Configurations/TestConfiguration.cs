@@ -19,6 +19,7 @@ namespace DevAdventCalendarCompetition.Repository.Configurations
             builder.OwnsMany(t => t.HashedAnswers, b =>
             {
                 b.ToTable("TestAnswers");
+                b.HasKey(ta => ta.Id);
             });
 
             builder
