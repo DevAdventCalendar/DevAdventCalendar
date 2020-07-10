@@ -1,19 +1,20 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public string FirstName { get; set; }
-
-        public string SecondName { get; set; }
-
-        public ICollection<TestAnswer> Answers { get; private set; }
-
         public bool EmailNotificationsEnabled { get; set; }
 
         public bool PushNotificationsEnabled { get; set; }
+
+#pragma warning disable CA2227 // Collection properties should be read only
+        public ICollection<UserTestCorrectAnswer> CorrectAnswers { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
+
+#pragma warning disable CA2227 // Collection properties should be read only
+        public ICollection<UserTestWrongAnswer> WrongAnswers { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
     }
 }

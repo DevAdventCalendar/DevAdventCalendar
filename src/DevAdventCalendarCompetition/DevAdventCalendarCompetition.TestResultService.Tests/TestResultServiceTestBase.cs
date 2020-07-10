@@ -1,4 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Models;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
@@ -62,19 +62,19 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
                 await dbContext.SaveChangesAsync();
             }
 
-            if (await dbContext.Test.CountAsync() <= 0)
+            if (await dbContext.Tests.CountAsync() <= 0)
             {
                 testModel.PrepareTestRows(dbContext);
                 await dbContext.SaveChangesAsync();
             }
 
-            if (await dbContext.TestAnswer.CountAsync() <= 0)
+            if (await dbContext.UserTestCorrectAnswers.CountAsync() <= 0)
             {
                 testAnswerModel.PrepareTestAnswerRows(dbContext);
                 await dbContext.SaveChangesAsync();
             }
 
-            if (await dbContext.TestWrongAnswer.CountAsync() <= 0)
+            if (await dbContext.UserTestWrongAnswers.CountAsync() <= 0)
             {
                 testWrongAnswerModel.PrepareTestWrongAnswerRows(dbContext);
                 await dbContext.SaveChangesAsync();

@@ -8,51 +8,51 @@ using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Repository
 {
-    public class TestAnswerRepository : ITestAnswerRepository
+    public class UserTestAnswersRepository : IUserTestAnswersRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public TestAnswerRepository(ApplicationDbContext dbContext)
+        public UserTestAnswersRepository(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
         }
 
-        public void AddAnswer(TestAnswer testAnswer)
+        public void AddCorrectAnswer(UserTestCorrectAnswer testAnswer)
         {
-            this._dbContext.Set<TestAnswer>().Add(testAnswer);
+            this._dbContext.Set<UserTestCorrectAnswer>().Add(testAnswer);
             this._dbContext.SaveChanges();
         }
 
-        public void AddWrongAnswer(TestWrongAnswer wrongAnswer)
+        public void AddWrongAnswer(UserTestWrongAnswer wrongAnswer)
         {
-            this._dbContext.Set<TestWrongAnswer>().Add(wrongAnswer);
+            this._dbContext.Set<UserTestWrongAnswer>().Add(wrongAnswer);
             this._dbContext.SaveChanges();
         }
 
-        public void UpdateAnswer(TestAnswer testAnswer)
+        public void UpdateCorrectAnswer(UserTestCorrectAnswer testAnswer)
         {
-            this._dbContext.Set<TestAnswer>().Update(testAnswer);
+            this._dbContext.Set<UserTestCorrectAnswer>().Update(testAnswer);
             this._dbContext.SaveChanges();
         }
 
-        public TestAnswer GetAnswerByTestId(int testId)
+        public UserTestCorrectAnswer GetCorrectAnswerByTestId(int testId)
         {
-            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId);
+            return this._dbContext.Set<UserTestCorrectAnswer>().FirstOrDefault(el => el.TestId == testId);
         }
 
-        public TestAnswer GetTestAnswerByUserId(string userId, int testId)
+        public UserTestCorrectAnswer GetCorrectAnswerByUserId(string userId, int testId)
         {
-            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == testId);
+            return this._dbContext.Set<UserTestCorrectAnswer>().FirstOrDefault(el => el.UserId == userId && el.TestId == testId);
         }
 
         public bool HasUserAnsweredTest(string userId, int testId)
         {
-            return this._dbContext.Set<TestAnswer>().FirstOrDefault(el => el.TestId == testId && el.UserId == userId) != null;
+            return this._dbContext.Set<UserTestCorrectAnswer>().FirstOrDefault(el => el.TestId == testId && el.UserId == userId) != null;
         }
 
         public int GetCorrectAnswersCountForUser(string userId)
         {
-            return this._dbContext.Set<TestAnswer>()
+            return this._dbContext.Set<UserTestCorrectAnswer>()
                 .Where(a => a.UserId == userId)
                 .AsEnumerable()
                 .GroupBy(t => t.TestId)
@@ -62,7 +62,7 @@ namespace DevAdventCalendarCompetition.Repository
         public IDictionary<string, int> GetCorrectAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             return this._dbContext
-                .TestAnswer
+                .UserTestCorrectAnswers
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
                 .AsEnumerable()
@@ -74,7 +74,7 @@ namespace DevAdventCalendarCompetition.Repository
         public IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             return this._dbContext
-                .TestWrongAnswer
+                .UserTestWrongAnswers
                 .Where(a => a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.Time.CompareTo(dateTo.DateTime) < 0)
                 .AsEnumerable()

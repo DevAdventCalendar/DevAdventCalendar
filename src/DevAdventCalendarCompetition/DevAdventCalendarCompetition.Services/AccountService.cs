@@ -30,9 +30,9 @@ namespace DevAdventCalendarCompetition.Services
             return await this._signInManager.PasswordSignInAsync(email, password, rememberMe, lockoutOnFailure: false).ConfigureAwait(false);
         }
 
-        public string GetUserId(ClaimsPrincipal pricipal)
+        public string GetUserId(ClaimsPrincipal principal)
         {
-            return this._userManager.GetUserId(pricipal);
+            return this._userManager.GetUserId(principal);
         }
 
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, string password)
