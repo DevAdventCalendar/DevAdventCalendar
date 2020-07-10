@@ -1114,20 +1114,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resetuj.
+        ///   Looks up a localized string similar to Reset.
         /// </summary>
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reset.
-        /// </summary>
-        public static string ResetShort {
-            get {
-                return ResourceManager.GetString("ResetShort", resourceCulture);
             }
         }
         
