@@ -88,7 +88,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; class=&quot;link&quot;&gt;www.michalgellert.pl&lt;/a&gt;..
+        ///   Looks up a localized string similar to Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href=&quot;https://www.michalgellert.pl/&quot; target=&quot;_blank&quot; class=&quot;link&quot;&gt;www.michalgellert.pl&lt;/a&gt;..
         /// </summary>
         public static string AboutMichalGellert {
             get {
