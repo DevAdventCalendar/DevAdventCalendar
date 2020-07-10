@@ -546,7 +546,7 @@
   <data name="StatusTestIsOver" xml:space="preserve">
     <value>Status: Test zakończony</value>
   </data>
-  <data name="SubscribeNewsletter" xml:space="preserve">
+  <data name="SubscribeToNewsletter" xml:space="preserve">
     <value>Zapisz się na newsletter</value>
   </data>
   <data name="Surprise" xml:space="preserve">

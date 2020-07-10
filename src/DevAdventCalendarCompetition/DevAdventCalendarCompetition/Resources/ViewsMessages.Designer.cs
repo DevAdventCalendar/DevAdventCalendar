@@ -1350,9 +1350,9 @@ namespace DevAdventCalendarCompetition.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Zapisz się na newsletter.
         /// </summary>
-        public static string SubscribeNewsletter {
+        public static string SubscribeToNewsletter {
             get {
-                return ResourceManager.GetString("SubscribeNewsletter", resourceCulture);
+                return ResourceManager.GetString("SubscribeToNewsletter", resourceCulture);
             }
         }
         
