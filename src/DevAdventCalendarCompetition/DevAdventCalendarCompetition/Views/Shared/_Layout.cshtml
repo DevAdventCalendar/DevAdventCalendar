@@ -1,3 +1,5 @@
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" lang="pl-PL">
 <head>
@@ -7,9 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DevAdventCalendar - programistyczny kalendarz adwentowy</title>
+    <title>@HeadTitle</title>
     <meta name="description" content="DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT. " />
-    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/dac2019-social.png">	    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/dac2019-social.png" />
+    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/dac2019-social.png">
+    <meta property="og:image" content="https://www.devadventcalendar.pl/theme-2019/images/dac2019-social.png" />
     <meta property="og:title" content="DevAdventCalendar - programistyczny kalendarz adwentowy" />
     <meta property="og:description" content="DevAdventCalendar - inicjatywa łącząca tradycję kalendarza adwentowego z programowaniem. Celem jest stworzenie konkursu dla osób związanych ze światem IT." />
     <meta property="og:url" content="https://devadventcalendar.pl/">
@@ -92,11 +95,11 @@
                                         </div>
                                         <ul>
                                             <li><a asp-area="" asp-controller="Home" asp-action="Index">&#9924;</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Results">Wyniki</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Sponsors">Sponsorzy</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Prizes">Nagrody</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="About">O nas</a></li>
-                                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Results">@Results</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Sponsors">@Sponsors</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Prizes">@Prizes</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="About">@About</a></li>
+                                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">@Contact</a></li>
 
                                             <!-- login partial -->
                                             <partial name="_LoginPartial" />
@@ -144,8 +147,8 @@
                     <div class="legal_text">
                         <p>
                             © 2019 - DevAdventCalendar<br />
-                            <a href="~/polityka.pdf" target="_blank">Polityka prywatności</a>
-                            <a href="~/regulamin.pdf" target="_blank">Regulamin</a>
+                            <a href="~/polityka.pdf" target="_blank">@PrivacyPolicy</a>
+                            <a href="~/regulamin.pdf" target="_blank">@TermsOfUse</a>
                         </p>
                     </div>
                 </div>

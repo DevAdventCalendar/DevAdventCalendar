@@ -1,5 +1,6 @@
-﻿@*based on https://github.com/ProfessionalCSharp/MoreSamples/tree/master/ASPNETCore/GDPRSample/GDPRSample*@
+@*based on https://github.com/ProfessionalCSharp/MoreSamples/tree/master/ASPNETCore/GDPRSample/GDPRSample*@
 @using Microsoft.AspNetCore.Http.Features
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 @{
     var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
@@ -13,11 +14,11 @@
         <div class="container">
             <div class="text-center">
                 <p>
-                    Serwis wykorzystuje pliki cookies. Korzystając ze strony wyrażasz zgodę na wykorzystywanie plików cookies.
+                    @WeUseCookies
                 </p>
                 <div>
-                    <a href="~/polityka.pdf" target="_blank" class="chris_btn">Dowiedz się więcej</a>
-                    <button type="button" class="chris_btn chris_btn_empty" data-cookie-string="@cookieString">Akceptuj</button>
+                    <a href="~/polityka.pdf" target="_blank" class="chris_btn">@LearnMore</a>
+                    <button type="button" class="chris_btn chris_btn_empty" data-cookie-string="@cookieString">@Accept</button>
                 </div>
             </div>
         </div>

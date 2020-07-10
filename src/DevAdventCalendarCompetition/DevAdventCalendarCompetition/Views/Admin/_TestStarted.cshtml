@@ -1,20 +1,21 @@
-﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
+@model DevAdventCalendarCompetition.Services.Models.TestDto
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 <div class="row">
     <div class="col-md-12">
         <h3>Test @Model.Number</h3>
         <p>
-            <b>Status: </b>Test rozpoczął się<b>
+            <b>@Status </b>@TestStarted<b>
             </b>
         </p>
         <p>
-            <b>Czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <b>Czas zakończenia: </b> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
+            <b>@StartTime </b> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <b>@EndTime </b> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
         </p>
     </div>
     <div class="col-md-12">
         <form class="form-inline" method="POST" action="/Admin/EndTest">
             @Html.Hidden("testId", Model.Id)
-            <button type="submit" class="btn btn-default">Zakończ test wcześniej</button>
+            <button type="submit" class="btn btn-default">@CompleteTestEalier</button>
         </form>
     </div>
 </div>

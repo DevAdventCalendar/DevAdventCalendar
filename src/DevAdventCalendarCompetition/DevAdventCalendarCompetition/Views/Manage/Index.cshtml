@@ -1,6 +1,8 @@
 @model IndexViewModel
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 @{
-    ViewData["Title"] = "Profil";
+    ViewData["Title"] = @Profile;
     ViewData.AddActivePage(ManageNavPages.Index);
 }
 
@@ -25,7 +27,7 @@
                 else
                 {
                     <input asp-for="Email" />
-                    <button asp-action="SendVerificationEmail" class="btn btn-link">Wyślij ponownie weryfikacyjny e-mail</button>
+                    <button asp-action="SendVerificationEmail" class="btn btn-link">@SendVerificationEmail</button>
                 }
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
@@ -42,10 +44,10 @@
             </div>
 
             @*<div class="form-group form-toogle">
-                <label asp-for="PushNotificationsEnabled"></label>
-                <input asp-for="PushNotificationsEnabled" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="tak" data-off="nie" />
-            </div>*@
-            <button type="submit" class="chris_btn">Zapisz</button>
+                    <label asp-for="PushNotificationsEnabled"></label>
+                    <input asp-for="PushNotificationsEnabled" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="tak" data-off="nie" />
+                </div>*@
+            <button type="submit" class="chris_btn">@Save</button>
         </form>
     </div>
 </div>
