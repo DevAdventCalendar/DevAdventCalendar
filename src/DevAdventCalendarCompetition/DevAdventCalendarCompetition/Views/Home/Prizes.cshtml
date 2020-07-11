@@ -1,9 +1,11 @@
-﻿<div class="breadcrumb_area">
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+<div class="breadcrumb_area">
     <div class="container">
         <div class="row">
             <div class="breadcrumb_wrapper">
                 <div class="page_title">
-                    <h3>Nagrody</h3>
+                    <h3>@Prizes</h3>
                 </div>
             </div>
         </div>
@@ -16,9 +18,9 @@
             <div class="col-md-6 col-lg-3 ">
                 <div class="send_wishe_content">
                     <div class="area_title">
-                        <h3>Mikołaj ma dla Was wyjątkowe prezenty</h3>
+                        <h3>@Presents</h3>
                     </div>
-                    <p>Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym</p>
+                    <p>@PresentsDescription</p>
                 </div>
             </div>
         </div>
@@ -44,7 +46,7 @@
         <div class="row">
             <div class="breadcrumb_wrapper">
                 <div class="page_title page_title--block text-center">
-                    <h3>Nagrody główne</h3>
+                    <h3>@MainPrizes</h3>
                 </div>
             </div>
         </div>
@@ -56,7 +58,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Słuchawki Sennheiser 4.50 BTNC Wireless</h4>
+                    <h4>@Sennheiser</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/sennheiser.jpg" alt="Sennheiser HD4.50 BTNC" title="Sennheiser HD4.50 BTNC" class="img-responsive center-block" />
@@ -66,7 +68,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE</h4>
+                    <h4>@MK850</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/mk850-performance.jpg" alt="MK850 PERFORMANCE" title="MK850 PERFORMANCE" class="img-responsive center-block" />
@@ -76,7 +78,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Bilet na konferencję Wroc#</h4>
+                    <h4>@TicketWrocSharp</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/wrocsharp.jpg" alt="bilet na Wroc#" title="Bilet na Wrocsharp" class="img-responsive center-block" />
@@ -88,7 +90,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Raspberry Pi 4 model B WiFi DualBand Bluetooth 2GB RAM 1,5GHz</h4>
+                    <h4>@Raspberry4</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/raspberry-pi-4.jpg" alt="Raspberry Pi 4B" title="Raspberry Pi 4B" class="img-responsive center-block" />
@@ -98,7 +100,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Xiaomi Redmi Airdots</h4>
+                    <h4>@Xiaomi</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/xiaomi-redmi-airdots.jpg" alt="Xiaomi Redmi Airdots" title="Xiaomi Redmi Airdots" class="img-responsive center-block" />
@@ -114,7 +116,7 @@
         <div class="row">
             <div class="breadcrumb_wrapper">
                 <div class="page_title page_title--block text-center">
-                    <h3>Nagrody tygodni</h3>
+                    <h3>@AwardsOfTheWeek</h3>
                 </div>
             </div>
         </div>
@@ -126,7 +128,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Xiaomi Mi Band 4</h4>
+                    <h4>@XiaomiBand4</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/xiaomi-mi-band-4.jpg" alt="Xiaomi Mi Band 4" title="Xiaomi Mi Band 4" class="img-responsive center-block" />
@@ -136,7 +138,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Bon 100 zł do Heliona</h4>
+                    <h4>@Helion100</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/helion.jpg" alt="bon do Helion" title="Bon do Helion" class="img-responsive center-block" />
@@ -146,7 +148,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Bon 100 zł do Heliona</h4>
+                    <h4>@Helion100</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/helion.jpg" alt="bon do Helion" title="Bon do Helion" class="img-responsive center-block" />
@@ -158,7 +160,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Książka "Programowanie funkcyjne w języku C#"</h4>
+                    <h4>@ProgrammingBook</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/programowanie-funkcyjne.jpg" alt="książka Programowanie Funkcyjne" title="książka Programowanie Funkcyjne" class="img-responsive center-block" />
@@ -168,7 +170,7 @@
         <div class="col-sm-4 mb-30">
             <div class="border prize-wrapper flex-column flex-fullheight">
                 <div class="area_title text-center mb-30">
-                    <h4>Licencja Nozbe Solo na 6 mscy</h4>
+                    <h4>@Nozbe</h4>
                 </div>
                 <div class="flex-centered flex-grow">
                     <img src="~/theme-2019/images/prizes/nozbe.jpg" alt="Nozbe Solo" title="Nozbe Solo" class="img-responsive center-block" />

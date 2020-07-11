@@ -1,23 +1,29 @@
 @using DevAdventCalendarCompetition.Services
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 @inject IdentityService IdentityService
 
 @if (IdentityService.IsSignedIn(User))
 {
-    <li class="mt-30">
-        <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Twoje konto</a>
-    </li>
-    <li>
-        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
-            <button type="submit" class="as_link">Wyloguj</button>
-        </form>
-    </li>
+    <ul>
+        <li class="mt-30">
+            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@ManageYourAccount</a>
+        </li>
+        <li>
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                <button type="submit" class="as_link">@SignOut</button>
+            </form>
+        </li>
+    </ul>
 }
 else
 {
-    <li class="mt-30">
-        <a asp-area="" asp-controller="Account" asp-action="Register" class="active">Rejestruj</a>
-    </li>
-    <li>
-        <a asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
-    </li>
+    <ul>
+        <li class="mt-30">
+            <a asp-area="" asp-controller="Account" asp-action="Register" class="active">@Register</a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="Login">@SignIn</a>
+        </li>
+    </ul>
 }
