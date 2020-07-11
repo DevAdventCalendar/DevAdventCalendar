@@ -1,9 +1,13 @@
 # DevAdventCalendar
 
-DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](www.devadventcalenar.pl)
+<p align="center">
+<img src="docs/Pictures/dac2019-logo.png" width="400">
+</p>
 
 [![Follow DevAdventCalendar](https://img.shields.io/twitter/follow/dev_advent_cal?label=Follow%20%40dev_advent_cal&style=social)](https://twitter.com/dev_advent_cal)
 [![Follow DevAdventCalendar](https://img.shields.io/badge/FB-Dev%20Advent%20Calendar-blue)](https://www.facebook.com/devadventcalendar/)
+
+DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](www.devadventcalenar.pl)
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/DevAdventCalendar/DevAdventCalendar)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/DevAdventCalendar/DevAdventCalendar)
@@ -53,13 +57,8 @@ Application is using Docker to work on VPS. Additional Docker-compose helping wi
 
 ### Swagger
 
-Useful tool to check api endpoints. It is  generated based on Controllers and attributes and can test any rest calls from this page. It is very helpful if you are using not razer page  (Angular etc) or for mobile apps.
-
-Can be access by: pagedomain (or localhost)/swagger/
-
-![Swagger](docs/Pictures/swagger.PNG/?raw=true "Swagger")
-
-[Swagger documentation](https://docs.microsoft.com/pl-pl/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-2.1)
+Useful tool to check api endpoints. It is  generated based on Controllers and attributes and can test any rest calls from this page.
+Can be access by: pagedomain (or localhost)/swagger/. [Swagger documentation](https://docs.microsoft.com/pl-pl/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-2.1)
 
 #### MailHog
 

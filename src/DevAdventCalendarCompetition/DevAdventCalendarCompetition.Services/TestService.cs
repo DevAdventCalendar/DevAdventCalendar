@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -7,25 +9,28 @@ using DevAdventCalendarCompetition.Services.Models;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    public class BaseTestService : IBaseTestService
+    public class TestService : ITestService
     {
-        private readonly IBaseTestRepository _baseTestRepository;
+        private readonly ITestRepository _testRepository;
+        private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly IMapper _mapper;
         private readonly StringHasher _stringHasher;
 
-        public BaseTestService(
-            IBaseTestRepository baseTestRepository,
+        public TestService(
+            ITestRepository baseTestRepository,
+            IUserTestAnswersRepository testAnswerRepository,
             IMapper mapper,
             StringHasher stringHasher)
         {
-            this._baseTestRepository = baseTestRepository;
+            this._testRepository = baseTestRepository;
+            this._testAnswerRepository = testAnswerRepository;
             this._mapper = mapper;
             this._stringHasher = stringHasher;
         }
 
         public TestDto GetTestByNumber(int testNumber)
         {
-            var test = this._baseTestRepository.GetByNumber(testNumber);
+            var test = this._testRepository.GetTestByNumber(testNumber);
 
             var testDto = this._mapper.Map<TestDto>(test);
             return testDto;
@@ -37,7 +42,7 @@ namespace DevAdventCalendarCompetition.Services
             var answerTimeOffset = currentTime.Subtract(testStartDate);
             var maxAnswerTime = new TimeSpan(0, 23, 59, 59, 999);
 
-            var testAnswer = new TestAnswer()
+            var testAnswer = new UserTestCorrectAnswer()
             {
                 TestId = testId,
                 UserId = userId,
@@ -46,24 +51,24 @@ namespace DevAdventCalendarCompetition.Services
             };
 
             // TODO remove (for tests only)
-            this._baseTestRepository.AddAnswer(testAnswer);
+            this._testAnswerRepository.AddCorrectAnswer(testAnswer);
         }
 
-        public TestAnswerDto GetAnswerByTestId(int testId)
+        public UserTestCorrectAnswerDto GetAnswerByTestId(int testId)
         {
-            var testAnswer = this._baseTestRepository.GetAnswerByTestId(testId);
-            var testAnswerDto = this._mapper.Map<TestAnswerDto>(testAnswer);
+            var testAnswer = this._testAnswerRepository.GetCorrectAnswerByTestId(testId);
+            var testAnswerDto = this._mapper.Map<UserTestCorrectAnswerDto>(testAnswer);
             return testAnswerDto;
         }
 
         public bool HasUserAnsweredTest(string userId, int testNumber)
         {
-            return this._baseTestRepository.HasUserAnsweredTest(userId, testNumber);
+            return this._testAnswerRepository.HasUserAnsweredTest(userId, testNumber);
         }
 
         public void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate)
         {
-            var testWrongAnswer = new TestWrongAnswer()
+            var testWrongAnswer = new UserTestWrongAnswer()
             {
                 UserId = userId,
                 Time = wrongAnswerDate,
@@ -71,12 +76,12 @@ namespace DevAdventCalendarCompetition.Services
                 TestId = testId
             };
 
-            this._baseTestRepository.AddWrongAnswer(testWrongAnswer);
+            this._testAnswerRepository.AddWrongAnswer(testWrongAnswer);
         }
 
-        public bool VerifyTestAnswer(string userAnswer, string correntAnswer)
+        public bool VerifyTestAnswer(string userAnswer, IEnumerable<string> correctAnswers)
         {
-            return this._stringHasher.VerifyHash(userAnswer, correntAnswer);
+            return correctAnswers.Any(t => this._stringHasher.VerifyHash(userAnswer, t));
         }
     }
 }

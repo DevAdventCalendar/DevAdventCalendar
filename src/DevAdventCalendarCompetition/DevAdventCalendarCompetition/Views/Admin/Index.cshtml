@@ -1,6 +1,8 @@
-﻿@using DevAdventCalendarCompetition.Services.Models
+@using DevAdventCalendarCompetition.Services.Models
 @using  DevAdventCalendarCompetition.Repository.Models
 @model List<DevAdventCalendarCompetition.Services.Models.TestDto>
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 
 @{
     ViewBag.Title = "Home Page";
@@ -9,12 +11,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3>Strona Administratora</h3>
+            <h3>@AdminPage</h3>
             <h4>DateTime - @ViewBag.DateTime</h4>
             <h4>DateTimeUtc - @ViewBag.DateTimeUtc</h4>
             <div>
-                <a href="/Admin/AddTest" class="btn btn-default">Dodaj test</a>
-                <a href="/Admin/CalculateResults" class="btn btn-default">Oblicz wyniki</a>
+                <a href="/Admin/AddTest" class="btn btn-default">@AddTest</a>
+                <a href="/Admin/CalculateResults" class="btn btn-default">@CalculateResults</a>
             </div>
             @for (int i = 0; i < Model.Count; i++)
             {

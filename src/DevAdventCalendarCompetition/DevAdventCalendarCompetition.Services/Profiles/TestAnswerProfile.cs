@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Models;
 
@@ -12,15 +12,15 @@ namespace DevAdventCalendarCompetition.Services.Profiles
         public TestAnswerProfile()
 #pragma warning restore CA1506
         {
-            this.CreateMap<TestAnswer, TestAnswerDto>()
+            this.CreateMap<UserTestCorrectAnswer, UserTestCorrectAnswerDto>()
                 .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email));
 
-            this.CreateMap<TestAnswerDto, TestAnswer>()
+            this.CreateMap<UserTestCorrectAnswerDto, UserTestCorrectAnswer>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.Test, opt => opt.Ignore())
                 .ForMember(dest => dest.User, opt => opt.Ignore());
 
-            this.CreateMap<ApplicationUser, TestAnswer>()
+            this.CreateMap<ApplicationUser, UserTestCorrectAnswer>()
                 .ForMember(dest => dest.User, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Test, opt => opt.Ignore())
@@ -28,7 +28,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
                 .ForMember(dest => dest.AnsweringTime, opt => opt.Ignore())
                 .ForMember(dest => dest.AnsweringTimeOffset, opt => opt.Ignore());
 
-            this.CreateMap<Test, TestAnswer>()
+            this.CreateMap<Test, UserTestCorrectAnswer>()
                 .ForMember(dest => dest.Test, opt => opt.MapFrom(src => src))
                 .ForMember(dest => dest.TestId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.User, opt => opt.Ignore())

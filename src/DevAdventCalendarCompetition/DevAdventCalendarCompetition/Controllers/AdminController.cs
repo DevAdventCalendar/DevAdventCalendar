@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -16,12 +17,12 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
-        private readonly IBaseTestService baseTestService;
+        private readonly ITestService _testService;
 
-        public AdminController(IAdminService adminService, IBaseTestService baseTestService)
+        public AdminController(IAdminService adminService, ITestService testService)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
-            this.baseTestService = baseTestService ?? throw new ArgumentNullException(nameof(baseTestService));
+            this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
         }
 
         public ActionResult Index()
@@ -48,7 +49,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (this.ModelState.IsValid)
             {
-                var dbTest = this.baseTestService.GetTestByNumber(model.Number);
+                var dbTest = this._testService.GetTestByNumber(model.Number);
 
                 if (dbTest != null)
                 {
@@ -60,11 +61,17 @@ namespace DevAdventCalendarCompetition.Controllers
                 model.StartDate = model.StartDate.AddHours(20).AddMinutes(00);
                 model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
 
+                var answers = model.Answers.Where(a => !string.IsNullOrWhiteSpace(a)).Select(a => new TestAnswerDto()
+                {
+                    Answer = a.ToUpper(CultureInfo.InvariantCulture)
+                        .Replace(" ", string.Empty, StringComparison.Ordinal)
+                }).ToList();
+
                 var testDto = new TestDto
                 {
                     Number = model.Number,
                     Description = model.Description,
-                    Answer = model.Answer.ToUpper(CultureInfo.InvariantCulture).Replace(" ", string.Empty, StringComparison.Ordinal),
+                    Answers = answers,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     SponsorLogoUrl = model.SponsorLogoUrl,
@@ -96,7 +103,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(ExceptionsMessages.PreviousTestIsNotDone);
             }
 
-            this._adminService.UpdateTestDates(testDto, minutesString);
+            this._adminService.UpdateTestDates(testDto.Id, minutesString);
 
             return this.RedirectToAction("Index");
         }
@@ -110,7 +117,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(ExceptionsMessages.TestAlreadyRun);
             }
 
-            this._adminService.UpdateTestEndDate(testDto, DateTime.Now);
+            this._adminService.UpdateTestEndDate(testDto.Id, DateTime.Now);
 
             return this.RedirectToAction("Index");
         }
@@ -125,25 +132,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
             Process.Start(@"c:\\Windows\\System32\\cmd.exe", weekNumber.ToString(CultureInfo.CurrentCulture.DateTimeFormat));
             return this.Ok();
-        }
-
-        public string Reset()
-        {
-            var resetEnabledString = "true"; // TODO get from AppSettings // ConfigurationManager.AppSettings["ResetEnabled"];
-
-            // TODO: move to service
-#pragma warning disable CA1806 // Do not ignore method results
-            bool.TryParse(resetEnabledString, out bool resetEnabled);
-#pragma warning restore CA1806 // Do not ignore method results
-            if (!resetEnabled)
-            {
-                return "Reset nie jest włączony.";
-            }
-
-            this._adminService.ResetTestDates();
-            this._adminService.ResetTestAnswers();
-
-            return "Dane zostały zresetowane.";
         }
     }
 }

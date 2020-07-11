@@ -1,7 +1,8 @@
-﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @model ExternalLoginViewModel
 @{
-    ViewData["Title"] = "Rejestracja";
+    ViewData["Title"] = @Registration;
 }
 
 <div class="breadcrumb_area mb-30">
@@ -20,11 +21,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="area_title">
-                <h3 class="black mb-20">Połącz swoje konto @ViewData["LoginProvider"]</h3>
+                <h3 class="black mb-20">@ConnectAccount @ViewData["LoginProvider"]</h3>
             </div>
             <p>
-                Zostałeś pomyślnie uwierzytelniony za pomocą serwisu <strong>@ViewData["LoginProvider"]</strong>.
-                Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.
+                @ExternalRegistrationDescriptionPart1 <strong>@ViewData["LoginProvider"]</strong>.
+                @ExternalRegistrationDescriptionPart2
             </p>
 
             <form asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="contact_form">
@@ -38,7 +39,7 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <button type="submit" class="chris_btn">Zarejestruj</button>
+                        <button type="submit" class="chris_btn">@Register</button>
                     </div>
                 </div>
             </form>

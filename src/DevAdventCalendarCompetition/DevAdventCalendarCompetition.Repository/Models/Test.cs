@@ -1,50 +1,44 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevAdventCalendarCompetition.Repository.Models
 {
-    public enum TestStatus
+    public class Test
     {
-        NotStarted,
-        Started,
-        Ended
-    }
-
-    [Table("Test")]
-
-    public class Test : ModelBase
-    {
-        private DateTime? endDate;
+        public int Id { get; set; }
 
         public int Number { get; set; }
 
         public DateTime? StartDate { get; set; }
 
-        public DateTime? EndDate
-        {
-            get
-            {
-                if (!this.endDate.HasValue)
-                {
-                    return null;
-                }
+        public DateTime? EndDate { get; set; }
 
-                var value = DateTime.SpecifyKind(this.endDate.Value, DateTimeKind.Local);
-                return value;
-            }
+        public string Description { get; set; }
 
-            set
-            {
-                this.endDate = value;
-            }
-        }
+        public string Discount { get; set; }
+
+        public string SponsorName { get; set; }
+
+        public Uri SponsorLogoUrl { get; set; }
+
+        public Uri DiscountUrl { get; set; }
+
+        public Uri DiscountLogoUrl { get; set; }
+
+        public string DiscountLogoPath { get; set; }
 
 #pragma warning disable CA2227 // Collection properties should be read only
-        public ICollection<TestAnswer> Answers { get;  set; }
+        public ICollection<TestAnswer> HashedAnswers { get; set; }
 #pragma warning restore CA2227 // Collection properties should be read only
 
-        public ICollection<TestWrongAnswer> WrongAnswers { get; private set; }
+#pragma warning disable CA2227 // Collection properties should be read only
+        public ICollection<UserTestCorrectAnswer> UserCorrectAnswers { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
+
+#pragma warning disable CA2227 // Collection properties should be read only
+        public ICollection<UserTestWrongAnswer> UserWrongAnswers { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
         public bool HasStarted
         {
@@ -89,23 +83,5 @@ namespace DevAdventCalendarCompetition.Repository.Models
                 return TestStatus.Ended;
             }
         }
-
-        public string SponsorName { get; set; }
-
-        public Uri SponsorLogoUrl { get; set; }
-
-        public string Description { get; set; }
-
-        public string HashedAnswer { get; set; }
-
-        public string Discount { get; set; }
-
-        public Uri DiscountUrl { get; set; }
-
-        public Uri DiscountLogoUrl { get; set; }
-
-        public string DiscountLogoPath { get; set; }
-
-        public string PlainAnswer { get; set; }
     }
 }

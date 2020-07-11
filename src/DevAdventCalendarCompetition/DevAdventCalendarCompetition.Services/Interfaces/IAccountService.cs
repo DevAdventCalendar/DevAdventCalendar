@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -11,7 +11,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
     {
         Task<SignInResult> PasswordSignInAsync(string email, string password, bool rememberMe);
 
-        string GetUserId(ClaimsPrincipal pricipal);
+        string GetUserId(ClaimsPrincipal principal);
 
         ApplicationUser CreateApplicationUserByEmail(string email);
 

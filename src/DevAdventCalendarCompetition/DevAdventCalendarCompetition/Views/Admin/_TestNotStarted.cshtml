@@ -1,24 +1,25 @@
-﻿@model DevAdventCalendarCompetition.Services.Models.TestDto
+@model DevAdventCalendarCompetition.Services.Models.TestDto
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 <div class="row">
     <div class="col-md-12">
         <h3>Test @Model.Number</h3>
 
         <p>
-            <b>Status: </b>@ViewData["Status"]
+            <strong>Status: </strong>@ViewData["Status"]
         </p>
         <p>
-            <b>Czas rozpoczęcia: </b> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <b>Czas zakończenia: </b> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
+            <strong>@StartTime </strong> @Model.StartDate.Value.ToLongDateString()  @Model.StartDate.Value.ToShortTimeString() - <strong>@EndTime </strong> @Model.EndDate.Value.ToLongDateString() @Model.EndDate.Value.ToShortTimeString()
         </p>
     </div>
     <div class="col-md-12">
         <form class="form-inline" method="POST" action="/Admin/StartTest">
             @Html.Hidden("testId", Model.Id)
             <div class="form-group">
-                <label for='timeString'>Ustaw, ile ma trwać test (w minutach)</label>
+                <label for='timeString'>@TestDuration</label>
                 <input id='timeString' type="text" name="minutesString" class="form-control" placeholder="domyślnie  20 minut">
             </div>
-            <button type="submit" class="btn btn-default">Rozpocznij</button>
+            <button type="submit" class="btn btn-default">@StartTest</button>
         </form>
     </div>
 </div>
