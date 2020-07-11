@@ -88,7 +88,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href=&quot;https://www.michalgellert.pl/&quot; target=&quot;_blank&quot; class=&quot;link&quot;&gt;www.michalgellert.pl&lt;/a&gt;..
+        ///   Looks up a localized string similar to Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href=&quot;https://www.michalgellert.pl/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;www.michalgellert.pl&lt;/a&gt;..
         /// </summary>
         public static string AboutMichalGellert {
             get {
@@ -133,7 +133,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; class=&quot;link&quot;&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Współorganizator Wrocławskiej grupy .NET oraz konferencji Wroc#..
+        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Współorganizator Wrocławskiej grupy .NET oraz konferencji Wroc#..
         /// </summary>
         public static string AboutWeronika {
             get {
