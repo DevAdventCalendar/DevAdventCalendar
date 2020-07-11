@@ -11,12 +11,12 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class HomeService : IHomeService
     {
-        private readonly ITestAnswerRepository _testAnswerRepository;
+        private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
 
         public HomeService(
-            ITestAnswerRepository testAnswerRepository,
+            IUserTestAnswersRepository testAnswerRepository,
             ITestRepository testRepository,
             IMapper mapper)
         {
@@ -37,10 +37,10 @@ namespace DevAdventCalendarCompetition.Services
             return testDto;
         }
 
-        public TestAnswerDto GetTestAnswerByUserId(string userId, int testId)
+        public UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId)
         {
-            var testAnswer = this._testAnswerRepository.GetTestAnswerByUserId(userId, testId);
-            var testAnswerDto = this._mapper.Map<TestAnswerDto>(testAnswer);
+            var testAnswer = this._testAnswerRepository.GetCorrectAnswerByUserId(userId, testId);
+            var testAnswerDto = this._mapper.Map<UserTestCorrectAnswerDto>(testAnswer);
             return testAnswerDto;
         }
 
@@ -51,10 +51,10 @@ namespace DevAdventCalendarCompetition.Services
             return allTestsDtoList;
         }
 
-        public List<TestWithAnswerListDto> GetTestsWithUserAnswers()
+        public List<TestWithUserCorrectAnswerListDto> GetTestsWithUserAnswers()
         {
             var testList = this._testRepository.GetTestsWithUserAnswers();
-            var testWithAnswersDtoList = this._mapper.Map<List<TestWithAnswerListDto>>(testList);
+            var testWithAnswersDtoList = this._mapper.Map<List<TestWithUserCorrectAnswerListDto>>(testList);
             return testWithAnswersDtoList;
         }
 

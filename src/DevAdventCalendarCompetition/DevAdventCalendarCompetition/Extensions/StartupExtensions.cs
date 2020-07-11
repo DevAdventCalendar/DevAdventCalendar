@@ -39,7 +39,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
 
             services.AddTransient<ITestRepository, TestRepository>();
-            services.AddTransient<ITestAnswerRepository, TestAnswerRepository>();
+            services.AddTransient<IUserTestAnswersRepository, UserTestAnswersRepository>();
             services.AddTransient<IResultsRepository, ResultsRepository>();
 
             services.AddScoped<DbInitializer>();

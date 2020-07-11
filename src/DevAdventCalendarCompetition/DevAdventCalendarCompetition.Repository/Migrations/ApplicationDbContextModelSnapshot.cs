@@ -41,9 +41,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<bool>("EmailNotificationsEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -69,9 +66,6 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<bool>("PushNotificationsEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("SecondName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -111,8 +105,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("Week1Place")
                         .HasColumnType("int");
@@ -134,7 +127,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Results");
                 });
@@ -164,14 +158,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("HashedAnswer")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Number")
                         .HasColumnType("int");
-
-                    b.Property<string>("PlainAnswer")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SponsorLogoUrl")
                         .HasColumnType("nvarchar(max)");
@@ -184,10 +172,10 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Test");
+                    b.ToTable("Tests");
                 });
 
-            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.TestAnswer", b =>
+            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.UserTestCorrectAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,8 +193,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -214,10 +201,10 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TestAnswer");
+                    b.ToTable("UserTestCorrectAnswers");
                 });
 
-            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.TestWrongAnswer", b =>
+            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.UserTestWrongAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,6 +212,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Answer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TestId")
@@ -235,8 +223,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasMaxLength(450);
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -244,7 +231,7 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WrongAnswer");
+                    b.ToTable("UserTestWrongAnswers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -381,37 +368,61 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
             modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.Result", b =>
                 {
                     b.HasOne("DevAdventCalendarCompetition.Repository.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne()
+                        .HasForeignKey("DevAdventCalendarCompetition.Repository.Models.Result", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.TestAnswer", b =>
+            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.Test", b =>
+                {
+                    b.OwnsMany("DevAdventCalendarCompetition.Repository.Models.TestAnswer", "HashedAnswers", b1 =>
+                        {
+                            b1.Property<int>("TestId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Answer")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("TestId", "Id");
+
+                            b1.ToTable("TestAnswers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TestId");
+                        });
+                });
+
+            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.UserTestCorrectAnswer", b =>
                 {
                     b.HasOne("DevAdventCalendarCompetition.Repository.Models.Test", "Test")
-                        .WithMany("Answers")
+                        .WithMany("UserCorrectAnswers")
                         .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DevAdventCalendarCompetition.Repository.Models.ApplicationUser", "User")
-                        .WithMany("Answers")
+                        .WithMany("CorrectAnswers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.TestWrongAnswer", b =>
+            modelBuilder.Entity("DevAdventCalendarCompetition.Repository.Models.UserTestWrongAnswer", b =>
                 {
                     b.HasOne("DevAdventCalendarCompetition.Repository.Models.Test", "Test")
+                        .WithMany("UserWrongAnswers")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DevAdventCalendarCompetition.Repository.Models.ApplicationUser", "User")
                         .WithMany("WrongAnswers")
-                        .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DevAdventCalendarCompetition.Repository.Models.ApplicationUser", "User")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

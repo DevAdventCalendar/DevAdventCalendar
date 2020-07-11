@@ -18,13 +18,13 @@ namespace DevAdventCalendarCompetition.Tests
     public class AdminServiceTest
     {
         private readonly Mock<ITestRepository> _testRepositoryMock;
-        private readonly Mock<ITestAnswerRepository> _testAnswerRepositoryMock;
+        private readonly Mock<IUserTestAnswersRepository> _testAnswerRepositoryMock;
         private IMapper _mapper;
 
         public AdminServiceTest()
         {
             this._testRepositoryMock = new Mock<ITestRepository>();
-            this._testAnswerRepositoryMock = new Mock<ITestAnswerRepository>();
+            this._testAnswerRepositoryMock = new Mock<IUserTestAnswersRepository>();
         }
 
         [Fact]
@@ -86,6 +86,23 @@ namespace DevAdventCalendarCompetition.Tests
         }
 
         [Fact]
+        public void AddTest_AddCorrectAmountOfAnswers()
+        {
+            // Arrange
+            var test = GetTestDto();
+            this._testRepositoryMock.Setup(mock => mock.AddTest(It.IsAny<Test>()));
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var stringHasher = new StringHasher(new HashParameters(100, new byte[] { 1, 2 }));
+            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, stringHasher);
+
+            // Act
+            adminService.AddTest(test);
+
+            // Assert
+            this._testRepositoryMock.Verify(mock => mock.AddTest(It.Is<Test>(t => t.HashedAnswers.Count == test.Answers.Count)));
+        }
+
+        [Fact]
         public void UpdateTestDates()
         {
             // Arrange
@@ -126,7 +143,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 1,
                 StartDate = DateTime.Today.AddDays(-1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             },
             new Test()
             {
@@ -134,7 +151,7 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 2,
                 StartDate = DateTime.Today.AddHours(12),
                 EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
             },
             new Test()
             {
@@ -142,7 +159,20 @@ namespace DevAdventCalendarCompetition.Tests
                 Number = 3,
                 StartDate = DateTime.Today.AddDays(1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-                Answers = null
+                HashedAnswers = null
+            }
+        };
+
+        private static TestDto GetTestDto() => new TestDto()
+        {
+            Id = 1,
+            Number = 1,
+            Description = "TestDescription",
+            Answers = new List<TestAnswerDto>()
+            {
+                new TestAnswerDto() { Answer = "Answer1" },
+                new TestAnswerDto() { Answer = "Answer2" },
+                new TestAnswerDto() { Answer = "Answer3" }
             }
         };
     }

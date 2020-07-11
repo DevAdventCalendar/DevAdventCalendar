@@ -1,226 +1,228 @@
-﻿<div class="donate_page">
-    @*<section class="promot_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="promot_content_wrapper">
-                        <div class="promt_content area_title">
-                            <h3>Sponsorzy</h3>
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+    <div class="donate_page">
+        @*<section class="promot_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="promot_content_wrapper">
+                            <div class="promt_content area_title">
+                                <h3>@Sponsors</h3>
+                            </div>
+                            <div class="santa_with_bag reveal animated" data-reveal-anim="bounceIn" data-anim-delay="0.3s">
+                                <img src="~/theme-2019/images/gift_bag.png" alt="Begger_santa">
+                            </div>
                         </div>
-                        <div class="santa_with_bag reveal animated" data-reveal-anim="bounceIn" data-anim-delay="0.3s">
-                            <img src="~/theme-2019/images/gift_bag.png" alt="Begger_santa">
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+        @*<div class="container mb-100 mt-100">
+            <div class="row">
+                <div class="col-12 mb-30 mt-30 text-center">
+                    <div class="area_title mb-30">
+                        <h3>@DoYouWantBeSponsor2019 </h3>
+                    </div>
+
+                    <a href="mailto:devadventcalendar@gmail.com" class="chris_btn reveal animated" data-reveal-anim="fadeIn">
+                        @ContactUs
+                    </a>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="breadcrumb_area">
+            <div class="container">
+                <div class="row">
+                    <div class="breadcrumb_wrapper">
+                        <div class="page_title page_title--block text-center">
+                            <h3>@SponsorsAndPartners</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>*@
 
-    @*<div class="container mb-100 mt-100">
-        <div class="row">
-            <div class="col-12 mb-30 mt-30 text-center">
-                <div class="area_title mb-30">
-                    <h3>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku? </h3>
+        <section class="event_txt">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col text-center">
+                        <h1 class="mb-30">@WeeklySponsors</h1>
+                    </div>
                 </div>
 
-                <a href="mailto:devadventcalendar@gmail.com" class="chris_btn reveal animated" data-reveal-anim="fadeIn">
-                    Skontaktuj się z nami
-                </a>
-            </div>
-        </div>
-    </div>*@
-
-    <div class="breadcrumb_area">
-        <div class="container">
-            <div class="row">
-                <div class="breadcrumb_wrapper">
-                    <div class="page_title page_title--block text-center">
-                        <h3>Sponsorzy i partnerzy</h3>
+                <div class="row prizes-wrapper">
+                    <div class="col-sm-6 mb-30"></div>
+                    <div class="col-sm-6 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://www.objectivity.co.uk/" target="_blank" class="flex-centered flex-grow">
+                                <img src="~/theme-2019/images/sponsors/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-30">
+                        <img src="~/theme-2019/images/pinguin.png" alt="pinguin" title="pinguin" class="img-responsive center-block hidden" />
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="event_txt">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col text-center">
+                        <h1 class="mb-30">@PrizesSponsors</h1>
+                    </div>
+                </div>
+
+                <div class="row prizes-wrapper">
+                    <div class="col-sm-4 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://dotnetomaniak.pl/" target="_blank" class="flex-centered flex-grow">
+                                <img src="~/theme-2019/images/sponsors/dotnetomaniak.jpg" alt="dotnetomaniak" title="Dotnetomaniak" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://nozbe.com/" target="_blank" class="flex-centered flex-grow">
+                                <img src="~/theme-2019/images/sponsors/nozbe.jpg" alt="nozbe" title="Nozbe" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://www.objectivity.co.uk/" target="_blank" class="flex-centered flex-grow">
+                                <img src="~/theme-2019/images/sponsors/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="event_txt">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col text-center">
+                        <h1 class="mt-30 mb-30">@MediaPartners</h1>
+                    </div>
+                </div>
+
+                <div class="row prizes-wrapper">
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://www.facebook.com/groups/bstoknet/" target="_blank">
+                                <img src="~/theme-2019/images/partners/bialostocka_grupa_dotnet.jpg" alt="bialostocka_grupa_dotnet" title="Białostocka Grupa .Net" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://www.meetup.com/pl-PL/KGD-NET/" target="_blank">
+                                <img src="~/theme-2019/images/partners/kgd.jpg" alt="kgd" title="KGD.NET" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://stormit.pl/" target="_blank">
+                                <img src="~/theme-2019/images/partners/StormIT.jpg" alt="kgd" title="StormIT" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://dotnetomaniak.pl/" target="_blank">
+                                <img src="~/theme-2019/images/partners/dotnetomaniak.jpg" alt="dotnetomaniak" title="dotnetomaniak" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://meetup.com/WG-NET/" target="_blank">
+                                <img src="~/theme-2019/images/partners/wgdotnet.jpg" alt="wgdotnet" title="WG.NET" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-fullheight">
+                            <a href="https://wroclaw.jug.pl/" target="_blank">
+                                <img src="~/theme-2019/images/partners/wroclawJUG.jpg" alt="wroclawJUG" title="Wrocław JUG" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row prizes-wrapper">
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://www.meetup.com/pl-PL/%C5%9Al%C4%85ska-Grupa-Microsoft-Meetup" target="_blank">
+                                <img src="~/theme-2019/images/partners/sgm.jpg" alt="sgm" title="Śląska Grupa Microsoft" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://dotnetconf.pl" target="_blank">
+                                <img src="~/theme-2019/images/partners/dotnetconf.jpg" alt="dotnetconf" title="DotNetConf" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://mrdev.pl/" target="_blank">
+                                <img src="~/theme-2019/images/partners/mrdev.jpg" alt="mrdev" title="mrDEV" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="http://devsi.pl/" target="_blank">
+                                <img src="~/theme-2019/images/partners/devsi.jpg" alt="devsi" title="devsi" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://confrontjs.com/" target="_blank">
+                                <img src="~/theme-2019/images/partners/confrontjs.jpg" alt="confrontjs" title="ConfrontJS" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://warsawjs.com" target="_blank">
+                                <img src="~/theme-2019/images/partners/warsawjs.jpg" alt="warsawjs" title="WarsawJS" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row prizes-wrapper">
+                    <div class="col-sm-2 mb-30">
+                        <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
+                            <a href="https://piecioshka.pl" target="_blank">
+                                <img src="~/theme-2019/images/partners/piecioshka.jpg" alt="piecioshka" title="Blog piecioshka.pl" class="img-responsive center-block" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
-
-    <section class="event_txt">
-        <div class="container">
-
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="mb-30">Sponsorzy tygodni</h1>
-                </div>
-            </div>
-
-            <div class="row prizes-wrapper">
-                <div class="col-sm-6 mb-30"></div>
-                <div class="col-sm-6 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://www.objectivity.co.uk/" target="_blank" class="flex-centered flex-grow">
-                            <img src="~/theme-2019/images/sponsors/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 mb-30">
-                    <img src="~/theme-2019/images/pinguin.png" alt="pinguin" title="pinguin" class="img-responsive center-block hidden" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="event_txt">
-        <div class="container">
-
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="mb-30">Sponsorzy nagród</h1>
-                </div>
-            </div>
-
-            <div class="row prizes-wrapper">
-                <div class="col-sm-4 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://dotnetomaniak.pl/" target="_blank" class="flex-centered flex-grow">
-                            <img src="~/theme-2019/images/sponsors/dotnetomaniak.jpg" alt="dotnetomaniak" title="Dotnetomaniak" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://nozbe.com/" target="_blank" class="flex-centered flex-grow">
-                            <img src="~/theme-2019/images/sponsors/nozbe.jpg" alt="nozbe" title="Nozbe" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://www.objectivity.co.uk/" target="_blank" class="flex-centered flex-grow">
-                            <img src="~/theme-2019/images/sponsors/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="event_txt">
-        <div class="container">
-
-            <div class="row">
-                <div class="col text-center">
-                    <h1 class="mt-30 mb-30">Patroni medialni</h1>
-                </div>
-            </div>
-
-            <div class="row prizes-wrapper">
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://www.facebook.com/groups/bstoknet/" target="_blank">
-                            <img src="~/theme-2019/images/partners/bialostocka_grupa_dotnet.jpg" alt="bialostocka_grupa_dotnet" title="Białostocka Grupa .Net" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://www.meetup.com/pl-PL/KGD-NET/" target="_blank">
-                            <img src="~/theme-2019/images/partners/kgd.jpg" alt="kgd" title="KGD.NET" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://stormit.pl/" target="_blank">
-                            <img src="~/theme-2019/images/partners/StormIT.jpg" alt="kgd" title="StormIT" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://dotnetomaniak.pl/" target="_blank">
-                            <img src="~/theme-2019/images/partners/dotnetomaniak.jpg" alt="dotnetomaniak" title="dotnetomaniak" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://meetup.com/WG-NET/" target="_blank">
-                            <img src="~/theme-2019/images/partners/wgdotnet.jpg" alt="wgdotnet" title="WG.NET" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-fullheight">
-                        <a href="https://wroclaw.jug.pl/" target="_blank">
-                            <img src="~/theme-2019/images/partners/wroclawJUG.jpg" alt="wroclawJUG" title="Wrocław JUG" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row prizes-wrapper">
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://www.meetup.com/pl-PL/%C5%9Al%C4%85ska-Grupa-Microsoft-Meetup" target="_blank">
-                            <img src="~/theme-2019/images/partners/sgm.jpg" alt="sgm" title="Śląska Grupa Microsoft" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://dotnetconf.pl" target="_blank">
-                            <img src="~/theme-2019/images/partners/dotnetconf.jpg" alt="dotnetconf" title="DotNetConf" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://mrdev.pl/" target="_blank">
-                            <img src="~/theme-2019/images/partners/mrdev.jpg" alt="mrdev" title="mrDEV" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="http://devsi.pl/" target="_blank">
-                            <img src="~/theme-2019/images/partners/devsi.jpg" alt="devsi" title="devsi" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://confrontjs.com/" target="_blank">
-                            <img src="~/theme-2019/images/partners/confrontjs.jpg" alt="confrontjs" title="ConfrontJS" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://warsawjs.com" target="_blank">
-                            <img src="~/theme-2019/images/partners/warsawjs.jpg" alt="warsawjs" title="WarsawJS" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row prizes-wrapper">
-                <div class="col-sm-2 mb-30">
-                    <div class="border prize-wrapper flex-column flex-centered flex-fullheight">
-                        <a href="https://piecioshka.pl" target="_blank">
-                            <img src="~/theme-2019/images/partners/piecioshka.jpg" alt="piecioshka" title="Blog piecioshka.pl" class="img-responsive center-block" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-</section>
-</div>

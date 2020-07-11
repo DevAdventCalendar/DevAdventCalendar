@@ -12,12 +12,12 @@ namespace DevAdventCalendarCompetition.Services
     public class ResultsService : IResultsService
     {
         private readonly IResultsRepository _resultsRepository;
-        private readonly ITestAnswerRepository _testAnswerRepository;
+        private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly IMapper _mapper;
 
         public ResultsService(
             IResultsRepository resultsRepository,
-            ITestAnswerRepository testAnswerRepository,
+            IUserTestAnswersRepository testAnswerRepository,
             IMapper mapper)
         {
             this._resultsRepository = resultsRepository;

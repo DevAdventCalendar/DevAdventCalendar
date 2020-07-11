@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -11,13 +12,13 @@ namespace DevAdventCalendarCompetition.Services
     public class AdminService : IAdminService
     {
         private readonly ITestRepository _testRepository;
-        private readonly ITestAnswerRepository _testAnswerRepository;
+        private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly IMapper _mapper;
         private readonly StringHasher _stringHasher;
 
         public AdminService(
             ITestRepository adminRepository,
-            ITestAnswerRepository testAnswerRepository,
+            IUserTestAnswersRepository testAnswerRepository,
             IMapper mapper,
             StringHasher stringHasher)
         {
@@ -57,10 +58,11 @@ namespace DevAdventCalendarCompetition.Services
                 throw new ArgumentNullException(nameof(testDto));
             }
 
-            string hashedAnswer = this._stringHasher.ComputeHash(testDto.Answer);
+            var testCorrectAnswers = testDto.Answers.Select(m => new TestAnswer { Answer = this._stringHasher.ComputeHash(m.Answer) }).ToList();
 
             var test = this._mapper.Map<Test>(testDto);
-            test.HashedAnswer = hashedAnswer;
+
+            test.HashedAnswers = testCorrectAnswers;
             this._testRepository.AddTest(test);
         }
 
