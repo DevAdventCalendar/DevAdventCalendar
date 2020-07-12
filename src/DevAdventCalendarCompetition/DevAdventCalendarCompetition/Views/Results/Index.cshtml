@@ -1,9 +1,12 @@
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+@using System.Globalization
+
 <div class="breadcrumb_area">
     <div class="container">
         <div class="row">
             <div class="breadcrumb_wrapper">
                 <div class="page_title">
-                    <h3>Wyniki</h3>
+                    <h3>@Results</h3>
                 </div>
             </div>
         </div>
@@ -11,7 +14,7 @@
 </div>
 
 @{
-    ViewBag.Title = "Wyniki";
+    ViewBag.Title = @Results;
 }
 @using DevAdventCalendarCompetition.Models.Test
 @using Microsoft.AspNetCore.Http
@@ -23,7 +26,7 @@
             <div class="col-md-12">
                 <div class="party_text">
                     <h1>
-                        Zapraszamy do tegorocznej edycji ;) <br />
+                        @WelcomeToTheGame <br />
                         <img src="~/theme-2019/images/gift_bag.png" alt="gifts" class="mt-20">
                     </h1>
                 </div>
@@ -64,9 +67,9 @@ else
 
                     @if (Model.UserWeek1Position == 0 && Model.UserWeek2Position == 0 && Model.UserWeek3Position == 0 && Model.UserFinalPosition == 0)
                     {
-                        <h1 class="mb-30">Wyniki już niedługo...</h1>
+                        <h1 class="mb-30">@ScoresWillBeSoon</h1>
                         <p>
-                            Twoja pozycja będzie dostępna po zliczeniu wyników najbliższego rankingu (tygodnia nr 1/2/3 lub całego konkursu).
+                            @ScoreDescription
                         </p>
                     }
                     <img src="~/theme-2019/images/gift_bag.png" alt="gifts">
@@ -85,16 +88,16 @@ else
                     {
                         <ul class="nav nav-tabs" id="results" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab">Tydzień 1</a>
+                                <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 1)</a>
                             </li>
                             <li role="presentation">
-                                <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab">Tydzień 2</a>
+                                <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 2)</a>
                             </li>
                             <li role="presentation">
-                                <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab">Tydzień 3</a>
+                                <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 3)</a>
                             </li>
                             <li role="presentation">
-                                <a href="#full" aria-controls="full" role="tab" data-toggle="tab">Pełny ranking</a>
+                                <a href="#full" aria-controls="full" role="tab" data-toggle="tab">@FullList</a>
                             </li>
                         </ul>
 
@@ -109,7 +112,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00.
+                                            @Week1ScoreDescription
                                         </h4>
                                     </div>
 
@@ -126,7 +129,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00.
+                                            @Week2ScoreDescription
                                         </h4>
                                     </div>
 
@@ -144,7 +147,7 @@ else
 
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.
+                                            @Week3ScoreDescription
                                         </h4>
                                     </div>
 
@@ -161,7 +164,7 @@ else
                                     <br />
                                     <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
                                         <h4 class="mb-30">
-                                            Ostateczne wyniki poznasz w środę, 25 grudnia.
+                                            @FinalScoreDescription
                                         </h4>
                                     </div>
 
@@ -172,7 +175,7 @@ else
                     }
                     else
                     {
-                        <div role="tabpanel" class="tab-pane" id="totalresults">Testy jeszcze się nie zakończyły</div>
+                        <div role="tabpanel" class="tab-pane" id="totalresults">@TestsAreActive</div>
                     }
                 </div>
             </div>

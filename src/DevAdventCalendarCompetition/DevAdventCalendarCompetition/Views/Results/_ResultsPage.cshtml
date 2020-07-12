@@ -1,4 +1,6 @@
 @model KeyValuePair<int, PaginatedCollection<DevAdventCalendarCompetition.Models.Test.TestResultEntryViewModel>>
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
 @{
     var entries = Model.Value;
     var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";
@@ -9,10 +11,10 @@
     <thead>
         <tr>
             <th scope="col"  class="col-xs-1">#</th>
-            <th scope="col" >Użytkownik</th>
-            <th scope="col" >Poprawne odpowiedzi</th>
-            <th scope="col" >Błędne odpowiedzi</th>
-            <th scope="col" >Suma punktów</th>
+            <th scope="col" >@User</th>
+            <th scope="col" >@CorrectAnswers</th>
+            <th scope="col" >@WrongAnswers</th>
+            <th scope="col" >@TotalScore</th>
         </tr>
     </thead>
     <tbody>
@@ -48,13 +50,13 @@
            asp-action="Index"
            asp-route-pageIndex="@(entries.PageIndex - 1)"
            class="chris_btn @prevDisabled">
-            Wstecz
+            @Previous
         </a>
         <a asp-controller="Results"
            asp-action="Index"
            asp-route-pageIndex="@(entries.PageIndex + 1)"
            class="chris_btn @nextDisabled">
-            Dalej
+            @Next
         </a>
     </div>
 </div>

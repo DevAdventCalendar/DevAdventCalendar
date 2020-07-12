@@ -1,8 +1,9 @@
-﻿@using DevAdventCalendarCompetition.Views.Manage
+@using DevAdventCalendarCompetition.Views.Manage
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 <div class="well">
     <ul class="nav nav-pills nav-stacked">
-        <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Profil</a></li>
-        <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Zmiana hasła</a></li>
+        <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">@Profile</a></li>
+        <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">@ChangePassword</a></li>
     </ul>
 </div>
