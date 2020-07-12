@@ -6,8 +6,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IHomeService
     {
-        TestDto GetCurrentTest();
-
         UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId);
 
         List<TestDto> GetCurrentTests();
