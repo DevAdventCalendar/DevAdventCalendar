@@ -4,12 +4,12 @@ using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
-using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
 using Xunit;
+using static DevAdventCalendarCompetition.Tests.TestHelper;
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 {
@@ -42,7 +42,31 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_all_test_answers()
+        public void Gets_previous_test()
+        {
+            var testList = GetTestList();
+            var currentTestNumber = 2;
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.AddRange(testList);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var adminService = PrepareSUT(context);
+
+                var result = adminService.GetPreviousTest(currentTestNumber);
+
+                result.Should().BeOfType<TestDto>();
+                result.Number.Should().Be(1);
+                result.StartDate.Should().Be(DateTime.Today.AddDays(-1).AddHours(12));
+                result.EndDate.Should().Be(DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59));
+            }
+        }
+
+        [Fact]
+        public void Adds_correct_amount_of_answers()
         {
             var testDto = GetTestDto();
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -85,6 +109,30 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             }
         }
 
+        [Fact]
+        public void Updates_test_end_date()
+        {
+            var test = GetTest();
+            var newDate = DateTime.Today.AddHours(19).AddMinutes(48);
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.Tests.Add(test);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var adminService = PrepareSUT(context);
+                adminService.UpdateTestEndDate(test.Id, newDate);
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var result = context.Tests.SingleOrDefault(t => t.Id == test.Id);
+                result.EndDate.Should().Be(newDate);
+            }
+        }
+
         private static AdminService PrepareSUT(ApplicationDbContext context)
         {
             var mapper = new MapperConfiguration(cfg => cfg.AddMaps(typeof(TestProfile))).CreateMapper();
@@ -93,48 +141,5 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var stringHasher = new StringHasher(new HashParameters(100, new byte[] { 1, 2 }));
             return new AdminService(testRepository, testAnswerRepository, mapper, stringHasher);
         }
-
-        private static Test GetTest(int number = 2) => GetTestList().First(t => t.Number == number);
-
-        private static List<Test> GetTestList() => new List<Test>()
-        {
-            new Test()
-            {
-                Id = 1,
-                Number = 1,
-                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            },
-            new Test()
-            {
-                Id = 2,
-                Number = 2,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            },
-            new Test()
-            {
-                Id = 3,
-                Number = 3,
-                StartDate = DateTime.Today.AddDays(1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            }
-        };
-
-        private static TestDto GetTestDto() => new TestDto()
-        {
-            Id = 1,
-            Number = 1,
-            Description = "TestDescription",
-            Answers = new List<TestAnswerDto>()
-            {
-                new TestAnswerDto() { Answer = "Answer1" },
-                new TestAnswerDto() { Answer = "Answer2" },
-                new TestAnswerDto() { Answer = "Answer3" }
-            }
-        };
     }
 }

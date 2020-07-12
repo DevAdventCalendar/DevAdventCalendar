@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
-using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
 using Moq;
 using Xunit;
+using static DevAdventCalendarCompetition.Tests.TestHelper;
 
 namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
@@ -132,48 +130,5 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             // Assert
             this._testRepositoryMock.Verify(mock => mock.UpdateTestEndDate(test.Id, newDate), Times.Once());
         }
-
-        private static Test GetTest(int number = 2) => GetTestList().First(t => t.Number == number);
-
-        private static List<Test> GetTestList() => new List<Test>()
-        {
-            new Test()
-            {
-                Id = 1,
-                Number = 1,
-                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            },
-            new Test()
-            {
-                Id = 2,
-                Number = 2,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            },
-            new Test()
-            {
-                Id = 3,
-                Number = 3,
-                StartDate = DateTime.Today.AddDays(1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            }
-        };
-
-        private static TestDto GetTestDto() => new TestDto()
-        {
-            Id = 1,
-            Number = 1,
-            Description = "TestDescription",
-            Answers = new List<TestAnswerDto>()
-            {
-                new TestAnswerDto() { Answer = "Answer1" },
-                new TestAnswerDto() { Answer = "Answer2" },
-                new TestAnswerDto() { Answer = "Answer3" }
-            }
-        };
     }
 }

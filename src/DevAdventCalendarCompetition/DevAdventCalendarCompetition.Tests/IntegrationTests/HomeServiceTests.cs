@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
@@ -9,8 +7,8 @@ using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
-using Microsoft.AspNetCore.Server.IIS.Core;
 using Xunit;
+using static DevAdventCalendarCompetition.Tests.TestHelper;
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 {
@@ -44,12 +42,12 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_Current_Test()
+        public void Gets_all_tests()
         {
+            var testList = GetTestList();
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
-                var tests = GetTestList();
-                context.Tests.AddRange(tests);
+                context.AddRange(testList);
                 context.SaveChanges();
             }
 
@@ -57,9 +55,36 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 var homeService = PrepareSUT(context);
 
-                var result = homeService.GetCurrentTest();
+                var result = homeService.GetCurrentTests();
 
-                result.Id.Should().Be(2);
+                result.Should().BeOfType<List<TestDto>>();
+                result.Count.Should().Be(testList.Count);
+            }
+        }
+
+        [Fact]
+        public void Gets_correct_answers_count_for_user()
+        {
+            var testList = GetTestList();
+            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
+            var correctAnswers = new List<UserTestCorrectAnswer>()
+            {
+                new UserTestCorrectAnswer() { UserId = userId, Test = testList[0] },
+                new UserTestCorrectAnswer() { UserId = userId, Test = testList[1] }
+            };
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.UserTestCorrectAnswers.AddRange(correctAnswers);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var homeService = PrepareSUT(context);
+                var result = homeService.GetCorrectAnswersCountForUser(userId);
+
+                result.Should().Be(correctAnswers.Count);
             }
         }
 
@@ -70,44 +95,5 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var testAnswerRepository = new UserTestAnswersRepository(context);
             return new HomeService(testAnswerRepository, testRepository, mapper);
         }
-
-        private static Test GetTest(int number = 2) => GetTestList().First(t => t.Number == number);
-
-        private static List<Test> GetTestList() => new List<Test>()
-        {
-            new Test()
-            {
-                Id = 1,
-                Number = 1,
-                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            },
-            new Test()
-            {
-                Id = 2,
-                Number = 2,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            },
-            new Test()
-            {
-                Id = 3,
-                Number = 3,
-                StartDate = DateTime.Today.AddDays(1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
-                HashedAnswers = null
-            }
-        };
-
-        private static UserTestCorrectAnswer GetTestAnswer() => new UserTestCorrectAnswer()
-        {
-            Id = 1,
-            TestId = 2,
-            UserId = "c611530e-bebd-41a9-ace2-951550edbfa0",
-            AnsweringTimeOffset = TimeSpan.FromMinutes(2),
-            AnsweringTime = DateTime.Now
-        };
     }
 }
