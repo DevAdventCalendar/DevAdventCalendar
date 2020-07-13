@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -23,7 +24,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task<string> GenerateEmailConfirmationTokenAsync(ClaimsPrincipal principal);
 
-        Task SendEmailConfirmationAsync(string email, Uri callbackUrl);
+        Task SendEmailConfirmationAsync(string email, Uri callbackUrl, bool isNewEmail);
 
         Task SendEmailAsync(string email, string subject, string message);
 
@@ -51,6 +52,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Task<IdentityResult> ResetPasswordAsync(ApplicationUser user, string code, string password);
 
-        Task SendEmailConfirmationAsync(string email, string callbackUrl);
+        Task SendEmailConfirmationAsync(string email, string callbackUrl, bool isNewEmail);
     }
 }
