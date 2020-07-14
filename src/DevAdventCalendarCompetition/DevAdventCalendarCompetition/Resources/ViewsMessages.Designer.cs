@@ -1600,7 +1600,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gramy do&lt;br&gt;24 grudnia..
+        ///   Looks up a localized string similar to Gramy do&lt;br&gt;24 grudnia.
         /// </summary>
         public static string WePlayUntilDecember {
             get {
