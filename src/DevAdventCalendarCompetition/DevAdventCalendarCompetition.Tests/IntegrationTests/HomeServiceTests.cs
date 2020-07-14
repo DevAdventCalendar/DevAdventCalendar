@@ -66,11 +66,10 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public void Gets_correct_answers_count_for_user()
         {
             var testList = GetTestList();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             var correctAnswers = new List<UserTestCorrectAnswer>()
             {
-                new UserTestCorrectAnswer() { UserId = userId, Test = testList[0] },
-                new UserTestCorrectAnswer() { UserId = userId, Test = testList[1] }
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[0] },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[1] }
             };
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -82,7 +81,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var homeService = PrepareSUT(context);
-                var result = homeService.GetCorrectAnswersCountForUser(userId);
+                var result = homeService.GetCorrectAnswersCountForUser(TestUserId);
 
                 result.Should().Be(correctAnswers.Count);
             }

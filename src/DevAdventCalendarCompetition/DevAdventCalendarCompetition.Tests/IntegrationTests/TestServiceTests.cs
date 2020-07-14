@@ -48,7 +48,6 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public void Adds_user_correct_answer()
         {
             var test = GetTest();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             var startDate = DateTime.Now;
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
@@ -60,12 +59,12 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 var testService = PrepareSUT(context);
 
-                testService.AddTestAnswer(test.Id, userId, startDate);
+                testService.AddTestAnswer(test.Id, TestUserId, startDate);
             }
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
-                var result = context.UserTestCorrectAnswers.SingleOrDefault(t => t.UserId == userId && t.TestId == test.Id);
+                var result = context.UserTestCorrectAnswers.SingleOrDefault(t => t.UserId == TestUserId && t.TestId == test.Id);
                 result.Should().NotBe(null);
             }
         }
@@ -74,7 +73,6 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public void Adds_user_wrong_answer()
         {
             var test = GetTest();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             var startDate = DateTime.Now;
             var wrongAnswer = "Wrong";
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -87,12 +85,12 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 var testService = PrepareSUT(context);
 
-                testService.AddTestWrongAnswer(userId, test.Id, wrongAnswer, startDate);
+                testService.AddTestWrongAnswer(TestUserId, test.Id, wrongAnswer, startDate);
             }
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
-                var result = context.UserTestWrongAnswers.SingleOrDefault(t => t.UserId == userId && t.TestId == test.Id);
+                var result = context.UserTestWrongAnswers.SingleOrDefault(t => t.UserId == TestUserId && t.TestId == test.Id);
                 result.Should().NotBe(null);
                 result.Answer.Should().Be(wrongAnswer);
             }
@@ -102,11 +100,10 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public void Gets_user_correct_answer_by_testId()
         {
             var test = GetTest();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             var userCorrectAnswer = new UserTestCorrectAnswer()
             {
                 Test = test,
-                UserId = userId,
+                UserId = TestUserId,
             };
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -123,36 +120,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 
                 result.Should().BeOfType<UserTestCorrectAnswerDto>();
                 result.TestId.Should().Be(test.Id);
-                result.UserId.Should().Be(userId);
-            }
-        }
-
-        [Fact]
-        public void Gets_user_correct_answer_by_userId()
-        {
-            var test = GetTest();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
-            var userCorrectAnswer = new UserTestCorrectAnswer()
-            {
-                Test = test,
-                UserId = userId,
-            };
-
-            using (var context = new ApplicationDbContext(this.ContextOptions))
-            {
-                context.UserTestCorrectAnswers.Add(userCorrectAnswer);
-                context.SaveChanges();
-            }
-
-            using (var context = new ApplicationDbContext(this.ContextOptions))
-            {
-                var testService = PrepareSUT(context);
-
-                var result = testService.GetAnswerByTestId(test.Id);
-
-                result.Should().BeOfType<UserTestCorrectAnswerDto>();
-                result.TestId.Should().Be(test.Id);
-                result.UserId.Should().Be(userId);
+                result.UserId.Should().Be(TestUserId);
             }
         }
 
@@ -160,11 +128,10 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public void Has_user_answered_test()
         {
             var test = GetTest();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             var userCorrectAnswer = new UserTestCorrectAnswer()
             {
                 Test = test,
-                UserId = userId,
+                UserId = TestUserId,
             };
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -177,7 +144,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 var testService = PrepareSUT(context);
 
-                var result = testService.HasUserAnsweredTest(userId, test.Id);
+                var result = testService.HasUserAnsweredTest(TestUserId, test.Id);
 
                 result.Should().Be(true);
             }

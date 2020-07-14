@@ -47,7 +47,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 
         private static Result GetUserResult() => new Result
         {
-            UserId = "c611530e-bebd-41a9-ace2-951550edbfa0",
+            UserId = TestUserId,
             Week1Points = 20,
             Week2Points = 30,
             Week3Points = 20,
@@ -61,14 +61,13 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         private static List<UserTestCorrectAnswer> GetUserCorrectAnswers()
         {
             var testList = GetTestList();
-            var userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
 
             return new List<UserTestCorrectAnswer>()
             {
-                new UserTestCorrectAnswer() { UserId = userId, Test = testList[0], AnsweringTime = new DateTime(2020, 12, 2, 20, 0, 0) },
-                new UserTestCorrectAnswer() { UserId = userId, Test = testList[1], AnsweringTime = new DateTime(2020, 12, 9, 20, 0, 0) },
-                new UserTestCorrectAnswer() { UserId = userId, Test = testList[2], AnsweringTime = new DateTime(2020, 12, 16, 20, 0, 0) },
-                new UserTestCorrectAnswer() { UserId = userId, Test = testList[3], AnsweringTime = new DateTime(2020, 12, 24, 20, 0, 0) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[0], AnsweringTime = new DateTime(2020, 12, 2, 20, 0, 0) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[1], AnsweringTime = new DateTime(2020, 12, 9, 20, 0, 0) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[2], AnsweringTime = new DateTime(2020, 12, 16, 20, 0, 0) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[3], AnsweringTime = new DateTime(2020, 12, 24, 20, 0, 0) },
             };
         }
     }
