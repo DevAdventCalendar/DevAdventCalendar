@@ -84,6 +84,20 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
+        public void Throws_exception_when_testDto_is_null()
+        {
+            TestDto testDto = null;
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var adminService = PrepareSUT(context);
+
+                Action act = () => adminService.AddTest(testDto);
+
+                act.Should().Throw<ArgumentNullException>();
+            }
+        }
+
+        [Fact]
         public void Updates_test_dates()
         {
             var test = GetTest();
@@ -106,6 +120,32 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 var result = context.Tests.SingleOrDefault(t => t.Id == test.Id);
                 result.StartDate.Should().BeCloseTo(DateTime.Now, 1000);
                 result.EndDate.Should().BeCloseTo(DateTime.Now.AddMinutes(minutes), 1000);
+            }
+        }
+
+        [Fact]
+        public void Updates_test_dates_with_default_when_cant_parse_()
+        {
+            var test = GetTest();
+            var defaultMinutes = 20;
+            var notParsableMinutesString = "minuta";
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.Tests.Add(test);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var adminService = PrepareSUT(context);
+                adminService.UpdateTestDates(test.Id, notParsableMinutesString);
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var result = context.Tests.SingleOrDefault(t => t.Id == test.Id);
+                result.StartDate.Should().BeCloseTo(DateTime.Now, 1000);
+                result.EndDate.Should().BeCloseTo(DateTime.Now.AddMinutes(defaultMinutes), 1000);
             }
         }
 
