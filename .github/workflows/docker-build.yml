@@ -19,7 +19,7 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-cache ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
         
-    - name: Run the Unit Tests
+    - name: Run the Unit and Integration Tests
       run: dotnet test -c Release --no-build ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
       
     - name: Run Code Coverage
