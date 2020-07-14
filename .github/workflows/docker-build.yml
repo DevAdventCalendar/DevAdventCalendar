@@ -30,7 +30,7 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./src/DevAdventCalendarCompetition/coverage.opencover.xml
-        flags: unittests
+        flags: unittests, integration
         name: codecov-umbrella
         fail_ci_if_error: true
 
