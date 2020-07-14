@@ -16,7 +16,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
     public class ResultsServiceTests : IntegrationTestBase
     {
         [Fact]
-        public void Gets_all_test_results()
+        public void GetAllTestResults_GetsAllTestResults()
         {
             var userResult = GetUserResult();
             var correctAnswers = GetUserCorrectAnswers();

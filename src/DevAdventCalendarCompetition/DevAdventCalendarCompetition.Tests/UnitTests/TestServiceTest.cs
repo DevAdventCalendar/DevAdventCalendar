@@ -27,7 +27,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             this._hasher = new StringHasher(new HashParameters(100, new byte[] { 1, 2 }));
         }
 
-        public static List<object[]> MinTestDateTimeGreaterThanMax()
+        public static List<object[]> TestAnswerData()
         {
             return new List<object[]>
             {
@@ -40,8 +40,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MinTestDateTimeGreaterThanMax))]
-        public void Correctly_verify_test_answer(string userAnswer, List<string> correctAnswers, bool expected)
+        [MemberData(nameof(TestAnswerData))]
+        public void VerifyTestAnswer_WithAnswer_ShouldBeAsExpected(string userAnswer, List<string> correctAnswers, bool expected)
         {
             var sut = new TestService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, this._hasher);
 

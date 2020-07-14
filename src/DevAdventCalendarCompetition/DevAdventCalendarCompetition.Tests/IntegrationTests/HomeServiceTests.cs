@@ -20,7 +20,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Returns_correctly_mapped_UserTestCorrectAnswerDto()
+        public void GetCorrectAnswerByUserId_UserAnsweredCorrectly_ReturnsUserTestCorrectAnswerDto()
         {
             var testCorrectAnswer = GetTestAnswer();
             var test = GetTest();
@@ -42,7 +42,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_all_tests()
+        public void GetCurrentTests_GetsAllTests()
         {
             var testList = GetTestList();
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -63,7 +63,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_correct_answers_count_for_user()
+        public void GetCorrectAnswersCountForUser_UserAnsweredCorrectly_ReturnsCorrectAnswersCount()
         {
             var testList = GetTestList();
             var correctAnswers = new List<UserTestCorrectAnswer>()

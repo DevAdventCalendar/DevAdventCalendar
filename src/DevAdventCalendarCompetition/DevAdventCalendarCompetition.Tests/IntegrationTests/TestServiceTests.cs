@@ -21,7 +21,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_test_by_number()
+        public void GetTestByNumber_GetsTestByNumber()
         {
             var test = GetTest();
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -45,7 +45,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Adds_user_correct_answer()
+        public void AddTestAnswer_UserAnsweredCorrectly_AddsUserCorrectAnswer()
         {
             var test = GetTest();
             var startDate = DateTime.Now;
@@ -70,7 +70,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Adds_user_wrong_answer()
+        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer()
         {
             var test = GetTest();
             var startDate = DateTime.Now;
@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_user_correct_answer_by_testId()
+        public void GetAnswerByTestId_GetsUserCorrectAnswerByTestId()
         {
             var test = GetTest();
             var userCorrectAnswer = new UserTestCorrectAnswer()
@@ -125,7 +125,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Has_user_answered_test()
+        public void HasUserAnsweredTest_UserAnswered_ReturnsTrue()
         {
             var test = GetTest();
             var userCorrectAnswer = new UserTestCorrectAnswer()
@@ -147,6 +147,21 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 var result = testService.HasUserAnsweredTest(TestUserId, test.Id);
 
                 result.Should().Be(true);
+            }
+        }
+
+        [Fact]
+        public void HasUserAnsweredTest_UserDidNotAnswer_ReturnsFalse()
+        {
+            var test = GetTest();
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var testService = PrepareSUT(context);
+
+                var result = testService.HasUserAnsweredTest(TestUserId, test.Id);
+
+                result.Should().Be(false);
             }
         }
 

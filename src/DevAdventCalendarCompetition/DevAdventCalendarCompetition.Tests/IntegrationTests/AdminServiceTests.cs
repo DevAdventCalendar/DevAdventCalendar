@@ -21,7 +21,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_all_tests()
+        public void GetAllTests_ReturnsAllTests()
         {
             var testList = GetTestList();
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -42,7 +42,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Gets_previous_test()
+        public void GetPreviousTest_ReturnsPreviousTest()
         {
             var testList = GetTestList();
             var currentTestNumber = 2;
@@ -66,7 +66,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Adds_correct_amount_of_answers()
+        public void AddTest_ValidTest_AddsCorrectAmountOfAnswers()
         {
             var testDto = GetTestDto();
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -84,7 +84,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Throws_exception_when_testDto_is_null()
+        public void AddTest_NullTest_ThrowsException()
         {
             TestDto testDto = null;
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -98,7 +98,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Updates_test_dates()
+        public void UpdateTestDates_ParsableMinutes_UpdatesTestDates()
         {
             var test = GetTest();
             var minutes = 30;
@@ -124,7 +124,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Updates_test_dates_with_default_when_cant_parse_()
+        public void UpdateTestDates_NotParsableMinutes_UpdatesTestDatesWithDefaultMinutesValue()
         {
             var test = GetTest();
             var defaultMinutes = 20;
@@ -150,7 +150,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Updates_test_end_date()
+        public void UpdateTestEndDate_ValidDate_UpdatesTestEndDate()
         {
             var test = GetTest();
             var newDate = DateTime.Today.AddHours(19).AddMinutes(48);
