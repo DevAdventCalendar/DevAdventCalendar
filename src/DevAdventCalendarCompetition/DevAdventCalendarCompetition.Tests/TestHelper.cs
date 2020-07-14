@@ -36,6 +36,14 @@ namespace DevAdventCalendarCompetition.Tests
                 StartDate = DateTime.Today.AddDays(1).AddHours(12),
                 EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
                 HashedAnswers = null
+            },
+            new Test()
+            {
+                Id = 4,
+                Number = 4,
+                StartDate = DateTime.Today.AddDays(2).AddHours(12),
+                EndDate = DateTime.Today.AddDays(2).AddHours(23).AddMinutes(59),
+                HashedAnswers = null
             }
         };
 
