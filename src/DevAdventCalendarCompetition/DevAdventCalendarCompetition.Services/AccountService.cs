@@ -58,11 +58,6 @@ namespace DevAdventCalendarCompetition.Services
             return await this._userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
         }
 
-        public async Task SendEmailConfirmationAsync(string email, string callbackUrl, bool isNewEmail)
-        {
-            await this._emailSender.SendEmailConfirmationAsync(email, callbackUrl, isNewEmail).ConfigureAwait(false);
-        }
-
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             await this._emailSender.SendEmailAsync(email, subject, message).ConfigureAwait(false);
@@ -140,7 +135,7 @@ namespace DevAdventCalendarCompetition.Services
             return await this._userManager.ResetPasswordAsync(user, code, password).ConfigureAwait(false);
         }
 
-        public async Task SendEmailConfirmationAsync(string email, Uri callbackUrl, bool isNewEmail)
+        public async Task SendEmailConfirmationAsync(string email, Uri callbackUrl, bool isNewEmail = false)
         {
             if (callbackUrl is null)
             {
