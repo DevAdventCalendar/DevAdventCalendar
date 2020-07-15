@@ -104,7 +104,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
         public void SaveUserWeeklyPlace(string userId, int weekNumber, int place)
         {
-            Console.WriteLine($"\n\nGoing to save place for user { userId } and week { weekNumber }...");
+            Console.WriteLine($"\nGoing to save place for user { userId } and week { weekNumber }...");
 
             var userResult = _dbContext
                 .Results
@@ -143,13 +143,13 @@ namespace DevAdventCalendarCompetition.TestResultService
             }
             catch (DbUpdateException e)
             {
-                Console.WriteLine($"\n\nAn error occurred during saving place for user { userId } and week { weekNumber }: { e.Message }");
+                Console.WriteLine($"\nAn error occurred during saving place for user { userId } and week { weekNumber }: { e.Message }");
             }
         }
 
         public void SaveUserWeeklyScore(string userId, int weekNumber, int score)
         {
-            Console.WriteLine($"\n\nGoing to save score for user { userId } and week { weekNumber }...");
+            Console.WriteLine($"\nGoing to save score for user { userId } and week { weekNumber }...");
 
             var userResult = _dbContext
                 .Results
@@ -188,7 +188,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             }
             catch (DbUpdateException e)
             {
-                Console.WriteLine($"\n\nAn error occurred during saving score for user { userId } and week { weekNumber }: { e.Message }");
+                Console.WriteLine($"\nAn error occurred during saving score for user { userId } and week { weekNumber }: { e.Message }");
             }
         }
 

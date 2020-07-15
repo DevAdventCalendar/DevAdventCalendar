@@ -19,11 +19,11 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-cache ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
         
-    - name: Run the Unit Tests
+    - name: Run the Unit and Integration Tests
       run: dotnet test -c Release --no-build ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
       
     - name: Run Code Coverage
-      run: dotnet test -c Release --no-build /p:CollectCoverage=true /p:CoverletOutput="../" /p:MergeWith="../coverage.json" /maxcpucount:1 /p:CoverletOutputFormat=\"json,opencover\" ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
+      run: dotnet test -c Release --no-build /p:CollectCoverage=true /p:CoverletOutput="../" /p:ExcludeByFile=\"**/Migrations/**/*%2c**/Models/**/*\" /p:MergeWith="../coverage.json" /maxcpucount:1 /p:CoverletOutputFormat=\"json,opencover\" ./src/DevAdventCalendarCompetition/DevAdventCalendarCompetition.sln
     
     - name: Upload coverage to Codecov  
       uses: codecov/codecov-action@v1

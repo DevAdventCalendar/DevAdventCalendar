@@ -17,12 +17,12 @@ namespace DevAdventCalendarCompetition.Services
         private readonly StringHasher _stringHasher;
 
         public TestService(
-            ITestRepository baseTestRepository,
+            ITestRepository testRepository,
             IUserTestAnswersRepository testAnswerRepository,
             IMapper mapper,
             StringHasher stringHasher)
         {
-            this._testRepository = baseTestRepository;
+            this._testRepository = testRepository;
             this._testAnswerRepository = testAnswerRepository;
             this._mapper = mapper;
             this._stringHasher = stringHasher;
@@ -61,9 +61,9 @@ namespace DevAdventCalendarCompetition.Services
             return testAnswerDto;
         }
 
-        public bool HasUserAnsweredTest(string userId, int testNumber)
+        public bool HasUserAnsweredTest(string userId, int testId)
         {
-            return this._testAnswerRepository.HasUserAnsweredTest(userId, testNumber);
+            return this._testAnswerRepository.HasUserAnsweredTest(userId, testId);
         }
 
         public void AddTestWrongAnswer(string userId, int testId, string wrongAnswer, DateTime wrongAnswerDate)
