@@ -38,11 +38,6 @@ namespace DevAdventCalendarCompetition.Repository
             this._dbContext.SaveChanges();
         }
 
-        public Test GetCurrentTest()
-        {
-            return this._dbContext.Set<Test>().FirstOrDefault(el => el.Status == TestStatus.Started);
-        }
-
         public List<Test> GetTestsWithUserAnswers()
         {
             return this._dbContext.Set<Test>()

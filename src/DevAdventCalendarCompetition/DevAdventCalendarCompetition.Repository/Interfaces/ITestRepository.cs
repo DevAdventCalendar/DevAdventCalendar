@@ -12,8 +12,6 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         Test GetTestByNumber(int testNumber);
 
-        Test GetCurrentTest();
-
         List<Test> GetTestsWithUserAnswers();
 
         void AddTest(Test test);

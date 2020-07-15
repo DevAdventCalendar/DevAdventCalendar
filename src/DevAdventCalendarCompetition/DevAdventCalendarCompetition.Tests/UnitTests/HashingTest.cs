@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using DevAdventCalendarCompetition.Services;
 using Xunit;
 
-namespace DevAdventCalendarCompetition.Tests
+namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class HashingTest
     {
