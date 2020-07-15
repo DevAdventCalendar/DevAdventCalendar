@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
                 int overallPoints = _correctAnswersPointsRule.CalculatePoints(correctAnswerDates.Count()) + bonus;
 
-                Console.WriteLine($"\n\nResults for user: { id } - correct answers: { correctAnswerDates.Count() }, bonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
+                Console.WriteLine($"\nResults for user: { id } - correct answers: { correctAnswerDates.Count() }, bonus: { bonus }, offset: { sumOffset }... Overall points: { overallPoints }");
 
                 results.Add(new CompetitionResult { UserId = id, Points = overallPoints, AnsweringTimeOffset = sumOffset });
             }

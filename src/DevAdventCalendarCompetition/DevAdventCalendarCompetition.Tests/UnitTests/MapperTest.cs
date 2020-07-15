@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using AutoMapper;
 using DevAdventCalendarCompetition.Services.Profiles;
 using Xunit;
 
-namespace DevAdventCalendarCompetition.Tests
+namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class MapperTest
     {
