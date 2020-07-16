@@ -25,18 +25,6 @@ namespace DevAdventCalendarCompetition.Services
             this._mapper = mapper;
         }
 
-        public TestDto GetCurrentTest()
-        {
-            var test = this._testRepository.GetCurrentTest();
-            if (test == null || (test.StartDate.HasValue && test.StartDate.Value.Date != DateTime.Today))
-            {
-                return null;
-            }
-
-            var testDto = this._mapper.Map<TestDto>(test);
-            return testDto;
-        }
-
         public UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId)
         {
             var testAnswer = this._testAnswerRepository.GetCorrectAnswerByUserId(userId, testId);

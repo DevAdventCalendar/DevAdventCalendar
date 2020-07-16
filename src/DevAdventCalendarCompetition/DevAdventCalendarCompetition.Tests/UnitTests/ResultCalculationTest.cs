@@ -5,7 +5,7 @@ using DevAdventCalendarCompetition.TestResultService;
 using DevAdventCalendarCompetition.TestResultService.Interfaces;
 using Xunit;
 
-namespace DevAdventCalendarCompetition.Tests
+namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class ResultCalculationTest
     {
