@@ -244,8 +244,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                         var code = await this._accountService.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
                         var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
-                        var isNewEmail = false;
-                        await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl), isNewEmail).ConfigureAwait(false);
+                        await this._accountService.SendEmailConfirmationAsync(model.Email, new Uri(callbackUrl)).ConfigureAwait(false);
 
                         return this.View("RegisterConfirmation");
                     }
