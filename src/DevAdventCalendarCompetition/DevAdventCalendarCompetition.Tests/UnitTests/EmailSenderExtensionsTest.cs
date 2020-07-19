@@ -1,41 +1,51 @@
+using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Moq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class EmailSenderExtensionsTest
     {
+        private const string TESTEMAIL = "aa@aa.pl";
+        private const string TESTLINK = "www.google.com";
+
         [Fact]
         public async Task SendEmailConfirmationForNewEmail()
         {
+            // Arrange
             var emailSenderMock = new Mock<IEmailSender>();
 
-            var testEmail = "Potwierdzenie zmiany email";
-            var testLink = "a";
-
             // Act
-            await EmailSenderExtensions.SendEmailConfirmationAsync(emailSenderMock, testEmail, testLink, true).ConfigureAwait;
+            await EmailSenderExtensions.SendEmailConfirmationAsync(emailSenderMock.Object, TESTEMAIL, TESTLINK, true).ConfigureAwait(false);
 
             // Assert
-            emailSenderMock.Verify(mock => mock.SendEmailAsync(testEmail, "Potwierdzenie zmiany email", It.IsAny<string>()), Times.Once());
+            emailSenderMock.Verify(
+                mock => mock.SendEmailAsync(
+                TESTEMAIL,
+                "Potwierdzenie zmiany email",
+                It.Is<string>(str => str.StartsWith("Prosimy o potwierdzenie zmiany email poprzez kliknięcie na link", System.StringComparison.InvariantCulture))),
+                Times.Once());
         }
-        
+
         [Fact]
-        public void SendEmailConfirmationForNewAccount()
+        public async Task SendEmailConfirmationForNewRegistration()
         {
             // Arrange
-            //mock emailSender
-            //set testEmail and testLink
+            var emailSenderMock = new Mock<IEmailSender>();
 
             // Act
-            EmailSenderExtensions.SendEmailConfirmationAsync(emailSenderMock, testEmail, testLink, false);
+            await EmailSenderExtensions.SendEmailConfirmationAsync(emailSenderMock.Object, TESTEMAIL, TESTLINK, false).ConfigureAwait(false);
 
             // Assert
-            this._testRepositoryMock.Verify(mock => emailSenderMock.SendEmailAsync(testEmail, "Potwierdzenie założenia konta", It.IsAny<string>()), Times.Once());
+            emailSenderMock.Verify(
+                mock => mock.SendEmailAsync(
+                TESTEMAIL,
+                "Potwierdzenie założenia konta",
+                It.Is<string>(str => str.StartsWith("Prosimy o potwierdzenie założenia konta poprzez kliknięcie na link", System.StringComparison.InvariantCulture))),
+                Times.Once());
         }
     }
 }
