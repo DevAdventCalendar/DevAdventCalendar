@@ -1,19 +1,27 @@
+using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Extensions;
+using DevAdventCalendarCompetition.Services.Interfaces;
+using Moq;
+using System.Threading.Tasks;
+using Xunit;
+
 namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class EmailSenderExtensionsTest
     {
         [Fact]
-        public void SendEmailConfirmationForNewEmail()
+        public async Task SendEmailConfirmationForNewEmail()
         {
-            // Arrange
-            //mock emailSender
-            //set testEmail and testLink
+            var emailSenderMock = new Mock<IEmailSender>();
+
+            var testEmail = "Potwierdzenie zmiany email";
+            var testLink = "a";
 
             // Act
-            EmailSenderExtensions.SendEmailConfirmationAsync(emailSenderMock, testEmail, testLink, true);
+            await EmailSenderExtensions.SendEmailConfirmationAsync(emailSenderMock, testEmail, testLink, true).ConfigureAwait;
 
             // Assert
-            this._testRepositoryMock.Verify(mock => emailSenderMock.SendEmailAsync(testEmail, "Potwierdzenie zmiany email", It.IsAny<string>()), Times.Once());
+            emailSenderMock.Verify(mock => mock.SendEmailAsync(testEmail, "Potwierdzenie zmiany email", It.IsAny<string>()), Times.Once());
         }
         
         [Fact]
