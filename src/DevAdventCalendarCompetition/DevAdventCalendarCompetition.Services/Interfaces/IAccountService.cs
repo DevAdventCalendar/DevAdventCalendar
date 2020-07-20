@@ -14,7 +14,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         string GetUserId(ClaimsPrincipal principal);
 
-        ApplicationUser CreateApplicationUserByEmail(string email);
+        ApplicationUser CreateApplicationUserByEmailAndUserName(string email, string userName);
 
         Task SignInWithApplicationUserAsync(ApplicationUser user);
 
