@@ -83,5 +83,11 @@ namespace DevAdventCalendarCompetition.Services
         {
             return correctAnswers.Any(t => this._stringHasher.VerifyHash(userAnswer, t));
         }
+
+        // metoda czytająca z TestDto IsAdvent
+        /*public void GetIsAdvent()
+        {
+
+        }*/
     }
 }

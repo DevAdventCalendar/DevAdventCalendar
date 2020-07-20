@@ -25,6 +25,8 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Index(int testNumber)
         {
             var test = this._testService.GetTestByNumber(testNumber);
+
+            // test.IsAdvent = true;
             var userHasAnswered = this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
             if (userHasAnswered)
             {
