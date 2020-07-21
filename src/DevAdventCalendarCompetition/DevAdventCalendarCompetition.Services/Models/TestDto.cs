@@ -14,12 +14,7 @@ namespace DevAdventCalendarCompetition.Services.Models
     {
         public const string DefaultDateTimeFormat = "yyyy-MM-dd";
 
-        /*
-#pragma warning disable CA1822
-        public bool IsAdvent => true; // DateTime.Now.Month == 7 && DateTime.Now.Day < 25;
-#pragma warning restore CA1822
-        */
-        public static bool IsAdvent => SetIsAdvent();
+        public bool IsAdvent { get;  private set; }
 
         public int Id { get; set; }
 
@@ -51,23 +46,42 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public bool HasUserAnswered { get; set; }
 
-        private static bool SetIsAdvent(Microsoft.Extensions.Configuration.IConfiguration configuration)
+        public static void SetIsAdvent(Microsoft.Extensions.Configuration.IConfiguration configuration, TestDto testDto)
         {
+#pragma warning disable CA1062 // Validate arguments of public methods
             var isAdventEndDate = configuration.GetSection("Competition:EndDate").Value;
+#pragma warning restore CA1062 // Validate arguments of public methods
             var isAdventStartDate = configuration.GetSection("Competition:StartDate").Value;
-            ValidateResultPublicationDateTime(isAdventEndDate);
-            ValidateResultPublicationDateTime(isAdventStartDate);
+            var correctStartDateTimeFormat = DateTimeOffset.TryParseExact(isAdventStartDate, DefaultDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var dateValue);
+            var correctEndDateTimeFormat = DateTimeOffset.TryParseExact(isAdventEndDate, DefaultDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var dateValue1);
 
-            CultureInfo culture = new CultureInfo("en-Us");
+            CultureInfo culture = CultureInfo.InvariantCulture;
+
+            if (!correctStartDateTimeFormat || correctEndDateTimeFormat)
+            {
+                throw new InvalidOperationException(
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    $"Niepoprawny format daty zmiennej ResultPublicationDateTime w appsettings ({DefaultDateTimeFormat})");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            }
 
             if (Convert.ToDateTime(isAdventStartDate, culture) >= DateTime.Now && Convert.ToDateTime(isAdventEndDate, culture) <= DateTime.Now)
             {
-                return true;
+#pragma warning disable CA1062 // Validate arguments of public methods
+                testDto.IsAdvent = true;
+#pragma warning restore CA1062 // Validate arguments of public methods
+                return;
             }
 
-            return false;
+            testDto.IsAdvent = false;
+            return;
         }
 
+        /*
         private static void ValidateResultPublicationDateTime(string resultPublicationDateTimeValue)
         {
             var correctDateTimeFormat = DateTimeOffset.TryParseExact(resultPublicationDateTimeValue, DefaultDateTimeFormat,
@@ -80,6 +94,6 @@ namespace DevAdventCalendarCompetition.Services.Models
                     $"Niepoprawny format daty zmiennej ResultPublicationDateTime w appsettings ({DefaultDateTimeFormat})");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
             }
-        }
+        }*/
     }
 }

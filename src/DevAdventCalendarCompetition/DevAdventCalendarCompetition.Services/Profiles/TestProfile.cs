@@ -1,6 +1,8 @@
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Models;
+using Microsoft.Data.SqlClient;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 
 namespace DevAdventCalendarCompetition.Services.Profiles
 {
