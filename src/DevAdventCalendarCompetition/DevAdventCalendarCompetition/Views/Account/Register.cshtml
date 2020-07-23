@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                     <div class="text_field text_field_default">
-                        <input asp-for="UserName" placeholder="Twój login" value="@ViewData["UserName"]" />
+                        <input asp-for="UserName" data-toggle="tooltip" data-placement="top" title="Nazwa użytkownika będzie wyświetlana tylko na liście wyników" placeholder="Nazwa użytkownika" value="@ViewData["UserName"]" />
                     </div>
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>

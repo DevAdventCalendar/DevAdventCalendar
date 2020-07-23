@@ -37,6 +37,10 @@ $(function () {
             });
         }
     });
+    $('[data-toggle="tooltip"]').tooltip()
+    /*
+     * via https://getbootstrap.com/docs/4.1/components/tooltips
+    */
 });
 
 function CheckTestStatus(testNumber) {
