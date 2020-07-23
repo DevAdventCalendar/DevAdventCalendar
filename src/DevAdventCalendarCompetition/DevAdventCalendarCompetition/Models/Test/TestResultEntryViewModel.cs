@@ -6,6 +6,8 @@ namespace DevAdventCalendarCompetition.Models.Test
     {
         public string FullName { get; set; }
 
+        public string UserName { get; set; }
+
         public int Position { get; set; }
 
         public int CorrectAnswers { get; set; }
