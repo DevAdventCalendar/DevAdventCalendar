@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Services.Models
@@ -7,7 +8,7 @@ namespace DevAdventCalendarCompetition.Services.Models
     public class TestDto
     {
 #pragma warning disable CA1822
-        public bool IsAdvent => DateTime.Now.Month == 12 && DateTime.Now.Day < 25;
+        public bool IsAdvent { get; private set; }
 #pragma warning restore CA1822
 
         public int Id { get; set; }
@@ -39,5 +40,51 @@ namespace DevAdventCalendarCompetition.Services.Models
         public string DiscountLogoPath { get; set; }
 
         public bool HasUserAnswered { get; set; }
+
+        public static void SetIsAdvent(TestDto testDto, string defaultDateTimeFormat = "dd-MM-yyyy")
+        {
+            Microsoft.Extensions.Configuration.IConfiguration configuration = null;
+#pragma warning disable CA1062 // Validate arguments of public methods
+            var isAdventEndDate = configuration.GetSection("Competition:EndDate").Value;
+#pragma warning restore CA1062 // Validate arguments of public methods
+            var isAdventStartDate = configuration.GetSection("Competition:StartDate").Value;
+            var correctStartDateTimeFormat = DateTimeOffset.TryParseExact(isAdventStartDate, defaultDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var dateValue);
+            var correctEndDateTimeFormat = DateTimeOffset.TryParseExact(isAdventEndDate, defaultDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var dateValue1);
+
+            if (!correctStartDateTimeFormat || correctEndDateTimeFormat)
+            {
+                throw new InvalidOperationException(
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    $"Niepoprawny format daty zmiennej ResultPublicationDateTime w appsettings ({defaultDateTimeFormat})");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            }
+
+            if (Convert.ToDateTime(isAdventStartDate, CultureInfo.InvariantCulture) >= DateTime.Now
+                && Convert.ToDateTime(isAdventEndDate, CultureInfo.InvariantCulture) <= DateTime.Now)
+            {
+                if (testDto == null)
+                {
+                    throw new ArgumentNullException(
+                        $"testDto jest nullem ({testDto})");
+                }
+
+                testDto.IsAdvent = true;
+
+                return;
+            }
+
+            if (testDto == null)
+            {
+                throw new ArgumentNullException(
+                    $"testDto jest nullem ({testDto})");
+            }
+
+            testDto.IsAdvent = false;
+            return;
+        }
     }
 }
