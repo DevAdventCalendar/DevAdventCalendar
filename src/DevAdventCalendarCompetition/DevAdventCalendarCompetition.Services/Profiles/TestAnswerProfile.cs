@@ -13,7 +13,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
 #pragma warning restore CA1506
         {
             this.CreateMap<UserTestCorrectAnswer, UserTestCorrectAnswerDto>()
-                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.Email));
+                .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.User.UserName));
 
             this.CreateMap<UserTestCorrectAnswerDto, UserTestCorrectAnswer>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())

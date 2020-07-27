@@ -6,8 +6,11 @@ using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
+using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
 
@@ -35,6 +38,20 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 
                 result.Count.Should().Be(4);
             }
+        }
+
+        [Fact]
+        public void GetUserName()
+        {
+            var newUser = GetNewUser();
+            var userResult = GetUserResult();
+            Console.WriteLine("Test");
+        }
+
+        private static ApplicationUser GetNewUser()
+        {
+            var accountService = new Mock<IAccountService>();
+            
         }
 
         private static ResultsService PrepareSUT(ApplicationDbContext context)
