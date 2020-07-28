@@ -52,7 +52,8 @@ namespace DevAdventCalendarCompetition.Controllers
                             FinalPlace = result.FinalPlace,
                             UserId = result.UserId,
                             CorrectAnswers = result.CorrectAnswersCount,
-                            WrongAnswers = result.WrongAnswersCount
+                            WrongAnswers = result.WrongAnswersCount,
+                            UserName = result.UserName,
                         });
                     }
 

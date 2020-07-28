@@ -4,8 +4,6 @@ namespace DevAdventCalendarCompetition.Models.Test
 {
     public class TestResultEntryViewModel
     {
-        public string FullName { get; set; }
-
         public string UserName { get; set; }
 
         public int Position { get; set; }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
@@ -37,21 +38,11 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 var result = resultsService.GetAllTestResults();
 
                 result.Count.Should().Be(4);
+                foreach (var key in result.Keys)
+                {
+                    result[key].ForEach(x => string.Equals(x.UserName, TestUserName, StringComparison.Ordinal));
+                }
             }
-        }
-
-        [Fact]
-        public void GetUserName()
-        {
-            var newUser = GetNewUser();
-            var userResult = GetUserResult();
-            Console.WriteLine("Test");
-        }
-
-        private static ApplicationUser GetNewUser()
-        {
-            var accountService = new Mock<IAccountService>();
-            
         }
 
         private static ResultsService PrepareSUT(ApplicationDbContext context)
