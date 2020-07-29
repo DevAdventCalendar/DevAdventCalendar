@@ -63,9 +63,9 @@ namespace DevAdventCalendarCompetition.Services
             await this._emailSender.SendEmailAsync(email, subject, message).ConfigureAwait(false);
         }
 
-        public ApplicationUser CreateApplicationUserByEmail(string email)
+        public ApplicationUser CreateApplicationUserByEmailAndUserName(string email, string userName)
         {
-            return new ApplicationUser { UserName = email, Email = email };
+            return new ApplicationUser { UserName = userName, Email = email };
         }
 
         public async Task SignInWithApplicationUserAsync(ApplicationUser user)

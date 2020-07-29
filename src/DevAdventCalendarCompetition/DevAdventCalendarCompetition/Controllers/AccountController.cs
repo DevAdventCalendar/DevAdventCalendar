@@ -128,7 +128,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this.ViewData["ReturnUrl"] = returnUrl;
             if (this.ModelState.IsValid)
             {
-                var user = this._accountService.CreateApplicationUserByEmail(model.Email);
+                var user = this._accountService.CreateApplicationUserByEmailAndUserName(model.Email, model.UserName);
 
                 var result = await this._accountService.CreateAsync(user, model.Password).ConfigureAwait(false);
                 if (result.Succeeded)
@@ -232,7 +232,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (this.ModelState.IsValid)
             {
-                var user = this._accountService.CreateApplicationUserByEmail(model.Email);
+                var user = this._accountService.CreateApplicationUserByEmailAndUserName(model.Email, model.UserName);
 
                 var result = await this._accountService.CreateAsync(user, null).ConfigureAwait(false);
                 if (result.Succeeded)

@@ -246,6 +246,9 @@
   <data name="DoYouWantBeSponsor2019" xml:space="preserve">
     <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
   </data>
@@ -591,6 +594,9 @@
   <data name="TicketWrocSharp" xml:space="preserve">
     <value>Bilet na konferencję Wroc#</value>
   </data>
+  <data name="ToolTipUserName" xml:space="preserve">
+    <value>Nazwa użytkownika będzie wyświetlana tylko na liście wyników</value>
+  </data>
   <data name="TotalScore" xml:space="preserve">
     <value>Suma punktów</value>
   </data>
@@ -602,6 +608,9 @@
   </data>
   <data name="UserAlreadyAnswered" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="VerifyCode" xml:space="preserve">
     <value>Weryfikacja</value>

@@ -448,6 +448,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ten adres email już mamy w swojej bazie :).
         /// </summary>
         public static string EmailAlreadyInDatabase {
@@ -1483,6 +1492,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nazwa użytkownika będzie wyświetlana tylko na liście wyników.
+        /// </summary>
+        public static string ToolTipUserName {
+            get {
+                return ResourceManager.GetString("ToolTipUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suma punktów.
         /// </summary>
         public static string TotalScore {
@@ -1515,6 +1533,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string UserAlreadyAnswered {
             get {
                 return ResourceManager.GetString("UserAlreadyAnswered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa użytkownika.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         
