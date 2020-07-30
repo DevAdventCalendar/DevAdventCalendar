@@ -39,6 +39,22 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Fact]
+        public void GetCurrentTests()
+        {
+            // Arrange
+            var testAnswer = GetTestList();
+            this._testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(testAnswer);
+            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+
+            // Act
+            var result = homeService.GetCurrentTests();
+
+            // Assert
+            Assert.IsType<List<TestDto>>(result);
+        }
+
+        [Fact]
         public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto()
         {
             // Arrange
