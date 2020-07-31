@@ -47,6 +47,38 @@ namespace DevAdventCalendarCompetition.Tests
             }
         };
 
+        public static List<TestDto> GetTestListDto() => new List<TestDto>()
+        {
+            new TestDto()
+            {
+                Id = 1,
+                Number = 1,
+                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
+            },
+            new TestDto()
+            {
+                Id = 2,
+                Number = 2,
+                StartDate = DateTime.Today.AddHours(12),
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+            },
+            new TestDto()
+            {
+                Id = 3,
+                Number = 3,
+                StartDate = DateTime.Today.AddDays(1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
+            },
+            new TestDto()
+            {
+                Id = 4,
+                Number = 4,
+                StartDate = DateTime.Today.AddDays(2).AddHours(12),
+                EndDate = DateTime.Today.AddDays(2).AddHours(23).AddMinutes(59),
+            }
+        };
+
         public static TestDto GetTestDto() => new TestDto()
         {
             Id = 1,
