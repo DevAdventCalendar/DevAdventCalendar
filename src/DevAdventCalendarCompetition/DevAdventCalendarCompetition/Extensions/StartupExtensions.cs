@@ -23,6 +23,33 @@ namespace DevAdventCalendarCompetition.Extensions
 {
     public static class StartupExtensions
     {
+        // metoda validate configuration przyjumje parametry jak ta poniżej
+        public static IServiceCollection ValidateConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            string defaultDateTimeFormat = "dd-MM-yyyy";
+#pragma warning disable CA1062 // Validate arguments of public methods
+            var isAdventEndDate = configuration.GetSection("Competition:EndDate").Value;
+#pragma warning restore CA1062 // Validate arguments of public methods
+            var isAdventStartDate = configuration.GetSection("Competition:StartDate").Value;
+            var correctStartDateTimeFormat = DateTimeOffset.TryParseExact(isAdventStartDate, defaultDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var dateValue);
+            var correctEndDateTimeFormat = DateTimeOffset.TryParseExact(isAdventEndDate, defaultDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out var dateValue1);
+
+            if (!(correctStartDateTimeFormat || correctEndDateTimeFormat))
+            {
+                throw new InvalidOperationException(
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                    $"Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings " +
+                    $"powinno byc ({defaultDateTimeFormat})");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+            }
+
+            return services;
+        }
+
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>

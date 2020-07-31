@@ -4,8 +4,10 @@ using System.Text.RegularExpressions;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -14,6 +16,7 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
+        private readonly bool _isAdvent;
 
         public HomeService(
             IUserTestAnswersRepository testAnswerRepository,
@@ -23,8 +26,10 @@ namespace DevAdventCalendarCompetition.Services
             this._testAnswerRepository = testAnswerRepository;
             this._testRepository = testRepository;
             this._mapper = mapper;
+            this._isAdvent = IsAdventExtensions.CheckIsAdvent();
         }
 
+        // sprawdzić czy isadvent true jesli nie to rzucić wyjatkiem
         public UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId)
         {
             var testAnswer = this._testAnswerRepository.GetCorrectAnswerByUserId(userId, testId);

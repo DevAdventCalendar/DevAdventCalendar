@@ -7,10 +7,6 @@ namespace DevAdventCalendarCompetition.Services.Models
 {
     public class TestDto
     {
-#pragma warning disable CA1822
-        public bool IsAdvent { get; private set; }
-#pragma warning restore CA1822
-
         public int Id { get; set; }
 
         public int Number { get; set; }
@@ -41,9 +37,14 @@ namespace DevAdventCalendarCompetition.Services.Models
 
         public bool HasUserAnswered { get; set; }
 
-        public static void SetIsAdvent(TestDto testDto, string defaultDateTimeFormat = "dd-MM-yyyy")
+        /*
+         * public static void SetIsAdvent(TestDto testDto, string defaultDateTimeFormat = "dd-MM-yyyy")
         {
-            Microsoft.Extensions.Configuration.IConfiguration configuration = null;
+            if (testDto == null)
+            {
+                throw new ArgumentNullException(nameof(testDto));
+            }
+
 #pragma warning disable CA1062 // Validate arguments of public methods
             var isAdventEndDate = configuration.GetSection("Competition:EndDate").Value;
 #pragma warning restore CA1062 // Validate arguments of public methods
@@ -66,25 +67,12 @@ namespace DevAdventCalendarCompetition.Services.Models
             if (Convert.ToDateTime(isAdventStartDate, CultureInfo.InvariantCulture) >= DateTime.Now
                 && Convert.ToDateTime(isAdventEndDate, CultureInfo.InvariantCulture) <= DateTime.Now)
             {
-                if (testDto == null)
-                {
-                    throw new ArgumentNullException(
-                        $"testDto jest nullem ({testDto})");
-                }
-
                 testDto.IsAdvent = true;
 
                 return;
             }
 
-            if (testDto == null)
-            {
-                throw new ArgumentNullException(
-                    $"testDto jest nullem ({testDto})");
-            }
-
             testDto.IsAdvent = false;
-            return;
-        }
+        }*/
     }
 }

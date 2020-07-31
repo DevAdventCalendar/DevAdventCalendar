@@ -100,6 +100,9 @@ namespace DevAdventCalendarCompetition
             services.ConfigureOptions(this.Configuration);
 
             services.AddHttpClient(nameof(EmailNotificationService));
+
+            // StartupExnetsions.metoda(coniguration)
+            // services.naszametoda(this.configuration)
         }
     }
 }

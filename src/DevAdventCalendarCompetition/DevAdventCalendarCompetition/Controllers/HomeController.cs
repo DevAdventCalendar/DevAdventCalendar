@@ -21,6 +21,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public ActionResult Index()
         {
+            // jesli nie ma adventu to uzytkownik ma widzieæ pusta strone
             var currentTestsDto = this._homeService.GetCurrentTests();
             if (currentTestsDto == null)
             {
@@ -35,6 +36,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
 
+            // przekazac do viewbaga informacje o tym cyz jest advent
             return this.View(currentTestsDto);
         }
 

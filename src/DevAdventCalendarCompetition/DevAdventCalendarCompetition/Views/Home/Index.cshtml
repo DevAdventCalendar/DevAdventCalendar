@@ -7,6 +7,7 @@
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
+    // pobrac informacje z view baga czy jest advent
     var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
 }
 
@@ -153,7 +154,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    if (correctAnswersForUser != null)
+    if (correctAnswersForUser != null) //jesli jest advent to ten if a jesli nie to wyswietlic pustego diva badz napis wykorzystać zmienną z viewbaga
     {
         <section class="event_txt">
             <div class="container">
