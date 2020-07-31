@@ -16,22 +16,32 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
-        private readonly bool _isAdvent;
+        private readonly IConfiguration _configuration;
 
         public HomeService(
             IUserTestAnswersRepository testAnswerRepository,
             ITestRepository testRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IConfiguration configuration)
         {
             this._testAnswerRepository = testAnswerRepository;
             this._testRepository = testRepository;
             this._mapper = mapper;
-            this._isAdvent = IsAdventExtensions.CheckIsAdvent();
+            this._configuration = configuration;
         }
 
         // sprawdzić czy isadvent true jesli nie to rzucić wyjatkiem
         public UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId)
         {
+            if (IsAdventExtensions.CheckIsAdvent(this._configuration) != true)
+            {
+#pragma warning disable CA2201 // Do not raise reserved exception types
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
+                throw new Exception("Nie ma Adventu");
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
+#pragma warning restore CA2201 // Do not raise reserved exception types
+            }
+
             var testAnswer = this._testAnswerRepository.GetCorrectAnswerByUserId(userId, testId);
             var testAnswerDto = this._mapper.Map<UserTestCorrectAnswerDto>(testAnswer);
             return testAnswerDto;

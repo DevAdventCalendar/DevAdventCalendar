@@ -5,23 +5,31 @@ using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Providers;
+using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(IHomeService homeService)
+        public HomeController(IHomeService homeService, IConfiguration configuration)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
+            this._configuration = configuration;
         }
 
         public ActionResult Index()
         {
-            // jesli nie ma adventu to uzytkownik ma widzieæ pusta strone
+            if (IsAdventExtensions.CheckIsAdvent(this._configuration) == false)
+            {
+                return this.View();
+            }
+
             var currentTestsDto = this._homeService.GetCurrentTests();
             if (currentTestsDto == null)
             {
@@ -37,6 +45,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
 
             // przekazac do viewbaga informacje o tym cyz jest advent
+            this.ViewBag.IsAdvent = IsAdventExtensions.CheckIsAdvent(this._configuration);
             return this.View(currentTestsDto);
         }
 

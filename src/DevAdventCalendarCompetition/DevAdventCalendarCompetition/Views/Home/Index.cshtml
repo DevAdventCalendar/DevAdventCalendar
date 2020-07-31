@@ -7,10 +7,11 @@
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
+    var isAdvent = ViewBag.IsAdvent;
     // pobrac informacje z view baga czy jest advent
     var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
 }
-
+    
 <!--================================
   START COUNTDOWN AREA
 =================================-->
@@ -154,31 +155,38 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    if (correctAnswersForUser != null) //jesli jest advent to ten if a jesli nie to wyswietlic pustego diva badz napis wykorzystać zmienną z viewbaga
+    if (isAdvent == true)
     {
-        <section class="event_txt">
-            <div class="container">
-                <div class="col-md-12">
-                    <div class="party_text">
-                        @if (DateTime.Today.Month == 12)
-                        {
-                            @if (correctAnswersForUser == 0)
+        if (correctAnswersForUser != null) //jesli jest advent to ten if a jesli nie to wyswietlic pustego diva badz napis wykorzystać zmienną z viewbaga
+        {
+            <section class="event_txt">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="party_text">
+                            @if (DateTime.Today.Month == 12)
                             {
-                                <h1>@YouHaventAnswered</h1>
+                                @if (correctAnswersForUser == 0)
+                                {
+                                    <h1>@YouHaventAnswered</h1>
+                                }
+                                else if (correctAnswersForUser == overallPossibleTestsCount)
+                                {
+                                    <h1><span>@Congrats</span> <br />@YouAnsweredCorrectly</h1> }
+                                else
+                                {
+                                    <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
+                                }
                             }
-                            else if (correctAnswersForUser == overallPossibleTestsCount)
-                            {
-                                <h1><span>@Congrats</span> <br />@YouAnsweredCorrectly</h1> }
-                            else
-                            {
-                                <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
-                            }
-                        }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        }
     }
+
+    <div>
+        
+    </div>
 
     <div class="container-fluid mb-30">
         <div class="row">

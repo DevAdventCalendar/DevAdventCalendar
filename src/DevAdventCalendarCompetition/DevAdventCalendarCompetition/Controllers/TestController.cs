@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
