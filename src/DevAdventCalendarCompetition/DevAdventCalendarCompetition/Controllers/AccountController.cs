@@ -270,7 +270,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this._accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
-                return this.RedirectToAction(nameof(HomeController.Error), "Home");
+                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
             }
 
             if (user.EmailConfirmed)
@@ -278,7 +278,8 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View("EmailAlreadyConfirmed");
             }
 
-            return await this.ConfrimEmailCompleted(userId, code);
+            var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
+            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         [HttpGet]
@@ -413,15 +414,6 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        private async Task<IActionResult> ConfrimEmailCompleted(string userId, string code)
-        {
-            var user = await this._accountService.FindByIdAsync(userId).ConfigureAwait(false);
-            var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
-            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
     }
 }
