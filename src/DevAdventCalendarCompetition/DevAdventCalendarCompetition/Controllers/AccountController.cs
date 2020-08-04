@@ -262,7 +262,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(code))
             {
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
