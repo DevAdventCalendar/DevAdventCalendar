@@ -279,6 +279,11 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException();
+            }
+
             return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
