@@ -284,7 +284,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException();
             }
 
-            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return this.View();
         }
 
         [HttpGet]
