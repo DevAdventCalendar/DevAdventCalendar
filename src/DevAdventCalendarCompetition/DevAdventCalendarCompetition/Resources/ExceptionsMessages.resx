@@ -135,4 +135,7 @@
   <data name="ErrorDuringPushNotificationsPreferenceChange" xml:space="preserve">
     <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}.</value>
   </data>
+  <data name="ErrorDuringEmailConfirmation" xml:space="preserve">
+    <value>Problem z potwierdzeniem emaila</value>
+  </data>
 </root>

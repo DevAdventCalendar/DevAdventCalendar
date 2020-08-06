@@ -322,15 +322,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problem z potwierdzeniem emaila.
-        /// </summary>
-        public static string ConfirmEmailError {
-            get {
-                return ResourceManager.GetString("ConfirmEmailError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Potwierdź hasło.
         /// </summary>
         public static string ConfirmPassword {
