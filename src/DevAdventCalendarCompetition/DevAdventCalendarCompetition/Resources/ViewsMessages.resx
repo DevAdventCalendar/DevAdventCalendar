@@ -204,6 +204,9 @@
   <data name="CompleteTestEalier" xml:space="preserve">
     <value>Zakończ test wcześniej</value>
   </data>
+  <data name="ConfirmEmailError" xml:space="preserve">
+    <value>Problem z potwierdzeniem emaila</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Potwierdź hasło</value>
   </data>

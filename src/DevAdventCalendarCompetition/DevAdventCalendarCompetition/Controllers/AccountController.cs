@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -281,7 +282,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException(ConfirmEmailError.ToString());
             }
 
             return this.View();
