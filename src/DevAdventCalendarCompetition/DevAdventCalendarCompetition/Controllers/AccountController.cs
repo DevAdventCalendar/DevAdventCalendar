@@ -272,7 +272,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this._accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException(@ErrorDuringEmailConfiguration,  @userId);
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, @ErrorDuringEmailConfiguration, userId));
             }
 
             if (user.EmailConfirmed)
