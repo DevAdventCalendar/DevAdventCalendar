@@ -84,7 +84,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\ExceptionsMessages.resx">
-      <CustomToolNamespace>DevExeptionsMessages</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>

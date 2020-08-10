@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using static DevAdventCalendarCompetition.Resources.ExceptionsMessages;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -262,7 +264,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(code))
             {
                 return this.RedirectToAction(nameof(HomeController.Index), "Home");
             }
@@ -270,7 +272,7 @@ namespace DevAdventCalendarCompetition.Controllers
             var user = await this._accountService.FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
             {
-                throw new ArgumentException($"Nie można załadować użytkownika z identyfikatorem '{userId}'.");
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, @ErrorDuringEmailConfiguration, userId));
             }
 
             if (user.EmailConfirmed)
@@ -279,7 +281,12 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             var result = await this._accountService.ConfirmEmailAsync(user, code).ConfigureAwait(false);
-            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException(@ErrorDuringEmailConfirmation);
+            }
+
+            return this.View();
         }
 
         [HttpGet]
