@@ -37,6 +37,10 @@ $(function () {
             });
         }
     });
+    $('[data-toggle="tooltip"]').tooltip()
+    /*
+     * via https://getbootstrap.com/docs/4.1/components/tooltips
+    */
 });
 
 function CheckTestStatus(testNumber) {
@@ -58,7 +62,7 @@ function CheckTestStatus(testNumber) {
 }
 
 function GetResult(number) {
-    if (number == 20) {
+    if (number === 20) {
         return "odpowiedź to: 'kutia'";
     } else {
         return "To nie ten numer! Spróbuj jeszcze raz...";

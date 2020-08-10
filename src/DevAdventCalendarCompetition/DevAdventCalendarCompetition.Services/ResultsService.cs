@@ -64,21 +64,6 @@ namespace DevAdventCalendarCompetition.Services
             return this._resultsRepository.GetUserPosition(userId);
         }
 
-        public string PrepareUserEmailForRODO(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-            {
-                return string.Empty;
-            }
-
-            var emailMaskRegex = "(^([\\w\\.\\-]{3})|(\\w{1,2})).*(@[\\w\\.\\-]).*(.)$";
-
-            return Regex.Replace(email, emailMaskRegex,
-                m => string.IsNullOrEmpty(m.Groups[3].Value)
-                    ? m.Groups[2].Value + "..." + m.Groups[4].Value + "..." + m.Groups[5].Value
-                    : m.Groups[3].Value + "..." + m.Groups[4].Value + "..." + m.Groups[5].Value);
-        }
-
         private List<TestResultDto> FillResultsWithAnswersStats(int weekNumber, List<TestResultDto> results)
         {
             DateTimeOffset dateFrom;

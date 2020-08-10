@@ -187,7 +187,8 @@ namespace DevAdventCalendarCompetition.Controllers
             var code = await this._accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
             var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
             var email = user.Email;
-            await this._accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl)).ConfigureAwait(false);
+            var isNewEmail = true;
+            await this._accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl), isNewEmail).ConfigureAwait(false);
 
             this.StatusMessage = "E-mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę odbiorczą";
             return this.RedirectToAction(nameof(this.Index));
