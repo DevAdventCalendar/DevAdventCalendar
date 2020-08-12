@@ -22,14 +22,14 @@ namespace DevExeptionsMessages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ExceptionsMessages {
+    public class ExceptionsMessagesServices {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ExceptionsMessages() {
+        internal ExceptionsMessagesServices() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DevExeptionsMessages {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Resources.ExceptionsMessages", typeof(ExceptionsMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Services.Resources.ExceptionsMessagesServices", typeof(ExceptionsMessagesServices).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -88,6 +88,15 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Proszę zmienić wartości start oraz end Date w appsettings żeby było możliwe wykonanie operacji.
+        /// </summary>
+        public static string IsNotAdvent {
+            get {
+                return ResourceManager.GetString("IsNotAdvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poprzedni test nie został zakończony.
         /// </summary>
         public static string PreviousTestIsNotDone {
@@ -111,15 +120,6 @@ namespace DevExeptionsMessages {
         public static string UserWithIdNotFound {
             get {
                 return ResourceManager.GetString("UserWithIdNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings.
-        /// </summary>
-        public static string WrongFormatOfDate {
-            get {
-                return ResourceManager.GetString("WrongFormatOfDate", resourceCulture);
             }
         }
     }

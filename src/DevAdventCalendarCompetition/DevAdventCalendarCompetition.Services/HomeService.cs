@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Resources;
 using System.Text.RegularExpressions;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -7,6 +8,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevExeptionsMessages;
 using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
@@ -35,11 +37,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             if (IsAdventExtensions.CheckIsAdvent(this._configuration) != true)
             {
-#pragma warning disable CA2201 // Do not raise reserved exception types
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new Exception("Nie ma Adventu");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
-#pragma warning restore CA2201 // Do not raise reserved exception types
+                throw new InvalidOperationException(ExceptionsMessagesServices.IsNotAdvent);
             }
 
             var testAnswer = this._testAnswerRepository.GetCorrectAnswerByUserId(userId, testId);

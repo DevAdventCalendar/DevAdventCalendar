@@ -20,11 +20,13 @@ namespace DevAdventCalendarCompetition.Controllers
         public HomeController(IHomeService homeService, IConfiguration configuration)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
-            this._configuration = configuration;
+            this._configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public ActionResult Index()
         {
+            this.ViewBag.IsAdvent = IsAdventExtensions.CheckIsAdvent(this._configuration);
+
             if (IsAdventExtensions.CheckIsAdvent(this._configuration) == false)
             {
                 return this.View();
@@ -44,8 +46,6 @@ namespace DevAdventCalendarCompetition.Controllers
 
             this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
 
-            // przekazac do viewbaga informacje o tym cyz jest advent
-            this.ViewBag.IsAdvent = IsAdventExtensions.CheckIsAdvent(this._configuration);
             return this.View(currentTestsDto);
         }
 

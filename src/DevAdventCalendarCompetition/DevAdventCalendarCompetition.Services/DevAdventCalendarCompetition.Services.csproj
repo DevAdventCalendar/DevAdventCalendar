@@ -25,4 +25,38 @@
     <ProjectReference Include="..\DevAdventCalendarCompetition.Repository\DevAdventCalendarCompetition.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\ErrorMessagesServices.Designer.cs">
+      <DependentUpon>ErrorMessagesServices.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ExceptionsMessagesServices.Designer.cs">
+      <DependentUpon>ExceptionsMessagesServices.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ViewsMessagesServices.Designer.cs">
+      <DependentUpon>ViewsMessagesServices.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ErrorMessagesServices.resx">
+      <LastGenOutput>ErrorMessagesServices.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ExceptionsMessagesServices.resx">
+      <CustomToolNamespace>DevExeptionsMessages</CustomToolNamespace>
+      <LastGenOutput>ExceptionsMessagesServices.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ViewsMessagesServices.resx">
+      <LastGenOutput>ViewsMessagesServices.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

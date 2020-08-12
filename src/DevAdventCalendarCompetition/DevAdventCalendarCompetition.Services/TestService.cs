@@ -38,11 +38,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             if (IsAdventExtensions.CheckIsAdvent(this._configuration) == false)
             {
-#pragma warning disable CA2201 // Do not raise reserved exception types
-#pragma warning disable CA1303 // Do not pass literals as localized parameters
-                throw new Exception("Brak Adwentu");
-#pragma warning restore CA1303 // Do not pass literals as localized parameters
-#pragma warning restore CA2201 // Do not raise reserved exception types
+                throw new ArgumentException(DevExeptionsMessages.ExceptionsMessagesServices.IsNotAdvent);
             }
 
             var test = this._testRepository.GetTestByNumber(testNumber);

@@ -7,6 +7,8 @@ namespace DevAdventCalendarCompetition.Services.Models
 {
     public class TestDto
     {
+        public bool IsAdvent { get; }
+
         public int Id { get; set; }
 
         public int Number { get; set; }
