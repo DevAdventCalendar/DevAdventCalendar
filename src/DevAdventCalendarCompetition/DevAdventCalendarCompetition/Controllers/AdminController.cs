@@ -125,7 +125,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult CalculateResults(int weekNumber)
         {
-            if (weekNumber < 1 && weekNumber > 4)
+            if (weekNumber < 1 || weekNumber > 4)
             {
                 return this.BadRequest("Błędny numer tygodnia.");
             }
