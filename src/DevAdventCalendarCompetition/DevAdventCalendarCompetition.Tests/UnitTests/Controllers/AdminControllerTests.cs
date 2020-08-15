@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -8,6 +9,7 @@ using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
@@ -35,17 +37,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             };
 
             this._adminServiceMock.Setup(x => x.GetAllTests()).Returns(testList);
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             var result = controller.Index();
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<List<TestDto>>(
-                viewResult.ViewData.Model);
+            var model = Assert.IsAssignableFrom<List<TestDto>>(viewResult.ViewData.Model);
             Assert.Single(model);
         }
 
@@ -53,9 +53,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         public void AddTest_ModelStateIsInvalid_ReturnsViewWithInvalidModel()
         {
             // Arrange
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
             controller.ModelState.AddModelError("Number", "Required");
 
             // Act
@@ -71,15 +69,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             this._testServiceMock.Setup(x => x.GetTestByNumber(It.IsAny<int>())).Returns(GetTestDto());
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             var result = controller.AddTest(GetTestViewModel());
 
             // Assert
-            controller.ModelState.ErrorCount.Should().Be(1);
+            var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
+            Assert.Single(allErrors);
+            Assert.Contains(allErrors, x => x.ErrorMessage == "Test o podanym numerze już istnieje.");
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<TestViewModel>(viewResult.ViewData.Model);
         }
@@ -89,9 +87,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             this._testServiceMock.Setup(x => x.GetTestByNumber(It.IsAny<int>())).Returns((TestDto)null);
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             var result = controller.AddTest(GetTestViewModel());
@@ -108,9 +104,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.Started);
             this._adminServiceMock.Setup(x => x.GetTestById(test.Id)).Returns(test);
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             Func<ActionResult> act = () => controller.StartTest(test.Id, "20");
@@ -128,9 +122,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var previousTest = GetTest(TestStatus.Started);
             this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
             this._adminServiceMock.Setup(x => x.GetPreviousTest(It.IsAny<int>())).Returns(previousTest);
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             Func<ActionResult> act = () => controller.StartTest(test.Id, "20");
@@ -149,9 +141,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var previousTest = GetTest(TestStatus.Ended);
             this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
             this._adminServiceMock.Setup(x => x.GetPreviousTest(It.IsAny<int>())).Returns(previousTest);
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             var result = controller.StartTest(test.Id, minutes);
@@ -167,9 +157,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var correctWeekNumber = 3;
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             var result = controller.CalculateResults(correctWeekNumber);
@@ -183,9 +171,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var incorrectWeekNumber = -1;
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
 
             // Act
             var result = controller.CalculateResults(incorrectWeekNumber);
