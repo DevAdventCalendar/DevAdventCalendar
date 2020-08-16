@@ -183,9 +183,11 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         public void AdminController_ShouldHaveCorrectRole()
         {
             using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-            var roles = GetAuthorizationRoles(controller);
-            Assert.NotNull(roles);
-            Assert.Equal("Admin", roles);
+            var authorizeAttribute = GetAuthorizeAttribute(controller);
+
+            Assert.NotNull(authorizeAttribute);
+            Assert.NotNull(authorizeAttribute.Roles);
+            Assert.Equal("Admin", authorizeAttribute.Roles);
         }
 
         private static TestViewModel GetTestViewModel() => new TestViewModel
@@ -213,7 +215,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             return test;
         }
 
-        private static string GetAuthorizationRoles(Controller controller)
+        private static AuthorizeAttribute GetAuthorizeAttribute(Controller controller)
         {
             if (controller == null)
             {
@@ -224,7 +226,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var attribute =
                 controllerType.GetCustomAttributes(typeof(AuthorizeAttribute), true).FirstOrDefault() as
                     AuthorizeAttribute;
-            return attribute.Roles;
+            return attribute;
         }
     }
 }
