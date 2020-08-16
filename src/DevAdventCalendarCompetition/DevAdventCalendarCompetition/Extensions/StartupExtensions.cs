@@ -6,6 +6,7 @@ using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
@@ -42,7 +43,7 @@ namespace DevAdventCalendarCompetition.Extensions
 
             if (!(isValidStartDateTime || isValidEndDateTime))
             {
-                throw new InvalidOperationException(DevExeptionsMessages.ExceptionsMessages.WrongFormatOfDate);
+                throw new InvalidOperationException(ExceptionsMessages.WrongFormatOfDate);
             }
 
             return services;

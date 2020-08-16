@@ -1,14 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services.Extensions
 {
     public static class IsAdventExtensions
     {
+        private const string DefaultDateTimeFormat = "dd-MM-yyyy";
+
         public static bool CheckIsAdvent(IConfiguration configuration)
         {
             if (configuration == null)
@@ -16,8 +15,11 @@ namespace DevAdventCalendarCompetition.Services.Extensions
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            if (Convert.ToDateTime(configuration.GetSection("Competition:StartDate"), CultureInfo.InvariantCulture) <= DateTime.Now &&
-                Convert.ToDateTime(configuration.GetSection("Competition:EndDate"), CultureInfo.InvariantCulture) >= DateTime.Now)
+            var startDate = configuration.GetSection("Competition:StartDate");
+            var endDate = configuration.GetSection("Competition:EndDate");
+
+            if (DateTimeOffset.ParseExact(startDate.Value, DefaultDateTimeFormat, CultureInfo.InvariantCulture) <= DateTime.Now &&
+                DateTimeOffset.ParseExact(endDate.Value, DefaultDateTimeFormat, CultureInfo.InvariantCulture) >= DateTime.Now)
             {
                 return true;
             }

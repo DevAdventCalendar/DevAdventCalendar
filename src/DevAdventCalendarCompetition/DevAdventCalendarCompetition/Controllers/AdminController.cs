@@ -2,12 +2,11 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using DevExeptionsMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

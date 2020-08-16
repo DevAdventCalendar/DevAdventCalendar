@@ -43,7 +43,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         [MemberData(nameof(TestAnswerData))]
         public void VerifyTestAnswer_WithAnswer_ShouldBeAsExpected(string userAnswer, List<string> correctAnswers, bool expected)
         {
-            var sut = new TestService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, this._hasher);
+            var sut = new TestService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, this._hasher, null);
 
             var result = sut.VerifyTestAnswer(userAnswer, correctAnswers);
 

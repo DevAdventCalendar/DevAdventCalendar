@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Resources;
-using System.Text.RegularExpressions;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using DevExeptionsMessages;
+using DevAdventCalendarCompetition.Services.Resources;
 using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
@@ -32,7 +30,6 @@ namespace DevAdventCalendarCompetition.Services
             this._configuration = configuration;
         }
 
-        // sprawdzić czy isadvent true jesli nie to rzucić wyjatkiem
         public UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId)
         {
             if (IsAdventExtensions.CheckIsAdvent(this._configuration) != true)

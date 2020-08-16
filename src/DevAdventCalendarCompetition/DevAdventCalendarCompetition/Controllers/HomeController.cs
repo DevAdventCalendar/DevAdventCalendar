@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
-using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -27,7 +26,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             this.ViewBag.IsAdvent = IsAdventExtensions.CheckIsAdvent(this._configuration);
 
-            if (IsAdventExtensions.CheckIsAdvent(this._configuration) == false)
+            if (!this.ViewBag.IsAdvent)
             {
                 return this.View();
             }
