@@ -152,21 +152,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void CalculateResults_CorrectWeekNumber_ReturnsOkResult()
-        {
-            // Arrange
-            var correctWeekNumber = 3;
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-
-            // Act
-            var result = controller.CalculateResults(correctWeekNumber);
-
-            // Assert
-            Assert.IsType<OkResult>(result);
-        }
-
-        [Fact]
-        public void CalculateResults_IncorrectWeekNumber_ReturnsOkResult()
+        public void CalculateResults_IncorrectWeekNumber_ReturnsBadRequestResult()
         {
             // Arrange
             var incorrectWeekNumber = -1;
