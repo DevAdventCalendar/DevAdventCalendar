@@ -7,9 +7,8 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using FluentAssertions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
@@ -180,6 +179,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
+        [Fact]
+        public void AdminController_ShouldHaveCorrectRole()
+        {
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            var roles = GetAuthorizationRoles(controller);
+            Assert.NotNull(roles);
+            Assert.Equal("Admin", roles);
+        }
+
         private static TestViewModel GetTestViewModel() => new TestViewModel
         {
             Number = 0,
@@ -203,6 +211,20 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTestDto();
             test.Status = status;
             return test;
+        }
+
+        private static string GetAuthorizationRoles(Controller controller)
+        {
+            if (controller == null)
+            {
+                throw new ArgumentNullException(nameof(controller));
+            }
+
+            var controllerType = controller.GetType();
+            var attribute =
+                controllerType.GetCustomAttributes(typeof(AuthorizeAttribute), true).FirstOrDefault() as
+                    AuthorizeAttribute;
+            return attribute.Roles;
         }
     }
 }
