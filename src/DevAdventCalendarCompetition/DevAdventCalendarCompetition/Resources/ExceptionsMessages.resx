@@ -138,4 +138,7 @@
   <data name="ErrorDuringEmailConfirmation" xml:space="preserve">
     <value>Problem z potwierdzeniem emaila</value>
   </data>
+  <data name="TestAlreadyExist" xml:space="preserve">
+    <value>Test o podanym numerze już istnieje.</value>
+  </data>
 </root>

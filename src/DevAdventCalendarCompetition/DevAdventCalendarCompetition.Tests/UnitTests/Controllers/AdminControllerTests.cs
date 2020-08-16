@@ -77,7 +77,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
-            Assert.Contains(allErrors, x => x.ErrorMessage == "Test o podanym numerze już istnieje.");
+            Assert.Contains(allErrors, x => x.ErrorMessage == ExceptionsMessages.TestAlreadyExist);
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<TestViewModel>(viewResult.ViewData.Model);
         }

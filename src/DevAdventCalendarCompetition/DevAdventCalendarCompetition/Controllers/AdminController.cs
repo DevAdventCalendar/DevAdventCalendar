@@ -53,7 +53,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (dbTest != null)
                 {
-                    this.ModelState.AddModelError("Number", "Test o podanym numerze już istnieje.");
+                    this.ModelState.AddModelError("Number", ExceptionsMessages.TestAlreadyExist);
                     return this.View(model);
                 }
 

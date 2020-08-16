@@ -106,6 +106,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test o podanym numerze już istnieje..
+        /// </summary>
+        public static string TestAlreadyExist {
+            get {
+                return ResourceManager.GetString("TestAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test został uruchomiony.
         /// </summary>
         public static string TestAlreadyRun {
