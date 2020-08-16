@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
+using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
 
@@ -34,6 +38,10 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 var result = resultsService.GetAllTestResults();
 
                 result.Count.Should().Be(4);
+                foreach (var key in result.Keys)
+                {
+                    result[key].ForEach(x => string.Equals(x.UserName, TestUserName, StringComparison.Ordinal));
+                }
             }
         }
 

@@ -70,6 +70,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Problem z potwierdzeniem emaila.
+        /// </summary>
+        public static string ErrorDuringEmailConfirmation {
+            get {
+                return ResourceManager.GetString("ErrorDuringEmailConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień email dla użytkownika z identyfikatorem {0}..
         /// </summary>
         public static string ErrorDuringEmailNotificationsPreferenceChange {

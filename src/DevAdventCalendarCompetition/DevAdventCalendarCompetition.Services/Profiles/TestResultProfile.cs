@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Models;
 
@@ -9,7 +9,7 @@ namespace DevAdventCalendarCompetition.Services.Profiles
         public TestResultProfile()
         {
             this.CreateMap<Result, TestResultDto>()
-                .ForMember(d => d.Email, opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.Email))
+                .ForMember(d => d.UserName, opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.UserName))
                 .ForMember(d => d.Position, opt => opt.MapFrom(src => src.Id));
         }
     }

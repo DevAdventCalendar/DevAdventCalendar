@@ -52,17 +52,15 @@ namespace DevAdventCalendarCompetition.Services
         {
             var currentTime = DateTime.Now;
             var answerTimeOffset = currentTime.Subtract(testStartDate);
-            var maxAnswerTime = new TimeSpan(0, 23, 59, 59, 999);
 
             var testAnswer = new UserTestCorrectAnswer()
             {
                 TestId = testId,
                 UserId = userId,
                 AnsweringTime = currentTime,
-                AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
+                AnsweringTimeOffset = answerTimeOffset
             };
 
-            // TODO remove (for tests only)
             this._testAnswerRepository.AddCorrectAnswer(testAnswer);
         }
 

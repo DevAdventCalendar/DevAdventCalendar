@@ -4,6 +4,10 @@ namespace DevAdventCalendarCompetition.Models.Account
 {
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "Pole nazwa użytkownika jest obowiązkowe")]
+        [Display(Name = "Nazwa użytkownika")]
+        public string UserName { get; set; }
+
         [Required(ErrorMessage = "Pole Email jest obowiązkowe")]
         [EmailAddress(ErrorMessage = "Podaj prawidłowy format adresu email")]
         [Display(Name = "Email")]
