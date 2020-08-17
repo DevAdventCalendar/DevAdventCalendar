@@ -40,9 +40,9 @@ namespace DevAdventCalendarCompetition.Extensions
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out var dateValue1);
 
-            if (!(isValidStartDateTime || isValidEndDateTime))
+            if (!isValidStartDateTime || !isValidEndDateTime)
             {
-                throw new InvalidOperationException(DevExeptionsMessages.ExceptionsMessages.WrongFormatOfDate);
+                throw new FormatException(DevExeptionsMessages.ExceptionsMessages.WrongFormatOfDate);
             }
 
             return services;
