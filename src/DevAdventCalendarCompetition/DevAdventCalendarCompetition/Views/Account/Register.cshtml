@@ -30,7 +30,14 @@
 
                 <div class="form-group">
                     <div class="text_field text_field_default">
-                        <input asp-for="Email" placeholder="Email" value="@ViewData["Email"]" />
+                        <input asp-for="UserName" data-toggle="tooltip" data-placement="top" title=@ToolTipUserName placeholder=@UserName value="@ViewData["UserName"]" />
+                    </div>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class="text_field text_field_default">
+                        <input asp-for="Email" placeholder=@Email value="@ViewData["Email"]" />
                     </div>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>

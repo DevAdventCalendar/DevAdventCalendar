@@ -7,6 +7,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Services.Resources;
 using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
@@ -38,7 +39,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             if (IsAdventExtensions.CheckIsAdvent(this._configuration) == false)
             {
-                throw new ArgumentException(DevExeptionsMessages.ExceptionsMessagesServices.IsNotAdvent);
+                throw new ArgumentException(ExceptionsMessagesServices.IsNotAdvent);
             }
 
             var test = this._testRepository.GetTestByNumber(testNumber);
@@ -51,17 +52,15 @@ namespace DevAdventCalendarCompetition.Services
         {
             var currentTime = DateTime.Now;
             var answerTimeOffset = currentTime.Subtract(testStartDate);
-            var maxAnswerTime = new TimeSpan(0, 23, 59, 59, 999);
 
             var testAnswer = new UserTestCorrectAnswer()
             {
                 TestId = testId,
                 UserId = userId,
                 AnsweringTime = currentTime,
-                AnsweringTimeOffset = answerTimeOffset > maxAnswerTime ? maxAnswerTime : answerTimeOffset
+                AnsweringTimeOffset = answerTimeOffset
             };
 
-            // TODO remove (for tests only)
             this._testAnswerRepository.AddCorrectAnswer(testAnswer);
         }
 

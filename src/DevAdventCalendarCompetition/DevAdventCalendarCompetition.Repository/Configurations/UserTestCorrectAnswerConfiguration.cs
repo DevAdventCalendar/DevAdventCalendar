@@ -2,6 +2,7 @@ using System;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DevAdventCalendarCompetition.Repository.Configurations
 {
@@ -15,6 +16,8 @@ namespace DevAdventCalendarCompetition.Repository.Configurations
             }
 
             builder.HasKey(ut => ut.Id);
+
+            builder.Property(ut => ut.AnsweringTimeOffset).HasConversion(new TimeSpanToTicksConverter());
 
             builder.HasOne(ut => ut.Test)
                 .WithMany(t => t.UserCorrectAnswers)

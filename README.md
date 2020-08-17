@@ -20,7 +20,7 @@ DevAdventCalendar web app for online competition for programmers : [www.devadven
 |Environment |Build  |Deployment| Quality | Coverage |
 |:----------:|:-----:|:--------:|:-------:|:--------:|
 | PROD |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/1/1)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=1) |[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DevAdventCalendar_DevAdventCalendar&metric=alert_status)](https://sonarcloud.io/dashboard?id=DevAdventCalendar_DevAdventCalendar) |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop)|
-| DEV |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI%20DEV/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI+DEV%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/2/2)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=2) | |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop_uat/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop_uat)|
+| DEV |[![Build](https://github.com/DevAdventCalendar/DevAdventCalendar/workflows/Docker%20Image%20CI%20DEV/badge.svg)](https://github.com/DevAdventCalendar/DevAdventCalendar/actions?query=workflow%3A%22Docker+Image+CI+DEV%22) |[![Deploy](https://vsrm.dev.azure.com/plotzwi/_apis/public/Release/badge/e2ad85fa-38da-4937-a85f-997b254f4cda/2/2)](https://dev.azure.com/plotzwi/DevAdventCalendar/_release?_a=releases&view=mine&definitionId=2) | |[![codecov](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop/graph/badge.svg)](https://codecov.io/gh/DevAdventCalendar/DevAdventCalendar/branch/develop)|
 
 
 ## Projects in solution
@@ -28,7 +28,7 @@ DevAdventCalendar web app for online competition for programmers : [www.devadven
 - **DevAdventCalendarCompetition** - main project with Controllers and Views
 - **DevAdventCalendarCompetition.Services** - class library for logic operations
 - **DevAdventCalendarCompetition.Repository** - class library for database operations
-- **DevAdventCalendarCompetition.Tests** - unit tests for DevAdventCalendarCompetition.Services (xUnit)
+- **DevAdventCalendarCompetition.Tests** - unit and integration tests that covers services and controllers (xUnit)
 
 - **DevAdventCalendarCompetition.TestResultService** - external service calculating user points based on a custom algorithm
 - **DevAdventCalendarCompetition.TestResultService.Tests** - unit tests for TestResultService (xUnit)

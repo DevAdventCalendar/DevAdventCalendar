@@ -53,7 +53,7 @@ namespace DevAdventCalendarCompetition.Controllers
                             UserId = result.UserId,
                             CorrectAnswers = result.CorrectAnswersCount,
                             WrongAnswers = result.WrongAnswersCount,
-                            FullName = this._resultsService.PrepareUserEmailForRODO(result.Email),
+                            UserName = result.UserName,
                         });
                     }
 

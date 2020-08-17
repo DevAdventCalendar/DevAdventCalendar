@@ -29,7 +29,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             var testAnswer = GetTestAnswer();
             this._testAnswerRepositoryMock.Setup(mock => mock.GetCorrectAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
-            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper, null);
 
             // Act
             var result = homeService.GetCorrectAnswerByUserId(testAnswer.UserId, testAnswer.Id);
@@ -45,7 +45,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             var testList = GetTestList();
             this._testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(testList);
             this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper, null);
 
             // Act
             var result = homeService.GetTestsWithUserAnswers();

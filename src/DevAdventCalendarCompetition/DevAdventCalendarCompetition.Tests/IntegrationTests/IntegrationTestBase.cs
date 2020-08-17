@@ -8,6 +8,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
     public class IntegrationTestBase : IDisposable
     {
         protected const string TestUserId = "c611530e-bebd-41a9-ace2-951550edbfa0";
+        protected const string TestUserName = "devadventcalendar";
 
         private readonly SqliteConnection _connection;
 
@@ -69,7 +70,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 var phoneNumberConfirmed = false;
                 var securityStamp = "DWAXVN2W4U5J3KSGI7V7KPLU3GBWFVJL";
                 var twoFactorEnabled = false;
-                var userName = email;
+                var userName = TestUserName;
                 var emailNotificationsEnabled = false;
                 var pushNotificationsEnabled = false;
 

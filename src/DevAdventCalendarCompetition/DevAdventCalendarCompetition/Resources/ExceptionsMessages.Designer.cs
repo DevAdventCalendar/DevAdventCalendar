@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DevExeptionsMessages {
+namespace DevAdventCalendarCompetition.Resources {
     using System;
     
     
@@ -66,6 +66,15 @@ namespace DevExeptionsMessages {
         public static string ErrorDuringEmailConfiguration {
             get {
                 return ResourceManager.GetString("ErrorDuringEmailConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem z potwierdzeniem emaila.
+        /// </summary>
+        public static string ErrorDuringEmailConfirmation {
+            get {
+                return ResourceManager.GetString("ErrorDuringEmailConfirmation", resourceCulture);
             }
         }
         

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <NeutralLanguage>pl-PL</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -49,7 +50,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ExceptionsMessagesServices.resx">
-      <CustomToolNamespace>DevExeptionsMessages</CustomToolNamespace>
       <LastGenOutput>ExceptionsMessagesServices.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>

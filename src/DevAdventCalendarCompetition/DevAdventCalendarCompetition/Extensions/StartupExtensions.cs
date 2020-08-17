@@ -6,6 +6,7 @@ using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
@@ -40,9 +41,9 @@ namespace DevAdventCalendarCompetition.Extensions
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out var dateValue1);
 
-            if (!isValidStartDateTime || !isValidEndDateTime)
+            if (!(isValidStartDateTime || isValidEndDateTime))
             {
-                throw new FormatException(DevExeptionsMessages.ExceptionsMessages.WrongFormatOfDate);
+                throw new InvalidOperationException(ExceptionsMessages.WrongFormatOfDate);
             }
 
             return services;
