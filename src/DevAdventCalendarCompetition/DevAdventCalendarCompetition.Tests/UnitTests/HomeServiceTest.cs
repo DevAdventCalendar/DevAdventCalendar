@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using AutoMapper;
+using AutoFixture.Xunit2;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
-using DevAdventCalendarCompetition.Services.Profiles;
 using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
@@ -12,43 +11,39 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class HomeServiceTest
     {
-        private readonly Mock<ITestRepository> _testRepositoryMock;
-        private readonly Mock<IUserTestAnswersRepository> _testAnswerRepositoryMock;
-        private IMapper _mapper;
-
-        public HomeServiceTest()
-        {
-            this._testRepositoryMock = new Mock<ITestRepository>();
-            this._testAnswerRepositoryMock = new Mock<IUserTestAnswersRepository>();
-        }
-
-        [Fact]
-        public void GetTestAnswerByUserId_ReturnTestAnswerDto()
+        [Theory]
+        [AutoMoqData]
+        public void GetTestAnswerByUserId_ReturnTestAnswerDto([Frozen]Mock<IUserTestAnswersRepository> testAnswerRepositoryMock, HomeService homeService)
         {
             // Arrange
             var testAnswer = GetTestAnswer();
-            this._testAnswerRepositoryMock.Setup(mock => mock.GetCorrectAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestAnswerProfile>()).CreateMapper();
-            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testAnswerRepositoryMock.Setup(mock => mock.GetCorrectAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Act
+#pragma warning disable CA1062 // Validate arguments of public methods
             var result = homeService.GetCorrectAnswerByUserId(testAnswer.UserId, testAnswer.Id);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
             Assert.IsType<UserTestCorrectAnswerDto>(result);
         }
 
-        [Fact]
-        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto()
+        [Theory]
+        [AutoMoqData]
+        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto([Frozen]Mock<ITestRepository> testRepositoryMock, HomeService homeService)
         {
             // Arrange
             var testList = GetTestList();
-            this._testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(testList);
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var homeService = new HomeService(this._testAnswerRepositoryMock.Object, this._testRepositoryMock.Object, this._mapper);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(testList);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Act
+#pragma warning disable CA1062 // Validate arguments of public methods
             var result = homeService.GetTestsWithUserAnswers();
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
             Assert.IsType<List<TestWithUserCorrectAnswerListDto>>(result);
