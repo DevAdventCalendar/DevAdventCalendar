@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using DevAdventCalendarCompetition.Repository.Interfaces;
+using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
 using Moq;
@@ -14,10 +15,9 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     {
         [Theory]
         [AutoMoqData]
-        public void GetTestAnswerByUserId_ReturnTestAnswerDto([Frozen]Mock<IUserTestAnswersRepository> testAnswerRepositoryMock, HomeService homeService)
+        public void GetTestAnswerByUserId_ReturnTestAnswerDto(UserTestCorrectAnswer testAnswer, [Frozen]Mock<IUserTestAnswersRepository> testAnswerRepositoryMock, HomeService homeService)
         {
             // Arrange
-            var testAnswer = GetTestAnswer();
             testAnswerRepositoryMock.Setup(mock => mock.GetCorrectAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
 
             // Act
@@ -29,18 +29,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
         [Theory]
         [AutoMoqData]
-        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto([Frozen]Mock<ITestRepository> testRepositoryMock, HomeService homeService)
+        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto(List<Test> tests, [Frozen]Mock<ITestRepository> testRepositoryMock, HomeService homeService)
         {
             // Arrange
-            var testList = GetTestList();
-            testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(testList);
+            testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(tests);
 
             // Act
             var result = homeService.GetTestsWithUserAnswers();
 
             // Assert
             Assert.IsType<List<TestWithUserCorrectAnswerListDto>>(result);
-            Assert.True(testList.Count == result.Count);
+            Assert.True(tests.Count == result.Count);
         }
     }
 }

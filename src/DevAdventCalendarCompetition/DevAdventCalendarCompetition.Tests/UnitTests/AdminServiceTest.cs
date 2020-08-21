@@ -17,26 +17,24 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     {
         [Theory]
         [AutoMoqData]
-        public void GetAllTests_ReturnTestDtoList([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
+        public void GetAllTests_ReturnTestDtoList(List<Test> tests, [Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
             // Arrange
-            var testList = GetTestList();
-            testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(testList);
+            testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(tests);
 
             // Act
             var result = adminService.GetAllTests();
 
             // Assert
             result.Should().BeOfType<List<TestDto>>();
-            result.Count.Should().Be(testList.Count);
+            result.Count.Should().Be(tests.Count);
         }
 
         [Theory]
         [AutoMoqData]
-        public void GetTestBy_IdReturnTestDto([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
+        public void GetTestBy_IdReturnTestDto(Test test, [Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
             // Arrange
-            var test = GetTest();
             testRepositoryMock.Setup(mock => mock.GetTestById(It.IsAny<int>())).Returns(test);
 
             // Act
@@ -72,12 +70,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
         [Theory]
         [AutoMoqData]
-        public void AddTest_AddCorrectAmountOfAnswers([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
+        public void AddTest_AddCorrectAmountOfAnswers(TestDto test, [Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
-            // Arrange
-            var test = GetTestDto();
-            testRepositoryMock.Setup(mock => mock.AddTest(It.IsAny<Test>()));
-
             // Act
             adminService.AddTest(test);
 
