@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using AutoMapper;
+using AutoFixture.Xunit2;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
-using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
 using Moq;
 using Xunit;
@@ -15,44 +14,40 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class AdminServiceTest
     {
-        private readonly Mock<ITestRepository> _testRepositoryMock;
-        private readonly Mock<IUserTestAnswersRepository> _testAnswerRepositoryMock;
-        private IMapper _mapper;
-
-        public AdminServiceTest()
-        {
-            this._testRepositoryMock = new Mock<ITestRepository>();
-            this._testAnswerRepositoryMock = new Mock<IUserTestAnswersRepository>();
-        }
-
-        [Fact]
-        public void GetAllTests_ReturnTestDtoList()
+        [Theory]
+        [AutoMoqData]
+        public void GetAllTests_ReturnTestDtoList([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
             // Arrange
             var testList = GetTestList();
-            this._testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(testList);
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Setup(mock => mock.GetAllTests()).Returns(testList);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Act
+#pragma warning disable CA1062 // Validate arguments of public methods
             var result = adminService.GetAllTests();
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
             result.Should().BeOfType<List<TestDto>>();
             result.Count.Should().Be(testList.Count);
         }
 
-        [Fact]
-        public void GetTestBy_IdReturnTestDto()
+        [Theory]
+        [AutoMoqData]
+        public void GetTestBy_IdReturnTestDto([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
             // Arrange
             var test = GetTest();
-            this._testRepositoryMock.Setup(mock => mock.GetTestById(It.IsAny<int>())).Returns(test);
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Setup(mock => mock.GetTestById(It.IsAny<int>())).Returns(test);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Act
+#pragma warning disable CA1062 // Validate arguments of public methods
             var result = adminService.GetTestById(test.Id);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
             result.Should().BeOfType<TestDto>();
@@ -62,19 +57,22 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             result.EndDate.Should().Be(test.EndDate);
         }
 
-        [Fact]
-        public void GetPreviousTest_ReturnPreviousTestDto()
+        [Theory]
+        [AutoMoqData]
+        public void GetPreviousTest_ReturnPreviousTestDto([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
             // Arrange
             var currentTestNumber = GetTest().Number;
             var previousTestNumber = currentTestNumber - 1;
             var previousTest = GetTest(previousTestNumber);
-            this._testRepositoryMock.Setup(mock => mock.GetTestByNumber(previousTestNumber)).Returns(previousTest);
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Setup(mock => mock.GetTestByNumber(previousTestNumber)).Returns(previousTest);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Act
+#pragma warning disable CA1062 // Validate arguments of public methods
             var result = adminService.GetPreviousTest(currentTestNumber);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
             result.Should().BeOfType<TestDto>();
@@ -83,52 +81,53 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             result.EndDate.Should().Be(previousTest.EndDate);
         }
 
-        [Fact]
-        public void AddTest_AddCorrectAmountOfAnswers()
+        [Theory]
+        [AutoMoqData]
+        public void AddTest_AddCorrectAmountOfAnswers([Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
             // Arrange
             var test = GetTestDto();
-            this._testRepositoryMock.Setup(mock => mock.AddTest(It.IsAny<Test>()));
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var stringHasher = new StringHasher(new HashParameters(100, new byte[] { 1, 2 }));
-            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, stringHasher);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Setup(mock => mock.AddTest(It.IsAny<Test>()));
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Act
+#pragma warning disable CA1062 // Validate arguments of public methods
             adminService.AddTest(test);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
-            this._testRepositoryMock.Verify(mock => mock.AddTest(It.Is<Test>(t => t.HashedAnswers.Count == test.Answers.Count)));
+            testRepositoryMock.Verify(mock => mock.AddTest(It.Is<Test>(t => t.HashedAnswers.Count == test.Answers.Count)));
         }
 
-        [Fact]
-        public void UpdateTestDates()
+        [Theory]
+        [AutoMoqData]
+        public void UpdateTestDates(int testId, [Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
-            // Arrange
-            var test = GetTest();
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
-
             // Act
-            adminService.UpdateTestDates(test.Id, "20");
+#pragma warning disable CA1062 // Validate arguments of public methods
+            adminService.UpdateTestDates(testId, "20");
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
-            this._testRepositoryMock.Verify(mock => mock.UpdateTestDates(test.Id, It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once());
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Verify(mock => mock.UpdateTestDates(testId, It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once());
+#pragma warning restore CA1062 // Validate arguments of public methods
         }
 
-        [Fact]
-        public void UpdateTestEndDate()
+        [Theory]
+        [AutoMoqData]
+        public void UpdateTestEndDate(int testId, DateTime newDate, [Frozen] Mock<ITestRepository> testRepositoryMock, AdminService adminService)
         {
-            // Arrange
-            var test = GetTest();
-            var newDate = DateTime.Today.AddHours(23).AddMinutes(20);
-            this._mapper = new MapperConfiguration(cfg => cfg.AddProfile<TestProfile>()).CreateMapper();
-            var adminService = new AdminService(this._testRepositoryMock.Object, this._testAnswerRepositoryMock.Object, this._mapper, null);
-
             // Act
-            adminService.UpdateTestEndDate(test.Id, newDate);
+#pragma warning disable CA1062 // Validate arguments of public methods
+            adminService.UpdateTestEndDate(testId, newDate);
+#pragma warning restore CA1062 // Validate arguments of public methods
 
             // Assert
-            this._testRepositoryMock.Verify(mock => mock.UpdateTestEndDate(test.Id, newDate), Times.Once());
+#pragma warning disable CA1062 // Validate arguments of public methods
+            testRepositoryMock.Verify(mock => mock.UpdateTestEndDate(testId, newDate), Times.Once());
+#pragma warning restore CA1062 // Validate arguments of public methods
         }
     }
 }
