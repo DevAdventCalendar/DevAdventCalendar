@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using AutoFixture;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
@@ -22,22 +24,40 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         [Fact]
         public void GetCorrectAnswerByUserId_UserAnsweredCorrectly_ReturnsUserTestCorrectAnswerDto()
         {
+            /*
             var testCorrectAnswer = GetTestAnswer();
             var test = GetTest();
+            */
+            var fixture = new Fixture();
+            fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
+                .ForEach(b => fixture.Behaviors.Remove(b));
+            fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+
+            fixture.Customize<UserTestCorrectAnswer>(c =>
+                c.With(ut => ut.TestId, 1)
+                    .With(ut => ut.UserId, TestUserId));
+
+            fixture.Customize<UserTestWrongAnswer>(c =>
+                c.With(ut => ut.TestId, 1)
+                    .With(ut => ut.UserId, TestUserId));
+
+            fixture.Customize<Test>(c =>
+                c.With(t => t.Id, 1));
+
+            var test = fixture.Create<Test>();
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 context.Tests.Add(test);
-                context.UserTestCorrectAnswers.Add(testCorrectAnswer);
                 context.SaveChanges();
             }
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var homeService = PrepareSUT(context);
-                var result = homeService.GetCorrectAnswerByUserId(testCorrectAnswer.UserId, test.Id);
+                var result = homeService.GetCorrectAnswerByUserId(TestUserId, test.Id);
 
                 result.Should().BeOfType<UserTestCorrectAnswerDto>();
-                result.UserId.Should().Be(testCorrectAnswer.UserId);
+                result.UserId.Should().Be(TestUserId);
             }
         }
 
