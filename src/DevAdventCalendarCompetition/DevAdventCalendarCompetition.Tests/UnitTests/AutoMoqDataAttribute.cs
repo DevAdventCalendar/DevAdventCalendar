@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using AutoFixture;
 using AutoFixture.AutoMoq;
-using AutoFixture.Kernel;
 using AutoFixture.Xunit2;
 using AutoMapper;
 using DevAdventCalendarCompetition.Services.Profiles;
@@ -21,6 +20,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
                 fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
                     .ForEach(b => fixture.Behaviors.Remove(b));
                 fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+                fixture.Customizations.Add(new TestNumberGenerator());
                 return fixture;
             })
         {

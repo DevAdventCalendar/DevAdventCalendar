@@ -15,7 +15,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     {
         [Theory]
         [AutoMoqData]
-        public void GetTestAnswerByUserId_ReturnTestAnswerDto(UserTestCorrectAnswer testAnswer, [Frozen]Mock<IUserTestAnswersRepository> testAnswerRepositoryMock, HomeService homeService)
+        public void GetTestAnswerByUserId_ReturnTestAnswerDto(
+            UserTestCorrectAnswer testAnswer,
+            [Frozen]Mock<IUserTestAnswersRepository> testAnswerRepositoryMock,
+            HomeService homeService)
         {
             // Arrange
             testAnswerRepositoryMock.Setup(mock => mock.GetCorrectAnswerByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(testAnswer);
@@ -29,7 +32,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
         [Theory]
         [AutoMoqData]
-        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto(List<Test> tests, [Frozen]Mock<ITestRepository> testRepositoryMock, HomeService homeService)
+        public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto(
+            List<Test> tests,
+            [Frozen]Mock<ITestRepository> testRepositoryMock,
+            HomeService homeService)
         {
             // Arrange
             testRepositoryMock.Setup(mock => mock.GetTestsWithUserAnswers()).Returns(tests);
