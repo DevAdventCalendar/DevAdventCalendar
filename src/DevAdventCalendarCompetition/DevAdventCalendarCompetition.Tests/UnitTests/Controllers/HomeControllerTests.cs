@@ -47,13 +47,11 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             {
                 GetTestDto()
             };
-            var user = GetClaimsUser();
             this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
             using var controller = new HomeController(this._homeServiceMock.Object);
-
             controller.ControllerContext = new ControllerContext()
             {
-                HttpContext = new DefaultHttpContext() { User = user }
+                HttpContext = new DefaultHttpContext() { User = null }
             };
 
             // Act
@@ -62,6 +60,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<List<TestDto>>(viewResult.ViewData.Model);
+        }
+
+        [Fact]
+        public void Index_ReturnsCorrectAnswersCountForUser()
+        {
+            // Arrange
+            this._homeServiceMock.Setup(x => x.GetCorrectAnswerByUserId(userId)).Returns(currentTestList);
+            using var controller = new HomeController(this._homeServiceMock.Object);
+
+            // Act
+            var result = controller.Index();
         }
 
         [Fact]
@@ -78,35 +87,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<ContentResult>(result);
         }
-
-        private static ClaimsPrincipal GetClaimsUser()
-        {
-            return new ClaimsPrincipal(new ClaimsIdentity(
-                new Claim[]
-            {
-                new Claim(ClaimTypes.Name, "example name"),
-                new Claim(ClaimTypes.NameIdentifier, "1"),
-                new Claim("custom-claim", "example claim value"),
-            }, "mock"));
-        }
-
-        private static TestViewModel GetTestViewModel() => new TestViewModel
-        {
-            Number = 0,
-            Description = "Description",
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(1),
-            Answers = new List<string>()
-            {
-                "Answer"
-            },
-            SponsorName = null,
-            SponsorLogoUrl = null,
-            Discount = null,
-            DiscountUrl = null,
-            DiscountLogoUrl = null,
-            DiscountLogoPath = null
-        };
 
         private static TestDto GetTest(TestStatus status)
         {
