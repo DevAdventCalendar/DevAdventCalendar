@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Test;
@@ -63,14 +64,31 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_ReturnsCorrectAnswersCountForUser()
+        public void Index_ReturnsCorrectAnswersForUser()
         {
             // Arrange
-            this._homeServiceMock.Setup(x => x.GetCorrectAnswerByUserId(userId)).Returns(currentTestList);
-            using var controller = new HomeController(this._homeServiceMock.Object);
+            var httpContext = new DefaultHttpContext();
+            var user = GetUser();
+            var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            httpContext.HttpContext.User = user;
+
+            var currentTestList = new List<TestDto>
+            {
+                GetTestDto()
+            };
+
+            this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
+            using var controller = new HomeController(this._homeServiceMock.Object)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext
+                }
+            };
 
             // Act
             var result = controller.Index();
+            this._homeServiceMock.Verify(x => x.GetCorrectAnswersCountForUser(userId), Times.Once);
         }
 
         [Fact]
@@ -87,6 +105,14 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<ContentResult>(result);
         }
+
+        private static ClaimsPrincipal GetUser() =>
+            new ClaimsPrincipal(new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, "UserId"),
+                new Claim(ClaimTypes.Name, "Name"),
+                new Claim(ClaimTypes.Role, "Role"),
+            }));
 
         private static TestDto GetTest(TestStatus status)
         {
