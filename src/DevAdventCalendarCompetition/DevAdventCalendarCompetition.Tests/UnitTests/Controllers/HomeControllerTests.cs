@@ -88,6 +88,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Act
             var result = controller.Index();
+
+            // Assert
             this._homeServiceMock.Verify(x => x.GetCorrectAnswersCountForUser(userId), Times.Once);
         }
 
