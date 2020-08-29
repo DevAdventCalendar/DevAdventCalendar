@@ -171,7 +171,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var testRepository = new TestRepository(context);
             var testAnswerRepository = new UserTestAnswersRepository(context);
             var stringHasher = new StringHasher(new HashParameters(100, new byte[] { 1, 2 }));
-            return new TestService(testRepository, testAnswerRepository, mapper, stringHasher, null);
+            return new TestService(testRepository, testAnswerRepository, mapper, stringHasher);
         }
     }
 }

@@ -6,6 +6,7 @@ using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -14,23 +15,14 @@ namespace DevAdventCalendarCompetition.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
-        private readonly IConfiguration _configuration;
 
-        public HomeController(IHomeService homeService, IConfiguration configuration)
+        public HomeController(IHomeService homeService)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
-            this._configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public ActionResult Index()
         {
-            this.ViewBag.IsAdvent = IsAdventExtensions.CheckIsAdvent(this._configuration);
-
-            if (!this.ViewBag.IsAdvent)
-            {
-                return this.View();
-            }
-
             var currentTestsDto = this._homeService.GetCurrentTests();
             if (currentTestsDto == null)
             {
