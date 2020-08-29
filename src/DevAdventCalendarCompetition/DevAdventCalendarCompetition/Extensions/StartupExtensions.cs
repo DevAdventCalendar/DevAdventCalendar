@@ -32,25 +32,25 @@ namespace DevAdventCalendarCompetition.Extensions
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            services.Configure<AdventSettings>(a =>
+            services.Configure<AdventSettings>(settings =>
                 {
                     string defaultDateTimeFormat = "dd-MM-yyyy";
-                    var isAdventEndDate = configuration.GetSection("Competition:EndDate").Value;
-                    var isAdventStartDate = configuration.GetSection("Competition:StartDate").Value;
-                    var isValidStartDateTime = DateTimeOffset.TryParseExact(isAdventStartDate, defaultDateTimeFormat,
+                    var adventEndDate = configuration.GetSection("Competition:EndDate").Value;
+                    var adventStartDate = configuration.GetSection("Competition:StartDate").Value;
+                    var isValidStartDateTime = DateTimeOffset.TryParseExact(adventStartDate, defaultDateTimeFormat,
                         CultureInfo.InvariantCulture,
                         DateTimeStyles.None, out var startDate);
-                    var isValidEndDateTime = DateTimeOffset.TryParseExact(isAdventEndDate, defaultDateTimeFormat,
+                    var isValidEndDateTime = DateTimeOffset.TryParseExact(adventEndDate, defaultDateTimeFormat,
                         CultureInfo.InvariantCulture,
                         DateTimeStyles.None, out var endDate);
 
-                    if (!(isValidStartDateTime && isValidEndDateTime))
+                    if (!isValidStartDateTime || !isValidEndDateTime)
                     {
                         throw new InvalidOperationException(ExceptionsMessages.WrongFormatOfDate);
                     }
 
-                    a.StartDate = startDate.DateTime;
-                    a.EndDate = endDate.DateTime;
+                    settings.StartDate = startDate.DateTime;
+                    settings.EndDate = endDate.DateTime;
                 });
 
             services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<AdventSettings>>().Value);
