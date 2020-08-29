@@ -2,14 +2,15 @@
 @using DevAdventCalendarCompetition.Repository.Models
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @using System.Globalization
-
+@using DevAdventCalendarCompetition.Services.Options
+@using Microsoft.Extensions.Options
+@inject AdventSettings AdventSettings
 
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
-    var isAdvent = ViewBag.IsAdvent;
-    // pobrac informacje z view baga czy jest advent
     var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
+    var isAdvent = AdventSettings.IsAdvent();
 }
     
 <!--================================
@@ -155,17 +156,15 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    if (isAdvent == true)
+    if (isAdvent)
     {
-        if (correctAnswersForUser != null) //jesli jest advent to ten if a jesli nie to wyswietlic pustego diva badz napis wykorzystać zmienną z viewbaga
+        if (correctAnswersForUser != null)
         {
             <section class="event_txt">
                 <div class="container">
                     <div class="col-md-12">
                         <div class="party_text">
-                            @if (DateTime.Today.Month == 12)
-                            {
-                                @if (correctAnswersForUser == 0)
+                            @if (correctAnswersForUser == 0)
                                 {
                                     <h1>@YouHaventAnswered</h1>
                                 }
@@ -176,17 +175,12 @@
                                 {
                                     <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
                                 }
-                            }
                         </div>
                     </div>
                 </div>
             </section>
         }
     }
-
-    <div>
-        
-    </div>
 
     <div class="container-fluid mb-30">
         <div class="row">
