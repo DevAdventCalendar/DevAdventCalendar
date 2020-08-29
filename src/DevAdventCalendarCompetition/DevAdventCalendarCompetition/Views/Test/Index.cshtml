@@ -37,7 +37,7 @@
                     }
                     else
                     {
-                        if (Model.SponsorLogoUrl != null && isAdvent)
+                        if (isAdvent && Model.SponsorLogoUrl != null)
                         {
                             <div id="day-sponsor" class="text-center mt-50 mb-50">
                                 <h4 class="mb-20 text-primary">@SponsorOfTheDay</h4>
@@ -46,7 +46,7 @@
                             </div>
                         }
 
-                        if (Model.Discount != null && isAdvent)
+                        if (isAdvent && Model.Discount != null)
                         {
                             <div class="discount text-center mt-50 mb-50">
                                 <h3 class="mb-20">@GiftFromElfs</h3>
