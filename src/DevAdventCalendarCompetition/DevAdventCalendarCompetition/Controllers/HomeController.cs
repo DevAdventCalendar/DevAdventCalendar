@@ -15,16 +15,17 @@ namespace DevAdventCalendarCompetition.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
+        private readonly AdventSettings _adventSettings;
 
-        public HomeController(IHomeService homeService)
+        public HomeController(IHomeService homeService, AdventSettings adventSettings)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
+            this._adventSettings = adventSettings;
         }
 
         public ActionResult Index()
         {
-            var currentTestsDto = this._homeService.GetCurrentTests();
-            if (currentTestsDto == null)
+            if (!this._adventSettings.IsAdvent())
             {
                 return this.View();
             }
@@ -32,11 +33,16 @@ namespace DevAdventCalendarCompetition.Controllers
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return this.View(currentTestsDto);
+                return this.View();
+            }
+
+            var currentTestsDto = this._homeService.GetCurrentTests();
+            if (currentTestsDto == null)
+            {
+                return this.View();
             }
 
             this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
-
             return this.View(currentTestsDto);
         }
 

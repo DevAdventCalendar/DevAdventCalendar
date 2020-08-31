@@ -3,13 +3,12 @@
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @using System.Globalization
 @using DevAdventCalendarCompetition.Services.Options
-@using Microsoft.Extensions.Options
 @inject AdventSettings AdventSettings
 
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
-    var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
+    var overallPossibleTestsCount = Model?.Count(t => t.Status != TestStatus.NotStarted);
     var isAdvent = AdventSettings.IsAdvent();
 }
     
@@ -201,7 +200,7 @@
                         @for (int j = 0; j < 7; j++)
                         {
                             var dayNumber = i * 7 + j + 1;
-                            var testForDay = Model.FirstOrDefault(t => t.Number == dayNumber);
+                            var testForDay = Model?.FirstOrDefault(t => t.Number == dayNumber);
                             if (dayNumber <= 24)
                             {
                                 <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">
