@@ -46,7 +46,7 @@ namespace DevAdventCalendarCompetition.Extensions
 
                     if (!isValidStartDateTime || !isValidEndDateTime)
                     {
-                        throw new InvalidOperationException(ExceptionsMessages.WrongFormatOfDate);
+                        throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.WrongFormatOfDate, defaultDateTimeFormat));
                     }
 
                     settings.StartDate = startDate.DateTime;
