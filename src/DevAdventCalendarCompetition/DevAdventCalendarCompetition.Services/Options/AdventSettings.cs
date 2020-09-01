@@ -1,4 +1,5 @@
 using System;
+using DevAdventCalendarCompetition.Services.Interfaces;
 
 namespace DevAdventCalendarCompetition.Services.Options
 {
@@ -10,7 +11,7 @@ namespace DevAdventCalendarCompetition.Services.Options
 
         public bool IsAdvent()
         {
-            var now = DateTime.Now;
+            var now = DateTimeProvider.Now;
             return this.StartDate <= now && this.EndDate >= now;
         }
     }
