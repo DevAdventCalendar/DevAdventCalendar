@@ -1,5 +1,4 @@
 using System;
-using DevAdventCalendarCompetition.Services.Interfaces;
 
 namespace DevAdventCalendarCompetition.Services.Options
 {
