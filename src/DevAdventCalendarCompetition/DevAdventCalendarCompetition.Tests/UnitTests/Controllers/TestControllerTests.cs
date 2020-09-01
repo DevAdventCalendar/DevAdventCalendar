@@ -26,6 +26,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         [Fact]
         public void Index_UserHasAnsweredTrue_ReturnsTestDto()
         {
+            // Arrange
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(true);
@@ -41,6 +42,21 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<TestDto>(viewResult.ViewData.Model);
+        }
+
+        [Fact]
+        public void Index_AnswerIsNull_ThrowsException()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.Started);
+            using var controller = new TestController(this._testServiceMock.Object);
+
+            // Act
+            Func<ActionResult> act = () => controller.Index(test.Id, null);
+
+            // Assert
+            var exception = Assert.Throws<ArgumentNullException>(act);
+            Assert.Equal(exception.Message, );
         }
 
         private static TestDto GetTest(TestStatus status)
