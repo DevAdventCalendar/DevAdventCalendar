@@ -4,12 +4,8 @@ using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using DevAdventCalendarCompetition.Services.Options;
-using DevAdventCalendarCompetition.Services.Resources;
-using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
 {

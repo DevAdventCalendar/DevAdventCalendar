@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Providers;
-using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Controllers
 {

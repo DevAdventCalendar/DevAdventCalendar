@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.Services.Models

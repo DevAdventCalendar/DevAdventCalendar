@@ -1,4 +1,3 @@
-@using DevAdventCalendarCompetition.Services.Models
 @using DevAdventCalendarCompetition.Repository.Models
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @using System.Globalization
@@ -164,16 +163,16 @@
                     <div class="col-md-12">
                         <div class="party_text">
                             @if (correctAnswersForUser == 0)
-                                {
-                                    <h1>@YouHaventAnswered</h1>
-                                }
-                                else if (correctAnswersForUser == overallPossibleTestsCount)
-                                {
-                                    <h1><span>@Congrats</span> <br />@YouAnsweredCorrectly</h1> }
-                                else
-                                {
-                                    <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
-                                }
+                            {
+                                <h1>@YouHaventAnswered</h1>
+                            }
+                            else if (correctAnswersForUser == overallPossibleTestsCount)
+                            {
+                                <h1><span>@Congrats</span> <br />@YouAnsweredCorrectly</h1> }
+                            else
+                            {
+                                <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
+                            }
                         </div>
                     </div>
                 </div>
