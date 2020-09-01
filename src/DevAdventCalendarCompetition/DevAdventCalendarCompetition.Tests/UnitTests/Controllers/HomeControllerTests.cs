@@ -41,7 +41,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_UserIsNull_ReturnsAViewResutWithListOfTestDto()
+        public void Index_UserIsNull_ReturnsAViewResultWithListOfTestDto()
         {
             // Arrange
             var currentTestList = new List<TestDto>()
@@ -94,7 +94,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void CheckTestStatus_ReturnsContetResultWithTestStatus()
+        public void CheckTestStatus_ReturnsContentResultWithTestStatus()
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
@@ -106,6 +106,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             var viewResult = Assert.IsType<ContentResult>(result);
+            this._homeServiceMock.Verify(x => x.CheckTestStatus(test.Id), Times.Once);
         }
 
         private static ClaimsPrincipal GetUser() =>
