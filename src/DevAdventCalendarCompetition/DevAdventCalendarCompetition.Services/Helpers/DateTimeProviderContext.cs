@@ -4,6 +4,7 @@ using System.Threading;
 
 namespace DevAdventCalendarCompetition.Services
 {
+    // https://dvoituron.com/2020/01/22/UnitTest-DateTime/
     public class DateTimeProviderContext : IDisposable
     {
         private static readonly ThreadLocal<Stack> ThreadScopeStack = new ThreadLocal<Stack>(() => new Stack());
@@ -32,6 +33,8 @@ namespace DevAdventCalendarCompetition.Services
         public void Dispose()
         {
             this.Dispose(true);
+
+            // to prevent the dispose method from running twice
             GC.SuppressFinalize(this);
         }
 
