@@ -1,10 +1,10 @@
 @model DevAdventCalendarCompetition.Services.Models.TestDto
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages 
 @using System.Globalization
-@using DevAdventCalendarCompetition.Services.Options
-@inject AdventSettings AdventSettings
+@using DevAdventCalendarCompetition.Services.Interfaces
+@inject IAdventService AdventService
 @{
-    var isAdvent = AdventSettings.IsAdvent();
+    var isAdvent = AdventService.IsAdvent();
 }
     <div class="breadcrumb_area">
         <div class="container">

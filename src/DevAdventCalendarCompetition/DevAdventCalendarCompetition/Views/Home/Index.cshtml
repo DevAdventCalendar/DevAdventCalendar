@@ -1,14 +1,14 @@
 @using DevAdventCalendarCompetition.Repository.Models
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @using System.Globalization
-@using DevAdventCalendarCompetition.Services.Options
-@inject AdventSettings AdventSettings
+@using DevAdventCalendarCompetition.Services.Interfaces
+@inject IAdventService AdventService
 
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
     var overallPossibleTestsCount = Model?.Count(t => t.Status != TestStatus.NotStarted);
-    var isAdvent = AdventSettings.IsAdvent();
+    var isAdvent = AdventService.IsAdvent();
 }
     
 <!--================================

@@ -4,7 +4,6 @@ using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -12,17 +11,17 @@ namespace DevAdventCalendarCompetition.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
-        private readonly AdventSettings _adventSettings;
+        private readonly IAdventService _adventService;
 
-        public HomeController(IHomeService homeService, AdventSettings adventSettings)
+        public HomeController(IHomeService homeService, IAdventService adventService)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
-            this._adventSettings = adventSettings;
+            this._adventService = adventService;
         }
 
         public ActionResult Index()
         {
-            if (!this._adventSettings.IsAdvent())
+            if (!this._adventService.IsAdvent())
             {
                 return this.View();
             }
