@@ -82,7 +82,7 @@ Password: `P@ssw0rd`
 
 ## Advent settings
 
-In order to imitate advent time, settings need to be changed. You can find "StartDate" and "EndDate" settings in appsettings.json under "Competition" section. We use specific DateTime format: "dd-MM-yyyy".
+In order to imitate advent time, settings need to be changed. You can find "StartDate" and "EndDate" settings in `appsettings.Development.json` under "Competition" section. We use specific DateTime format: "dd-MM-yyyy".
 
 ## Test environment
 
