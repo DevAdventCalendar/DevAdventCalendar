@@ -136,7 +136,7 @@
     <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}.</value>
   </data>
   <data name="WrongFormatOfDate" xml:space="preserve">
-    <value>Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Uzyj domyślnego formatu {0}.</value>
+    <value>Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Użyj domyślnego formatu {0}.</value>
   </data>
   <data name="ErrorDuringEmailConfirmation" xml:space="preserve">
     <value>Problem z potwierdzeniem emaila</value>
