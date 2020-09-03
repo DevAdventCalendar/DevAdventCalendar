@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using DevAdventCalendarCompetition.Controllers;
+using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -158,8 +159,20 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTest(TestStatus.Started);
             var answer = "Answer1";
             var user = GetUser();
+            var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.VerifyTestAnswer(It.IsAny<string>(), It.IsAny<List<string>>())).Returns(true);
+
+            var utcad = new UserTestCorrectAnswerDto
+            {
+                TestId = test.Id,
+                UserId = userId,
+                UserFullName = null,
+                AnsweringTime = default,
+                AnsweringTimeOffset = default
+            };
+            this._testServiceMock.Setup(x => x.GetAnswerByTestId(test.Id)).Returns(utcad);
+
             using var controller = new TestController(this._testServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
@@ -168,6 +181,11 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Act
             var result = controller.Index(test.Id, answer);
+
+            // Assert
+            this._testServiceMock.Verify(x => x.AddTestAnswer(test.Id, userId, test.StartDate.Value), Times.Once);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<AnswerViewModel>(viewResult.ViewData.Model);
         }
 
         private static TestDto GetTest(TestStatus status)
