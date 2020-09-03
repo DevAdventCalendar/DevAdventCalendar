@@ -5,8 +5,9 @@ using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using AutoMapper;
 using DevAdventCalendarCompetition.Services.Profiles;
+using DevAdventCalendarCompetition.Tests.UnitTests;
 
-namespace DevAdventCalendarCompetition.Tests.UnitTests
+namespace DevAdventCalendarCompetition.Tests.AutoFixture
 {
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class AutoMoqDataAttribute : AutoDataAttribute

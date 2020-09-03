@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using AutoFixture.Kernel;
 
-namespace DevAdventCalendarCompetition.Tests.UnitTests
+namespace DevAdventCalendarCompetition.Tests.AutoFixture
 {
     public class TestNumberGenerator : ISpecimenBuilder
     {

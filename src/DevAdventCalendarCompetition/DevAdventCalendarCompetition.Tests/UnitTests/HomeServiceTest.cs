@@ -5,9 +5,9 @@ using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Tests.AutoFixture;
 using Moq;
 using Xunit;
-using static DevAdventCalendarCompetition.Tests.TestHelper;
 
 namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
