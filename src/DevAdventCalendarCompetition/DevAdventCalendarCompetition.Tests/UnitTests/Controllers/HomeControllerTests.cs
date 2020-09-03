@@ -93,8 +93,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var list = Assert.IsType<List<TestDto>>(viewResult.ViewData.Model);
-            Assert.Equal(currentTestList, list);
+            var actualList = Assert.IsType<List<TestDto>>(viewResult.ViewData.Model);
+            Assert.Equal(currentTestList, actualList);
         }
 
         [Fact]
@@ -102,15 +102,18 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
-            this._homeServiceMock.Setup(x => x.CheckTestStatus(It.IsAny<int>())).Returns(It.IsAny<string>());
+            var testStatus = test.Status.ToString();
+            this._homeServiceMock.Setup(x => x.CheckTestStatus(It.IsAny<int>())).Returns(testStatus);
             using var controller = new HomeController(this._homeServiceMock.Object);
 
             // Act
             var result = controller.CheckTestStatus(test.Id);
 
             // Assert
-            var viewResult = Assert.IsType<ContentResult>(result);
             this._homeServiceMock.Verify(x => x.CheckTestStatus(test.Id), Times.Once);
+            var viewResult = Assert.IsType<ContentResult>(result);
+            var actualStatus = Assert.IsType<string>(viewResult.Content.ToString());
+            Assert.Equal(testStatus, actualStatus);
         }
 
         private static ClaimsPrincipal GetUser() =>

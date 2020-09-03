@@ -163,7 +163,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.VerifyTestAnswer(It.IsAny<string>(), It.IsAny<List<string>>())).Returns(true);
 
-            var utcad = new UserTestCorrectAnswerDto
+            var userTestCorrectAnswerDto = new UserTestCorrectAnswerDto
             {
                 TestId = test.Id,
                 UserId = userId,
@@ -171,7 +171,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
                 AnsweringTime = default,
                 AnsweringTimeOffset = default
             };
-            this._testServiceMock.Setup(x => x.GetAnswerByTestId(test.Id)).Returns(utcad);
+            this._testServiceMock.Setup(x => x.GetAnswerByTestId(test.Id)).Returns(userTestCorrectAnswerDto);
 
             using var controller = new TestController(this._testServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
