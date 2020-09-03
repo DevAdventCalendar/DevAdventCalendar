@@ -90,10 +90,9 @@
     <EmbeddedResource Update="Resources\LoggingMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LoggingMessages.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>DevLoggingMessages</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ErrorMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ViewsMessages.resx">
