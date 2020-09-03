@@ -69,6 +69,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var httpContext = new DefaultHttpContext();
             var user = GetUser();
+            var correctAnswersCount = 3;
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
             httpContext.HttpContext.User = user;
 
@@ -78,6 +79,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             };
 
             this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
+            this._homeServiceMock.Setup(x => x.GetCorrectAnswersCountForUser(userId)).Returns(correctAnswersCount);
             using var controller = new HomeController(this._homeServiceMock.Object)
             {
                 ControllerContext = new ControllerContext()
@@ -90,7 +92,9 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var result = controller.Index();
 
             // Assert
-            this._homeServiceMock.Verify(x => x.GetCorrectAnswersCountForUser(userId), Times.Once);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var list = Assert.IsType<List<TestDto>>(viewResult.ViewData.Model);
+            Assert.Equal(currentTestList, list);
         }
 
         [Fact]
