@@ -111,8 +111,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             this._homeServiceMock.Verify(x => x.CheckTestStatus(test.Id), Times.Once);
-            var viewResult = Assert.IsType<ContentResult>(result);
-            var actualStatus = Assert.IsType<string>(viewResult.Content.ToString());
+            var contentResult = Assert.IsType<ContentResult>(result);
+            var actualStatus = Assert.IsType<string>(contentResult.Content.ToString());
             Assert.Equal(testStatus, actualStatus);
         }
 
