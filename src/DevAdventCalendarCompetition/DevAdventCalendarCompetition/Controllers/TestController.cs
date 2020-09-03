@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +24,6 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public ActionResult Index(int testNumber)
         {
-            // sprawdzić czy jest advent
             var test = this._testService.GetTestByNumber(testNumber);
             var userHasAnswered = this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
             if (userHasAnswered)

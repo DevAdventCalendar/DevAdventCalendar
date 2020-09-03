@@ -18,34 +18,42 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace DevAdventCalendarCompetition.Extensions
 {
     public static class StartupExtensions
     {
-        public static IServiceCollection ValidateConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAdventConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             if (configuration == null)
             {
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            string defaultDateTimeFormat = "dd-MM-yyyy";
-            var isAdventEndDate = configuration.GetSection("Competition:EndDate").Value;
-            var isAdventStartDate = configuration.GetSection("Competition:StartDate").Value;
-            var isValidStartDateTime = DateTimeOffset.TryParseExact(isAdventStartDate, defaultDateTimeFormat,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None, out var dateValue);
-            var isValidEndDateTime = DateTimeOffset.TryParseExact(isAdventEndDate, defaultDateTimeFormat,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None, out var dateValue1);
+            services.Configure<AdventSettings>(settings =>
+                {
+                    string defaultDateTimeFormat = "dd-MM-yyyy";
+                    var adventEndDate = configuration.GetSection("Competition:EndDate").Value;
+                    var adventStartDate = configuration.GetSection("Competition:StartDate").Value;
+                    var isValidStartDateTime = DateTimeOffset.TryParseExact(adventStartDate, defaultDateTimeFormat,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var startDate);
+                    var isValidEndDateTime = DateTimeOffset.TryParseExact(adventEndDate, defaultDateTimeFormat,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var endDate);
 
-            if (!(isValidStartDateTime || isValidEndDateTime))
-            {
-                throw new InvalidOperationException(ExceptionsMessages.WrongFormatOfDate);
-            }
+                    if (!isValidStartDateTime || !isValidEndDateTime)
+                    {
+                        throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.WrongFormatOfDate, defaultDateTimeFormat));
+                    }
 
+                    settings.StartDate = startDate.DateTime;
+                    settings.EndDate = endDate.DateTime;
+                });
+
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<AdventSettings>>().Value);
             return services;
         }
 
@@ -87,6 +95,8 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IResultsService, ResultsService>();
             services.AddTransient<IManageService, ManageService>();
+            services.AddTransient<IDateTimeService, DateTimeService>();
+            services.AddTransient<IAdventService, AdventService>();
             services.AddTransient<IdentityService>();
 
             services.AddAutoMapper(typeof(AdminService));

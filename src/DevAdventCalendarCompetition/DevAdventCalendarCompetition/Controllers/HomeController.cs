@@ -1,32 +1,33 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Providers;
-using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
-        private readonly IConfiguration _configuration;
+        private readonly IAdventService _adventService;
 
-        public HomeController(IHomeService homeService, IConfiguration configuration)
+        public HomeController(IHomeService homeService, IAdventService adventService)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
-            this._configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            this._adventService = adventService;
         }
 
         public ActionResult Index()
         {
-            this.ViewBag.IsAdvent = IsAdventExtensions.CheckIsAdvent(this._configuration);
+            if (!this._adventService.IsAdvent())
+            {
+                return this.View();
+            }
 
-            if (!this.ViewBag.IsAdvent)
+            var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
             {
                 return this.View();
             }
@@ -37,14 +38,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.View();
             }
 
-            var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                return this.View(currentTestsDto);
-            }
-
             this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
-
             return this.View(currentTestsDto);
         }
 

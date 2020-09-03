@@ -4,11 +4,8 @@ using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using DevAdventCalendarCompetition.Services.Resources;
-using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -17,31 +14,22 @@ namespace DevAdventCalendarCompetition.Services
         private readonly ITestRepository _testRepository;
         private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
         private readonly StringHasher _stringHasher;
 
         public TestService(
             ITestRepository testRepository,
             IUserTestAnswersRepository testAnswerRepository,
             IMapper mapper,
-            StringHasher stringHasher,
-            IConfiguration configuration)
+            StringHasher stringHasher)
         {
             this._testRepository = testRepository;
             this._testAnswerRepository = testAnswerRepository;
             this._mapper = mapper;
-            this._configuration = configuration;
             this._stringHasher = stringHasher;
         }
 
-        // w kazdej metodzie sprawdzić czy is advent true jesli nie  to exeptions
         public TestDto GetTestByNumber(int testNumber)
         {
-            if (IsAdventExtensions.CheckIsAdvent(this._configuration) == false)
-            {
-                throw new ArgumentException(ExceptionsMessagesServices.IsNotAdvent);
-            }
-
             var test = this._testRepository.GetTestByNumber(testNumber);
 
             var testDto = this._mapper.Map<TestDto>(test);

@@ -1,15 +1,14 @@
-@using DevAdventCalendarCompetition.Services.Models
 @using DevAdventCalendarCompetition.Repository.Models
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @using System.Globalization
-
+@using DevAdventCalendarCompetition.Services.Interfaces
+@inject IAdventService AdventService
 
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
-    var isAdvent = ViewBag.IsAdvent;
-    // pobrac informacje z view baga czy jest advent
-    var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
+    var overallPossibleTestsCount = Model?.Count(t => t.Status != TestStatus.NotStarted);
+    var isAdvent = AdventService.IsAdvent();
 }
     
 <!--================================
@@ -155,27 +154,24 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    if (isAdvent == true)
+    if (isAdvent)
     {
-        if (correctAnswersForUser != null) //jesli jest advent to ten if a jesli nie to wyswietlic pustego diva badz napis wykorzystać zmienną z viewbaga
+        if (correctAnswersForUser != null)
         {
             <section class="event_txt">
                 <div class="container">
                     <div class="col-md-12">
                         <div class="party_text">
-                            @if (DateTime.Today.Month == 12)
+                            @if (correctAnswersForUser == 0)
                             {
-                                @if (correctAnswersForUser == 0)
-                                {
-                                    <h1>@YouHaventAnswered</h1>
-                                }
-                                else if (correctAnswersForUser == overallPossibleTestsCount)
-                                {
-                                    <h1><span>@Congrats</span> <br />@YouAnsweredCorrectly</h1> }
-                                else
-                                {
-                                    <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
-                                }
+                                <h1>@YouHaventAnswered</h1>
+                            }
+                            else if (correctAnswersForUser == overallPossibleTestsCount)
+                            {
+                                <h1><span>@Congrats</span> <br />@YouAnsweredCorrectly</h1> }
+                            else
+                            {
+                                <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
                             }
                         </div>
                     </div>
@@ -183,10 +179,6 @@
             </section>
         }
     }
-
-    <div>
-        
-    </div>
 
     <div class="container-fluid mb-30">
         <div class="row">
@@ -207,7 +199,7 @@
                         @for (int j = 0; j < 7; j++)
                         {
                             var dayNumber = i * 7 + j + 1;
-                            var testForDay = Model.FirstOrDefault(t => t.Number == dayNumber);
+                            var testForDay = Model?.FirstOrDefault(t => t.Number == dayNumber);
                             if (dayNumber <= 24)
                             {
                                 <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">

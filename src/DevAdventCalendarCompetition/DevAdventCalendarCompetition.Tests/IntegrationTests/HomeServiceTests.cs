@@ -92,7 +92,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var mapper = new MapperConfiguration(cfg => cfg.AddMaps(typeof(TestProfile))).CreateMapper();
             var testRepository = new TestRepository(context);
             var testAnswerRepository = new UserTestAnswersRepository(context);
-            return new HomeService(testAnswerRepository, testRepository, mapper, null);
+            return new HomeService(testAnswerRepository, testRepository, mapper);
         }
     }
 }

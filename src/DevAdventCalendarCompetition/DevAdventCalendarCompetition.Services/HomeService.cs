@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
-using DevAdventCalendarCompetition.Services.Extensions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using DevAdventCalendarCompetition.Services.Resources;
-using Microsoft.Extensions.Configuration;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -16,27 +12,19 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly ITestRepository _testRepository;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
 
         public HomeService(
             IUserTestAnswersRepository testAnswerRepository,
             ITestRepository testRepository,
-            IMapper mapper,
-            IConfiguration configuration)
+            IMapper mapper)
         {
             this._testAnswerRepository = testAnswerRepository;
             this._testRepository = testRepository;
             this._mapper = mapper;
-            this._configuration = configuration;
         }
 
         public UserTestCorrectAnswerDto GetCorrectAnswerByUserId(string userId, int testId)
         {
-            if (IsAdventExtensions.CheckIsAdvent(this._configuration) != true)
-            {
-                throw new InvalidOperationException(ExceptionsMessagesServices.IsNotAdvent);
-            }
-
             var testAnswer = this._testAnswerRepository.GetCorrectAnswerByUserId(userId, testId);
             var testAnswerDto = this._mapper.Map<UserTestCorrectAnswerDto>(testAnswer);
             return testAnswerDto;
