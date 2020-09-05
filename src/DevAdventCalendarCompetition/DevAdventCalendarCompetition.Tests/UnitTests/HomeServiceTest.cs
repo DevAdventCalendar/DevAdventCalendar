@@ -14,7 +14,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     public class HomeServiceTest
     {
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void GetTestAnswerByUserId_ReturnTestAnswerDto(
             UserTestCorrectAnswer testAnswer,
             [Frozen]Mock<IUserTestAnswersRepository> testAnswerRepositoryMock,
@@ -31,7 +31,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void GetTestsWithUserAnswers_ReturnTestWithAnswerListDto(
             List<Test> tests,
             [Frozen]Mock<ITestRepository> testRepositoryMock,

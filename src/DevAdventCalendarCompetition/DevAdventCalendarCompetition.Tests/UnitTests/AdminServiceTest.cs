@@ -16,7 +16,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     public class AdminServiceTest
     {
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void GetAllTests_ReturnTestDtoList(
             List<Test> tests,
             [Frozen] Mock<ITestRepository> testRepositoryMock,
@@ -34,7 +34,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void GetTestBy_IdReturnTestDto(
             Test test,
             [Frozen] Mock<ITestRepository> testRepositoryMock,
@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void GetPreviousTest_ReturnPreviousTestDto(
             Test currentTest,
             Test previousTest,
@@ -76,7 +76,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void AddTest_AddCorrectAmountOfAnswers(
             TestDto test,
             [Frozen] Mock<ITestRepository> testRepositoryMock,
@@ -90,7 +90,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void UpdateTestDates(
             int testId,
             [Frozen] Mock<ITestRepository> testRepositoryMock,
@@ -104,7 +104,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Theory]
-        [AutoMoqData]
+        [TestWithNumberData]
         public void UpdateTestEndDate(
             int testId,
             DateTime newDate,

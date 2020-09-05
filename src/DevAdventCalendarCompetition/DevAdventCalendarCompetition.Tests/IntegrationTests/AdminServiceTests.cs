@@ -23,7 +23,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Theory]
-        [AutoDataWithoutChilds]
+        [TestWithNumberWithoutAnswersData]
         public void GetAllTests_ReturnsAllTests(List<Test> testList)
         {
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -44,7 +44,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Theory]
-        [AutoDataWithoutChilds]
+        [TestWithNumberWithoutAnswersData]
         public void GetPreviousTest_ReturnsPreviousTest(Test currentTest, Test previousTest)
         {
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -67,7 +67,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Theory]
-        [AutoDataWithoutChilds]
+        [TestWithNumberWithoutAnswersData]
         public void AddTest_ValidTest_AddsCorrectAmountOfAnswers(TestDto testDto)
         {
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -98,7 +98,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Theory]
-        [AutoDataWithoutChilds]
+        [TestWithNumberWithoutAnswersData]
         public void UpdateTestDates_ParsableMinutes_UpdatesTestDates(Test test)
         {
             var minutes = 30;
@@ -124,7 +124,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Theory]
-        [AutoDataWithoutChilds]
+        [TestWithNumberWithoutAnswersData]
         public void UpdateTestDates_NotParsableMinutes_UpdatesTestDatesWithDefaultMinutesValue(Test test)
         {
             var defaultMinutes = 20;
@@ -150,7 +150,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         }
 
         [Theory]
-        [AutoDataWithoutChilds]
+        [TestWithNumberWithoutAnswersData]
         public void UpdateTestEndDate_ValidDate_UpdatesTestEndDate(Test test, DateTime newDate)
         {
             using (var context = new ApplicationDbContext(this.ContextOptions))

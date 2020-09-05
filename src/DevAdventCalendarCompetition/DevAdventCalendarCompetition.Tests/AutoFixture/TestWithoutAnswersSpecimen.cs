@@ -4,10 +4,8 @@ using AutoFixture.Kernel;
 
 namespace DevAdventCalendarCompetition.Tests.AutoFixture
 {
-    public class TestNumberGenerator : ISpecimenBuilder
+    public class TestWithoutAnswersSpecimen : ISpecimenBuilder
     {
-        private int _currentNumber = 100;
-
         public object Create(object request, ISpecimenContext context)
         {
             var propertyInfo = request as PropertyInfo;
@@ -17,12 +15,12 @@ namespace DevAdventCalendarCompetition.Tests.AutoFixture
                 return new NoSpecimen();
             }
 
-            var isNumberProperty = propertyInfo.Name.Contains("Number", StringComparison.InvariantCulture);
-            var isIntProperty = propertyInfo.PropertyType == typeof(int);
+            var isUCAProperty = propertyInfo.Name.Contains("UserCorrectAnswers", StringComparison.InvariantCulture);
+            var isUWAProperty = propertyInfo.Name.Contains("UserWrongAnswers", StringComparison.InvariantCulture);
 
-            if (isNumberProperty && isIntProperty)
+            if (isUCAProperty || isUWAProperty)
             {
-                return this._currentNumber--;
+                return null;
             }
 
             return new NoSpecimen();

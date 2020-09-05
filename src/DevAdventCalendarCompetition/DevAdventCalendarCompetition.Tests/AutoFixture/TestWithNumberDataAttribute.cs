@@ -5,14 +5,13 @@ using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
 using AutoMapper;
 using DevAdventCalendarCompetition.Services.Profiles;
-using DevAdventCalendarCompetition.Tests.UnitTests;
 
 namespace DevAdventCalendarCompetition.Tests.AutoFixture
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class AutoMoqDataAttribute : AutoDataAttribute
+    public sealed class TestWithNumberDataAttribute : AutoDataAttribute
     {
-        public AutoMoqDataAttribute()
+        public TestWithNumberDataAttribute()
             : base(() =>
             {
                 var fixture = new Fixture().Customize(new AutoMoqCustomization());
@@ -21,7 +20,7 @@ namespace DevAdventCalendarCompetition.Tests.AutoFixture
                 fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
                     .ForEach(b => fixture.Behaviors.Remove(b));
                 fixture.Behaviors.Add(new OmitOnRecursionBehavior());
-                fixture.Customizations.Add(new TestNumberGenerator());
+                fixture.Customizations.Add(new TestNumberSpecimen());
                 return fixture;
             })
         {
