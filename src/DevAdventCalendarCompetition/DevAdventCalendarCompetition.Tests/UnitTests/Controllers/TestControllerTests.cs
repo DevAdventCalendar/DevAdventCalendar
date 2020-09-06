@@ -58,7 +58,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Func<ActionResult> act = () => controller.Index(test.Id, null);
 
             // Assert
-            var exception = Assert.Throws<ArgumentNullException>(act);
+            Assert.Throws<ArgumentNullException>(act);
         }
 
         [Fact]
