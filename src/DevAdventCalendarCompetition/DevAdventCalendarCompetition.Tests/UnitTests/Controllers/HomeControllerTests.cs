@@ -19,18 +19,21 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
     public class HomeControllerTests
     {
         private readonly Mock<IHomeService> _homeServiceMock;
+        private readonly Mock<IAdventService> _adventService;
 
         public HomeControllerTests()
         {
             this._homeServiceMock = new Mock<IHomeService>();
+            this._adventService = new Mock<IAdventService>();
         }
 
         [Fact]
-        public void Index_CurrentTestDtoIsNull_ReturnsEmptyViewResult()
+        public void Index_IsNotAdventTime_ReturnsEmptyViewResult()
         {
             // Arrange
             this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns((List<TestDto>)null);
-            using var controller = new HomeController(this._homeServiceMock.Object);
+            this._adventService.Setup(x => x.IsAdvent()).Returns(false);
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
 
             // Act
             var result = controller.Index();
@@ -41,7 +44,27 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_UserIsNull_ReturnsAViewResultWithListOfTestDto()
+        public void Index_CurrentTestDtoIsNull_ReturnsEmptyViewResult()
+        {
+            // Arrange
+            this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns((List<TestDto>)null);
+            this._adventService.Setup(x => x.IsAdvent()).Returns(true);
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = GetUser() }
+            };
+
+            // Act
+            var result = controller.Index();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void Index_UserIsNull_ReturnsEmptyViewResult()
         {
             // Arrange
             var currentTestList = new List<TestDto>()
@@ -49,7 +72,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
                 GetTestDto()
             };
             this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
-            using var controller = new HomeController(this._homeServiceMock.Object);
+            this._adventService.Setup(x => x.IsAdvent()).Returns(true);
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = null }
@@ -60,7 +84,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.IsType<List<TestDto>>(viewResult.ViewData.Model);
+            Assert.Null(viewResult.Model);
         }
 
         [Fact]
@@ -76,7 +100,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             };
             this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
             this._homeServiceMock.Setup(x => x.GetCorrectAnswersCountForUser(userId)).Returns(correctAnswersCount);
-            using var controller = new HomeController(this._homeServiceMock.Object);
+            this._adventService.Setup(x => x.IsAdvent()).Returns(true);
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = user }
@@ -98,7 +123,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTest(TestStatus.Started);
             var testStatus = test.Status.ToString();
             this._homeServiceMock.Setup(x => x.CheckTestStatus(It.IsAny<int>())).Returns(testStatus);
-            using var controller = new HomeController(this._homeServiceMock.Object);
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
 
             // Act
             var result = controller.CheckTestStatus(test.Id);
