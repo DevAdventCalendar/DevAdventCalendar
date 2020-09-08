@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -212,15 +213,36 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void AdminController_ShouldHaveCorrectRole()
+        public void AdminController_ShouldHaveAuthorizeAttributeWithCorrectRole()
         {
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-            var authorizeAttribute = GetAuthorizeAttribute(controller);
+            var attribute = GetAuthorizeAttributeFromController();
 
-            Assert.NotNull(authorizeAttribute);
-            Assert.NotNull(authorizeAttribute.Roles);
-            Assert.Equal("Admin", authorizeAttribute.Roles);
+            Assert.NotNull(attribute);
+            Assert.NotNull(attribute.Roles);
+            Assert.Equal("Admin", attribute.Roles);
         }
+
+        [Fact]
+        public void AdminController_ShouldNotHaveAllowAnonymousAttribute()
+        {
+            var actions = GetActionsWithAllowAnonymousAttribute();
+            var allowAnonymousAttr = GetAllowAnonymousAttributeFromController();
+
+            Assert.Empty(actions);
+            Assert.Null(allowAnonymousAttr);
+        }
+
+        private static AllowAnonymousAttribute GetAllowAnonymousAttributeFromController() => typeof(AdminController)
+                .GetCustomAttributes(typeof(AllowAnonymousAttribute), true)
+                .FirstOrDefault() as AllowAnonymousAttribute;
+
+        private static AuthorizeAttribute GetAuthorizeAttributeFromController() => typeof(AdminController)
+            .GetCustomAttributes(typeof(AuthorizeAttribute), true)
+            .FirstOrDefault() as AuthorizeAttribute;
+
+        private static IEnumerable<MethodInfo> GetActionsWithAllowAnonymousAttribute() => typeof(AdminController)
+            .GetMethods()
+            .Where(m => m.IsDefined(typeof(AllowAnonymousAttribute)));
 
         private static TestViewModel GetTestViewModel() => new TestViewModel
         {
@@ -245,20 +267,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTestDto();
             test.Status = status;
             return test;
-        }
-
-        private static AuthorizeAttribute GetAuthorizeAttribute(Controller controller)
-        {
-            if (controller == null)
-            {
-                throw new ArgumentNullException(nameof(controller));
-            }
-
-            var controllerType = controller.GetType();
-            var attribute =
-                controllerType.GetCustomAttributes(typeof(AuthorizeAttribute), true).FirstOrDefault() as
-                    AuthorizeAttribute;
-            return attribute;
         }
     }
 }
