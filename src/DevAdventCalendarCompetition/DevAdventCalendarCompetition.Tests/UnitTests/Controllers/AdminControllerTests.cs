@@ -49,6 +49,19 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
+        public void AddTest_ModelIsNull_ThrowsException()
+        {
+            // Arrange
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+
+            // Act
+            Func<ActionResult> act = () => controller.AddTest(null);
+
+            // Assert
+            Assert.Throws<ArgumentNullException>(act);
+        }
+
+        [Fact]
         public void AddTest_ModelStateIsInvalid_ReturnsViewWithInvalidModel()
         {
             // Arrange
@@ -147,6 +160,39 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             this._adminServiceMock.Verify(x => x.UpdateTestDates(test.Id, minutes), Times.Once);
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", redirectToActionResult.ActionName);
+        }
+
+        [Fact]
+        public void EndTest_TestIsNotStarted_ThrowsException()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.NotStarted);
+            this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+
+            // Act
+            Func<ActionResult> act = () => controller.EndTest(test.Id);
+
+            // Assert
+            var exception = Assert.Throws<InvalidOperationException>(act);
+            Assert.Equal(ExceptionsMessages.TestAlreadyRun, exception.Message);
+        }
+
+        [Fact]
+        public void EndTest_TestIsStarted_ReturnsRedirectToAction()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.Started);
+            this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
+            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+
+            // Act
+            var result = controller.EndTest(test.Id);
+
+            // Assert
+            this._adminServiceMock.Verify(x => x.UpdateTestEndDate(test.Id, It.IsAny<DateTime>()), Times.Once);
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
