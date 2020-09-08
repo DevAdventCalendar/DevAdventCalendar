@@ -67,25 +67,19 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         public void Index_ReturnsCorrectAnswersForUser()
         {
             // Arrange
-            var httpContext = new DefaultHttpContext();
             var user = GetUser();
             var correctAnswersCount = 3;
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-            httpContext.HttpContext.User = user;
-
             var currentTestList = new List<TestDto>
             {
                 GetTestDto()
             };
-
             this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
             this._homeServiceMock.Setup(x => x.GetCorrectAnswersCountForUser(userId)).Returns(correctAnswersCount);
-            using var controller = new HomeController(this._homeServiceMock.Object)
+            using var controller = new HomeController(this._homeServiceMock.Object);
+            controller.ControllerContext = new ControllerContext()
             {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = httpContext
-                }
+                HttpContext = new DefaultHttpContext() { User = user }
             };
 
             // Act
@@ -112,7 +106,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             this._homeServiceMock.Verify(x => x.CheckTestStatus(test.Id), Times.Once);
             var contentResult = Assert.IsType<ContentResult>(result);
-            var actualStatus = Assert.IsType<string>(contentResult.Content.ToString());
+            var actualStatus = Assert.IsType<string>(contentResult.Content);
             Assert.Equal(testStatus, actualStatus);
         }
 
