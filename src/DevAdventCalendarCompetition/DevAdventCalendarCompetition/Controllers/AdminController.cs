@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;

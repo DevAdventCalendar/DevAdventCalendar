@@ -1,12 +1,11 @@
 using System;
 using System.Globalization;
-using System.Resources;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.Account;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevLoggingMessages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

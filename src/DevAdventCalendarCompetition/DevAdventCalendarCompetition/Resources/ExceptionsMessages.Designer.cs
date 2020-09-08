@@ -149,5 +149,14 @@ namespace DevAdventCalendarCompetition.Resources {
                 return ResourceManager.GetString("UserWithIdNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Użyj domyślnego formatu {0}..
+        /// </summary>
+        public static string WrongFormatOfDate {
+            get {
+                return ResourceManager.GetString("WrongFormatOfDate", resourceCulture);
+            }
+        }
     }
 }

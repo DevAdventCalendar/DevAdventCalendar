@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
-using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +11,17 @@ namespace DevAdventCalendarCompetition.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
+        private readonly IAdventService _adventService;
 
-        public HomeController(IHomeService homeService)
+        public HomeController(IHomeService homeService, IAdventService adventService)
         {
             this._homeService = homeService ?? throw new ArgumentNullException(nameof(homeService));
+            this._adventService = adventService;
         }
 
         public ActionResult Index()
         {
-            var currentTestsDto = this._homeService.GetCurrentTests();
-            if (currentTestsDto == null)
+            if (!this._adventService.IsAdvent())
             {
                 return this.View();
             }
@@ -30,11 +29,16 @@ namespace DevAdventCalendarCompetition.Controllers
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return this.View(currentTestsDto);
+                return this.View();
+            }
+
+            var currentTestsDto = this._homeService.GetCurrentTests();
+            if (currentTestsDto == null)
+            {
+                return this.View();
             }
 
             this.ViewBag.CorrectAnswers = this._homeService.GetCorrectAnswersCountForUser(userId);
-
             return this.View(currentTestsDto);
         }
 
