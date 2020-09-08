@@ -48,6 +48,27 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
+        public void Index_UserHasNotAnsweredTrue_ReturnsViewWithTestDto()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.Started);
+            this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
+            this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(false);
+            using var controller = new TestController(this._testServiceMock.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = null }
+            };
+
+            // Act
+            var result = controller.Index(test.Id);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<TestDto>(viewResult.ViewData.Model);
+        }
+
+        [Fact]
         public void Index_AnswerIsNull_ThrowsException()
         {
             // Arrange
@@ -66,15 +87,36 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
-            var answer = "Answer";
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns((TestDto)null);
             using var controller = new TestController(this._testServiceMock.Object);
 
             // Act
-            var result = controller.Index(test.Id, answer);
+            var result = controller.Index(test.Id, "answer");
 
             // Assert
-            var viewResult = Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void Index_UserHasAnswered_ReturnsViewWithTestDto()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.Ended);
+            this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
+            this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(true);
+            using var controller = new TestController(this._testServiceMock.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = GetUser() }
+            };
+
+            // Act
+            var result = controller.Index(test.Id, "answer");
+
+            // Assert
+            Assert.True(test.HasUserAnswered);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<TestDto>(viewResult.ViewData.Model);
         }
 
         [Fact]
@@ -82,17 +124,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var test = GetTest(TestStatus.NotStarted);
-            var answer = "Answer";
-            var user = GetUser();
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             using var controller = new TestController(this._testServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
-                HttpContext = new DefaultHttpContext() { User = user }
+                HttpContext = new DefaultHttpContext() { User = GetUser() }
             };
 
             // Act
-            var result = controller.Index(test.Id, answer);
+            var result = controller.Index(test.Id, "answer");
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
@@ -107,17 +147,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var test = GetTest(TestStatus.Ended);
-            var answer = "Answer";
-            var user = GetUser();
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             using var controller = new TestController(this._testServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
-                HttpContext = new DefaultHttpContext() { User = user }
+                HttpContext = new DefaultHttpContext() { User = GetUser() }
             };
 
             // Act
-            var result = controller.Index(test.Id, answer);
+            var result = controller.Index(test.Id, "answer");
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
@@ -132,17 +170,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
-            var answer = "WrongAnswer";
-            var user = GetUser();
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             using var controller = new TestController(this._testServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
-                HttpContext = new DefaultHttpContext() { User = user }
+                HttpContext = new DefaultHttpContext() { User = GetUser() }
             };
 
             // Act
-            var result = controller.Index(test.Id, answer);
+            var result = controller.Index(test.Id, "wrongAnswer");
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
@@ -157,12 +193,11 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
-            var answer = "Answer1";
+            var correctAnswer = test.Answers.First().Answer;
             var user = GetUser();
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.VerifyTestAnswer(It.IsAny<string>(), It.IsAny<List<string>>())).Returns(true);
-
             var userTestCorrectAnswerDto = new UserTestCorrectAnswerDto
             {
                 TestId = test.Id,
@@ -172,7 +207,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
                 AnsweringTimeOffset = default
             };
             this._testServiceMock.Setup(x => x.GetAnswerByTestId(test.Id)).Returns(userTestCorrectAnswerDto);
-
             using var controller = new TestController(this._testServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
@@ -180,7 +214,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             };
 
             // Act
-            var result = controller.Index(test.Id, answer);
+            var result = controller.Index(test.Id, correctAnswer);
 
             // Assert
             this._testServiceMock.Verify(x => x.AddTestAnswer(test.Id, userId, test.StartDate.Value), Times.Once);
