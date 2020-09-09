@@ -327,6 +327,9 @@
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
   </data>
+  <data name="GiveUsYourAnswer" xml:space="preserve">
+    <value>Podaj odpowiedź!</value>
+  </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
   </data>
@@ -591,6 +594,9 @@
   <data name="ThankYouForSubscription" xml:space="preserve">
     <value>Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :)</value>
   </data>
+  <data name="ThereIsError" xml:space="preserve">
+    <value>Wystąpił błąd!</value>
+  </data>
   <data name="TicketWrocSharp" xml:space="preserve">
     <value>Bilet na konferencję Wroc#</value>
   </data>
@@ -653,6 +659,9 @@
   </data>
   <data name="WrongAnswers" xml:space="preserve">
     <value>Błędne odpowiedzi</value>
+  </data>
+  <data name="WrongTryAgain" xml:space="preserve">
+    <value>Źle! Spróbuj ponownie :)</value>
   </data>
   <data name="Xiaomi" xml:space="preserve">
     <value>Xiaomi Redmi Airdots</value>

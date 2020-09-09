@@ -8,6 +8,7 @@ using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -42,7 +43,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (string.IsNullOrWhiteSpace(answer))
             {
-                this.ModelState.AddModelError("Answers", "Podaj odpowiedź!");
+                this.ModelState.AddModelError("Answers", @GiveUsYourAnswer);
                 return this.View("Index", test);
             }
 
@@ -61,7 +62,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
             if (test.Status == TestStatus.Ended || test.Status == TestStatus.NotStarted)
             {
-                this.ModelState.AddModelError("Answers", "Wystąpił błąd!");
+                this.ModelState.AddModelError("Answers", @ThereIsError);
                 return this.View("Index", test);
             }
 
@@ -72,7 +73,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             this.SaveWrongAnswer(test.Id, finalAnswer);
-            this.ModelState.AddModelError("Answers", "Źle! Spróbuj ponownie :)");
+            this.ModelState.AddModelError("Answers", @WrongTryAgain);
 
             return this.View("Index", test);
         }

@@ -691,6 +691,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Podaj odpowiedź!.
+        /// </summary>
+        public static string GiveUsYourAnswer {
+            get {
+                return ResourceManager.GetString("GiveUsYourAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odpowiedź poprawna!.
         /// </summary>
         public static string GoodAnswer {
@@ -1483,6 +1492,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd!.
+        /// </summary>
+        public static string ThereIsError {
+            get {
+                return ResourceManager.GetString("ThereIsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bilet na konferencję Wroc#.
         /// </summary>
         public static string TicketWrocSharp {
@@ -1668,6 +1686,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string WrongAnswers {
             get {
                 return ResourceManager.GetString("WrongAnswers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Źle! Spróbuj ponownie :).
+        /// </summary>
+        public static string WrongTryAgain {
+            get {
+                return ResourceManager.GetString("WrongTryAgain", resourceCulture);
             }
         }
         
