@@ -38,12 +38,13 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult Index(int testNumber, string answer = "")
         {
-            if (answer == null)
-            {
-                throw new ArgumentNullException(nameof(answer));
-            }
-
             var test = this._testService.GetTestByNumber(testNumber);
+
+            if (string.IsNullOrWhiteSpace(answer))
+            {
+                this.ModelState.AddModelError("Answers", "Podaj odpowiedź!");
+                return this.View("Index", test);
+            }
 
             if (test == null)
             {
