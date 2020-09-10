@@ -682,6 +682,15 @@ namespace DevAdventCalendarCompetition.Services.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Podaj odpowiedź!.
+        /// </summary>
+        public static string GiveUsYourAnswer {
+            get {
+                return ResourceManager.GetString("GiveUsYourAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odpowiedź poprawna!.
         /// </summary>
         public static string GoodAnswer {
