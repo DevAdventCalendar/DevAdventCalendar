@@ -52,7 +52,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (dbTest != null)
                 {
-                    this.ModelState.AddModelError("Number", "Test o podanym numerze już istnieje.");
+                    this.ModelState.AddModelError("Number", ExceptionsMessages.TestAlreadyExists);
                     return this.View(model);
                 }
 
@@ -124,7 +124,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult CalculateResults(int weekNumber)
         {
-            if (weekNumber < 1 && weekNumber > 4)
+            if (weekNumber < 1 || weekNumber > 4)
             {
                 return this.BadRequest("Błędny numer tygodnia.");
             }

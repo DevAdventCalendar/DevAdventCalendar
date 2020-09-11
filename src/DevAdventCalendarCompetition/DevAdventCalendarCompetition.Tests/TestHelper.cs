@@ -47,16 +47,59 @@ namespace DevAdventCalendarCompetition.Tests
             }
         };
 
-        public static TestDto GetTestDto() => new TestDto()
+        public static TestDto GetTestDto(int number = 2) => GetTestDtoList().First(t => t.Number == number);
+
+        public static List<TestDto> GetTestDtoList() => new List<TestDto>()
         {
-            Id = 1,
-            Number = 1,
-            Description = "TestDescription",
-            Answers = new List<TestAnswerDto>()
+            new TestDto()
             {
-                new TestAnswerDto() { Answer = "Answer1" },
-                new TestAnswerDto() { Answer = "Answer2" },
-                new TestAnswerDto() { Answer = "Answer3" }
+                Id = 1,
+                Number = 1,
+                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
+                Answers = new List<TestAnswerDto>()
+                {
+                    new TestAnswerDto() { Answer = "Answer1" },
+                    new TestAnswerDto() { Answer = "Answer3" }
+                }
+            },
+            new TestDto()
+            {
+                Id = 2,
+                Number = 2,
+                StartDate = DateTime.Today.AddHours(12),
+                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+                Answers = new List<TestAnswerDto>()
+                {
+                    new TestAnswerDto() { Answer = "Answer1" },
+                    new TestAnswerDto() { Answer = "Answer2" },
+                    new TestAnswerDto() { Answer = "Answer3" }
+                }
+            },
+            new TestDto()
+            {
+                Id = 3,
+                Number = 3,
+                StartDate = DateTime.Today.AddDays(1).AddHours(12),
+                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
+                Answers = new List<TestAnswerDto>()
+                {
+                    new TestAnswerDto() { Answer = "Answer1" }
+                }
+            },
+            new TestDto()
+            {
+                Id = 4,
+                Number = 4,
+                StartDate = DateTime.Today.AddDays(2).AddHours(12),
+                EndDate = DateTime.Today.AddDays(2).AddHours(23).AddMinutes(59),
+                Answers = new List<TestAnswerDto>()
+                {
+                    new TestAnswerDto() { Answer = "Answer1" },
+                    new TestAnswerDto() { Answer = "Answer2" },
+                    new TestAnswerDto() { Answer = "Answer3" },
+                    new TestAnswerDto() { Answer = "Answer4" }
+                }
             }
         };
 

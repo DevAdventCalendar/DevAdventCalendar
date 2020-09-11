@@ -97,11 +97,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd!.
+        /// </summary>
+        public static string ErrorOccurs {
+            get {
+                return ResourceManager.GetString("ErrorOccurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Źle! Spróbuj ponownie :).
+        /// </summary>
+        public static string ErrorTryAgain {
+            get {
+                return ResourceManager.GetString("ErrorTryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poprzedni test nie został zakończony.
         /// </summary>
         public static string PreviousTestIsNotDone {
             get {
                 return ResourceManager.GetString("PreviousTestIsNotDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test o podanym numerze już istnieje..
+        /// </summary>
+        public static string TestAlreadyExists {
+            get {
+                return ResourceManager.GetString("TestAlreadyExists", resourceCulture);
             }
         }
         
