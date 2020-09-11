@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
+using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
 
 namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
@@ -69,17 +70,23 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_AnswerIsNull_ThrowsException()
+        public void Index_AnswerIsNull_ReturnsViewWithError()
         {
             // Arrange
-            var test = GetTest(TestStatus.Started);
+            var test = GetTestDto();
+            this._testServiceMock.Setup(x => x.GetTestByNumber(It.IsAny<int>())).Returns(test);
             using var controller = new TestController(this._testServiceMock.Object);
 
             // Act
-            Func<ActionResult> act = () => controller.Index(test.Id, null);
+            var result = controller.Index(test.Number, null);
 
             // Assert
-            Assert.Throws<ArgumentNullException>(act);
+            var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
+            Assert.Single(allErrors);
+            Assert.Contains(allErrors, x => x.ErrorMessage == @GiveUsYourAnswer);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            Assert.Equal("Index", viewResult.ViewName);
         }
 
         [Fact]
