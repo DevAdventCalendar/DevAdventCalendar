@@ -324,6 +324,9 @@
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
   </data>
+  <data name="GiveUsYourAnswer" xml:space="preserve">
+    <value>Podaj odpowiedź!</value>
+  </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
   </data>
