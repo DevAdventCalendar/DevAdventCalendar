@@ -72,7 +72,7 @@ namespace DevAdventCalendarCompetition
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickApp API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DevAdventCalendar API V1");
             });
 
             app.UseEndpoints(routes =>
