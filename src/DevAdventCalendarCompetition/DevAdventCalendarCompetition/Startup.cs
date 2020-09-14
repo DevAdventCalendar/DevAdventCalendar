@@ -42,6 +42,7 @@ namespace DevAdventCalendarCompetition
         {
             app.UpdateDatabase();
             app.UseForwardedHeaders();
+            app.UseStatusCodePagesWithRedirects("/Error?statusCode={0}");
 
             if (env.IsDevelopment())
             {
@@ -56,7 +57,6 @@ namespace DevAdventCalendarCompetition
             }
             else
             {
-                app.UseStatusCodePagesWithRedirects("/Error?statusCode={0}");
                 app.UseHsts();
             }
 
