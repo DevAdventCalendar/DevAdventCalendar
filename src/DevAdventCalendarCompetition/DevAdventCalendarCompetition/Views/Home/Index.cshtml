@@ -1,15 +1,16 @@
-@using DevAdventCalendarCompetition.Services.Models
 @using DevAdventCalendarCompetition.Repository.Models
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 @using System.Globalization
-
+@using DevAdventCalendarCompetition.Services.Interfaces
+@inject IAdventService AdventService
 
 @model IEnumerable<DevAdventCalendarCompetition.Services.Models.TestDto>
 @{
     var correctAnswersForUser = ViewBag.CorrectAnswers;
-    var overallPossibleTestsCount = Model.Count(t => t.Status != TestStatus.NotStarted);
+    var overallPossibleTestsCount = Model?.Count(t => t.Status != TestStatus.NotStarted);
+    var isAdvent = AdventService.IsAdvent();
 }
-
+    
 <!--================================
   START COUNTDOWN AREA
 =================================-->
@@ -153,14 +154,14 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    if (correctAnswersForUser != null)
+    if (isAdvent)
     {
-        <section class="event_txt">
-            <div class="container">
-                <div class="col-md-12">
-                    <div class="party_text">
-                        @if (DateTime.Today.Month == 12)
-                        {
+        if (correctAnswersForUser != null)
+        {
+            <section class="event_txt">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="party_text">
                             @if (correctAnswersForUser == 0)
                             {
                                 <h1>@YouHaventAnswered</h1>
@@ -172,11 +173,11 @@
                             {
                                 <h1>@YourStats <span>@correctAnswersForUser/@overallPossibleTestsCount</span> @OpenPuzzles </h1>
                             }
-                        }
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        }
     }
 
     <div class="container-fluid mb-30">
@@ -198,7 +199,7 @@
                         @for (int j = 0; j < 7; j++)
                         {
                             var dayNumber = i * 7 + j + 1;
-                            var testForDay = Model.FirstOrDefault(t => t.Number == dayNumber);
+                            var testForDay = Model?.FirstOrDefault(t => t.Number == dayNumber);
                             if (dayNumber <= 24)
                             {
                                 <div class="col-xs-6 col-md-2 mb-30 task-@(testForDay != null && testForDay.Status == TestStatus.Started ? "active" : "inactive")">

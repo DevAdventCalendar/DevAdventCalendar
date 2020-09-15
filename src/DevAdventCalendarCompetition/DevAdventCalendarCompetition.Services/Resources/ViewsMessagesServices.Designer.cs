@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DevAdventCalendarCompetition.Resources {
+namespace DevAdventCalendarCompetition.Services.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace DevAdventCalendarCompetition.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ViewsMessages {
+    public class ViewsMessagesServices {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ViewsMessages() {
+        internal ViewsMessagesServices() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DevAdventCalendarCompetition.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Resources.ViewsMessages", typeof(ViewsMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Services.Resources.ViewsMessagesServices", typeof(ViewsMessagesServices).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -444,15 +444,6 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string DoYouWantBeSponsor2019 {
             get {
                 return ResourceManager.GetString("DoYouWantBeSponsor2019", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email.
-        /// </summary>
-        public static string Email {
-            get {
-                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
@@ -1492,29 +1483,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił błąd!.
-        /// </summary>
-        public static string ThereIsError {
-            get {
-                return ResourceManager.GetString("ThereIsError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Bilet na konferencję Wroc#.
         /// </summary>
         public static string TicketWrocSharp {
             get {
                 return ResourceManager.GetString("TicketWrocSharp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nazwa użytkownika będzie wyświetlana tylko na liście wyników.
-        /// </summary>
-        public static string ToolTipUserName {
-            get {
-                return ResourceManager.GetString("ToolTipUserName", resourceCulture);
             }
         }
         
@@ -1551,15 +1524,6 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string UserAlreadyAnswered {
             get {
                 return ResourceManager.GetString("UserAlreadyAnswered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nazwa użytkownika.
-        /// </summary>
-        public static string UserName {
-            get {
-                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         
@@ -1686,15 +1650,6 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string WrongAnswers {
             get {
                 return ResourceManager.GetString("WrongAnswers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Źle! Spróbuj ponownie :).
-        /// </summary>
-        public static string WrongTryAgain {
-            get {
-                return ResourceManager.GetString("WrongTryAgain", resourceCulture);
             }
         }
         

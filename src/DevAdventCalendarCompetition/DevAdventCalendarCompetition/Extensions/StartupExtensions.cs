@@ -6,6 +6,7 @@ using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
@@ -17,12 +18,45 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace DevAdventCalendarCompetition.Extensions
 {
     public static class StartupExtensions
     {
+        public static IServiceCollection AddAdventConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.Configure<AdventSettings>(settings =>
+                {
+                    string defaultDateTimeFormat = "dd-MM-yyyy";
+                    var adventEndDate = configuration.GetSection("Competition:EndDate").Value;
+                    var adventStartDate = configuration.GetSection("Competition:StartDate").Value;
+                    var isValidStartDateTime = DateTimeOffset.TryParseExact(adventStartDate, defaultDateTimeFormat,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var startDate);
+                    var isValidEndDateTime = DateTimeOffset.TryParseExact(adventEndDate, defaultDateTimeFormat,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var endDate);
+
+                    if (!isValidStartDateTime || !isValidEndDateTime)
+                    {
+                        throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.WrongFormatOfDate, defaultDateTimeFormat));
+                    }
+
+                    settings.StartDate = startDate.DateTime;
+                    settings.EndDate = endDate.DateTime;
+                });
+
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<AdventSettings>>().Value);
+            return services;
+        }
+
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -61,6 +95,8 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IResultsService, ResultsService>();
             services.AddTransient<IManageService, ManageService>();
+            services.AddTransient<IDateTimeService, DateTimeService>();
+            services.AddTransient<IAdventService, AdventService>();
             services.AddTransient<IdentityService>();
 
             services.AddAutoMapper(typeof(AdminService));

@@ -1,7 +1,11 @@
 @model DevAdventCalendarCompetition.Services.Models.TestDto
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages 
-@using System.Globalization 
-
+@using System.Globalization
+@using DevAdventCalendarCompetition.Services.Interfaces
+@inject IAdventService AdventService
+@{
+    var isAdvent = AdventService.IsAdvent();
+}
     <div class="breadcrumb_area">
         <div class="container">
             <div class="row">
@@ -32,7 +36,7 @@
                     }
                     else
                     {
-                        if (Model.SponsorLogoUrl != null && Model.IsAdvent)
+                        if (isAdvent && Model.SponsorLogoUrl != null)
                         {
                             <div id="day-sponsor" class="text-center mt-50 mb-50">
                                 <h4 class="mb-20 text-primary">@SponsorOfTheDay</h4>
@@ -41,7 +45,7 @@
                             </div>
                         }
 
-                        if (Model.Discount != null && Model.IsAdvent)
+                        if (isAdvent && Model.Discount != null)
                         {
                             <div class="discount text-center mt-50 mb-50">
                                 <h3 class="mb-20">@GiftFromElfs</h3>
@@ -70,7 +74,7 @@
                         {
                             <h3 class="mb-30 text-primary">@UserAlreadyAnswered</h3>
                         }
-                        else if (Model.IsAdvent && (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate))
+                        else if (isAdvent && (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate))
                         {
                             using (Html.BeginForm(FormMethod.Post))
                             {

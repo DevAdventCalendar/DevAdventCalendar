@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DevAdventCalendarCompetition.Resources {
+namespace DevAdventCalendarCompetition.Services.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace DevAdventCalendarCompetition.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class LoggingMessages {
+    public class ExceptionsMessagesServices {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LoggingMessages() {
+        internal ExceptionsMessagesServices() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DevAdventCalendarCompetition.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Resources.LoggingMessages", typeof(LoggingMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DevAdventCalendarCompetition.Services.Resources.ExceptionsMessagesServices", typeof(ExceptionsMessagesServices).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,65 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User created an account using {Name} provider..
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem &apos;{0}&apos;..
         /// </summary>
-        public static string CreatedUserNameProvider {
+        public static string ErrorDuringEmailConfiguration {
             get {
-                return ResourceManager.GetString("CreatedUserNameProvider", resourceCulture);
+                return ResourceManager.GetString("ErrorDuringEmailConfiguration", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania..
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień email dla użytkownika z identyfikatorem {0}..
         /// </summary>
-        public static string LoadingDataError {
+        public static string ErrorDuringEmailNotificationsPreferenceChange {
             get {
-                return ResourceManager.GetString("LoadingDataError", resourceCulture);
+                return ResourceManager.GetString("ErrorDuringEmailNotificationsPreferenceChange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User created a new account with password..
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}..
         /// </summary>
-        public static string NewAccount {
+        public static string ErrorDuringPushNotificationsPreferenceChange {
             get {
-                return ResourceManager.GetString("NewAccount", resourceCulture);
+                return ResourceManager.GetString("ErrorDuringPushNotificationsPreferenceChange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User changed their password successfully..
+        ///   Looks up a localized string similar to Proszę zmienić wartości start oraz end Date w appsettings żeby było możliwe wykonanie operacji.
         /// </summary>
-        public static string PasswordIsChangedSuccessfully {
+        public static string IsNotAdvent {
             get {
-                return ResourceManager.GetString("PasswordIsChangedSuccessfully", resourceCulture);
+                return ResourceManager.GetString("IsNotAdvent", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kod musi być dostarczony do resetowania hasła..
+        ///   Looks up a localized string similar to Poprzedni test nie został zakończony.
         /// </summary>
-        public static string ResetPasswordCodeError {
+        public static string PreviousTestIsNotDone {
             get {
-                return ResourceManager.GetString("ResetPasswordCodeError", resourceCulture);
+                return ResourceManager.GetString("PreviousTestIsNotDone", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User account locked out..
+        ///   Looks up a localized string similar to Test został uruchomiony.
         /// </summary>
-        public static string UserAccountIsLockedOut {
+        public static string TestAlreadyRun {
             get {
-                return ResourceManager.GetString("UserAccountIsLockedOut", resourceCulture);
+                return ResourceManager.GetString("TestAlreadyRun", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User logged in..
+        ///   Looks up a localized string similar to Nie można załadować użytkownika z identyfikatorem {0}..
         /// </summary>
-        public static string UserIsLoggedIn {
+        public static string UserWithIdNotFound {
             get {
-                return ResourceManager.GetString("UserIsLoggedIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Musisz najpierw potwierdzić swoje konto!.
-        /// </summary>
-        public static string UserIsNotConfirmed {
-            get {
-                return ResourceManager.GetString("UserIsNotConfirmed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User logged in with {Name} provider..
-        /// </summary>
-        public static string UserLoginProvider {
-            get {
-                return ResourceManager.GetString("UserLoginProvider", resourceCulture);
+                return ResourceManager.GetString("UserWithIdNotFound", resourceCulture);
             }
         }
     }

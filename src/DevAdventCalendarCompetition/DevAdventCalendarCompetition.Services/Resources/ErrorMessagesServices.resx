@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrorDuringEmailConfiguration" xml:space="preserve">
-    <value>Wystąpił nieoczekiwany błąd podczas konfigurowania wiadomości e-mail dla użytkownika z identyfikatorem '{0}'.</value>
+  <data name="NotFound" xml:space="preserve">
+    <value>Niestety, podana strona nie istnieje :(</value>
   </data>
-  <data name="PreviousTestIsNotDone" xml:space="preserve">
-    <value>Poprzedni test nie został zakończony</value>
-  </data>
-  <data name="TestAlreadyRun" xml:space="preserve">
-    <value>Test został uruchomiony</value>
-  </data>
-  <data name="UserWithIdNotFound" xml:space="preserve">
-    <value>Nie można załadować użytkownika z identyfikatorem {0}.</value>
-  </data>
-  <data name="ErrorDuringEmailNotificationsPreferenceChange" xml:space="preserve">
-    <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień email dla użytkownika z identyfikatorem {0}.</value>
-  </data>
-  <data name="ErrorDuringPushNotificationsPreferenceChange" xml:space="preserve">
-    <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}.</value>
-  </data>
-  <data name="WrongFormatOfDate" xml:space="preserve">
-    <value>Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Użyj domyślnego formatu {0}.</value>
-  </data>
-  <data name="ErrorDuringEmailConfirmation" xml:space="preserve">
-    <value>Problem z potwierdzeniem emaila</value>
-  </data>
-  <data name="TestAlreadyExists" xml:space="preserve">
-    <value>Test o podanym numerze już istnieje.</value>
-  </data>
-  <data name="ErrorOccurs" xml:space="preserve">
-    <value>Wystąpił błąd!</value>
-  </data>
-  <data name="ErrorTryAgain" xml:space="preserve">
-    <value>Źle! Spróbuj ponownie :)</value>
+  <data name="Default" xml:space="preserve">
+    <value>Ups... Coś poszło nie tak... Nasze elfy już nad tym pracują ;-)</value>
   </data>
 </root>

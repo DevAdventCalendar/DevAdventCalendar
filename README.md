@@ -28,7 +28,7 @@ DevAdventCalendar web app for online competition for programmers : [www.devadven
 - **DevAdventCalendarCompetition** - main project with Controllers and Views
 - **DevAdventCalendarCompetition.Services** - class library for logic operations
 - **DevAdventCalendarCompetition.Repository** - class library for database operations
-- **DevAdventCalendarCompetition.Tests** - unit tests for DevAdventCalendarCompetition.Services (xUnit)
+- **DevAdventCalendarCompetition.Tests** - unit and integration tests that covers services and controllers (xUnit)
 
 - **DevAdventCalendarCompetition.TestResultService** - external service calculating user points based on a custom algorithm
 - **DevAdventCalendarCompetition.TestResultService.Tests** - unit tests for TestResultService (xUnit)
