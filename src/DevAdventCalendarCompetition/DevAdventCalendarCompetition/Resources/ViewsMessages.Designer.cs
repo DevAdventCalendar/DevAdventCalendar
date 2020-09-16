@@ -1312,7 +1312,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sponsorzy i partnerzy.
+        ///   Looks up a localized string similar to W tamtym roku wsparli nas.
         /// </summary>
         public static string SponsorsAndPartners {
             get {
