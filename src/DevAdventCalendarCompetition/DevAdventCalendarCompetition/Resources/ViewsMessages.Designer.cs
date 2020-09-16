@@ -835,7 +835,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nagrody główne.
+        ///   Looks up a localized string similar to W tamtym roku otrzymaliście nagrody.
         /// </summary>
         public static string MainPrizes {
             get {
