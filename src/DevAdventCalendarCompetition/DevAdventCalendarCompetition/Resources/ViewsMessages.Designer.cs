@@ -439,11 +439,20 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?.
+        /// </summary>
+        public static string DoYouWantBeSponsor2020 {
+            get {
+                return ResourceManager.GetString("DoYouWantBeSponsor2020", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?.
         /// </summary>
-        public static string DoYouWantBeSponsor2019 {
+        public static string DoYouWantToBeASponsor {
             get {
-                return ResourceManager.GetString("DoYouWantBeSponsor2019", resourceCulture);
+                return ResourceManager.GetString("DoYouWantToBeASponsor", resourceCulture);
             }
         }
         
