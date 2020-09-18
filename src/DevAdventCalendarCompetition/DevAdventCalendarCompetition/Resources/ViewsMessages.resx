@@ -246,9 +246,6 @@
   <data name="DoYouWantBeSponsor2020" xml:space="preserve">
     <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
   </data>
-  <data name="DoYouWantToBeASponsor" xml:space="preserve">
-    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>

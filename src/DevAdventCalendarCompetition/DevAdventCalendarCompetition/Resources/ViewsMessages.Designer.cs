@@ -448,15 +448,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?.
-        /// </summary>
-        public static string DoYouWantToBeASponsor {
-            get {
-                return ResourceManager.GetString("DoYouWantToBeASponsor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
