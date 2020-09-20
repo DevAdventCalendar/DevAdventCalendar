@@ -193,24 +193,6 @@ button.navbar-toggle {
             margin-top: 5px;
         }
 
-#home-santa .content-centered {
-    margin: 20px 0 20px 0;
-}
-
-.main-sponsor-section {
-    display: flex;
-    align-items: center;
-    padding-top: 10px;
-}
-
-#main-sponsor-title {
-    font-size: 14pt;
-}
-
-#main-sponsor-name {
-    font-size: 18pt;
-    font-weight: bold;
-}
 
 .week-sponsor {
     max-width: 200px;
