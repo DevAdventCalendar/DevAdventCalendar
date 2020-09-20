@@ -13,6 +13,7 @@ using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 namespace DevAdventCalendarCompetition.Controllers
 {
     [Authorize]
+    [Route("[controller]/[action]")]
     public class TestController : Controller
     {
         private readonly ITestService _testService;
