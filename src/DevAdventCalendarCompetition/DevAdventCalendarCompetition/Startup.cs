@@ -42,16 +42,21 @@ namespace DevAdventCalendarCompetition
         {
             app.UpdateDatabase();
             app.UseForwardedHeaders();
+            app.UseStatusCodePagesWithRedirects("/Error?statusCode={0}");
 
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DevAdventCalendar API V1");
+                });
             }
             else
             {
-                app.UseStatusCodePagesWithRedirects("/Error?statusCode={0}");
                 app.UseHsts();
             }
 
@@ -68,12 +73,6 @@ namespace DevAdventCalendarCompetition
             app.UseHttpsRequestScheme();
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QuickApp API V1");
-            });
 
             app.UseEndpoints(routes =>
             {
