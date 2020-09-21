@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
+    [Route("[controller]/[action]")]
     public class ResultsController : Controller
     {
         private readonly IResultsService _resultsService;
@@ -19,6 +20,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this._resultsService = resultsService ?? throw new ArgumentNullException(nameof(resultsService));
         }
 
+        [HttpGet]
         public ActionResult Index(int? pageIndex)
         {
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
