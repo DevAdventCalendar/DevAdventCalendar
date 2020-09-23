@@ -61,6 +61,20 @@ namespace DevAdventCalendarCompetition.Extensions
             return services;
         }
 
+        public static IServiceCollection RegisterGoogleHttpClient(this IServiceCollection services)
+        {
+            services.AddHttpContextAccessor();
+            services.AddHttpClient<IGoogleCalendarService, GoogleCalendarService>(
+                async (services, client) =>
+                {
+                    var accessor = services.GetRequiredService<IHttpContextAccessor>();
+                    var accessToken = await accessor.HttpContext.GetTokenAsync("Calendar", "access_token");
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    client.BaseAddress = new Uri("https://www.googleapis.com/calendar/v3/");
+                });
+            return services;
+        }
+
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>

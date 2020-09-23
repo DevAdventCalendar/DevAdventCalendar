@@ -90,6 +90,7 @@ namespace DevAdventCalendarCompetition
             services
                 .RegisterDatabase(this.Configuration)
                 .RegisterServices(this.Configuration)
+                .RegisterGoogleHttpClient()
                 .AddExternalLoginProviders(this.Configuration);
 
             services
