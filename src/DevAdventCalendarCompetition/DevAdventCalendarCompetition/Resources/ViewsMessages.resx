@@ -243,8 +243,8 @@
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
-  <data name="DoYouWantBeSponsor2019" xml:space="preserve">
-    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?</value>
+  <data name="DoYouWantBeSponsor2020" xml:space="preserve">
+    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -379,7 +379,7 @@
     <value>Zaloguj używając loginu i hasła</value>
   </data>
   <data name="MainPrizes" xml:space="preserve">
-    <value>Nagrody główne</value>
+    <value>W tamtym roku otrzymaliście nagrody</value>
   </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Twoje konto</value>
@@ -538,7 +538,7 @@
     <value>Sponsorzy</value>
   </data>
   <data name="SponsorsAndPartners" xml:space="preserve">
-    <value>Sponsorzy i partnerzy</value>
+    <value>W tamtym roku wsparli nas</value>
   </data>
   <data name="StartTest" xml:space="preserve">
     <value>Rozpocznij</value>

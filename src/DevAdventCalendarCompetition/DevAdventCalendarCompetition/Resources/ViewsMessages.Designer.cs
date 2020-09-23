@@ -439,11 +439,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?.
+        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?.
         /// </summary>
-        public static string DoYouWantBeSponsor2019 {
+        public static string DoYouWantBeSponsor2020 {
             get {
-                return ResourceManager.GetString("DoYouWantBeSponsor2019", resourceCulture);
+                return ResourceManager.GetString("DoYouWantBeSponsor2020", resourceCulture);
             }
         }
         
@@ -844,7 +844,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nagrody główne.
+        ///   Looks up a localized string similar to W tamtym roku otrzymaliście nagrody.
         /// </summary>
         public static string MainPrizes {
             get {
@@ -1321,7 +1321,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sponsorzy i partnerzy.
+        ///   Looks up a localized string similar to W tamtym roku wsparli nas.
         /// </summary>
         public static string SponsorsAndPartners {
             get {

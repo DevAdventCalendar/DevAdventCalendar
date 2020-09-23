@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DevAdventCalendarCompetition.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [Route("[controller]/[action]")]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
@@ -24,6 +25,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             var tests = this._adminService.GetAllTests();
@@ -33,6 +35,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(tests);
         }
 
+        [HttpGet]
         public ActionResult AddTest()
         {
             return this.View();
