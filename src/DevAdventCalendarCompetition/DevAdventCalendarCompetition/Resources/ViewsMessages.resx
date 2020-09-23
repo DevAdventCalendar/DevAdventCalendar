@@ -333,6 +333,9 @@
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
   </data>
+  <data name="GoogleCalendarIntegration" xml:space="preserve">
+    <value>Integracja z kalendarzem Google</value>
+  </data>
   <data name="GoTo" xml:space="preserve">
     <value>Przejdź na</value>
   </data>

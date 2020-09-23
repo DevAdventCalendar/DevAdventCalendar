@@ -709,6 +709,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Integracja z kalendarzem Google.
+        /// </summary>
+        public static string GoogleCalendarIntegration {
+            get {
+                return ResourceManager.GetString("GoogleCalendarIntegration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Przejdź na.
         /// </summary>
         public static string GoTo {

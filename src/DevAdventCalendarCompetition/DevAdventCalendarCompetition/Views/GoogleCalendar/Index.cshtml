@@ -1,0 +1,26 @@
+@model DevAdventCalendarCompetition.Models.GoogleCalendar.IndexViewModel
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+@using DevAdventCalendarCompetition.Views.Manage
+
+@{
+    ViewData["Title"] = @GoogleCalendarIntegration;
+    ViewData.AddActivePage(ManageNavPages.GoogleCalendarIntegration);
+}
+
+<div class="area_title mb-30">
+    <h3>@ViewData["Title"]</h3>
+</div>
+@await Html.PartialAsync("/Views/Manage/_StatusMessage.cshtml", @Model.StatusMessage)
+@if (@Model.HasPermissions)
+{
+    <h1>Twoje kalendarze: </h1>
+    @foreach (var calendar in @Model.Calendars)
+    {
+        <strong>@Html.Raw(calendar.Id); </strong>
+        <br />
+    }
+}
+else
+{
+    <a class="btn btn-primary" asp-controller="GoogleCalendar" asp-action="AuthorizeAccessToGoogleCalendar">Authorize</a>
+}
