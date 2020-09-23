@@ -1,6 +1,8 @@
 using System;
 using System.Globalization;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
@@ -10,6 +12,8 @@ using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -130,6 +134,31 @@ namespace DevAdventCalendarCompetition.Extensions
             {
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            })
+            .AddOAuth("Calendar", googleOptions =>
+            {
+                googleOptions.AuthorizationEndpoint = configuration["Authentication:Google:AuthorizationEndpoint"];
+                googleOptions.TokenEndpoint = configuration["Authentication:Google:TokenEndpoint"];
+                googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                googleOptions.Scope.Add(configuration["Authentication:Google:CalendarScope"]);
+                googleOptions.Scope.Add(configuration["Authentication:Google:EventsScope"]);
+                googleOptions.CallbackPath = "/oauth-callback";
+                googleOptions.UsePkce = true;
+                googleOptions.SaveTokens = true;
+
+                // For debugging purposes
+                googleOptions.Events = new OAuthEvents
+                {
+                    OnCreatingTicket = async context =>
+                    {
+                        var ac = context.AccessToken;
+                        var ft = context.RefreshToken;
+                        Console.WriteLine($"TOKEN ---> {ac} <---");
+                        Console.WriteLine($"REFRESH TOKEN ---> {ft} <---");
+                        await Task.CompletedTask;
+                    }
+                };
             })
             .AddGitHub(githubOptions =>
             {
