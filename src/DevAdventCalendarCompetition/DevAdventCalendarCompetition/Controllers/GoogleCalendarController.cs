@@ -66,6 +66,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "HasCorrectGooglePermissions")]
         public IActionResult AddCalendar()
         {
             var model = new AddCalendarViewModel

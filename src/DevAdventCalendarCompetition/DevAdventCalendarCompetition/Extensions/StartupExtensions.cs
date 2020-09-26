@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using DevAdventCalendarCompetition.Authorization;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -14,6 +15,7 @@ using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -180,6 +182,14 @@ namespace DevAdventCalendarCompetition.Extensions
                 githubOptions.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
                 githubOptions.Scope.Add("user:email");
             });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "HasCorrectGooglePermissions",
+                    policy => policy.Requirements.Add(new CorrectGooglePermissions()));
+            });
+            services.AddSingleton<IAuthorizationHandler, CorrectGooglePermissionsHandler>();
 
             return services;
         }
