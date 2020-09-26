@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Models.GoogleCalendar;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,12 @@ namespace DevAdventCalendarCompetition.Controllers
     public class GoogleCalendarController : Controller
     {
         private readonly IGoogleCalendarService _googleCalendarService;
+        private readonly AdventSettings _adventSettings;
 
-        public GoogleCalendarController(IGoogleCalendarService googleCalendarService)
+        public GoogleCalendarController(IGoogleCalendarService googleCalendarService, AdventSettings adventSettings)
         {
             this._googleCalendarService = googleCalendarService;
+            this._adventSettings = adventSettings;
         }
 
         [TempData]
@@ -27,11 +30,10 @@ namespace DevAdventCalendarCompetition.Controllers
 
         public IActionResult AuthorizeAccessToGoogleCalendar()
         {
-            var redirectUri = this.Url.Action(nameof(this.AuthorizationCallback), "GoogleCalendar");
             return this.Challenge(
                 new AuthenticationProperties
                 {
-                    RedirectUri = redirectUri
+                    RedirectUri = this.Url.Action(nameof(this.AuthorizationCallback), "GoogleCalendar")
                 },
                 "Calendar");
         }
@@ -46,7 +48,7 @@ namespace DevAdventCalendarCompetition.Controllers
         public async Task<IActionResult> Index()
         {
             var userHasPermissions = await this.CheckIfUserHasPermissions();
-            IEnumerable<Items> calendars = new List<Items>();
+            CalendarList calendars = new CalendarList();
 
             if (userHasPermissions)
             {
@@ -61,6 +63,39 @@ namespace DevAdventCalendarCompetition.Controllers
             };
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddCalendar()
+        {
+            var model = new AddCalendarViewModel
+            {
+                StartDate = this._adventSettings.StartDate,
+                EndDate = this._adventSettings.EndDate
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCalendar(AddCalendarViewModel addCalendarViewModel)
+        {
+            if (addCalendarViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(addCalendarViewModel));
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                var response = await this._googleCalendarService.CreateNewCalendarWithEvents(
+                    addCalendarViewModel.CalendarSummary,
+                    addCalendarViewModel.StartDate,
+                    addCalendarViewModel.EndDate);
+                this.StatusMessage = response;
+                return this.RedirectToAction(nameof(this.Index));
+            }
+
+            return this.View(addCalendarViewModel);
         }
 
         private async Task<bool> CheckIfUserHasPermissions()

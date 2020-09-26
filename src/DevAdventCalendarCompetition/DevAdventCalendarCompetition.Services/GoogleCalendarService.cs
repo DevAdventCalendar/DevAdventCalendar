@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Transactions;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using Newtonsoft.Json.Linq;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -17,24 +18,65 @@ namespace DevAdventCalendarCompetition.Services
             this._httpClient = httpClient;
         }
 
-        // For demo purpose
-        public async Task<IEnumerable<Items>> GetAllCalendars()
+        public async Task<CalendarList> GetAllCalendars()
         {
-#pragma warning disable CA2234 // Pass system uri objects instead of strings
-            var result = await this._httpClient.GetAsync("users/me/calendarList");
-#pragma warning restore CA2234 // Pass system uri objects instead of strings
-            string responseBody = await result.Content.ReadAsStringAsync();
-            JObject googleSearch = JObject.Parse(responseBody);
+            return await this._httpClient.GetFromJsonAsync<CalendarList>("users/me/calendarList");
+        }
 
-            IList<JToken> results = googleSearch["items"].Children().ToList();
-            IList<Items> searchResults = new List<Items>();
-            foreach (JToken resultd in results)
+        public async Task<string> CreateNewCalendarWithEvents(string calendarSummary, DateTime startDate, DateTime endDate)
+        {
+            var calendarResponse = await this.CreateCalendar(calendarSummary);
+
+            // For debug
+            calendarResponse.EnsureSuccessStatusCode();
+
+            var newCalendar = await calendarResponse.Content.ReadFromJsonAsync<CalendarDto>();
+
+            var eventsResponse = await this.CreateEvents(newCalendar.Id, startDate, endDate);
+            eventsResponse.EnsureSuccessStatusCode();
+
+            if (calendarResponse.IsSuccessStatusCode && eventsResponse.IsSuccessStatusCode)
             {
-                Items searchResult = resultd.ToObject<Items>();
-                searchResults.Add(searchResult);
+                return $"Pomyślnie utworzono kalendarz: {calendarSummary}";
             }
 
-            return searchResults;
+            return "Wystapił błąd podczas tworzenia nowego kalendarza. Spróbuj ponownie później";
+        }
+
+        private async Task<HttpResponseMessage> CreateCalendar(string calendarSummary)
+        {
+            var newOne = new NewCalendarDto
+            {
+                Summary = calendarSummary
+            };
+
+            return await this._httpClient.PostAsJsonAsync("calendars", newOne);
+        }
+
+        private async Task<HttpResponseMessage> CreateEvents(string calendarId, DateTime startDate, DateTime endDate)
+        {
+            var daysCount = (endDate.Day - startDate.Day) + 1;
+            var newEvents = new EventsDto
+            {
+                Summary = "DevAdventCalendar",
+                Location = @"https://devadventcalendar.pl/",
+                Start = new StartDate
+                {
+                    DateTime = startDate,
+                    TimeZone = @"Europe/Warsaw"
+                },
+                End = new EndDate
+                {
+                    DateTime = startDate.AddHours(1),
+                    TimeZone = @"Europe/Warsaw"
+                },
+                Recurrence = new List<string>()
+                {
+                    $"RRULE:FREQ=DAILY;COUNT={daysCount}"
+                }
+            };
+
+            return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
         }
     }
 }

@@ -14,13 +14,17 @@
 @if (@Model.HasPermissions)
 {
     <h1>Twoje kalendarze: </h1>
-    @foreach (var calendar in @Model.Calendars)
+    @foreach (var calendar in @Model.Calendars.Items)
     {
-        <strong>@Html.Raw(calendar.Id); </strong>
+        <strong>@Html.Raw(calendar.Summary); </strong>
         <br />
     }
+    <br />
+    <a class="chris_btn reveal" asp-controller="GoogleCalendar" asp-action="AddCalendar">➕Dodaj nowy</a>
 }
 else
 {
-    <a class="btn btn-primary" asp-controller="GoogleCalendar" asp-action="AuthorizeAccessToGoogleCalendar">Authorize</a>
+    <strong>TODO *Informacje dla użytkownika o integracji*</strong>
+    <br />
+    <a class="chris_btn reveal" asp-controller="GoogleCalendar" asp-action="AuthorizeAccessToGoogleCalendar">Integracja</a>
 }
