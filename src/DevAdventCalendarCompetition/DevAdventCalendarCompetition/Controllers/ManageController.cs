@@ -1,13 +1,10 @@
 using System;
 using System.Globalization;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.Manage;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevExeptionsMessages;
-using DevLoggingMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -156,7 +153,8 @@ namespace DevAdventCalendarCompetition.Controllers
             var code = await this._accountService.GenerateEmailConfirmationTokenAsync(this.User).ConfigureAwait(false);
             var callbackUrl = this.Url.EmailConfirmationLink(user.Id, code, this.Request.Scheme);
             var email = user.Email;
-            await this._accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl)).ConfigureAwait(false);
+            var isNewEmail = true;
+            await this._accountService.SendEmailConfirmationAsync(email, new Uri(callbackUrl), isNewEmail).ConfigureAwait(false);
 
             this.StatusMessage = "E-mail weryfikacyjny został wysłany. Sprawdź swoją skrzynkę odbiorczą";
             return this.RedirectToAction(nameof(this.Index));

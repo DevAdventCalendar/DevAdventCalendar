@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <NeutralLanguage>pl-PL</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DevLoggingMessages {
+namespace DevAdventCalendarCompetition.Resources {
     using System;
     
     

@@ -243,8 +243,11 @@
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
-  <data name="DoYouWantBeSponsor2019" xml:space="preserve">
-    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?</value>
+  <data name="DoYouWantBeSponsor2020" xml:space="preserve">
+    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="EmailAlreadyInDatabase" xml:space="preserve">
     <value>Ten adres email już mamy w swojej bazie :)</value>
@@ -324,6 +327,9 @@
   <data name="GiftFromElfs" xml:space="preserve">
     <value>A oto prezent, jaki otrzymujesz od Elfów za otwarcie okienka</value>
   </data>
+  <data name="GiveUsYourAnswer" xml:space="preserve">
+    <value>Podaj odpowiedź!</value>
+  </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
   </data>
@@ -370,7 +376,7 @@
     <value>Zaloguj używając loginu i hasła</value>
   </data>
   <data name="MainPrizes" xml:space="preserve">
-    <value>Nagrody główne</value>
+    <value>W tamtym roku otrzymaliście nagrody</value>
   </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Twoje konto</value>
@@ -529,7 +535,7 @@
     <value>Sponsorzy</value>
   </data>
   <data name="SponsorsAndPartners" xml:space="preserve">
-    <value>Sponsorzy i partnerzy</value>
+    <value>W tamtym roku wsparli nas</value>
   </data>
   <data name="StartTest" xml:space="preserve">
     <value>Rozpocznij</value>
@@ -588,8 +594,14 @@
   <data name="ThankYouForSubscription" xml:space="preserve">
     <value>Dziękujemy za potwierdzenie subskrypcji! Teraz wiemy, że Ty to Ty :)</value>
   </data>
+  <data name="ThereIsError" xml:space="preserve">
+    <value>Wystąpił błąd!</value>
+  </data>
   <data name="TicketWrocSharp" xml:space="preserve">
     <value>Bilet na konferencję Wroc#</value>
+  </data>
+  <data name="ToolTipUserName" xml:space="preserve">
+    <value>Nazwa użytkownika będzie wyświetlana tylko na liście wyników</value>
   </data>
   <data name="TotalScore" xml:space="preserve">
     <value>Suma punktów</value>
@@ -602,6 +614,9 @@
   </data>
   <data name="UserAlreadyAnswered" xml:space="preserve">
     <value>Ho ho! Już odpowiedziałeś na to pytanie, brawo :)</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="VerifyCode" xml:space="preserve">
     <value>Weryfikacja</value>
@@ -631,7 +646,7 @@
     <value>Zapraszamy do tegorocznej edycji ;)</value>
   </data>
   <data name="WePlayUntilDecember" xml:space="preserve">
-    <value>Gramy do&lt;br&gt;24 grudnia.</value>
+    <value>Gramy do&lt;br&gt;24 grudnia</value>
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
     <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
@@ -644,6 +659,9 @@
   </data>
   <data name="WrongAnswers" xml:space="preserve">
     <value>Błędne odpowiedzi</value>
+  </data>
+  <data name="WrongTryAgain" xml:space="preserve">
+    <value>Źle! Spróbuj ponownie :)</value>
   </data>
   <data name="Xiaomi" xml:space="preserve">
     <value>Xiaomi Redmi Airdots</value>

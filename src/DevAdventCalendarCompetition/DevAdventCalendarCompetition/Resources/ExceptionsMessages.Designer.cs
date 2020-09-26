@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DevExeptionsMessages {
+namespace DevAdventCalendarCompetition.Resources {
     using System;
     
     
@@ -70,6 +70,15 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Problem z potwierdzeniem emaila.
+        /// </summary>
+        public static string ErrorDuringEmailConfirmation {
+            get {
+                return ResourceManager.GetString("ErrorDuringEmailConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień email dla użytkownika z identyfikatorem {0}..
         /// </summary>
         public static string ErrorDuringEmailNotificationsPreferenceChange {
@@ -88,11 +97,38 @@ namespace DevExeptionsMessages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd!.
+        /// </summary>
+        public static string ErrorOccurs {
+            get {
+                return ResourceManager.GetString("ErrorOccurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Źle! Spróbuj ponownie :).
+        /// </summary>
+        public static string ErrorTryAgain {
+            get {
+                return ResourceManager.GetString("ErrorTryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poprzedni test nie został zakończony.
         /// </summary>
         public static string PreviousTestIsNotDone {
             get {
                 return ResourceManager.GetString("PreviousTestIsNotDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test o podanym numerze już istnieje..
+        /// </summary>
+        public static string TestAlreadyExists {
+            get {
+                return ResourceManager.GetString("TestAlreadyExists", resourceCulture);
             }
         }
         
@@ -111,6 +147,15 @@ namespace DevExeptionsMessages {
         public static string UserWithIdNotFound {
             get {
                 return ResourceManager.GetString("UserWithIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Użyj domyślnego formatu {0}..
+        /// </summary>
+        public static string WrongFormatOfDate {
+            get {
+                return ResourceManager.GetString("WrongFormatOfDate", resourceCulture);
             }
         }
     }

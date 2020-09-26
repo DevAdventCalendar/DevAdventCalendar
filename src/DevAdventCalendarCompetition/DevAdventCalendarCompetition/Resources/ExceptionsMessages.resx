@@ -135,4 +135,19 @@
   <data name="ErrorDuringPushNotificationsPreferenceChange" xml:space="preserve">
     <value>Wystąpił nieoczekiwany błąd podczas konfigurowania powiadomień push dla użytkownika z identyfikatorem {0}.</value>
   </data>
+  <data name="WrongFormatOfDate" xml:space="preserve">
+    <value>Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Użyj domyślnego formatu {0}.</value>
+  </data>
+  <data name="ErrorDuringEmailConfirmation" xml:space="preserve">
+    <value>Problem z potwierdzeniem emaila</value>
+  </data>
+  <data name="TestAlreadyExists" xml:space="preserve">
+    <value>Test o podanym numerze już istnieje.</value>
+  </data>
+  <data name="ErrorOccurs" xml:space="preserve">
+    <value>Wystąpił błąd!</value>
+  </data>
+  <data name="ErrorTryAgain" xml:space="preserve">
+    <value>Źle! Spróbuj ponownie :)</value>
+  </data>
 </root>

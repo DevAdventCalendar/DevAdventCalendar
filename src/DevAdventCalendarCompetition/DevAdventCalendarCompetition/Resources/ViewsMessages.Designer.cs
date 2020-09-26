@@ -439,11 +439,20 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2019 roku?.
+        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?.
         /// </summary>
-        public static string DoYouWantBeSponsor2019 {
+        public static string DoYouWantBeSponsor2020 {
             get {
-                return ResourceManager.GetString("DoYouWantBeSponsor2019", resourceCulture);
+                return ResourceManager.GetString("DoYouWantBeSponsor2020", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
@@ -682,6 +691,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Podaj odpowiedź!.
+        /// </summary>
+        public static string GiveUsYourAnswer {
+            get {
+                return ResourceManager.GetString("GiveUsYourAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odpowiedź poprawna!.
         /// </summary>
         public static string GoodAnswer {
@@ -817,7 +835,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nagrody główne.
+        ///   Looks up a localized string similar to W tamtym roku otrzymaliście nagrody.
         /// </summary>
         public static string MainPrizes {
             get {
@@ -1294,7 +1312,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sponsorzy i partnerzy.
+        ///   Looks up a localized string similar to W tamtym roku wsparli nas.
         /// </summary>
         public static string SponsorsAndPartners {
             get {
@@ -1474,11 +1492,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd!.
+        /// </summary>
+        public static string ThereIsError {
+            get {
+                return ResourceManager.GetString("ThereIsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bilet na konferencję Wroc#.
         /// </summary>
         public static string TicketWrocSharp {
             get {
                 return ResourceManager.GetString("TicketWrocSharp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa użytkownika będzie wyświetlana tylko na liście wyników.
+        /// </summary>
+        public static string ToolTipUserName {
+            get {
+                return ResourceManager.GetString("ToolTipUserName", resourceCulture);
             }
         }
         
@@ -1515,6 +1551,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string UserAlreadyAnswered {
             get {
                 return ResourceManager.GetString("UserAlreadyAnswered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa użytkownika.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         
@@ -1600,7 +1645,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gramy do&lt;br&gt;24 grudnia..
+        ///   Looks up a localized string similar to Gramy do&lt;br&gt;24 grudnia.
         /// </summary>
         public static string WePlayUntilDecember {
             get {
@@ -1641,6 +1686,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string WrongAnswers {
             get {
                 return ResourceManager.GetString("WrongAnswers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Źle! Spróbuj ponownie :).
+        /// </summary>
+        public static string WrongTryAgain {
+            get {
+                return ResourceManager.GetString("WrongTryAgain", resourceCulture);
             }
         }
         

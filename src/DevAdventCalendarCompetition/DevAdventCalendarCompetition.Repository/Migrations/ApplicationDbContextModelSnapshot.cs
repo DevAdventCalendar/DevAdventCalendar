@@ -185,8 +185,8 @@ namespace DevAdventCalendarCompetition.Repository.Migrations
                     b.Property<DateTime>("AnsweringTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("AnsweringTimeOffset")
-                        .HasColumnType("time");
+                    b.Property<long>("AnsweringTimeOffset")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("TestId")
                         .HasColumnType("int");

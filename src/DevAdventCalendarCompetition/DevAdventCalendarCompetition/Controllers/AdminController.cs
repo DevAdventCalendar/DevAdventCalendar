@@ -2,18 +2,18 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using DevAdventCalendarCompetition.Models;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
-using DevExeptionsMessages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [Route("[controller]/[action]")]
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
@@ -25,6 +25,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             var tests = this._adminService.GetAllTests();
@@ -34,6 +35,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(tests);
         }
 
+        [HttpGet]
         public ActionResult AddTest()
         {
             return this.View();
@@ -53,7 +55,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (dbTest != null)
                 {
-                    this.ModelState.AddModelError("Number", "Test o podanym numerze już istnieje.");
+                    this.ModelState.AddModelError("Number", ExceptionsMessages.TestAlreadyExists);
                     return this.View(model);
                 }
 
@@ -125,7 +127,7 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpPost]
         public ActionResult CalculateResults(int weekNumber)
         {
-            if (weekNumber < 1 && weekNumber > 4)
+            if (weekNumber < 1 || weekNumber > 4)
             {
                 return this.BadRequest("Błędny numer tygodnia.");
             }
