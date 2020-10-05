@@ -709,11 +709,38 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystapił błąd podczas tworzenia nowego kalendarza..
+        /// </summary>
+        public static string GoogleCalendarError {
+            get {
+                return ResourceManager.GetString("GoogleCalendarError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Integracja z kalendarzem Google.
         /// </summary>
         public static string GoogleCalendarIntegration {
             get {
                 return ResourceManager.GetString("GoogleCalendarIntegration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pomyślnie utworzono nowy kalendarz z wydarzeniami..
+        /// </summary>
+        public static string GoogleCalendarSuccess {
+            get {
+                return ResourceManager.GetString("GoogleCalendarSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystapił błąd podczas tworzenia wydarzeń w nowym kalendarzu..
+        /// </summary>
+        public static string GoogleEventsError {
+            get {
+                return ResourceManager.GetString("GoogleEventsError", resourceCulture);
             }
         }
         

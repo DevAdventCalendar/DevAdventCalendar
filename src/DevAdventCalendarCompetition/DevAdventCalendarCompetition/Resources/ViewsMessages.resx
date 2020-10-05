@@ -333,8 +333,17 @@
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
   </data>
+  <data name="GoogleCalendarError" xml:space="preserve">
+    <value>Wystapił błąd podczas tworzenia nowego kalendarza.</value>
+  </data>
   <data name="GoogleCalendarIntegration" xml:space="preserve">
     <value>Integracja z kalendarzem Google</value>
+  </data>
+  <data name="GoogleCalendarSuccess" xml:space="preserve">
+    <value>Pomyślnie utworzono nowy kalendarz z wydarzeniami.</value>
+  </data>
+  <data name="GoogleEventsError" xml:space="preserve">
+    <value>Wystapił błąd podczas tworzenia wydarzeń w nowym kalendarzu.</value>
   </data>
   <data name="GoTo" xml:space="preserve">
     <value>Przejdź na</value>
