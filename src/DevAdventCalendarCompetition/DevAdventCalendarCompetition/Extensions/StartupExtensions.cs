@@ -2,9 +2,7 @@ using System;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
-using DevAdventCalendarCompetition.Authorization;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
@@ -14,8 +12,6 @@ using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -65,6 +61,7 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static IServiceCollection RegisterGoogleHttpClient(this IServiceCollection services)
         {
+            var googleCalendarBaseUri = @"https://www.googleapis.com/calendar/v3/";
             services.AddHttpContextAccessor();
             services.AddHttpClient<IGoogleCalendarService, GoogleCalendarService>(
                 async (services, client) =>
@@ -72,7 +69,7 @@ namespace DevAdventCalendarCompetition.Extensions
                     var accessor = services.GetRequiredService<IHttpContextAccessor>();
                     var accessToken = await accessor.HttpContext.GetTokenAsync("Calendar", "access_token");
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                    client.BaseAddress = new Uri("https://www.googleapis.com/calendar/v3/");
+                    client.BaseAddress = new Uri(googleCalendarBaseUri);
                 });
             return services;
         }
@@ -162,19 +159,6 @@ namespace DevAdventCalendarCompetition.Extensions
                 googleOptions.CallbackPath = "/oauth-callback";
                 googleOptions.UsePkce = true;
                 googleOptions.SaveTokens = true;
-
-                // For debugging purposes
-                googleOptions.Events = new OAuthEvents
-                {
-                    OnCreatingTicket = async context =>
-                    {
-                        var ac = context.AccessToken;
-                        var ft = context.RefreshToken;
-                        Console.WriteLine($"TOKEN ---> {ac} <---");
-                        Console.WriteLine($"REFRESH TOKEN ---> {ft} <---");
-                        await Task.CompletedTask;
-                    }
-                };
             })
             .AddGitHub(githubOptions =>
             {
@@ -182,14 +166,6 @@ namespace DevAdventCalendarCompetition.Extensions
                 githubOptions.ClientSecret = configuration["Authentication:GitHub:ClientSecret"];
                 githubOptions.Scope.Add("user:email");
             });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(
-                    "HasCorrectGooglePermissions",
-                    policy => policy.Requirements.Add(new CorrectGooglePermissions()));
-            });
-            services.AddSingleton<IAuthorizationHandler, CorrectGooglePermissionsHandler>();
 
             return services;
         }
