@@ -186,6 +186,9 @@
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
   </data>
+  <data name="BackToPuzzles" xml:space="preserve">
+    <value>Wróć do zagadek / Inna zagadka</value>
+  </data>
   <data name="Calculate" xml:space="preserve">
     <value>Oblicz</value>
   </data>

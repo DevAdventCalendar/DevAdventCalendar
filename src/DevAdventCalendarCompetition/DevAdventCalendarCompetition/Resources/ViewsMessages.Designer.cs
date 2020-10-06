@@ -268,6 +268,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wróć do zagadek / Inna zagadka.
+        /// </summary>
+        public static string BackToPuzzles {
+            get {
+                return ResourceManager.GetString("BackToPuzzles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oblicz.
         /// </summary>
         public static string Calculate {
