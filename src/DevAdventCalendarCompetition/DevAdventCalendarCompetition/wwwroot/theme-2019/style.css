@@ -2064,8 +2064,8 @@ footer{
 	background-size: cover;
 	background-repeat: no-repeat;
 	overflow: hidden;
-	padding-top: 130px;
-	padding-bottom: 140px;
+	padding-top: 84px;
+	padding-bottom: 90px;
 }
 .countdown_wrapper{
 	text-align: center;
@@ -2077,7 +2077,7 @@ footer{
 	background: #c02323;
 }
 .countdown_section .countdown li{
-	padding: 0 56px;
+	padding: 0 40px;
 }
 
 
