@@ -166,15 +166,16 @@ namespace DevAdventCalendarCompetition.Extensions
             })
             .AddOAuth("Calendar", googleOptions =>
             {
-                googleOptions.AuthorizationEndpoint = configuration["Authentication:Google:AuthorizationEndpoint"];
-                googleOptions.TokenEndpoint = configuration["Authentication:Google:TokenEndpoint"];
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                googleOptions.Scope.Add(configuration["Authentication:Google:CalendarScope"]);
-                googleOptions.Scope.Add(configuration["Authentication:Google:EventsScope"]);
-                googleOptions.CallbackPath = "/oauth-callback";
-                googleOptions.UsePkce = true;
-                googleOptions.SaveTokens = true;
+                var googleCalendarConfig = configuration.GetSection("Authentication:Google:Calendar");
+                googleOptions.AuthorizationEndpoint = googleCalendarConfig["AuthorizationEndpoint"];
+                googleOptions.TokenEndpoint = googleCalendarConfig["TokenEndpoint"];
+                googleOptions.Scope.Add(googleCalendarConfig["CalendarScope"]);
+                googleOptions.Scope.Add(googleCalendarConfig["EventsScope"]);
+                googleOptions.CallbackPath = googleCalendarConfig["CallbackPath"];
+                googleOptions.UsePkce = Convert.ToBoolean(googleCalendarConfig["UsePkce"], CultureInfo.InvariantCulture);
+                googleOptions.SaveTokens = Convert.ToBoolean(googleCalendarConfig["SaveTokens"], CultureInfo.InvariantCulture);
             })
             .AddGitHub(githubOptions =>
             {
