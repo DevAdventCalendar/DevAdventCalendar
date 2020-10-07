@@ -59,6 +59,22 @@ namespace DevAdventCalendarCompetition.Extensions
             return services;
         }
 
+        public static IServiceCollection AddTestConfiguration(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.AddOptions<TestHours>()
+                .Bind(configuration.GetSection("Test"))
+                .ValidateDataAnnotations();
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<TestHours>>().Value);
+            return services;
+        }
+
         public static IServiceCollection RegisterGoogleHttpClient(this IServiceCollection services)
         {
             var googleCalendarBaseUri = @"https://www.googleapis.com/calendar/v3/";

@@ -7,6 +7,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,13 @@ namespace DevAdventCalendarCompetition.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly ITestService _testService;
+        private readonly TestHours _testHours;
 
-        public AdminController(IAdminService adminService, ITestService testService)
+        public AdminController(IAdminService adminService, ITestService testService, TestHours testHours)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
             this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
+            this._testHours = testHours;
         }
 
         [HttpGet]
@@ -60,8 +63,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
 
                 // automatically set start and end time
-                model.StartDate = model.StartDate.AddHours(20).AddMinutes(00);
-                model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
+                model = this.SetHours(model);
 
                 var answers = model.Answers.Where(a => !string.IsNullOrWhiteSpace(a)).Select(a => new TestAnswerDto()
                 {
@@ -134,6 +136,13 @@ namespace DevAdventCalendarCompetition.Controllers
 
             Process.Start(@"c:\\Windows\\System32\\cmd.exe", weekNumber.ToString(CultureInfo.CurrentCulture.DateTimeFormat));
             return this.Ok();
+        }
+
+        private TestViewModel SetHours(TestViewModel model)
+        {
+            model.StartDate = model.StartDate.AddTicks(this._testHours.StartHour.Ticks);
+            model.EndDate = model.EndDate.AddTicks(this._testHours.EndHour.Ticks);
+            return model;
         }
     }
 }
