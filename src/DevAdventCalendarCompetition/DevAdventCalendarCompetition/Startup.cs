@@ -101,7 +101,9 @@ namespace DevAdventCalendarCompetition
 
             services.AddHttpClient(nameof(EmailNotificationService));
 
-            services.AddAdventConfiguration(this.Configuration);
+            services
+                .AddAdventConfiguration(this.Configuration)
+                .AddTestConfiguration(this.Configuration);
         }
     }
 }

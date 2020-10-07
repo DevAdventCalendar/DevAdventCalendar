@@ -13,11 +13,16 @@ namespace DevAdventCalendarCompetition.Services
     {
         private readonly HttpClient _httpClient;
         private readonly AdventSettings _adventSettings;
+        private readonly TestHours _testHours;
 
-        public GoogleCalendarService(HttpClient httpClient, AdventSettings adventSettings)
+        public GoogleCalendarService(
+            HttpClient httpClient,
+            AdventSettings adventSettings,
+            TestHours testHours)
         {
             this._httpClient = httpClient;
             this._adventSettings = adventSettings;
+            this._testHours = testHours;
         }
 
         public async Task<OperationalResult> CreateNewCalendarWithEvents()
@@ -55,11 +60,13 @@ namespace DevAdventCalendarCompetition.Services
             var summary = "DevAdventCalendar";
             var location = @"https://devadventcalendar.pl/";
             var timeZone = @"Europe/Warsaw";
-            var startDate = this._adventSettings.StartDate;
+            var startDate = this._adventSettings.StartDate.AddTicks(this._testHours.StartHour.Ticks);
             var endDate = this._adventSettings.EndDate;
             var daysCount = (endDate.Day - startDate.Day) + 1;
             var recurrence = $"RRULE:FREQ=DAILY;COUNT={daysCount}";
             var calendarEventsUrl = $"calendars/{calendarId}/events";
+            var reminderMethod = "popup";
+            var reminderMinutes = 5;
 
             var newEvents = new EventsDto
             {
@@ -78,6 +85,18 @@ namespace DevAdventCalendarCompetition.Services
                 Recurrence = new List<string>()
                 {
                     recurrence
+                },
+                Reminders = new Reminder
+                {
+                    UseDefault = false,
+                    Overrides = new List<Override>()
+                    {
+                        new Override
+                        {
+                            Method = reminderMethod,
+                            Minutes = reminderMinutes
+                        }
+                    }
                 }
             };
             return await this._httpClient.PostAsJsonAsync(calendarEventsUrl, newEvents);

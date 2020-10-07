@@ -12,6 +12,8 @@ namespace DevAdventCalendarCompetition.Services.Models.GoogleCalendar
 
         public EventDate End { get; set; }
 
+        public Reminder Reminders { get; set; }
+
 #pragma warning disable CA2227 // Collection properties should be read only
         public List<string> Recurrence { get; set; }
 #pragma warning restore CA2227 // Collection properties should be read only
