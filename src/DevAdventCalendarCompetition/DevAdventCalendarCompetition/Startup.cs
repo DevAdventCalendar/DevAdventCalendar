@@ -103,6 +103,7 @@ namespace DevAdventCalendarCompetition
 
             services
                 .AddAdventConfiguration(this.Configuration)
+                .AddGoogleCalendarConfiguration(this.Configuration)
                 .AddTestConfiguration(this.Configuration);
         }
     }

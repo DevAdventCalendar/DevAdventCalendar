@@ -19,13 +19,13 @@ namespace DevAdventCalendarCompetition.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly ITestService _testService;
-        private readonly TestHours _testHours;
+        private readonly TestSettings _testSettings;
 
-        public AdminController(IAdminService adminService, ITestService testService, TestHours testHours)
+        public AdminController(IAdminService adminService, ITestService testService, TestSettings testSettings)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
             this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
-            this._testHours = testHours;
+            this._testSettings = testSettings;
         }
 
         [HttpGet]
@@ -140,8 +140,8 @@ namespace DevAdventCalendarCompetition.Controllers
 
         private TestViewModel SetHours(TestViewModel model)
         {
-            model.StartDate = model.StartDate.AddTicks(this._testHours.StartHour.Ticks);
-            model.EndDate = model.EndDate.AddTicks(this._testHours.EndHour.Ticks);
+            model.StartDate = model.StartDate.AddTicks(this._testSettings.StartHour.Ticks);
+            model.EndDate = model.EndDate.AddTicks(this._testSettings.EndHour.Ticks);
             return model;
         }
     }

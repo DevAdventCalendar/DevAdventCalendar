@@ -68,10 +68,26 @@ namespace DevAdventCalendarCompetition.Extensions
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            services.AddOptions<TestHours>()
+            services.AddOptions<TestSettings>()
                 .Bind(configuration.GetSection("Test"))
                 .ValidateDataAnnotations();
-            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<TestHours>>().Value);
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<TestSettings>>().Value);
+            return services;
+        }
+
+        public static IServiceCollection AddGoogleCalendarConfiguration(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.AddOptions<GoogleCalendarSettings>()
+                .Bind(configuration.GetSection("Authentication:Google:CalendarAPI:Calendar"))
+                .ValidateDataAnnotations();
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<GoogleCalendarSettings>>().Value);
             return services;
         }
 
@@ -168,7 +184,7 @@ namespace DevAdventCalendarCompetition.Extensions
             {
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                var googleCalendarConfig = configuration.GetSection("Authentication:Google:Calendar");
+                var googleCalendarConfig = configuration.GetSection("Authentication:Google:CalendarAPI");
                 googleOptions.AuthorizationEndpoint = googleCalendarConfig["AuthorizationEndpoint"];
                 googleOptions.TokenEndpoint = googleCalendarConfig["TokenEndpoint"];
                 googleOptions.Scope.Add(googleCalendarConfig["CalendarScope"]);

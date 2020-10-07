@@ -1,14 +1,13 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevAdventCalendarCompetition.Services.Options
 {
-    public class TestHours
+    public class GoogleCalendarSettings
     {
         [Required]
-        public TimeSpan StartHour { get; set; }
+        public string Summary { get; set; }
 
         [Required]
-        public TimeSpan EndHour { get; set; }
+        public CalendarEvent Events { get; set; }
     }
 }

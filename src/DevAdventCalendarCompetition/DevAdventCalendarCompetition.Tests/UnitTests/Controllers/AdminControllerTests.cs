@@ -272,7 +272,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
         private AdminController CreateAdminController()
         {
-            return new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object, new TestHours());
+            return new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object, new TestSettings());
         }
     }
 }

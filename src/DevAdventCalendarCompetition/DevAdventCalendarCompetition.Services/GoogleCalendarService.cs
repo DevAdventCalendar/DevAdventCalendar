@@ -13,22 +13,24 @@ namespace DevAdventCalendarCompetition.Services
     {
         private readonly HttpClient _httpClient;
         private readonly AdventSettings _adventSettings;
-        private readonly TestHours _testHours;
+        private readonly TestSettings _testSettings;
+        private readonly GoogleCalendarSettings _calendarSettings;
 
         public GoogleCalendarService(
             HttpClient httpClient,
             AdventSettings adventSettings,
-            TestHours testHours)
+            TestSettings testSettings,
+            GoogleCalendarSettings calendarSettings)
         {
             this._httpClient = httpClient;
             this._adventSettings = adventSettings;
-            this._testHours = testHours;
+            this._testSettings = testSettings;
+            this._calendarSettings = calendarSettings;
         }
 
         public async Task<OperationalResult> CreateNewCalendarWithEvents()
         {
-            var calendarSummary = "DevAdventCalendar";
-            var calendarResponse = await this.CreateCalendar(calendarSummary);
+            var calendarResponse = await this.CreateCalendar();
             if (!calendarResponse.IsSuccessStatusCode)
             {
                 return OperationalResult.Failure(OperationalResultStatus.CalendarFailure);
@@ -45,28 +47,26 @@ namespace DevAdventCalendarCompetition.Services
             return OperationalResult.Failure(OperationalResultStatus.EventsFailure);
         }
 
-        private async Task<HttpResponseMessage> CreateCalendar(string calendarSummary)
+        private async Task<HttpResponseMessage> CreateCalendar()
         {
-            var calendarsUrl = "calendars";
             var newCalendar = new NewCalendarDto
             {
-                Summary = calendarSummary
+                Summary = this._calendarSettings.Summary
             };
-            return await this._httpClient.PostAsJsonAsync(calendarsUrl, newCalendar);
+            return await this._httpClient.PostAsJsonAsync("calendars", newCalendar);
         }
 
         private async Task<HttpResponseMessage> CreateEvents(string calendarId)
         {
-            var summary = "DevAdventCalendar";
-            var location = @"https://devadventcalendar.pl/";
-            var timeZone = @"Europe/Warsaw";
-            var startDate = this._adventSettings.StartDate.AddTicks(this._testHours.StartHour.Ticks);
+            var summary = this._calendarSettings.Events.Summary;
+            var location = this._calendarSettings.Events.Location;
+            var timeZone = this._calendarSettings.Events.TimeZone;
+            var reminderMethod = this._calendarSettings.Events.ReminderMethod;
+            var reminderMinutes = this._calendarSettings.Events.ReminderMinutes;
+            var startDate = this._adventSettings.StartDate.AddTicks(this._testSettings.StartHour.Ticks);
             var endDate = this._adventSettings.EndDate;
             var daysCount = (endDate.Day - startDate.Day) + 1;
             var recurrence = $"RRULE:FREQ=DAILY;COUNT={daysCount}";
-            var calendarEventsUrl = $"calendars/{calendarId}/events";
-            var reminderMethod = "popup";
-            var reminderMinutes = 5;
 
             var newEvents = new EventsDto
             {
@@ -99,7 +99,7 @@ namespace DevAdventCalendarCompetition.Services
                     }
                 }
             };
-            return await this._httpClient.PostAsJsonAsync(calendarEventsUrl, newEvents);
+            return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
         }
     }
 }
