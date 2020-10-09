@@ -97,6 +97,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił nieoczekiwany błąd podczas próby zmiany nazwy użytkownika..
+        /// </summary>
+        public static string ErrorDuringUserNameChange {
+            get {
+                return ResourceManager.GetString("ErrorDuringUserNameChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wystąpił błąd!.
         /// </summary>
         public static string ErrorOccurs {
