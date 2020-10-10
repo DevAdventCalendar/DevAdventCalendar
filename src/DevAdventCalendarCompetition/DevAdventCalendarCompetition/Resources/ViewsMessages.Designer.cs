@@ -727,6 +727,42 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to W tej sekcji możesz zintegrować DevAdventCalendar z Twoim kalendarzem Google..
+        /// </summary>
+        public static string GoogleCalendarIntegrationIntro {
+            get {
+                return ResourceManager.GetString("GoogleCalendarIntegrationIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przeglądanie, edytowanie, udostępnianie i trwałe usuwanie wszystkich kalendarzy, do których masz dostęp w kalendarzu Google..
+        /// </summary>
+        public static string GoogleCalendarIntegrationPermission1 {
+            get {
+                return ResourceManager.GetString("GoogleCalendarIntegrationPermission1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyświetlanie i edytowanie wydarzeń we wszystkich kalendarzach..
+        /// </summary>
+        public static string GoogleCalendarIntegrationPermission2 {
+            get {
+                return ResourceManager.GetString("GoogleCalendarIntegrationPermission2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W celu utworzenia nowega kalendarza oraz dodania wydarzeń w trakcie trwania adwentu będziemy potrzebować następujących uprawnień:.
+        /// </summary>
+        public static string GoogleCalendarIntegrationPermissionInfo {
+            get {
+                return ResourceManager.GetString("GoogleCalendarIntegrationPermissionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pomyślnie utworzono nowy kalendarz z wydarzeniami..
         /// </summary>
         public static string GoogleCalendarSuccess {

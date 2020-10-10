@@ -339,6 +339,18 @@
   <data name="GoogleCalendarIntegration" xml:space="preserve">
     <value>Integracja z kalendarzem Google</value>
   </data>
+  <data name="GoogleCalendarIntegrationIntro" xml:space="preserve">
+    <value>W tej sekcji możesz zintegrować DevAdventCalendar z Twoim kalendarzem Google.</value>
+  </data>
+  <data name="GoogleCalendarIntegrationPermission1" xml:space="preserve">
+    <value>Przeglądanie, edytowanie, udostępnianie i trwałe usuwanie wszystkich kalendarzy, do których masz dostęp w kalendarzu Google.</value>
+  </data>
+  <data name="GoogleCalendarIntegrationPermission2" xml:space="preserve">
+    <value>Wyświetlanie i edytowanie wydarzeń we wszystkich kalendarzach.</value>
+  </data>
+  <data name="GoogleCalendarIntegrationPermissionInfo" xml:space="preserve">
+    <value>W celu utworzenia nowega kalendarza oraz dodania wydarzeń w trakcie trwania adwentu będziemy potrzebować następujących uprawnień:</value>
+  </data>
   <data name="GoogleCalendarSuccess" xml:space="preserve">
     <value>Pomyślnie utworzono nowy kalendarz z wydarzeniami.</value>
   </data>

@@ -12,14 +12,15 @@
 @await Html.PartialAsync("_StatusMessage.cshtml", @Model.StatusMessage)
 @if (!@Model.HasPermissions)
 {
-    <p>W tej sekcji możesz zintegrować DevAdventCalendar z Twoim kalendarzem Google.</p>
-    <p>W celu utworzenia nowega kalendarza oraz dodania wydarzeń w trakcie trwania adwentu będziemy potrzebować następujących uprawnień:</p>
+    <p>@GoogleCalendarIntegrationIntro</p>
+    <p>@GoogleCalendarIntegrationPermissionInfo</p>
     <strong>
-        ◾ Przeglądanie, edytowanie, udostępnianie i trwałe usuwanie wszystkich kalendarzy, do których masz dostęp
-        w kalendarzu Google.
+        ◾ @GoogleCalendarIntegrationPermission1
     </strong>
     <br />
-    <strong>◾ Wyświetlanie i edytowanie wydarzeń we wszystkich kalendarzach.</strong>
+    <strong>
+        ◾ @GoogleCalendarIntegrationPermission2
+    </strong>
     <br />
     <a class="chris_btn reveal" asp-controller="Manage" asp-action="AuthorizeAccessToGoogleCalendar">Integracja</a>
 }
