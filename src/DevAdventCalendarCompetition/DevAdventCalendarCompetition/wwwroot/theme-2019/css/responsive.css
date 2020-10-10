@@ -1,3 +1,17 @@
+@media screen and (min-width: 2000px) {
+    .countdown_section {
+        padding-bottom: 323px;
+        padding-top: 320px;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1999px) {
+    .countdown_section {
+        padding-bottom: 150px;
+        padding-top: 150px;
+    }
+}
+
 @media screen and (max-width: 1199px){
     .nav_area{
         border-bottom: 1px solid #ddd;
