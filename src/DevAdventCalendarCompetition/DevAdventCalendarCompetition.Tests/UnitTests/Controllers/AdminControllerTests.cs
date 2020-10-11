@@ -198,6 +198,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
+        /*
         [Fact]
         public void CalculateResults_IncorrectWeekNumber_ReturnsBadRequestResult()
         {
@@ -210,7 +211,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             Assert.IsType<BadRequestObjectResult>(result);
-        }
+        }*/
 
         [Fact]
         public void AdminController_ShouldHaveAuthorizeAttributeWithCorrectRole()
