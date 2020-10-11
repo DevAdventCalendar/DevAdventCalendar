@@ -95,6 +95,16 @@ namespace DevAdventCalendarCompetition.Controllers
                 model.EmailNotificationsEnabled = false;
             }
 
+            var userName = user.UserName;
+            if (model.Username != userName)
+            {
+                var setUserNameResult = await this._manageService.SetUserNameAsync(user, model.Username).ConfigureAwait(false);
+                if (!setUserNameResult.Succeeded)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringUserNameChange, this._accountService.GetUserId(this.User)));
+                }
+            }
+
             if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
             {
                 user.EmailNotificationsEnabled = model.EmailNotificationsEnabled;

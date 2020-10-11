@@ -33,6 +33,9 @@
                     <div class="col-sm-9">
                         <div class="form-group">
                             <div class="text_field text_field_default">
+                                <input asp-for="UserName" placeholder="UserName" />
+                            </div>
+                            <div class="text_field text_field_default">
                                 <input asp-for="Email" placeholder="Email" />
                             </div>
                             <span class="text-danger">@Html.ValidationSummary()</span>
