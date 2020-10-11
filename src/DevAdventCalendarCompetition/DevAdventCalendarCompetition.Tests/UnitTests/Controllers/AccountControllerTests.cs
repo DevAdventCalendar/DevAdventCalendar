@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,9 @@ using System.Threading.Tasks.Sources;
 using Castle.Core.Logging;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Account;
+using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using FluentAssertions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using Moq;
 using Xunit;
+using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 
 namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 {
@@ -31,7 +35,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Login_Get__ReturnsLoginViewModel()
+        public void Login_ReturnsLoginViewModel()
         {
             // Arrange
             Uri returnUrl = null;
@@ -49,7 +53,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Login_Post_LoginViewModelIsNull_ThrowsException()
+        public void Login_LoginViewModelIsNull_ThrowsException()
         {
             // Arrange
             Uri returnUrl = null;
@@ -61,6 +65,37 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             Assert.ThrowsAsync<ArgumentNullException>(act);
+        }
+
+        [Fact]
+        public void Login_UserIsNull_ReturnsViewWithError()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            LoginViewModel model = GetLoginViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync((ApplicationUser)null);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Login(model, returnUrl);
+
+            // Assert
+            var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
+            Assert.Single(allErrors);
+            Assert.Contains(allErrors, x => x.ErrorMessage == @EmailNotFound);
+            var viewResult = Assert.IsType<Task<IActionResult>>(result);
+
+            // Assert.IsType<LoginViewModel>(viewResult.Result)
+        }
+
+        private static LoginViewModel GetLoginViewModel()
+        {
+            return new LoginViewModel
+            {
+                Email = "a@a.pl",
+                Password = "tajne",
+                RememberMe = false
+            };
         }
 
         private static ClaimsPrincipal GetUser() =>
