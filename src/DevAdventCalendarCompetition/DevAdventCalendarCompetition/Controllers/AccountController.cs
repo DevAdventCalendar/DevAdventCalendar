@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using static DevAdventCalendarCompetition.Resources.ExceptionsMessages;
+using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -64,7 +65,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 if (user == null)
                 {
                     this._logger.LogWarning($"User {model.Email} not exists.");
-                    this.ModelState.AddModelError("Email", "Nie znaleziono takiego konta.");
+                    this.ModelState.AddModelError("Email", @EmailNotFound);
                     return this.View(model);
                 }
 

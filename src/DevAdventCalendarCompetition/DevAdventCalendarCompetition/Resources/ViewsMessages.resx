@@ -267,6 +267,9 @@
   <data name="EmailForRegistrationConfirmedDescription" xml:space="preserve">
     <value>Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
   </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>Nie znaleziono takiego konta.</value>
+  </data>
   <data name="EndTime" xml:space="preserve">
     <value>Czas zakończenia:</value>
   </data>
