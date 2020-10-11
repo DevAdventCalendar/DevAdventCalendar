@@ -144,4 +144,7 @@
   <data name="UserLoginProvider" xml:space="preserve">
     <value>User logged in with {Name} provider.</value>
   </data>
+  <data name="UserNotExist" xml:space="preserve">
+    <value>User {0} not exist</value>
+  </data>
 </root>

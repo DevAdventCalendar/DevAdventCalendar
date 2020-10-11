@@ -64,7 +64,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (user == null)
                 {
-                    this._logger.LogWarning($"User {model.Email} not exists.");
+                    this._logger.LogWarning(LoggingMessages.UserNotExist, model.Email);
                     this.ModelState.AddModelError("Email", @EmailNotFound);
                     return this.View(model);
                 }
