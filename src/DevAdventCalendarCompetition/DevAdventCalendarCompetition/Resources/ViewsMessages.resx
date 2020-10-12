@@ -267,6 +267,9 @@
   <data name="EmailForRegistrationConfirmedDescription" xml:space="preserve">
     <value>Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
   </data>
+  <data name="EmailMustBeConfirmed" xml:space="preserve">
+    <value>Musisz najpierw potwierdzić swoje konto!</value>
+  </data>
   <data name="EmailNotFound" xml:space="preserve">
     <value>Nie znaleziono takiego konta.</value>
   </data>
@@ -296,6 +299,9 @@
   </data>
   <data name="ExternalRegistrationDescriptionPart2" xml:space="preserve">
     <value>Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.</value>
+  </data>
+  <data name="FailedLoginAttempt" xml:space="preserve">
+    <value>Niepoprawna próba logowania.</value>
   </data>
   <data name="FbEvent" xml:space="preserve">
     <value>Wydarzenie na FB</value>

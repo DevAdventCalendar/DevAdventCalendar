@@ -72,7 +72,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 if (!user.EmailConfirmed)
                 {
                     this._logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
-                    this.ModelState.AddModelError("Email", "Musisz najpierw potwierdzić swoje konto!");
+                    this.ModelState.AddModelError("Email", @EmailMustBeConfirmed);
                     return this.View(model);
                 }
 
@@ -93,7 +93,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.RedirectToAction(nameof(this.Lockout));
                 }
 
-                this.ModelState.AddModelError("Email", "Niepoprawna próba logowania.");
+                this.ModelState.AddModelError("Email", @FailedLoginAttempt);
                 return this.View(model);
             }
 

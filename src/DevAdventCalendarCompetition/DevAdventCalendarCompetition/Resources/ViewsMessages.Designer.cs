@@ -511,6 +511,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Musisz najpierw potwierdzić swoje konto!.
+        /// </summary>
+        public static string EmailMustBeConfirmed {
+            get {
+                return ResourceManager.GetString("EmailMustBeConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie znaleziono takiego konta..
         /// </summary>
         public static string EmailNotFound {
@@ -597,6 +606,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string ExternalRegistrationDescriptionPart2 {
             get {
                 return ResourceManager.GetString("ExternalRegistrationDescriptionPart2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niepoprawna próba logowania..
+        /// </summary>
+        public static string FailedLoginAttempt {
+            get {
+                return ResourceManager.GetString("FailedLoginAttempt", resourceCulture);
             }
         }
         
