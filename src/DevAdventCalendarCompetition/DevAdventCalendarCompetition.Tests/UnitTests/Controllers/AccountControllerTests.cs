@@ -84,16 +84,14 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == @EmailNotFound);
             var viewResult = Assert.IsType<Task<IActionResult>>(result);
-
-            // Assert.IsType<LoginViewModel>(viewResult.Result)
         }
 
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
             {
-                Email = "a@a.pl",
-                Password = "tajne",
+                Email = "a@gmail.com",
+                Password = "password",
                 RememberMe = false
             };
         }

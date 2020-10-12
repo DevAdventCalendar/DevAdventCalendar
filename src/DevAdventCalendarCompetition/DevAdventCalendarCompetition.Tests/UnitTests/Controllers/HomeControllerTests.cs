@@ -149,8 +149,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var accualMessage = Assert.IsType<ErrorViewModel>(viewResult.ViewData.Model);
-            Assert.Equal(expectedMessage, accualMessage.Message.ToString());
+            var message = Assert.IsType<ErrorViewModel>(viewResult.ViewData.Model);
+            Assert.Equal(expectedMessage, message.Message.ToString());
         }
 
         private static ClaimsPrincipal GetUser() =>
