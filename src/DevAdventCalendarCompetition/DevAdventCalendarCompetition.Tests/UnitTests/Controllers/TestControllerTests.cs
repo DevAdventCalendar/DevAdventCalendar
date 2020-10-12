@@ -173,7 +173,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_WrongAnswer_ReturnsViewWithError()
+        public void Index_WrongAnswer_ReturnsViewWithErrorAndUserAnswer()
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
@@ -185,7 +185,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             };
 
             // Act
-            var result = controller.Index(test.Id, "wrongAnswer");
+            var usersWrongAnswer = "wrongAnswer";
+            var result = controller.Index(test.Id, usersWrongAnswer);
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
@@ -193,6 +194,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Contains(allErrors, x => x.ErrorMessage == ExceptionsMessages.ErrorTryAgain);
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            Assert.Equal(usersWrongAnswer, ((TestDto)viewResult.ViewData.Model).UserAnswer, ignoreCase: true);
         }
 
         [Fact]
