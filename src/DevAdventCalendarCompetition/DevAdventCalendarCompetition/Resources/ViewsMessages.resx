@@ -699,6 +699,9 @@
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
   </data>
+  <data name="YouHaveAnswered" xml:space="preserve">
+    <value>Odpowiedziano:</value>
+  </data>
   <data name="YouHaventAnswered" xml:space="preserve">
     <value>Nie odpowiedziałeś jeszcze na żadną zagadkę...</value>
   </data>
