@@ -198,21 +198,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Equal("Index", redirectToActionResult.ActionName);
         }
 
-        /*
-        [Fact]
-        public void CalculateResults_IncorrectWeekNumber_ReturnsBadRequestResult()
-        {
-            // Arrange
-            var incorrectWeekNumber = -1;
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-
-            // Act
-            var result = controller.CalculateResults(incorrectWeekNumber);
-
-            // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
-        }*/
-
         [Fact]
         public void AdminController_ShouldHaveAuthorizeAttributeWithCorrectRole()
         {
