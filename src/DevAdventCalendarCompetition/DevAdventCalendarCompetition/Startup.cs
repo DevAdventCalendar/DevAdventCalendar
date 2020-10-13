@@ -89,6 +89,7 @@ namespace DevAdventCalendarCompetition
             services
                 .RegisterDatabase(this.Configuration)
                 .RegisterServices(this.Configuration)
+                .RegisterGoogleHttpClient()
                 .AddExternalLoginProviders(this.Configuration);
 
             services
@@ -100,7 +101,10 @@ namespace DevAdventCalendarCompetition
 
             services.AddHttpClient(nameof(EmailNotificationService));
 
-            services.AddAdventConfiguration(this.Configuration);
+            services
+                .AddAdventConfiguration(this.Configuration)
+                .AddGoogleCalendarConfiguration(this.Configuration)
+                .AddTestConfiguration(this.Configuration);
         }
     }
 }
