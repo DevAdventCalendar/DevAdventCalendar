@@ -20,6 +20,7 @@ using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Resources.ViewsMessages;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 {
@@ -104,6 +105,22 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == @EmailMustBeConfirmed);
             var viewResult = Assert.IsType<Task<IActionResult>>(result);
+        }
+
+        [Fact]
+        public void Login_ResultIsSucceeded_RedirectToLocal()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            LoginViewModel model = GetLoginViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email))
+                                    .ReturnsAsync(new ApplicationUser() { EmailConfirmed = true });
+            this._accountServiceMock.Setup(x => x.PasswordSignInAsync(model.Email, model.Password, model.RememberMe))
+                                   .ReturnsAsync(SignInResult.Success);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Login(model, returnUrl);
         }
 
         private static LoginViewModel GetLoginViewModel()
