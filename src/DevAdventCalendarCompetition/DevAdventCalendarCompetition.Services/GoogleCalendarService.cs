@@ -47,7 +47,7 @@ namespace DevAdventCalendarCompetition.Services
             return OperationalResult.Failure(OperationalResultStatus.EventsFailure);
         }
 
-        private async Task<HttpResponseMessage> CreateCalendar()
+        public async Task<HttpResponseMessage> CreateCalendar()
         {
             var newCalendar = new NewCalendarDto
             {
