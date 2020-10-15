@@ -189,9 +189,6 @@
   <data name="Calculate" xml:space="preserve">
     <value>Oblicz</value>
   </data>
-  <data name="CalculateResults" xml:space="preserve">
-    <value>Oblicz wyniki</value>
-  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmiana hasła</value>
   </data>
