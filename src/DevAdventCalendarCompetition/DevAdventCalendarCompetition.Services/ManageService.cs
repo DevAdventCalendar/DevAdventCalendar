@@ -55,6 +55,11 @@ namespace DevAdventCalendarCompetition.Services
             return await this._userManager.SetEmailAsync(user, email).ConfigureAwait(false);
         }
 
+        public async Task<IdentityResult> SetUserNameAsync(ApplicationUser user, string userName)
+        {
+            return await this._userManager.SetUserNameAsync(user, userName);
+        }
+
         public async Task<IdentityResult> AddPasswordAsync(ApplicationUser user, string password)
         {
             return await this._userManager.AddPasswordAsync(user, password).ConfigureAwait(false);

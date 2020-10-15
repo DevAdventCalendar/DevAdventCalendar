@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -173,9 +171,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_WrongAnswer_ReturnsViewWithError()
+        public void Index_WrongAnswer_ReturnsViewWithErrorAndUserAnswer()
         {
             // Arrange
+            var usersWrongAnswer = "wrongAnswer";
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             using var controller = new TestController(this._testServiceMock.Object);
@@ -185,14 +184,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             };
 
             // Act
-            var result = controller.Index(test.Id, "wrongAnswer");
+            var result = controller.Index(test.Id, usersWrongAnswer);
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == ExceptionsMessages.ErrorTryAgain);
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            var answer = Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            Assert.Equal(usersWrongAnswer, answer.UserAnswer, ignoreCase: true);
         }
 
         [Fact]

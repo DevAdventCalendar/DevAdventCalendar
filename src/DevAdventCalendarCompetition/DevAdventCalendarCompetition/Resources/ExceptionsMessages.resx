@@ -150,4 +150,7 @@
   <data name="ErrorTryAgain" xml:space="preserve">
     <value>Źle! Spróbuj ponownie :)</value>
   </data>
+  <data name="ErrorDuringUserNameChange" xml:space="preserve">
+    <value>Wystąpił nieoczekiwany błąd podczas próby zmiany nazwy użytkownika.</value>
+  </data>
 </root>

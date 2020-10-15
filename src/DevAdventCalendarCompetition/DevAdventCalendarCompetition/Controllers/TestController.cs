@@ -74,6 +74,7 @@ namespace DevAdventCalendarCompetition.Controllers
             }
 
             this.SaveWrongAnswer(test.Id, finalAnswer);
+            test.UserAnswer = finalAnswer;
             this.ModelState.AddModelError("Answers", @WrongTryAgain);
 
             return this.View("Index", test);
