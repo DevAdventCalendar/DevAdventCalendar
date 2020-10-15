@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DevAdventCalendarCompetition.Repository.Models;
 
 namespace DevAdventCalendarCompetition.TestResultService.Interfaces
 {

@@ -204,12 +204,11 @@ namespace DevAdventCalendarCompetition.TestResultService
          * 
          *  [out] Count of submitted wrong answers
          */
-        public int GetWrongAnswersToTest(string userId, int testID) // get count of wrong answers
+        public int GetUserTestWrongAnswerCount(string userId, int testID) // get count of wrong answers
         {
             return _dbContext
                 .UserTestWrongAnswers
-                .Where(a => a.TestId == testID)
-                .Where(a => a.UserId == userId)
+                .Where(a => a.TestId == testID && a.UserId == userId)
                 .Count();
         }
 
@@ -218,14 +217,13 @@ namespace DevAdventCalendarCompetition.TestResultService
          * 
          *  [out] Date of submission of corect answer
          */
-        public DateTime GetCorrectAnswerDate(string userId, int testID) // get DateTime of correct answer
+        public DateTime GetUserTestCorrectAnswerDate(string userId, int testID) // get DateTime of correct answer
         {
             return _dbContext
                 .UserTestCorrectAnswers
-                .Where(a => a.UserId == userId)
-                .Where(a => a.TestId == testID)
+                .Where(a => a.TestId == testID && a.UserId == userId)
                 .Select(a => a.AnsweringTime) 
-                .First(); // I assume there is only one row
+                .Single(); // I assume there is only one row
         }
     }
 }
