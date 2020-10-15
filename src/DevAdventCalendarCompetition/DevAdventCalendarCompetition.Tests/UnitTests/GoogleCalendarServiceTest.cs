@@ -18,32 +18,30 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         {
             // Arrange
             var handlerMock = new Mock<HttpMessageHandler>();
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var response = new HttpResponseMessage()
+            using (var response = new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.OK
-            };
-#pragma warning restore CA2000 // Dispose objects before losing scope
+            })
+            {
+                handlerMock
+                    .Protected()
+                    .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                    .ReturnsAsync(response);
 
-            handlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(response);
+                using (var httpClient = new HttpClient(handlerMock.Object))
+                {
+                    var googleCalendarService = new GoogleCalendarService(httpClient, new AdventSettings(), new TestSettings(), new GoogleCalendarSettings());
 
-#pragma warning disable CA2000 // Dispose objects before losing scope
-            var httpClient = new HttpClient(handlerMock.Object);
-#pragma warning restore CA2000 // Dispose objects before losing scope
+                    // Act
+                    var createdCalendar = googleCalendarService.CreateCalendar();
 
-            var googleCalendarService = new GoogleCalendarService(httpClient, new AdventSettings(), new TestSettings(), new GoogleCalendarSettings());
-
-            // Act
-            var createdCalendar = googleCalendarService.CreateCalendar();
-
-            // Assert
-            Assert.NotNull(createdCalendar);
-            handlerMock
-                .Protected()
-                .Verify("SendAsync", Times.Exactly(0), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());
+                    // Assert
+                    Assert.NotNull(createdCalendar);
+                    handlerMock
+                        .Protected()
+                        .Verify("SendAsync", Times.Exactly(0), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());
+                }
+            }
         }
     }
 }
