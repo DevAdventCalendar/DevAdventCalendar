@@ -115,7 +115,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             LoginViewModel model = GetLoginViewModel();
             this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email))
                                     .ReturnsAsync(new ApplicationUser() { EmailConfirmed = true });
-            this._accountServiceMock.Setup(x => x.PasswordSignInAsync(model.Email, model.Password, model.RememberMe))
+            this._accountServiceMock.Setup(x => x.PasswordSignInAsync(It.IsAny<string>(), model.Password, model.RememberMe))
                                    .ReturnsAsync(SignInResult.Success);
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
