@@ -105,7 +105,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == @EmailMustBeConfirmed);
-            var viewResult = Assert.IsType<Task<IActionResult>>(result);
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.IsType<LoginViewModel>(viewResult.ViewData.Model);
         }
 
         [Fact]
@@ -127,7 +128,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var result = controller.Login(model, returnUrl);
 
             // Assert
-            var viewResult = Assert.IsType<Task<IActionResult>>(result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Index", viewResult.ActionName);
         }
 
         [Fact]
@@ -146,7 +148,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var result = controller.Login(model, returnUrl);
 
             // Assert
-            var viewResult = Assert.IsType<Task<IActionResult>>(result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Lockout", viewResult.ActionName);
         }
 
         [Fact]
