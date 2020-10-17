@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using Moq;
@@ -118,9 +119,34 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             this._accountServiceMock.Setup(x => x.PasswordSignInAsync(It.IsAny<string>(), model.Password, model.RememberMe))
                                    .ReturnsAsync(SignInResult.Success);
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+            var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Default);
+            mockUrlHelper.Setup(x => x.Action(It.IsAny<UrlActionContext>())).Returns("callbackUrl").Verifiable();
+            controller.Url = mockUrlHelper.Object;
 
             // Act
             var result = controller.Login(model, returnUrl);
+
+            // Assert
+            var viewResult = Assert.IsType<Task<IActionResult>>(result);
+        }
+
+        [Fact]
+        public void Login_ResultIsLockedOut_RedirectToLocal()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            LoginViewModel model = GetLoginViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email))
+                                    .ReturnsAsync(new ApplicationUser() { EmailConfirmed = true });
+            this._accountServiceMock.Setup(x => x.PasswordSignInAsync(It.IsAny<string>(), model.Password, model.RememberMe))
+                                   .ReturnsAsync(SignInResult.LockedOut);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Login(model, returnUrl);
+
+            // Assert
+            var viewResult = Assert.IsType<Task<IActionResult>>(result);
         }
 
         private static LoginViewModel GetLoginViewModel()
