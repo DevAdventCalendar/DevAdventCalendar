@@ -77,7 +77,7 @@
                     </div>
                     <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="contact_form">
                         <div class="row">
-                            @foreach (var provider in externalProviders)
+                            @foreach (var provider in externalProviders.Where(p => p.Name != "Calendar"))
                             {
                                 <div class="col-xs-6 col-sm-3 col-md-6 col-lg-4 mb-20 text-center">
                                     <button style="width:150px" type="submit" class="btn btn-social btn-@provider.Name.ToLower()" name="provider" value="@provider.Name" title="Zaloguj używając konta @provider.DisplayName">
