@@ -149,6 +149,29 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var viewResult = Assert.IsType<Task<IActionResult>>(result);
         }
 
+        [Fact]
+        public void Login_FailedLogin_ReturnsViewWithError()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            LoginViewModel model = GetLoginViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email))
+                                    .ReturnsAsync(new ApplicationUser() { EmailConfirmed = true });
+            this._accountServiceMock.Setup(x => x.PasswordSignInAsync(It.IsAny<string>(), model.Password, model.RememberMe))
+                                   .ReturnsAsync(SignInResult.Failed);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Login(model, returnUrl);
+
+            // Assert
+            var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
+            Assert.Single(allErrors);
+            Assert.Contains(allErrors, x => x.ErrorMessage == @FailedLoginAttempt);
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.IsType<LoginViewModel>(viewResult.ViewData.Model);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
