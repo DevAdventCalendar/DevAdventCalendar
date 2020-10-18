@@ -189,6 +189,37 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Null(viewResult.Model);
         }
 
+        [Fact]
+        public void Register_ReturnsRegisterViewModel()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string email = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Register(returnUrl, email);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void Register_RegisterViewModelIsNull_ThrowsException()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            RegisterViewModel model = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<Task<IActionResult>> act = () => controller.Register(model, returnUrl);
+
+            // Assert
+            Assert.ThrowsAsync<ArgumentNullException>(act);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
