@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -12,9 +12,13 @@ namespace DevAdventCalendarCompetition.Views.Manage
 
         public static string ChangePassword => "ChangePassword";
 
+        public static string GoogleCalendarIntegration => "GoogleCalendarIntegration";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
+
+        public static string GoogleCalendarIntegrationNavClass(ViewContext viewContext) => PageNavClass(viewContext, GoogleCalendarIntegration);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

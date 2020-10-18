@@ -1,0 +1,26 @@
+@model DevAdventCalendarCompetition.Models.Manage.GoogleCalendarViewModel
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+@{
+    ViewData["Title"] = @GoogleCalendarIntegration;
+    ViewData.AddActivePage(ManageNavPages.GoogleCalendarIntegration);
+}
+
+<div class="area_title mb-30">
+    <h3>@ViewData["Title"]</h3>
+</div>
+@await Html.PartialAsync("_StatusMessage.cshtml", @Model.StatusMessage)
+@if (!@Model.HasPermissions)
+{
+    <p>@GoogleCalendarIntegrationIntro</p>
+    <p>@GoogleCalendarIntegrationPermissionInfo</p>
+    <strong>
+        ◾ @GoogleCalendarIntegrationPermission1
+    </strong>
+    <br />
+    <strong>
+        ◾ @GoogleCalendarIntegrationPermission2
+    </strong>
+    <br />
+    <a class="chris_btn reveal" asp-controller="Manage" asp-action="AuthorizeAccessToGoogleCalendar">Integracja</a>
+}
