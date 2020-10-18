@@ -175,6 +175,20 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.IsType<LoginViewModel>(viewResult.ViewData.Model);
         }
 
+        [Fact]
+        public void Lockout_ReturnsViewesult()
+        {
+            // Arrange
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Lockout();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
