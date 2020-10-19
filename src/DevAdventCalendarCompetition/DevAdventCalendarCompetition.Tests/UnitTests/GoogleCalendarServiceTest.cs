@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -14,7 +15,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     public class GoogleCalendarServiceTest
     {
         [Fact]
-        public void CreateCalendarShouldReturnHttpresponseMessageTask()
+        public void CreateCalendarShouldReturnHttpresponseMessageTaskAsync()
         {
             // Arrange
             var handlerMock = new Mock<HttpMessageHandler>();
@@ -30,7 +31,22 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
                 using (var httpClient = new HttpClient(handlerMock.Object))
                 {
-                    var googleCalendarService = new GoogleCalendarService(httpClient, new AdventSettings(), new TestSettings(), new GoogleCalendarSettings());
+                    var googleCalendarService = new GoogleCalendarService(
+                        httpClient,
+                        new AdventSettings()
+                        {
+                            StartDate = new DateTime(2020, 12, 1),
+                            EndDate = new DateTime(2020, 12, 24)
+                        },
+                        new TestSettings()
+                        {
+                            StartHour = new TimeSpan(12, 1, 0),
+                            EndHour = new TimeSpan(12, 0, 0)
+                        },
+                        new GoogleCalendarSettings()
+                        {
+                            Summary = "Testowy opis"
+                        });
 
                     // Act
                     var createdCalendar = googleCalendarService.CreateCalendar();
