@@ -295,15 +295,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oblicz wyniki.
-        /// </summary>
-        public static string CalculateResults {
-            get {
-                return ResourceManager.GetString("CalculateResults", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Zmiana hasła.
         /// </summary>
         public static string ChangePassword {
