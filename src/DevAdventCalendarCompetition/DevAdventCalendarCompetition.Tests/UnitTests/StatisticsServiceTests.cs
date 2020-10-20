@@ -15,7 +15,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class StatisticsServiceTests
     {
-        private readonly StatisticsService _controller;
+        private readonly StatisticsService _service;
         private readonly Mock<ITestStatisticsService> _testStatisticsMock;
 
         // might me useless
@@ -30,13 +30,13 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             // might be useless
             this._testUserTestCorrectAnswerMock = new Mock<UserTestCorrectAnswer>();
 
-            this._controller = new StatisticsService(this._testStatisticsMock.Object);
+            this._service = new StatisticsService(this._testStatisticsMock.Object);
         }
 
         [Fact]
         public void TemporaryTest()
         {
-            int a = this._controller.TmpStatisticsImpementation("1", 2);
+            int a = this._service.TmpStatisticsImpementation("1", 2);
 
             Assert.True(a == 3, "Temoporary test - wrong!");
         }
@@ -47,7 +47,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             DateTime currentTest = DateTime.Now;
             this._testStatisticsMock.Setup(a => a.GetUserTestCorrectAnswerDate("1", 1)).Returns(currentTest);
 
-            var result = this._controller.GetCorrectAnswerDate("1", 1);
+            var result = this._service.GetCorrectAnswerDate("1", 1);
 
             Assert.True(result == currentTest, "Temoporary test for datetime - wrong!");
         }
@@ -57,7 +57,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         {
             this._testStatisticsMock.Setup(a => a.GetUserTestWrongAnswerCount("1", 1)).Returns(6);
 
-            var result = this._controller.GetWrongAnswerCount("1", 1);
+            var result = this._service.GetWrongAnswerCount("1", 1);
 
             Assert.True(result == 6, "Temoporary test for ans count - wrong!");
         }

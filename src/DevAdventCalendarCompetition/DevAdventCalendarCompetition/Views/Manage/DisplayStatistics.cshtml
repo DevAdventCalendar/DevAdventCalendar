@@ -1,0 +1,26 @@
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+<!-- DisplayStatistics -->
+
+@{
+    ViewData["Title"] = @DisplayStatistics;
+    ViewData.AddActivePage(ManageNavPages.DisplayStatistics);
+}
+
+
+<div class="area_title mb-30">
+    <h3>@ViewData["Title"]</h3>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" class="contact_form">
+            <button type="submit" class="chris_btn reveal">@ChangeYourPassword</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
