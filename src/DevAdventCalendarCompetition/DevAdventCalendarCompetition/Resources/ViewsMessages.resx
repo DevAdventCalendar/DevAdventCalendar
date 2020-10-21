@@ -240,6 +240,9 @@
   <data name="DevelopmentMode" xml:space="preserve">
     <value>Development Mode</value>
   </data>
+  <data name="DisplayStatistics" xml:space="preserve">
+    <value>Statystyki</value>
+  </data>
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
@@ -542,6 +545,9 @@
   </data>
   <data name="StartTime" xml:space="preserve">
     <value>Czas rozpoczęcia:</value>
+  </data>
+  <data name="StatistisTab" xml:space="preserve">
+    <value>Statystyki</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status:</value>

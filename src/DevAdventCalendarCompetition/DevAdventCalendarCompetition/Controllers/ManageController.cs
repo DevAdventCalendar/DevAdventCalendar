@@ -22,13 +22,15 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAccountService _accountService;
         private readonly ILogger _logger;
         private readonly INotificationService _emailNotificationService;
+        private readonly ITestStatisticsService _testStatisticsService;
 
-        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService)
+        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService, ITestStatisticsService testStatisticsService)
         {
             this._manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
             this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
+            this._testStatisticsService = testStatisticsService ?? throw new ArgumentNullException(nameof(testStatisticsService)); // Temporary
         }
 
         [TempData]
@@ -281,39 +283,23 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            var model = new IndexViewModel
+            // TODO: Test for null (the right way)
+            // TODO: check all questions
+            // DateTime answerDate = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1);
+            string messsageToUser = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1).ToString(CultureInfo.InvariantCulture);
+            if (messsageToUser == null)
             {
-                StatusMessage = this.StatusMessage
+                messsageToUser = "NoAnswer";
+            }
+
+            var model = new DisplayStatisticsViewModel
+            {
+                WrongAnswerCount = this._testStatisticsService.GetWrongAnswerCount(user.Email, 1),
+                MessageToUser = messsageToUser,
+                StatusMessage = this.StatusMessage,
             };
 
             return this.View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DisplayStatistics(DisplayStatisticsViewModel model)
-        {
-            // is there a model?
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-
-            // is valid (?)
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(model);
-            }
-
-            // get user ID
-            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
-            if (user == null)
-            {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
-            }
-
-            this.StatusMessage = "Somenthing Something DisplayStatistics";
-            return this.RedirectToAction(nameof(this.DisplayStatistics));
         }
 
         private void AddErrors(IdentityResult result)
