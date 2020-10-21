@@ -32,6 +32,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
                 using (var httpClient = new HttpClient(handlerMock.Object))
                 {
+                    httpClient.PostAsync("calendars", );
                     var googleCalendarService = new GoogleCalendarService(
                         httpClient,
                         new AdventSettings()
@@ -53,7 +54,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
                     var createdCalendar = googleCalendarService.CreateNewCalendarWithEvents();
 
                     // Assert
-                    Assert.IsType<OperationalResult>(createdCalendar);
+                    Assert.IsType<Task<OperationalResult>>(createdCalendar);
                     handlerMock
                         .Protected()
                         .Verify("SendAsync", Times.Exactly(1), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());

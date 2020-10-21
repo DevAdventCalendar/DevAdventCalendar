@@ -56,7 +56,15 @@ namespace DevAdventCalendarCompetition.Services
             {
                 Summary = this._calendarSettings.Summary
             };
-            return await this._httpClient.PostAsJsonAsync("calendars", newCalendar);
+
+            using (var content = new StringContent(JsonConvert.SerializeObject(newCalendar), Encoding.UTF8, MediaTypeNames.Application.Json))
+            {
+                var uri = new System.Uri("https://calendar.google.com/calendars/");
+                var response = await this._httpClient.PostAsync(uri, content);
+                return response;
+            }
+
+            // return await this._httpClient.PostAsJsonAsync("calendars", newCalendar);
         }
 
         private async Task<HttpResponseMessage> CreateEvents(string calendarId)
@@ -102,14 +110,14 @@ namespace DevAdventCalendarCompetition.Services
                     }
                 }
             };
-
             using (var content = new StringContent(JsonConvert.SerializeObject(newEvents), Encoding.UTF8, MediaTypeNames.Application.Json))
             {
-                var response = await this._httpClient.PostAsync($"calendars/{calendarId}/events", content);
+                var uri = new System.Uri("https://calendar.google.com/calendars/" + $"{calendarId}/events");
+                var response = await this._httpClient.PostAsync(uri, content);
                 return response;
             }
 
-            // return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
+           // return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
         }
     }
 }
