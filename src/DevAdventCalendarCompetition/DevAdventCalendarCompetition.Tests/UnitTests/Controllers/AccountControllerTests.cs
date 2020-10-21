@@ -234,6 +234,25 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Equal("Index", viewResult.ActionName);
         }
 
+        [Fact]
+        public void ExternalLogin_ChallengeResult()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            var provider = "Facebook";
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+            var mockUrlHelper = new Mock<IUrlHelper>();
+            mockUrlHelper.Setup(x => x.Action(It.IsAny<UrlActionContext>())).Returns("callbackUrl");
+            controller.Url = mockUrlHelper.Object;
+            this._accountServiceMock.Setup(x => x.ConfigureExternalAuthenticationProperties(provider, returnUrl)).Returns(new AuthenticationProperties());
+
+            // Act
+            var result = controller.ExternalLogin(provider, returnUrl);
+
+            // Arrange
+            var viewResult = Assert.IsType<ChallengeResult>(result);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
