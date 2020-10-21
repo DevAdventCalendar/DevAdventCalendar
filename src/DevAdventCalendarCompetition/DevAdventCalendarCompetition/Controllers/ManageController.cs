@@ -272,6 +272,50 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.RedirectToAction(nameof(this.SetPassword));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DisplayStatistics()
+        {
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
+            }
+
+            var model = new IndexViewModel
+            {
+                StatusMessage = this.StatusMessage
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DisplayStatistics(DisplayStatisticsViewModel model)
+        {
+            // is there a model?
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            // is valid (?)
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            // get user ID
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
+            }
+
+            this.StatusMessage = "Somenthing Something DisplayStatistics";
+            return this.RedirectToAction(nameof(this.DisplayStatistics));
+        }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

@@ -313,7 +313,19 @@ namespace DevAdventCalendarCompetition.Resources {
                 return ResourceManager.GetString("ChangeYourPassword", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Wyświel statystyki.
+        /// </summary>
+        public static string CheckYourStatistics
+        {
+            get
+            {
+                return ResourceManager.GetString("CheckYourStatistics", resourceCulture);
+            }
+        }
         
+
         /// <summary>
         ///   Looks up a localized string similar to Wybierz sposób uwierzytelniania dwuetapowego:.
         /// </summary>
