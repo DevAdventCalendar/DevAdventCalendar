@@ -253,6 +253,22 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var viewResult = Assert.IsType<ChallengeResult>(result);
         }
 
+        [Fact]
+        public void ExternalLoginCallback_Error_RedirectToAction()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string remoteError = @ExternalLoginFailureDescription;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Login", viewResult.ActionName);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel

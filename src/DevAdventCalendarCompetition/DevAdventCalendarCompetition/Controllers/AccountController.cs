@@ -178,7 +178,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (remoteError != null)
             {
-                this.ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
+                this.ErrorMessage = @ExternalLoginFailureDescription;
                 return this.RedirectToAction(nameof(this.Login));
             }
 
