@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Net.Mime;
+using System.Text;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Models.GoogleCalendar;
 using DevAdventCalendarCompetition.Services.Options;
+using Newtonsoft.Json;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -33,7 +36,7 @@ namespace DevAdventCalendarCompetition.Services
             var calendarResponse = await this.CreateCalendar();
             if (!calendarResponse.IsSuccessStatusCode)
             {
-                return OperationalResult.Failure(OperationalResultStatus.CalendarFailure);
+                return OperationalResult.Failure(OperationalResultStatus.CalendarFailure); // test 1 sprawdzic czy zwraca failure callendar jeden mock httpclient
             }
 
             var newCalendar = await calendarResponse.Content.ReadFromJsonAsync<CalendarDto>();
@@ -41,13 +44,13 @@ namespace DevAdventCalendarCompetition.Services
 
             if (eventsResponse.IsSuccessStatusCode)
             {
-                return OperationalResult.Success();
+                return OperationalResult.Success(); // test 1 czy zwraca succes dwa mocki
             }
 
-            return OperationalResult.Failure(OperationalResultStatus.EventsFailure);
+            return OperationalResult.Failure(OperationalResultStatus.EventsFailure); // test 1 czy failure event dwa mocki
         }
 
-        public async Task<HttpResponseMessage> CreateCalendar()
+        private async Task<HttpResponseMessage> CreateCalendar()
         {
             var newCalendar = new NewCalendarDto
             {
@@ -99,7 +102,14 @@ namespace DevAdventCalendarCompetition.Services
                     }
                 }
             };
-            return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
+
+            using (var content = new StringContent(JsonConvert.SerializeObject(newEvents), Encoding.UTF8, MediaTypeNames.Application.Json))
+            {
+                var response = await this._httpClient.PostAsync($"calendars/{calendarId}/events", content);
+                return response;
+            }
+
+            // return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     public class GoogleCalendarServiceTest
     {
         [Fact]
-        public void CreateCalendarShouldReturnHttpresponseMessageTaskAsync()
+        public void CreateCalendarWithEventsShouldReturnOperationalResultTask()
         {
             // Arrange
             var handlerMock = new Mock<HttpMessageHandler>();
@@ -50,59 +50,13 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
                         });
 
                     // Act
-                    var createdCalendar = googleCalendarService.CreateCalendar();
+                    var createdCalendar = googleCalendarService.CreateNewCalendarWithEvents();
 
                     // Assert
-                    Assert.NotNull(createdCalendar);
+                    Assert.IsType<OperationalResult>(createdCalendar);
                     handlerMock
                         .Protected()
-                        .Verify("SendAsync", Times.Exactly(0), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());
-                }
-            }
-        }
-
-        [Fact]
-        public void CreateCalendarWithEventsShouldReturnOperationResultTask()
-        {
-            // Arrange
-            var handlerMock = new Mock<HttpMessageHandler>();
-            using (var response = new HttpResponseMessage()
-            {
-                StatusCode = HttpStatusCode.OK
-            })
-            {
-                handlerMock
-                    .Protected()
-                    .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                    .ReturnsAsync(response);
-
-                using (var httpClient = new HttpClient(handlerMock.Object))
-                {
-                    var googleCalendarService = new GoogleCalendarService(
-                        httpClient,
-                        new AdventSettings()
-                        {
-                            StartDate = new DateTime(2020, 12, 1),
-                            EndDate = new DateTime(2020, 12, 24)
-                        },
-                        new TestSettings()
-                        {
-                            StartHour = new TimeSpan(12, 1, 0),
-                            EndHour = new TimeSpan(12, 0, 0)
-                        },
-                        new GoogleCalendarSettings()
-                        {
-                            Summary = "Testowy opis"
-                        });
-
-                    // Act
-                    var createdCalendarWithEvents = googleCalendarService.CreateNewCalendarWithEvents();
-
-                    // Assert
-                    Assert.IsType<Task<OperationalResult>>(createdCalendarWithEvents);
-                    handlerMock
-                        .Protected()
-                        .Verify("SendAsync", Times.Exactly(0), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());
+                        .Verify("SendAsync", Times.Exactly(1), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());
                 }
             }
         }
