@@ -268,7 +268,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wróć do zagadek / Inna zagadka.
+        ///   Looks up a localized string similar to Wróć do zagadek.
         /// </summary>
         public static string BackToPuzzles {
             get {
