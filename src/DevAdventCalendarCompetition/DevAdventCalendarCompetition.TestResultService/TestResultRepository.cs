@@ -198,32 +198,5 @@ namespace DevAdventCalendarCompetition.TestResultService
                 .Users
                 .FirstOrDefault(r => r.Id == id);
         }
-
-        /*  [in #1] ID of user that wants to know count of wrong answers
-         *  [in #2] ID of test that user wants to know count of wrong answers
-         * 
-         *  [out] Count of submitted wrong answers
-         */
-        public int GetUserTestWrongAnswerCount(string userId, int testID) // get count of wrong answers
-        {
-            return _dbContext
-                .UserTestWrongAnswers
-                .Where(a => a.TestId == testID && a.UserId == userId)
-                .Count();
-        }
-
-        /*  [in]#1 ID of user that wants to know when he submitted correct answer
-         *  [in]#2 ID of test that user wants to know when he submitted correct answer
-         * 
-         *  [out] Date of submission of corect answer
-         */
-        public DateTime GetUserTestCorrectAnswerDate(string userId, int testID) // get DateTime of correct answer
-        {
-            return _dbContext
-                .UserTestCorrectAnswers
-                .Where(a => a.TestId == testID && a.UserId == userId)
-                .Select(a => a.AnsweringTime) 
-                .Single(); // I assume there is only one row
-        }
     }
 }

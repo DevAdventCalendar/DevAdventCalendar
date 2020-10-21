@@ -5,8 +5,8 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface ITestStatisticsService
     {
-        public int GetUserTestWrongAnswerCount(string userId, int testId);
+        public int GetWrongAnswerCount(string userID, int testID);
 
-        public DateTime GetUserTestCorrectAnswerDate(string userId, int testId);
+        public DateTime GetCorrectAnswerDateTime(string userID, int testID);
     }
 }
