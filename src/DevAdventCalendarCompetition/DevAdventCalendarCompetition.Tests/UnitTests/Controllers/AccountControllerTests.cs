@@ -220,6 +220,20 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.ThrowsAsync<ArgumentNullException>(act);
         }
 
+        [Fact]
+        public void Logout_RedirectToAction()
+        {
+            // Arrange
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.Logout();
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Index", viewResult.ActionName);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
