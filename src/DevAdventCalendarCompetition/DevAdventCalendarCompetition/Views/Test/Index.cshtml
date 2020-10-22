@@ -68,6 +68,10 @@
                         if (!string.IsNullOrEmpty(errorMessage.ToString()))
                         {
                             <h3 class="mb-30 text-primary">@errorMessage</h3>
+                            if (!string.IsNullOrEmpty(Model.UserAnswer))
+                            {
+                                <p class="mb-30">@YouHaveAnswered @Model.UserAnswer</p>
+                            }
                         }
 
                         if (Model.HasUserAnswered)

@@ -120,29 +120,35 @@
   <data name="About" xml:space="preserve">
     <value>O nas</value>
   </data>
-  <data name="AboutDarekGrund" xml:space="preserve">
-    <value>Frontend developer. Z komputerami i programowaniem związany od czasów Amigi 500. Prywatnie miłośnik kawy, książki użytkowej i długich wycieczek. Zafascynowany kierunkiem w jakim rozwija się technologia.</value>
+  <data name="AboutPiotrKrol" xml:space="preserve">
+    <value>Test Manager w jednej z wrocławskich firm. W wolnym czasie pasjonat czytania kryminałów i thrillerów oraz aktywnego spędzania czasu na wycieczkach górskich.</value>
+  </data>
+  <data name="AboutKrzysztofSiera" xml:space="preserve">
+    <value>Student, a przede wszystkim pasjonat robotyki, gier komputerowych i GameJamów. Rozwijający wiedzę o C++, C# i Unity. Miłośnik historii oraz wszystkiego co wysoko - od górskich szczytów po odległe planety.</value>
   </data>
   <data name="AboutKamilSmieszek" xml:space="preserve">
     <value>Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi spalić nieco benzyny na torze wyścigowym i tworzyć trance.</value>
   </data>
   <data name="AboutMichalGellert" xml:space="preserve">
-    <value>Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href="https://www.michalgellert.pl/" target="_blank" rel="noopener noreferrer" class="link"&gt;www.michalgellert.pl&lt;/a&gt;.</value>
+    <value>Współorganizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim, co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href="https://www.michalgellert.pl/" target="_blank" rel="noopener noreferrer" class="link"&gt;www.michalgellert.pl&lt;/a&gt;.</value>
   </data>
-  <data name="AboutMikolajJakubowski" xml:space="preserve">
-    <value>Wykonawca aplikacji z 2017 roku i twórca logo. Programista różnych technologii m.in. PHP, Java, .NET, zależy co na daną chwilę potrzeba. Artysta zarówno kodując jak i hobbystycznie. Uwielbia rysować zarówno cyfrowo jak i standardowo. Ponadto crossfiter, mąż i tata.</value>
+  <data name="AboutKamilJarzebski" xml:space="preserve">
+    <value>Student, który do projektu trafił szukając nowych wyzwań. Miłośnik kawy oraz filmów Marvela. W wolnym czasie lubi grać w planszowki ze znajomymi lub dokształcać się z zakresu ekonomii.</value>
   </data>
-  <data name="AboutOliwiaMatusik" xml:space="preserve">
-    <value>Junior .Net Dev. Wolontariuszka i inicjatorka Geek Girls Carrots Katowice. Uzależniona od kawy, miłośniczka nowych technologii i Sci-Fi i Fantasy. Wolny czas lubi aktywnie spędzać trenując pole dance i ćwicząc jogę.</value>
+  <data name="AboutGrzegorzMutkowski" xml:space="preserve">
+    <value>Pasjonat programowania, automatyzacji oraz linuxa. W wolnych chwilach uwielbia seriale, rower oraz podróże, zarówno bliższe jak i te dalsze.</value>
   </data>
-  <data name="AboutParykLotzwi" xml:space="preserve">
+  <data name="AboutPatrykLotzwi" xml:space="preserve">
     <value>Programista .NET, fan(atyk) automatyzacji. Pasjonat programowania i czystego kodu. Aktywny uczestnik lokalnych konferencji i grup programistycznych. Po godzinach miłośnik książek, filmów, seriali i gier fantasy oraz sci-fi.</value>
   </data>
-  <data name="AboutRadekMaziarka" xml:space="preserve">
-    <value>Solution Architect, Team Leader i programista w obszarze .NET prowadzący prezentacje i szkolenia, a także organizujący konferencje programistyczne. Po pracy pomaga firmom w projektach IT oraz wspomaga technologicznie Stowarzyszenie Libertariańskie. Zwolennik dostarczania wartości małymi krokami.</value>
+  <data name="AboutMateuszGolombniak" xml:space="preserve">
+    <value>Dotnetomaniak z niesłabnącym zapałem do rozwoju. Nie tylko twierdzący, że "to zależy" ale również starający się odpowiedzieć "od czego". Pilny student - niedługo inżynier informatyki.</value>
   </data>
-  <data name="AboutWeronika" xml:space="preserve">
-    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href="http://www.programmer-girl.com" target="_blank" rel="noopener noreferrer" class="link"&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Współorganizator Wrocławskiej grupy .NET oraz konferencji Wroc#.</value>
+  <data name="AboutKrystianBrozek" xml:space="preserve">
+    <value>Trener z wieloletnią praktyką w zakresie nauczania technologii w obszarze IT, programista fullstack, ze szczególnym uwzględnieniem zakresu baz danych - głównie w obszarze technologii Microsoftu.  Specjalista, nauczyciel i partner biznesowy, który z wiedzą, umiejętnościami, pasją i zaangażowaniem wprowadza swoich słuchaczy w świat programowania.</value>
+  </data>
+  <data name="AboutWeronikaMularczyk" xml:space="preserve">
+    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href="http://www.programmer-girl.com" target="_blank" rel="noopener noreferrer" class="link"&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Microsoft MVP i współorganizator Wrocławskiej grupy .NET.</value>
   </data>
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
@@ -191,9 +197,6 @@
   </data>
   <data name="Calculate" xml:space="preserve">
     <value>Oblicz</value>
-  </data>
-  <data name="CalculateResults" xml:space="preserve">
-    <value>Oblicz wyniki</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmiana hasła</value>
@@ -335,6 +338,30 @@
   </data>
   <data name="GoodAnswer" xml:space="preserve">
     <value>Odpowiedź poprawna!</value>
+  </data>
+  <data name="GoogleCalendarError" xml:space="preserve">
+    <value>Wystapił błąd podczas tworzenia nowego kalendarza.</value>
+  </data>
+  <data name="GoogleCalendarIntegration" xml:space="preserve">
+    <value>Integracja z kalendarzem Google</value>
+  </data>
+  <data name="GoogleCalendarIntegrationIntro" xml:space="preserve">
+    <value>W tej sekcji możesz zintegrować DevAdventCalendar z Twoim kalendarzem Google.</value>
+  </data>
+  <data name="GoogleCalendarIntegrationPermission1" xml:space="preserve">
+    <value>Przeglądanie, edytowanie, udostępnianie i trwałe usuwanie wszystkich kalendarzy, do których masz dostęp w kalendarzu Google.</value>
+  </data>
+  <data name="GoogleCalendarIntegrationPermission2" xml:space="preserve">
+    <value>Wyświetlanie i edytowanie wydarzeń we wszystkich kalendarzach.</value>
+  </data>
+  <data name="GoogleCalendarIntegrationPermissionInfo" xml:space="preserve">
+    <value>W celu utworzenia nowega kalendarza oraz dodania wydarzeń w trakcie trwania adwentu będziemy potrzebować następujących uprawnień:</value>
+  </data>
+  <data name="GoogleCalendarSuccess" xml:space="preserve">
+    <value>Pomyślnie utworzono nowy kalendarz z wydarzeniami.</value>
+  </data>
+  <data name="GoogleEventsError" xml:space="preserve">
+    <value>Wystapił błąd podczas tworzenia wydarzeń w nowym kalendarzu.</value>
   </data>
   <data name="GoTo" xml:space="preserve">
     <value>Przejdź na</value>
@@ -677,6 +704,9 @@
   </data>
   <data name="YouAreLateWithAnswer" xml:space="preserve">
     <value>Niestety, spóźniłeś się z odpowiedzią na to pytanie :(</value>
+  </data>
+  <data name="YouHaveAnswered" xml:space="preserve">
+    <value>Odpowiedziano:</value>
   </data>
   <data name="YouHaventAnswered" xml:space="preserve">
     <value>Nie odpowiedziałeś jeszcze na żadną zagadkę...</value>
