@@ -200,20 +200,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void CalculateResults_IncorrectWeekNumber_ReturnsBadRequestResult()
-        {
-            // Arrange
-            var incorrectWeekNumber = -1;
-            using var controller = this.CreateAdminController();
-
-            // Act
-            var result = controller.CalculateResults(incorrectWeekNumber);
-
-            // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
-        }
-
-        [Fact]
         public void AdminController_ShouldHaveAuthorizeAttributeWithCorrectRole()
         {
             var attribute = GetAuthorizeAttributeFromController();

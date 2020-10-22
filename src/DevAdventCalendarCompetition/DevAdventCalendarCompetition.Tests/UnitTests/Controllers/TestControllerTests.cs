@@ -99,7 +99,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var result = controller.Index(test.Id, "answer");
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var viewResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal(404, viewResult.StatusCode);
         }
 
         [Fact]
