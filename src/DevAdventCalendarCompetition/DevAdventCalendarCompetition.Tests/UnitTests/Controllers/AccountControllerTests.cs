@@ -120,8 +120,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             this._accountServiceMock.Setup(x => x.PasswordSignInAsync(It.IsAny<string>(), model.Password, model.RememberMe))
                                    .ReturnsAsync(SignInResult.Success);
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
-            var mockUrlHelper = new Mock<IUrlHelper>(MockBehavior.Default);
-            mockUrlHelper.Setup(x => x.Action(It.IsAny<UrlActionContext>())).Returns("callbackUrl").Verifiable();
+            var mockUrlHelper = new Mock<IUrlHelper>();
+            mockUrlHelper.Setup(x => x.Action(It.IsAny<UrlActionContext>())).Returns("callbackUrl");
             controller.Url = mockUrlHelper.Object;
 
             // Act
@@ -254,7 +254,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginCallback_Error_RedirectToAction()
+        public void ExternalLoginCallback_RemoteErrorIsNotNull_RedirectToAction()
         {
             // Arrange
             Uri returnUrl = null;
@@ -267,6 +267,44 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
             Assert.Equal("Login", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ExternalLoginCallback_InfoIsNull_RedirectToAction()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string remoteError = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Login", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ExternalLoginCallback_ResustIsSuccessed_RedirectToLocal()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string remoteError = null;
+            string userId = null;
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            this._accountServiceMock.Setup(x => x.ExternalLoginSignInAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(SignInResult.Success);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+            var mockUrlHelper = new Mock<IUrlHelper>();
+            mockUrlHelper.Setup(x => x.Action(It.IsAny<UrlActionContext>())).Returns("callbackUrl");
+            controller.Url = mockUrlHelper.Object;
+
+            // Act
+            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+
+            // Arrange
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Index", viewResult.ActionName);
         }
 
         private static LoginViewModel GetLoginViewModel()
