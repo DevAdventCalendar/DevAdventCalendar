@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -59,7 +60,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.NotFound();
             }
 
-            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", string.Empty, StringComparison.Ordinal);
+            var finalAnswer = this.PrepareAnswer(answer);
 
             if (this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
             {
@@ -90,6 +91,11 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             this._testService.AddTestWrongAnswer(this.User.FindFirstValue(ClaimTypes.NameIdentifier), testId, wrongAnswer, DateTime.Now);
         }
+
+        // I don't get this error. It complains about making this method as static but this can't be static, it's an instance method...
+#pragma warning disable CA1822 // Mark members as static
+        private string PrepareAnswer(string userAnswer) => Regex.Replace(userAnswer.ToUpper(CultureInfo.CurrentCulture).Trim(), "\\s{2,}", " ");
+#pragma warning restore CA1822 // Mark members as static
 
         private AnswerViewModel SaveAnswer(TestDto testDto)
         {
