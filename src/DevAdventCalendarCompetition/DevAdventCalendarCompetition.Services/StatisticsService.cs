@@ -18,10 +18,12 @@ namespace DevAdventCalendarCompetition.Services
 
         public int GetWrongAnswerCount(string userID, int testID)
         {
+            // TODO: if DB empty no searching
+            // if ()
             return this._statisticsService.GetUserTestWrongAnswerCount(userID, testID);
         }
 
-        public DateTime GetCorrectAnswerDateTime(string userID, int testID)
+        public DateTime? GetCorrectAnswerDateTime(string userID, int testID)
         {
             return this._statisticsService.GetUserTestCorrectAnswerDate(userID, testID);
         }

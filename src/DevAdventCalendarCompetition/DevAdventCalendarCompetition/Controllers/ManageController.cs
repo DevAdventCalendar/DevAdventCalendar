@@ -283,14 +283,21 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            // TODO: Test for null (the right way)
             // TODO: check all questions
-            // DateTime answerDate = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1);
-            string messsageToUser = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1).ToString(CultureInfo.InvariantCulture);
-            if (messsageToUser == null)
+            // seems sketchy?
+            DateTime? answerDate = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1);
+            string messsageToUser = string.Empty;
+
+            if (answerDate == null)
             {
-                messsageToUser = "NoAnswer";
+                messsageToUser = "Nie udzieliłeś jeszcze poprawnej odpowiedzi na to pytanie. \n";
             }
+            else
+            {
+                messsageToUser = "Poprawną odpowiedź udzieliłeś " + answerDate?.ToString(CultureInfo.InvariantCulture) + ". \n";
+            }
+
+            messsageToUser += "Do tej pory odpowiedziałeś: " + this._testStatisticsService.GetWrongAnswerCount(user.Email, 1);
 
             var model = new DisplayStatisticsViewModel
             {

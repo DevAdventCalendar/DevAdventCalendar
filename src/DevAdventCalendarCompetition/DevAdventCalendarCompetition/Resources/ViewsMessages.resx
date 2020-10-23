@@ -546,7 +546,7 @@
   <data name="StartTime" xml:space="preserve">
     <value>Czas rozpoczęcia:</value>
   </data>
-  <data name="StatistisTab" xml:space="preserve">
+  <data name="StatisticsTab" xml:space="preserve">
     <value>Statystyki</value>
   </data>
   <data name="Status" xml:space="preserve">

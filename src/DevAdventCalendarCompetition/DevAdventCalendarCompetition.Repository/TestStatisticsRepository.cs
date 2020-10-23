@@ -35,13 +35,19 @@ namespace DevAdventCalendarCompetition.Repository
          *
          *  [out] Date of submission of corect answer
          */
-        public DateTime GetUserTestCorrectAnswerDate(string userID, int testID) // get DateTime of correct answer
+        public DateTime? GetUserTestCorrectAnswerDate(string userID, int testID) // get DateTime of correct answer
         {
-            return this._dbContext
+            var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testID);
+            if (dbTest != null)
+            {
+                return this._dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.TestId == testID && a.UserId == userID)
                 .Select(a => a.AnsweringTime)
                 .Single(); // I assume there is only one row
+            }
+
+            return null;
         }
     }
 }

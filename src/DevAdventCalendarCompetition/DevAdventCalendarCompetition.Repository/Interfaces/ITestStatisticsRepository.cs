@@ -8,6 +8,6 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
     {
         public int GetUserTestWrongAnswerCount(string userID, int testID);
 
-        public DateTime GetUserTestCorrectAnswerDate(string userID, int testID);
+        public DateTime? GetUserTestCorrectAnswerDate(string userID, int testID);
     }
 }

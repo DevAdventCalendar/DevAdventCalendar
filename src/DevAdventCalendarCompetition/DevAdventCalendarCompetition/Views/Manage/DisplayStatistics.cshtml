@@ -1,6 +1,5 @@
+@model DisplayStatisticsViewModel
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
-
-<!-- DisplayStatistics -->
 
 @{
     ViewData["Title"] = @DisplayStatistics;
@@ -16,7 +15,10 @@
 <div class="row">
     <div class="col-md-12">
         <form method="post" class="contact_form">
-            <button type="submit" class="chris_btn reveal">thing</button>
+            <div class="form-group text_field text_field_default">
+                <label> Pytanie x </label>
+                <input asp-for="MessageToUser" disabled />
+            </div>
         </form>
     </div>
 </div>
