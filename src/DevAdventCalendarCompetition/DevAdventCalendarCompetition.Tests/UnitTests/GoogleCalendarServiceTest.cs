@@ -88,7 +88,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
                         // Assert
                         Assert.IsType<Task<OperationalResult>>(createdCalendar);
-                        Assert.Same(OperationalResult.Failure(OperationalResultStatus.CalendarFailure), createdCalendar);
+                        Assert.Equal<OperationalResultStatus>(OperationalResultStatus.CalendarFailure, createdCalendar.Result.Status);
 
                         // handlerMock.Protected().Verify("SendAsync", Times.Exactly(1), ItExpr.Is<HttpRequestMessage>(req => req.Method == HttpMethod.Get), ItExpr.IsAny<CancellationToken>());
                     }
