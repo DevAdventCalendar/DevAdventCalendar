@@ -457,11 +457,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?.
+        ///   Looks up a localized string similar to Chcesz zostać partnerem i wesprzeć dobrą inicjatywę w 2020 roku?.
         /// </summary>
-        public static string DoYouWantBeSponsor2020 {
+        public static string DoYouWantToBePartner2020 {
             get {
-                return ResourceManager.GetString("DoYouWantBeSponsor2020", resourceCulture);
+                return ResourceManager.GetString("DoYouWantToBePartner2020", resourceCulture);
             }
         }
         
@@ -889,6 +889,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to W tamtym roku wsparli nas.
+        /// </summary>
+        public static string LastYearPartners {
+            get {
+                return ResourceManager.GetString("LastYearPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dowiedz się więcej.
         /// </summary>
         public static string LearnMore {
@@ -1024,6 +1033,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Partnerem dnia jest.
+        /// </summary>
+        public static string PartnerOfTheDay {
+            get {
+                return ResourceManager.GetString("PartnerOfTheDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partnerzy.
+        /// </summary>
+        public static string Partners {
+            get {
+                return ResourceManager.GetString("Partners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hasło.
         /// </summary>
         public static string Password {
@@ -1132,11 +1159,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sponsorzy nagród.
+        ///   Looks up a localized string similar to Partnerzy nagród.
         /// </summary>
-        public static string PrizesSponsors {
+        public static string PrizesPartners {
             get {
-                return ResourceManager.GetString("PrizesSponsors", resourceCulture);
+                return ResourceManager.GetString("PrizesPartners", resourceCulture);
             }
         }
         
@@ -1380,33 +1407,6 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string SocialMedia {
             get {
                 return ResourceManager.GetString("SocialMedia", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sponsorem dnia jest.
-        /// </summary>
-        public static string SponsorOfTheDay {
-            get {
-                return ResourceManager.GetString("SponsorOfTheDay", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sponsorzy.
-        /// </summary>
-        public static string Sponsors {
-            get {
-                return ResourceManager.GetString("Sponsors", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to W tamtym roku wsparli nas.
-        /// </summary>
-        public static string SponsorsAndPartners {
-            get {
-                return ResourceManager.GetString("SponsorsAndPartners", resourceCulture);
             }
         }
         
@@ -1708,11 +1708,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sponsorzy tygodni.
+        ///   Looks up a localized string similar to Partnerzy tygodni.
         /// </summary>
-        public static string WeeklySponsors {
+        public static string WeeklyPartners {
             get {
-                return ResourceManager.GetString("WeeklySponsors", resourceCulture);
+                return ResourceManager.GetString("WeeklyPartners", resourceCulture);
             }
         }
         
