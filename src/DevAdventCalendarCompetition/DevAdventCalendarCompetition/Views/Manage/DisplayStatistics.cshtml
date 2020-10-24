@@ -11,13 +11,15 @@
     <h3>@ViewData["Title"]</h3>
 </div>
 
+<!-- I wanted to use Html.Display(CorrectAnswerDateMessage) but Im unsure how to do it using css -->
 
 <div class="row">
     <div class="col-md-12">
         <form method="post" class="contact_form">
             <div class="form-group text_field text_field_default">
                 <label> Pytanie x </label>
-                <input asp-for="MessageToUser" disabled />
+                <input asp-for="CorrectAnswerDateMessage" disabled />
+                <input asp-for="WrongAnswerCountMessage" disabled />
             </div>
         </form>
     </div>

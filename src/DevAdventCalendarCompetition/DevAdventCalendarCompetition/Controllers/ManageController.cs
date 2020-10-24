@@ -274,6 +274,9 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.RedirectToAction(nameof(this.SetPassword));
         }
 
+        // TODO: check all questions
+        // I'm thinking about for that goes throgh all 24 questions and displays all of the at once.
+        // A list of models. Or a list of some class in model?
         [HttpGet]
         public async Task<IActionResult> DisplayStatistics()
         {
@@ -283,27 +286,27 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            // TODO: check all questions
+            // where to put changeable string? Controller or view?
             // seems sketchy?
             DateTime? answerDate = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1);
-            string messsageToUser = string.Empty;
+            string correctAnswerDateMessage;
 
+            // Can I use Resources in controller?
             if (answerDate == null)
             {
-                messsageToUser = "Nie udzieliłeś jeszcze poprawnej odpowiedzi na to pytanie. \n";
+                correctAnswerDateMessage = "Nie udzieliłeś jeszcze poprawnej odpowiedzi na to pytanie.";
             }
             else
             {
-                messsageToUser = "Poprawną odpowiedź udzieliłeś " + answerDate?.ToString(CultureInfo.InvariantCulture) + ". \n";
+                correctAnswerDateMessage = "Poprawną odpowiedź udzieliłeś " + answerDate?.ToString(CultureInfo.InvariantCulture) + ".";
             }
 
-            messsageToUser += "Do tej pory odpowiedziałeś: " + this._testStatisticsService.GetWrongAnswerCount(user.Email, 1);
+            string wrongAnswerCountMessage = "Odpowiedzi do tej pory: " + this._testStatisticsService.GetWrongAnswerCount(user.Email, 1);
 
             var model = new DisplayStatisticsViewModel
             {
-                WrongAnswerCount = this._testStatisticsService.GetWrongAnswerCount(user.Email, 1),
-                MessageToUser = messsageToUser,
-                StatusMessage = this.StatusMessage,
+                WrongAnswerCountMessage = wrongAnswerCountMessage,
+                CorrectAnswerDateMessage = correctAnswerDateMessage
             };
 
             return this.View(model);
