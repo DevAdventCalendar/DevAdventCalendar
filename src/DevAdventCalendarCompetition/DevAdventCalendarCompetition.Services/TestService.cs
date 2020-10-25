@@ -81,10 +81,5 @@ namespace DevAdventCalendarCompetition.Services
         {
             return correctAnswers.Any(t => this._stringHasher.VerifyHash(userAnswer, t));
         }
-
-        public string ParseUserAnswer(string userAnswer)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
