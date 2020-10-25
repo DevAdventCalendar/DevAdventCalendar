@@ -78,8 +78,8 @@ namespace DevAdventCalendarCompetition.Controllers
                     Answers = answers,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    SponsorLogoUrl = model.SponsorLogoUrl,
-                    SponsorName = model.SponsorName,
+                    PartnerLogoUrl = model.PartnerLogoUrl,
+                    PartnerName = model.PartnerName,
                     Discount = model.Discount,
                     DiscountUrl = model.DiscountUrl,
                     DiscountLogoUrl = model.DiscountLogoUrl,
@@ -124,18 +124,6 @@ namespace DevAdventCalendarCompetition.Controllers
             this._adminService.UpdateTestEndDate(testDto.Id, DateTime.Now);
 
             return this.RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult CalculateResults(int weekNumber)
-        {
-            if (weekNumber < 1 || weekNumber > 4)
-            {
-                return this.BadRequest("Błędny numer tygodnia.");
-            }
-
-            Process.Start(@"c:\\Windows\\System32\\cmd.exe", weekNumber.ToString(CultureInfo.CurrentCulture.DateTimeFormat));
-            return this.Ok();
         }
 
         private TestViewModel SetHours(TestViewModel model)
