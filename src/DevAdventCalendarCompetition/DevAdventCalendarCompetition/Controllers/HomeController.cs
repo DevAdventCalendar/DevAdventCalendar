@@ -80,8 +80,8 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpGet]
-        [Route(nameof(Sponsors))]
-        public ActionResult Sponsors()
+        [Route(nameof(Partners))]
+        public ActionResult Partners()
         {
             return this.View();
         }
