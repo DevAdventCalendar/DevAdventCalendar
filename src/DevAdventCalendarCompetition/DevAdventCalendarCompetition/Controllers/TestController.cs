@@ -64,7 +64,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.NotFound();
             }
 
-            var finalAnswer = this._answerService.ParseUserAnswer(answer);
+            var finalAnswer = this._answerService.ParseTestAnswer(answer);
 
             if (this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
             {

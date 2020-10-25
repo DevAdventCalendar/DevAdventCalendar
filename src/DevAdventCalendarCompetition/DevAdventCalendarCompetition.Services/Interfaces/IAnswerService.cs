@@ -6,6 +6,6 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IAnswerService
     {
-        public string ParseUserAnswer(string answer);
+        public string ParseTestAnswer(string answer);
     }
 }

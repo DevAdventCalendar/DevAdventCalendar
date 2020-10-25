@@ -6,7 +6,7 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class AnswerService : IAnswerService
     {
-        public string ParseUserAnswer(string answer)
+        public string ParseTestAnswer(string answer)
         {
             return string.IsNullOrWhiteSpace(answer) ?
                 string.Empty :

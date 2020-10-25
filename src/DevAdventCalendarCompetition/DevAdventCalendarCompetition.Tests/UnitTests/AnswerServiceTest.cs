@@ -23,7 +23,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         {
             var sut = new AnswerService();
 
-            var result = sut.ParseUserAnswer(userAnswer);
+            var result = sut.ParseTestAnswer(userAnswer);
 
             result.Should().Be(resultAnswer);
         }

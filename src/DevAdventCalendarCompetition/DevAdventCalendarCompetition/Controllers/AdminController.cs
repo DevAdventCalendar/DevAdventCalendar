@@ -18,12 +18,18 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly IAnswerService _answerService;
         private readonly ITestService _testService;
         private readonly TestSettings _testSettings;
 
-        public AdminController(IAdminService adminService, ITestService testService, TestSettings testSettings)
+        public AdminController(
+            IAdminService adminService,
+            IAnswerService answerService,
+            ITestService testService,
+            TestSettings testSettings)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
+            this._answerService = answerService;
             this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
             this._testSettings = testSettings;
         }
@@ -67,8 +73,7 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 var answers = model.Answers.Where(a => !string.IsNullOrWhiteSpace(a)).Select(a => new TestAnswerDto()
                 {
-                    Answer = a.ToUpper(CultureInfo.InvariantCulture)
-                        .Replace(" ", string.Empty, StringComparison.Ordinal)
+                    Answer = this._answerService.ParseTestAnswer(a)
                 }).ToList();
 
                 var testDto = new TestDto
