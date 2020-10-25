@@ -1735,7 +1735,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi.
+        ///   Looks up a localized string similar to Nie martw się, dla uproszczenia usuniemy nadmiarowe spacje z odpowiedzi.
         /// </summary>
         public static string WeRemovedWhiteSpaces {
             get {

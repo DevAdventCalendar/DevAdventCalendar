@@ -18,10 +18,14 @@ namespace DevAdventCalendarCompetition.Controllers
     public class TestController : Controller
     {
         private readonly ITestService _testService;
+        private readonly IAnswerService _answerService;
 
-        public TestController(ITestService testService)
+        public TestController(
+            ITestService testService,
+            IAnswerService answerService)
         {
             this._testService = testService;
+            this._answerService = answerService;
         }
 
         [HttpGet]
@@ -60,7 +64,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.NotFound();
             }
 
-            var finalAnswer = this.PrepareAnswer(answer);
+            var finalAnswer = this._answerService.ParseUserAnswer(answer);
 
             if (this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
             {
@@ -91,11 +95,6 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             this._testService.AddTestWrongAnswer(this.User.FindFirstValue(ClaimTypes.NameIdentifier), testId, wrongAnswer, DateTime.Now);
         }
-
-        // I don't get this error. It complains about making this method as static but this can't be static, it's an instance method...
-#pragma warning disable CA1822 // Mark members as static
-        private string PrepareAnswer(string userAnswer) => Regex.Replace(userAnswer.ToUpper(CultureInfo.CurrentCulture).Trim(), "\\s{2,}", " ");
-#pragma warning restore CA1822 // Mark members as static
 
         private AnswerViewModel SaveAnswer(TestDto testDto)
         {

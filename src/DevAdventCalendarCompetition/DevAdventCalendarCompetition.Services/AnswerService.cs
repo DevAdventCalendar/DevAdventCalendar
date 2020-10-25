@@ -1,17 +1,16 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
+using DevAdventCalendarCompetition.Services.Interfaces;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    public class AnswerService
+    public class AnswerService : IAnswerService
     {
-#pragma warning disable CA1822 // Mark members as static
-        public string ParseUserAnswer(string userAnswer)
-#pragma warning restore CA1822 // Mark members as static
+        public string ParseUserAnswer(string answer)
         {
-            return string.IsNullOrWhiteSpace(userAnswer) ?
+            return string.IsNullOrWhiteSpace(answer) ?
                 string.Empty :
-                Regex.Replace(userAnswer.ToUpper(CultureInfo.CurrentCulture).Trim(), "\\s{2,}", " ");
+                Regex.Replace(answer.ToUpper(CultureInfo.CurrentCulture).Trim(), "\\s{2,}", " ");
         }
     }
 }
