@@ -23,7 +23,10 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 
         public static List<object[]> WrongAnswerTestData => new List<object[]>
         {
-            new object[] { GetTest(), "Wrong", DateTime.Now }
+            new object[] { GetTest(1), "Wrong", DateTime.Now.AddHours(-8) },
+            new object[] { GetTest(), "Wrong Answer", DateTime.Now.AddHours(18) },
+            new object[] { GetTest(3), "   Wrong    ", DateTime.Now.AddDays(1).AddHours(15) },
+            new object[] { GetTest(4), " Wrong   answer WRONG answer  ", DateTime.Now.AddDays(2).AddHours(14) }
         };
 
         [Fact]
@@ -77,7 +80,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 
         [Theory]
         [MemberData(nameof(WrongAnswerTestData))]
-        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer(Test test, string wrongAnswer, DateTime startDate)
+        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer(Test test, string wrongAnswer, DateTime wrongAnswerDate)
         {
             if (test == null)
             {
@@ -94,7 +97,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 var testService = PrepareSUT(context);
 
-                testService.AddTestWrongAnswer(TestUserId, test.Id, wrongAnswer, startDate);
+                testService.AddTestWrongAnswer(TestUserId, test.Id, wrongAnswer, wrongAnswerDate);
             }
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
