@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
@@ -19,6 +20,11 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             : base()
         {
         }
+
+        public static List<object[]> WrongAnswerTestData => new List<object[]>
+        {
+            new object[] { GetTest(), "Wrong", DateTime.Now }
+        };
 
         [Fact]
         public void GetTestByNumber_GetsTestByNumber()
@@ -69,12 +75,15 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             }
         }
 
-        [Fact]
-        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer()
+        [Theory]
+        [MemberData(nameof(WrongAnswerTestData))]
+        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer(Test test, string wrongAnswer, DateTime startDate)
         {
-            var test = GetTest();
-            var startDate = DateTime.Now;
-            var wrongAnswer = "Wrong";
+            if (test == null)
+            {
+                throw new ArgumentNullException(nameof(test));
+            }
+
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 context.Tests.Add(test);
