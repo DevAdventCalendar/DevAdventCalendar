@@ -10,7 +10,7 @@ namespace DevAdventCalendarCompetition.Services
         {
             return string.IsNullOrWhiteSpace(answer) ?
                 string.Empty :
-                Regex.Replace(answer.ToUpper(CultureInfo.CurrentCulture).Trim(), "\\s{2,}", " ");
+                Regex.Replace(answer.ToUpper(CultureInfo.CurrentCulture).Trim(), @"\s{2,}", " ");
         }
     }
 }
