@@ -180,6 +180,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var usersWrongAnswer = "wrongAnswer";
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
+            this._answerServiceMock.Setup(x => x.ParseTestAnswer(usersWrongAnswer)).Returns(usersWrongAnswer);
             using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
