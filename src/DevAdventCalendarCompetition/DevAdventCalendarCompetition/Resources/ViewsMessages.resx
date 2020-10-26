@@ -192,6 +192,9 @@
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
   </data>
+  <data name="BackToPuzzles" xml:space="preserve">
+    <value>Wróć do zagadek</value>
+  </data>
   <data name="Calculate" xml:space="preserve">
     <value>Oblicz</value>
   </data>
@@ -246,8 +249,8 @@
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
-  <data name="DoYouWantBeSponsor2020" xml:space="preserve">
-    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
+  <data name="DoYouWantToBePartner2020" xml:space="preserve">
+    <value>Chcesz zostać partnerem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -471,8 +474,8 @@
   <data name="Prizes" xml:space="preserve">
     <value>Nagrody</value>
   </data>
-  <data name="PrizesSponsors" xml:space="preserve">
-    <value>Sponsorzy nagród</value>
+  <data name="PrizesPartners" xml:space="preserve">
+    <value>Partnerzy nagród</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
@@ -555,13 +558,13 @@
   <data name="SocialMedia" xml:space="preserve">
     <value>media społecznościowe:</value>
   </data>
-  <data name="SponsorOfTheDay" xml:space="preserve">
-    <value>Sponsorem dnia jest</value>
+  <data name="PartnerOfTheDay" xml:space="preserve">
+    <value>Partnerem dnia jest</value>
   </data>
-  <data name="Sponsors" xml:space="preserve">
-    <value>Sponsorzy</value>
+  <data name="Partners" xml:space="preserve">
+    <value>Partnerzy</value>
   </data>
-  <data name="SponsorsAndPartners" xml:space="preserve">
+  <data name="LastYearPartners" xml:space="preserve">
     <value>W tamtym roku wsparli nas</value>
   </data>
   <data name="StartTest" xml:space="preserve">
@@ -663,8 +666,8 @@
   <data name="Week3ScoreDescription" xml:space="preserve">
     <value>Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.</value>
   </data>
-  <data name="WeeklySponsors" xml:space="preserve">
-    <value>Sponsorzy tygodni</value>
+  <data name="WeeklyPartners" xml:space="preserve">
+    <value>Partnerzy tygodni</value>
   </data>
   <data name="WeekNumber" xml:space="preserve">
     <value>Numer tygodnia (1, 2, 3 lub 4 - dla wszystkich wyników)</value>

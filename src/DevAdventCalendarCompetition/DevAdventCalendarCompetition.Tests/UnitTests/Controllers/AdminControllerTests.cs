@@ -243,8 +243,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             {
                 "Answer"
             },
-            SponsorName = null,
-            SponsorLogoUrl = null,
+            PartnerName = null,
+            PartnerLogoUrl = null,
             Discount = null,
             DiscountUrl = null,
             DiscountLogoUrl = null,
