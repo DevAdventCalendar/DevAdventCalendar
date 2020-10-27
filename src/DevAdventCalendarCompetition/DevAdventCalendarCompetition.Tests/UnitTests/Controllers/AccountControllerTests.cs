@@ -345,6 +345,55 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Equal("Lockout", viewResult.ActionName);
         }
 
+        [Fact]
+        public void ExternalLoginCallback_ResustIsNotLockedOut_ReturnsViewResult()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string remoteError = null;
+            string userId = null;
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            this._accountServiceMock.Setup(x => x.ExternalLoginSignInAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(SignInResult.Failed);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+
+            // Arrange - *********************zrobic*********************
+        }
+
+        [Fact]
+        public void ExternalLoginConfirmation_ExternalLoginConfirmationIsNull_ThrowsException()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            ExternalLoginViewModel model = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<Task<IActionResult>> act = () => controller.ExternalLoginConfirmation(model, returnUrl);
+
+            // Assert
+            Assert.ThrowsAsync<ArgumentNullException>(act);
+        }
+
+        [Fact]
+        public void ExternalLoginConfirmation_InfoIsNull_ThrowsException()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            ExternalLoginViewModel model = null;
+            string userId = null;
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<Task<IActionResult>> act = () => controller.ExternalLoginConfirmation(model, returnUrl);
+
+            // Assert
+            Assert.ThrowsAsync<InvalidOperationException>(act);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
