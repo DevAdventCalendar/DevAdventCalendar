@@ -307,6 +307,44 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Equal("Index", viewResult.ActionName);
         }
 
+        [Fact]
+        public void ExternalLoginCallback_ResustIsNotAllowed_RedirectToLocal()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string remoteError = null;
+            string userId = null;
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            this._accountServiceMock.Setup(x => x.ExternalLoginSignInAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(SignInResult.NotAllowed);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+
+            // Arrange
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.Equal("RegisterConfirmation", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void ExternalLoginCallback_ResustIsLockedOut_RedirectToLocal()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            string remoteError = null;
+            string userId = null;
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            this._accountServiceMock.Setup(x => x.ExternalLoginSignInAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(SignInResult.LockedOut);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+
+            // Arrange
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Lockout", viewResult.ActionName);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
