@@ -63,10 +63,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<Task<IActionResult>> act = () => controller.Login(model, returnUrl);
+            Func<IActionResult> act = () => controller.Login(model, returnUrl).Result;
 
             // Assert
-            Assert.ThrowsAsync<ArgumentNullException>(act);
+            Assert.Throws<AggregateException>(act);
         }
 
         [Fact]
@@ -214,10 +214,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<Task<IActionResult>> act = () => controller.Register(model, returnUrl);
+            Func<IActionResult> act = () => controller.Register(model, returnUrl).Result;
 
             // Assert
-            Assert.ThrowsAsync<ArgumentNullException>(act);
+            Assert.Throws<AggregateException>(act);
         }
 
         [Fact]
@@ -363,7 +363,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginConfirmation_ExternalLoginConfirmationIsNull_ThrowsException()
+        public void ExternalLoginConfirmation_ExternalLoginViewModelIsNull_ThrowsException()
         {
             // Arrange
             Uri returnUrl = null;
@@ -371,10 +371,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<Task<IActionResult>> act = () => controller.ExternalLoginConfirmation(model, returnUrl);
+            Func<IActionResult> act = () => controller.ExternalLoginConfirmation(model, returnUrl).Result;
 
             // Assert
-            Assert.ThrowsAsync<ArgumentNullException>(act);
+            Assert.Throws<AggregateException>(act);
         }
 
         [Fact]
@@ -382,16 +382,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             Uri returnUrl = null;
-            ExternalLoginViewModel model = null;
-            string userId = null;
-            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            var model = new ExternalLoginViewModel();
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(null));
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<Task<IActionResult>> act = () => controller.ExternalLoginConfirmation(model, returnUrl);
+            Func<IActionResult> act = () => controller.ExternalLoginConfirmation(model, returnUrl).Result;
 
             // Assert
-            Assert.ThrowsAsync<InvalidOperationException>(act);
+            Assert.Throws<AggregateException>(act);
         }
 
         private static LoginViewModel GetLoginViewModel()
