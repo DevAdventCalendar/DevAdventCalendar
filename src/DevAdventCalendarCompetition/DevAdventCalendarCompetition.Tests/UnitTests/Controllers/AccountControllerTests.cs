@@ -286,7 +286,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResustIsSuccessed_RedirectToLocal()
+        public void ExternalLoginCallback_ResultIsSuccessed_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -308,7 +308,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResustIsNotAllowed_RedirectToLocal()
+        public void ExternalLoginCallback_ResultIsNotAllowed_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -327,7 +327,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResustIsLockedOut_RedirectToLocal()
+        public void ExternalLoginCallback_ResultIsLockedOut_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -346,7 +346,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResustIsNotLockedOut_ReturnsViewResult()
+        public void ExternalLoginCallback_ResultIsNotLockedOut_ReturnsViewResult()
         {
             // Arrange
             Uri returnUrl = null;
