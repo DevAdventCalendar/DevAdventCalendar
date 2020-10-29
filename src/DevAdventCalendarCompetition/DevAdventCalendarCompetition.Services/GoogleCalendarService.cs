@@ -59,7 +59,7 @@ namespace DevAdventCalendarCompetition.Services
 
             using (var content = new StringContent(JsonConvert.SerializeObject(newCalendar), Encoding.UTF8, MediaTypeNames.Application.Json))
             {
-                var uri = new System.Uri("https://calendar.google.com/calendars/");
+                var uri = new System.Uri(@"https://www.googleapis.com/calendar/v3/calendars");
                 var response = await this._httpClient.PostAsync(uri, content);
                 return response;
             }
@@ -112,9 +112,9 @@ namespace DevAdventCalendarCompetition.Services
             };
             using (var content = new StringContent(JsonConvert.SerializeObject(newEvents), Encoding.UTF8, MediaTypeNames.Application.Json))
             {
-                var uri = new System.Uri("https://calendar.google.com/calendars/" + $"{calendarId}/events");
-                var response = await this._httpClient.PostAsync(uri, content);
-                return response;
+                var uri = new System.Uri("https://www.googleapis.com/calendar/v3/calendars/" + $"{calendarId}/events");
+                var response = this._httpClient.PostAsync(uri, content);
+                return await response;
             }
 
            // return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
