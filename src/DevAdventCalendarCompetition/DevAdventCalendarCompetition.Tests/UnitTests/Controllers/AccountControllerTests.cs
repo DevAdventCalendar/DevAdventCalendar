@@ -434,6 +434,22 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Equal("ExternalLogin", viewResult.ViewName);
         }
 
+        [Fact]
+        public void ConfirmEmail_UserIsNull_RedirectToAction()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            string code = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ConfirmEmail(user.Id, code);
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Index", viewResult.ActionName);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
