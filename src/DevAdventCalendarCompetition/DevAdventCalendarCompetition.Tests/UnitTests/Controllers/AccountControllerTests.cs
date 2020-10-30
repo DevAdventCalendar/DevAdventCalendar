@@ -393,6 +393,47 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.Throws<AggregateException>(act);
         }
 
+        [Fact]
+        public void ExternalLoginConfirmation_ResultIsSucceeded_ReturnsViewResult()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            var model = new ExternalLoginViewModel();
+            var user = new ApplicationUser();
+            var externalLoginInfo = new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>());
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(null)).ReturnsAsync(externalLoginInfo);
+            this._accountServiceMock.Setup(x => x.CreateApplicationUserByEmailAndUserName(It.IsAny<string>(), It.IsAny<string>())).Returns(user);
+            this._accountServiceMock.Setup(x => x.CreateAsync(user, It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+            this._accountServiceMock.Setup(x => x.AddLoginAsync(user, externalLoginInfo)).ReturnsAsync(IdentityResult.Success);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginConfirmation(model, returnUrl);
+
+            // Arrange - *********************zrobic*********************
+        }
+
+        [Fact]
+        public void ExternalLoginConfirmation_ResultIsNotSucceeded_ReturnsViewResult()
+        {
+            // Arrange
+            Uri returnUrl = null;
+            var model = new ExternalLoginViewModel();
+            var user = new ApplicationUser();
+            var externalLoginInfo = new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>());
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(null)).ReturnsAsync(externalLoginInfo);
+            this._accountServiceMock.Setup(x => x.CreateApplicationUserByEmailAndUserName(It.IsAny<string>(), It.IsAny<string>())).Returns(user);
+            this._accountServiceMock.Setup(x => x.CreateAsync(user, It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ExternalLoginConfirmation(model, returnUrl);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.Equal("ExternalLogin", viewResult.ViewName);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
