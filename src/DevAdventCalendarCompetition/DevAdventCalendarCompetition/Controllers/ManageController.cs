@@ -22,15 +22,15 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAccountService _accountService;
         private readonly ILogger _logger;
         private readonly INotificationService _emailNotificationService;
-        private readonly ITestStatisticsService _testStatisticsService;
+        private readonly IStatisticsService _testStatisticsService;
 
-        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService, ITestStatisticsService testStatisticsService)
+        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService, IStatisticsService statisticsService)
         {
             this._manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
             this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
-            this._testStatisticsService = testStatisticsService ?? throw new ArgumentNullException(nameof(testStatisticsService)); // Temporary
+            this._testStatisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService)); // Temporary
         }
 
         [TempData]

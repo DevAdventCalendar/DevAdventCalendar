@@ -7,33 +7,23 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DevAdventCalendarCompetition.Services
 {
-    public class StatisticsService : ITestStatisticsService
+    public class StatisticsService : IStatisticsService
     {
-        private readonly ITestStatisticsRepository _statisticsService;
+        private readonly IStatisticsRepository _statisticsService;
 
-        public StatisticsService(ITestStatisticsRepository testStatisticsRepository)
+        public StatisticsService(IStatisticsRepository statisticsRepository)
         {
-            this._statisticsService = testStatisticsRepository;
+            this._statisticsService = statisticsRepository;
         }
 
-        public int GetWrongAnswerCount(string userID, int testID)
+        public int GetWrongAnswerCount(string userId, int testId)
         {
-            // TODO: if DB empty no searching
-            // if ()
-            return this._statisticsService.GetUserTestWrongAnswerCount(userID, testID);
+            return this._statisticsService.GetUserTestWrongAnswerCount(userId, testId);
         }
 
-        public DateTime? GetCorrectAnswerDateTime(string userID, int testID)
+        public DateTime? GetCorrectAnswerDateTime(string userId, int testId)
         {
-            return this._statisticsService.GetUserTestCorrectAnswerDate(userID, testID);
-        }
-
-        public int TmpStatisticsImpementation(string playerID, int testID)
-        {
-            this.GetWrongAnswerCount(playerID, testID);
-            this.GetCorrectAnswerDateTime(playerID, testID);
-
-            return int.Parse(playerID, System.Globalization.NumberStyles.HexNumber, null) + testID;
+            return this._statisticsService.GetUserTestCorrectAnswerDate(userId, testId);
         }
     }
 }

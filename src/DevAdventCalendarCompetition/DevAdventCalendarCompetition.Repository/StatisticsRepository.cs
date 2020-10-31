@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevAdventCalendarCompetition.Repository
 {
-    public class TestStatisticsRepository : ITestStatisticsRepository
+    public class StatisticsRepository : IStatisticsRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public TestStatisticsRepository(ApplicationDbContext dbContext)
+        public StatisticsRepository(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
         }
@@ -22,12 +22,11 @@ namespace DevAdventCalendarCompetition.Repository
          *
          *  [out] Count of submitted wrong answers
          */
-        public int GetUserTestWrongAnswerCount(string userID, int testID) // get count of wrong answers
+        public int GetUserTestWrongAnswerCount(string userId, int testId) // get count of wrong answers
         {
             return this._dbContext
                 .UserTestWrongAnswers
-                .Where(a => a.TestId == testID && a.UserId == userID)
-                .Count();
+                .Count(a => a.TestId == testId && a.UserId == userId);
         }
 
         /*  [in]#1 ID of user that wants to know when he submitted correct answer
@@ -35,16 +34,16 @@ namespace DevAdventCalendarCompetition.Repository
          *
          *  [out] Date of submission of corect answer
          */
-        public DateTime? GetUserTestCorrectAnswerDate(string userID, int testID) // get DateTime of correct answer
+        public DateTime? GetUserTestCorrectAnswerDate(string userId, int testId) // get DateTime of correct answer
         {
-            var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testID);
+            var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
             if (dbTest != null)
             {
                 return this._dbContext
                 .UserTestCorrectAnswers
-                .Where(a => a.TestId == testID && a.UserId == userID)
+                .Where(a => a.TestId == testId && a.UserId == userId)
                 .Select(a => a.AnsweringTime)
-                .Single(); // I assume there is only one row
+                .SingleOrDefault(); // I assume there is only one row
             }
 
             return null;

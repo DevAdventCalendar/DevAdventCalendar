@@ -17,29 +17,21 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 {
     public class StatisticsServiceTests
     {
-        private readonly Mock<ITestStatisticsRepository> _testStatisticsRepositoryMock;
+        private readonly Mock<IStatisticsRepository> _statisticsRepositoryMock;
         private readonly StatisticsService _statisticsService;
 
         public StatisticsServiceTests()
         {
-            this._testStatisticsRepositoryMock = new Mock<ITestStatisticsRepository>();
+            this._statisticsRepositoryMock = new Mock<IStatisticsRepository>();
 
-            this._statisticsService = new StatisticsService(this._testStatisticsRepositoryMock.Object);
+            this._statisticsService = new StatisticsService(this._statisticsRepositoryMock.Object);
         }
 
         [Fact]
-        public void TemporaryTest()
-        {
-            int a = this._statisticsService.TmpStatisticsImpementation("1", 2);
-
-            Assert.True(a == 3, "Temoporary test - wrong!");
-        }
-
-        [Fact]
-        public void TemporaryTest2()
+        public void GetUserTestCorrectAnswerDateResturnsCorrectDateTime()
         {
             DateTime currentTest = DateTime.Now;
-            this._testStatisticsRepositoryMock.Setup(a => a.GetUserTestCorrectAnswerDate("1", 1)).Returns(currentTest);
+            this._statisticsRepositoryMock.Setup(a => a.GetUserTestCorrectAnswerDate("1", 1)).Returns(currentTest);
 
             var result = this._statisticsService.GetCorrectAnswerDateTime("1", 1);
 
@@ -47,9 +39,9 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Fact]
-        public void TemporaryTest3()
+        public void GetUserTestWrongAnswerCountReturnsCorrectIntiger()
         {
-            this._testStatisticsRepositoryMock.Setup(a => a.GetUserTestWrongAnswerCount("1", 1)).Returns(6);
+            this._statisticsRepositoryMock.Setup(a => a.GetUserTestWrongAnswerCount("1", 1)).Returns(6);
 
             var result = this._statisticsService.GetWrongAnswerCount("1", 1);
 
