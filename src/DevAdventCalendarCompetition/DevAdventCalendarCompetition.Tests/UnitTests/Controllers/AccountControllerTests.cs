@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using Moq;
@@ -176,7 +177,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Lockout_ReturnsViewesult()
+        public void Lockout_ReturnsViewResult()
         {
             // Arrange
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
@@ -435,7 +436,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ConfirmEmail_UserIsNull_RedirectToAction()
+        public void ConfirmEmail_UserIdIsNull_RedirectToAction()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -448,6 +449,182 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
             Assert.Equal("Index", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ConfirmEmail_CodeIsNull_RedirectToAction()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            string code = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ConfirmEmail(user.Id, code);
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("Index", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ConfirmEmail_EmailIsConfirmed_ReturnsViewResult()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            user.EmailConfirmed = true;
+            string code = "test";
+            this._accountServiceMock.Setup(x => x.FindByIdAsync(user.Id)).ReturnsAsync(user);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ConfirmEmail(user.Id, code);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.Equal("EmailAlreadyConfirmed", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void ConfirmEmail_ResultIsNotSucceeded_ThrowsException()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            user.EmailConfirmed = false;
+            string code = "test";
+            this._accountServiceMock.Setup(x => x.FindByIdAsync(user.Id)).ReturnsAsync(user);
+            this._accountServiceMock.Setup(x => x.ConfirmEmailAsync(user, code)).ReturnsAsync(IdentityResult.Failed());
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<IActionResult> act = () => controller.ConfirmEmail(user.Id, code).Result;
+
+            // Assert
+            Assert.Throws<AggregateException>(act);
+        }
+
+        [Fact]
+        public void ConfirmEmail_ResultIsSucceeded_ThrowsException()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            user.EmailConfirmed = false;
+            string code = "test";
+            this._accountServiceMock.Setup(x => x.FindByIdAsync(user.Id)).ReturnsAsync(user);
+            this._accountServiceMock.Setup(x => x.ConfirmEmailAsync(user, code)).ReturnsAsync(IdentityResult.Success);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ConfirmEmail(user.Id, code);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void ForgotPassword_ReturnsViewResult()
+        {
+            // Arrange
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ForgotPassword();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void ForgotPassword_ForgotPasswordViewModelIsNull_ThrowsException()
+        {
+            // Arrange
+            ForgotPasswordViewModel model = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<IActionResult> act = () => controller.ForgotPassword(model).Result;
+
+            // Assert
+            Assert.Throws<AggregateException>(act);
+        }
+
+        [Fact]
+        public void ForgotPassword_UserIsNull_RedirectToAction()
+        {
+            // Arrange
+            var model = new ForgotPasswordViewModel();
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ForgotPassword(model);
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            Assert.Equal("ForgotPasswordConfirmation", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ForgotPassword_UserIsCorrect_RedirectToAction()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            var model = new ForgotPasswordViewModel();
+            model.Email = "test@gmail.com";
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync(user);
+            this._accountServiceMock.Setup(x => x.IsEmailConfirmedAsync(user)).ReturnsAsync(true);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ForgotPassword(model);
+
+            // Arrange - *********************zrobic*********************
+        }
+
+        [Fact]
+        public void ForgotPasswordConfirmation_ReturnsViewResult()
+        {
+            // Arrange
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ForgotPasswordConfirmation();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void ReserPassword_CodeIsNull_ThrowsException()
+        {
+            // Arrange
+            var email = "test@gmail.com";
+            string code = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<IActionResult> act = () => controller.ResetPassword(email, code);
+
+            // Assert
+            Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void ReserPassword_CodeIsNull_ReturnsViewResult()
+        {
+            // Arrange
+            var email = "test@gmail.com";
+            string code = "code";
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ResetPassword(email, code);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<ResetPasswordViewModel>(viewResult.ViewData.Model);
         }
 
         private static LoginViewModel GetLoginViewModel()
