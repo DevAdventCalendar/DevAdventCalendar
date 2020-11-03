@@ -627,6 +627,117 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Assert.IsType<ResetPasswordViewModel>(viewResult.ViewData.Model);
         }
 
+        [Fact]
+        public void ResetPassword_ResetPasswordViewModelIsNull_ThrowsException()
+        {
+            // Arrange
+            ResetPasswordViewModel model = null;
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            Func<IActionResult> act = () => controller.ResetPassword(model).Result;
+
+            // Assert
+            Assert.Throws<AggregateException>(act);
+        }
+
+        [Fact]
+        public void ResetPassword_ModelStateIsNotValid_ReturnsViewResult()
+        {
+            // Arrange
+            var model = new ResetPasswordViewModel();
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+            controller.ModelState.AddModelError("error", "message");
+
+            // Act
+            var result = controller.ResetPassword(model).Result;
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<ResetPasswordViewModel>(viewResult.ViewData.Model);
+        }
+
+        [Fact]
+        public void ResetPassword_UserIsNull_RedirectToAction()
+        {
+            // Arrange
+            ApplicationUser user = null;
+            var model = new ResetPasswordViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync(user);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ResetPassword(model).Result;
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("ResetPasswordConfirmation", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ResetPassword_ResultIsSucceeded_RedirectToAction()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            var model = new ResetPasswordViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync(user);
+            this._accountServiceMock.Setup(x => x.ResetPasswordAsync(user, It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ResetPassword(model).Result;
+
+            // Assert
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("ResetPasswordConfirmation", viewResult.ActionName);
+        }
+
+        [Fact]
+        public void ResetPassword_ResultIsNotSucceeded_ReturnsViewResult()
+        {
+            // Arrange
+            var user = new ApplicationUser();
+            var model = new ResetPasswordViewModel();
+            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync(user);
+            this._accountServiceMock.Setup(x => x.ResetPasswordAsync(user, It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ResetPassword(model).Result;
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.IsType<ResetPasswordViewModel>(viewResult.ViewData.Model);
+        }
+
+        [Fact]
+        public void ResetPasswordConfirmation_ReturnsViewResult()
+        {
+            // Arrange
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.ResetPasswordConfirmation();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void AccessDenied_ReturnsViewResult()
+        {
+            // Arrange
+            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
+
+            // Act
+            var result = controller.AccessDenied();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
         private static LoginViewModel GetLoginViewModel()
         {
             return new LoginViewModel
