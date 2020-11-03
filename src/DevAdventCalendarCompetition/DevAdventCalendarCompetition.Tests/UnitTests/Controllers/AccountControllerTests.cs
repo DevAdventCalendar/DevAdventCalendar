@@ -597,7 +597,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ReserPassword_CodeIsNull_ThrowsException()
+        public void ResetPassword_CodeIsNull_ThrowsException()
         {
             // Arrange
             var email = "test@gmail.com";
@@ -612,7 +612,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ReserPassword_CodeIsNull_ReturnsViewResult()
+        public void ResetPassword_CodeIsNotNull_ReturnsViewResult()
         {
             // Arrange
             var email = "test@gmail.com";
