@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -59,12 +60,10 @@ namespace DevAdventCalendarCompetition.Services
 
             using (var content = new StringContent(JsonConvert.SerializeObject(newCalendar), Encoding.UTF8, MediaTypeNames.Application.Json))
             {
-                var uri = new System.Uri(@"https://www.googleapis.com/calendar/v3/calendars");
+                var uri = new System.Uri(this._calendarSettings.CalendarsEndpoint);
                 var response = await this._httpClient.PostAsync(uri, content);
                 return response;
             }
-
-            // return await this._httpClient.PostAsJsonAsync("calendars", newCalendar);
         }
 
         private async Task<HttpResponseMessage> CreateEvents(string calendarId)
@@ -112,12 +111,10 @@ namespace DevAdventCalendarCompetition.Services
             };
             using (var content = new StringContent(JsonConvert.SerializeObject(newEvents), Encoding.UTF8, MediaTypeNames.Application.Json))
             {
-                var uri = new System.Uri("https://www.googleapis.com/calendar/v3/calendars/" + $"{calendarId}/events");
+                var uri = new System.Uri(string.Format(CultureInfo.InvariantCulture, this._calendarSettings.EventsEndpoint, calendarId));
                 var response = this._httpClient.PostAsync(uri, content);
                 return await response;
             }
-
-           // return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
         }
     }
 }

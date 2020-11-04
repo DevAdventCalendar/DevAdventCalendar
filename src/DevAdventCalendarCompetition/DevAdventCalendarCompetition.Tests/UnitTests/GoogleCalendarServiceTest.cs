@@ -38,15 +38,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
     {
         private readonly GoogleCalendarSettings _googleCalendarSettings = new GoogleCalendarSettings()
         {
-            Summary = "Testowy Opis",
+            Summary = "TestSummary",
             Events = new CalendarEvent()
             {
                 Location = "Warsaw",
                 ReminderMethod = "null",
                 ReminderMinutes = 11,
-                Summary = "Testowy event",
+                Summary = "TestEvent",
                 TimeZone = "Warsaw"
-            }
+            },
+            CalendarsEndpoint = "/calendars",
+            EventsEndpoint = "/calendars/{0}/events"
         };
 
         private readonly AdventSettings _adventSettings = new AdventSettings()
@@ -84,7 +86,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             var handlerMock = new Mock<HttpMessageHandler>();
             handlerMock
                 .Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .Setup<Task<HttpResponseMessage>>("SendAsync", new Uri(this._googleCalendarSettings.CalendarsEndpoint), ItExpr.IsAny<CancellationToken>())
                 .ReturnsAsync(this.calendarResponses[1]);
 
             using (var httpClient = new HttpClient(handlerMock.Object))
@@ -113,8 +115,12 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
 
             handlerMock
                 .Protected()
-                .SetupSequence<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(this.calendarResponses[0])
+                .SetupSequence<Task<HttpResponseMessage>>("SendAsync", new Uri(this._googleCalendarSettings.CalendarsEndpoint), ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(this.calendarResponses[0]);
+
+            handlerMock
+                .Protected()
+                .SetupSequence<Task<HttpResponseMessage>>("SendAsync", new Uri(this._googleCalendarSettings.EventsEndpoint), ItExpr.IsAny<CancellationToken>())
                 .ReturnsAsync(this.eventResponses[1]);
 
             using (var httpClient = new HttpClient(handlerMock.Object))
