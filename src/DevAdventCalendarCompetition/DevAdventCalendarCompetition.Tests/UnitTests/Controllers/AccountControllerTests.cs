@@ -56,7 +56,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Login_LoginViewModelIsNull_ThrowsException()
+        public async void Login_LoginViewModelIsNull_ThrowsException()
         {
             // Arrange
             Uri returnUrl = null;
@@ -64,10 +64,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.Login(model, returnUrl).Result;
+            Func<Task<IActionResult>> act = async () => await controller.Login(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(act).ConfigureAwait(false);
         }
 
         [Fact]
@@ -207,7 +207,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Register_RegisterViewModelIsNull_ThrowsException()
+        public async void Register_RegisterViewModelIsNull_ThrowsException()
         {
             // Arrange
             Uri returnUrl = null;
@@ -215,10 +215,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.Register(model, returnUrl).Result;
+            Func<Task<IActionResult>> act = async () => await controller.Register(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(act).ConfigureAwait(false);
         }
 
         [Fact]
@@ -369,7 +369,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginConfirmation_ExternalLoginViewModelIsNull_ThrowsException()
+        public async void ExternalLoginConfirmation_ExternalLoginViewModelIsNull_ThrowsException()
         {
             // Arrange
             Uri returnUrl = null;
@@ -377,14 +377,14 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.ExternalLoginConfirmation(model, returnUrl).Result;
+            Func<Task<IActionResult>> act = async () => await controller.ExternalLoginConfirmation(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(act).ConfigureAwait(false);
         }
 
         [Fact]
-        public void ExternalLoginConfirmation_InfoIsNull_ThrowsException()
+        public async void ExternalLoginConfirmation_InfoIsNull_ThrowsException()
         {
             // Arrange
             Uri returnUrl = null;
@@ -393,10 +393,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.ExternalLoginConfirmation(model, returnUrl).Result;
+            Func<Task<IActionResult>> act = async () => await controller.ExternalLoginConfirmation(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<InvalidOperationException>(act).ConfigureAwait(false);
         }
 
         [Fact]
@@ -491,7 +491,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ConfirmEmail_ResultIsNotSucceeded_ThrowsException()
+        public async void ConfirmEmail_ResultIsNotSucceeded_ThrowsException()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -502,14 +502,14 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.ConfirmEmail(user.Id, code).Result;
+            Func<Task<IActionResult>> act = async () => await controller.ConfirmEmail(user.Id, code).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<InvalidOperationException>(act).ConfigureAwait(false);
         }
 
         [Fact]
-        public void ConfirmEmail_ResultIsSucceeded_ThrowsException()
+        public void ConfirmEmail_ResultIsSucceeded_ReturnsViewResult()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -542,17 +542,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ForgotPassword_ForgotPasswordViewModelIsNull_ThrowsException()
+        public async void ForgotPassword_ForgotPasswordViewModelIsNull_ThrowsException()
         {
             // Arrange
             ForgotPasswordViewModel model = null;
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.ForgotPassword(model).Result;
+            Func<Task<IActionResult>> act = async () => await controller.ForgotPassword(model).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(act).ConfigureAwait(false);
         }
 
         [Fact]
@@ -633,17 +633,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ResetPassword_ResetPasswordViewModelIsNull_ThrowsException()
+        public async void ResetPassword_ResetPasswordViewModelIsNull_ThrowsException()
         {
             // Arrange
             ResetPasswordViewModel model = null;
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            Func<IActionResult> act = () => controller.ResetPassword(model).Result;
+            Func<Task<IActionResult>> act = async () => await controller.ResetPassword(model).ConfigureAwait(false);
 
             // Assert
-            Assert.Throws<AggregateException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(act).ConfigureAwait(false);
         }
 
         [Fact]
