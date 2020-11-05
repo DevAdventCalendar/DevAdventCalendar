@@ -353,14 +353,19 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             Uri returnUrl = null;
             string remoteError = null;
             string userId = null;
-            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+            var user = GetUser();
+            var externalLoginViewModel = new ExternalLoginViewModel();
+            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(userId)).ReturnsAsync(new ExternalLoginInfo(user, It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
             this._accountServiceMock.Setup(x => x.ExternalLoginSignInAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(SignInResult.Failed);
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
             var result = controller.ExternalLoginCallback(returnUrl, remoteError);
 
-            // Arrange - *********************zrobic*********************
+            // Arrange
+            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            Assert.Equal("ExternalLogin", viewResult.ViewName);
+            Assert.IsType<ExternalLoginViewModel>(viewResult.ViewData.Model);
         }
 
         [Fact]
@@ -752,6 +757,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             new ClaimsPrincipal(new ClaimsIdentity(new[]
             {
                         new Claim(ClaimTypes.NameIdentifier, "UserId"),
+                        new Claim(ClaimTypes.Email, "test@test.com"),
                         new Claim(ClaimTypes.Name, "Name"),
                         new Claim(ClaimTypes.Role, "Role"),
             }));
