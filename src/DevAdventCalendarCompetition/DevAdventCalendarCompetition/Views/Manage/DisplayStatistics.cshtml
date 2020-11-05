@@ -1,4 +1,4 @@
-@model DisplayStatisticsViewModel
+@model List<DisplayStatisticsViewModel>
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 @{
@@ -11,16 +11,25 @@
     <h3>@ViewData["Title"]</h3>
 </div>
 
-<!-- I wanted to use Html.Display(CorrectAnswerDateMessage) but Im unsure how to do it using css -->
-
-<div class="row">
-    <div class="col-md-12">
-        <form method="post" class="contact_form">
-            <div class="form-group text_field text_field_default">
-                <label> Pytanie x </label>
-                <input asp-for="CorrectAnswerDateMessage" disabled />
-                <input asp-for="WrongAnswerCountMessage" disabled />
-            </div>
-        </form>
-    </div>
-</div>
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            <th scope="col" class="col-xs-1">#</th>
+            <th scope="col">@StatsTestId</th>
+            <th scope="col">@StatsCorrect</th>
+            <th scope="col">@StatsWrong</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th scope="row" class="col-xs-1"></th>
+                <td>@i.TestId</td>
+                <td>@i.CorrectAnswerDateMessage</td>
+                <td>@i.WrongAnswerCount</td>
+            </tr>
+        }
+    </tbody>
+</table>

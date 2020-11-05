@@ -22,7 +22,7 @@ namespace DevAdventCalendarCompetition.Repository
          *
          *  [out] Count of submitted wrong answers
          */
-        public int GetUserTestWrongAnswerCount(string userId, int testId) // get count of wrong answers
+        public int GetUserTestWrongAnswerCount(string userId, int testId)
         {
             return this._dbContext
                 .UserTestWrongAnswers
@@ -34,7 +34,7 @@ namespace DevAdventCalendarCompetition.Repository
          *
          *  [out] Date of submission of corect answer
          */
-        public DateTime? GetUserTestCorrectAnswerDate(string userId, int testId) // get DateTime of correct answer
+        public DateTime? GetUserTestCorrectAnswerDate(string userId, int testId)
         {
             var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
             if (dbTest != null)
@@ -43,7 +43,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .UserTestCorrectAnswers
                 .Where(a => a.TestId == testId && a.UserId == userId)
                 .Select(a => a.AnsweringTime)
-                .SingleOrDefault(); // I assume there is only one row
+                .SingleOrDefault();
             }
 
             return null;

@@ -1,13 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
 using DevAdventCalendarCompetition.Models.Manage;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.Extensions.Logging;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -22,7 +25,7 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAccountService _accountService;
         private readonly ILogger _logger;
         private readonly INotificationService _emailNotificationService;
-        private readonly IStatisticsService _testStatisticsService;
+        private readonly IStatisticsService _statisticsService;
 
         public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService, IStatisticsService statisticsService)
         {
@@ -30,7 +33,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
-            this._testStatisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService)); // Temporary
+            this._statisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService)); // Temporary
         }
 
         [TempData]
@@ -274,9 +277,7 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.RedirectToAction(nameof(this.SetPassword));
         }
 
-        // TODO: check all questions
-        // I'm thinking about for that goes throgh all 24 questions and displays all of the at once.
-        // A list of models. Or a list of some class in model?
+        // mayby unnecesary conversion from DisplayStatisticsDto to DisplayStatisticsViewModel
         [HttpGet]
         public async Task<IActionResult> DisplayStatistics()
         {
@@ -286,30 +287,30 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
             }
 
-            // where to put changeable string? Controller or view?
-            // seems sketchy?
-            DateTime? answerDate = this._testStatisticsService.GetCorrectAnswerDateTime(user.Email, 1);
-            string correctAnswerDateMessage;
+            var testStats = this._statisticsService.FillResultsWithTestStats(user.Email);
+            List<DisplayStatisticsViewModel> viewTestStats = new List<DisplayStatisticsViewModel>();
+            string stringCorrectAnswerDateTime;
 
-            // Can I use Resources in controller?
-            if (answerDate == null)
+            foreach (var i in testStats)
             {
-                correctAnswerDateMessage = "Nie udzieliłeś jeszcze poprawnej odpowiedzi na to pytanie.";
+                if (i.CorrectAnswerDateTime == null)
+                {
+                    stringCorrectAnswerDateTime = "brak";
+                }
+                else
+                {
+                    stringCorrectAnswerDateTime = i.CorrectAnswerDateTime.ToString();
+                }
+
+                viewTestStats.Add(new DisplayStatisticsViewModel()
+                {
+                    CorrectAnswerDateMessage = stringCorrectAnswerDateTime,
+                    WrongAnswerCount = i.WrongAnswerCount,
+                    TestId = i.TestId
+                });
             }
-            else
-            {
-                correctAnswerDateMessage = "Poprawną odpowiedź udzieliłeś " + answerDate?.ToString(CultureInfo.InvariantCulture) + ".";
-            }
 
-            string wrongAnswerCountMessage = "Odpowiedzi do tej pory: " + this._testStatisticsService.GetWrongAnswerCount(user.Email, 1);
-
-            var model = new DisplayStatisticsViewModel
-            {
-                WrongAnswerCountMessage = wrongAnswerCountMessage,
-                CorrectAnswerDateMessage = correctAnswerDateMessage
-            };
-
-            return this.View(model);
+            return this.View(viewTestStats);
         }
 
         private void AddErrors(IdentityResult result)

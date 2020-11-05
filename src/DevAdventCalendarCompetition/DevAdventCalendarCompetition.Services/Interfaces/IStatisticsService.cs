@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
+using DevAdventCalendarCompetition.Services.Models;
 
 namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IStatisticsService
     {
-        public int GetWrongAnswerCount(string userId, int testId);
-
-        public DateTime? GetCorrectAnswerDateTime(string userId, int testId);
+        public List<DisplayStatisticsDto> FillResultsWithTestStats(string userId);
     }
 }

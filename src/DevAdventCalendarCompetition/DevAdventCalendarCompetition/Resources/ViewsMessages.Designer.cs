@@ -1357,6 +1357,33 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wysłana poprawna odpowiedź.
+        /// </summary>
+        public static string StatsCorrect {
+            get {
+                return ResourceManager.GetString("StatsCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pytanie.
+        /// </summary>
+        public static string StatsTestId {
+            get {
+                return ResourceManager.GetString("StatsTestId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błędne odpowiedzi.
+        /// </summary>
+        public static string StatsWrong {
+            get {
+                return ResourceManager.GetString("StatsWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status:.
         /// </summary>
         public static string Status {

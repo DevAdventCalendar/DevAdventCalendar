@@ -549,6 +549,15 @@
   <data name="StatisticsTab" xml:space="preserve">
     <value>Statystyki</value>
   </data>
+  <data name="StatsCorrect" xml:space="preserve">
+    <value>Wysłana poprawna odpowiedź</value>
+  </data>
+  <data name="StatsTestId" xml:space="preserve">
+    <value>Pytanie</value>
+  </data>
+  <data name="StatsWrong" xml:space="preserve">
+    <value>Błędne odpowiedzi</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status:</value>
   </data>
