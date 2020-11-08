@@ -400,26 +400,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginConfirmation_ResultIsSucceeded_ReturnsViewResult()
-        {
-            // Arrange
-            Uri returnUrl = null;
-            var model = new ExternalLoginViewModel();
-            var user = new ApplicationUser();
-            var externalLoginInfo = new ExternalLoginInfo(It.IsAny<ClaimsPrincipal>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>());
-            this._accountServiceMock.Setup(x => x.GetExternalLoginInfoAsync(null)).ReturnsAsync(externalLoginInfo);
-            this._accountServiceMock.Setup(x => x.CreateApplicationUserByEmailAndUserName(It.IsAny<string>(), It.IsAny<string>())).Returns(user);
-            this._accountServiceMock.Setup(x => x.CreateAsync(user, It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
-            this._accountServiceMock.Setup(x => x.AddLoginAsync(user, externalLoginInfo)).ReturnsAsync(IdentityResult.Success);
-            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
-
-            // Act
-            var result = controller.ExternalLoginConfirmation(model, returnUrl);
-
-            // Arrange - *********************zrobic*********************
-        }
-
-        [Fact]
         public void ExternalLoginConfirmation_ResultIsNotSucceeded_ReturnsViewResult()
         {
             // Arrange
@@ -568,23 +548,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Assert
             var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
             Assert.Equal("ForgotPasswordConfirmation", viewResult.ActionName);
-        }
-
-        [Fact]
-        public void ForgotPassword_UserIsCorrect_RedirectToAction()
-        {
-            // Arrange
-            var user = new ApplicationUser();
-            var model = new ForgotPasswordViewModel();
-            model.Email = "test@gmail.com";
-            this._accountServiceMock.Setup(x => x.FindByEmailAsync(model.Email)).ReturnsAsync(user);
-            this._accountServiceMock.Setup(x => x.IsEmailConfirmedAsync(user)).ReturnsAsync(true);
-            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
-
-            // Act
-            var result = controller.ForgotPassword(model);
-
-            // Arrange - *********************zrobic*********************
         }
 
         [Fact]
