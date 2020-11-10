@@ -10,29 +10,43 @@ namespace DevAdventCalendarCompetition.Services
 {
     public class StatisticsService : IStatisticsService
     {
-        private readonly IStatisticsRepository _statisticsService;
+        private readonly IStatisticsRepository _statisticsRepository;
 
         public StatisticsService(IStatisticsRepository statisticsRepository)
         {
-            this._statisticsService = statisticsRepository;
+            this._statisticsRepository = statisticsRepository;
         }
 
-        // TODO: unfix max testId
-        public List<DisplayStatisticsDto> FillResultsWithTestStats(string userId)
+        public List<StatisticsDto> FillResultsWithTestStats(string userId)
         {
-            List<DisplayStatisticsDto> allCurrentStats = new List<DisplayStatisticsDto>();
+            List<StatisticsDto> allCurrentStats = new List<StatisticsDto>();
 
-            for (int currentTestId = 0; currentTestId < 24; currentTestId++)
+            int currentTestId;
+            int maxNuber = this.GetHighestTestNumber(userId);
+            for (int i = 1; i <= maxNuber; i++)
             {
-                allCurrentStats.Add(new DisplayStatisticsDto()
+                currentTestId = this._statisticsRepository.GetTestIdFromTestNumber(i);
+
+                allCurrentStats.Add(new StatisticsDto()
                 {
-                    CorrectAnswerDateTime = this._statisticsService.GetUserTestCorrectAnswerDate(userId, currentTestId),
-                    WrongAnswerCount = this._statisticsService.GetUserTestWrongAnswerCount(userId, currentTestId),
-                    TestId = currentTestId + 1
+                    CorrectAnswerDateTime = this._statisticsRepository.GetUserTestCorrectAnswerDate(userId, currentTestId),
+                    WrongAnswerCount = this._statisticsRepository.GetUserTestWrongAnswerCount(userId, currentTestId),
+                    TestNumber = i
                 });
             }
 
             return allCurrentStats;
+        }
+
+        public int GetHighestTestNumber(string userId)
+        {
+            int correctMaxTestNumber = this._statisticsRepository.GetHighestTestNumber(
+                this._statisticsRepository.GetAnsweredCorrectMaxTestId(userId));
+            int wrongMaxTestNumber = this._statisticsRepository.GetHighestTestNumber(
+                this._statisticsRepository.GetAnsweredWrongMaxTestId(userId));
+
+            return correctMaxTestNumber >= wrongMaxTestNumber
+                ? correctMaxTestNumber : wrongMaxTestNumber;
         }
     }
 }

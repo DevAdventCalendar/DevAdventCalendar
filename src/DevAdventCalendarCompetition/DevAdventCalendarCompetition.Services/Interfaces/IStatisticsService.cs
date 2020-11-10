@@ -6,6 +6,8 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 {
     public interface IStatisticsService
     {
-        public List<DisplayStatisticsDto> FillResultsWithTestStats(string userId);
+        public List<StatisticsDto> FillResultsWithTestStats(string userId);
+
+        public int GetHighestTestNumber(string userId);
     }
 }

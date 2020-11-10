@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
+using DevAdventCalendarCompetition.Repository.Migrations;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,6 @@ namespace DevAdventCalendarCompetition.Repository
             this._dbContext = dbContext;
         }
 
-        /*  [in #1] ID of user that wants to know count of wrong answers
-         *  [in #2] ID of test that user wants to know count of wrong answers
-         *
-         *  [out] Count of submitted wrong answers
-         */
         public int GetUserTestWrongAnswerCount(string userId, int testId)
         {
             return this._dbContext
@@ -29,24 +25,60 @@ namespace DevAdventCalendarCompetition.Repository
                 .Count(a => a.TestId == testId && a.UserId == userId);
         }
 
-        /*  [in]#1 ID of user that wants to know when he submitted correct answer
-         *  [in]#2 ID of test that user wants to know when he submitted correct answer
-         *
-         *  [out] Date of submission of corect answer
-         */
         public DateTime? GetUserTestCorrectAnswerDate(string userId, int testId)
         {
-            var dbTest = this._dbContext.Set<Test>().FirstOrDefault(el => el.Id == testId);
-            if (dbTest != null)
+            if (!this._dbContext.Tests.Any())
             {
-                return this._dbContext
+                return null;
+            }
+
+            return this._dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.TestId == testId && a.UserId == userId)
                 .Select(a => a.AnsweringTime)
                 .SingleOrDefault();
-            }
+        }
 
-            return null;
+        public int GetAnsweredCorrectMaxTestId(string userId)
+        {
+            return this._dbContext.UserTestCorrectAnswers.Any()
+                ? this._dbContext
+                .UserTestCorrectAnswers
+                .Where(a => a.UserId == userId)
+                .Max(a => a.TestId)
+                : 0;
+        }
+
+        public int GetAnsweredWrongMaxTestId(string userId)
+        {
+            return this._dbContext.UserTestWrongAnswers.Any()
+                ? this._dbContext
+                .UserTestWrongAnswers
+                .Where(a => a.UserId == userId)
+                .Max(a => a.TestId)
+                : 0;
+        }
+
+        public int GetHighestTestNumber(int testId)
+        {
+            return this._dbContext.Tests.Any()
+                ? this._dbContext
+                .Tests
+                .Where(a => a.Id == testId)
+                .Select(a => a.Number)
+                .SingleOrDefault()
+                : 0;
+        }
+
+        public int GetTestIdFromTestNumber(int testNuber)
+        {
+            return this._dbContext.Tests.Any()
+                ? this._dbContext
+                .Tests
+                .Where(a => a.Number == testNuber)
+                .Select(a => a.Id)
+                .SingleOrDefault()
+                : 0;
         }
     }
 }
