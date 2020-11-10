@@ -35,12 +35,27 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         }
 
         [Fact]
-        public void MakeStatisticsDtoList()
+        public void GetStatisticsDtoList()
         {
             string userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
-            int testId = 5;
-            int testNumber = 3;
-            this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(testId)).Returns(testNumber);
+
+            // I assume it is wrong
+            this._statisticsRepositoryMock.Setup(a => a.GetAnsweredCorrectMaxTestId(userId)).Returns(4);
+            this._statisticsRepositoryMock.Setup(a => a.GetAnsweredWrongMaxTestId(userId)).Returns(0);
+            this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(4)).Returns(3);
+
+            for (int i = 1; i < 4; i++)
+            {
+                this._statisticsRepositoryMock.Setup(a => a.GetUserTestCorrectAnswerDate(userId, i + 2)).Returns(DateTime.MinValue.AddDays(i));
+                this._statisticsRepositoryMock.Setup(a => a.GetUserTestWrongAnswerCount(userId, i + 2)).Returns(i);
+                this._statisticsRepositoryMock.Setup(a => a.GetTestIdFromTestNumber(i)).Returns(i + 2);
+            }
+
+            var result = this._statisticsService.FillResultsWithTestStats(userId);
+
+            Assert.Equal(result[0].TestNumber, this._results[0].TestNumber);
+            Assert.Equal(result[1].CorrectAnswerDateTime, this._results[1].CorrectAnswerDateTime);
+            Assert.Equal(result[2].WrongAnswerCount, this._results[2].WrongAnswerCount);
         }
 
         [Fact]
