@@ -11,9 +11,9 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers.IdentityHelpe
 {
     public class FakeUserManager : UserManager<ApplicationUser>
     {
-        public FakeUserManager(IUserValidator<ApplicationUser> userValidator, IQueryable<ApplicationUser> users)
+        public FakeUserManager(IUserValidator<ApplicationUser> userValidator, IUserPasswordStore<ApplicationUser> userStore)
             : base(
-                new Mock<IUserPasswordStore<ApplicationUser>>().Object,
+                userStore,
                 new Mock<IOptions<IdentityOptions>>().Object,
                 new Mock<IPasswordHasher<ApplicationUser>>().Object,
                 new List<IUserValidator<ApplicationUser>> { userValidator },
@@ -23,9 +23,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers.IdentityHelpe
                 new Mock<IServiceProvider>().Object,
                 new Mock<ILogger<UserManager<ApplicationUser>>>().Object)
         {
-            this.Users = users;
         }
-
-        public override IQueryable<ApplicationUser> Users { get; }
     }
 }

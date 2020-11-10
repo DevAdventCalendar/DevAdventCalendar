@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Account;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -19,21 +19,24 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
     public class AccountControllerTests
     {
         private IUserValidator<ApplicationUser> _userValidator;
+        private Mock<IUserPasswordStore<ApplicationUser>> _userStore;
         private IAccountService _accountService;
         private ILogger<AccountController> _logger;
 
         public AccountControllerTests()
         {
+            this._userValidator = new UserValidator<ApplicationUser>();
             this._logger = new Mock<ILogger<AccountController>>().Object;
         }
 
         [Fact]
         public void Account_CannotAddUserWithExistingUsername_ThrowsException()
         {
-            var users = GetUsers().AsQueryable();
+            this._userStore = new Mock<IUserPasswordStore<ApplicationUser>>();
+            this._userStore.Setup(x => x.GetUserNameAsync(It.IsAny<ApplicationUser>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult("user1"));
 
-            this._userValidator = new UserValidator<ApplicationUser>();
-            using var userManager = new FakeUserManager(this._userValidator, users);
+            using var userManager = new FakeUserManager(this._userValidator, this._userStore.Object);
             this._accountService = new AccountService(null, userManager, null);
 
             var registerViewModel = new RegisterViewModel
@@ -49,18 +52,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             var exception = Assert.Throws<InvalidOperationException>(result);
             Assert.Equal(exception.Message, ExceptionsMessages.UserWithNameExists);
-        }
-
-        private static List<ApplicationUser> GetUsers()
-        {
-            return new List<ApplicationUser>()
-            {
-                new ApplicationUser
-                {
-                    Email = "user1@gmail.com",
-                    UserName = "user1"
-                }
-            };
         }
 
         private AccountController CreateAccountController()
