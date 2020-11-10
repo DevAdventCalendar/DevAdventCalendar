@@ -679,7 +679,7 @@
     <value>Gramy do&lt;br&gt;24 grudnia</value>
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
-    <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
+    <value>Nie martw się, dla uproszczenia usuniemy nadmiarowe spacje z odpowiedzi</value>
   </data>
   <data name="WeStartIn" xml:space="preserve">
     <value>Zapnij pasy! Startujemy już za</value>

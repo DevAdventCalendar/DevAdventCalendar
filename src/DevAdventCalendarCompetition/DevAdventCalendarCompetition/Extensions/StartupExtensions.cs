@@ -146,6 +146,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddTransient<IAdventService, AdventService>();
+            services.AddTransient<IAnswerService, AnswerService>();
             services.AddTransient<IdentityService>();
 
             services.AddAutoMapper(typeof(AdminService));
