@@ -16,9 +16,9 @@ namespace DevAdventCalendarCompetition.Services.Models
         public List<TestAnswerDto> Answers { get; set; }
 #pragma warning restore CA2227 // Collection properties should be read only
 
-        public Uri SponsorLogoUrl { get; set; }
+        public Uri PartnerLogoUrl { get; set; }
 
-        public string SponsorName { get; set; }
+        public string PartnerName { get; set; }
 
         public DateTime? StartDate { get; set; }
 
@@ -35,5 +35,7 @@ namespace DevAdventCalendarCompetition.Services.Models
         public string DiscountLogoPath { get; set; }
 
         public bool HasUserAnswered { get; set; }
+
+        public string UserAnswer { get; set; }
     }
 }

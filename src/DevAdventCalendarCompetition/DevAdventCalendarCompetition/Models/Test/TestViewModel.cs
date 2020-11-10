@@ -28,11 +28,11 @@ namespace DevAdventCalendarCompetition.Models.Test
         public List<string> Answers { get; set; } = new List<string>();
 #pragma warning restore CA2227 // Collection properties should be read only
 
-        [Display(Name = "Nazwa sponsora")]
-        public string SponsorName { get; set; }
+        [Display(Name = "Nazwa partnera")]
+        public string PartnerName { get; set; }
 
-        [Display(Name = "Logo sponsora (ścieżka)")]
-        public Uri SponsorLogoUrl { get; set; }
+        [Display(Name = "Logo partnera (ścieżka)")]
+        public Uri PartnerLogoUrl { get; set; }
 
         [Display(Name = "Zniżka")]
         public string Discount { get; set; }

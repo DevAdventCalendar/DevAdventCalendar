@@ -8,6 +8,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -20,11 +21,13 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
     {
         private readonly Mock<ITestService> _testServiceMock;
         private readonly Mock<IAdminService> _adminServiceMock;
+        private readonly Mock<IAnswerService> _answerServiceMock;
 
         public AdminControllerTests()
         {
            this._testServiceMock = new Mock<ITestService>();
            this._adminServiceMock = new Mock<IAdminService>();
+           this._answerServiceMock = new Mock<IAnswerService>();
         }
 
         [Fact]
@@ -38,7 +41,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             this._adminServiceMock.Setup(x => x.GetAllTests()).Returns(testList);
 
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             var result = controller.Index();
@@ -53,7 +56,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         public void AddTest_ModelIsNull_ThrowsException()
         {
             // Arrange
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             Func<ActionResult> act = () => controller.AddTest(null);
@@ -66,7 +69,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         public void AddTest_ModelStateIsInvalid_ReturnsViewWithInvalidModel()
         {
             // Arrange
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
             controller.ModelState.AddModelError("Number", "Required");
 
             // Act
@@ -82,7 +85,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             this._testServiceMock.Setup(x => x.GetTestByNumber(It.IsAny<int>())).Returns(GetTestDto());
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             var result = controller.AddTest(GetTestViewModel());
@@ -100,7 +103,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         {
             // Arrange
             this._testServiceMock.Setup(x => x.GetTestByNumber(It.IsAny<int>())).Returns((TestDto)null);
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             var result = controller.AddTest(GetTestViewModel());
@@ -117,7 +120,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.Started);
             this._adminServiceMock.Setup(x => x.GetTestById(test.Id)).Returns(test);
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             Func<ActionResult> act = () => controller.StartTest(test.Id, "20");
@@ -135,7 +138,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var previousTest = GetTest(TestStatus.Started);
             this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
             this._adminServiceMock.Setup(x => x.GetPreviousTest(It.IsAny<int>())).Returns(previousTest);
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             Func<ActionResult> act = () => controller.StartTest(test.Id, "20");
@@ -154,7 +157,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var previousTest = GetTest(TestStatus.Ended);
             this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
             this._adminServiceMock.Setup(x => x.GetPreviousTest(It.IsAny<int>())).Returns(previousTest);
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             var result = controller.StartTest(test.Id, minutes);
@@ -171,7 +174,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.NotStarted);
             this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             Func<ActionResult> act = () => controller.EndTest(test.Id);
@@ -187,7 +190,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.Started);
             this._adminServiceMock.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(test);
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
+            using var controller = this.CreateAdminController();
 
             // Act
             var result = controller.EndTest(test.Id);
@@ -196,20 +199,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             this._adminServiceMock.Verify(x => x.UpdateTestEndDate(test.Id, It.IsAny<DateTime>()), Times.Once);
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectToActionResult.ActionName);
-        }
-
-        [Fact]
-        public void CalculateResults_IncorrectWeekNumber_ReturnsBadRequestResult()
-        {
-            // Arrange
-            var incorrectWeekNumber = -1;
-            using var controller = new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object);
-
-            // Act
-            var result = controller.CalculateResults(incorrectWeekNumber);
-
-            // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
         }
 
         [Fact]
@@ -254,8 +243,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             {
                 "Answer"
             },
-            SponsorName = null,
-            SponsorLogoUrl = null,
+            PartnerName = null,
+            PartnerLogoUrl = null,
             Discount = null,
             DiscountUrl = null,
             DiscountLogoUrl = null,
@@ -267,6 +256,11 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTestDto();
             test.Status = status;
             return test;
+        }
+
+        private AdminController CreateAdminController()
+        {
+            return new AdminController(this._adminServiceMock.Object, this._answerServiceMock.Object, this._testServiceMock.Object, new TestSettings());
         }
     }
 }

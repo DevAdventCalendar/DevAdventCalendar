@@ -7,6 +7,7 @@ using DevAdventCalendarCompetition.Models.Manage;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +27,21 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly ILogger _logger;
         private readonly INotificationService _emailNotificationService;
         private readonly IStatisticsService _statisticsService;
+        private readonly IGoogleCalendarService _googleCalendarService;
 
-        public ManageController(IManageService manageService, IAccountService accountService, ILogger<ManageController> logger, INotificationService emailNotificationService, IStatisticsService statisticsService)
+        public ManageController(
+            IManageService manageService,
+            IAccountService accountService,
+            ILogger<ManageController> logger,
+            INotificationService emailNotificationService,
+            IGoogleCalendarService googleCalendarService,
+            IStatisticsService statisticsService)
         {
             this._manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
             this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
+            this._googleCalendarService = googleCalendarService ?? throw new ArgumentNullException(nameof(googleCalendarService));
             this._statisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService)); // Temporary
         }
 
@@ -98,6 +107,16 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 shouldSendVerificationEmail = true;
                 model.EmailNotificationsEnabled = false;
+            }
+
+            var userName = user.UserName;
+            if (model.Username != userName)
+            {
+                var setUserNameResult = await this._manageService.SetUserNameAsync(user, model.Username).ConfigureAwait(false);
+                if (!setUserNameResult.Succeeded)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringUserNameChange, this._accountService.GetUserId(this.User)));
+                }
             }
 
             if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
@@ -275,6 +294,49 @@ namespace DevAdventCalendarCompetition.Controllers
             this.StatusMessage = "Your password has been set.";
 
             return this.RedirectToAction(nameof(this.SetPassword));
+        }
+
+        public IActionResult AuthorizeAccessToGoogleCalendar()
+        {
+            return this.Challenge(
+                new AuthenticationProperties
+                {
+                    RedirectUri = this.Url.Action(nameof(this.AuthorizationCallback), "Manage")
+                },
+                "Calendar");
+        }
+
+        public async Task<IActionResult> AuthorizationCallback()
+        {
+            var response = await this._googleCalendarService.CreateNewCalendarWithEvents();
+            this.StatusMessage = MapStatusToMessage(response.Status);
+            return this.RedirectToAction(nameof(this.GoogleCalendarIntegration));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GoogleCalendarIntegration()
+        {
+            var userHasPermissions = await this.CheckIfUserHasPermissions();
+            var model = new GoogleCalendarViewModel
+            {
+                HasPermissions = userHasPermissions,
+                StatusMessage = this.StatusMessage
+            };
+            return this.View(model);
+        }
+
+        private static string MapStatusToMessage(OperationalResultStatus status) =>
+            status switch
+            {
+                OperationalResultStatus.Success => ViewsMessages.GoogleCalendarSuccess,
+                OperationalResultStatus.CalendarFailure => ViewsMessages.GoogleCalendarError,
+                OperationalResultStatus.EventsFailure => ViewsMessages.GoogleEventsError,
+                _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
+            };
+
+        private async Task<bool> CheckIfUserHasPermissions()
+        {
+            return await this.HttpContext.GetTokenAsync("Calendar", "access_token") != null;
         }
 
         // mayby unnecesary conversion from DisplayStatisticsDto to DisplayStatisticsViewModel

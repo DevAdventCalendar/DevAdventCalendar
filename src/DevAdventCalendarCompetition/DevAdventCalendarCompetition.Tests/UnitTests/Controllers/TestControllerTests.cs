@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using DevAdventCalendarCompetition.Controllers;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -21,10 +19,12 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
     public class TestControllerTests
     {
         private readonly Mock<ITestService> _testServiceMock;
+        private readonly Mock<IAnswerService> _answerServiceMock;
 
         public TestControllerTests()
         {
             this._testServiceMock = new Mock<ITestService>();
+            this._answerServiceMock = new Mock<IAnswerService>();
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(true);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = null }
@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(false);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = null }
@@ -75,7 +75,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTestDto();
             this._testServiceMock.Setup(x => x.GetTestByNumber(It.IsAny<int>())).Returns(test);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
 
             // Act
             var result = controller.Index(test.Number, null);
@@ -95,13 +95,14 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns((TestDto)null);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
 
             // Act
             var result = controller.Index(test.Id, "answer");
 
             // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var viewResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal(404, viewResult.StatusCode);
         }
 
         [Fact]
@@ -111,7 +112,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var test = GetTest(TestStatus.Ended);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(true);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = GetUser() }
@@ -132,7 +133,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.NotStarted);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = GetUser() }
@@ -155,7 +156,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             // Arrange
             var test = GetTest(TestStatus.Ended);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = GetUser() }
@@ -173,26 +174,29 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_WrongAnswer_ReturnsViewWithError()
+        public void Index_WrongAnswer_ReturnsViewWithErrorAndUserAnswer()
         {
             // Arrange
+            var usersWrongAnswer = "wrongAnswer";
             var test = GetTest(TestStatus.Started);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
-            using var controller = new TestController(this._testServiceMock.Object);
+            this._answerServiceMock.Setup(x => x.ParseTestAnswer(usersWrongAnswer)).Returns(usersWrongAnswer);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = GetUser() }
             };
 
             // Act
-            var result = controller.Index(test.Id, "wrongAnswer");
+            var result = controller.Index(test.Id, usersWrongAnswer);
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == ExceptionsMessages.ErrorTryAgain);
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            var answer = Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            Assert.Equal(usersWrongAnswer, answer.UserAnswer, ignoreCase: true);
         }
 
         [Fact]
@@ -214,7 +218,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
                 AnsweringTimeOffset = default
             };
             this._testServiceMock.Setup(x => x.GetAnswerByTestId(test.Id)).Returns(userTestCorrectAnswerDto);
-            using var controller = new TestController(this._testServiceMock.Object);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = user }

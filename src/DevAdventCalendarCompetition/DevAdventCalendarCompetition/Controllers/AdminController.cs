@@ -7,6 +7,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Services.Options;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,20 @@ namespace DevAdventCalendarCompetition.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly IAnswerService _answerService;
         private readonly ITestService _testService;
+        private readonly TestSettings _testSettings;
 
-        public AdminController(IAdminService adminService, ITestService testService)
+        public AdminController(
+            IAdminService adminService,
+            IAnswerService answerService,
+            ITestService testService,
+            TestSettings testSettings)
         {
             this._adminService = adminService ?? throw new ArgumentNullException(nameof(adminService));
+            this._answerService = answerService;
             this._testService = testService ?? throw new ArgumentNullException(nameof(testService));
+            this._testSettings = testSettings;
         }
 
         [HttpGet]
@@ -60,13 +69,11 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
 
                 // automatically set start and end time
-                model.StartDate = model.StartDate.AddHours(20).AddMinutes(00);
-                model.EndDate = model.EndDate.AddHours(23).AddMinutes(59);
+                model = this.SetHours(model);
 
                 var answers = model.Answers.Where(a => !string.IsNullOrWhiteSpace(a)).Select(a => new TestAnswerDto()
                 {
-                    Answer = a.ToUpper(CultureInfo.InvariantCulture)
-                        .Replace(" ", string.Empty, StringComparison.Ordinal)
+                    Answer = this._answerService.ParseTestAnswer(a)
                 }).ToList();
 
                 var testDto = new TestDto
@@ -76,8 +83,8 @@ namespace DevAdventCalendarCompetition.Controllers
                     Answers = answers,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    SponsorLogoUrl = model.SponsorLogoUrl,
-                    SponsorName = model.SponsorName,
+                    PartnerLogoUrl = model.PartnerLogoUrl,
+                    PartnerName = model.PartnerName,
                     Discount = model.Discount,
                     DiscountUrl = model.DiscountUrl,
                     DiscountLogoUrl = model.DiscountLogoUrl,
@@ -124,16 +131,11 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public ActionResult CalculateResults(int weekNumber)
+        private TestViewModel SetHours(TestViewModel model)
         {
-            if (weekNumber < 1 || weekNumber > 4)
-            {
-                return this.BadRequest("Błędny numer tygodnia.");
-            }
-
-            Process.Start(@"c:\\Windows\\System32\\cmd.exe", weekNumber.ToString(CultureInfo.CurrentCulture.DateTimeFormat));
-            return this.Ok();
+            model.StartDate = model.StartDate.AddTicks(this._testSettings.StartHour.Ticks);
+            model.EndDate = model.EndDate.AddTicks(this._testSettings.EndHour.Ticks);
+            return model;
         }
     }
 }

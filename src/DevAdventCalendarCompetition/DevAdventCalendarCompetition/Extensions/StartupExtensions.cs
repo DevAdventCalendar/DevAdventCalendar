@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Net.Http.Headers;
 using System.Text;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
@@ -10,6 +11,7 @@ using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -57,6 +59,53 @@ namespace DevAdventCalendarCompetition.Extensions
             return services;
         }
 
+        public static IServiceCollection AddTestConfiguration(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.AddOptions<TestSettings>()
+                .Bind(configuration.GetSection("Test"))
+                .ValidateDataAnnotations();
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<TestSettings>>().Value);
+            return services;
+        }
+
+        public static IServiceCollection AddGoogleCalendarConfiguration(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            services.AddOptions<GoogleCalendarSettings>()
+                .Bind(configuration.GetSection("Authentication:Google:CalendarAPI:Calendar"))
+                .ValidateDataAnnotations();
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<GoogleCalendarSettings>>().Value);
+            return services;
+        }
+
+        public static IServiceCollection RegisterGoogleHttpClient(this IServiceCollection services)
+        {
+            var googleCalendarBaseUri = @"https://www.googleapis.com/calendar/v3/";
+            services.AddHttpContextAccessor();
+            services.AddHttpClient<IGoogleCalendarService, GoogleCalendarService>(
+                async (services, client) =>
+                {
+                    var accessor = services.GetRequiredService<IHttpContextAccessor>();
+                    var accessToken = await accessor.HttpContext.GetTokenAsync("Calendar", "access_token");
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    client.BaseAddress = new Uri(googleCalendarBaseUri);
+                });
+            return services;
+        }
+
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -100,6 +149,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IAdventService, AdventService>();
             services.AddTransient<IAdventService, AdventService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IAnswerService, AnswerService>();
             services.AddTransient<IdentityService>();
 
             services.AddAutoMapper(typeof(AdminService));
@@ -133,6 +183,19 @@ namespace DevAdventCalendarCompetition.Extensions
             {
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            })
+            .AddOAuth("Calendar", googleOptions =>
+            {
+                googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                var googleCalendarConfig = configuration.GetSection("Authentication:Google:CalendarAPI");
+                googleOptions.AuthorizationEndpoint = googleCalendarConfig["AuthorizationEndpoint"];
+                googleOptions.TokenEndpoint = googleCalendarConfig["TokenEndpoint"];
+                googleOptions.Scope.Add(googleCalendarConfig["CalendarScope"]);
+                googleOptions.Scope.Add(googleCalendarConfig["EventsScope"]);
+                googleOptions.CallbackPath = googleCalendarConfig["CallbackPath"];
+                googleOptions.UsePkce = Convert.ToBoolean(googleCalendarConfig["UsePkce"], CultureInfo.InvariantCulture);
+                googleOptions.SaveTokens = Convert.ToBoolean(googleCalendarConfig["SaveTokens"], CultureInfo.InvariantCulture);
             })
             .AddGitHub(githubOptions =>
             {

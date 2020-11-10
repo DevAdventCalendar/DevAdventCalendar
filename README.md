@@ -7,7 +7,7 @@
 [![Follow DevAdventCalendar](https://img.shields.io/twitter/follow/dev_advent_cal?label=Follow%20%40dev_advent_cal&style=social)](https://twitter.com/dev_advent_cal)
 [![Follow DevAdventCalendar](https://img.shields.io/badge/FB-Dev%20Advent%20Calendar-blue)](https://www.facebook.com/devadventcalendar/)
 
-DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](www.devadventcalenar.pl)
+DevAdventCalendar web app for online competition for programmers : [www.devadventcalendar.pl](https://devadventcalendar.pl/)
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/DevAdventCalendar/DevAdventCalendar)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/DevAdventCalendar/DevAdventCalendar)
