@@ -37,7 +37,7 @@ namespace DevAdventCalendarCompetition.Services
             var calendarResponse = await this.CreateCalendar();
             if (!calendarResponse.IsSuccessStatusCode)
             {
-                return OperationalResult.Failure(OperationalResultStatus.CalendarFailure); // test 1 sprawdzic czy zwraca failure callendar jeden mock httpclient
+                return OperationalResult.Failure(OperationalResultStatus.CalendarFailure);
             }
 
             var newCalendar = await calendarResponse.Content.ReadFromJsonAsync<CalendarDto>();
@@ -45,10 +45,10 @@ namespace DevAdventCalendarCompetition.Services
 
             if (eventsResponse.IsSuccessStatusCode)
             {
-                return OperationalResult.Success(); // test 1 czy zwraca succes dwa mocki
+                return OperationalResult.Success();
             }
 
-            return OperationalResult.Failure(OperationalResultStatus.EventsFailure); // test 1 czy failure event dwa mocki
+            return OperationalResult.Failure(OperationalResultStatus.EventsFailure);
         }
 
         private async Task<HttpResponseMessage> CreateCalendar()
