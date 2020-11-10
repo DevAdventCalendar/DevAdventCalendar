@@ -6,8 +6,8 @@ namespace DevAdventCalendarCompetition.Models.Manage
     {
         public int WrongAnswerCount { get; set; }
 
-        public string CorrectAnswerDateMessage { get; set; }
+        public DateTime? CorrectAnswerDate { get; set; }
 
-        public int TestId { get; set; }
+        public int TestNumber { get; set; }
     }
 }

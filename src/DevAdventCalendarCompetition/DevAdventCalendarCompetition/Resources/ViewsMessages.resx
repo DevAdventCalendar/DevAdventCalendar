@@ -576,13 +576,10 @@
   <data name="StartTime" xml:space="preserve">
     <value>Czas rozpoczęcia:</value>
   </data>
-  <data name="StatisticsTab" xml:space="preserve">
-    <value>Statystyki</value>
-  </data>
   <data name="StatsCorrect" xml:space="preserve">
     <value>Wysłana poprawna odpowiedź</value>
   </data>
-  <data name="StatsTestId" xml:space="preserve">
+  <data name="StatsTestNumber" xml:space="preserve">
     <value>Pytanie</value>
   </data>
   <data name="StatsWrong" xml:space="preserve">

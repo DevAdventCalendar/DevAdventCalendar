@@ -16,19 +16,19 @@
     <thead>
         <tr>
             <th scope="col" class="col-xs-1">#</th>
-            <th scope="col">@StatsTestId</th>
+            <th scope="col">@StatsTestNumber</th>
             <th scope="col">@StatsCorrect</th>
             <th scope="col">@StatsWrong</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var i in Model)
+        @foreach (var curresntStat in Model)
         {
             <tr>
                 <th scope="row" class="col-xs-1"></th>
-                <td>@i.TestId</td>
-                <td>@i.CorrectAnswerDateMessage</td>
-                <td>@i.WrongAnswerCount</td>
+                <td>@curresntStat.TestNumber</td>
+                <td>@curresntStat.CorrectAnswerDate</td>
+                <td>@curresntStat.WrongAnswerCount</td>
             </tr>
         }
     </tbody>

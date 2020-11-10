@@ -325,6 +325,31 @@ namespace DevAdventCalendarCompetition.Controllers
             return this.View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DisplayStatistics()
+        {
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
+            }
+
+            var testStats = this._statisticsService.FillResultsWithTestStats(user.Id);
+            List<DisplayStatisticsViewModel> viewTestStats = new List<DisplayStatisticsViewModel>();
+
+            foreach (var stat in testStats)
+            {
+                viewTestStats.Add(new DisplayStatisticsViewModel()
+                {
+                    CorrectAnswerDate = (stat.CorrectAnswerDateTime == DateTime.MinValue) ? null : stat.CorrectAnswerDateTime,
+                    WrongAnswerCount = stat.WrongAnswerCount,
+                    TestNumber = stat.TestNumber
+                });
+            }
+
+            return this.View(viewTestStats);
+        }
+
         private static string MapStatusToMessage(OperationalResultStatus status) =>
             status switch
             {
@@ -337,42 +362,6 @@ namespace DevAdventCalendarCompetition.Controllers
         private async Task<bool> CheckIfUserHasPermissions()
         {
             return await this.HttpContext.GetTokenAsync("Calendar", "access_token") != null;
-        }
-
-        // mayby unnecesary conversion from DisplayStatisticsDto to DisplayStatisticsViewModel
-        [HttpGet]
-        public async Task<IActionResult> DisplayStatistics()
-        {
-            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
-            if (user == null)
-            {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
-            }
-
-            var testStats = this._statisticsService.FillResultsWithTestStats(user.Email);
-            List<DisplayStatisticsViewModel> viewTestStats = new List<DisplayStatisticsViewModel>();
-            string stringCorrectAnswerDateTime;
-
-            foreach (var i in testStats)
-            {
-                if (i.CorrectAnswerDateTime == null)
-                {
-                    stringCorrectAnswerDateTime = "brak";
-                }
-                else
-                {
-                    stringCorrectAnswerDateTime = i.CorrectAnswerDateTime.ToString();
-                }
-
-                viewTestStats.Add(new DisplayStatisticsViewModel()
-                {
-                    CorrectAnswerDateMessage = stringCorrectAnswerDateTime,
-                    WrongAnswerCount = i.WrongAnswerCount,
-                    TestId = i.TestId
-                });
-            }
-
-            return this.View(viewTestStats);
         }
 
         private void AddErrors(IdentityResult result)
