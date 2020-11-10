@@ -37,6 +37,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         [Fact]
         public void GetStatisticsDtoList()
         {
+            // ARRANGE
             string userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
 
             // I assume it is wrong
@@ -51,8 +52,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
                 this._statisticsRepositoryMock.Setup(a => a.GetTestIdFromTestNumber(i)).Returns(i + 2);
             }
 
+            // ACT
             var result = this._statisticsService.FillResultsWithTestStats(userId);
 
+            // ASSERT
             Assert.Equal(result[0].TestNumber, this._results[0].TestNumber);
             Assert.Equal(result[1].CorrectAnswerDateTime, this._results[1].CorrectAnswerDateTime);
             Assert.Equal(result[2].WrongAnswerCount, this._results[2].WrongAnswerCount);
@@ -61,6 +64,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
         [Fact]
         public void GetHighestTestNumberForNoTests()
         {
+            // ARRANGE
             string userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             int noTests = 0;
 
@@ -68,14 +72,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             this._statisticsRepositoryMock.Setup(a => a.GetAnsweredWrongMaxTestId(userId)).Returns(0);
             this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(0)).Returns(0);
 
+            // ACT
             var result = this._statisticsService.GetHighestTestNumber(userId);
 
+            // ASSERT
             Assert.Equal(result, noTests);
         }
 
         [Fact]
         public void GetHighestTestNumberForNoCorrectAnswers()
         {
+            // ARRANGE
             string userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             int twoWrongAnswers = 2;
 
@@ -83,14 +90,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             this._statisticsRepositoryMock.Setup(a => a.GetAnsweredWrongMaxTestId(userId)).Returns(4);
             this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(4)).Returns(2);
 
+            // ACT
             var result = this._statisticsService.GetHighestTestNumber(userId);
 
+            // ASSERT
             Assert.Equal(result, twoWrongAnswers);
         }
 
         [Fact]
         public void GetHighestTestNumberForNoWrongAnswers()
         {
+            // ARRANGE
             string userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             int twoCorrectAnswers = 2;
 
@@ -98,14 +108,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             this._statisticsRepositoryMock.Setup(a => a.GetAnsweredWrongMaxTestId(userId)).Returns(0);
             this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(4)).Returns(2);
 
+            // ACT
             var result = this._statisticsService.GetHighestTestNumber(userId);
 
+            // ASSERT
             Assert.Equal(result, twoCorrectAnswers);
         }
 
         [Fact]
         public void GetHighestTestNumberForSomeWrongAndCorrectAnswers()
         {
+            // ARRANGE
             string userId = "c611530e-bebd-41a9-ace2-951550edbfa0";
             int twoCorrectAnswersAreHigher = 2;
 
@@ -114,8 +127,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests
             this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(4)).Returns(2);
             this._statisticsRepositoryMock.Setup(a => a.GetHighestTestNumber(3)).Returns(1);
 
+            // ACT
             var result = this._statisticsService.GetHighestTestNumber(userId);
 
+            // ASSERT
             Assert.Equal(result, twoCorrectAnswersAreHigher);
         }
     }
