@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
@@ -19,6 +20,14 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             : base()
         {
         }
+
+        public static List<object[]> WrongAnswerTestData => new List<object[]>
+        {
+            new object[] { GetTest(1), "Wrong", DateTime.Now.AddHours(-8) },
+            new object[] { GetTest(), "Wrong Answer", DateTime.Now.AddHours(18) },
+            new object[] { GetTest(3), "   Wrong    ", DateTime.Now.AddDays(1).AddHours(15) },
+            new object[] { GetTest(4), " Wrong   answer WRONG answer  ", DateTime.Now.AddDays(2).AddHours(14) }
+        };
 
         [Fact]
         public void GetTestByNumber_GetsTestByNumber()
@@ -69,12 +78,15 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             }
         }
 
-        [Fact]
-        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer()
+        [Theory]
+        [MemberData(nameof(WrongAnswerTestData))]
+        public void AddTestWrongAnswer_UserAnsweredWrongly_AddsUserWrongAnswer(Test test, string wrongAnswer, DateTime wrongAnswerDate)
         {
-            var test = GetTest();
-            var startDate = DateTime.Now;
-            var wrongAnswer = "Wrong";
+            if (test == null)
+            {
+                throw new ArgumentNullException(nameof(test));
+            }
+
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 context.Tests.Add(test);
@@ -85,7 +97,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 var testService = PrepareSUT(context);
 
-                testService.AddTestWrongAnswer(TestUserId, test.Id, wrongAnswer, startDate);
+                testService.AddTestWrongAnswer(TestUserId, test.Id, wrongAnswer, wrongAnswerDate);
             }
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
