@@ -293,17 +293,17 @@ namespace DevAdventCalendarCompetition.Resources {
                 return ResourceManager.GetString("BackToPuzzles", resourceCulture);
             }
         }
-        
         /// <summary>
         ///   Looks up a localized string similar to Oblicz.
         /// </summary>
-        public static string Calculate {
-            get {
+        public static string Calculate
+        {
+            get
+            {
                 return ResourceManager.GetString("Calculate", resourceCulture);
             }
         }
-        
-        /// <summary>
+
         ///   Looks up a localized string similar to Zmiana hasła.
         /// </summary>
         public static string ChangePassword {
