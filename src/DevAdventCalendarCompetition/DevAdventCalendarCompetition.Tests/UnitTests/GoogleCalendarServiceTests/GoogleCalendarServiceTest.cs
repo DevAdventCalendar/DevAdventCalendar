@@ -28,8 +28,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.GoogleCalendarServiceTest
                 Summary = "TestEvent",
                 TimeZone = "Warsaw"
             },
-            CalendarsUrl = "https://www.googleapis.com/calendar/v3/calendars",
-            EventsUrl = "https://www.googleapis.com/calendar/v3/calendars/{0}/events"
+            CalendarsEndpoint = "https://www.googleapis.com/calendar/v3/calendars",
+            EventsEndpoint = "https://www.googleapis.com/calendar/v3/calendars/{0}/events"
         };
 
         private readonly AdventSettings _adventSettings = new AdventSettings()
@@ -49,11 +49,11 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.GoogleCalendarServiceTest
         {
             var messages = new Dictionary<string, HttpResponseMessage>()
             {
-                [this._googleCalendarSettings.CalendarsUrl] = new HttpResponseMessage()
+                [this._googleCalendarSettings.CalendarsEndpoint] = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                 },
-                [this._googleCalendarSettings.EventsUrl] = new HttpResponseMessage()
+                [this._googleCalendarSettings.EventsEndpoint] = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                 }
@@ -84,7 +84,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.GoogleCalendarServiceTest
             var eventsUrl = this.GetEventsUrl(newCalendarId);
             var messages = new Dictionary<string, HttpResponseMessage>()
             {
-                [this._googleCalendarSettings.CalendarsUrl] = new HttpResponseMessage()
+                [this._googleCalendarSettings.CalendarsEndpoint] = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK,
                     Content = new StringContent(
@@ -121,7 +121,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.GoogleCalendarServiceTest
             var eventsUrl = this.GetEventsUrl(newCalendarId);
             var messages = new Dictionary<string, HttpResponseMessage>()
             {
-                [this._googleCalendarSettings.CalendarsUrl] = new HttpResponseMessage()
+                [this._googleCalendarSettings.CalendarsEndpoint] = new HttpResponseMessage()
                 {
                     StatusCode = HttpStatusCode.OK,
                     Content = new StringContent(
@@ -152,7 +152,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.GoogleCalendarServiceTest
 
         private string GetEventsUrl(string calendarId) => string.Format(
             CultureInfo.InvariantCulture,
-            this._googleCalendarSettings.EventsUrl,
+            this._googleCalendarSettings.EventsEndpoint,
             calendarId);
     }
 }

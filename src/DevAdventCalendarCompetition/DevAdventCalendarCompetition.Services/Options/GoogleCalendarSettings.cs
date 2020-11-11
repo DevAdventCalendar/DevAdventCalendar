@@ -11,13 +11,9 @@ namespace DevAdventCalendarCompetition.Services.Options
         public CalendarEvent Events { get; set; }
 
         [Required]
-#pragma warning disable CA1056 // Uri properties should not be strings
-        public string CalendarsUrl { get; set; }
-#pragma warning restore CA1056 // Uri properties should not be strings
+        public string CalendarsEndpoint { get; set; }
 
         [Required]
-#pragma warning disable CA1056 // Uri properties should not be strings
-        public string EventsUrl { get; set; }
-#pragma warning restore CA1056 // Uri properties should not be strings
+        public string EventsEndpoint { get; set; }
     }
 }

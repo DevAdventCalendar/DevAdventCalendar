@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Services
                 Summary = this._calendarSettings.Summary
             };
 
-            var uri = new System.Uri(this._calendarSettings.CalendarsUrl);
+            var uri = new System.Uri(this._calendarSettings.CalendarsEndpoint);
             return await this._httpClient.PostAsJsonAsync(uri, newCalendar);
         }
 
@@ -105,7 +105,7 @@ namespace DevAdventCalendarCompetition.Services
 
             var uri = new System.Uri(string.Format(
                 CultureInfo.InvariantCulture,
-                this._calendarSettings.EventsUrl, calendarId));
+                this._calendarSettings.EventsEndpoint, calendarId));
             return await this._httpClient.PostAsJsonAsync(uri, newEvents);
         }
     }
