@@ -2,14 +2,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Models.GoogleCalendar;
 using DevAdventCalendarCompetition.Services.Options;
-using Newtonsoft.Json;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -58,12 +55,8 @@ namespace DevAdventCalendarCompetition.Services
                 Summary = this._calendarSettings.Summary
             };
 
-            using (var content = new StringContent(JsonConvert.SerializeObject(newCalendar), Encoding.UTF8, MediaTypeNames.Application.Json))
-            {
-                var uri = new System.Uri(this._calendarSettings.CalendarsEndpoint);
-                var response = await this._httpClient.PostAsync(uri, content);
-                return response;
-            }
+            var uri = new System.Uri(this._calendarSettings.CalendarsUrl);
+            return await this._httpClient.PostAsJsonAsync(uri, newCalendar);
         }
 
         private async Task<HttpResponseMessage> CreateEvents(string calendarId)
@@ -109,12 +102,11 @@ namespace DevAdventCalendarCompetition.Services
                     }
                 }
             };
-            using (var content = new StringContent(JsonConvert.SerializeObject(newEvents), Encoding.UTF8, MediaTypeNames.Application.Json))
-            {
-                var uri = new System.Uri(string.Format(CultureInfo.InvariantCulture, this._calendarSettings.EventsEndpoint, calendarId));
-                var response = this._httpClient.PostAsync(uri, content);
-                return await response;
-            }
+
+            var uri = new System.Uri(string.Format(
+                CultureInfo.InvariantCulture,
+                this._calendarSettings.EventsUrl, calendarId));
+            return await this._httpClient.PostAsJsonAsync(uri, newEvents);
         }
     }
 }
