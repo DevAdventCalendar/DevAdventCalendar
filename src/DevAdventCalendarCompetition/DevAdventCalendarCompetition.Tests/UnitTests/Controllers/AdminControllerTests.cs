@@ -21,11 +21,13 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
     {
         private readonly Mock<ITestService> _testServiceMock;
         private readonly Mock<IAdminService> _adminServiceMock;
+        private readonly Mock<IAnswerService> _answerServiceMock;
 
         public AdminControllerTests()
         {
            this._testServiceMock = new Mock<ITestService>();
            this._adminServiceMock = new Mock<IAdminService>();
+           this._answerServiceMock = new Mock<IAnswerService>();
         }
 
         [Fact]
@@ -241,8 +243,8 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             {
                 "Answer"
             },
-            SponsorName = null,
-            SponsorLogoUrl = null,
+            PartnerName = null,
+            PartnerLogoUrl = null,
             Discount = null,
             DiscountUrl = null,
             DiscountLogoUrl = null,
@@ -258,7 +260,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
         private AdminController CreateAdminController()
         {
-            return new AdminController(this._adminServiceMock.Object, this._testServiceMock.Object, new TestSettings());
+            return new AdminController(this._adminServiceMock.Object, this._answerServiceMock.Object, this._testServiceMock.Object, new TestSettings());
         }
     }
 }
