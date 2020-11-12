@@ -38,24 +38,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Login_ReturnsLoginViewModel()
-        {
-            // Arrange
-            Uri returnUrl = null;
-            using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
-            controller.ControllerContext = new ControllerContext()
-            {
-                HttpContext = new DefaultHttpContext() { RequestServices = GetRequestService() }
-            };
-
-            // Act
-            var result = controller.Login(returnUrl);
-
-            // Assert
-            var viewResult = Assert.IsType<Task<IActionResult>>(result);
-        }
-
-        [Fact]
         public async void Login_LoginViewModelIsNull_ThrowsException()
         {
             // Arrange
@@ -71,7 +53,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Login_UserIsNull_ReturnsViewWithError()
+        public async void Login_UserIsNull_ReturnsViewWithError()
         {
             // Arrange
             Uri returnUrl = null;
@@ -80,17 +62,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.Login(model, returnUrl);
+            var result = await controller.Login(model, returnUrl).ConfigureAwait(false);
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == @EmailNotFound);
-            var viewResult = Assert.IsType<Task<IActionResult>>(result);
+            Assert.IsType<ViewResult>(result);
         }
 
         [Fact]
-        public void Login_EmailNotConfirmed_ReturnsViewWithError()
+        public async void Login_EmailNotConfirmed_ReturnsViewWithError()
         {
             // Arrange
             Uri returnUrl = null;
@@ -100,18 +82,18 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.Login(model, returnUrl);
+            var result = await controller.Login(model, returnUrl).ConfigureAwait(false);
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == @EmailMustBeConfirmed);
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<LoginViewModel>(viewResult.ViewData.Model);
         }
 
         [Fact]
-        public void Login_ResultIsSucceeded_RedirectToLocal()
+        public async void Login_ResultIsSucceeded_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -126,15 +108,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             controller.Url = mockUrlHelper.Object;
 
             // Act
-            var result = controller.Login(model, returnUrl);
+            var result = await controller.Login(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", viewResult.ActionName);
         }
 
         [Fact]
-        public void Login_ResultIsLockedOut_RedirectToLocal()
+        public async void Login_ResultIsLockedOut_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -146,15 +128,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.Login(model, returnUrl);
+            var result = await controller.Login(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Lockout", viewResult.ActionName);
         }
 
         [Fact]
-        public void Login_FailedLogin_ReturnsViewWithError()
+        public async void Login_FailedLogin_ReturnsViewWithError()
         {
             // Arrange
             Uri returnUrl = null;
@@ -166,13 +148,13 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.Login(model, returnUrl);
+            var result = await controller.Login(model, returnUrl).ConfigureAwait(false);
 
             // Assert
             var allErrors = controller.ModelState.Values.SelectMany(v => v.Errors);
             Assert.Single(allErrors);
             Assert.Contains(allErrors, x => x.ErrorMessage == @FailedLoginAttempt);
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.IsType<LoginViewModel>(viewResult.ViewData.Model);
         }
 
@@ -222,16 +204,16 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Logout_RedirectToAction()
+        public async void Logout_RedirectToAction()
         {
             // Arrange
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.Logout();
+            var result = await controller.Logout().ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", viewResult.ActionName);
         }
 
@@ -255,7 +237,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginCallback_RemoteErrorIsNotNull_RedirectToAction()
+        public async void ExternalLoginCallback_RemoteErrorIsNotNull_RedirectToAction()
         {
             // Arrange
             Uri returnUrl = null;
@@ -263,15 +245,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+            var result = await controller.ExternalLoginCallback(returnUrl, remoteError).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Login", viewResult.ActionName);
         }
 
         [Fact]
-        public void ExternalLoginCallback_InfoIsNull_RedirectToAction()
+        public async void ExternalLoginCallback_InfoIsNull_RedirectToAction()
         {
             // Arrange
             Uri returnUrl = null;
@@ -279,15 +261,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+            var result = await controller.ExternalLoginCallback(returnUrl, remoteError).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Login", viewResult.ActionName);
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResultIsSuccessed_RedirectToLocal()
+        public async void ExternalLoginCallback_ResultIsSuccessed_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -301,15 +283,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             controller.Url = mockUrlHelper.Object;
 
             // Act
-            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+            var result = await controller.ExternalLoginCallback(returnUrl, remoteError).ConfigureAwait(false);
 
             // Arrange
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", viewResult.ActionName);
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResultIsNotAllowed_RedirectToLocal()
+        public async void ExternalLoginCallback_ResultIsNotAllowed_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -320,15 +302,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+            var result = await controller.ExternalLoginCallback(returnUrl, remoteError).ConfigureAwait(false);
 
             // Arrange
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("RegisterConfirmation", viewResult.ViewName);
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResultIsLockedOut_RedirectToLocal()
+        public async void ExternalLoginCallback_ResultIsLockedOut_RedirectToLocal()
         {
             // Arrange
             Uri returnUrl = null;
@@ -339,15 +321,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+            var result = await controller.ExternalLoginCallback(returnUrl, remoteError).ConfigureAwait(false);
 
             // Arrange
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Lockout", viewResult.ActionName);
         }
 
         [Fact]
-        public void ExternalLoginCallback_ResultIsNotLockedOut_ReturnsViewResult()
+        public async void ExternalLoginCallback_ResultIsNotLockedOut_ReturnsViewResult()
         {
             // Arrange
             Uri returnUrl = null;
@@ -360,10 +342,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ExternalLoginCallback(returnUrl, remoteError);
+            var result = await controller.ExternalLoginCallback(returnUrl, remoteError).ConfigureAwait(false);
 
             // Arrange
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("ExternalLogin", viewResult.ViewName);
             Assert.IsType<ExternalLoginViewModel>(viewResult.ViewData.Model);
         }
@@ -400,7 +382,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ExternalLoginConfirmation_ResultIsNotSucceeded_ReturnsViewResult()
+        public async void ExternalLoginConfirmation_ResultIsNotSucceeded_ReturnsViewResult()
         {
             // Arrange
             Uri returnUrl = null;
@@ -413,15 +395,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ExternalLoginConfirmation(model, returnUrl);
+            var result = await controller.ExternalLoginConfirmation(model, returnUrl).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("ExternalLogin", viewResult.ViewName);
         }
 
         [Fact]
-        public void ConfirmEmail_UserIdIsNull_RedirectToAction()
+        public async void ConfirmEmail_UserIdIsNull_RedirectToAction()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -429,15 +411,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ConfirmEmail(user.Id, code);
+            var result = await controller.ConfirmEmail(user.Id, code).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", viewResult.ActionName);
         }
 
         [Fact]
-        public void ConfirmEmail_CodeIsNull_RedirectToAction()
+        public async void ConfirmEmail_CodeIsNull_RedirectToAction()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -445,15 +427,15 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ConfirmEmail(user.Id, code);
+            var result = await controller.ConfirmEmail(user.Id, code).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", viewResult.ActionName);
         }
 
         [Fact]
-        public void ConfirmEmail_EmailIsConfirmed_ReturnsViewResult()
+        public async void ConfirmEmail_EmailIsConfirmed_ReturnsViewResult()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -463,10 +445,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ConfirmEmail(user.Id, code);
+            var result = await controller.ConfirmEmail(user.Id, code).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("EmailAlreadyConfirmed", viewResult.ViewName);
         }
 
@@ -489,7 +471,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ConfirmEmail_ResultIsSucceeded_ReturnsViewResult()
+        public async void ConfirmEmail_ResultIsSucceeded_ReturnsViewResult()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -500,10 +482,10 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ConfirmEmail(user.Id, code);
+            var result = await controller.ConfirmEmail(user.Id, code).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(result.Result);
+            var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Null(viewResult.Model);
         }
 
@@ -536,17 +518,17 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ForgotPassword_UserIsNull_RedirectToAction()
+        public async void ForgotPassword_UserIsNull_RedirectToAction()
         {
             // Arrange
             var model = new ForgotPasswordViewModel();
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ForgotPassword(model);
+            var result = await controller.ForgotPassword(model).ConfigureAwait(false);
 
             // Assert
-            var viewResult = Assert.IsType<RedirectToActionResult>(result.Result);
+            var viewResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("ForgotPasswordConfirmation", viewResult.ActionName);
         }
 
@@ -610,7 +592,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ResetPassword_ModelStateIsNotValid_ReturnsViewResult()
+        public async void ResetPassword_ModelStateIsNotValid_ReturnsViewResult()
         {
             // Arrange
             var model = new ResetPasswordViewModel();
@@ -618,7 +600,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             controller.ModelState.AddModelError("error", "message");
 
             // Act
-            var result = controller.ResetPassword(model).Result;
+            var result = await controller.ResetPassword(model).ConfigureAwait(false);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
@@ -626,7 +608,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ResetPassword_UserIsNull_RedirectToAction()
+        public async void ResetPassword_UserIsNull_RedirectToAction()
         {
             // Arrange
             ApplicationUser user = null;
@@ -635,7 +617,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ResetPassword(model).Result;
+            var result = await controller.ResetPassword(model).ConfigureAwait(false);
 
             // Assert
             var viewResult = Assert.IsType<RedirectToActionResult>(result);
@@ -643,7 +625,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ResetPassword_ResultIsSucceeded_RedirectToAction()
+        public async void ResetPassword_ResultIsSucceeded_RedirectToAction()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -653,7 +635,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ResetPassword(model).Result;
+            var result = await controller.ResetPassword(model).ConfigureAwait(false);
 
             // Assert
             var viewResult = Assert.IsType<RedirectToActionResult>(result);
@@ -661,7 +643,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void ResetPassword_ResultIsNotSucceeded_ReturnsViewResult()
+        public async void ResetPassword_ResultIsNotSucceeded_ReturnsViewResult()
         {
             // Arrange
             var user = new ApplicationUser();
@@ -671,7 +653,7 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             using var controller = new AccountController(this._accountServiceMock.Object, this._loggerMock.Object);
 
             // Act
-            var result = controller.ResetPassword(model).Result;
+            var result = await controller.ResetPassword(model).ConfigureAwait(false);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
