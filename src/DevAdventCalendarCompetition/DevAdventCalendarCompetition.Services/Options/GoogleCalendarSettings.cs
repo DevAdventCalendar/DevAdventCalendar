@@ -9,5 +9,11 @@ namespace DevAdventCalendarCompetition.Services.Options
 
         [Required]
         public CalendarEvent Events { get; set; }
+
+        [Required]
+        public string CalendarsEndpoint { get; set; }
+
+        [Required]
+        public string EventsEndpoint { get; set; }
     }
 }
