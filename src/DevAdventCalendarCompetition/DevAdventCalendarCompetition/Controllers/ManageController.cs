@@ -140,6 +140,37 @@ namespace DevAdventCalendarCompetition.Controllers
                 }
             }
 
+            if (model.EmailNotificationsEnabled != user.EmailNotificationsEnabled)
+            {
+                user.EmailNotificationsEnabled = model.EmailNotificationsEnabled;
+                var updateEmailNotificationPreferencesSucceeded =
+                    await this._emailNotificationService
+                        .SetSubscriptionPreferenceAsync(user.Email, user.EmailNotificationsEnabled && user.EmailConfirmed)
+                        .ConfigureAwait(false)
+                    && (await this._manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+
+                if (updateEmailNotificationPreferencesSucceeded == false)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailNotificationsPreferenceChange, this._accountService.GetUserId(this.User)));
+                }
+            }
+
+            if (model.PushNotificationsEnabled != user.PushNotificationsEnabled)
+            {
+                user.PushNotificationsEnabled = model.PushNotificationsEnabled;
+                var updatePushNotificationPreferencesSucceeded = (await this._manageService.UpdateUserAsync(user).ConfigureAwait(false)).Succeeded;
+
+                if (updatePushNotificationPreferencesSucceeded == false)
+                {
+                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringPushNotificationsPreferenceChange, this._accountService.GetUserId(this.User)));
+                }
+            }
+
+            if (shouldSendVerificationEmail)
+            {
+                return await this.SendVerificationEmail(model).ConfigureAwait(false);
+            }
+
             if (shouldSendVerificationEmail)
             {
                 return await this.SendVerificationEmail(model).ConfigureAwait(false);
