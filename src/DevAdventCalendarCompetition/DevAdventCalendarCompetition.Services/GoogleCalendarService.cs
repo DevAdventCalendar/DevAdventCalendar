@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -53,7 +54,9 @@ namespace DevAdventCalendarCompetition.Services
             {
                 Summary = this._calendarSettings.Summary
             };
-            return await this._httpClient.PostAsJsonAsync("calendars", newCalendar);
+
+            var uri = new System.Uri(this._calendarSettings.CalendarsEndpoint);
+            return await this._httpClient.PostAsJsonAsync(uri, newCalendar);
         }
 
         private async Task<HttpResponseMessage> CreateEvents(string calendarId)
@@ -99,7 +102,11 @@ namespace DevAdventCalendarCompetition.Services
                     }
                 }
             };
-            return await this._httpClient.PostAsJsonAsync($"calendars/{calendarId}/events", newEvents);
+
+            var uri = new System.Uri(string.Format(
+                CultureInfo.InvariantCulture,
+                this._calendarSettings.EventsEndpoint, calendarId));
+            return await this._httpClient.PostAsJsonAsync(uri, newEvents);
         }
     }
 }
