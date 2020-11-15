@@ -717,4 +717,7 @@
   <data name="YourStats" xml:space="preserve">
     <value>Twoje statystyki wyglądają następująco:</value>
   </data>
+  <data name="UserNameChangeNotification" xml:space="preserve">
+    <value>Możesz teraz ustawić sobie nazwę użytkownika! Nazwa ta będzie widoczna publicznie w tabeli wyników.</value>
+  </data>
 </root>

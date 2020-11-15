@@ -18,7 +18,7 @@
         <form method="post" class="contact_form">
             @if (Model.Email == Model.Username)
             {
-                <div class="alert alert-info" role="alert">Możesz teraz ustawić sobie nazwę użytkownika! Nazwa ta będzie widoczna publicznie w tabeli wyników.</div>
+                <div class="alert alert-info" role="alert">@UserNameChangeNotification</div>
             }
 
             <div class="form-group text_field text_field_default">
