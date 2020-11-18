@@ -233,19 +233,35 @@
                         <div class="col-xs-12 col-md-2 mb-30">
                             @if (i < 3)
                             {
-                                <div class="border prize-wrapper flex-column flex-fullheight">
-                                    <div class="area_title text-center mb-30">
-                                        <h3>@string.Format(CultureInfo.InvariantCulture, @Week.ToUpper(),  (i +1))</h3>
-                                    </div>
-                                    @if (i == 0)
-                                    {
-                                        <div class="flex-centered flex-grow">
-                                            <a href="https://www.objectivity.co.uk/" target="_blank">
-                                                <img src="~/theme-2019/images/partners/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
-                                            </a>
-                                        </div>
-                                    }
+                            <div class="border prize-wrapper flex-column flex-fullheight">
+                                <div class="area_title text-center mb-30">
+                                    <h3>@string.Format(CultureInfo.InvariantCulture, @Week.ToUpper(), (i + 1))</h3>
                                 </div>
+                                @if (i == 0)
+                                {
+                                    <div class="flex-centered flex-grow">
+                                        <a href="https://career.softserveinc.com/en-us/poland" target="_blank">
+                                            <img src="~/theme-2019/images/partners/softserve.jpg" alt="softserve" title="SoftServe" class="img-responsive center-block" />
+                                        </a>
+                                    </div>
+                                }
+                                @if (i == 1)
+                                {
+                                    <div class="flex-centered flex-grow">
+                                        <a href="https://cshark.com/" target="_blank">
+                                            <img src="~/theme-2019/images/partners/cshark.jpg" alt="cshark" title="CShark" class="img-responsive center-block" />
+                                        </a>
+                                    </div>
+                                }
+                                @if (i == 2)
+                                {
+                                    <div class="flex-centered flex-grow">
+                                        <a href="https://spyro-soft.com" target="_blank">
+                                            <img src="~/theme-2019/images/partners/spyrosoft.jpg" alt="spyrosoft" title="Spyrosoft" class="img-responsive center-block" />
+                                        </a>
+                                    </div>
+                                }
+                            </div>
                             }
                         </div><!-- /sponsor -->
 
