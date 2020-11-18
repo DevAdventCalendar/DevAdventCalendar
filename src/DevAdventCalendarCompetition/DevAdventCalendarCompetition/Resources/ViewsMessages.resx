@@ -729,4 +729,7 @@
   <data name="UserNameChangeNotification" xml:space="preserve">
     <value>Możesz teraz ustawić sobie nazwę użytkownika! Nazwa ta będzie widoczna publicznie w tabeli wyników.</value>
   </data>
+  <data name="MainPartner" xml:space="preserve">
+    <value>Partner główny</value>
+  </data>
 </root>
