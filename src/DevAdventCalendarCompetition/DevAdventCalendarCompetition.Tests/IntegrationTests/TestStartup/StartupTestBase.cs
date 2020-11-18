@@ -23,7 +23,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.Test.json", false, true)
+                .AddJsonFile("appsettings.json", false, true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
