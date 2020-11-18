@@ -4,7 +4,24 @@
     ViewData["Title"] = @AccessDenied;
 }
 
-<header>
-    <h2 class="text-danger">@ViewData["Title"]</h2>
-    <p class="text-danger">@NoAccessToResources</p>
-</header>
+<div class="breadcrumb_area">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb_wrapper">
+                <div class="page_title">
+                    <h3>@Error</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="event_txt">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>@NoAccessToResources</h1>
+            </div>
+        </div>
+    </div>
+</section>
