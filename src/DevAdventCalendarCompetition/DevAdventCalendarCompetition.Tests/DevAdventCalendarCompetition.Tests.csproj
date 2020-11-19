@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\DevAdventCalendarCompetition\appsettings.Development.json" Link="appsettings.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.13.0" />
     <PackageReference Include="AutoFixture.AutoMoq" Version="4.13.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.13.0" />

@@ -21,11 +21,8 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup
         static StartupTestBase()
 #pragma warning restore CA1810 // Initialize reference type static fields inline
         {
-            var pathToAppsettingsDev = Path.GetFullPath(@"../../../../DevAdventCalendarCompetition");
             var builder = new ConfigurationBuilder()
-                .SetBasePath(pathToAppsettingsDev)
                 .AddJsonFile("appsettings.Development.json", optional: false, true)
-                .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, true)
                 .AddEnvironmentVariables();
 
