@@ -160,6 +160,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Użytkownik o tej nazwie już istnieje. Wybierz inną..
+        /// </summary>
+        public static string UserWithNameExists {
+            get {
+                return ResourceManager.GetString("UserWithNameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Niepoprawny format daty zmiennej Configuration:EndDate lub Configuration:StartDate w appsettings. Użyj domyślnego formatu {0}..
         /// </summary>
         public static string WrongFormatOfDate {

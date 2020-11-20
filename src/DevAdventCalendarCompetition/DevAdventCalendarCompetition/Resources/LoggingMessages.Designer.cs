@@ -140,5 +140,14 @@ namespace DevAdventCalendarCompetition.Resources {
                 return ResourceManager.GetString("UserLoginProvider", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} not exist.
+        /// </summary>
+        public static string UserNotExist {
+            get {
+                return ResourceManager.GetString("UserNotExist", resourceCulture);
+            }
+        }
     }
 }
