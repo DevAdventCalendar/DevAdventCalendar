@@ -28,6 +28,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Nito.AsyncEx" Version="5.1.0" />
     <PackageReference Include="Respawn" Version="3.3.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
