@@ -15,7 +15,7 @@ jobs:
     tags: dev
   strategy:
     runOnce:
-      preDeploy:
+      deploy:
         steps:
         - script: docker ps --filter name=devcal*
 
