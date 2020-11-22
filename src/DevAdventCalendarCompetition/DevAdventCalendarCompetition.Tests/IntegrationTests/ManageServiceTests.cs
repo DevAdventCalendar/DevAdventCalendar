@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -12,6 +9,7 @@ using static DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup.Sta
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 {
+    [Collection("AccountTestCollection")]
     public class ManageServiceTests : IntegrationStartupTestBase
     {
         [Fact]

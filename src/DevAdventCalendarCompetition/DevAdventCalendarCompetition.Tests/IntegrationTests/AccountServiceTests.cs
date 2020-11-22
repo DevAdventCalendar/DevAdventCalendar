@@ -9,6 +9,7 @@ using static DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup.Sta
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 {
+    [Collection("AccountTestCollection")]
     public class AccountServiceTests : IntegrationStartupTestBase
     {
         [Fact]
