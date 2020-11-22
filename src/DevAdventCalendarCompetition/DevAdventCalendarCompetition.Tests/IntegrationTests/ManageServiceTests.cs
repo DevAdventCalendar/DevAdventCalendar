@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
-using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup.StartupTestBase;
+using static DevAdventCalendarCompetition.Tests.TestHelper;
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 {
@@ -16,19 +16,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public async Task SetEmailAsync_CannotUpdateEmailToTheExistingOne()
         {
             // Arrange
-            var users = new[]
-            {
-                new ApplicationUser
-                {
-                    UserName = "testUser",
-                    Email = "test@mail.com"
-                },
-                new ApplicationUser
-                {
-                    UserName = "testUser1",
-                    Email = "test1@mail.com"
-                },
-            };
+            var users = CreateTestUsers();
 
             var newEmail = "test1@mail.com";
             await AddApplicationUserAsync(users[0]).ConfigureAwait(false);
@@ -48,19 +36,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         public async Task SetUserNameAsync_CannotUpdateUserNameToTheExistingOne()
         {
             // Arrange
-            var users = new[]
-            {
-                new ApplicationUser
-                {
-                    UserName = "testUser",
-                    Email = "test@mail.com"
-                },
-                new ApplicationUser
-                {
-                    UserName = "testUser1",
-                    Email = "test1@mail.com"
-                },
-            };
+            var users = CreateTestUsers();
 
             var newUserName = "testUser1";
             await AddApplicationUserAsync(users[0]).ConfigureAwait(false);
@@ -74,6 +50,74 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             result.Should().NotBe(IdentityResult.Success);
             result.Errors.Should().HaveCount(1);
             result.Errors.Should().Contain(x => x.Code == "DuplicateUserName");
+        }
+
+        [Fact]
+        public async Task UpdateUserAsync_CannotUpdateUserWithOtherUsersName()
+        {
+            // Arrange
+            var users = CreateTestUsers();
+
+            var newUserName = "testUser1";
+            await AddApplicationUserAsync(users[0]).ConfigureAwait(false);
+            await AddApplicationUserAsync(users[1]).ConfigureAwait(false);
+            users[0].UserName = newUserName;
+
+            // Act
+            var result = await ExecuteAsync<IManageService, IdentityResult>(manageService =>
+                manageService.UpdateUserAsync(users[0])).ConfigureAwait(false);
+
+            // Assert
+            result.Should().NotBe(IdentityResult.Success);
+            result.Errors.Should().HaveCount(1);
+            result.Errors.Should().Contain(x => x.Code == "DuplicateUserName");
+        }
+
+        [Fact]
+        public async Task UpdateUserAsync_CannotUpdateUserWithOtherUsersEmail()
+        {
+            // Arrange
+            var users = CreateTestUsers();
+
+            var newEmail = "test1@mail.com";
+            await AddApplicationUserAsync(users[0]).ConfigureAwait(false);
+            await AddApplicationUserAsync(users[1]).ConfigureAwait(false);
+            users[0].Email = newEmail;
+
+            // Act
+            var result = await ExecuteAsync<IManageService, IdentityResult>(manageService =>
+                manageService.UpdateUserAsync(users[0])).ConfigureAwait(false);
+
+            // Assert
+            result.Should().NotBe(IdentityResult.Success);
+            result.Errors.Should().HaveCount(1);
+            result.Errors.Should().Contain(x => x.Code == "DuplicateEmail");
+        }
+
+        [Fact]
+        public async Task UpdateUserAsync_CannotUpdateUserWithOtherUsersNameAndEmail()
+        {
+            // Arrange
+            var users = CreateTestUsers();
+
+            var newUserName = "testUser1";
+            var newEmail = "test1@mail.com";
+
+            await AddApplicationUserAsync(users[0]).ConfigureAwait(false);
+            await AddApplicationUserAsync(users[1]).ConfigureAwait(false);
+
+            users[0].UserName = newUserName;
+            users[0].Email = newEmail;
+
+            // Act
+            var result = await ExecuteAsync<IManageService, IdentityResult>(manageService =>
+                manageService.UpdateUserAsync(users[0])).ConfigureAwait(false);
+
+            // Assert
+            result.Should().NotBe(IdentityResult.Success);
+            result.Errors.Should().HaveCount(2);
+            result.Errors.Should().Contain(x => x.Code == "DuplicateUserName");
+            result.Errors.Should().Contain(x => x.Code == "DuplicateEmail");
         }
     }
 }
