@@ -1,8 +1,11 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Respawn;
@@ -30,6 +33,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup
 
             var startup = new Startup(Configuration);
             var services = new ServiceCollection();
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "aspnet-DevAdventCalendarCompetition-Testing"));
             startup.ConfigureServices(services);
             ScopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
             Checkpoint = new Checkpoint
