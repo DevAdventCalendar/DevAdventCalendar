@@ -7,7 +7,7 @@ trigger:
 - master
 
 jobs:
-- deployment: deploy
+- deployment: target_test
   displayName: 'Deployment target test'
   environment:
     name:  Server
