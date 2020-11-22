@@ -120,29 +120,35 @@
   <data name="About" xml:space="preserve">
     <value>O nas</value>
   </data>
-  <data name="AboutDarekGrund" xml:space="preserve">
-    <value>Frontend developer. Z komputerami i programowaniem związany od czasów Amigi 500. Prywatnie miłośnik kawy, książki użytkowej i długich wycieczek. Zafascynowany kierunkiem w jakim rozwija się technologia.</value>
+  <data name="AboutPiotrKrol" xml:space="preserve">
+    <value>Test Manager w jednej z wrocławskich firm. W wolnym czasie pasjonat czytania kryminałów i thrillerów oraz aktywnego spędzania czasu na wycieczkach górskich.</value>
+  </data>
+  <data name="AboutKrzysztofSiera" xml:space="preserve">
+    <value>Student, a przede wszystkim pasjonat robotyki, gier komputerowych i GameJamów. Rozwijający wiedzę o C++, C# i Unity. Miłośnik historii oraz wszystkiego co wysoko - od górskich szczytów po odległe planety.</value>
   </data>
   <data name="AboutKamilSmieszek" xml:space="preserve">
     <value>Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi spalić nieco benzyny na torze wyścigowym i tworzyć trance.</value>
   </data>
   <data name="AboutMichalGellert" xml:space="preserve">
-    <value>Organizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href="https://www.michalgellert.pl/" target="_blank" rel="noopener noreferrer" class="link"&gt;www.michalgellert.pl&lt;/a&gt;.</value>
+    <value>Współorganizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim, co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href="https://www.michalgellert.pl/" target="_blank" rel="noopener noreferrer" class="link"&gt;www.michalgellert.pl&lt;/a&gt;.</value>
   </data>
-  <data name="AboutMikolajJakubowski" xml:space="preserve">
-    <value>Wykonawca aplikacji z 2017 roku i twórca logo. Programista różnych technologii m.in. PHP, Java, .NET, zależy co na daną chwilę potrzeba. Artysta zarówno kodując jak i hobbystycznie. Uwielbia rysować zarówno cyfrowo jak i standardowo. Ponadto crossfiter, mąż i tata.</value>
+  <data name="AboutKamilJarzebski" xml:space="preserve">
+    <value>Student, który do projektu trafił szukając nowych wyzwań. Miłośnik kawy oraz filmów Marvela. W wolnym czasie lubi grać w planszowki ze znajomymi lub dokształcać się z zakresu ekonomii.</value>
   </data>
-  <data name="AboutOliwiaMatusik" xml:space="preserve">
-    <value>Junior .Net Dev. Wolontariuszka i inicjatorka Geek Girls Carrots Katowice. Uzależniona od kawy, miłośniczka nowych technologii i Sci-Fi i Fantasy. Wolny czas lubi aktywnie spędzać trenując pole dance i ćwicząc jogę.</value>
+  <data name="AboutGrzegorzMutkowski" xml:space="preserve">
+    <value>Pasjonat programowania, automatyzacji oraz linuxa. W wolnych chwilach uwielbia seriale, rower oraz podróże, zarówno bliższe jak i te dalsze.</value>
   </data>
-  <data name="AboutParykLotzwi" xml:space="preserve">
+  <data name="AboutPatrykLotzwi" xml:space="preserve">
     <value>Programista .NET, fan(atyk) automatyzacji. Pasjonat programowania i czystego kodu. Aktywny uczestnik lokalnych konferencji i grup programistycznych. Po godzinach miłośnik książek, filmów, seriali i gier fantasy oraz sci-fi.</value>
   </data>
-  <data name="AboutRadekMaziarka" xml:space="preserve">
-    <value>Solution Architect, Team Leader i programista w obszarze .NET prowadzący prezentacje i szkolenia, a także organizujący konferencje programistyczne. Po pracy pomaga firmom w projektach IT oraz wspomaga technologicznie Stowarzyszenie Libertariańskie. Zwolennik dostarczania wartości małymi krokami.</value>
+  <data name="AboutMateuszGolombniak" xml:space="preserve">
+    <value>Dotnetomaniak z niesłabnącym zapałem do rozwoju. Nie tylko twierdzący, że "to zależy" ale również starający się odpowiedzieć "od czego". Pilny student - niedługo inżynier informatyki.</value>
   </data>
-  <data name="AboutWeronika" xml:space="preserve">
-    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href="http://www.programmer-girl.com" target="_blank" rel="noopener noreferrer" class="link"&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Współorganizator Wrocławskiej grupy .NET oraz konferencji Wroc#.</value>
+  <data name="AboutKrystianBrozek" xml:space="preserve">
+    <value>Trener z wieloletnią praktyką w zakresie nauczania technologii w obszarze IT, programista fullstack, ze szczególnym uwzględnieniem zakresu baz danych - głównie w obszarze technologii Microsoftu.  Specjalista, nauczyciel i partner biznesowy, który z wiedzą, umiejętnościami, pasją i zaangażowaniem wprowadza swoich słuchaczy w świat programowania.</value>
+  </data>
+  <data name="AboutWeronikaMularczyk" xml:space="preserve">
+    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href="http://www.programmer-girl.com" target="_blank" rel="noopener noreferrer" class="link"&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Microsoft MVP i współorganizator Wrocławskiej grupy .NET.</value>
   </data>
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
@@ -186,11 +192,11 @@
   <data name="Back" xml:space="preserve">
     <value>Powrót</value>
   </data>
+  <data name="BackToPuzzles" xml:space="preserve">
+    <value>Wróć do zagadek</value>
+  </data>
   <data name="Calculate" xml:space="preserve">
     <value>Oblicz</value>
-  </data>
-  <data name="CalculateResults" xml:space="preserve">
-    <value>Oblicz wyniki</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmiana hasła</value>
@@ -243,8 +249,8 @@
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
-  <data name="DoYouWantBeSponsor2020" xml:space="preserve">
-    <value>Chcesz zostać sponsorem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
+  <data name="DoYouWantToBePartner2020" xml:space="preserve">
+    <value>Chcesz zostać partnerem i wesprzeć dobrą inicjatywę w 2020 roku?</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -266,6 +272,12 @@
   </data>
   <data name="EmailForRegistrationConfirmedDescription" xml:space="preserve">
     <value>Twój e-mail został już potwierdzony. Naciśnij poniższy przycisk, aby się zalogować.</value>
+  </data>
+  <data name="EmailMustBeConfirmed" xml:space="preserve">
+    <value>Musisz najpierw potwierdzić swoje konto!</value>
+  </data>
+  <data name="EmailNotFound" xml:space="preserve">
+    <value>Nie znaleziono takiego konta.</value>
   </data>
   <data name="EndTime" xml:space="preserve">
     <value>Czas zakończenia:</value>
@@ -293,6 +305,9 @@
   </data>
   <data name="ExternalRegistrationDescriptionPart2" xml:space="preserve">
     <value>Wpisz poniżej adres e-mail dla tej witryny i kliknij przycisk Zarejestruj, aby zakończyć rejestrację.</value>
+  </data>
+  <data name="FailedLoginAttempt" xml:space="preserve">
+    <value>Niepoprawna próba logowania.</value>
   </data>
   <data name="FbEvent" xml:space="preserve">
     <value>Wydarzenie na FB</value>
@@ -468,8 +483,8 @@
   <data name="Prizes" xml:space="preserve">
     <value>Nagrody</value>
   </data>
-  <data name="PrizesSponsors" xml:space="preserve">
-    <value>Sponsorzy nagród</value>
+  <data name="PrizesPartners" xml:space="preserve">
+    <value>Partnerzy nagród</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
@@ -552,13 +567,13 @@
   <data name="SocialMedia" xml:space="preserve">
     <value>media społecznościowe:</value>
   </data>
-  <data name="SponsorOfTheDay" xml:space="preserve">
-    <value>Sponsorem dnia jest</value>
+  <data name="PartnerOfTheDay" xml:space="preserve">
+    <value>Partnerem dnia jest</value>
   </data>
-  <data name="Sponsors" xml:space="preserve">
-    <value>Sponsorzy</value>
+  <data name="Partners" xml:space="preserve">
+    <value>Partnerzy</value>
   </data>
-  <data name="SponsorsAndPartners" xml:space="preserve">
+  <data name="LastYearPartners" xml:space="preserve">
     <value>W tamtym roku wsparli nas</value>
   </data>
   <data name="StartTest" xml:space="preserve">
@@ -660,8 +675,8 @@
   <data name="Week3ScoreDescription" xml:space="preserve">
     <value>Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00.</value>
   </data>
-  <data name="WeeklySponsors" xml:space="preserve">
-    <value>Sponsorzy tygodni</value>
+  <data name="WeeklyPartners" xml:space="preserve">
+    <value>Partnerzy tygodni</value>
   </data>
   <data name="WeekNumber" xml:space="preserve">
     <value>Numer tygodnia (1, 2, 3 lub 4 - dla wszystkich wyników)</value>
@@ -673,7 +688,7 @@
     <value>Gramy do&lt;br&gt;24 grudnia</value>
   </data>
   <data name="WeRemovedWhiteSpaces" xml:space="preserve">
-    <value>Nie martw się, dla uproszczenia usuniemy spacje z odpowiedzi</value>
+    <value>Nie martw się, dla uproszczenia usuniemy nadmiarowe spacje z odpowiedzi</value>
   </data>
   <data name="WeStartIn" xml:space="preserve">
     <value>Zapnij pasy! Startujemy już za</value>
@@ -710,5 +725,11 @@
   </data>
   <data name="YourStats" xml:space="preserve">
     <value>Twoje statystyki wyglądają następująco:</value>
+  </data>
+  <data name="UserNameChangeNotification" xml:space="preserve">
+    <value>Możesz teraz ustawić sobie nazwę użytkownika! Nazwa ta będzie widoczna publicznie w tabeli wyników.</value>
+  </data>
+  <data name="MainPartner" xml:space="preserve">
+    <value>Partner główny</value>
   </data>
 </root>

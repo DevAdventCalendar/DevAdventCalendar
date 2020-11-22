@@ -93,7 +93,6 @@ namespace DevAdventCalendarCompetition.Extensions
 
         public static IServiceCollection RegisterGoogleHttpClient(this IServiceCollection services)
         {
-            var googleCalendarBaseUri = @"https://www.googleapis.com/calendar/v3/";
             services.AddHttpContextAccessor();
             services.AddHttpClient<IGoogleCalendarService, GoogleCalendarService>(
                 async (services, client) =>
@@ -101,7 +100,6 @@ namespace DevAdventCalendarCompetition.Extensions
                     var accessor = services.GetRequiredService<IHttpContextAccessor>();
                     var accessToken = await accessor.HttpContext.GetTokenAsync("Calendar", "access_token");
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                    client.BaseAddress = new Uri(googleCalendarBaseUri);
                 });
             return services;
         }
@@ -146,6 +144,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddTransient<IAdventService, AdventService>();
+            services.AddTransient<IAnswerService, AnswerService>();
             services.AddTransient<IdentityService>();
 
             services.AddAutoMapper(typeof(AdminService));

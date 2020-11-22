@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using static DevAdventCalendarCompetition.Resources.ExceptionsMessages;
+using static DevAdventCalendarCompetition.Resources.ViewsMessages;
 
 namespace DevAdventCalendarCompetition.Controllers
 {
@@ -63,15 +64,15 @@ namespace DevAdventCalendarCompetition.Controllers
 
                 if (user == null)
                 {
-                    this._logger.LogWarning($"User {model.Email} not exists.");
-                    this.ModelState.AddModelError("Email", "Nie znaleziono takiego konta.");
+                    this._logger.LogWarning(LoggingMessages.UserNotExist, model.Email);
+                    this.ModelState.AddModelError("Email", @EmailNotFound);
                     return this.View(model);
                 }
 
                 if (!user.EmailConfirmed)
                 {
                     this._logger.LogInformation(LoggingMessages.UserIsNotConfirmed);
-                    this.ModelState.AddModelError("Email", "Musisz najpierw potwierdzić swoje konto!");
+                    this.ModelState.AddModelError("Email", @EmailMustBeConfirmed);
                     return this.View(model);
                 }
 
@@ -92,7 +93,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     return this.RedirectToAction(nameof(this.Lockout));
                 }
 
-                this.ModelState.AddModelError("Email", "Niepoprawna próba logowania.");
+                this.ModelState.AddModelError("Email", @FailedLoginAttempt);
                 return this.View(model);
             }
 
@@ -177,7 +178,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             if (remoteError != null)
             {
-                this.ErrorMessage = $"Błąd od zewnętrznego dostawcy: {remoteError}";
+                this.ErrorMessage = @ExternalLoginFailureDescription;
                 return this.RedirectToAction(nameof(this.Login));
             }
 

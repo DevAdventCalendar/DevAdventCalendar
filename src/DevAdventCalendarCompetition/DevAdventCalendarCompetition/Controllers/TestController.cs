@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
@@ -17,16 +18,26 @@ namespace DevAdventCalendarCompetition.Controllers
     public class TestController : Controller
     {
         private readonly ITestService _testService;
+        private readonly IAnswerService _answerService;
 
-        public TestController(ITestService testService)
+        public TestController(
+            ITestService testService,
+            IAnswerService answerService)
         {
             this._testService = testService;
+            this._answerService = answerService;
         }
 
         [HttpGet]
         public ActionResult Index(int testNumber)
         {
             var test = this._testService.GetTestByNumber(testNumber);
+
+            if (test == null)
+            {
+                return this.NotFound();
+            }
+
             var userHasAnswered = this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id);
             if (userHasAnswered)
             {
@@ -53,7 +64,7 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.NotFound();
             }
 
-            var finalAnswer = answer.ToUpper(CultureInfo.CurrentCulture).Replace(" ", string.Empty, StringComparison.Ordinal);
+            var finalAnswer = this._answerService.ParseTestAnswer(answer);
 
             if (this._testService.HasUserAnsweredTest(this.User.FindFirstValue(ClaimTypes.NameIdentifier), test.Id))
             {

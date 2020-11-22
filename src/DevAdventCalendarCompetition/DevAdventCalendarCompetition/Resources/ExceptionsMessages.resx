@@ -153,4 +153,7 @@
   <data name="ErrorDuringUserNameChange" xml:space="preserve">
     <value>Wystąpił nieoczekiwany błąd podczas próby zmiany nazwy użytkownika.</value>
   </data>
+  <data name="UserWithNameExists" xml:space="preserve">
+    <value>Użytkownik o tej nazwie już istnieje. Wybierz inną.</value>
+  </data>
 </root>

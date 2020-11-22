@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using DevAdventCalendarCompetition.Controllers;
+using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Models.Test;
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Http;
@@ -31,9 +34,31 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         public void Index_IsNotAdventTime_ReturnsEmptyViewResult()
         {
             // Arrange
-            this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns((List<TestDto>)null);
             this._adventService.Setup(x => x.IsAdvent()).Returns(false);
             using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
+
+            // Act
+            var result = controller.Index();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Null(viewResult.Model);
+        }
+
+        [Fact]
+        public void Index_UserIsNull_ReturnsEmptyViewResult()
+        {
+            // Arrange
+            var currentTestList = new List<TestDto>()
+            {
+                GetTestDto()
+            };
+            this._adventService.Setup(x => x.IsAdvent()).Returns(true);
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = null }
+            };
 
             // Act
             var result = controller.Index();
@@ -53,30 +78,6 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             controller.ControllerContext = new ControllerContext()
             {
                 HttpContext = new DefaultHttpContext() { User = GetUser() }
-            };
-
-            // Act
-            var result = controller.Index();
-
-            // Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.Null(viewResult.Model);
-        }
-
-        [Fact]
-        public void Index_UserIsNull_ReturnsEmptyViewResult()
-        {
-            // Arrange
-            var currentTestList = new List<TestDto>()
-            {
-                GetTestDto()
-            };
-            this._homeServiceMock.Setup(x => x.GetCurrentTests()).Returns(currentTestList);
-            this._adventService.Setup(x => x.IsAdvent()).Returns(true);
-            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
-            controller.ControllerContext = new ControllerContext()
-            {
-                HttpContext = new DefaultHttpContext() { User = null }
             };
 
             // Act
@@ -133,6 +134,23 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
             var contentResult = Assert.IsType<ContentResult>(result);
             var actualStatus = Assert.IsType<string>(contentResult.Content);
             Assert.Equal(testStatus, actualStatus);
+        }
+
+        [Fact]
+        public void Error_ReturnsPageNotFoundErrorViewModel()
+        {
+            // Arrange
+            var statusCode = 404;
+            var expectedMessage = ErrorMessages.NotFound;
+            using var controller = new HomeController(this._homeServiceMock.Object, this._adventService.Object);
+
+            // Act
+            var result = controller.Error(statusCode);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var message = Assert.IsType<ErrorViewModel>(viewResult.ViewData.Model);
+            Assert.Equal(expectedMessage, message.Message.ToString());
         }
 
         private static ClaimsPrincipal GetUser() =>
