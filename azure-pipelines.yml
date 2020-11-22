@@ -12,10 +12,10 @@ jobs:
   environment:
     name:  Server
     resourceType: VirtualMachine
-    tags: dev
+    tags: local
   strategy:
     runOnce:
       deploy:
         steps:
-        - script: docker ps --filter name=devcal*
+        - script: docker ps
 
