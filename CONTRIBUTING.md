@@ -82,7 +82,7 @@ Password: `P@ssw0rd`
 
 ## Advent settings
 
-In order to imitate advent time, settings need to be changed. You can find "StartDate" and "EndDate" settings in `appsettings.Development.json` under "Competition" section. We use specific DateTime format: "dd-MM-yyyy".
+In order to imitate advent time, settings need to be changed. You can find "StartDate" and "EndDate" settings in `appsettings.Local.json` under "Competition" section. We use specific DateTime format: "dd-MM-yyyy".
 
 ## Test environment
 
@@ -92,13 +92,9 @@ Test environment is running on [dev.devadventcalendar.pl](https://dev.devadventc
 
 Application sends emails with registration informations and notifications. In order to test these functionalities, you must configure the mailbox that the application will use - use option A) or B).
 
-It is necessary to add new environment variable `ASPNETCORE_ENVIRONMENT`: `Development` for the main `DevAdventCalendarCompetition` project.
-
-![ENVIRONMENT](docs/Pictures/screen.png/?raw=true)
-
 ### A) Connect your private email
 
-Set up an e-mail account in `appsettings.development.json` file (remember to enable the `"Access less secure applications"` option for the selected mailbox)
+Set up an e-mail account in `appsettings.Local.json` file (remember to enable the `"Access less secure applications"` option for the selected mailbox)
 
 ```json
 "Email": {
