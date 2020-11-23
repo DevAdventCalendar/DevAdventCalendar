@@ -277,7 +277,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StarterKit Arduino od podstaw - z modułem Arduino Uno.
+        ///   Looks up a localized string similar to Zestaw startowy Arduino od podstaw - z Arduino Uno.
         /// </summary>
         public static string Arduino {
             get {
@@ -1231,7 +1231,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym.
+        ///   Looks up a localized string similar to Wypaśny tablet, słuchawki, głosniki, Raspberry Pi 4, bony i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym..
         /// </summary>
         public static string PresentsDescription {
             get {
@@ -1294,7 +1294,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oficjalny zestaw Raspberry Pi 4B WiFi 8GB RAM.
+        ///   Looks up a localized string similar to Zestaw Raspberry Pi 4B WiFi 8GB RAM.
         /// </summary>
         public static string RaspberryPi {
             get {

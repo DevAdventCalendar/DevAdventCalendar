@@ -394,7 +394,7 @@
     <value>IT Startup "Brudne Przetargi"</value>
   </data>
   <data name="RaspberryPi" xml:space="preserve">
-    <value>Oficjalny zestaw Raspberry Pi 4B WiFi 8GB RAM</value>
+    <value>Zestaw Raspberry Pi 4B WiFi 8GB RAM</value>
   </data>
   <data name="BoilingFrogs" xml:space="preserve">
     <value>Bilet na konferencję online BoilingFrogs 2021</value>
@@ -484,7 +484,7 @@
     <value>Mikołaj ma dla Was wyjątkowe prezenty</value>
   </data>
   <data name="PresentsDescription" xml:space="preserve">
-    <value>Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym</value>
+    <value>Wypaśny tablet, słuchawki, głosniki, Raspberry Pi 4, bony i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym.</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Wstecz</value>
@@ -715,7 +715,7 @@
     <value>Źle! Spróbuj ponownie :)</value>
   </data>
   <data name="Arduino" xml:space="preserve">
-    <value>StarterKit Arduino od podstaw - z modułem Arduino Uno</value>
+    <value>Zestaw startowy Arduino od podstaw - z Arduino Uno</value>
   </data>
   <data name="XiaomiBand5" xml:space="preserve">
     <value>Xiaomi Mi Band 5</value>
