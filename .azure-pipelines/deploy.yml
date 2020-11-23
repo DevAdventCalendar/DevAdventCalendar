@@ -1,0 +1,14 @@
+trigger: none
+
+stages:
+- stage: Deploy UAT
+  jobs:
+  - template: templates/deploy-calendar.yml
+    parameters: 
+      environment: 'uat'
+    
+- stage: Deploy PROD
+  jobs:
+  - template: templates/deploy-calendar.yml
+    parameters: 
+      environment: 'uat'

@@ -1,0 +1,52 @@
+parameters:
+  environment: ''
+
+variables:
+  ProjectName: 'devcal-${{ environment }}'
+
+jobs:
+- deployment: Deploy_${{ environment }}
+  displayName: Deploy DevAdventCalendar ${{ environment }}
+  environment:
+    name: ${{ environment }}
+    resourceType: VirtualMachine
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - task: DownloadSecureFile@1
+          displayName: 'Download app secrets'
+          inputs:
+            secureFile: app.${{ environment }}.env
+            retryCount: 5
+            
+        - task: DownloadSecureFile@1
+          displayName: 'Download database secrets'
+          inputs:
+            secureFile: db.${{ environment }}.env
+            retryCount: 5
+            
+        - task: CopyFiles@2
+          displayName: 'Copy env files to target folder'
+          inputs:
+            SourceFolder: '$(Agent.TempDirectory)'
+            Contents: '**/*.env'
+            TargetFolder: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition'
+            
+        - task: DockerCompose@0
+          displayName: 'Pull images'
+          inputs:
+            containerregistrytype: 'Container Registry'
+            dockerRegistryEndpoint: 'GitHub Package Registry'
+            dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.uat.yml'
+            projectName: '$(ProjectName)'
+            dockerComposeCommand: pull
+
+        - task: DockerCompose@0
+          displayName: 'Deploy images'
+          inputs:
+            containerregistrytype: 'Container Registry'
+            dockerRegistryEndpoint: 'GitHub Package Registry'
+            dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.uat.yml'
+            projectName: '$(ProjectName)'
+            dockerComposeCommand: 'up -d'
