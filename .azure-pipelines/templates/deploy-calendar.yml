@@ -2,10 +2,10 @@ parameters:
   environment: ''
 
 jobs:
-- deployment: Deploy_${{ environment }}
-  displayName: Deploy DevAdventCalendar ${{ environment }}
+- deployment: Deploy_${{ parameters.environment }}
+  displayName: Deploy DevAdventCalendar ${{ parameters.environment }}
   environment:
-    name: ${{ environment }}
+    name: ${{ parameters.environment }}
     resourceType: VirtualMachine
   strategy:
     runOnce:
@@ -14,13 +14,13 @@ jobs:
         - task: DownloadSecureFile@1
           displayName: 'Download app secrets'
           inputs:
-            secureFile: app.${{ environment }}.env
+            secureFile: app.${{ parameters.environment }}.env
             retryCount: 5
             
         - task: DownloadSecureFile@1
           displayName: 'Download database secrets'
           inputs:
-            secureFile: db.${{ environment }}.env
+            secureFile: db.${{ parameters.environment }}.env
             retryCount: 5
             
         - task: CopyFiles@2
@@ -36,7 +36,7 @@ jobs:
             containerregistrytype: 'Container Registry'
             dockerRegistryEndpoint: 'GitHub Package Registry'
             dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.uat.yml'
-            projectName: 'devcal-${{ environment }}'
+            projectName: 'devcal-${{ parameters.environment }}'
             dockerComposeCommand: pull
 
         - task: DockerCompose@0
@@ -45,5 +45,5 @@ jobs:
             containerregistrytype: 'Container Registry'
             dockerRegistryEndpoint: 'GitHub Package Registry'
             dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.uat.yml'
-            projectName: 'devcal-${{ environment }}'
+            projectName: 'devcal-${{ parameters.environment }}'
             dockerComposeCommand: 'up -d'
