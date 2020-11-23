@@ -29,6 +29,7 @@ namespace DevAdventCalendarCompetition
             }
 
             var configurationBuilder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: false)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false)
                 .AddEnvironmentVariables();
 
