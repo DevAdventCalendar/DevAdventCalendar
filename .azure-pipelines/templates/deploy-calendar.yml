@@ -11,6 +11,8 @@ jobs:
     runOnce:
       deploy:
         steps:
+        - checkout: self
+        
         - task: DownloadSecureFile@1
           displayName: 'Download app secrets'
           inputs:
