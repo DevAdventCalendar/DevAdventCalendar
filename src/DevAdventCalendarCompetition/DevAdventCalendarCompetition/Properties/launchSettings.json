@@ -13,14 +13,14 @@
       "launchBrowser": true,
       "launchUrl": "https://localhost:44301/",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Local"
       }
     },
     "DevAdventCalendarCompetition": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Local"
       },
       "applicationUrl": "http://localhost:50957/"
     }
