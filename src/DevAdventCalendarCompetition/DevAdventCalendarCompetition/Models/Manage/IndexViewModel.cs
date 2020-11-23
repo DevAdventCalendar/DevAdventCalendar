@@ -5,6 +5,7 @@ namespace DevAdventCalendarCompetition.Models.Manage
     public class IndexViewModel
     {
         [Display(Name = "Nazwa użytkownika")]
+        [RegularExpression("^\\w+$", ErrorMessage = "Nazwa użytkownika może składać się wyłącznie z liter i cyfr")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
