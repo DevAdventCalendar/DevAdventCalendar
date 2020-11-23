@@ -934,11 +934,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 5x bon 200 zł do Heliona.
+        ///   Looks up a localized string similar to 5x bon 150 zł do Heliona.
         /// </summary>
-        public static string Helion200 {
+        public static string Helion150 {
             get {
-                return ResourceManager.GetString("Helion200", resourceCulture);
+                return ResourceManager.GetString("Helion150", resourceCulture);
             }
         }
         
