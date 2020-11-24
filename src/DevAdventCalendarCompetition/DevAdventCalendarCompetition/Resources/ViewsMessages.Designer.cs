@@ -1231,7 +1231,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wypaśny tablet, słuchawki, głosniki, Raspberry Pi 4, bony i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym..
+        ///   Looks up a localized string similar to Wypaśny tablet, słuchawki, głośniki, Raspberry Pi 4, bony i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym..
         /// </summary>
         public static string PresentsDescription {
             get {
