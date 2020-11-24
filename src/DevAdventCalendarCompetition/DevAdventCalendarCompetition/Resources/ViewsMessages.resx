@@ -388,7 +388,19 @@
     <value>DevAdventCalendar - programistyczny kalendarz adwentowy</value>
   </data>
   <data name="Helion100" xml:space="preserve">
-    <value>Bon 100 zł do Heliona</value>
+    <value>5x bon 100 zł do Heliona</value>
+  </data>
+  <data name="Helion150" xml:space="preserve">
+    <value>5x bon 150 zł do Heliona</value>
+  </data>
+  <data name="ItStartup" xml:space="preserve">
+    <value>IT Startup "Brudne Przetargi"</value>
+  </data>
+  <data name="RaspberryPi" xml:space="preserve">
+    <value>Zestaw Raspberry Pi 4B WiFi 8GB RAM</value>
+  </data>
+  <data name="BoilingFrogs" xml:space="preserve">
+    <value>Bilet na konferencję online BoilingFrogs 2021</value>
   </data>
   <data name="HowItWorks" xml:space="preserve">
     <value>Jak to działa?</value>
@@ -418,7 +430,7 @@
     <value>Zaloguj używając loginu i hasła</value>
   </data>
   <data name="MainPrizes" xml:space="preserve">
-    <value>W tamtym roku otrzymaliście nagrody</value>
+    <value>Nagrody główne</value>
   </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Twoje konto</value>
@@ -429,8 +441,8 @@
   <data name="MerryChristmas" xml:space="preserve">
     <value>Wesołych Świąt!</value>
   </data>
-  <data name="MK850" xml:space="preserve">
-    <value>Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE</value>
+  <data name="DenonAHGC25W" xml:space="preserve">
+    <value>Słuchawki Denon AH-GC25W</value>
   </data>
   <data name="NewRegistrationQuestion" xml:space="preserve">
     <value>Zarejestrować nowego użytkownika?</value>
@@ -444,8 +456,8 @@
   <data name="NoAccessToResources" xml:space="preserve">
     <value>Nie masz dostępu do tego zasobu.</value>
   </data>
-  <data name="Nozbe" xml:space="preserve">
-    <value>Licencja Nozbe Solo na 6 mscy</value>
+  <data name="Nillkin" xml:space="preserve">
+    <value>Głośnik Nillkin Traveler W2</value>
   </data>
   <data name="OpenPuzzles" xml:space="preserve">
     <value>otwartych okienek</value>
@@ -475,7 +487,7 @@
     <value>Mikołaj ma dla Was wyjątkowe prezenty</value>
   </data>
   <data name="PresentsDescription" xml:space="preserve">
-    <value>Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym</value>
+    <value>Wypaśny tablet, słuchawki, głośniki, Raspberry Pi 4, bony i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym.</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Wstecz</value>
@@ -492,14 +504,14 @@
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
   </data>
-  <data name="ProgrammingBook" xml:space="preserve">
-    <value>Książka "Programowanie funkcyjne w języku C#"</value>
+  <data name="ArduinoStarterKit" xml:space="preserve">
+    <value>Arduino StarterKit K000007</value>
   </data>
   <data name="Puzzle" xml:space="preserve">
     <value>Zagadka {0}</value>
   </data>
-  <data name="Raspberry4" xml:space="preserve">
-    <value>Raspberry Pi 4 model B WiFi DualBand Bluetooth 2GB RAM 1,5GHz</value>
+  <data name="SonySRSXB23" xml:space="preserve">
+    <value>Głośnik Sony SRS-XB23</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Zarejestruj</value>
@@ -546,8 +558,8 @@
   <data name="SendVerificationEmail" xml:space="preserve">
     <value>Wyślij ponownie weryfikacyjny e-mail</value>
   </data>
-  <data name="Sennheiser" xml:space="preserve">
-    <value>Słuchawki Sennheiser 4.50 BTNC Wireless</value>
+  <data name="AppleIPad" xml:space="preserve">
+    <value>Apple iPad 8-generacji 10,2" 3GB/32GB</value>
   </data>
   <data name="SetPassword" xml:space="preserve">
     <value>Ustaw hasło</value>
@@ -648,8 +660,8 @@
   <data name="ThereIsError" xml:space="preserve">
     <value>Wystąpił błąd!</value>
   </data>
-  <data name="TicketWrocSharp" xml:space="preserve">
-    <value>Bilet na konferencję Wroc#</value>
+  <data name="GoogleHomeHub" xml:space="preserve">
+    <value>Google Home Hub</value>
   </data>
   <data name="ToolTipUserName" xml:space="preserve">
     <value>Nazwa użytkownika będzie wyświetlana tylko na liście wyników</value>
@@ -714,11 +726,14 @@
   <data name="WrongTryAgain" xml:space="preserve">
     <value>Źle! Spróbuj ponownie :)</value>
   </data>
-  <data name="Xiaomi" xml:space="preserve">
-    <value>Xiaomi Redmi Airdots</value>
+  <data name="Arduino" xml:space="preserve">
+    <value>Zestaw startowy Arduino od podstaw - z Arduino Uno</value>
   </data>
-  <data name="XiaomiBand4" xml:space="preserve">
-    <value>Xiaomi Mi Band 4</value>
+  <data name="XiaomiBand5" xml:space="preserve">
+    <value>Xiaomi Mi Band 5</value>
+  </data>
+  <data name="GoogleHomeGlosnik" xml:space="preserve">
+    <value>Google Home Inteligentny Głośnik OEM</value>
   </data>
   <data name="YouAnsweredCorrectly" xml:space="preserve">
     <value>Odpowiedziałeś poprawnie we wszystkich otwartych do tej pory okienkach.</value>

@@ -268,6 +268,33 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apple iPad 8-generacji 10,2&quot; 3GB/32GB.
+        /// </summary>
+        public static string AppleIPad {
+            get {
+                return ResourceManager.GetString("AppleIPad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zestaw startowy Arduino od podstaw - z Arduino Uno.
+        /// </summary>
+        public static string Arduino {
+            get {
+                return ResourceManager.GetString("Arduino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arduino StarterKit K000007.
+        /// </summary>
+        public static string ArduinoStarterKit {
+            get {
+                return ResourceManager.GetString("ArduinoStarterKit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nagrody tygodni.
         /// </summary>
         public static string AwardsOfTheWeek {
@@ -291,6 +318,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string BackToPuzzles {
             get {
                 return ResourceManager.GetString("BackToPuzzles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bilet na konferencję online BoilingFrogs 2021.
+        /// </summary>
+        public static string BoilingFrogs {
+            get {
+                return ResourceManager.GetString("BoilingFrogs", resourceCulture);
             }
         }
         
@@ -417,6 +453,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string Day {
             get {
                 return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Słuchawki Denon AH-GC25W.
+        /// </summary>
+        public static string DenonAHGC25W {
+            get {
+                return ResourceManager.GetString("DenonAHGC25W", resourceCulture);
             }
         }
         
@@ -835,6 +880,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Google Home Inteligentny Głośnik OEM.
+        /// </summary>
+        public static string GoogleHomeGlosnik {
+            get {
+                return ResourceManager.GetString("GoogleHomeGlosnik", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Google Home Hub.
+        /// </summary>
+        public static string GoogleHomeHub {
+            get {
+                return ResourceManager.GetString("GoogleHomeHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Przejdź na.
         /// </summary>
         public static string GoTo {
@@ -871,11 +934,20 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bon 100 zł do Heliona.
+        ///   Looks up a localized string similar to 5x bon 100 zł do Heliona.
         /// </summary>
         public static string Helion100 {
             get {
                 return ResourceManager.GetString("Helion100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5x bon 150 zł do Heliona.
+        /// </summary>
+        public static string Helion150 {
+            get {
+                return ResourceManager.GetString("Helion150", resourceCulture);
             }
         }
         
@@ -921,6 +993,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string IntroParagraph4 {
             get {
                 return ResourceManager.GetString("IntroParagraph4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IT Startup &quot;Brudne Przetargi&quot;.
+        /// </summary>
+        public static string ItStartup {
+            get {
+                return ResourceManager.GetString("ItStartup", resourceCulture);
             }
         }
         
@@ -979,7 +1060,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to W tamtym roku otrzymaliście nagrody.
+        ///   Looks up a localized string similar to Nagrody główne.
         /// </summary>
         public static string MainPrizes {
             get {
@@ -1015,15 +1096,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zestaw bezprzewodowej klawiatury i myszy MK850 PERFORMANCE.
-        /// </summary>
-        public static string MK850 {
-            get {
-                return ResourceManager.GetString("MK850", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Zarejestrować nowego użytkownika?.
         /// </summary>
         public static string NewRegistrationQuestion {
@@ -1051,20 +1123,20 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Głośnik Nillkin Traveler W2.
+        /// </summary>
+        public static string Nillkin {
+            get {
+                return ResourceManager.GetString("Nillkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie masz dostępu do tego zasobu..
         /// </summary>
         public static string NoAccessToResources {
             get {
                 return ResourceManager.GetString("NoAccessToResources", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Licencja Nozbe Solo na 6 mscy.
-        /// </summary>
-        public static string Nozbe {
-            get {
-                return ResourceManager.GetString("Nozbe", resourceCulture);
             }
         }
         
@@ -1168,7 +1240,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wypaśne słuchawki, Raspberry Pi 4, książki, wejściówki i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym.
+        ///   Looks up a localized string similar to Wypaśny tablet, słuchawki, głośniki, Raspberry Pi 4, bony i wiele innych. Sami sprawdźcie, dlaczego w tym roku warto być grzecznym..
         /// </summary>
         public static string PresentsDescription {
             get {
@@ -1222,15 +1294,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Książka &quot;Programowanie funkcyjne w języku C#&quot;.
-        /// </summary>
-        public static string ProgrammingBook {
-            get {
-                return ResourceManager.GetString("ProgrammingBook", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Zagadka {0}.
         /// </summary>
         public static string Puzzle {
@@ -1240,11 +1303,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Raspberry Pi 4 model B WiFi DualBand Bluetooth 2GB RAM 1,5GHz.
+        ///   Looks up a localized string similar to Zestaw Raspberry Pi 4B WiFi 8GB RAM.
         /// </summary>
-        public static string Raspberry4 {
+        public static string RaspberryPi {
             get {
-                return ResourceManager.GetString("Raspberry4", resourceCulture);
+                return ResourceManager.GetString("RaspberryPi", resourceCulture);
             }
         }
         
@@ -1384,15 +1447,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Słuchawki Sennheiser 4.50 BTNC Wireless.
-        /// </summary>
-        public static string Sennheiser {
-            get {
-                return ResourceManager.GetString("Sennheiser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ustaw hasło.
         /// </summary>
         public static string SetPassword {
@@ -1452,6 +1506,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string SocialMedia {
             get {
                 return ResourceManager.GetString("SocialMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Głośnik Sony SRS-XB23.
+        /// </summary>
+        public static string SonySRSXB23 {
+            get {
+                return ResourceManager.GetString("SonySRSXB23", resourceCulture);
             }
         }
         
@@ -1663,15 +1726,6 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bilet na konferencję Wroc#.
-        /// </summary>
-        public static string TicketWrocSharp {
-            get {
-                return ResourceManager.GetString("TicketWrocSharp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nazwa użytkownika będzie wyświetlana tylko na liście wyników.
         /// </summary>
         public static string ToolTipUserName {
@@ -1870,20 +1924,11 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xiaomi Redmi Airdots.
+        ///   Looks up a localized string similar to Xiaomi Mi Band 5.
         /// </summary>
-        public static string Xiaomi {
+        public static string XiaomiBand5 {
             get {
-                return ResourceManager.GetString("Xiaomi", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Xiaomi Mi Band 4.
-        /// </summary>
-        public static string XiaomiBand4 {
-            get {
-                return ResourceManager.GetString("XiaomiBand4", resourceCulture);
+                return ResourceManager.GetString("XiaomiBand5", resourceCulture);
             }
         }
         

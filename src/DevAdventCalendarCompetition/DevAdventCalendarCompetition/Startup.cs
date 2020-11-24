@@ -21,18 +21,9 @@ namespace DevAdventCalendarCompetition
 {
     public class Startup
     {
-        public Startup(IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            if (env == null)
-            {
-                throw new ArgumentNullException(nameof(env));
-            }
-
-            var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: false)
-                .AddEnvironmentVariables();
-
-            this.Configuration = configurationBuilder.Build();
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
