@@ -1,67 +1,54 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Respawn;
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup
 {
-    public static class StartupTestBase
+    public class StartupTestBase
     {
-        private static readonly IServiceScopeFactory ScopeFactory;
+        private readonly IServiceScopeFactory _scopeFactory;
 
-        private static readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
 
-        private static readonly Checkpoint Checkpoint;
-
-#pragma warning disable CA1810 // Initialize reference type static fields inline
-        static StartupTestBase()
-#pragma warning restore CA1810 // Initialize reference type static fields inline
+        protected StartupTestBase()
         {
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.Development.json", optional: false, true)
-                .AddJsonFile("appsettings.integration-tests.json", false, true)
+                .AddJsonFile("appsettings.json", optional: false, true)
+                .AddJsonFile("appsettings.Local.json", false, true)
                 .AddEnvironmentVariables();
 
-            Configuration = builder.Build();
-
-            var startup = new Startup(Configuration);
+            this._configuration = builder.Build();
+            var startup = new Startup(this._configuration);
             var services = new ServiceCollection();
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase(databaseName: "aspnet-DevAdventCalendarCompetition-Testing"));
+            var databaseName = Guid.NewGuid().ToString();
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase(databaseName));
             startup.ConfigureServices(services);
-            ScopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
-            Checkpoint = new Checkpoint
-            {
-                TablesToIgnore = new[] { "__EFMigrationsHistory" }
-            };
+            this._scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
         }
 
-        public static Task ResetCheckpoint() => Checkpoint.Reset(Configuration.GetConnectionString("DefaultConnection"));
-
-        public static async Task AddApplicationUserAsync(ApplicationUser user)
+        protected async Task AddApplicationUserAsync(ApplicationUser user)
         {
-            using var scope = ScopeFactory.CreateScope();
+            using var scope = this._scopeFactory.CreateScope();
             var userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
             await userManager.CreateAsync(user).ConfigureAwait(false);
         }
 
-        public static Task<TResult> ExecuteAsync<TService, TResult>(Func<TService, Task<TResult>> action)
-            => ExecuteScopeAsync(sp => action(sp.GetService<TService>()));
+        protected Task<TResult> ExecuteAsync<TService, TResult>(Func<TService, Task<TResult>> action)
+            => this.ExecuteScopeAsync(sp => action(sp.GetService<TService>()));
 
-        private static async Task<T> ExecuteScopeAsync<T>(Func<IServiceProvider, Task<T>> action)
+        private async Task<T> ExecuteScopeAsync<T>(Func<IServiceProvider, Task<T>> action)
         {
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
-            using var scope = ScopeFactory.CreateScope();
+            using var scope = this._scopeFactory.CreateScope();
             return await action(scope.ServiceProvider).ConfigureAwait(false);
         }
     }
