@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\DevAdventCalendarCompetition\appsettings.Development.json" Link="appsettings.Development.json" />
+    <Content Include="..\DevAdventCalendarCompetition\appsettings.json" Link="appsettings.json" />
+    <Content Include="..\DevAdventCalendarCompetition\appsettings.Local.json" Link="appsettings.Local.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +30,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Respawn" Version="3.3.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -43,12 +43,6 @@
     <ProjectReference Include="..\DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj" />
     <ProjectReference Include="..\DevAdventCalendarCompetition.TestResultService\DevAdventCalendarCompetition.TestResultService.csproj" />
     <ProjectReference Include="..\DevAdventCalendarCompetition\DevAdventCalendarCompetition.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.integration-tests.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
