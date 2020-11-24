@@ -42,7 +42,7 @@ namespace DevAdventCalendarCompetition.Controllers
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
             this._googleCalendarService = googleCalendarService ?? throw new ArgumentNullException(nameof(googleCalendarService));
-            this._statisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService)); // Temporary
+            this._statisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService));
         }
 
         [TempData]
