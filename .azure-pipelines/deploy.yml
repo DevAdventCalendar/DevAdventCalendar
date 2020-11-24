@@ -11,4 +11,4 @@ stages:
   jobs:
   - template: templates/deploy-calendar.yml
     parameters: 
-      environment: 'uat'
+      environment: 'prod'
