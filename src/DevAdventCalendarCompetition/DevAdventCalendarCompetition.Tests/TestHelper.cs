@@ -111,5 +111,22 @@ namespace DevAdventCalendarCompetition.Tests
             AnsweringTimeOffset = TimeSpan.FromMinutes(2),
             AnsweringTime = DateTime.Now
         };
+
+        public static ApplicationUser[] CreateTestUsers()
+        {
+            return new[]
+            {
+                new ApplicationUser
+                {
+                    UserName = "testUser",
+                    Email = "test@mail.com"
+                },
+                new ApplicationUser
+                {
+                    UserName = "testUser1",
+                    Email = "test1@mail.com"
+                },
+            };
+        }
     }
 }

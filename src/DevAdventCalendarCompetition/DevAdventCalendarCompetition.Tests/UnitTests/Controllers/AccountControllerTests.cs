@@ -24,45 +24,13 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
     {
         private readonly Mock<IAccountService> _accountServiceMock;
         private readonly Mock<ILogger<AccountController>> _loggerMock;
-        private readonly IUserValidator<ApplicationUser> _userValidator;
-
-        // private readonly Mock<IUserPasswordStore<ApplicationUser>> _userStore;
-        private readonly ILogger<AccountController> _logger;
 
         public AccountControllerTests()
         {
             this._accountServiceMock = new Mock<IAccountService>();
             this._loggerMock = new Mock<ILogger<AccountController>>();
-            this._userValidator = new UserValidator<ApplicationUser>();
-
-            // this._userStore = new Mock<IUserPasswordStore<ApplicationUser>>();
-            this._logger = new Mock<ILogger<AccountController>>().Object;
         }
 
-        // TODO: fix
-        // [Fact]
-        // public void Register_CannotAddUserWithExistingUsername_ThrowsException()
-        // {
-        //    this._userStore.Setup(x => x.GetUserNameAsync(It.IsAny<ApplicationUser>(), It.IsAny<CancellationToken>()))
-        //        .Returns(Task.FromResult("user1"));
-        //
-        //    using var userManager = new FakeUserManager(this._userValidator, this._userStore.Object);
-        //    this._accountService = new AccountService(null, userManager, null);
-        //
-        //    var registerViewModel = new RegisterViewModel
-        //    {
-        //        UserName = "user1",
-        //        Email = "user1@gmail.com",
-        //        Password = "userP@ssword1",
-        //        ConfirmPassword = "userP@ssword1",
-        //    };
-        //    using var controller = this.CreateAccountController();
-        //
-        //    Func<IActionResult> result = () => controller.Register(registerViewModel).Result;
-        //
-        //    var exception = Assert.Throws<InvalidOperationException>(result);
-        //    Assert.Equal(exception.Message, ExceptionsMessages.UserWithNameExists);
-        // }
         [Fact]
         public async void Login_LoginViewModelIsNull_ThrowsException()
         {
@@ -747,10 +715,5 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             return serviceProviderMock.Object;
         }
-
-        // private AccountController CreateAccountController()
-        // {
-        //    return new AccountController(this._accountService, this._logger);
-        // }
     }
 }
