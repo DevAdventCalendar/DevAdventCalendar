@@ -5,12 +5,10 @@ using DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Xunit;
-using static DevAdventCalendarCompetition.Tests.IntegrationTests.TestStartup.StartupTestBase;
 
 namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 {
-    [Collection("AccountTestCollection")]
-    public class AccountServiceTests : IntegrationStartupTestBase
+    public class AccountServiceTests : StartupTestBase
     {
         [Fact]
         public async Task CreateAsync_CannotAddUserWithExistingUsernameAndEmail()
@@ -19,14 +17,14 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var email = "test@mail.com";
             var userName = "testUser";
 
-            await AddApplicationUserAsync(new ApplicationUser
+            await this.AddApplicationUserAsync(new ApplicationUser
             {
                 Email = email,
                 UserName = userName
             }).ConfigureAwait(false);
 
             // Act
-            var result = await ExecuteAsync<IAccountService, IdentityResult>(accountService
+            var result = await this.ExecuteAsync<IAccountService, IdentityResult>(accountService
                 => accountService.CreateAsync(
                     new ApplicationUser
                     {
@@ -46,13 +44,13 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         {
             var userName = "testUser";
 
-            await AddApplicationUserAsync(new ApplicationUser
+            await this.AddApplicationUserAsync(new ApplicationUser
             {
                 Email = "test@mail.com",
                 UserName = userName,
             }).ConfigureAwait(false);
 
-            var result = await ExecuteAsync<IAccountService, IdentityResult>(accountService
+            var result = await this.ExecuteAsync<IAccountService, IdentityResult>(accountService
                 => accountService.CreateAsync(
                     new ApplicationUser
                     {
@@ -70,13 +68,13 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         {
             var email = "test@mail.com";
 
-            await AddApplicationUserAsync(new ApplicationUser
+            await this.AddApplicationUserAsync(new ApplicationUser
             {
                 Email = email,
                 UserName = "testUser",
             }).ConfigureAwait(false);
 
-            var result = await ExecuteAsync<IAccountService, IdentityResult>(accountService
+            var result = await this.ExecuteAsync<IAccountService, IdentityResult>(accountService
                 => accountService.CreateAsync(
                     new ApplicationUser
                     {
