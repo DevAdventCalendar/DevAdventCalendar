@@ -2220,6 +2220,9 @@ footer{
 	padding-top: 10px;
 	display: block;
 }
+.charity_widget iframe {
+    border: none;
+}
 .post_image{
 	position: absolute;
 	right: 0;
