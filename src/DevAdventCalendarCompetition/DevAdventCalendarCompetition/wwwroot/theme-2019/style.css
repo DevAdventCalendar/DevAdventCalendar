@@ -2190,8 +2190,8 @@ footer{
 	padding-top: 60px;
 }
 .single_related_post,
-.related_post_area_title{
-	text-align: center;
+.related_post_area_title {
+    text-align: center;
 }
 .related_post_area_title{
 	padding-bottom: 36px;
@@ -2201,11 +2201,12 @@ footer{
 	position: relative;
 	padding: 56px 0;
 }
-.related_post_area_title h3{
-	font-size: 22px;
-	line-height: 57px;
-	color: #3a3a3a;
-	font-weight: 700;
+.related_post_area_title h3,
+.related_post_area_title h4 {
+    font-size: 22px;
+    line-height: 57px;
+    color: #3a3a3a;
+    font-weight: 700;
 }
 .single_related_post .title h4{
 	font-size: 18px;
@@ -2218,6 +2219,9 @@ footer{
 	line-height: 25px;
 	padding-top: 10px;
 	display: block;
+}
+.charity_widget iframe {
+    border: none;
 }
 .post_image{
 	position: absolute;
@@ -2257,6 +2261,10 @@ body {
 
 .mt-20 {
     margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
 }
 
 .mb-30 {

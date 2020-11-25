@@ -1,0 +1,35 @@
+@model List<DisplayStatisticsViewModel>
+@using static DevAdventCalendarCompetition.Resources.ViewsMessages
+
+@{
+    ViewData["Title"] = @DisplayStatistics;
+    ViewData.AddActivePage(ManageNavPages.DisplayStatistics);
+}
+
+
+<div class="area_title mb-30">
+    <h3>@ViewData["Title"]</h3>
+</div>
+
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            <th scope="col" class="col-xs-1">#</th>
+            <th scope="col" style="text-align: center;">@StatsTestNumber</th>
+            <th scope="col" style="text-align: center;">@StatsCorrect</th>
+            <th scope="col" style="text-align: center;">@StatsWrong</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var currentStat in Model)
+        {
+            <tr>
+                <th scope="row" class="col-xs-1"></th>
+                <td style="text-align: center;">@currentStat.TestNumber</td>
+                <td style="text-align: center;">@currentStat.CorrectAnswerDate</td>
+                <td style="text-align: center;">@currentStat.WrongAnswerCount</td>
+            </tr>
+        }
+    </tbody>
+</table>

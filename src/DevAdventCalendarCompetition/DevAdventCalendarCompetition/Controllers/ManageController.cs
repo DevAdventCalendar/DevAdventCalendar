@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using DevAdventCalendarCompetition.Extensions;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Operations;
 using Microsoft.Extensions.Logging;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -24,6 +26,7 @@ namespace DevAdventCalendarCompetition.Controllers
         private readonly IAccountService _accountService;
         private readonly ILogger _logger;
         private readonly INotificationService _emailNotificationService;
+        private readonly IStatisticsService _statisticsService;
         private readonly IGoogleCalendarService _googleCalendarService;
 
         public ManageController(
@@ -31,13 +34,15 @@ namespace DevAdventCalendarCompetition.Controllers
             IAccountService accountService,
             ILogger<ManageController> logger,
             INotificationService emailNotificationService,
-            IGoogleCalendarService googleCalendarService)
+            IGoogleCalendarService googleCalendarService,
+            IStatisticsService statisticsService)
         {
             this._manageService = manageService ?? throw new ArgumentNullException(nameof(manageService));
             this._accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._emailNotificationService = emailNotificationService ?? throw new ArgumentNullException(nameof(emailNotificationService));
             this._googleCalendarService = googleCalendarService ?? throw new ArgumentNullException(nameof(googleCalendarService));
+            this._statisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService));
         }
 
         [TempData]
@@ -349,6 +354,31 @@ namespace DevAdventCalendarCompetition.Controllers
                 StatusMessage = this.StatusMessage
             };
             return this.View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DisplayStatistics()
+        {
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
+            }
+
+            var testStats = this._statisticsService.FillResultsWithTestStats(user.Id);
+            List<DisplayStatisticsViewModel> viewTestStats = new List<DisplayStatisticsViewModel>();
+
+            foreach (var stat in testStats)
+            {
+                viewTestStats.Add(new DisplayStatisticsViewModel()
+                {
+                    CorrectAnswerDate = (stat.CorrectAnswerDateTime == DateTime.MinValue) ? null : stat.CorrectAnswerDateTime,
+                    WrongAnswerCount = stat.WrongAnswerCount,
+                    TestNumber = stat.TestNumber
+                });
+            }
+
+            return this.View(viewTestStats);
         }
 
         private static string MapStatusToMessage(OperationalResultStatus status) =>
