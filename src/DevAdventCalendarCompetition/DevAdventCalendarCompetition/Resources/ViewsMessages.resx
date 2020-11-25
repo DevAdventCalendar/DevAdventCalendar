@@ -246,6 +246,9 @@
   <data name="DevelopmentMode" xml:space="preserve">
     <value>Development Mode</value>
   </data>
+  <data name="DisplayStatistics" xml:space="preserve">
+    <value>Statystyki</value>
+  </data>
   <data name="DontMissEvents" xml:space="preserve">
     <value>I nie przegap najważniejszych wydarzeń!</value>
   </data>
@@ -593,6 +596,15 @@
   </data>
   <data name="StartTime" xml:space="preserve">
     <value>Czas rozpoczęcia:</value>
+  </data>
+  <data name="StatsCorrect" xml:space="preserve">
+    <value>Wysłana poprawna odpowiedź</value>
+  </data>
+  <data name="StatsTestNumber" xml:space="preserve">
+    <value>Pytanie</value>
+  </data>
+  <data name="StatsWrong" xml:space="preserve">
+    <value>Błędne odpowiedzi</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status:</value>

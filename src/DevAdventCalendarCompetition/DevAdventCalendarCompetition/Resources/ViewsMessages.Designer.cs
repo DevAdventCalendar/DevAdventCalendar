@@ -493,6 +493,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statystyki.
+        /// </summary>
+        public static string DisplayStatistics {
+            get {
+                return ResourceManager.GetString("DisplayStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I nie przegap najważniejszych wydarzeń!.
         /// </summary>
         public static string DontMissEvents {
@@ -1524,6 +1533,33 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string StartTime {
             get {
                 return ResourceManager.GetString("StartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wysłana poprawna odpowiedź.
+        /// </summary>
+        public static string StatsCorrect {
+            get {
+                return ResourceManager.GetString("StatsCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pytanie.
+        /// </summary>
+        public static string StatsTestNumber {
+            get {
+                return ResourceManager.GetString("StatsTestNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błędne odpowiedzi.
+        /// </summary>
+        public static string StatsWrong {
+            get {
+                return ResourceManager.GetString("StatsWrong", resourceCulture);
             }
         }
         
