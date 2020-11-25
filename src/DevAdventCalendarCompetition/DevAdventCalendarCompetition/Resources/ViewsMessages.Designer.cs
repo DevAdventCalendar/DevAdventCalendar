@@ -358,7 +358,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Możesz również wesprzec naszą zrzutkę, z której cały dochód przeznaczymy na Szlachetną Paczkę.
+        ///   Looks up a localized string similar to Możesz również wesprzeć naszą zrzutkę, z której cały dochód przeznaczymy na Szlachetną Paczkę.
         /// </summary>
         public static string CharityAction {
             get {
