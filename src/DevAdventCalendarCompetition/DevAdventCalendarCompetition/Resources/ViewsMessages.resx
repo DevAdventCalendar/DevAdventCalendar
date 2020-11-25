@@ -759,4 +759,7 @@
   <data name="MainPartner" xml:space="preserve">
     <value>Partner główny</value>
   </data>
+  <data name="CharityAction" xml:space="preserve">
+    <value>Możesz również wesprzeć naszą zrzutkę, z której cały dochód przeznaczymy na Szlachetną Paczkę</value>
+  </data>
 </root>

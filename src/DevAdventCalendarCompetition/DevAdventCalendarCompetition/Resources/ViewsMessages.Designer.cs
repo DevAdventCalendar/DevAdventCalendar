@@ -358,6 +358,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Możesz również wesprzeć naszą zrzutkę, z której cały dochód przeznaczymy na Szlachetną Paczkę.
+        /// </summary>
+        public static string CharityAction {
+            get {
+                return ResourceManager.GetString("CharityAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wybierz sposób uwierzytelniania dwuetapowego:.
         /// </summary>
         public static string Choose2Fa {
