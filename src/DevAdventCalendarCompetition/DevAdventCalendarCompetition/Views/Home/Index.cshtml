@@ -10,7 +10,7 @@
     var overallPossibleTestsCount = Model?.Count(t => t.Status != TestStatus.NotStarted);
     var isAdvent = AdventService.IsAdvent();
 }
-    
+
 <!--================================
   START COUNTDOWN AREA
 =================================-->
@@ -145,6 +145,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-30">
+                <div class="col-md-12">
+                    <div class="single_related_post">
+                        <div class="related_post_area_title ">
+                            <h4>@Html.Raw(CharityAction)</h4>
+                        </div>
+                        <div class="charity_widget">
+                            <iframe width="400" height="450" title="@CharityAction" src="https://zrzutka.pl/6w4k8t/widget"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -154,6 +166,28 @@
 
 @if (User.Identity.IsAuthenticated)
 {
+    <section class="event_txt" style="padding-bottom:10px;">
+        <div class="container">
+
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="mb-30">@MainPartner</h1>
+                </div>
+            </div>
+
+            <div class="row prizes-wrapper">
+                <div class="col-sm-4 mb-30"></div>
+                <div class="col-sm-4 mb-30">
+                    <div class="border prize-wrapper flex-column flex-fullheight">
+                        <a href="https://incat.com.pl/" target="_blank" class="flex-centered flex-grow" rel="noopener noreferrer">
+                            <img src="~/theme-2019/images/partners/incat.jpg" alt="incat" title="Incat" class="img-responsive center-block" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     if (isAdvent)
     {
         if (correctAnswersForUser != null)
@@ -235,13 +269,29 @@
                             {
                                 <div class="border prize-wrapper flex-column flex-fullheight">
                                     <div class="area_title text-center mb-30">
-                                        <h3>@string.Format(CultureInfo.InvariantCulture, @Week.ToUpper(),  (i +1))</h3>
+                                        <h3>@string.Format(CultureInfo.InvariantCulture, @Week.ToUpper(), (i + 1))</h3>
                                     </div>
                                     @if (i == 0)
                                     {
                                         <div class="flex-centered flex-grow">
-                                            <a href="https://www.objectivity.co.uk/" target="_blank">
-                                                <img src="~/theme-2019/images/partners/objectivity.jpg" alt="objectivity" title="Objectivity" class="img-responsive center-block" />
+                                            <a href="https://career.softserveinc.com/en-us/poland" target="_blank">
+                                                <img src="~/theme-2019/images/partners/softserve.jpg" alt="softserve" title="SoftServe" class="img-responsive center-block" />
+                                            </a>
+                                        </div>
+                                    }
+                                    else if (i == 1)
+                                    {
+                                        <div class="flex-centered flex-grow">
+                                            <a href="https://cshark.com/" target="_blank">
+                                                <img src="~/theme-2019/images/partners/cshark.jpg" alt="cshark" title="CShark" class="img-responsive center-block" />
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="flex-centered flex-grow">
+                                            <a href="https://spyro-soft.com" target="_blank">
+                                                <img src="~/theme-2019/images/partners/spyrosoft.jpg" alt="spyrosoft" title="Spyrosoft" class="img-responsive center-block" />
                                             </a>
                                         </div>
                                     }
