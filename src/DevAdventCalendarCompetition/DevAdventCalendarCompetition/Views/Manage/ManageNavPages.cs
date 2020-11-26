@@ -14,11 +14,15 @@ namespace DevAdventCalendarCompetition.Views.Manage
 
         public static string GoogleCalendarIntegration => "GoogleCalendarIntegration";
 
+        public static string DisplayStatistics => "DisplayStatistics";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
         public static string GoogleCalendarIntegrationNavClass(ViewContext viewContext) => PageNavClass(viewContext, GoogleCalendarIntegration);
+
+        public static string PlayerStatisticsNavClass(ViewContext viewContext) => PageNavClass(viewContext, DisplayStatistics);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

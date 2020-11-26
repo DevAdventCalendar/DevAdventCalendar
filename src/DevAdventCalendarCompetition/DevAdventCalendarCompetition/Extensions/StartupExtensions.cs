@@ -123,6 +123,7 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<ITestRepository, TestRepository>();
             services.AddTransient<IUserTestAnswersRepository, UserTestAnswersRepository>();
             services.AddTransient<IResultsRepository, ResultsRepository>();
+            services.AddTransient<IStatisticsRepository, StatisticsRepository>();
 
             services.AddScoped<DbInitializer>();
 
@@ -145,6 +146,8 @@ namespace DevAdventCalendarCompetition.Extensions
             services.AddTransient<IManageService, ManageService>();
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddTransient<IAdventService, AdventService>();
+            services.AddTransient<IAdventService, AdventService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<IAnswerService, AnswerService>();
             services.AddTransient<IdentityService>();
 
