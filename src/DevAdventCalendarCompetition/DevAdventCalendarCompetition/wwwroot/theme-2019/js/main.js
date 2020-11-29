@@ -27,7 +27,7 @@
 
 
     /* COUNTDOWN INIT */
-    $('.countdown').countdown('2020/12/01 20:00:00', function(event) {
+    $('.countdown').countdown('2020/12/01 13:00:00', function(event) {
     var $this = $(this).html(event.strftime(''
       + '<li>%D <span>dni</span></li>  '
       + '<li>%H <span>godzin</span></li>  '
