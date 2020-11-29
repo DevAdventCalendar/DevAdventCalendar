@@ -36,7 +36,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetAnsweredCorrectMaxTestId(string userId)
         {
-            return this._dbContext.UserTestCorrectAnswers.Any()
+            return this._dbContext.UserTestCorrectAnswers.Where(a => a.UserId == userId).Any()
                 ? this._dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId)
@@ -46,7 +46,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetAnsweredWrongMaxTestId(string userId)
         {
-            return this._dbContext.UserTestWrongAnswers.Any()
+            return this._dbContext.UserTestWrongAnswers.Where(a => a.UserId == userId).Any()
                 ? this._dbContext
                 .UserTestWrongAnswers
                 .Where(a => a.UserId == userId)
