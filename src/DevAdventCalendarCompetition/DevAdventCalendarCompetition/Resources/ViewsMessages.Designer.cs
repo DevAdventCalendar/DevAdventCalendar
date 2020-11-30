@@ -709,7 +709,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ostateczne wyniki poznasz w środę, 25 grudnia.
+        ///   Looks up a localized string similar to Ostateczne wyniki poznasz w piątek, 25 grudnia.
         /// </summary>
         public static string FinalScoreDescription {
             get {
@@ -1834,7 +1834,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyniki dla pierwszego tygodnia poznasz w niedzielę, 8 grudnia po godzinie 20:00..
+        ///   Looks up a localized string similar to Wyniki dla pierwszego tygodnia poznasz we wtorek, 8 grudnia po godzinie 13:00..
         /// </summary>
         public static string Week1ScoreDescription {
             get {
@@ -1843,7 +1843,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyniki dla drugiego tygodnia poznasz w niedzielę, 15 grudnia po godzinie 20:00..
+        ///   Looks up a localized string similar to Wyniki dla drugiego tygodnia poznasz we wtorek, 15 grudnia po godzinie 13:00..
         /// </summary>
         public static string Week2ScoreDescription {
             get {
@@ -1852,7 +1852,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyniki dla trzeciego tygodnia poznasz w niedzielę, 22 grudnia po godzinie 20:00..
+        ///   Looks up a localized string similar to Wyniki dla trzeciego tygodnia poznasz we wtorek, 22 grudnia po godzinie 13:00..
         /// </summary>
         public static string Week3ScoreDescription {
             get {
