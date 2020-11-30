@@ -96,13 +96,16 @@ namespace DevAdventCalendarCompetition.Controllers
                 throw new ArgumentNullException(nameof(model));
             }
 
+            model.IsEmailConfirmed = user.EmailConfirmed;
+
             var shouldSendVerificationEmail = false;
             if (model.Email != email)
             {
                 var setEmailResult = await this._manageService.SetEmailAsync(user, model.Email).ConfigureAwait(false);
                 if (!setEmailResult.Succeeded)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringEmailConfiguration, this._accountService.GetUserId(this.User)));
+                    this.AddErrors(setEmailResult, "Email");
+                    return this.View(model);
                 }
 
                 shouldSendVerificationEmail = true;
@@ -115,7 +118,8 @@ namespace DevAdventCalendarCompetition.Controllers
                 var setUserNameResult = await this._manageService.SetUserNameAsync(user, model.Username).ConfigureAwait(false);
                 if (!setUserNameResult.Succeeded)
                 {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.ErrorDuringUserNameChange, this._accountService.GetUserId(this.User)));
+                    this.AddErrors(setUserNameResult, "Username");
+                    return this.View(model);
                 }
             }
 
@@ -400,6 +404,14 @@ namespace DevAdventCalendarCompetition.Controllers
             foreach (var error in result.Errors)
             {
                 this.ModelState.AddModelError("Result", error.Description);
+            }
+        }
+
+        private void AddErrors(IdentityResult result, string key)
+        {
+            foreach (var error in result.Errors)
+            {
+                this.ModelState.AddModelError(key, error.Description);
             }
         }
     }
