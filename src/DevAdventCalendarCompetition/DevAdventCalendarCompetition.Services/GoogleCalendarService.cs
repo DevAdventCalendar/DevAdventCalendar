@@ -66,10 +66,10 @@ namespace DevAdventCalendarCompetition.Services
             var timeZone = this._calendarSettings.Events.TimeZone;
             var reminderMethod = this._calendarSettings.Events.ReminderMethod;
             var reminderMinutes = this._calendarSettings.Events.ReminderMinutes;
-            var startDate = this._adventSettings.StartDate.AddTicks(this._testSettings.StartHour.Ticks);
-            var endDate = this._adventSettings.EndDate;
-            var daysCount = (endDate.Day - startDate.Day) + 1;
-            var recurrence = $"RRULE:FREQ=DAILY;COUNT={daysCount}";
+            var eventStartTime = this._adventSettings.StartDate.AddTicks(this._testSettings.StartHour.Ticks);
+            var eventEndTime = this._adventSettings.StartDate.AddTicks(this._testSettings.EndHour.Ticks);
+            var adventDaysCount = (this._adventSettings.EndDate.Day - this._adventSettings.StartDate.Day) + 1;
+            var recurrence = $"RRULE:FREQ=DAILY;COUNT={adventDaysCount}";
 
             var newEvents = new EventsDto
             {
@@ -77,12 +77,12 @@ namespace DevAdventCalendarCompetition.Services
                 Location = location,
                 Start = new EventDate
                 {
-                    DateTime = startDate,
+                    DateTime = eventStartTime,
                     TimeZone = timeZone
                 },
                 End = new EventDate
                 {
-                    DateTime = startDate.AddHours(1),
+                    DateTime = eventEndTime,
                     TimeZone = timeZone
                 },
                 Recurrence = new List<string>()
