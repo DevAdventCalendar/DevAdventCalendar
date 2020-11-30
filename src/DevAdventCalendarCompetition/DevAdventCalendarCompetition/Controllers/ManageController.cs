@@ -180,11 +180,6 @@ namespace DevAdventCalendarCompetition.Controllers
                 return await this.SendVerificationEmail(model).ConfigureAwait(false);
             }
 
-            if (shouldSendVerificationEmail)
-            {
-                return await this.SendVerificationEmail(model).ConfigureAwait(false);
-            }
-
             this.StatusMessage = "Profil został zaktualizowany";
             return this.RedirectToAction(nameof(this.Index));
         }
