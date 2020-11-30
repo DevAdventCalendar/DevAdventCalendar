@@ -360,6 +360,9 @@
   <data name="GoogleCalendarIntegrationIntro" xml:space="preserve">
     <value>W tej sekcji możesz zintegrować DevAdventCalendar z Twoim kalendarzem Google.</value>
   </data>
+  <data name="GoogleCalendarVerificationInfo" xml:space="preserve">
+    <value>Uwaga! Integracja działa, ale nasza aplikacja wciąż jeszcze czeka na zweryfikowanie przez Google.</value>
+  </data>
   <data name="GoogleCalendarIntegrationPermission1" xml:space="preserve">
     <value>Przeglądanie, edytowanie, udostępnianie i trwałe usuwanie wszystkich kalendarzy, do których masz dostęp w kalendarzu Google.</value>
   </data>
