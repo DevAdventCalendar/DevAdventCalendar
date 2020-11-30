@@ -85,4 +85,4 @@ function refreshAt(hours, minutes, seconds) {
     var timeout = (then.getTime() - now.getTime());
     setTimeout(function () { window.location.reload(true); }, timeout);
 }
-refreshAt(20, 00, 0); //Will refresh the page at 20:00pm
+refreshAt(13, 00, 0);
