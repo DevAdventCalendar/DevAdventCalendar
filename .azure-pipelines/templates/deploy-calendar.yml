@@ -1,5 +1,9 @@
 parameters:
-  environment: ''
+- name: environment
+  type: string
+  values:
+  - uat
+  - prod
 
 jobs:
 - deployment: Deploy_${{ parameters.environment }}
@@ -37,7 +41,7 @@ jobs:
           inputs:
             containerregistrytype: 'Container Registry'
             dockerRegistryEndpoint: 'GitHub Package Registry'
-            dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.uat.yml'
+            dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.${{ parameters.environment }}.yml'
             projectName: 'devcal-${{ parameters.environment }}'
             dockerComposeCommand: pull
 
@@ -46,6 +50,6 @@ jobs:
           inputs:
             containerregistrytype: 'Container Registry'
             dockerRegistryEndpoint: 'GitHub Package Registry'
-            dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.uat.yml'
+            dockerComposeFile: '$(System.DefaultWorkingDirectory)/src/DevAdventCalendarCompetition/docker-compose.${{ parameters.environment }}.yml'
             projectName: 'devcal-${{ parameters.environment }}'
             dockerComposeCommand: 'up -d'
