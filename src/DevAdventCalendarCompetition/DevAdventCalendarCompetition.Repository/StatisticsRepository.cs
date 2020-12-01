@@ -27,11 +27,6 @@ namespace DevAdventCalendarCompetition.Repository
 
         public DateTime? GetUserTestCorrectAnswerDate(string userId, int testId)
         {
-            if (!this._dbContext.Tests.Any())
-            {
-                return null;
-            }
-
             return this._dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.TestId == testId && a.UserId == userId)
@@ -41,7 +36,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetAnsweredCorrectMaxTestId(string userId)
         {
-            return this._dbContext.UserTestCorrectAnswers.Any()
+            return this._dbContext.UserTestCorrectAnswers.Where(a => a.UserId == userId).Any()
                 ? this._dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId)
@@ -51,7 +46,7 @@ namespace DevAdventCalendarCompetition.Repository
 
         public int GetAnsweredWrongMaxTestId(string userId)
         {
-            return this._dbContext.UserTestWrongAnswers.Any()
+            return this._dbContext.UserTestWrongAnswers.Where(a => a.UserId == userId).Any()
                 ? this._dbContext
                 .UserTestWrongAnswers
                 .Where(a => a.UserId == userId)
@@ -70,12 +65,12 @@ namespace DevAdventCalendarCompetition.Repository
                 : 0;
         }
 
-        public int GetTestIdFromTestNumber(int testNuber)
+        public int GetTestIdFromTestNumber(int testNumber)
         {
             return this._dbContext.Tests.Any()
                 ? this._dbContext
                 .Tests
-                .Where(a => a.Number == testNuber)
+                .Where(a => a.Number == testNumber)
                 .Select(a => a.Id)
                 .SingleOrDefault()
                 : 0;
