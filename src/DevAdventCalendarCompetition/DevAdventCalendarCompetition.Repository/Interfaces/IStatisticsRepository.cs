@@ -16,6 +16,6 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
 
         public int GetHighestTestNumber(int testId);
 
-        public int GetTestIdFromTestNumber(int testNuber);
+        public int GetTestIdFromTestNumber(int testNumber);
     }
 }
