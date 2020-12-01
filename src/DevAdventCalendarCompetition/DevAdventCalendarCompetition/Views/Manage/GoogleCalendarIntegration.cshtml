@@ -5,24 +5,35 @@
     ViewData["Title"] = @GoogleCalendarIntegration;
     ViewData.AddActivePage(ManageNavPages.GoogleCalendarIntegration);
 }
-<div>
-    <p class="alert alert-danger">@GoogleCalendarVerificationInfo</p>
-</div>
 <div class="area_title mb-30">
     <h3>@ViewData["Title"]</h3>
 </div>
-@await Html.PartialAsync("_StatusMessage.cshtml", @Model.StatusMessage)
-@if (!@Model.HasPermissions)
+
+@if (Model.IsAlreadyIntegrated)
 {
-    <p>@GoogleCalendarIntegrationIntro</p>
-    <p>@GoogleCalendarIntegrationPermissionInfo</p>
-    <strong>
-        ◾ @GoogleCalendarIntegrationPermission1
-    </strong>
-    <br />
-    <strong>
-        ◾ @GoogleCalendarIntegrationPermission2
-    </strong>
-    <br />
-    <a class="chris_btn reveal" asp-controller="Manage" asp-action="AuthorizeAccessToGoogleCalendar">Integracja</a>
+    <p>Pomyślnie zintegrowałeś DevAdventCalendar ze swoim kalendarzem Google!</p>
+    <p>Miłej zabawy 🎁 </p>
+}
+else
+{
+    @if (!@Model.HasPermissions)
+    {
+        <p class="alert alert-danger">@GoogleCalendarVerificationInfo</p>
+        <p>@GoogleCalendarIntegrationIntro</p>
+        <p>@GoogleCalendarIntegrationPermissionInfo</p>
+        <strong>
+            ◾ @GoogleCalendarIntegrationPermission1
+        </strong>
+        <br />
+        <strong>
+            ◾ @GoogleCalendarIntegrationPermission2
+        </strong>
+        <br />
+        <a class="chris_btn reveal" asp-controller="Manage" asp-action="AuthorizeAccessToGoogleCalendar">Integracja</a>
+    }
+    else
+    {
+        <p>Wystąpił błąd z integracją, przepraszamy!</p>
+    }
+
 }
