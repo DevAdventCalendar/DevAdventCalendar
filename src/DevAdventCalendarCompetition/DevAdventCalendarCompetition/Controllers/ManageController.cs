@@ -339,6 +339,11 @@ namespace DevAdventCalendarCompetition.Controllers
         public async Task<IActionResult> AuthorizationCallback()
         {
             var response = await this._googleCalendarService.CreateNewCalendarWithEvents();
+            if (response.Status == OperationalResultStatus.Success)
+            {
+                await this.AddInfoToUserAboutSuccessfulIntegration();
+            }
+
             this.StatusMessage = MapStatusToMessage(response.Status);
             return this.RedirectToAction(nameof(this.GoogleCalendarIntegration));
         }
@@ -346,9 +351,16 @@ namespace DevAdventCalendarCompetition.Controllers
         [HttpGet]
         public async Task<IActionResult> GoogleCalendarIntegration()
         {
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
+            }
+
             var userHasPermissions = await this.CheckIfUserHasPermissions();
             var model = new GoogleCalendarViewModel
             {
+                IsAlreadyIntegrated = user.IsIntegratedWithGoogleCalendar,
                 HasPermissions = userHasPermissions,
                 StatusMessage = this.StatusMessage
             };
@@ -408,6 +420,20 @@ namespace DevAdventCalendarCompetition.Controllers
             {
                 this.ModelState.AddModelError(key, error.Description);
             }
+        }
+
+        private async Task AddInfoToUserAboutSuccessfulIntegration()
+        {
+            var user = await this._manageService.GetUserAsync(this.User).ConfigureAwait(false);
+            if (user == null)
+            {
+                throw new InvalidOperationException(string.Format(
+                    CultureInfo.InvariantCulture,
+                    ExceptionsMessages.UserWithIdNotFound, this._accountService.GetUserId(this.User)));
+            }
+
+            user.IsIntegratedWithGoogleCalendar = true;
+            await this._manageService.UpdateUserAsync(user).ConfigureAwait(false);
         }
     }
 }

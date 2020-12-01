@@ -73,14 +73,17 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 var userName = TestUserName;
                 var emailNotificationsEnabled = false;
                 var pushNotificationsEnabled = false;
+                var isIntegratedWithGoogleCalendar = false;
 
                 context.Database.ExecuteSqlInterpolated(
                     $@"INSERT INTO AspNetUsers ([Id],[AccessFailedCount],[ConcurrencyStamp],[Email],[EmailConfirmed],
                     [LockoutEnabled],[LockoutEnd],[NormalizedEmail],[NormalizedUserName],[PasswordHash],[PhoneNumber],
-                    [PhoneNumberConfirmed],[SecurityStamp],[TwoFactorEnabled],[UserName],[EmailNotificationsEnabled],[PushNotificationsEnabled])
+                    [PhoneNumberConfirmed],[SecurityStamp],[TwoFactorEnabled],[UserName],[EmailNotificationsEnabled],[PushNotificationsEnabled],
+                    [IsIntegratedWithGoogleCalendar])
                     VALUES ({TestUserId}, {accessFailedCount}, {userConcurrencyStamp}, {email},{emailConfirmed},{lockoutEnabled},
                     {lockoutEnd},{normalizedEmail},{normalizedUserName}, {passwordHash},{phoneNumber},{phoneNumberConfirmed},  
-                    {securityStamp}, {twoFactorEnabled}, {userName},{emailNotificationsEnabled},{pushNotificationsEnabled})");
+                    {securityStamp}, {twoFactorEnabled}, {userName},{emailNotificationsEnabled},{pushNotificationsEnabled},
+                    {isIntegratedWithGoogleCalendar})");
 
                 context.Database.ExecuteSqlInterpolated(
                     $@"INSERT INTO AspNetUserRoles ([UserId],[RoleId])
