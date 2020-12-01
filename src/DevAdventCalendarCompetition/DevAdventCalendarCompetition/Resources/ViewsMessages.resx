@@ -363,6 +363,15 @@
   <data name="GoogleCalendarVerificationInfo" xml:space="preserve">
     <value>Uwaga! Integracja działa, ale nasza aplikacja wciąż jeszcze czeka na zweryfikowanie przez Google.</value>
   </data>
+  <data name="GoogleCalendarSuccessfulIntegrationInfo" xml:space="preserve">
+    <value>Pomyślnie zintegrowałeś DevAdventCalendar ze swoim kalendarzem Google!</value>
+  </data>
+  <data name="GoogleCalendarSuccessfulIntegrationInfo2" xml:space="preserve">
+    <value>Miłej zabawy 🎁</value>
+  </data>
+  <data name="GoogleCalendarFailureIntegrationInfo" xml:space="preserve">
+    <value>Wystąpił błąd z integracją, przepraszamy!</value>
+  </data>
   <data name="GoogleCalendarIntegrationPermission1" xml:space="preserve">
     <value>Przeglądanie, edytowanie, udostępnianie i trwałe usuwanie wszystkich kalendarzy, do których masz dostęp w kalendarzu Google.</value>
   </data>

@@ -33,7 +33,7 @@ namespace DevAdventCalendarCompetition.Controllers
         {
             var test = this._testService.GetTestByNumber(testNumber);
 
-            if (test == null)
+            if (test == null || test.Status == TestStatus.NotStarted)
             {
                 return this.NotFound();
             }
