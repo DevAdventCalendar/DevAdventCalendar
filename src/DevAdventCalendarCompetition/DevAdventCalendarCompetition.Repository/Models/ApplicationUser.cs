@@ -9,6 +9,8 @@ namespace DevAdventCalendarCompetition.Repository.Models
 
         public bool PushNotificationsEnabled { get; set; }
 
+        public bool IsIntegratedWithGoogleCalendar { get; set; }
+
 #pragma warning disable CA2227 // Collection properties should be read only
         public ICollection<UserTestCorrectAnswer> CorrectAnswers { get; set; }
 #pragma warning restore CA2227 // Collection properties should be read only
