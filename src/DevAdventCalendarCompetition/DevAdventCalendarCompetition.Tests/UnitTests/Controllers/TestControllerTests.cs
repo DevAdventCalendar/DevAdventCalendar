@@ -7,6 +7,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -28,12 +29,14 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Index_UserHasAnsweredTrue_ReturnsTestDto()
+        public void Index_GivenStartedTest_UserHasAnsweredCorrectly_ReturnsTestDto()
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
+            var answeredCorrectly = true;
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
-            this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(true);
+            this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id))
+                .Returns(answeredCorrectly);
             using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
             controller.ControllerContext = new ControllerContext()
             {
@@ -45,14 +48,57 @@ namespace DevAdventCalendarCompetition.Tests.UnitTests.Controllers
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            var testDto = Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            testDto.HasUserAnswered.Should().Be(answeredCorrectly);
         }
 
         [Fact]
-        public void Index_UserHasNotAnsweredTrue_ReturnsViewWithTestDto()
+        public void Index_GivenStartedTest_UserHasAnsweredWrong_ReturnsViewWithTestDto()
         {
             // Arrange
             var test = GetTest(TestStatus.Started);
+            var answeredCorrectly = false;
+            this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = null }
+            };
+
+            // Act
+            var result = controller.Index(test.Id);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var testDto = Assert.IsType<TestDto>(viewResult.ViewData.Model);
+            testDto.HasUserAnswered.Should().Be(answeredCorrectly);
+        }
+
+        [Fact]
+        public void Index_GivenNotStartedTest_UserTryToNavigateToTestPage_ReturnsNotFound()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.NotStarted);
+            this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
+            this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(false);
+            using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = null }
+            };
+
+            // Act
+            var result = controller.Index(test.Id);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public void Index_GivenEndedTest_UserTryToNavigateToTestPage_ReturnsViewWithTestDto()
+        {
+            // Arrange
+            var test = GetTest(TestStatus.Ended);
             this._testServiceMock.Setup(x => x.GetTestByNumber(test.Id)).Returns(test);
             this._testServiceMock.Setup(x => x.HasUserAnsweredTest(It.IsAny<string>(), test.Id)).Returns(false);
             using var controller = new TestController(this._testServiceMock.Object, this._answerServiceMock.Object);
