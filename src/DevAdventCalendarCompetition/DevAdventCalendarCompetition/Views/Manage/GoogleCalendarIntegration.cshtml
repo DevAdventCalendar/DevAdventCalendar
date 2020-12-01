@@ -11,8 +11,8 @@
 
 @if (Model.IsAlreadyIntegrated)
 {
-    <p>Pomyślnie zintegrowałeś DevAdventCalendar ze swoim kalendarzem Google!</p>
-    <p>Miłej zabawy 🎁 </p>
+    <p>@GoogleCalendarSuccessfulIntegrationInfo</p>
+    <p>@GoogleCalendarSuccessfulIntegrationInfo2</p>
 }
 else
 {
@@ -33,7 +33,7 @@ else
     }
     else
     {
-        <p>Wystąpił błąd z integracją, przepraszamy!</p>
+        <p>@GoogleCalendarFailureIntegrationInfo</p>
     }
 
 }

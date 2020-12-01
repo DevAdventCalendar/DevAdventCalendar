@@ -826,6 +826,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd z integracją, przepraszamy!.
+        /// </summary>
+        public static string GoogleCalendarFailureIntegrationInfo {
+            get {
+                return ResourceManager.GetString("GoogleCalendarFailureIntegrationInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Integracja z kalendarzem Google.
         /// </summary>
         public static string GoogleCalendarIntegration {
@@ -876,6 +885,24 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string GoogleCalendarSuccess {
             get {
                 return ResourceManager.GetString("GoogleCalendarSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pomyślnie zintegrowałeś DevAdventCalendar ze swoim kalendarzem Google!.
+        /// </summary>
+        public static string GoogleCalendarSuccessfulIntegrationInfo {
+            get {
+                return ResourceManager.GetString("GoogleCalendarSuccessfulIntegrationInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miłej zabawy 🎁.
+        /// </summary>
+        public static string GoogleCalendarSuccessfulIntegrationInfo2 {
+            get {
+                return ResourceManager.GetString("GoogleCalendarSuccessfulIntegrationInfo2", resourceCulture);
             }
         }
         
