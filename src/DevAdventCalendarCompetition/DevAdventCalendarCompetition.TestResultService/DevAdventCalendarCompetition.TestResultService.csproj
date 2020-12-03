@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DevAdventCalendarCompetition.Repository\DevAdventCalendarCompetition.Repository.csproj" />
+    <ProjectReference Include="..\DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

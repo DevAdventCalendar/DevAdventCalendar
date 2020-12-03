@@ -1,4 +1,5 @@
-﻿using DevAdventCalendarCompetition.TestResultService.Interfaces;
+using DevAdventCalendarCompetition.Services.Options;
+using DevAdventCalendarCompetition.TestResultService.Interfaces;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -15,11 +16,13 @@ namespace DevAdventCalendarCompetition.TestResultService
                 ITestResultPointsRule correctAnswersPointsRule = new CorrectAnswerPointsRule();
                 ITestResultPointsRule bonusPointsRule = new BonusPointsRule();
                 ITestResultPlaceRule placeRule = new AnsweringTimePlaceRule();
+                TestSettings testSettings = new TestSettings();
 
                 TestResultService service = new TestResultService(repository,
                     correctAnswersPointsRule,
                     bonusPointsRule,
-                    placeRule);
+                    placeRule,
+                    testSettings);
 
                 var numberOfWeek = args.FirstOrDefault();
                 if (numberOfWeek == null)
