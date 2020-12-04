@@ -12,7 +12,7 @@ namespace DevAdventCalendarCompetition.TestResultService
         public static TestSettings LoadTestSettings()
         {
             var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile($"appsetins.json", optional: false);
+                .AddJsonFile($"appsettings.json", optional: false);
 
             var configuration = configurationBuilder.Build();
 
