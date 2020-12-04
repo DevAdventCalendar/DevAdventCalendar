@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\DevAdventCalendarCompetition\appsettings.Local.json" Link="appsettings.Local.json" />
+    <Content Include="..\DevAdventCalendarCompetition\appsettings.json" Link="appsettings.json" />
     <Content Include="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
