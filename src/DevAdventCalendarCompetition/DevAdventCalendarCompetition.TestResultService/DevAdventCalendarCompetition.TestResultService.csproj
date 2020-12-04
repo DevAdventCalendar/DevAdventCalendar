@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\DevAdventCalendarCompetition\appsettings.Local.json" Link="appsettings.Local.json" />
     <Content Include="appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -29,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DevAdventCalendarCompetition.Repository\DevAdventCalendarCompetition.Repository.csproj" />
+    <ProjectReference Include="..\DevAdventCalendarCompetition.Services\DevAdventCalendarCompetition.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
