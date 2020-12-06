@@ -8,6 +8,7 @@ using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Interfaces;
+using DevAdventCalendarCompetition.Services.Options;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
@@ -50,7 +51,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var mapper = new MapperConfiguration(cfg => cfg.AddMaps(typeof(TestProfile))).CreateMapper();
             var resultsRepository = new ResultsRepository(context);
             var testAnswerRepository = new UserTestAnswersRepository(context);
-            return new ResultsService(resultsRepository, testAnswerRepository, mapper);
+            return new ResultsService(resultsRepository, testAnswerRepository, mapper, GetTestSettings());
         }
 
         private static Result GetUserResult() => new Result
@@ -76,6 +77,15 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[1], AnsweringTime = new DateTime(2020, 12, 9, 20, 0, 0) },
                 new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[2], AnsweringTime = new DateTime(2020, 12, 16, 20, 0, 0) },
                 new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[3], AnsweringTime = new DateTime(2020, 12, 24, 20, 0, 0) },
+            };
+        }
+
+        private static TestSettings GetTestSettings()
+        {
+            return new TestSettings()
+            {
+                StartHour = new TimeSpan(13, 0, 0),
+                EndHour = new TimeSpan(23, 59, 59)
             };
         }
     }

@@ -30,6 +30,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             return _dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
+                .ToList()
                 .Sum(a => a.AnsweringTimeOffset.TotalMilliseconds);
         }
         
@@ -78,7 +79,7 @@ namespace DevAdventCalendarCompetition.TestResultService
             {
                 _dbContext.Results.Add(new Result { UserId = userId, FinalPlace = place });
             }
-
+            
             _dbContext.SaveChanges();
         }
 
