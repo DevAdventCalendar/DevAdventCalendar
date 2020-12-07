@@ -6,6 +6,7 @@ using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Models;
+using DevAdventCalendarCompetition.Services.Options;
 
 namespace DevAdventCalendarCompetition.Services
 {
@@ -14,15 +15,18 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IResultsRepository _resultsRepository;
         private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly IMapper _mapper;
+        private readonly TestSettings _testSettings;
 
         public ResultsService(
             IResultsRepository resultsRepository,
             IUserTestAnswersRepository testAnswerRepository,
-            IMapper mapper)
+            IMapper mapper,
+            TestSettings testSettings)
         {
             this._resultsRepository = resultsRepository;
             this._testAnswerRepository = testAnswerRepository;
             this._mapper = mapper;
+            this._testSettings = testSettings;
         }
 
         public Dictionary<int, List<TestResultDto>> GetAllTestResults()
@@ -64,28 +68,35 @@ namespace DevAdventCalendarCompetition.Services
             return this._resultsRepository.GetUserPosition(userId);
         }
 
+        private (int, int, int) GetStartHour()
+            => (this._testSettings.StartHour.Hours,
+                this._testSettings.StartHour.Minutes,
+                this._testSettings.StartHour.Seconds);
+
         private List<TestResultDto> FillResultsWithAnswersStats(int weekNumber, List<TestResultDto> results)
         {
             DateTimeOffset dateFrom;
             DateTimeOffset dateTo;
 
+            (int hour, int minute, int second) = this.GetStartHour();
+
             switch (weekNumber)
             {
                 case 1:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 8, hour, minute, second, TimeSpan.Zero);
                     break;
                 case 2:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 8, 20, 0, 0, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 8, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 15, hour, minute, second, TimeSpan.Zero);
                     break;
                 case 3:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 15, 20, 0, 0, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 22, 20, 0, 0, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 15, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 22, hour, minute, second, TimeSpan.Zero);
                     break;
                 default:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, 20, 0, 0, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 25, 20, 0, 0, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 25, hour, minute, second, TimeSpan.Zero);
                     break;
             }
 
