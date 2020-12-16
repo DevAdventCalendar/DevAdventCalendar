@@ -41,8 +41,8 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 User = UserModel.userI,
                 TestId = this._testModel.test7.Id,
                 Test = this._testModel.test7,
-                AnsweringTime = this._testModel.test7.StartDate.Value.AddDays(8).AddHours(2),
-                AnsweringTimeOffset = new TimeSpan(8, 2, 0, 0)
+                AnsweringTime = this._testModel.test7.StartDate.Value.AddDays(1).AddHours(2),
+                AnsweringTimeOffset = new TimeSpan(1, 2, 0, 0)
             });
 
             //userI - 1 correct answer (after ranking time)
