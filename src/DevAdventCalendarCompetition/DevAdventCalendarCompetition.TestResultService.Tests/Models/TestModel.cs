@@ -46,21 +46,21 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests.Models
         internal readonly Test test6 = new Test()
         {
             Id = 6,
-            StartDate = new DateTime(DateTime.Today.Year, 12, 6, 13, 0, 0),
+            StartDate = new DateTime(DateTime.Today.Year, 12, 6, 20, 0, 0),
             EndDate = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 0)
         };
 
         internal readonly Test test7 = new Test()
         {
             Id = 7,
-            StartDate = new DateTime(DateTime.Today.Year, 12, 7, 13, 0, 0),
+            StartDate = new DateTime(DateTime.Today.Year, 12, 7, 20, 0, 0),
             EndDate = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 0)
         };
 
         internal readonly Test test8 = new Test()
         {
             Id = 8,
-            StartDate = new DateTime(DateTime.Today.Year, 12, 8, 13, 0, 0),
+            StartDate = new DateTime(DateTime.Today.Year, 12, 8, 20, 0, 0),
             EndDate = new DateTime(DateTime.Today.Year, 12, 24, 23, 59, 0)
         };
         

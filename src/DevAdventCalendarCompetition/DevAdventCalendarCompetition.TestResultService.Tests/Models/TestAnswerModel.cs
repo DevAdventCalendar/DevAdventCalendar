@@ -176,33 +176,11 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
             dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
                 Id = 8,
-                UserId = UserModel.userI.Id,
-                User = UserModel.userI,
-                TestId = this._testModel.test6.Id,
-                Test = this._testModel.test6,
-                AnsweringTime = this._testModel.test6.StartDate.Value.AddHours(2),
-                AnsweringTimeOffset = new TimeSpan(2, 0, 0)
-            });
-
-            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
-            {
-                Id = 9,
-                UserId = UserModel.userI.Id,
-                User = UserModel.userI,
-                TestId = this._testModel.test7.Id,
-                Test = this._testModel.test7,
-                AnsweringTime = this._testModel.test7.StartDate.Value.AddHours(2),
-                AnsweringTimeOffset = new TimeSpan(2, 0, 0)
-            });
-
-            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
-            {
-                Id = 10,
-                UserId = UserModel.userI.Id,
-                User = UserModel.userI,
-                TestId = this._testModel.test8.Id,
-                Test = this._testModel.test8,
-                AnsweringTime = this._testModel.test8.StartDate.Value.AddHours(2),
+                UserId = UserModel.userA.Id,
+                User = UserModel.userA,
+                TestId = this._testModel.test2.Id,
+                Test = this._testModel.test2,
+                AnsweringTime = this._testModel.test2.StartDate.Value.AddHours(2),
                 AnsweringTimeOffset = new TimeSpan(2, 0, 0)
             });
         }
