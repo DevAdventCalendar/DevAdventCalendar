@@ -213,6 +213,24 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
                 results.FirstOrDefault(x => x.UserId == UserModel.userI.Id).Week1Points.Value);
         }
 
+        [Fact]
+        public async Task UserWhoAnsweredInSecondWeekToTheFirstWeekTestShouldHaveSecondWeekPointsOnly()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
+
+            //Act
+            service.CalculateWeeklyResults(2);
+            var results = testResultRepository.GetFinalResults();
+
+            //Assert
+            Assert.Equal(
+                130,
+                results.FirstOrDefault(x => x.UserId == UserModel.userI.Id).Week2Points.Value);
+        }
+
         private object GetWeek1Result(Result result)
         {
             return new { UserdId = result.UserId, Week1Points = result.Week1Points, Week1Place = result.Week1Points != 0 ? result.Week1Place : int.MaxValue };

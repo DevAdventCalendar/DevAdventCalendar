@@ -36,12 +36,14 @@ namespace DevAdventCalendarCompetition.TestResultService
         
         public IEnumerable<DateTime> GetCorrectAnswersDates(string userId, DateTime dateFrom, DateTime dateTo)
         {
-            return _dbContext
+            var results = _dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId)
                 .Where(a => a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
                 .Where(a => a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
                 .Select(a => a.Test.StartDate.Value.Date);
+
+            return results;
         }
 
         public List<Result> GetFinalResults()
