@@ -23,6 +23,17 @@ namespace DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Model
                 throw new ArgumentNullException(nameof(dbContext));
             }
 
+            dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
+            {
+                Id = 16,
+                UserId = UserModel.userI.Id,
+                User = UserModel.userI,
+                TestId = this._testModel.test8.Id,
+                Test = this._testModel.test8,
+                AnsweringTime = this._testModel.test8.StartDate.Value.AddDays(1).AddHours(2).AddMilliseconds(5),
+                AnsweringTimeOffset = new TimeSpan(1, 2, 0, 0, 5)
+            });
+
             //userI - 1 correct answer (after ranking time)
             dbContext.UserTestCorrectAnswers.Add(new UserTestCorrectAnswer()
             {
