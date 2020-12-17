@@ -27,21 +27,27 @@ namespace DevAdventCalendarCompetition.TestResultService
 
         public double GetAnsweringTimeSum(string userId, DateTime dateFrom, DateTime dateTo)
         {
-            return _dbContext
+            var results =  _dbContext
                 .UserTestCorrectAnswers
                 .Where(a => a.UserId == userId && a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
                 .ToList()
-                .Sum(a => a.AnsweringTimeOffset.TotalMilliseconds);
+                .GroupBy(a => a.TestId, (k, g) => new { TestId = k, Answer = g.FirstOrDefault() })
+                .Sum(a => a.Answer.AnsweringTimeOffset.TotalMilliseconds);
+
+            return results;
         }
         
         public IEnumerable<DateTime> GetCorrectAnswersDates(string userId, DateTime dateFrom, DateTime dateTo)
         {
             var results = _dbContext
                 .UserTestCorrectAnswers
+                .Include(a => a.Test)
                 .Where(a => a.UserId == userId)
                 .Where(a => a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
                 .Where(a => a.AnsweringTime > dateFrom && a.AnsweringTime <= dateTo)
-                .Select(a => a.Test.StartDate.Value.Date);
+                .ToList()
+                .GroupBy(a => a.TestId, (k, g) => new { TestId = k, Date = g.FirstOrDefault() })
+                .Select(a => a.Date.Test.StartDate.Value);
 
             return results;
         }
