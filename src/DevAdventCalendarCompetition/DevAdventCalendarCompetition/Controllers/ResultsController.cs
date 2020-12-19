@@ -21,7 +21,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(int? pageIndex)
+        public ActionResult Index(int? pageIndex, int weekNumber = 4)
         {
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -32,35 +32,33 @@ namespace DevAdventCalendarCompetition.Controllers
             int pageSize = 50;
 
             var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryViewModel>>();
-            var testResultListDto = this._resultsService.GetAllTestResults();
+
+            // var testResultListDto = this._resultsService.GetAllTestResults();
+            var testResultListDto = this._resultsService.GetTestResults(weekNumber);
+
 
             for (var i = 1; i <= testResultListDto.Count; i++)
             {
-                if (testResultListDto.TryGetValue(i, out var results))
+                var totalTestResults = new List<TestResultEntryViewModel>
                 {
-                    var totalTestResults = new List<TestResultEntryViewModel>();
-
-                    foreach (var result in results)
+                    new TestResultEntryViewModel
                     {
-                        totalTestResults.Add(new TestResultEntryViewModel
-                        {
-                            Week1Points = result.Week1Points,
-                            Week1Place = result.Week1Place,
-                            Week2Points = result.Week2Points,
-                            Week2Place = result.Week2Place,
-                            Week3Points = result.Week3Points,
-                            Week3Place = result.Week3Place,
-                            FinalPoints = result.FinalPoints,
-                            FinalPlace = result.FinalPlace,
-                            UserId = result.UserId,
-                            CorrectAnswers = result.CorrectAnswersCount,
-                            WrongAnswers = result.WrongAnswersCount,
-                            UserName = result.UserName,
-                        });
+                        Week1Points = testResultListDto[i].Week1Points,
+                        Week1Place = testResultListDto[i].Week1Place,
+                        Week2Points = testResultListDto[i].Week2Points,
+                        Week2Place = testResultListDto[i].Week2Place,
+                        Week3Points = testResultListDto[i].Week3Points,
+                        Week3Place = testResultListDto[i].Week3Place,
+                        FinalPoints = testResultListDto[i].FinalPoints,
+                        FinalPlace = testResultListDto[i].FinalPlace,
+                        UserId = testResultListDto[i].UserId,
+                        CorrectAnswers = testResultListDto[i].CorrectAnswersCount,
+                        WrongAnswers = testResultListDto[i].WrongAnswersCount,
+                        UserName = testResultListDto[i].UserName,
                     }
+                };
 
-                    paginatedResults.Add(i, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex ?? 1, pageSize));
-                }
+                paginatedResults.Add(i, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex ?? 1, pageSize));
             }
 
             var userPosition = this._resultsService.GetUserPosition(userId);
