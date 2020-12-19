@@ -63,6 +63,18 @@ namespace DevAdventCalendarCompetition.Services
             return testResultDictionary;
         }
 
+        public List<TestResultDto> GetTestResults(int weekNumber = 4)
+        {
+            var results = this._resultsRepository.GetTestResultsForWeek(weekNumber);
+
+            if (results != null && results.Count > 0)
+            {
+                return this.FillResultsWithAnswersStats(weekNumber, this._mapper.Map<List<TestResultDto>>(results));
+            }
+
+            return null;
+        }
+
         public UserPosition GetUserPosition(string userId)
         {
             return this._resultsRepository.GetUserPosition(userId);

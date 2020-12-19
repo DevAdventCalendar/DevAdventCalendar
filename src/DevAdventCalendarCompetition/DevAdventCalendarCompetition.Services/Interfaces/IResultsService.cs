@@ -9,5 +9,7 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
         UserPosition GetUserPosition(string userId);
 
         Dictionary<int, List<TestResultDto>> GetAllTestResults();
+
+        List<TestResultDto> GetTestResults(int weekNumber);
     }
 }
