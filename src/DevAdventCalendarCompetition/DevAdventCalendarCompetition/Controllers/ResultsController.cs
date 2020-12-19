@@ -32,10 +32,7 @@ namespace DevAdventCalendarCompetition.Controllers
             int pageSize = 50;
 
             var paginatedResults = new Dictionary<int, PaginatedCollection<TestResultEntryViewModel>>();
-
-            // var testResultListDto = this._resultsService.GetAllTestResults();
             var testResultListDto = this._resultsService.GetTestResults(weekNumber);
-
 
             for (var i = 1; i <= testResultListDto.Count; i++)
             {
