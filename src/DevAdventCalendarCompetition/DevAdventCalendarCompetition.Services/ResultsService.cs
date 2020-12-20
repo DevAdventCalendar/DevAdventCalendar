@@ -32,25 +32,25 @@ namespace DevAdventCalendarCompetition.Services
         public Dictionary<int, List<TestResultDto>> GetAllTestResults()
         {
             var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
-            var week1Results = this._resultsRepository.GetTestResultsForWeek(1);
+            var week1Results = this._resultsRepository.GetTestResultsForWeek(1, 50, 1);
 
             if (week1Results != null && week1Results.Count > 0)
             {
                 testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1Results)));
 
-                var week2Results = this._resultsRepository.GetTestResultsForWeek(2);
+                var week2Results = this._resultsRepository.GetTestResultsForWeek(2, 50, 1);
 
                 if (week2Results != null && week2Results.Count > 0)
                 {
                     testResultDictionary.Add(2, this.FillResultsWithAnswersStats(2, this._mapper.Map<List<TestResultDto>>(week2Results)));
 
-                    var week3Results = this._resultsRepository.GetTestResultsForWeek(3);
+                    var week3Results = this._resultsRepository.GetTestResultsForWeek(3, 50, 1);
 
                     if (week3Results != null && week3Results.Count > 0)
                     {
                         testResultDictionary.Add(3, this.FillResultsWithAnswersStats(3, this._mapper.Map<List<TestResultDto>>(week3Results)));
 
-                        var fullResults = this._resultsRepository.GetTestResultsForWeek(4);
+                        var fullResults = this._resultsRepository.GetTestResultsForWeek(4, 50, 1);
 
                         if (fullResults != null && fullResults.Count > 0)
                         {
@@ -63,9 +63,9 @@ namespace DevAdventCalendarCompetition.Services
             return testResultDictionary;
         }
 
-        public List<TestResultDto> GetTestResults(int weekNumber = 4)
+        public List<TestResultDto> GetTestResults(int weekNumber, int pageCount, int pageIndex)
         {
-            var results = this._resultsRepository.GetTestResultsForWeek(weekNumber);
+            var results = this._resultsRepository.GetTestResultsForWeek(weekNumber, pageCount, pageIndex);
 
             if (results != null && results.Count > 0)
             {
@@ -73,6 +73,11 @@ namespace DevAdventCalendarCompetition.Services
             }
 
             return null;
+        }
+
+        public int GetTotalTestResultsCount(int weekNumber)
+        {
+            return this._resultsRepository.GetTotalTestResultsCount(weekNumber);
         }
 
         public UserPosition GetUserPosition(string userId)

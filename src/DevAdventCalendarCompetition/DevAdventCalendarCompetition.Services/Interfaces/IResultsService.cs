@@ -10,6 +10,8 @@ namespace DevAdventCalendarCompetition.Services.Interfaces
 
         Dictionary<int, List<TestResultDto>> GetAllTestResults();
 
-        List<TestResultDto> GetTestResults(int weekNumber);
+        List<TestResultDto> GetTestResults(int weekNumber, int pageCount, int pageIndex);
+
+        int GetTotalTestResultsCount(int weekNumber);
     }
 }

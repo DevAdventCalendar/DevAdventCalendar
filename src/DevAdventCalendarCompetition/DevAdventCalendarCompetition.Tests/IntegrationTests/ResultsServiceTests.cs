@@ -1,18 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
-using DevAdventCalendarCompetition.Services.Interfaces;
 using DevAdventCalendarCompetition.Services.Options;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
-using Microsoft.AspNetCore.Identity;
-using Moq;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
 
@@ -63,7 +58,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var resultsService = PrepareSUT(context);
-                var result = resultsService.GetTestResults(weekNumber);
+                var result = resultsService.GetTestResults(weekNumber, 50, 1);
 
                 result.Count.Should().Be(1);
                 string.Equals(result[0].UserName, TestUserName, StringComparison.Ordinal);
@@ -91,7 +86,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var resultsService = PrepareSUT(context);
-                var result = resultsService.GetTestResults();
+                var result = resultsService.GetTestResults(4, 50, 1);
 
                 result.Count.Should().Be(1);
                 string.Equals(result[0].UserName, TestUserName, StringComparison.Ordinal);

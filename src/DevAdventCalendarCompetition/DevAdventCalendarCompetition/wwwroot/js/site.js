@@ -47,13 +47,14 @@ $(function () {
     */
 
     $('[data-toggle="tab"]').on("click", function(event) {
-        GetResults(event.target.getAttribute("data-week"));
+      GetResults(event.target.getAttribute("data-week"),
+          event.target.getAttribute("data-page"));
     });
 });
 
-function GetResults(weekNumber) {
+function GetResults(weekNumber, pageIndex) {
     $.get("/Results/RenderResults",
-        { pageIndex: 1, weekNumber: weekNumber }, function (result) {
+        { pageIndex: pageIndex, weekNumber: weekNumber }, function (result) {
             $("#resultsPanel").html(result);
         });
 }

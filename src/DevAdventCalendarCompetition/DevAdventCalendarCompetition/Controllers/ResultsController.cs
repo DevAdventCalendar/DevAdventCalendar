@@ -44,7 +44,7 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpGet]
-        public ActionResult RenderResults(int? pageIndex, int weekNumber = 1)
+        public ActionResult RenderResults(int pageIndex = 1, int weekNumber = 1)
         {
             var userId = this.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -52,9 +52,9 @@ namespace DevAdventCalendarCompetition.Controllers
                 return this.RedirectToAction("Index");
             }
 
-            int pageSize = 50;
+            const int pageSize = 50;
 
-            var testResultListDto = this._resultsService.GetTestResults(weekNumber);
+            var testResultListDto = this._resultsService.GetTestResults(weekNumber, pageSize, pageIndex);
             if (testResultListDto == null || !testResultListDto.Any())
             {
                 return this.PartialView("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(weekNumber, null));
@@ -78,8 +78,10 @@ namespace DevAdventCalendarCompetition.Controllers
                     })
                     .ToList();
 
+            var totalPages = (int)Math.Ceiling(this._resultsService.GetTotalTestResultsCount(weekNumber) / (double)pageSize);
+
             var paginatedResults = new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(
-                weekNumber, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex ?? 1, pageSize));
+                weekNumber, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex, pageSize, totalPages));
 
             return this.PartialView("_ResultsPage", paginatedResults);
         }

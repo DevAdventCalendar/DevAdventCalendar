@@ -8,6 +8,8 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
     {
         UserPosition GetUserPosition(string userId);
 
-        List<Result> GetTestResultsForWeek(int weekNumber);
+        List<Result> GetTestResultsForWeek(int weekNumber, int resultsCountToGet, int paginationIndex);
+
+        int GetTotalTestResultsCount(int weekNumber);
     }
 }

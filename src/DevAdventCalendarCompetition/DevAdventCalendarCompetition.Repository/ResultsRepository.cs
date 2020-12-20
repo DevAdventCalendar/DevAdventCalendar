@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -52,39 +53,55 @@ namespace DevAdventCalendarCompetition.Repository
             return userPosition;
         }
 
-        public List<Result> GetTestResultsForWeek(int weekNumber)
+        public List<Result> GetTestResultsForWeek(int weekNumber, int resultsCountToGet, int paginationIndex)
         {
-            switch (weekNumber)
+            if (weekNumber < 1 || weekNumber > 4)
             {
-                case 1:
-                    return this._dbContext.Results
-                        .Include(u => u.User)
-                        .Where(r => r.Week1Points != null)
-                        .OrderBy(r => r.Week1Place)
-                        .ToList();
-                case 2:
-                    return this._dbContext.Results
-                        .Include(u => u.User)
-                        .Where(r => r.Week2Points != null)
-                        .OrderBy(r => r.Week2Place)
-                        .ToList();
-                case 3:
-                    return this._dbContext.Results
-                        .Include(u => u.User)
-                        .Where(r => r.Week3Points != null)
-                        .OrderBy(r => r.Week3Place)
-                        .ToList();
-                case 4:
-                    return this._dbContext.Results
-                        .Include(u => u.User)
-                        .Where(r => r.FinalPoints != null)
-                        .OrderBy(r => r.FinalPlace)
-                        .ToList();
-                default:
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
-                    throw new ArgumentException("Invalid week number.");
+                throw new ArgumentException("Invalid week number.");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
             }
+
+            Expression<Func<Result, bool>> resultsFilter = GetFilter(weekNumber);
+            Expression<Func<Result, int?>> resultsOrder = GetOrder(weekNumber);
+
+            return this._dbContext.Results
+                .Include(u => u.User)
+                .Where(resultsFilter)
+                .OrderBy(resultsOrder)
+                .Skip(resultsCountToGet * (paginationIndex - 1))
+                .Take(resultsCountToGet)
+                .ToList();
+        }
+
+        public int GetTotalTestResultsCount(int weekNumber)
+        {
+            return this._dbContext.Results
+                .Count(GetFilter(weekNumber));
+        }
+
+        private static Expression<Func<Result, bool>> GetFilter(int weekNumber)
+        {
+            return weekNumber switch
+            {
+                1 => r => r.Week1Points != null,
+                2 => r => r.Week2Points != null,
+                3 => r => r.Week3Points != null,
+                4 => r => r.FinalPoints != null,
+                _ => null,
+            };
+        }
+
+        private static Expression<Func<Result, int?>> GetOrder(int weekNumber)
+        {
+            return weekNumber switch
+            {
+                1 => r => r.Week1Place,
+                2 => r => r.Week2Place,
+                3 => r => r.Week3Place,
+                4 => r => r.FinalPlace,
+                _ => null,
+            };
         }
     }
 }
