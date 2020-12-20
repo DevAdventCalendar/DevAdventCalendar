@@ -2,13 +2,17 @@
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 @{
+    var weekNumber = Model.Key;
     var entries = Model.Value;
-    var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.Value.HasNextPage ? "disabled" : "";
+    var prevDisabled = Model.Value != null && !Model.Value.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = Model.Value != null && !Model.Value.HasNextPage ? "disabled" : "";
 }
-<table class="table table-striped">
-    <caption></caption>
-    <thead>
+
+@if (entries != null && entries.Any())
+{
+    <table class="table table-striped">
+        <caption></caption>
+        <thead>
         <tr>
             <th scope="col"  class="col-xs-1">#</th>
             <th scope="col" >@UserName</th>
@@ -16,8 +20,8 @@
             <th scope="col" >@WrongAnswers</th>
             <th scope="col" >@TotalScore</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         @for (var i = 0; i < entries.Count; i++)
         {
             var testResult = entries[i];
@@ -41,22 +45,49 @@
                 }
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<div class="row">
-    <div class="col-xs-12">
-        <a asp-controller="Results"
-           asp-action="Index"
-           asp-route-pageIndex="@(entries.PageIndex - 1)"
-           class="chris_btn @prevDisabled">
-            @Previous
-        </a>
-        <a asp-controller="Results"
-           asp-action="Index"
-           asp-route-pageIndex="@(entries.PageIndex + 1)"
-           class="chris_btn @nextDisabled">
-            @Next
-        </a>
+    <div class="row">
+        <div class="col-xs-12">
+            <a asp-controller="Results"
+               asp-action="Index"
+               asp-route-pageIndex="@(entries.PageIndex - 1)"
+               class="chris_btn @prevDisabled">
+                @Previous
+            </a>
+            <a asp-controller="Results"
+               asp-action="Index"
+               asp-route-pageIndex="@(entries.PageIndex + 1)"
+               class="chris_btn @nextDisabled">
+                @Next
+            </a>
+        </div>
     </div>
-</div>
+    //await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(1, week1results));
+}
+else
+{
+    <br />
+    <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
+        <h4 class="mb-30">
+            @switch (weekNumber)
+            {
+                case 1:
+                    @Week1ScoreDescription
+                    break;
+                case 2:
+                    @Week2ScoreDescription
+                    break;
+                case 3:
+                    @Week3ScoreDescription
+                    break;
+                default:
+                    @FinalScoreDescription
+                    break;
+            }
+        </h4>
+    </div>
+
+     <img src="~/theme-2019/images/hanging.svg" alt="">
+}

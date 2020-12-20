@@ -37,10 +37,17 @@ $(function () {
             });
         }
     });
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
     /*
      * via https://getbootstrap.com/docs/4.1/components/tooltips
     */
+
+    $('[data-toggle="tab"]').on("click", function(event) {
+        $.get("/Results/RenderResults",
+          { pageIndex: 1, weekNumber: event.target.getAttribute("data-week") }, function(result) {
+                $("#resultsPanel").html(result);
+            });
+    });
 });
 
 function CheckTestStatus(testNumber) {

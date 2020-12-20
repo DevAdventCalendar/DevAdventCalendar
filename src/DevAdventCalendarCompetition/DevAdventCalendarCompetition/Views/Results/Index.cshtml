@@ -83,100 +83,25 @@ else
 
                 <!-- Tab panes -->
                 <div class="tab-content">
+                    <ul class="nav nav-tabs" id="results" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab" data-week="1">@string.Format(CultureInfo.InvariantCulture, @Week, 1)</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab" data-week="2">@string.Format(CultureInfo.InvariantCulture, @Week, 2)</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab" data-week="3">@string.Format(CultureInfo.InvariantCulture, @Week, 3)</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#full" aria-controls="full" role="tab" data-toggle="tab" data-week="4">@FullList</a>
+                        </li>
+                    </ul>
 
-                    @if (Model.TotalTestResults != null)
-                    {
-                        <ul class="nav nav-tabs" id="results" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#week1" aria-controls="week1" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 1)</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#week2" aria-controls="week2" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 2)</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#week3" aria-controls="week3" role="tab" data-toggle="tab">@string.Format(CultureInfo.InvariantCulture, @Week, 3)</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#full" aria-controls="full" role="tab" data-toggle="tab">@FullList</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="week1">
-                                @if (Model.TotalTestResults.TryGetValue(1, out var week1results))
-                                {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(1, week1results));
-                                }
-                                else
-                                {
-                                    <br />
-                                    <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
-                                        <h4 class="mb-30">
-                                            @Week1ScoreDescription
-                                        </h4>
-                                    </div>
-
-                                    <img src="~/theme-2019/images/hanging.svg" alt="">
-                                }
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="week2">
-                                @if (Model.TotalTestResults.TryGetValue(2, out var week2results))
-                                {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(2, week2results));
-                                }
-                                else
-                                {
-                                    <br />
-                                    <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
-                                        <h4 class="mb-30">
-                                            @Week2ScoreDescription
-                                        </h4>
-                                    </div>
-
-                                    <img src="~/theme-2019/images/hanging.svg" alt="">
-                                }
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="week3">
-                                @if (Model.TotalTestResults.TryGetValue(3, out var week3results))
-                                {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(3, week3results));
-                                }
-                                else
-                                {
-                                    <br />
-
-                                    <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
-                                        <h4 class="mb-30">
-                                            @Week3ScoreDescription
-                                        </h4>
-                                    </div>
-
-                                    <img src="~/theme-2019/images/hanging.svg" alt="">
-                                }
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="full">
-                                @if (Model.TotalTestResults.TryGetValue(4, out var finalResults))
-                                {
-                                    await Html.RenderPartialAsync("_ResultsPage", new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(4, finalResults));
-                                }
-                                else
-                                {
-                                    <br />
-                                    <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
-                                        <h4 class="mb-30">
-                                            @FinalScoreDescription
-                                        </h4>
-                                    </div>
-
-                                    <img src="~/theme-2019/images/hanging.svg" alt="">
-                                }
-                            </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="resultsPanel">
                         </div>
-                    }
-                    else
-                    {
-                        <div role="tabpanel" class="tab-pane" id="totalresults">@TestsAreActive</div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>
