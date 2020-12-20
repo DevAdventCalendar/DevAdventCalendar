@@ -3,6 +3,10 @@
 $(function () {
     var url = window.location.href;
 
+    if (document.location.pathname === "/Results/Index") {
+        GetResults(1);
+    }
+
     $("[data-hide]").on("click", function () {
         $("." + $(this).attr("data-hide")).hide();
         /*
@@ -43,12 +47,16 @@ $(function () {
     */
 
     $('[data-toggle="tab"]').on("click", function(event) {
-        $.get("/Results/RenderResults",
-          { pageIndex: 1, weekNumber: event.target.getAttribute("data-week") }, function(result) {
-                $("#resultsPanel").html(result);
-            });
+        GetResults(event.target.getAttribute("data-week"));
     });
 });
+
+function GetResults(weekNumber) {
+    $.get("/Results/RenderResults",
+        { pageIndex: 1, weekNumber: weekNumber }, function (result) {
+            $("#resultsPanel").html(result);
+        });
+}
 
 function CheckTestStatus(testNumber) {
     if (testNumber != null) {
