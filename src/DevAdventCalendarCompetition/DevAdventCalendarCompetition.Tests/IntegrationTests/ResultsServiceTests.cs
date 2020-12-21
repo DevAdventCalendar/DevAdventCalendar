@@ -18,7 +18,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         [Fact]
         public void GetAllTestResults_GetsAllTestResults()
         {
-            var userResult = GetUserResults();
+            var userResult = GetUserResult();
             var correctAnswers = GetUserCorrectAnswers();
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -44,7 +44,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
         [Fact]
         public void GetTestResultsForWeek_ShouldReturnOnlyResultsForSecondWeek()
         {
-            var userResult = GetUserWeek2Results();
+            var userResult = GetUserWeek2Result();
             var correctAnswers = GetUserCorrectAnswers();
             const int weekNumber = 2;
 
@@ -58,22 +58,22 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var resultsService = PrepareSUT(context);
-                var result = resultsService.GetTestResults(weekNumber, 50, 1);
+                var results = resultsService.GetTestResults(weekNumber, 50, 1);
 
-                result.Count.Should().Be(1);
-                string.Equals(result[0].UserName, TestUserName, StringComparison.Ordinal);
+                results.Count.Should().Be(1);
+                string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
 
-                result[0].Week1Points.Should().BeNull();
-                result[0].Week2Points.Should().Be(30);
-                result[0].Week3Points.Should().BeNull();
-                result[0].FinalPoints.Should().BeNull();
+                results[0].Week1Points.Should().BeNull();
+                results[0].Week2Points.Should().Be(30);
+                results[0].Week3Points.Should().BeNull();
+                results[0].FinalPoints.Should().BeNull();
             }
         }
 
         [Fact]
         public void GetFinalTestResults_ShouldReturnOnlyFinalTestResults()
         {
-            var userResult = GetUserFinalResults();
+            var userResult = GetUserFinalResult();
             var correctAnswers = GetUserCorrectAnswers();
 
             using (var context = new ApplicationDbContext(this.ContextOptions))
@@ -86,15 +86,15 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var resultsService = PrepareSUT(context);
-                var result = resultsService.GetTestResults(4, 50, 1);
+                var results = resultsService.GetTestResults(4, 50, 1);
 
-                result.Count.Should().Be(1);
-                string.Equals(result[0].UserName, TestUserName, StringComparison.Ordinal);
+                results.Count.Should().Be(1);
+                string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
 
-                result[0].Week1Points.Should().BeNull();
-                result[0].Week2Points.Should().BeNull();
-                result[0].Week3Points.Should().BeNull();
-                result[0].FinalPoints.Should().Be(70);
+                results[0].Week1Points.Should().BeNull();
+                results[0].Week2Points.Should().BeNull();
+                results[0].Week3Points.Should().BeNull();
+                results[0].FinalPoints.Should().Be(70);
             }
         }
 
@@ -106,7 +106,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             return new ResultsService(resultsRepository, testAnswerRepository, mapper, GetTestSettings());
         }
 
-        private static Result GetUserResults() => new Result
+        private static Result GetUserResult() => new Result
         {
             UserId = TestUserId,
             Week1Points = 20,
@@ -119,14 +119,14 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             FinalPlace = 1
         };
 
-        private static Result GetUserWeek2Results() => new Result
+        private static Result GetUserWeek2Result() => new Result
         {
             UserId = TestUserId,
             Week2Points = 30,
             Week2Place = 1,
         };
 
-        private static Result GetUserFinalResults() => new Result
+        private static Result GetUserFinalResult() => new Result
         {
             UserId = TestUserId,
             FinalPoints = 70,

@@ -78,7 +78,7 @@ namespace DevAdventCalendarCompetition.Controllers
                     })
                     .ToList();
 
-            var totalPages = (int)Math.Ceiling(this._resultsService.GetTotalTestResultsCount(weekNumber) / (double)pageSize);
+            var totalPages = (int)Math.Ceiling((double)this._resultsService.GetTotalTestResultsCount(weekNumber) / pageSize);
 
             var paginatedResults = new KeyValuePair<int, PaginatedCollection<TestResultEntryViewModel>>(
                 weekNumber, new PaginatedCollection<TestResultEntryViewModel>(totalTestResults, pageIndex, pageSize, totalPages));

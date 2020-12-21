@@ -53,7 +53,7 @@ namespace DevAdventCalendarCompetition.Repository
             return userPosition;
         }
 
-        public List<Result> GetTestResultsForWeek(int weekNumber, int resultsCountToGet, int paginationIndex)
+        public List<Result> GetTestResultsForRanking(int weekNumber, int resultsCountToGet, int paginationIndex)
         {
             if (weekNumber < 1 || weekNumber > 4)
             {
