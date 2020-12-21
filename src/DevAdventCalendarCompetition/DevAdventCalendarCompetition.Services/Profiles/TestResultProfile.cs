@@ -9,8 +9,9 @@ namespace DevAdventCalendarCompetition.Services.Profiles
         public TestResultProfile()
         {
             this.CreateMap<Result, TestResultDto>()
-                .ForMember(d => d.UserName, opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.UserName))
-                .ForMember(d => d.Position, opt => opt.MapFrom(src => src.Id));
+                .ForMember(
+                    d => d.UserName,
+                    opt => opt.MapFrom(src => src.User == null ? "Użytkownik Anonimowy" : src.User.UserName));
         }
     }
 }

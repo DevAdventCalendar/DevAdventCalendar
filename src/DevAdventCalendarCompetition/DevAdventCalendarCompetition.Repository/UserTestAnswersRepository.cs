@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Repository
             return this._dbContext.Set<UserTestCorrectAnswer>()
                 .Where(a => a.UserId == userId)
                 .AsEnumerable()
-                .GroupBy(t => t.TestId)
+                .GroupBy(a => a.TestId, (k, g) => new { TestId = k, Answer = g.FirstOrDefault() })
                 .Count();
         }
 
@@ -68,6 +68,18 @@ namespace DevAdventCalendarCompetition.Repository
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        }
+
+        public IDictionary<string, double> GetAnsweringTimeSumPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return this._dbContext
+                .UserTestCorrectAnswers
+                .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
+                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                .AsEnumerable()
+                .GroupBy(a => a.UserId)
+                .Select(ug => new KeyValuePair<string, double>(ug.Key, Math.Round(ug.Sum(x => x.AnsweringTimeOffset.TotalSeconds), 2)))
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 

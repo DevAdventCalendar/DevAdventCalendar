@@ -1,4 +1,5 @@
 using DevAdventCalendarCompetition.Repository.Models;
+using DevAdventCalendarCompetition.Services.Options;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
 using System;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(),
+                new AnsweringTimePlaceRule(), GetTestSettings());
             var expectedResult = testBase.GetExpectedFinalResultModel();
 
             //Act
@@ -41,7 +43,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
             var expectedResult = testBase.GetExpectedWeek1ResultModel();
 
             //Act
@@ -65,7 +67,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
             var expectedResult = testBase.GetExpectedWeek2ResultModel();
 
             //Act
@@ -88,7 +90,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
             var expectedResult = testBase.GetExpectedWeek1ResultModel();
 
             //Act
@@ -111,7 +113,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
             var expectedResult = testBase.GetExpectedWeek1ResultModel();
 
             //Act
@@ -134,7 +136,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
 
             //Act
             service.CalculateWeeklyResults(1);
@@ -155,7 +157,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
 
             //Act
             service.CalculateWeeklyResults(1);
@@ -181,7 +183,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
 
             //Act
             service.CalculateWeeklyResults(1);
@@ -199,7 +201,7 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             //Arrange
             TestResultServiceTestBase testBase = new TestResultServiceTestBase();
             TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
-            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule());
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
 
             //Act
             service.CalculateWeeklyResults(1);
@@ -209,6 +211,42 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             Assert.Equal(
                 0,
                 results.FirstOrDefault(x => x.UserId == UserModel.userI.Id).Week1Points.Value);
+        }
+
+        [Fact]
+        public async Task UserWhoAnsweredInSecondWeekToTheFirstWeekTestShouldHaveSecondWeekPointsOnly()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
+
+            //Act
+            service.CalculateWeeklyResults(2);
+            var results = testResultRepository.GetFinalResults();
+
+            //Assert
+            Assert.Equal(
+                130,
+                results.FirstOrDefault(x => x.UserId == UserModel.userI.Id).Week2Points.Value);
+        }
+
+        [Fact]
+        public async Task UserWithTwoCorrectAnswersForOneTestInSecondWeekShouldHaveCalculatedResultsForJustFirstAnswer()
+        {
+            //Arrange
+            TestResultServiceTestBase testBase = new TestResultServiceTestBase();
+            TestResultRepository testResultRepository = await testBase.GetTestResultRepositoryAsync();
+            var service = new TestResultService(testResultRepository, new CorrectAnswerPointsRule(), new BonusPointsRule(), new AnsweringTimePlaceRule(), GetTestSettings());
+
+            //Act
+            service.CalculateWeeklyResults(2);
+            var results = testResultRepository.GetFinalResults();
+
+            //Assert
+            Assert.Equal(
+                130,
+                results.FirstOrDefault(x => x.UserId == UserModel.userI.Id).Week2Points.Value);
         }
 
         private object GetWeek1Result(Result result)
@@ -224,6 +262,15 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
         private object GetFinalResult(Result result)
         {
             return new { UserdId = result.UserId, FinalPoints = result.FinalPoints, FinalPlace = result.FinalPoints != 0 ? result.FinalPlace : int.MaxValue };
+        }
+
+        private static TestSettings GetTestSettings()
+        {
+            return new TestSettings()
+            {
+                StartHour = new TimeSpan(13, 0, 0),
+                EndHour = new TimeSpan(23, 59, 59)
+            };
         }
     }
 }

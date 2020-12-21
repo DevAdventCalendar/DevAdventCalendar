@@ -2,22 +2,27 @@
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages
 
 @{
+    var weekNumber = Model.Key;
     var entries = Model.Value;
-    var prevDisabled = !Model.Value.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.Value.HasNextPage ? "disabled" : "";
+    var prevDisabled = Model.Value != null && !Model.Value.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = Model.Value != null && !Model.Value.HasNextPage ? "disabled" : "";
 }
-<table class="table table-striped">
-    <caption></caption>
-    <thead>
-        <tr>
-            <th scope="col"  class="col-xs-1">#</th>
-            <th scope="col" >@UserName</th>
-            <th scope="col" >@CorrectAnswers</th>
-            <th scope="col" >@WrongAnswers</th>
-            <th scope="col" >@TotalScore</th>
-        </tr>
-    </thead>
-    <tbody>
+
+@if (entries != null && entries.Any())
+{
+    <table class="table table-striped">
+        <caption></caption>
+        <thead>
+            <tr>
+                <th scope="col" class="col-xs-1">#</th>
+                <th scope="col">@UserName</th>
+                <th scope="col">@CorrectAnswers</th>
+                <th scope="col">@WrongAnswers</th>
+                <th scope="col">@TotalTime</th>
+                <th scope="col">@TotalScore</th>
+            </tr>
+        </thead>
+        <tbody>
         @for (var i = 0; i < entries.Count; i++)
         {
             var testResult = entries[i];
@@ -26,37 +31,48 @@
                 <td>@testResult.UserName</td>
                 <td>@testResult.CorrectAnswers</td>
                 <td>@testResult.WrongAnswers</td>
-                @if (entries.FirstOrDefault().FinalPoints != null)
-                {
-                    <td>@testResult.FinalPoints</td>
-                }
-                else
-                {
-                    var score = testResult.GetType()
-                        .GetProperties()
-                        .FirstOrDefault(p => p.Name.Contains($"Week{Model.Key}Points"))
-                        .GetValue(testResult) as int?;
-
-                    <td>@score.Value</td>
-                }
+                <td>@testResult.TotalTime</td>
+                <td>@testResult.Points</td>
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<div class="row">
-    <div class="col-xs-12">
-        <a asp-controller="Results"
-           asp-action="Index"
-           asp-route-pageIndex="@(entries.PageIndex - 1)"
-           class="chris_btn @prevDisabled">
-            @Previous
-        </a>
-        <a asp-controller="Results"
-           asp-action="Index"
-           asp-route-pageIndex="@(entries.PageIndex + 1)"
-           class="chris_btn @nextDisabled">
-            @Next
-        </a>
+    <div class="row">
+        <div class="col-xs-12">
+            <a id="prevPage" href="#resultsPanel" onclick="GetResults(@weekNumber, @(entries.PageIndex - 1))"
+               class="chris_btn @prevDisabled">
+                @Previous
+            </a>
+            <a id="nextPage" href="#resultsPanel" onclick="GetResults(@weekNumber, @(entries.PageIndex + 1))"
+               class="chris_btn @nextDisabled">
+                @Next
+            </a>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <br />
+    <div class="reveal animated" data-reveal-anim="fadeInDown" data-anim-delay="0.3s">
+        <h4 class="mb-30">
+            @switch (weekNumber)
+            {
+                case 1:
+                    @Week1ScoreDescription
+                    break;
+                case 2:
+                    @Week2ScoreDescription
+                    break;
+                case 3:
+                    @Week3ScoreDescription
+                    break;
+                default:
+                    @FinalScoreDescription
+                    break;
+            }
+        </h4>
+    </div>
+
+     <img src="~/theme-2019/images/hanging.svg" alt="">
+}
