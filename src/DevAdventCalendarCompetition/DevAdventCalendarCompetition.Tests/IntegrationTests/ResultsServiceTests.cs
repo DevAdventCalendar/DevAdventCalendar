@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
+using DevAdventCalendarCompetition.Services.Models;
 using DevAdventCalendarCompetition.Services.Options;
 using DevAdventCalendarCompetition.Services.Profiles;
 using FluentAssertions;
@@ -31,18 +33,23 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             using (var context = new ApplicationDbContext(this.ContextOptions))
             {
                 var resultsService = PrepareSUT(context);
-                var result = resultsService.GetAllTestResults();
+                var allResults = new TestResultDto[4];
 
-                result.Count.Should().Be(4);
-                foreach (var key in result.Keys)
+                for (int i = 1; i <= 4; i++)
                 {
-                    result[key].ForEach(x => string.Equals(x.UserName, TestUserName, StringComparison.Ordinal));
+                    allResults[i - 1] = resultsService.GetTestResults(i, 50, 1).FirstOrDefault();
+                    allResults[i - 1].Should().NotBeNull();
                 }
+
+                allResults[0].Week1Points.Should().Be(20);
+                allResults[1].Week2Points.Should().Be(30);
+                allResults[2].Week3Points.Should().Be(20);
+                allResults[3].FinalPoints.Should().Be(70);
             }
         }
 
         [Fact]
-        public void GetTestResultsForWeek_ShouldReturnOnlyResultsForSecondWeek()
+        public void GetTestResultsForSecondWeek_ShouldReturnOnlyResultsForSecondWeek()
         {
             var userResult = GetUserWeek2Result();
             var correctAnswers = GetUserCorrectAnswers();
