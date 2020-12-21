@@ -64,6 +64,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
 
                 results[0].Points.Should().Be(70);
+                results[0].Position.Should().Be(1);
                 results[0].TotalTime.Should().BeGreaterThan(0);
             }
         }

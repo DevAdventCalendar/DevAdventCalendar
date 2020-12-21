@@ -65,6 +65,7 @@ namespace DevAdventCalendarCompetition.Controllers
                         CorrectAnswers = t.CorrectAnswersCount,
                         WrongAnswers = t.WrongAnswersCount,
                         UserName = t.UserName,
+                        TotalTime = t.TotalTime
                     })
                     .ToList();
 
