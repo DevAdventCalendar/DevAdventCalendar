@@ -48,7 +48,7 @@ namespace DevAdventCalendarCompetition.TestResultService
                 var bonus = 0;
                 foreach (var correctAnswerDate in correctAnswerDates)
                 {
-                    var wrongAnswers = wrongAnswersCounts.FirstOrDefault(w => w.TestStartDate == correctAnswerDate);
+                    var wrongAnswers = wrongAnswersCounts.FirstOrDefault(w => w.TestStartDate.Date == correctAnswerDate.Date);
                     bonus += _bonusPointsRule.CalculatePoints(wrongAnswers != null ? wrongAnswers.Count : 0);
                 }
 

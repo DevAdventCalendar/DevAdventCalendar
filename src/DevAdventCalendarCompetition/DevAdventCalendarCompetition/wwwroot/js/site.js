@@ -3,6 +3,10 @@
 $(function () {
     var url = window.location.href;
 
+    if (document.location.pathname === "/Results/Index") {
+        GetResults(1);
+    }
+
     $("[data-hide]").on("click", function () {
         $("." + $(this).attr("data-hide")).hide();
         /*
@@ -37,11 +41,23 @@ $(function () {
             });
         }
     });
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
     /*
      * via https://getbootstrap.com/docs/4.1/components/tooltips
     */
+
+    $('[data-toggle="tab"]').on("click", function(event) {
+      GetResults(event.target.getAttribute("data-week"),
+          event.target.getAttribute("data-page"));
+    });
 });
+
+function GetResults(weekNumber, pageIndex) {
+    $.get("/Results/RenderResults",
+        { pageIndex: pageIndex, weekNumber: weekNumber }, function (result) {
+            $("#resultsPanel").html(result);
+        });
+}
 
 function CheckTestStatus(testNumber) {
     if (testNumber != null) {

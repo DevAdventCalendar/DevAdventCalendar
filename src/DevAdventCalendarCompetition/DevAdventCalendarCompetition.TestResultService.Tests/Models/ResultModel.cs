@@ -1,4 +1,4 @@
-﻿using DevAdventCalendarCompetition.Repository.Context;
+using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Models;
 using System;
 using System.Collections.Generic;
