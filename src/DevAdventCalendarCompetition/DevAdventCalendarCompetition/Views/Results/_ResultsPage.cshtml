@@ -30,19 +30,7 @@
                 <td>@testResult.UserName</td>
                 <td>@testResult.CorrectAnswers</td>
                 <td>@testResult.WrongAnswers</td>
-                @if (entries.FirstOrDefault().FinalPoints != null)
-                {
-                    <td>@testResult.FinalPoints</td>
-                }
-                else
-                {
-                    var score = testResult.GetType()
-                        .GetProperties()
-                        .FirstOrDefault(p => p.Name.Contains($"Week{Model.Key}Points"))
-                        .GetValue(testResult) as int?;
-
-                    <td>@score.Value</td>
-                }
+                <td>@testResult.Points</td>
             </tr>
         }
         </tbody>

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Linq;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -29,47 +29,20 @@ namespace DevAdventCalendarCompetition.Services
             this._testSettings = testSettings;
         }
 
-        public Dictionary<int, List<TestResultDto>> GetAllTestResults()
-        {
-            var testResultDictionary = new Dictionary<int, List<TestResultDto>>();
-            var week1Results = this._resultsRepository.GetTestResultsForRanking(1, 50, 1);
-
-            if (week1Results != null && week1Results.Count > 0)
-            {
-                testResultDictionary.Add(1, this.FillResultsWithAnswersStats(1, this._mapper.Map<List<TestResultDto>>(week1Results)));
-
-                var week2Results = this._resultsRepository.GetTestResultsForRanking(2, 50, 1);
-
-                if (week2Results != null && week2Results.Count > 0)
-                {
-                    testResultDictionary.Add(2, this.FillResultsWithAnswersStats(2, this._mapper.Map<List<TestResultDto>>(week2Results)));
-
-                    var week3Results = this._resultsRepository.GetTestResultsForRanking(3, 50, 1);
-
-                    if (week3Results != null && week3Results.Count > 0)
-                    {
-                        testResultDictionary.Add(3, this.FillResultsWithAnswersStats(3, this._mapper.Map<List<TestResultDto>>(week3Results)));
-
-                        var fullResults = this._resultsRepository.GetTestResultsForRanking(4, 50, 1);
-
-                        if (fullResults != null && fullResults.Count > 0)
-                        {
-                            testResultDictionary.Add(4, this.FillResultsWithAnswersStats(4, this._mapper.Map<List<TestResultDto>>(fullResults)));
-                        }
-                    }
-                }
-            }
-
-            return testResultDictionary;
-        }
-
         public List<TestResultDto> GetTestResults(int weekNumber, int pageCount, int pageIndex)
         {
-            var results = this._resultsRepository.GetTestResultsForRanking(weekNumber, pageCount, pageIndex);
+            var dbResults = this._resultsRepository.GetTestResultsForRanking(weekNumber, pageCount, pageIndex);
 
-            if (results != null && results.Count > 0)
+            if (dbResults != null && dbResults.Count > 0)
             {
-                return this.FillResultsWithAnswersStats(weekNumber, this._mapper.Map<List<TestResultDto>>(results));
+                var results = dbResults.Select(x =>
+                {
+                    var result = this._mapper.Map<TestResultDto>(x);
+                    AssignPointsAndPosition(weekNumber, x, result);
+                    return result;
+                }).ToList();
+
+                return this.FillResultsWithAnswersStats(weekNumber, results);
             }
 
             return null;
@@ -83,6 +56,29 @@ namespace DevAdventCalendarCompetition.Services
         public UserPosition GetUserPosition(string userId)
         {
             return this._resultsRepository.GetUserPosition(userId);
+        }
+
+        private static void AssignPointsAndPosition(int weekNumber, Result x, TestResultDto result)
+        {
+            switch (weekNumber)
+            {
+                case 1:
+                    result.Position = x.Week1Place ?? 0;
+                    result.Points = x.Week1Points ?? 0;
+                    break;
+                case 2:
+                    result.Position = x.Week2Place ?? 0;
+                    result.Points = x.Week2Points ?? 0;
+                    break;
+                case 3:
+                    result.Position = x.Week3Place ?? 0;
+                    result.Points = x.Week3Points ?? 0;
+                    break;
+                case 4:
+                    result.Position = x.FinalPlace ?? 0;
+                    result.Points = x.FinalPoints ?? 0;
+                    break;
+            }
         }
 
         private (int, int, int) GetStartHour()

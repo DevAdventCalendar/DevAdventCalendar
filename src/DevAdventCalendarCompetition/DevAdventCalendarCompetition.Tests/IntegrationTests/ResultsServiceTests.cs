@@ -16,33 +16,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
     public class ResultsServiceTests : IntegrationTestBase
     {
         [Fact]
-        public void GetAllTestResults_GetsAllTestResults()
-        {
-            var userResult = GetUserResult();
-            var correctAnswers = GetUserCorrectAnswers();
-
-            using (var context = new ApplicationDbContext(this.ContextOptions))
-            {
-                context.Results.Add(userResult);
-                context.UserTestCorrectAnswers.AddRange(correctAnswers);
-                context.SaveChanges();
-            }
-
-            using (var context = new ApplicationDbContext(this.ContextOptions))
-            {
-                var resultsService = PrepareSUT(context);
-                var result = resultsService.GetAllTestResults();
-
-                result.Count.Should().Be(4);
-                foreach (var key in result.Keys)
-                {
-                    result[key].ForEach(x => string.Equals(x.UserName, TestUserName, StringComparison.Ordinal));
-                }
-            }
-        }
-
-        [Fact]
-        public void GetTestResultsForWeek_ShouldReturnOnlyResultsForSecondWeek()
+        public void GetTestResultsForSecondWeek_ShouldReturnOnlyResultsForSecondWeek()
         {
             var userResult = GetUserWeek2Result();
             var correctAnswers = GetUserCorrectAnswers();
@@ -63,10 +37,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 results.Count.Should().Be(1);
                 string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
 
-                results[0].Week1Points.Should().BeNull();
-                results[0].Week2Points.Should().Be(30);
-                results[0].Week3Points.Should().BeNull();
-                results[0].FinalPoints.Should().BeNull();
+                results[0].Points.Should().Be(30);
             }
         }
 
@@ -91,10 +62,50 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 results.Count.Should().Be(1);
                 string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
 
-                results[0].Week1Points.Should().BeNull();
-                results[0].Week2Points.Should().BeNull();
-                results[0].Week3Points.Should().BeNull();
-                results[0].FinalPoints.Should().Be(70);
+                results[0].Points.Should().Be(70);
+            }
+        }
+
+        [Fact]
+        public void GetTestResultsForEveryRanking_ShouldReturnOnlyResultsForEveryRanking()
+        {
+            var userResult = GetUserFullResult();
+            var correctAnswers = GetUserCorrectAnswers();
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.Results.Add(userResult);
+                context.UserTestCorrectAnswers.AddRange(correctAnswers);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var resultsService = PrepareSUT(context);
+                var week1Results = resultsService.GetTestResults(1, 50, 1);
+                var week2Results = resultsService.GetTestResults(2, 50, 1);
+                var week3Results = resultsService.GetTestResults(3, 50, 1);
+                var finalResults = resultsService.GetTestResults(4, 50, 1);
+
+                week1Results.Count.Should().Be(1);
+                week2Results.Count.Should().Be(1);
+                week3Results.Count.Should().Be(1);
+                finalResults.Count.Should().Be(1);
+
+                string.Equals(week1Results[0].UserName, TestUserName, StringComparison.Ordinal);
+                string.Equals(week2Results[0].UserName, TestUserName, StringComparison.Ordinal);
+                string.Equals(week3Results[0].UserName, TestUserName, StringComparison.Ordinal);
+                string.Equals(finalResults[0].UserName, TestUserName, StringComparison.Ordinal);
+
+                week1Results[0].Points.Should().Be(30);
+                week2Results[0].Points.Should().Be(40);
+                week3Results[0].Points.Should().Be(50);
+                finalResults[0].Points.Should().Be(120);
+
+                week1Results[0].Position.Should().Be(1);
+                week2Results[0].Position.Should().Be(6);
+                week3Results[0].Position.Should().Be(12);
+                finalResults[0].Position.Should().Be(20);
             }
         }
 
@@ -106,24 +117,24 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             return new ResultsService(resultsRepository, testAnswerRepository, mapper, GetTestSettings());
         }
 
-        private static Result GetUserResult() => new Result
-        {
-            UserId = TestUserId,
-            Week1Points = 20,
-            Week2Points = 30,
-            Week3Points = 20,
-            Week1Place = 1,
-            Week2Place = 1,
-            Week3Place = 1,
-            FinalPoints = 70,
-            FinalPlace = 1
-        };
-
         private static Result GetUserWeek2Result() => new Result
         {
             UserId = TestUserId,
             Week2Points = 30,
             Week2Place = 1,
+        };
+
+        private static Result GetUserFullResult() => new Result
+        {
+            UserId = TestUserId,
+            Week1Points = 30,
+            Week1Place = 1,
+            Week2Points = 40,
+            Week2Place = 6,
+            Week3Points = 50,
+            Week3Place = 12,
+            FinalPoints = 120,
+            FinalPlace = 20,
         };
 
         private static Result GetUserFinalResult() => new Result

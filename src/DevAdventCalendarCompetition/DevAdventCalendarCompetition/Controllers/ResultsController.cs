@@ -1,13 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
-using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Models.Test;
-using DevAdventCalendarCompetition.Providers;
 using DevAdventCalendarCompetition.Services.Interfaces;
-using DevAdventCalendarCompetition.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevAdventCalendarCompetition.Controllers
@@ -63,14 +59,8 @@ namespace DevAdventCalendarCompetition.Controllers
             var totalTestResults = testResultListDto
                     .Select(t => new TestResultEntryViewModel
                     {
-                        Week1Points = t.Week1Points,
-                        Week1Place = t.Week1Place,
-                        Week2Points = t.Week2Points,
-                        Week2Place = t.Week2Place,
-                        Week3Points = t.Week3Points,
-                        Week3Place = t.Week3Place,
-                        FinalPoints = t.FinalPoints,
-                        FinalPlace = t.FinalPlace,
+                        Points = t.Points,
+                        Position = t.Position,
                         UserId = t.UserId,
                         CorrectAnswers = t.CorrectAnswersCount,
                         WrongAnswers = t.WrongAnswersCount,
