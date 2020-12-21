@@ -56,6 +56,10 @@ namespace DevAdventCalendarCompetition.Controllers
                             CorrectAnswers = result.CorrectAnswersCount,
                             WrongAnswers = result.WrongAnswersCount,
                             UserName = result.UserName,
+                            Week1TimeSum = result.Week1TimeSum,
+                            Week2TimeSum = result.Week2TimeSum,
+                            Week3TimeSum = result.Week3TimeSum,
+                            FinalTimeSum = result.FinalTimeSum
                         });
                     }
 
