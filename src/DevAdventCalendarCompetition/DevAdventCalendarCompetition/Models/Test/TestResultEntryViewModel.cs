@@ -29,5 +29,13 @@ namespace DevAdventCalendarCompetition.Models.Test
         public int? FinalPoints { get; set; }
 
         public int? FinalPlace { get; set; }
+
+        public int? Week1TimeSum { get; set; }
+
+        public int? Week2TimeSum { get; set; }
+
+        public int? Week3TimeSum { get; set; }
+
+        public int? FinalTimeSum { get; set; }
     }
 }
