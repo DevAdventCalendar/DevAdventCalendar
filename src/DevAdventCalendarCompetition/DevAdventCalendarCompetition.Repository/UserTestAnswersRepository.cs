@@ -55,7 +55,7 @@ namespace DevAdventCalendarCompetition.Repository
             return this._dbContext.Set<UserTestCorrectAnswer>()
                 .Where(a => a.UserId == userId)
                 .AsEnumerable()
-                .GroupBy(t => t.TestId)
+                .GroupBy(a => a.TestId, (k, g) => new { TestId = k, Answer = g.FirstOrDefault() })
                 .Count();
         }
 
