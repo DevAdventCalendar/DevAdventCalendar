@@ -403,7 +403,7 @@
     <value>5x bon 100 zł do Heliona</value>
   </data>
   <data name="Helion150" xml:space="preserve">
-    <value>5x bon 150 zł do Heliona</value>
+    <value>4x bon 150 zł do Heliona</value>
   </data>
   <data name="ItStartup" xml:space="preserve">
     <value>IT Startup "Brudne Przetargi"</value>
@@ -773,5 +773,8 @@
   </data>
   <data name="CharityAction" xml:space="preserve">
     <value>Możesz również wesprzeć naszą zrzutkę, z której cały dochód przeznaczymy na Szlachetną Paczkę</value>
+  </data>
+  <data name="TotalTime" xml:space="preserve">
+    <value>Całkowity czas odpowiedzi (s)</value>
   </data>
 </root>

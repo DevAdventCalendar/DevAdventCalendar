@@ -23,5 +23,7 @@ namespace DevAdventCalendarCompetition.Repository.Interfaces
         void AddCorrectAnswer(UserTestCorrectAnswer testAnswer);
 
         void AddWrongAnswer(UserTestWrongAnswer wrongAnswer);
+
+        IDictionary<string, double> GetAnsweringTimeSumPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo);
     }
 }

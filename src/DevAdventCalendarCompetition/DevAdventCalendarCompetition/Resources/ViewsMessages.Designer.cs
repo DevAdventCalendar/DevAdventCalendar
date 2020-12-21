@@ -988,7 +988,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 5x bon 150 zł do Heliona.
+        ///   Looks up a localized string similar to 4x bon 150 zł do Heliona.
         /// </summary>
         public static string Helion150 {
             get {
@@ -1785,6 +1785,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string TotalScore {
             get {
                 return ResourceManager.GetString("TotalScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Całkowity czas odpowiedzi (s).
+        /// </summary>
+        public static string TotalTime {
+            get {
+                return ResourceManager.GetString("TotalTime", resourceCulture);
             }
         }
         
