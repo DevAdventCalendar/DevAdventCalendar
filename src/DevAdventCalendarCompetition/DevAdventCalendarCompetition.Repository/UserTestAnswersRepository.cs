@@ -79,7 +79,7 @@ namespace DevAdventCalendarCompetition.Repository
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
-                .Select(ug => new KeyValuePair<string, double>(ug.Key, ug.Sum(x => x.AnsweringTimeOffset.TotalSeconds)))
+                .Select(ug => new KeyValuePair<string, double>(ug.Key, Math.Round(ug.Sum(x => x.AnsweringTimeOffset.TotalSeconds), 2)))
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
