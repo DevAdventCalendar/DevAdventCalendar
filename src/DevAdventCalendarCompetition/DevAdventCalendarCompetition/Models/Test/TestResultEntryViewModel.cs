@@ -12,6 +12,8 @@ namespace DevAdventCalendarCompetition.Models.Test
 
         public int WrongAnswers { get; set; }
 
+        public double TotalTime { get; set; }
+
         public string UserId { get; set; }
     }
 }

@@ -71,6 +71,18 @@ namespace DevAdventCalendarCompetition.Repository
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
+        public IDictionary<string, double> GetAnsweringTimeSumPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
+        {
+            return this._dbContext
+                .UserTestCorrectAnswers
+                .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
+                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                .AsEnumerable()
+                .GroupBy(a => a.UserId)
+                .Select(ug => new KeyValuePair<string, double>(ug.Key, ug.Sum(x => x.AnsweringTimeOffset.TotalSeconds)))
+                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        }
+
         public IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
         {
             return this._dbContext

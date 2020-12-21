@@ -115,6 +115,7 @@ namespace DevAdventCalendarCompetition.Services
 
             var correctAnswers = this._testAnswerRepository.GetCorrectAnswersPerUserForDateRange(dateFrom, dateTo);
             var wrongAnswers = this._testAnswerRepository.GetWrongAnswersPerUserForDateRange(dateFrom, dateTo);
+            var totalTimes = this._testAnswerRepository.GetAnsweringTimeSumPerUserForDateRange(dateFrom, dateTo);
 
             foreach (var result in results)
             {
@@ -123,6 +124,9 @@ namespace DevAdventCalendarCompetition.Services
 
                 wrongAnswers.TryGetValue(result.UserId, out var wrongAnswersCount);
                 result.WrongAnswersCount = wrongAnswersCount;
+
+                totalTimes.TryGetValue(result.UserId, out var totalTime);
+                result.TotalTime = totalTime;
             }
 
             return results;
