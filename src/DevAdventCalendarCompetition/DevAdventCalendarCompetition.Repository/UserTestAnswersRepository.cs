@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DevAdventCalendarCompetition.Repository.Context;
 using DevAdventCalendarCompetition.Repository.Interfaces;
 using DevAdventCalendarCompetition.Repository.Models;
@@ -67,8 +66,7 @@ namespace DevAdventCalendarCompetition.Repository
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
-                .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                .ToDictionary(ug => ug.Key, ug => ug.Select(t => t.TestId).Distinct().Count());
         }
 
         public IDictionary<string, double> GetAnsweringTimeSumPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
@@ -79,8 +77,8 @@ namespace DevAdventCalendarCompetition.Repository
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
-                .Select(ug => new KeyValuePair<string, double>(ug.Key, Math.Round(ug.Sum(x => x.AnsweringTimeOffset.TotalSeconds), 2)))
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                .Select(a => new { UserId = a.Key, Tests = a.Select(b => new { b.TestId, b.AnsweringTimeOffset }).GroupBy(b => b.TestId) })
+                .ToDictionary(ug => ug.UserId, ug => Math.Round(ug.Tests.Sum(x => x.OrderBy(a => a.AnsweringTimeOffset).First().AnsweringTimeOffset.TotalSeconds), 2));
         }
 
         public IDictionary<string, int> GetWrongAnswersPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
@@ -91,8 +89,7 @@ namespace DevAdventCalendarCompetition.Repository
                             a.Time.CompareTo(dateTo.DateTime) < 0)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
-                .Select(ug => new KeyValuePair<string, int>(ug.Key, ug.Count()))
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                .ToDictionary(ug => ug.Key, ug => ug.Count());
         }
     }
 }
