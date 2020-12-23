@@ -65,11 +65,12 @@ namespace DevAdventCalendarCompetition.Repository
                 .UserTestCorrectAnswers
                 .Include(a => a.Test)
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0 &&
+                        a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .ToDictionary(ug => ug.Key, ug =>
-                    ug.Count(t => t.Test.StartDate.Value >= dateFrom && t.Test.StartDate.Value < dateTo));
+                    ug.Count());
         }
 
         public IDictionary<string, double> GetAnsweringTimeSumPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
@@ -78,13 +79,13 @@ namespace DevAdventCalendarCompetition.Repository
                 .UserTestCorrectAnswers
                 .Include(a => a.Test)
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0)
+                            a.AnsweringTime.CompareTo(dateTo.DateTime) < 0 &&
+                            a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .Select(a => new
                 {
                     UserId = a.Key, Tests = a
-                    .Where(t => t.Test.StartDate.Value >= dateFrom && t.Test.StartDate.Value < dateTo)
                     .Select(b => new { b.TestId, b.AnsweringTimeOffset }).GroupBy(b => b.TestId)
                 })
                 .ToDictionary(ug => ug.UserId, ug =>
@@ -97,11 +98,12 @@ namespace DevAdventCalendarCompetition.Repository
                 .UserTestWrongAnswers
                 .Include(a => a.Test)
                 .Where(a => a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
-                            a.Time.CompareTo(dateTo.DateTime) < 0)
+                            a.Time.CompareTo(dateTo.DateTime) < 0 &&
+                            a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .ToDictionary(ug => ug.Key, ug =>
-                    ug.Count(t => t.Test.StartDate.Value >= dateFrom && t.Test.StartDate.Value < dateTo));
+                    ug.Count());
         }
     }
 }
