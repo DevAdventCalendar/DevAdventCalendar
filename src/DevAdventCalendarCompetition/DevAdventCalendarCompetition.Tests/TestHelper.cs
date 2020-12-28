@@ -17,34 +17,42 @@ namespace DevAdventCalendarCompetition.Tests
             {
                 Id = 1,
                 Number = 1,
-                StartDate = DateTime.Today.AddDays(-1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(-1).AddHours(23).AddMinutes(59),
+                StartDate = new DateTime(2020, 12, 1, 20, 0, 0),
+                EndDate = new DateTime(2020, 12, 24, 20, 0, 0),
                 HashedAnswers = null
             },
             new Test()
             {
                 Id = 2,
                 Number = 2,
-                StartDate = DateTime.Today.AddHours(12),
-                EndDate = DateTime.Today.AddHours(23).AddMinutes(59),
+                StartDate = new DateTime(2020, 12, 8, 20, 0, 0),
+                EndDate = new DateTime(2020, 12, 24, 20, 0, 0),
                 HashedAnswers = null
             },
             new Test()
             {
                 Id = 3,
                 Number = 3,
-                StartDate = DateTime.Today.AddDays(1).AddHours(12),
-                EndDate = DateTime.Today.AddDays(1).AddHours(23).AddMinutes(59),
+                StartDate = new DateTime(2020, 12, 15, 20, 0, 0),
+                EndDate = new DateTime(2020, 12, 24, 20, 0, 0),
                 HashedAnswers = null
             },
             new Test()
             {
                 Id = 4,
                 Number = 4,
-                StartDate = DateTime.Today.AddDays(2).AddHours(12),
-                EndDate = DateTime.Today.AddDays(2).AddHours(23).AddMinutes(59),
+                StartDate = new DateTime(2020, 12, 23, 20, 0, 0),
+                EndDate = new DateTime(2020, 12, 24, 20, 0, 0),
                 HashedAnswers = null
-            }
+            },
+            new Test()
+            {
+                Id = 5,
+                Number = 5,
+                StartDate = new DateTime(2020, 12, 2, 20, 0, 0),
+                EndDate = new DateTime(2020, 12, 24, 20, 0, 0),
+                HashedAnswers = null
+            },
         };
 
         public static TestDto GetTestDto(int number = 2) => GetTestDtoList().First(t => t.Number == number);
