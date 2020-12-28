@@ -66,7 +66,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .Include(a => a.Test)
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0 &&
-                        a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
+                        a.Test.StartDate.Value >= dateFrom.DateTime && a.Test.StartDate.Value < dateTo.DateTime)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .ToDictionary(ug => ug.Key, ug =>
@@ -80,7 +80,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .Include(a => a.Test)
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0 &&
-                            a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
+                            a.Test.StartDate.Value >= dateFrom.DateTime && a.Test.StartDate.Value < dateTo.DateTime)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .Select(a => new
@@ -99,7 +99,7 @@ namespace DevAdventCalendarCompetition.Repository
                 .Include(a => a.Test)
                 .Where(a => a.Time.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.Time.CompareTo(dateTo.DateTime) < 0 &&
-                            a.Test.StartDate.Value >= dateFrom && a.Test.StartDate.Value < dateTo)
+                            a.Test.StartDate.Value >= dateFrom.DateTime && a.Test.StartDate.Value < dateTo.DateTime)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
                 .ToDictionary(ug => ug.Key, ug =>
