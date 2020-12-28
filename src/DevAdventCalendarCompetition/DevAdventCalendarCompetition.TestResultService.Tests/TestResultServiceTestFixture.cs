@@ -3,21 +3,22 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.TestAnswerResultService.TestAnswers.Models;
 using DevAdventCalendarCompetition.TestResultService.Tests.Models;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
+using Xunit;
 
 namespace DevAdventCalendarCompetition.TestResultService.Tests
 {
-    public class TestResultServiceTestBase
+    public class TestResultServiceTestFixture : IDisposable
     {
         private readonly TestModel testModel;
         private readonly TestAnswerModel testAnswerModel;
         private readonly TestWrongAnswerModel testWrongAnswerModel;
         private ApplicationDbContext dbContext;
+        private TestResultRepository testResultRepository;
 
-        public TestResultServiceTestBase()
+        public TestResultServiceTestFixture()
         {
             testModel = new TestModel();
             testAnswerModel = new TestAnswerModel(testModel);
@@ -43,42 +44,62 @@ namespace DevAdventCalendarCompetition.TestResultService.Tests
             return resultModel.GetFinalResultList(dbContext);
         }
 
-        public async Task<TestResultRepository> GetTestResultRepositoryAsync()
+        public TestResultRepository GetTestResultRepository()
         {
+            if (testResultRepository != null)
+            {
+                return testResultRepository;
+            }
+
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var databaseName = Guid.NewGuid().ToString();
+            optionsBuilder.UseInMemoryDatabase(databaseName);
             dbContext = new ApplicationDbContext(optionsBuilder.Options);
             dbContext.Database.EnsureCreated();
-            await PrepareDatabaseRows(dbContext);
+            PrepareDatabaseRows();
 
-            return new TestResultRepository(dbContext);
+            testResultRepository = new TestResultRepository(dbContext);
+            return testResultRepository;
         }
 
-        private async Task PrepareDatabaseRows(ApplicationDbContext dbContext)
+        private void PrepareDatabaseRows()
         {
-            if (await dbContext.Users.CountAsync() <= 0)
+            if (!dbContext.Users.Any())
             {
                 UserModel.PrepareUserRows(dbContext);
-                await dbContext.SaveChangesAsync();
+                dbContext.SaveChanges();
             }
 
-            if (await dbContext.Tests.CountAsync() <= 0)
+            if (!dbContext.Tests.Any())
             {
                 testModel.PrepareTestRows(dbContext);
-                await dbContext.SaveChangesAsync();
+                dbContext.SaveChanges();
             }
 
-            if (await dbContext.UserTestCorrectAnswers.CountAsync() <= 0)
+            if (!dbContext.UserTestCorrectAnswers.Any())
             {
                 testAnswerModel.PrepareTestAnswerRows(dbContext);
-                await dbContext.SaveChangesAsync();
+                dbContext.SaveChanges();
             }
 
-            if (await dbContext.UserTestWrongAnswers.CountAsync() <= 0)
+            if (!dbContext.UserTestWrongAnswers.Any())
             {
                 testWrongAnswerModel.PrepareTestWrongAnswerRows(dbContext);
-                await dbContext.SaveChangesAsync();
+                dbContext.SaveChanges();
             }
         }
+
+        public void Dispose()
+        {
+            dbContext.Dispose();
+        }
+    }
+    
+    [CollectionDefinition(nameof(TestResultServiceTestCollection))]
+    public class TestResultServiceTestCollection : ICollectionFixture<TestResultServiceTestFixture>
+    {
+        // This class has no code, and is never created. Its purpose is simply
+        // to be the place to apply [CollectionDefinition] and all the
+        // ICollectionFixture<> interfaces.
     }
 }
