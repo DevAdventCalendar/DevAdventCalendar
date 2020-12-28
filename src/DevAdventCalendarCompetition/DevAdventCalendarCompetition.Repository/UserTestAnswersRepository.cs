@@ -63,14 +63,12 @@ namespace DevAdventCalendarCompetition.Repository
         {
             return this._dbContext
                 .UserTestCorrectAnswers
-                .Include(a => a.Test)
                 .Where(a => a.AnsweringTime.CompareTo(dateFrom.DateTime) >= 0 &&
                             a.AnsweringTime.CompareTo(dateTo.DateTime) < 0 &&
-                        a.Test.StartDate.Value >= dateFrom.DateTime && a.Test.StartDate.Value < dateTo.DateTime)
+                            a.Test.StartDate.Value >= dateFrom.DateTime && a.Test.StartDate.Value < dateTo.DateTime)
                 .AsEnumerable()
                 .GroupBy(a => a.UserId)
-                .ToDictionary(ug => ug.Key, ug =>
-                    ug.Count());
+                .ToDictionary(ug => ug.Key, ug => ug.Select(t => t.TestId).Distinct().Count());
         }
 
         public IDictionary<string, double> GetAnsweringTimeSumPerUserForDateRange(DateTimeOffset dateFrom, DateTimeOffset dateTo)
