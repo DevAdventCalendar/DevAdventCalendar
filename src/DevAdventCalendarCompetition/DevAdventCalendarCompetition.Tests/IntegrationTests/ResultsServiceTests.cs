@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using DevAdventCalendarCompetition.Repository;
 using DevAdventCalendarCompetition.Repository.Context;
@@ -7,6 +9,7 @@ using DevAdventCalendarCompetition.Repository.Models;
 using DevAdventCalendarCompetition.Services;
 using DevAdventCalendarCompetition.Services.Options;
 using DevAdventCalendarCompetition.Services.Profiles;
+using DevAdventCalendarCompetition.TestResultService;
 using FluentAssertions;
 using Xunit;
 using static DevAdventCalendarCompetition.Tests.TestHelper;
@@ -66,6 +69,56 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
                 results[0].Points.Should().Be(70);
                 results[0].Position.Should().Be(1);
                 results[0].TotalTime.Should().BeGreaterThan(0);
+            }
+        }
+
+        [Fact]
+        public void GetTestResultsForSpecificWeek_ShouldReturnAnswersOnlyForThatWeek()
+        {
+            var userResult = GetUserWeek2Result();
+            var correctAnswers = GetUserCorrectAnswers();
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.Results.Add(userResult);
+                context.UserTestCorrectAnswers.AddRange(correctAnswers);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var resultsService = PrepareSUT(context);
+                var results = resultsService.GetTestResults(2, 50, 1);
+
+                results.Count.Should().Be(1);
+                string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
+
+                results[0].CorrectAnswersCount.Should().Be(1);
+            }
+        }
+
+        [Fact]
+        public void GetTestResultsForSpecificWeek_ShouldReturnWrongAnswersOnlyForTestsStartedThatWeek()
+        {
+            var userResult = GetUserWeek2Result();
+            var wrongAnswers = GetUserWrongAnswers();
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                context.Results.Add(userResult);
+                context.UserTestWrongAnswers.AddRange(wrongAnswers);
+                context.SaveChanges();
+            }
+
+            using (var context = new ApplicationDbContext(this.ContextOptions))
+            {
+                var resultsService = PrepareSUT(context);
+                var results = resultsService.GetTestResults(2, 50, 1);
+
+                results.Count.Should().Be(1);
+                string.Equals(results[0].UserName, TestUserName, StringComparison.Ordinal);
+
+                results[0].WrongAnswersCount.Should().Be(0);
             }
         }
 
@@ -158,10 +211,22 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
 
             return new List<UserTestCorrectAnswer>()
             {
-                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[0], AnsweringTime = new DateTime(2020, 12, 2, 20, 0, 0), AnsweringTimeOffset = testList[0].StartDate.Value.Subtract(new DateTime(2020, 12, 2, 20, 0, 0)) },
-                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[1], AnsweringTime = new DateTime(2020, 12, 9, 20, 0, 0), AnsweringTimeOffset = testList[1].StartDate.Value.Subtract(new DateTime(2020, 12, 9, 20, 0, 0)) },
-                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[2], AnsweringTime = new DateTime(2020, 12, 16, 20, 0, 0), AnsweringTimeOffset = testList[2].StartDate.Value.Subtract(new DateTime(2020, 12, 16, 20, 0, 0)) },
-                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[3], AnsweringTime = new DateTime(2020, 12, 24, 20, 0, 0), AnsweringTimeOffset = testList[3].StartDate.Value.Subtract(new DateTime(2020, 12, 24, 20, 0, 0)) }
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[0], AnsweringTime = new DateTime(2020, 12, 2, 20, 0, 0), AnsweringTimeOffset = testList[0].StartDate.Value.Subtract(new DateTime(2020, 12, 2, 20, 0, 0)) * (-1) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[1], AnsweringTime = new DateTime(2020, 12, 9, 20, 0, 0), AnsweringTimeOffset = testList[1].StartDate.Value.Subtract(new DateTime(2020, 12, 9, 20, 0, 0)) * (-1) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[2], AnsweringTime = new DateTime(2020, 12, 16, 20, 0, 0), AnsweringTimeOffset = testList[2].StartDate.Value.Subtract(new DateTime(2020, 12, 16, 20, 0, 0)) * (-1) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[3], AnsweringTime = new DateTime(2020, 12, 24, 20, 0, 0), AnsweringTimeOffset = testList[3].StartDate.Value.Subtract(new DateTime(2020, 12, 24, 20, 0, 0)) * (-1) },
+                new UserTestCorrectAnswer() { UserId = TestUserId, Test = testList[4], AnsweringTime = new DateTime(2020, 12, 14, 20, 0, 0), AnsweringTimeOffset = testList[4].StartDate.Value.Subtract(new DateTime(2020, 12, 14, 20, 0, 0)) * (-1) }
+            };
+        }
+
+        private static List<UserTestWrongAnswer> GetUserWrongAnswers()
+        {
+            var testList = GetTestList();
+
+            return new List<UserTestWrongAnswer>()
+            {
+                new UserTestWrongAnswer() { UserId = TestUserId, Test = testList[4], Time = new DateTime(2020, 12, 2, 20, 0, 0), Answer = "Test1234" },
+                new UserTestWrongAnswer() { UserId = TestUserId, Test = testList[4], Time = new DateTime(2020, 12, 9, 20, 0, 0), Answer = "Test12345" }
             };
         }
 
