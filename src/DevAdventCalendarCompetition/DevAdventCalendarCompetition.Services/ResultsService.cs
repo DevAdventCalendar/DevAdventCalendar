@@ -95,21 +95,22 @@ namespace DevAdventCalendarCompetition.Services
 
             switch (weekNumber)
             {
+                // TODO: remove hardcoded year
                 case 1:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 8, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(2020, 12, 1, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(2020, 12, 8, hour, minute, second, TimeSpan.Zero);
                     break;
                 case 2:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 8, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 15, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(2020, 12, 8, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(2020, 12, 15, hour, minute, second, TimeSpan.Zero);
                     break;
                 case 3:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 15, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 22, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(2020, 12, 15, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(2020, 12, 22, hour, minute, second, TimeSpan.Zero);
                     break;
                 default:
-                    dateFrom = new DateTimeOffset(DateTime.Now.Year, 12, 1, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(DateTime.Now.Year, 12, 25, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(2020, 12, 1, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(2020, 12, 25, hour, minute, second, TimeSpan.Zero);
                     break;
             }
 
