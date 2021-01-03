@@ -16,17 +16,20 @@ namespace DevAdventCalendarCompetition.Services
         private readonly IUserTestAnswersRepository _testAnswerRepository;
         private readonly IMapper _mapper;
         private readonly TestSettings _testSettings;
+        private readonly AdventSettings _adventSettings;
 
         public ResultsService(
             IResultsRepository resultsRepository,
             IUserTestAnswersRepository testAnswerRepository,
             IMapper mapper,
-            TestSettings testSettings)
+            TestSettings testSettings,
+            AdventSettings adventSettings)
         {
             this._resultsRepository = resultsRepository;
             this._testAnswerRepository = testAnswerRepository;
             this._mapper = mapper;
             this._testSettings = testSettings;
+            this._adventSettings = adventSettings;
         }
 
         public List<TestResultDto> GetTestResults(int weekNumber, int pageCount, int pageIndex)
@@ -91,26 +94,28 @@ namespace DevAdventCalendarCompetition.Services
             DateTimeOffset dateFrom;
             DateTimeOffset dateTo;
 
+            var competitionYear = this._adventSettings.StartDate.Year;
+
             (int hour, int minute, int second) = this.GetStartHour();
 
             switch (weekNumber)
             {
                 // TODO: remove hardcoded year
                 case 1:
-                    dateFrom = new DateTimeOffset(2020, 12, 1, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(2020, 12, 8, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(competitionYear, 12, 1, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(competitionYear, 12, 8, hour, minute, second, TimeSpan.Zero);
                     break;
                 case 2:
-                    dateFrom = new DateTimeOffset(2020, 12, 8, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(2020, 12, 15, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(competitionYear, 12, 8, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(competitionYear, 12, 15, hour, minute, second, TimeSpan.Zero);
                     break;
                 case 3:
-                    dateFrom = new DateTimeOffset(2020, 12, 15, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(2020, 12, 22, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(competitionYear, 12, 15, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(competitionYear, 12, 22, hour, minute, second, TimeSpan.Zero);
                     break;
                 default:
-                    dateFrom = new DateTimeOffset(2020, 12, 1, hour, minute, second, TimeSpan.Zero);
-                    dateTo = new DateTimeOffset(2020, 12, 25, hour, minute, second, TimeSpan.Zero);
+                    dateFrom = new DateTimeOffset(competitionYear, 12, 1, hour, minute, second, TimeSpan.Zero);
+                    dateTo = new DateTimeOffset(competitionYear, 12, 25, hour, minute, second, TimeSpan.Zero);
                     break;
             }
 
