@@ -175,7 +175,7 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             var mapper = new MapperConfiguration(cfg => cfg.AddMaps(typeof(TestProfile))).CreateMapper();
             var resultsRepository = new ResultsRepository(context);
             var testAnswerRepository = new UserTestAnswersRepository(context);
-            return new ResultsService(resultsRepository, testAnswerRepository, mapper, GetTestSettings());
+            return new ResultsService(resultsRepository, testAnswerRepository, mapper, GetTestSettings(), GetAdventSettings());
         }
 
         private static Result GetUserWeek2Result() => new Result
@@ -236,6 +236,15 @@ namespace DevAdventCalendarCompetition.Tests.IntegrationTests
             {
                 StartHour = new TimeSpan(13, 0, 0),
                 EndHour = new TimeSpan(23, 59, 59)
+            };
+        }
+
+        private static AdventSettings GetAdventSettings()
+        {
+            return new AdventSettings
+            {
+                StartDate = new DateTime(2020, 12, 1),
+                EndDate = new DateTime(2020, 12, 24)
             };
         }
     }
