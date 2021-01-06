@@ -84,7 +84,7 @@ Password: `P@ssw0rd`
 
 In order to imitate advent time, settings need to be changed. You can find "StartDate" and "EndDate" settings in `appsettings.Local.json` under "Competition" section. We use specific DateTime format: "dd-MM-yyyy".
 
-## Adding sample questions
+## Adding sample tests
 
 Using test user go to `/Admin/Index` then click `Dodaj Test`
 
