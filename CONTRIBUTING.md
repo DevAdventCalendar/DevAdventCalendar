@@ -86,7 +86,7 @@ In order to imitate advent time, settings need to be changed. You can find "Star
 
 ## Adding sample tests
 
-Using test user go to `/Admin/Index` then click `Dodaj Test`
+Please use browser different than Chrome. Using test user go to `/Admin/Index` then click `Dodaj Test`
 
 ## Test environment
 
