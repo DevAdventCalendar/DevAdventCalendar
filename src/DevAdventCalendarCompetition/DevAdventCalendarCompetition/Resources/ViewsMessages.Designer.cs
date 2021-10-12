@@ -79,6 +79,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Konsultant Microsoft Power Platform. Do IT przeszedł w 2020 roku, po kilku latach pracy w branży marketingowej. W wolnych chwilach uczy się C# i JavaScript. Ceni zasady filozofii stoickiej i próbuję je stosować w praktyce, z różnym skutkiem..
+        /// </summary>
+        public static string AboutIgorBelczewski {
+            get {
+                return ResourceManager.GetString("AboutIgorBelczewski", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Student, który do projektu trafił szukając nowych wyzwań. Miłośnik kawy oraz filmów Marvela. W wolnym czasie lubi grać w planszowki ze znajomymi lub dokształcać się z zakresu ekonomii..
         /// </summary>
         public static string AboutKamilJarzebski {
@@ -88,7 +97,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi spalić nieco benzyny na torze wyścigowym i tworzyć trance..
+        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem  .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem  aplikacji, a w wolnych chwilach lubi eksperymentować ze sztuką miksologii oraz eksplorować głębię mórz i polskich jezior..
         /// </summary>
         public static string AboutKamilSmieszek {
             get {
@@ -133,11 +142,29 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący developer, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii obecnie uczący się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie oraz początkujący pasjonat open source. Osoba chcąca tworzyć społeczności szukająca swojej ścieżki oraz przyszłych projektów       ‎        otwartych na rozwój..
+        /// </summary>
+        public static string AboutMichalPiechowiak {
+            get {
+                return ResourceManager.GetString("AboutMichalPiechowiak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Programista .NET, fan(atyk) automatyzacji. Pasjonat programowania i czystego kodu. Aktywny uczestnik lokalnych konferencji i grup programistycznych. Po godzinach miłośnik książek, filmów, seriali i gier fantasy oraz sci-fi..
         /// </summary>
         public static string AboutPatrykLotzwi {
             get {
                 return ResourceManager.GetString("AboutPatrykLotzwi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wesoły programista, który lubi poznawać nowych ludzi oraz brać udział w różnych interesujących przedsięwzięciach. W świecie IT rozwija się nieprzerwanie od 15 lat. Esteta, który docenia piękno sztuki, lubi grafikę komputerową oraz tworzyć filmy. Hobbystycznie fotografuje, pstrykając zdjęcia krajobrazu, ale również czerpie radość z realizacji reportaży. Zgłębia techniki karate, co daje mu siłę panować nad emocjami oraz przezwyciężać ból..
+        /// </summary>
+        public static string AboutPiotrKowalski {
+            get {
+                return ResourceManager.GetString("AboutPiotrKowalski", resourceCulture);
             }
         }
         
@@ -151,7 +178,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Microsoft MVP i współorganizator Wrocławskiej grupy .NET..
+        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie  łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester  oraz specjalista ds. marketingu. Po pracy prowadzi blog programistyczny &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;www.programmer-girl.com&lt;/a&gt; Microsoft MVP i współorganizator Wrocławskiej grupy .NET &lt;a href=&quot;https://wrocnet.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;https://wrocnet.org/&lt;/ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string AboutWeronikaMularczyk {
             get {
@@ -525,6 +552,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string DoYouWantToBePartner2020 {
             get {
                 return ResourceManager.GetString("DoYouWantToBePartner2020", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chcesz zostać partnerem i wesprzeć dobrą inicjatywę w 2021 roku?.
+        /// </summary>
+        public static string DoYouWantToBePartner2021 {
+            get {
+                return ResourceManager.GetString("DoYouWantToBePartner2021", resourceCulture);
             }
         }
         
@@ -1290,6 +1326,24 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string PresentsDescription {
             get {
                 return ResourceManager.GetString("PresentsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiemy, wiemy, że się niecierpliwicie...Ale spokojnie ;) Odwiedzajcie naszą stronę, więcej informacji o nagrodach podamy już wkrótce!.
+        /// </summary>
+        public static string PresentsDescriptionNextEdition {
+            get {
+                return ResourceManager.GetString("PresentsDescriptionNextEdition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I w tym roku Mikołaj będzie miał dla Was wyjątkowe prezenty.
+        /// </summary>
+        public static string PresentsNextEdition {
+            get {
+                return ResourceManager.GetString("PresentsNextEdition", resourceCulture);
             }
         }
         
