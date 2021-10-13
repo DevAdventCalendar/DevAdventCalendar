@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem  .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem  aplikacji, a w wolnych chwilach lubi eksperymentować ze sztuką miksologii oraz eksplorować głębię mórz i polskich jezior..
+        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem  .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi eksperymentować ze sztuką miksologii oraz eksplorować głębię mórz i polskich jezior..
         /// </summary>
         public static string AboutKamilSmieszek {
             get {
@@ -142,7 +142,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący developer, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii obecnie uczący się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie oraz początkujący pasjonat open source. Osoba chcąca tworzyć społeczności szukająca swojej ścieżki oraz przyszłych projektów       ‎        otwartych na rozwój..
+        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący developer, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii obecnie uczący się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie oraz początkujący pasjonat open source. Osoba chcąca tworzyć społeczności szukająca swojej ścieżki oraz przyszłych projektów otwartych na rozwój..
         /// </summary>
         public static string AboutMichalPiechowiak {
             get {
@@ -178,7 +178,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie  łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester  oraz specjalista ds. marketingu. Po pracy prowadzi blog programistyczny &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;www.programmer-girl.com&lt;/a&gt; Microsoft MVP i współorganizator Wrocławskiej grupy .NET &lt;a href=&quot;https://wrocnet.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;https://wrocnet.org/&lt;/ [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Główny organizator projektu od 2017 roku oraz programista. W projekcie  łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Po pracy prowadzi blog programistyczny &lt;a href=&quot;http://www.programmer-girl.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;www.programmer-girl.com&lt;/a&gt; Microsoft MVP i współorganizator Wrocławskiej grupy .NET &lt;a href=&quot;https://wrocnet.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;link&quot;&gt;https://wrocnet.org/&lt;/a [rest of string was truncated]&quot;;.
         /// </summary>
         public static string AboutWeronikaMularczyk {
             get {
@@ -1330,7 +1330,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wiemy, wiemy, że się niecierpliwicie...Ale spokojnie ;) Odwiedzajcie naszą stronę, więcej informacji o nagrodach podamy już wkrótce!.
+        ///   Looks up a localized string similar to Wiemy, wiemy, że się niecierpliwicie... Spokojnie ;) Odwiedzajcie naszą stronę, więcej informacji o nagrodach podamy już wkrótce!.
         /// </summary>
         public static string PresentsDescriptionNextEdition {
             get {
