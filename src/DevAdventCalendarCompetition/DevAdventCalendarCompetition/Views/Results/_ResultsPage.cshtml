@@ -27,7 +27,7 @@
         {
             var testResult = entries[i];
             <tr>
-                <th scope="row" class="col-xs-1">@testResult.Position</th>
+                <th scope="row" class="col-xs-1">@(entries.PageIndex <= 1 ? i + 1 : (entries.PageSize * (entries.PageIndex - 1)) + i + 1)</th>
                 <td>@testResult.UserName</td>
                 <td>@testResult.CorrectAnswers</td>
                 <td>@testResult.WrongAnswers</td>
