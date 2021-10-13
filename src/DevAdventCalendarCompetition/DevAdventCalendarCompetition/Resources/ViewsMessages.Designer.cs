@@ -79,7 +79,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Konsultant Microsoft Power Platform. Do IT przeszedł w 2020 roku, po kilku latach pracy w branży marketingowej. W wolnych chwilach uczy się C# i JavaScript. Ceni zasady filozofii stoickiej i próbuję je stosować w praktyce, z różnym skutkiem..
+        ///   Looks up a localized string similar to Konsultant Microsoft Power Platform. Do IT przeszedł w 2020 roku, po kilku latach pracy w branży marketingowej. W wolnych chwilach uczy się C# i JavaScript. Ceni zasady filozofii stoickiej i próbuje je stosować w praktyce, z różnym skutkiem..
         /// </summary>
         public static string AboutIgorBelczewski {
             get {
@@ -106,7 +106,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trener z wieloletnią praktyką w zakresie nauczania technologii w obszarze IT, programista fullstack, ze szczególnym uwzględnieniem zakresu baz danych - głównie w obszarze technologii Microsoftu.  Specjalista, nauczyciel i partner biznesowy, który z wiedzą, umiejętnościami, pasją i zaangażowaniem wprowadza swoich słuchaczy w świat programowania..
+        ///   Looks up a localized string similar to Trener z wieloletnią praktyką w zakresie nauczania technologii w obszarze IT, programista fullstack, ze szczególnym uwzględnieniem zakresu baz danych - głównie w obszarze technologii Microsoftu. Specjalista, nauczyciel i partner biznesowy, który z wiedzą, umiejętnościami, pasją i zaangażowaniem wprowadza swoich słuchaczy w świat programowania..
         /// </summary>
         public static string AboutKrystianBrozek {
             get {
@@ -142,7 +142,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący developer, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii obecnie uczący się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie oraz początkujący pasjonat open source. Osoba chcąca tworzyć społeczności szukająca swojej ścieżki oraz przyszłych projektów otwartych na rozwój..
+        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący deweloper, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii. Obecnie uczy się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie początkujący pasjonat open source. Osoba chcąca tworzyć społeczności, szukająca swojej ścieżki oraz przyszłych projektów otwartych na rozwój..
         /// </summary>
         public static string AboutMichalPiechowiak {
             get {
