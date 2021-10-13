@@ -97,7 +97,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem  .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi eksperymentować ze sztuką miksologii oraz eksplorować głębię mórz i polskich jezior..
+        ///   Looks up a localized string similar to Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi eksperymentować ze sztuką miksologii oraz eksplorować głębię mórz i polskich jezior..
         /// </summary>
         public static string AboutKamilSmieszek {
             get {
