@@ -84,6 +84,10 @@ Password: `P@ssw0rd`
 
 In order to imitate advent time, settings need to be changed. You can find "StartDate" and "EndDate" settings in `appsettings.Local.json` under "Competition" section. We use specific DateTime format: "dd-MM-yyyy".
 
+## Adding sample tests
+
+Please use browser different than Chrome. Using test user go to `/Admin/Index` then click `Dodaj Test`
+
 ## Test environment
 
 Test environment is running on [dev.devadventcalendar.pl](https://dev.devadventcalendar.pl/) with automatic deployment from develop_uat branch.
