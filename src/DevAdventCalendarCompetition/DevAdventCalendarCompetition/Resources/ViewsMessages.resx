@@ -127,7 +127,7 @@
     <value>Student, a przede wszystkim pasjonat robotyki, gier komputerowych i GameJamów. Rozwijający wiedzę o C++, C# i Unity. Miłośnik historii oraz wszystkiego co wysoko - od górskich szczytów po odległe planety.</value>
   </data>
   <data name="AboutKamilSmieszek" xml:space="preserve">
-    <value>Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi spalić nieco benzyny na torze wyścigowym i tworzyć trance.</value>
+    <value>Programista Java, który zmienił obóz z Oracle na Microsoft pod wpływem .NET Core. Interesuje się tematyką sieci komputerowych, bezpieczeństwem aplikacji, a w wolnych chwilach lubi eksperymentować ze sztuką miksologii oraz eksplorować głębię mórz i polskich jezior.</value>
   </data>
   <data name="AboutMichalGellert" xml:space="preserve">
     <value>Współorganizator projektu od 2018 zajmujący się marketingiem, promocją i wszystkim, co nie jest kodem. Na co dzień wręcz odwrotnie - programista piszący w Javie, Kotlinie i właściwie w czym potrzeba. Do tego zdarza mu się poprowadzić szkolenie, wydać kurs, czy pomóc w organizacji jakiejś konferencji. Bloguje na &lt;a href="https://www.michalgellert.pl/" target="_blank" rel="noopener noreferrer" class="link"&gt;www.michalgellert.pl&lt;/a&gt;.</value>
@@ -145,10 +145,10 @@
     <value>Dotnetomaniak z niesłabnącym zapałem do rozwoju. Nie tylko twierdzący, że "to zależy" ale również starający się odpowiedzieć "od czego". Pilny student - niedługo inżynier informatyki.</value>
   </data>
   <data name="AboutKrystianBrozek" xml:space="preserve">
-    <value>Trener z wieloletnią praktyką w zakresie nauczania technologii w obszarze IT, programista fullstack, ze szczególnym uwzględnieniem zakresu baz danych - głównie w obszarze technologii Microsoftu.  Specjalista, nauczyciel i partner biznesowy, który z wiedzą, umiejętnościami, pasją i zaangażowaniem wprowadza swoich słuchaczy w świat programowania.</value>
+    <value>Trener z wieloletnią praktyką w zakresie nauczania technologii w obszarze IT, programista fullstack, ze szczególnym uwzględnieniem zakresu baz danych - głównie w obszarze technologii Microsoftu. Specjalista, nauczyciel i partner biznesowy, który z wiedzą, umiejętnościami, pasją i zaangażowaniem wprowadza swoich słuchaczy w świat programowania.</value>
   </data>
   <data name="AboutWeronikaMularczyk" xml:space="preserve">
-    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Na co dzień bloguje na &lt;a href="http://www.programmer-girl.com" target="_blank" rel="noopener noreferrer" class="link"&gt;www.programmer-girl.com&lt;/a&gt; i aktywnie udziela się we wrocławskim świecie IT. Microsoft MVP i współorganizator Wrocławskiej grupy .NET.</value>
+    <value>Główny organizator projektu od 2017 roku oraz programista. W projekcie  łączy w sobie wiele roli: lider, manager, developer, devops, analityk, tester oraz specjalista ds. marketingu. Po pracy prowadzi blog programistyczny &lt;a href="http://www.programmer-girl.com" target="_blank" rel="noopener noreferrer" class="link"&gt;www.programmer-girl.com&lt;/a&gt; Microsoft MVP i współorganizator Wrocławskiej grupy .NET &lt;a href="https://wrocnet.org/" target="_blank" rel="noopener noreferrer" class="link"&gt;https://wrocnet.org/&lt;/a&gt;, współautorka kursu &lt;a href="https://kursazuredevops.pl" target="_blank" rel="noopener noreferrer" class="link"&gt;https://kursazuredevops.pl&lt;/a&gt;. Poza światem IT skupia się na swoich hobby: planszówkach i escape roomach.</value>
   </data>
   <data name="Accept" xml:space="preserve">
     <value>Akceptuj</value>
@@ -776,5 +776,23 @@
   </data>
   <data name="TotalTime" xml:space="preserve">
     <value>Całkowity czas odpowiedzi (s)</value>
+  </data>
+  <data name="DoYouWantToBePartner2021" xml:space="preserve">
+    <value>Chcesz zostać partnerem i wesprzeć dobrą inicjatywę w 2021 roku?</value>
+  </data>
+  <data name="PresentsDescriptionNextEdition" xml:space="preserve">
+    <value>Wiemy, wiemy, że się niecierpliwicie... Spokojnie ;) Odwiedzajcie naszą stronę, więcej informacji o nagrodach podamy już wkrótce!</value>
+  </data>
+  <data name="PresentsNextEdition" xml:space="preserve">
+    <value>I w tym roku Mikołaj będzie miał dla Was wyjątkowe prezenty</value>
+  </data>
+  <data name="AboutIgorBelczewski" xml:space="preserve">
+    <value>Konsultant Microsoft Power Platform. Do IT przeszedł w 2020 roku, po kilku latach pracy w branży marketingowej. W wolnych chwilach uczy się C# i JavaScript. Ceni zasady filozofii stoickiej i próbuje je stosować w praktyce, z różnym skutkiem.</value>
+  </data>
+  <data name="AboutMichalPiechowiak" xml:space="preserve">
+    <value>Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący deweloper, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii. Obecnie uczy się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie początkujący pasjonat open source. Osoba chcąca tworzyć społeczności, szukająca swojej ścieżki oraz przyszłych projektów otwartych na rozwój.</value>
+  </data>
+  <data name="AboutPiotrKowalski" xml:space="preserve">
+    <value>Wesoły programista, który lubi poznawać nowych ludzi oraz brać udział w różnych interesujących przedsięwzięciach. W świecie IT rozwija się nieprzerwanie od 15 lat. Esteta, który docenia piękno sztuki, lubi grafikę komputerową oraz tworzyć filmy. Hobbystycznie fotografuje, pstrykając zdjęcia krajobrazu, ale również czerpie radość z realizacji reportaży. Zgłębia techniki karate, co daje mu siłę panować nad emocjami oraz przezwyciężać ból.</value>
   </data>
 </root>
