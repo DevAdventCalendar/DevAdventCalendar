@@ -142,7 +142,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący deweloper, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii. Obecnie uczy się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie początkujący pasjonat open source. Osoba chcąca tworzyć społeczności, szukająca swojej ścieżki oraz przyszłych projektów otwartych na rozwój..
+        ///   Looks up a localized string similar to Uczeń technikum lubiący w wolnym czasie jeździć na rowerze oraz motorze. Początkujący developer, piszący najwięcej kodu w Pythonie, próbujący różnych języków i technologii. Obecnie uczy się Darta, by móc przejść do Fluttera. Okazyjnie grzebiący w Linuxie początkujący pasjonat open source. Osoba chcąca tworzyć społeczności, szukająca swojej ścieżki oraz przyszłych projektów otwartych na rozwój..
         /// </summary>
         public static string AboutMichalPiechowiak {
             get {
@@ -732,6 +732,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string FailedLoginAttempt {
             get {
                 return ResourceManager.GetString("FailedLoginAttempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAQ.
+        /// </summary>
+        public static string FAQ {
+            get {
+                return ResourceManager.GetString("FAQ", resourceCulture);
             }
         }
         

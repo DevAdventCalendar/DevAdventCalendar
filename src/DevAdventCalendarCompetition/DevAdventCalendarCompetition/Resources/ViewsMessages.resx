@@ -795,4 +795,7 @@
   <data name="AboutPiotrKowalski" xml:space="preserve">
     <value>Wesoły programista, który lubi poznawać nowych ludzi oraz brać udział w różnych interesujących przedsięwzięciach. W świecie IT rozwija się nieprzerwanie od 15 lat. Esteta, który docenia piękno sztuki, lubi grafikę komputerową oraz tworzyć filmy. Hobbystycznie fotografuje, pstrykając zdjęcia krajobrazu, ale również czerpie radość z realizacji reportaży. Zgłębia techniki karate, co daje mu siłę panować nad emocjami oraz przezwyciężać ból.</value>
   </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
 </root>
