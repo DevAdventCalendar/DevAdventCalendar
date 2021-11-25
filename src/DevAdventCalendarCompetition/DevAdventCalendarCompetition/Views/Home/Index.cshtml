@@ -166,7 +166,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <section class="event_txt" style="padding-bottom:10px;">
+    @*<section class="event_txt" style="padding-bottom:10px;">
         <div class="container">
 
             <div class="row">
@@ -186,7 +186,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
+
+    <div class="row prizes-wrapper">
+        <div class="col-sm-12 mb-30"></div>
+    </div>
 
     if (isAdvent)
     {
@@ -274,24 +278,24 @@
                                     @if (i == 0)
                                     {
                                         <div class="flex-centered flex-grow">
-                                            <a href="https://career.softserveinc.com/en-us/poland" target="_blank">
-                                                <img src="~/theme-2019/images/partners/softserve.jpg" alt="softserve" title="SoftServe" class="img-responsive center-block" />
+                                            <a href="https://postclick.com/" target="_blank">
+                                                <img src="~/theme-2019/images/partners/postclick.jpg" alt="postclick" title="Postclick" class="img-responsive center-block" />
                                             </a>
                                         </div>
                                     }
                                     else if (i == 1)
                                     {
                                         <div class="flex-centered flex-grow">
-                                            <a href="https://cshark.com/" target="_blank">
-                                                <img src="~/theme-2019/images/partners/cshark.jpg" alt="cshark" title="CShark" class="img-responsive center-block" />
+                                            <a href="https://beetalents.com/pl/" target="_blank">
+                                                <img src="~/theme-2019/images/partners/beetalents.jpg" alt="beetalents" title="BeeTalents" class="img-responsive center-block" />
                                             </a>
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="flex-centered flex-grow">
-                                            <a href="https://spyro-soft.com" target="_blank">
-                                                <img src="~/theme-2019/images/partners/spyrosoft.jpg" alt="spyrosoft" title="Spyrosoft" class="img-responsive center-block" />
+                                            <a href="https://www2.deloitte.com/pl/pl.html" target="_blank">
+                                                <img src="~/theme-2019/images/partners/deloitte.jpg" alt="deloitte" title="Deloitte" class="img-responsive center-block" />
                                             </a>
                                         </div>
                                     }
