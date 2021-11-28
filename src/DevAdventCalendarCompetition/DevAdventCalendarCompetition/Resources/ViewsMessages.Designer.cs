@@ -232,6 +232,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dysk przenośny ADATA External SD700 1TB SSD.
+        /// </summary>
+        public static string AdataExternal {
+            get {
+                return ResourceManager.GetString("AdataExternal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj.
         /// </summary>
         public static string Add {
@@ -309,6 +318,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string Arduino {
             get {
                 return ResourceManager.GetString("Arduino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zestaw FORBOT - Arduino Uno Rev3.
+        /// </summary>
+        public static string ArduinoForbot {
+            get {
+                return ResourceManager.GetString("ArduinoForbot", resourceCulture);
             }
         }
         
@@ -561,6 +579,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string DoYouWantToBePartner2021 {
             get {
                 return ResourceManager.GetString("DoYouWantToBePartner2021", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Słuchawki Edifier W820BT.
+        /// </summary>
+        public static string EdifierHeadphones {
+            get {
+                return ResourceManager.GetString("EdifierHeadphones", resourceCulture);
             }
         }
         
@@ -1096,6 +1123,24 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jabra Elite.
+        /// </summary>
+        public static string JabraElite {
+            get {
+                return ResourceManager.GetString("JabraElite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Głośnik JBL Flip 5 Moro.
+        /// </summary>
+        public static string JblFlip {
+            get {
+                return ResourceManager.GetString("JblFlip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to W tamtym roku wsparli nas.
         /// </summary>
         public static string LastYearPartners {
@@ -1411,11 +1456,74 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Książka: Gynvael Coldwind &quot;Zrozumieć programowanie&quot;, PWN.
+        /// </summary>
+        public static string PwnBook1 {
+            get {
+                return ResourceManager.GetString("PwnBook1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Książka: Gynvael Coldwind, Mateusz Jurczyk &quot;Praktyczna inżynieria wsteczna&quot;, PWN.
+        /// </summary>
+        public static string PwnBook2 {
+            get {
+                return ResourceManager.GetString("PwnBook2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Książka: T. Cormen, C. Leiserson, R. Rivest, S. Clifford &quot;Wprowadzenie do algorytmów&quot;, PWN.
+        /// </summary>
+        public static string PwnBook3 {
+            get {
+                return ResourceManager.GetString("PwnBook3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Książka: Robert C. Martin &quot;Czysty kod&quot;, PWN.
+        /// </summary>
+        public static string PwnBook4 {
+            get {
+                return ResourceManager.GetString("PwnBook4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Książka: Radosław Smilgin &quot;Zawód tester. Od decyzji do zdobycia doświadczenia&quot;, PWN.
+        /// </summary>
+        public static string PwnBook5 {
+            get {
+                return ResourceManager.GetString("PwnBook5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Książka: K. Zmitrowicz, R. Stańczak &quot;Jakość w Agile. Zwinna droga do sukcesu&quot;, PWN.
+        /// </summary>
+        public static string PwnBook6 {
+            get {
+                return ResourceManager.GetString("PwnBook6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zestaw Raspberry Pi 4B WiFi 8GB RAM.
         /// </summary>
         public static string RaspberryPi {
             get {
                 return ResourceManager.GetString("RaspberryPi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Raspberry Pi 4 4 GB.
+        /// </summary>
+        public static string RaspberryPi4 {
+            get {
+                return ResourceManager.GetString("RaspberryPi4", resourceCulture);
             }
         }
         
@@ -1497,6 +1605,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string RodoAgreeMissing {
             get {
                 return ResourceManager.GetString("RodoAgreeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Powerbank Samsung EB-U1200C 10000 mAh.
+        /// </summary>
+        public static string SamsungPowerbank {
+            get {
+                return ResourceManager.GetString("SamsungPowerbank", resourceCulture);
             }
         }
         
@@ -1686,6 +1803,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string StatusTestIsOver {
             get {
                 return ResourceManager.GetString("StatusTestIsOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Klawiatura — SteelSeries Apex 5.
+        /// </summary>
+        public static string SteelSeriesApex5 {
+            get {
+                return ResourceManager.GetString("SteelSeriesApex5", resourceCulture);
             }
         }
         
@@ -2046,6 +2172,33 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string XiaomiBand5 {
             get {
                 return ResourceManager.GetString("XiaomiBand5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opaska Xiaomi Mi Band 6.
+        /// </summary>
+        public static string XiaomiMiBand6 {
+            get {
+                return ResourceManager.GetString("XiaomiMiBand6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drukarka zdjęć z telefonu Xiaomi Mini.
+        /// </summary>
+        public static string XiaomiMini {
+            get {
+                return ResourceManager.GetString("XiaomiMini", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2x Żarówka YEELIGHT 1S RGB.
+        /// </summary>
+        public static string YeelightBulb {
+            get {
+                return ResourceManager.GetString("YeelightBulb", resourceCulture);
             }
         }
         
