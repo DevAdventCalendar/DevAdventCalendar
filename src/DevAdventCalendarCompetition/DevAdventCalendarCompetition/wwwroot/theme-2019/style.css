@@ -1079,6 +1079,18 @@ div.form-group.form-toogle {
 .promt_content h3{
 	color: #3a3a3a;
 }
+.promt_content.faq ul {
+    padding: 0 0 12px 40px;
+}
+.promt_content.faq li {
+    list-style: initial;
+    font-family: "Roboto",sans-serif;
+    font-weight: 300;
+    color: #3a3a3a;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 24px;
+}
 .promot_content_wrapper{
 	text-align: center;
 	position: relative;

@@ -66,6 +66,13 @@ namespace DevAdventCalendarCompetition.Controllers
         }
 
         [HttpGet]
+        [Route(nameof(Faq))]
+        public ActionResult Faq()
+        {
+            return this.View();
+        }
+
+        [HttpGet]
         [Route(nameof(About))]
         public ActionResult About()
         {
