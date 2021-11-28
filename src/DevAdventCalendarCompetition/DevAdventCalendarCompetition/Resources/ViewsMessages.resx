@@ -798,4 +798,55 @@
   <data name="FAQ" xml:space="preserve">
     <value>FAQ</value>
   </data>
+  <data name="AdataExternal" xml:space="preserve">
+    <value>Dysk przenośny ADATA External SD700 1TB SSD</value>
+  </data>
+  <data name="ArduinoForbot" xml:space="preserve">
+    <value>Zestaw FORBOT - Arduino Uno Rev3</value>
+  </data>
+  <data name="EdifierHeadphones" xml:space="preserve">
+    <value>Słuchawki Edifier W820BT</value>
+  </data>
+  <data name="JabraElite" xml:space="preserve">
+    <value>Jabra Elite</value>
+  </data>
+  <data name="JblFlip" xml:space="preserve">
+    <value>Głośnik JBL Flip 5 Moro</value>
+  </data>
+  <data name="PwnBook1" xml:space="preserve">
+    <value>Książka: Gynvael Coldwind "Zrozumieć programowanie", PWN</value>
+  </data>
+  <data name="PwnBook2" xml:space="preserve">
+    <value>Książka: Gynvael Coldwind, Mateusz Jurczyk "Praktyczna inżynieria wsteczna", PWN</value>
+  </data>
+  <data name="PwnBook3" xml:space="preserve">
+    <value>Książka: T. Cormen, C. Leiserson, R. Rivest, S. Clifford "Wprowadzenie do algorytmów", PWN</value>
+  </data>
+  <data name="PwnBook4" xml:space="preserve">
+    <value>Książka: Robert C. Martin "Czysty kod", PWN</value>
+  </data>
+  <data name="PwnBook5" xml:space="preserve">
+    <value>Książka: Radosław Smilgin "Zawód tester. Od decyzji do zdobycia doświadczenia", PWN</value>
+  </data>
+  <data name="PwnBook6" xml:space="preserve">
+    <value>Książka: K. Zmitrowicz, R. Stańczak "Jakość w Agile. Zwinna droga do sukcesu", PWN</value>
+  </data>
+  <data name="RaspberryPi4" xml:space="preserve">
+    <value>Raspberry Pi 4 4 GB</value>
+  </data>
+  <data name="SamsungPowerbank" xml:space="preserve">
+    <value>Powerbank Samsung EB-U1200C 10000 mAh</value>
+  </data>
+  <data name="SteelSeriesApex5" xml:space="preserve">
+    <value>Klawiatura — SteelSeries Apex 5</value>
+  </data>
+  <data name="XiaomiMiBand6" xml:space="preserve">
+    <value>Opaska Xiaomi Mi Band 6</value>
+  </data>
+  <data name="XiaomiMini" xml:space="preserve">
+    <value>Drukarka zdjęć z telefonu Xiaomi Mini</value>
+  </data>
+  <data name="YeelightBulb" xml:space="preserve">
+    <value>2x Żarówka YEELIGHT 1S RGB</value>
+  </data>
 </root>
