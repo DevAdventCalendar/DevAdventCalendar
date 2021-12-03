@@ -52,6 +52,10 @@ $(function () {
     });
 });
 
+function GetMysteriousName() {
+    return "odpowiedź to: kutia"
+}
+
 function GetResults(weekNumber, pageIndex) {
     $.get("/Results/RenderResults",
         { pageIndex: pageIndex, weekNumber: weekNumber }, function (result) {
