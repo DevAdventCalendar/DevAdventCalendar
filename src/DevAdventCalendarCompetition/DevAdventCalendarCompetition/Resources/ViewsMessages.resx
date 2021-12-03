@@ -316,7 +316,7 @@
     <value>Wydarzenie na FB</value>
   </data>
   <data name="FinalScoreDescription" xml:space="preserve">
-    <value>Ostateczne wyniki poznasz w piątek, 25 grudnia</value>
+    <value>Ostateczne wyniki poznasz w sobotę, 25 grudnia</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Przypomnienie hasła</value>
@@ -703,13 +703,13 @@
     <value>Tydzień {0}</value>
   </data>
   <data name="Week1ScoreDescription" xml:space="preserve">
-    <value>Wyniki dla pierwszego tygodnia poznasz we wtorek, 8 grudnia po godzinie 13:00.</value>
+    <value>Wyniki dla pierwszego tygodnia poznasz w środę, 8 grudnia po godzinie 13:00.</value>
   </data>
   <data name="Week2ScoreDescription" xml:space="preserve">
-    <value>Wyniki dla drugiego tygodnia poznasz we wtorek, 15 grudnia po godzinie 13:00.</value>
+    <value>Wyniki dla drugiego tygodnia poznasz w środę, 15 grudnia po godzinie 13:00.</value>
   </data>
   <data name="Week3ScoreDescription" xml:space="preserve">
-    <value>Wyniki dla trzeciego tygodnia poznasz we wtorek, 22 grudnia po godzinie 13:00.</value>
+    <value>Wyniki dla trzeciego tygodnia poznasz w środę, 22 grudnia po godzinie 13:00.</value>
   </data>
   <data name="WeeklyPartners" xml:space="preserve">
     <value>Partnerzy tygodni</value>
