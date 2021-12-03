@@ -703,13 +703,13 @@
     <value>Tydzień {0}</value>
   </data>
   <data name="Week1ScoreDescription" xml:space="preserve">
-    <value>Wyniki dla pierwszego tygodnia poznasz we środę, 8 grudnia po godzinie 13:00.</value>
+    <value>Wyniki dla pierwszego tygodnia poznasz w środę, 8 grudnia po godzinie 13:00.</value>
   </data>
   <data name="Week2ScoreDescription" xml:space="preserve">
-    <value>Wyniki dla drugiego tygodnia poznasz we środę, 15 grudnia po godzinie 13:00.</value>
+    <value>Wyniki dla drugiego tygodnia poznasz w środę, 15 grudnia po godzinie 13:00.</value>
   </data>
   <data name="Week3ScoreDescription" xml:space="preserve">
-    <value>Wyniki dla trzeciego tygodnia poznasz we środę, 22 grudnia po godzinie 13:00.</value>
+    <value>Wyniki dla trzeciego tygodnia poznasz w środę, 22 grudnia po godzinie 13:00.</value>
   </data>
   <data name="WeeklyPartners" xml:space="preserve">
     <value>Partnerzy tygodni</value>
