@@ -73,7 +73,7 @@ namespace DevAdventCalendarCompetition.TestResultService
 
             // Save results to DB as weekly results.
             (int hour, int minute, int second) = GetStartHour();
-            DateTime dateFrom = new DateTime(DateTime.Today.Year, 12, 1 + 7 * (weekNumber - 1), hour, minute, second);
+            DateTime dateFrom = new DateTime(DateTime.Today.Year, 12, 2 + 7 * (weekNumber - 1), hour, minute, second);
             DateTime dateTo = dateFrom.AddDays(7);
 
             Console.WriteLine($"\nCurrent week number: { weekNumber }, dates from: { dateFrom.ToString(CultureInfo.InvariantCulture) }, to: { dateTo.ToString(CultureInfo.InvariantCulture) }");
