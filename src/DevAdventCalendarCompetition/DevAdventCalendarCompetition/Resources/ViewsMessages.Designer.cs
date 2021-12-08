@@ -1069,7 +1069,7 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To zadanie jest trudniejsze niż nam się pierwotnie wydawało...Może pod tym dziwnym nagłówkiem z mikołajem coś się kryje?.
+        ///   Looks up a localized string similar to To zadanie jest trudniejsze niż nam się pierwotnie wydawało...Może pod tym dziwnym nagłówkiem z choinką coś się kryje?.
         /// </summary>
         public static string HelpTheElves {
             get {
