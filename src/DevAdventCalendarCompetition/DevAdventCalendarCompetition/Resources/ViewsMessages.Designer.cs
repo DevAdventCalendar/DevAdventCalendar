@@ -1069,6 +1069,15 @@ namespace DevAdventCalendarCompetition.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To zadanie jest trudniejsze niż nam się pierwotnie wydawało...Może pod tym dziwnym nagłówkiem z mikołajem coś się kryje?.
+        /// </summary>
+        public static string HelpTheElves {
+            get {
+                return ResourceManager.GetString("HelpTheElves", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jak to działa?.
         /// </summary>
         public static string HowItWorks {
@@ -1227,6 +1236,15 @@ namespace DevAdventCalendarCompetition.Resources {
         public static string MerryChristmas {
             get {
                 return ResourceManager.GetString("MerryChristmas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kutia.
+        /// </summary>
+        public static string MysteriousName {
+            get {
+                return ResourceManager.GetString("MysteriousName", resourceCulture);
             }
         }
         
