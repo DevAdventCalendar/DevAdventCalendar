@@ -1,6 +1,7 @@
 @model DevAdventCalendarCompetition.Services.Models.TestDto
 @using static DevAdventCalendarCompetition.Resources.ViewsMessages 
 @using System.Globalization
+@using System.Web
 @using DevAdventCalendarCompetition.Services.Interfaces
 @inject IAdventService AdventService
 @{
@@ -22,7 +23,7 @@
         <div class="container">
             <div class="col-md-12">
                 <div class="party_text">
-                    <h1 class="mb-30">@Model.Description</h1>
+                    <h1 class="mb-30">@Html.Raw(Model.Description)</h1>
                     @if (Model == null)
                     {
                         <div class="row content-centered">

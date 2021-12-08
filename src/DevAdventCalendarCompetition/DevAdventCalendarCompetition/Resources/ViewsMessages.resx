@@ -849,4 +849,10 @@
   <data name="YeelightBulb" xml:space="preserve">
     <value>2x Żarówka YEELIGHT 1S RGB</value>
   </data>
+  <data name="HelpTheElves" xml:space="preserve">
+    <value>To zadanie jest trudniejsze niż nam się pierwotnie wydawało...Może pod tym dziwnym nagłówkiem z choinką coś się kryje?</value>
+  </data>
+  <data name="MysteriousName" xml:space="preserve">
+    <value>Kutia</value>
+  </data>
 </root>
