@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Security.Claims;
 using DevAdventCalendarCompetition.Models.Home;
 using DevAdventCalendarCompetition.Providers;
+using DevAdventCalendarCompetition.Resources;
 using DevAdventCalendarCompetition.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +64,23 @@ namespace DevAdventCalendarCompetition.Controllers
         public ActionResult Surprise()
         {
             return this.View();
+        }
+
+        [HttpGet]
+        [Route("/ile_bombek_jest_na_choince")]
+        public ActionResult HelpTheElves()
+        {
+            var answer = 45;
+
+            this.Response.Headers.Add("X-Christmas-Tree", answer.ToString(new NumberFormatInfo()));
+            return this.Json(ViewsMessages.HelpTheElves);
+        }
+
+        [HttpGet]
+        [Route("/mysterious_name")]
+        public ActionResult MysteriousName()
+        {
+            return this.Json(ViewsMessages.MysteriousName);
         }
 
         [HttpGet]

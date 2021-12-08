@@ -77,12 +77,11 @@ function CheckTestStatus(testNumber) {
     }
 }
 
-function GetResult(number) {
-    if (number === 20) {
-        return "odpowiedź to: 'kutia'";
-    } else {
-        return "To nie ten numer! Spróbuj jeszcze raz...";
-    }
+function GetMysteriousName() {
+    $.get("/mysterious_name",
+        function(result) {
+            console.log(result);
+        });
 }
 
 function refreshAt(hours, minutes, seconds) {
