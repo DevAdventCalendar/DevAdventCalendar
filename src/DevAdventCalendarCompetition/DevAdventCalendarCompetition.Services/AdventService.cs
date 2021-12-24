@@ -17,7 +17,7 @@ namespace DevAdventCalendarCompetition.Services
         public bool IsAdvent()
         {
             var now = this._dateTimeService.Now;
-            return this._adventSettings.StartDate <= now && this._adventSettings.EndDate >= now;
+            return this._adventSettings.StartDate <= now && this._adventSettings.EndDate.AddDays(1) >= now;
         }
     }
 }
